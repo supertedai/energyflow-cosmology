@@ -1,0 +1,71 @@
+{
+  "@context": "https://schema.org",
+  "@type": "DefinedTermSet",
+  "@id": "https://github.com/supertedai/energyflow-cosmology/schema/concepts.json",
+  "name": "Energy-Flow Cosmology (EFC) Core Concepts",
+  "description": "A unified thermodynamic framework connecting cosmic structure, dynamics, and cognition through energy flow and entropy.",
+  "creator": {
+    "@type": "Person",
+    "name": "Morten Magnusson",
+    "sameAs": "https://orcid.org/0009-0002-4860-5095",
+    "@id": "https://figshare.com/authors/Morten_Magnusson/20477774",
+    "url": "https://energyflow-cosmology.com"
+  },
+  "hasDefinedTerm": [
+    {
+      "@type": "DefinedTerm",
+      "@id": "https://energyflow-cosmology.com/concepts/efc-framework",
+      "name": "Energy-Flow Cosmology (EFC)",
+      "termCode": "EFC",
+      "description": "The unified thermodynamic framework linking cosmic structure, dynamics, and cognition through energy and entropy flow.",
+      "url": "https://energyflow-cosmology.com/efc-foundational-framework/",
+      "creator": { "@id": "https://figshare.com/authors/Morten_Magnusson/20477774" }
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "https://energyflow-cosmology.com/concepts/grid-higgs-framework",
+      "name": "Grid–Higgs Framework",
+      "termCode": "GHF",
+      "description": "A model interpreting gravitation, dark matter, and black holes as emergent phenomena driven by entropic gradients and the Grid–Higgs field interaction.",
+      "url": "https://energyflow-cosmology.com/grid-higgs-framework/",
+      "isRelatedTo": "https://energyflow-cosmology.com/concepts/halo-model-entropy",
+      "creator": { "@id": "https://figshare.com/authors/Morten_Magnusson/20477774" }
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "https://energyflow-cosmology.com/concepts/halo-model-entropy",
+      "name": "Halo Model of Entropy",
+      "termCode": "HME",
+      "description": "Underlying model for the formation and function of galactic halos as entropy regulators in cosmic clusters.",
+      "url": "https://energyflow-cosmology.com/the-halo-model-of-entropy/",
+      "creator": { "@id": "https://figshare.com/authors/Morten_Magnusson/20477774" }
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "https://energyflow-cosmology.com/concepts/energy-flow-interface",
+      "name": "Energy–Flow Interface",
+      "termCode": "EFI",
+      "description": "The unified thermodynamic interpretation of Dark Matter, Dark Energy, and the CMB within the Grid–Higgs framework.",
+      "url": "https://energyflow-cosmology.com/energy-flow-interface/",
+      "creator": { "@id": "https://figshare.com/authors/Morten_Magnusson/20477774" }
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "https://energyflow-cosmology.com/concepts/energy-flow-dynamics",
+      "name": "Energy-Flow Dynamics (EFD)",
+      "termCode": "EFD",
+      "description": "Sub-model describing cosmic expansion, gravitation, and time as emergent properties of energy-rate density and entropy flow.",
+      "url": "https://energyflow-cosmology.com/energy-flow-dynamics/",
+      "creator": { "@id": "https://figshare.com/authors/Morten_Magnusson/20477774" }
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "https://energyflow-cosmology.com/concepts/cem-cosmos",
+      "name": "CEM-Cosmos",
+      "termCode": "CEM",
+      "description": "A field-theoretic model of consciousness coupled to Energy-Flow Cosmology, extending thermodynamic logic to cognitive systems.",
+      "url": "https://energyflow-cosmology.com/cem-cosmos-model/",
+      "creator": { "@id": "https://figshare.com/authors/Morten_Magnusson/20477774" }
+    }
+  ]
+}
