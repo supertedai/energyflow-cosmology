@@ -59,3 +59,31 @@ If referencing this repository or associated works:
 All textual and visual materials © Morten Magnusson, 2025.  
 Distributed for academic and educational use under Creative Commons CC-BY-NC-SA 4.0.
 
+---
+
+## 🧩 Semantic Integration Guide
+
+This repository is directly connected to the live WordPress site via a **child theme function** that dynamically loads and injects the JSON-LD schema from GitHub into every page.
+
+### Architecture Overview
+
+| Layer | Function | Location |
+|-------|-----------|-----------|
+| **GitHub (source)** | Authoritative JSON-LD schema files (`site-graph.json`, `posts-structure.json`) | `main` branch |
+| **WordPress (frontend)** | Public presentation layer for the Energy-Flow Cosmology website | [https://energyflow-cosmology.com](https://energyflow-cosmology.com) |
+| **PHP Bridge** | Fetches JSON-LD data and inserts it into `<head>` | Child theme `functions.php` |
+| **Search / LLM Layer** | Google, Bing, Copilot, Perplexity, etc. read structured data for knowledge graph mapping | Automatic |
+
+### Active Function
+
+The WordPress child theme includes the following PHP function:
+
+```php
+function efc_load_schema_from_github() {
+  $url = 'https://raw.githubusercontent.com/supertedai/energyflow-cosmology/main/site-graph.json';
+  $response = wp_remote_get($url);
+  if (is_array($response) && !is_wp_error($response)) {
+    echo '<script type="application/ld+json">' . $response['body'] . '</script>';
+  }
+}
+add_action('wp_head', 'efc_load_schema_from_github');
