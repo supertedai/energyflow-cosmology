@@ -76,6 +76,29 @@ This repository is directly connected to the live WordPress site via a **child t
 | **PHP Bridge** | Fetches JSON-LD data and inserts it into `<head>` | Child theme `functions.php` |
 | **Search / LLM Layer** | Google, Bing, Copilot, Perplexity, etc. read structured data for knowledge graph mapping | Automatic |
 
+## ⚙️ Automation
+
+### Auto Update Sitemap Schema
+![Auto Update Sitemap Schema](https://github.com/supertedai/energyflow-cosmology/actions/workflows/update-schema.yml/badge.svg)
+
+This automated workflow keeps the project’s sitemap and Schema.org definitions up-to-date.
+
+**Triggers**
+- 🕒 Runs automatically every night at 03:00 UTC  
+- 🧩 Can be started manually from the **Actions** tab  
+- 🔄 Executes on every commit to `main`
+
+**Process**
+1. Checks out the repository  
+2. Fetches the latest `sitemap.xml` and JSON-LD schema from the website  
+3. Commits and pushes any detected changes back to the repository  
+
+**Configuration**
+File: `.github/workflows/update-schema.yml`  
+Script: `schema/update-schema.sh`
+
+This ensures that search engines, LLMs, and data indexers always reference the most recent semantic structure of *Energy-Flow Cosmology*.
+
 ### Active Function
 
 The WordPress child theme includes the following PHP function:
