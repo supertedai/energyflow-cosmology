@@ -10,9 +10,10 @@ OUTPUT_JSON="$BASE_DIR/sitemap-links.json"
 
 echo "🔄 Henter sitemap fra $SITEMAP_URL ..."
 curl -s "$SITEMAP_URL" \
-  | grep -Eo '<loc>[^<]+' \
-  | sed 's/<loc>//' \
+  | tr -d '\n' \
+  | grep -oP '(?<=<loc>).*?(?=</loc>)' \
   | jq -R . | jq -s . > "$OUTPUT_JSON"
+
 
 echo "✅ Lagret sitemap-links.json med $(jq length "$OUTPUT_JSON") lenker."
 git -C "$BASE_DIR/.." add schema/
