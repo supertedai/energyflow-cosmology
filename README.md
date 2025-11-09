@@ -1,3 +1,5 @@
+![Auto Update Sitemap Schema](https://github.com/supertedai/energyflow-cosmology/actions/workflows/update-schema.yml/badge.svg)
+
 # Energy-Flow Cosmology (EFC)
 
 **Author:** Morten Magnusson  
