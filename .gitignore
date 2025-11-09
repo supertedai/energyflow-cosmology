@@ -1,0 +1,24 @@
+# macOS system files
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Node / build tools (hvis du bruker web)
+node_modules/
+dist/
+build/
+
+# VSCode / IDE
+.vscode/
+.idea/
+
+# Git / backup
+*.log
+*.tmp
+*.bak
+*.swp
+
+# Schema & site drafts
+_schema-cache/
+drafts/
+
