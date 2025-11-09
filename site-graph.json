@@ -2,22 +2,21 @@
   "@context": "https://schema.org",
   "@graph": [
     {
-      "@type": "WebSite",
-      "@id": "https://energyflow-cosmology.com/#website",
+      "@type": "Organization",
+      "@id": "https://energyflow-cosmology.com/#organization",
+      "name": "Energy-Flow Cosmology Initiative",
       "url": "https://energyflow-cosmology.com/",
-      "name": "Energy-Flow Cosmology",
-      "description": "A unified thermodynamic model of the universe developed by Morten Magnusson — integrating energy flow, entropy, and structure across scales.",
-      "publisher": {
-        "@type": "Organization",
-        "@id": "https://energyflow-cosmology.com/#organization",
-        "name": "Energy-Flow Cosmology Initiative",
-        "url": "https://energyflow-cosmology.com",
-        "logo": {
-          "@type": "ImageObject",
-          "url": "https://energyflow-cosmology.com/wp-content/uploads/2024/12/EFC-logo.png"
-        }
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://energyflow-cosmology.com/wp-content/uploads/logo.png"
       },
-      "inLanguage": "en-US"
+      "sameAs": [
+        "https://figshare.com/authors/Morten_Magnusson/20477774",
+        "https://github.com/supertedai/energyflow-cosmology"
+      ],
+      "founder": {
+        "@id": "https://energyflow-cosmology.com/#person"
+      }
     },
     {
       "@type": "Person",
@@ -29,93 +28,88 @@
       },
       "identifier": "https://orcid.org/0009-0002-4860-5095",
       "sameAs": [
-        "https://figshare.com/authors/Morten_Magnusson/20477774",
-        "https://github.com/supertedai"
+        "https://figshare.com/authors/Morten_Magnusson/20477774"
       ],
       "email": "contact@energyflow-cosmology.com"
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://energyflow-cosmology.com/#website",
+      "url": "https://energyflow-cosmology.com/",
+      "name": "Energy-Flow Cosmology",
+      "publisher": {
+        "@id": "https://energyflow-cosmology.com/#organization"
+      },
+      "inLanguage": "en-US",
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": "https://energyflow-cosmology.com/?s={search_term_string}",
+        "query-input": "required name=search_term_string"
+      }
     },
     {
       "@type": "AboutPage",
       "@id": "https://energyflow-cosmology.com/about/#webpage",
       "url": "https://energyflow-cosmology.com/about/",
       "name": "About — Energy-Flow Cosmology",
-      "about": { "@id": "https://energyflow-cosmology.com/#person" },
       "isPartOf": { "@id": "https://energyflow-cosmology.com/#website" },
-      "description": "About Morten Magnusson and the origins of Energy-Flow Cosmology — bridging thermodynamics, structure, and consciousness."
+      "about": { "@id": "https://energyflow-cosmology.com/#person" },
+      "inLanguage": "en-US"
     },
     {
       "@type": "CollectionPage",
       "@id": "https://energyflow-cosmology.com/resources/#webpage",
       "url": "https://energyflow-cosmology.com/resources/",
       "name": "Resources — Energy-Flow Cosmology",
-      "description": "Access Energy-Flow Cosmology publications, datasets, DOIs, and validation materials.",
-      "isPartOf": { "@id": "https://energyflow-cosmology.com/#website" }
+      "isPartOf": { "@id": "https://energyflow-cosmology.com/#website" },
+      "about": { "@id": "https://energyflow-cosmology.com/#organization" },
+      "inLanguage": "en-US"
     },
     {
       "@type": "DefinedTermSet",
       "@id": "https://energyflow-cosmology.com/concepts/#efc-series",
-      "url": "https://energyflow-cosmology.com/concepts/",
-      "name": "Concepts — Energy-Flow Cosmology",
-      "description": "Core conceptual modules of Energy-Flow Cosmology (EFC), including the Grid–Higgs Framework, Halo Model of Entropy, and CEM-Cosmos.",
+      "name": "EFC Concept Framework",
+      "description": "Core conceptual modules of Energy-Flow Cosmology, including the Grid–Higgs Framework, Halo Model of Entropy, and CEM-Cosmos.",
       "hasDefinedTerm": [
         {
           "@type": "DefinedTerm",
+          "@id": "https://energyflow-cosmology.com/concepts/grid-higgs-framework/#term",
           "name": "Grid–Higgs Framework",
           "url": "https://energyflow-cosmology.com/concepts/grid-higgs-framework/"
         },
         {
           "@type": "DefinedTerm",
+          "@id": "https://energyflow-cosmology.com/concepts/halo-model-of-entropy/#term",
           "name": "Halo Model of Entropy",
-          "url": "https://energyflow-cosmology.com/concepts/halo-model-of-entropy-efc-s/"
+          "url": "https://energyflow-cosmology.com/concepts/halo-model-of-entropy/"
         },
         {
           "@type": "DefinedTerm",
+          "@id": "https://energyflow-cosmology.com/concepts/cem-cosmos/#term",
           "name": "CEM-Cosmos",
-          "url": "https://energyflow-cosmology.com/concepts/cem-cosmos-efc-c/"
+          "url": "https://energyflow-cosmology.com/concepts/cem-cosmos/"
         }
       ]
     },
     {
-      "@type": "ContactPage",
-      "@id": "https://energyflow-cosmology.com/contact/#webpage",
-      "url": "https://energyflow-cosmology.com/contact/",
-      "name": "Contact — Energy-Flow Cosmology",
-      "description": "Contact information for research collaboration, media inquiries, or institutional correspondence.",
-      "isPartOf": { "@id": "https://energyflow-cosmology.com/#website" }
+      "@type": "WebPage",
+      "@id": "https://energyflow-cosmology.com/concepts/#webpage",
+      "url": "https://energyflow-cosmology.com/concepts/",
+      "name": "Concepts — Energy-Flow Cosmology",
+      "isPartOf": { "@id": "https://energyflow-cosmology.com/#website" },
+      "about": { "@id": "https://energyflow-cosmology.com/concepts/#efc-series" },
+      "mainEntity": { "@id": "https://energyflow-cosmology.com/concepts/#efc-series" },
+      "inLanguage": "en-US"
     },
     {
       "@type": "WebPage",
-      "@id": "https://energyflow-cosmology.com/validation-ledger/#webpage",
-      "url": "https://energyflow-cosmology.com/validation-ledger/",
-      "name": "Validation Ledger — Energy-Flow Cosmology",
-      "description": "Comparative framework mapping EFC predictions against ΛCDM datasets (JWST, DESI, CMB, SPARC).",
-      "isPartOf": { "@id": "https://energyflow-cosmology.com/#website" }
-    },
-    {
-      "@type": "FAQPage",
-      "@id": "https://energyflow-cosmology.com/faq/#webpage",
-      "url": "https://energyflow-cosmology.com/faq/",
-      "name": "FAQ — Energy-Flow Cosmology",
-      "description": "Answers to key questions about Energy-Flow Cosmology, entropy, dark matter, and the structure of the universe.",
-      "isPartOf": { "@id": "https://energyflow-cosmology.com/#website" }
-    },
-    {
-      "@type": "DataCatalog",
-      "@id": "https://energyflow-cosmology.com/figshare/#catalog",
-      "url": "https://figshare.com/authors/Morten_Magnusson/20477774",
-      "name": "Energy-Flow Cosmology Figshare Collection",
-      "creator": { "@id": "https://energyflow-cosmology.com/#person" },
-      "provider": { "@id": "https://energyflow-cosmology.com/#organization" },
-      "dataset": [
-        { "@id": "https://doi.org/10.6084/m9.figshare.30563738" },
-        { "@id": "https://doi.org/10.6084/m9.figshare.30530156" },
-        { "@id": "https://doi.org/10.6084/m9.figshare.30478916" },
-        { "@id": "https://doi.org/10.6084/m9.figshare.30468737" },
-        { "@id": "https://doi.org/10.6084/m9.figshare.30421807" },
-        { "@id": "https://doi.org/10.6084/m9.figshare.30402427" },
-        { "@id": "https://doi.org/10.6084/m9.figshare.30275947" }
-      ]
+      "@id": "https://energyflow-cosmology.com/#webpage",
+      "url": "https://energyflow-cosmology.com/",
+      "name": "Energy-Flow Cosmology — Official Site",
+      "isPartOf": { "@id": "https://energyflow-cosmology.com/#website" },
+      "about": { "@id": "https://energyflow-cosmology.com/#organization" },
+      "mainEntity": { "@id": "https://energyflow-cosmology.com/#organization" },
+      "inLanguage": "en-US"
     }
   ]
 }
-
