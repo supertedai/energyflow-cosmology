@@ -1,0 +1,33 @@
+name: Auto Update Schema from Sitemap
+
+on:
+  schedule:
+    - cron: "0 1 * * *"  # Kjører hver natt kl. 02:00 CET (01:00 UTC)
+  workflow_dispatch:      # Lar deg starte den manuelt fra GitHub UI
+
+jobs:
+  update-schema:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Sjekk ut repo
+        uses: actions/checkout@v4
+
+      - name: Installer jq og curl
+        run: sudo apt-get update && sudo apt-get install -y jq curl
+
+      - name: Kjør update-schema.sh
+        run: bash schema/update-schema.sh
+
+      - name: Commit og push hvis endringer
+        run: |
+          git config user.name "GitHub Action"
+          git config user.email "actions@github.com"
+          if [ -n "$(git status --porcelain)" ]; then
+            git add schema/sitemap-links.json
+            git commit -m "🤖 Auto-update sitemap-links.json"
+            git push
+          else
+            echo "Ingen endringer å pushe."
+          fi
+
