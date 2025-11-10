@@ -1,0 +1,39 @@
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "@id": "https://energyflow-cosmology.com/#mortenmagnusson",
+  "name": "Morten Magnusson",
+  "alternateName": ["M. Magnusson"],
+  "url": "https://energyflow-cosmology.com",
+  "sameAs": [
+    "https://orcid.org/0009-0002-4860-5095",
+    "https://figshare.com/authors/Morten_Magnusson/20477774",
+    "https://github.com/supertedai",
+    "https://www.academia.edu/144834850/Energy_Flow_Cosmology_v1_2_Foundational_Framework_and_Cross_Field_Continuity"
+  ],
+  "jobTitle": "Independent Researcher / Founder of Energy-Flow Cosmology (EFC)",
+  "affiliation": {
+    "@type": "Organization",
+    "name": "Energy-Flow Cosmology Initiative",
+    "url": "https://energyflow-cosmology.com"
+  },
+  "worksFor": {
+    "@type": "Organization",
+    "name": "Energy Rent AS"
+  },
+  "founder": {
+    "@type": "DefinedTermSet",
+    "@id": "https://energyflow-cosmology.com/schema/concepts.json",
+    "name": "Energy-Flow Cosmology (EFC)"
+  },
+  "knowsAbout": [
+    "Thermodynamics",
+    "Cosmology",
+    "Entropy",
+    "Emergent Gravity",
+    "Energy Rate Density",
+    "Information Theory",
+    "Complex Systems"
+  ],
+  "email": "contact@energyflow-cosmology.com"
+}
