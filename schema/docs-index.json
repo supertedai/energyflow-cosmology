@@ -17,6 +17,7 @@
     "name": "Energy-Flow Cosmology Initiative",
     "url": "https://energyflow-cosmology.com"
   },
+  "mainEntityOfPage": "https://github.com/supertedai/energyflow-cosmology/tree/main/docs",
   "hasPart": [
     { "@type": "CreativeWork", "name": "Energy–Flow Cosmology v1.2: Foundational Framework and Cross-Field Continuity", "identifier": "https://doi.org/10.6084/m9.figshare.30563738", "datePublished": "2025-11-07", "publisher": "Figshare", "url": "https://figshare.com/articles/preprint/30563738" },
     { "@type": "CreativeWork", "name": "Applied Energy-Flow Cosmology v2.2 – Cross-Field Integration Summary (2025)", "identifier": "https://doi.org/10.6084/m9.figshare.30530156", "datePublished": "2025-11-04", "publisher": "Figshare", "url": "https://figshare.com/articles/preprint/30530156" },
@@ -25,6 +26,7 @@
     { "@type": "CreativeWork", "name": "Energy Flow Cosmology EFCv2.1 Modular Synthesis across Structure, Dynamics, Cognition", "identifier": "https://doi.org/10.6084/m9.figshare.30455237", "datePublished": "2025-10-27", "publisher": "Figshare", "url": "https://figshare.com/articles/preprint/30455237" },
     { "@type": "CreativeWork", "name": "Energy Flow Cosmology: Field Equations for Entropy-Driven Spacetime", "identifier": "https://doi.org/10.6084/m9.figshare.30421807", "datePublished": "2025-10-22", "publisher": "Figshare", "url": "https://figshare.com/articles/preprint/30421807" },
     { "@type": "CreativeWork", "name": "Energy-Flow Cosmology: A Thermodynamic Bridge Between General Relativity and Quantum Field Theory", "identifier": "https://doi.org/10.6084/m9.figshare.30402427", "datePublished": "2025-10-21", "publisher": "Figshare", "url": "https://figshare.com/articles/preprint/30402427" },
+    { "@type": "CreativeWork", "name": "Informational Metastructure Extension (IMX): Linking Energy Flow, Entropy, and Cognition", "identifier": "https://doi.org/10.6084/m9.figshare.30468927", "datePublished": "2025-10-20", "publisher": "Figshare", "url": "https://figshare.com/articles/preprint/30468927" },
     { "@type": "CreativeWork", "name": "CEM-Cosmos: A Field-Theoretic Model of Consciousness Coupled to Energy-Flow Cosmology", "identifier": "https://doi.org/10.6084/m9.figshare.30275947", "datePublished": "2025-10-04", "publisher": "Figshare", "url": "https://figshare.com/articles/preprint/30275947" },
     { "@type": "CreativeWork", "name": "Integrated Hypothesis on the Emergence of Time from Energy Flow and Entropy", "identifier": "https://doi.org/10.6084/m9.figshare.28578263", "datePublished": "2025-03-11", "publisher": "Figshare", "url": "https://figshare.com/articles/preprint/28578263" },
     { "@type": "CreativeWork", "name": "Hypothesis on Cosmic Microwave Background as a Thermodynamic Temperature Gradient", "identifier": "https://doi.org/10.6084/m9.figshare.28570088", "datePublished": "2025-03-10", "publisher": "Figshare", "url": "https://figshare.com/articles/preprint/28570088" },
