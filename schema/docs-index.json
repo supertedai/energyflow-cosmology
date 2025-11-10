@@ -1,0 +1,57 @@
+{
+  "@context": "https://schema.org",
+  "@type": "CreativeWorkSeries",
+  "@id": "https://energyflow-cosmology.com/docs/",
+  "name": "Energy-Flow Cosmology Documentation Set",
+  "creator": {
+    "@type": "Person",
+    "name": "Morten Magnusson",
+    "sameAs": [
+      "https://orcid.org/0009-0002-4860-5095",
+      "https://figshare.com/authors/Morten_Magnusson/20477774",
+      "https://github.com/supertedai"
+    ]
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Energy-Flow Cosmology Initiative",
+    "url": "https://energyflow-cosmology.com"
+  },
+  "hasPart": [
+    { "@type": "CreativeWork", "name": "Energy–Flow Cosmology v1.2: Foundational Framework and Cross-Field Continuity", "identifier": "https://doi.org/10.6084/m9.figshare.30563738", "datePublished": "2025-11-07", "publisher": "Figshare", "url": "https://figshare.com/articles/preprint/30563738" },
+    { "@type": "CreativeWork", "name": "Applied Energy-Flow Cosmology v2.2 – Cross-Field Integration Summary (2025)", "identifier": "https://doi.org/10.6084/m9.figshare.30530156", "datePublished": "2025-11-04", "publisher": "Figshare", "url": "https://figshare.com/articles/preprint/30530156" },
+    { "@type": "CreativeWork", "name": "Energy-Flow Cosmology (EFC-v2.1): Unified Thermodynamic Framework across Structure, Dynamics, and Cognition", "identifier": "https://doi.org/10.6084/m9.figshare.30478916", "datePublished": "2025-10-30", "publisher": "Figshare", "url": "https://figshare.com/articles/preprint/30478916" },
+    { "@type": "CreativeWork", "name": "The Energy-Flow Interface: A Unified Thermodynamic Interpretation of Dark Matter, Dark Energy, and the CMB within the Grid-Higgs Field Framework", "identifier": "https://doi.org/10.6084/m9.figshare.30468737", "datePublished": "2025-10-28", "publisher": "Figshare", "url": "https://figshare.com/articles/preprint/30468737" },
+    { "@type": "CreativeWork", "name": "Energy Flow Cosmology EFCv2.1 Modular Synthesis across Structure, Dynamics, Cognition", "identifier": "https://doi.org/10.6084/m9.figshare.30455237", "datePublished": "2025-10-27", "publisher": "Figshare", "url": "https://figshare.com/articles/preprint/30455237" },
+    { "@type": "CreativeWork", "name": "Energy Flow Cosmology: Field Equations for Entropy-Driven Spacetime", "identifier": "https://doi.org/10.6084/m9.figshare.30421807", "datePublished": "2025-10-22", "publisher": "Figshare", "url": "https://figshare.com/articles/preprint/30421807" },
+    { "@type": "CreativeWork", "name": "Energy-Flow Cosmology: A Thermodynamic Bridge Between General Relativity and Quantum Field Theory", "identifier": "https://doi.org/10.6084/m9.figshare.30402427", "datePublished": "2025-10-21", "publisher": "Figshare", "url": "https://figshare.com/articles/preprint/30402427" },
+    { "@type": "CreativeWork", "name": "CEM-Cosmos: A Field-Theoretic Model of Consciousness Coupled to Energy-Flow Cosmology", "identifier": "https://doi.org/10.6084/m9.figshare.30275947", "datePublished": "2025-10-04", "publisher": "Figshare", "url": "https://figshare.com/articles/preprint/30275947" },
+    { "@type": "CreativeWork", "name": "Integrated Hypothesis on the Emergence of Time from Energy Flow and Entropy", "identifier": "https://doi.org/10.6084/m9.figshare.28578263", "datePublished": "2025-03-11", "publisher": "Figshare", "url": "https://figshare.com/articles/preprint/28578263" },
+    { "@type": "CreativeWork", "name": "Hypothesis on Cosmic Microwave Background as a Thermodynamic Temperature Gradient", "identifier": "https://doi.org/10.6084/m9.figshare.28570088", "datePublished": "2025-03-10", "publisher": "Figshare", "url": "https://figshare.com/articles/preprint/28570088" },
+    { "@type": "CreativeWork", "name": "Paradigm Shift in Cosmology – Continuous Energy Recycling Through the Grid-Higgs Framework", "identifier": "https://doi.org/10.6084/m9.figshare.28560935", "datePublished": "2025-03-09", "publisher": "Figshare", "url": "https://figshare.com/articles/preprint/28560935" },
+    { "@type": "CreativeWork", "name": "Grid-Higgs Framework: An Entropic and Structural Theory of Gravity, Dark Matter, and Black Holes", "identifier": "https://doi.org/10.6084/m9.figshare.28559510", "datePublished": "2025-03-08", "publisher": "Figshare", "url": "https://figshare.com/articles/preprint/28559510" },
+    { "@type": "CreativeWork", "name": "The Grid Model: An Entropy-Based Alternative to Dark Matter and Dark Energy in Cosmology", "identifier": "https://doi.org/10.6084/m9.figshare.28559423", "datePublished": "2025-03-08", "publisher": "Figshare", "url": "https://figshare.com/articles/preprint/28559423" },
+    { "@type": "CreativeWork", "name": "Hypothesis on the Interrelation of Energy Flow, Entropy, and the Structural Dynamics of the Universe", "identifier": "https://doi.org/10.6084/m9.figshare.28557281", "datePublished": "2025-03-07", "publisher": "Figshare", "url": "https://figshare.com/articles/preprint/28557281" },
+    { "@type": "CreativeWork", "name": "Can EnergyFlow Be Observed in Galactic Clusters?", "identifier": "https://doi.org/10.6084/m9.figshare.28098317", "datePublished": "2025-01-14", "publisher": "Figshare", "url": "https://figshare.com/articles/preprint/28098317" },
+    { "@type": "CreativeWork", "name": "Can Entropy Drive Cosmic Evolution?", "identifier": "https://doi.org/10.6084/m9.figshare.28098353", "datePublished": "2025-01-14", "publisher": "Figshare", "url": "https://figshare.com/articles/preprint/28098353" },
+    { "@type": "CreativeWork", "name": "How Does Balance Shape Universal Structures?", "identifier": "https://doi.org/10.6084/m9.figshare.28098338", "datePublished": "2025-01-14", "publisher": "Figshare", "url": "https://figshare.com/articles/preprint/28098338" },
+    { "@type": "CreativeWork", "name": "How Does Energy Flow Sustain Space-Time?", "identifier": "https://doi.org/10.6084/m9.figshare.28098371", "datePublished": "2025-01-14", "publisher": "Figshare", "url": "https://figshare.com/articles/preprint/28098371" },
+    { "@type": "CreativeWork", "name": "How Does Entropy Interact with Energy Flow?", "identifier": "https://doi.org/10.6084/m9.figshare.28098326", "datePublished": "2025-01-14", "publisher": "Figshare", "url": "https://figshare.com/articles/preprint/28098326" },
+    { "@type": "CreativeWork", "name": "Hypothesis: The Universe as an Energy-Driven System", "identifier": "https://doi.org/10.6084/m9.figshare.28098350", "datePublished": "2025-01-14", "publisher": "Figshare", "url": "https://figshare.com/articles/preprint/28098350" },
+    { "@type": "CreativeWork", "name": "A Deep Dive into the Halo Concept", "identifier": "https://doi.org/10.6084/m9.figshare.28114370", "datePublished": "2024-12-31", "publisher": "Figshare", "url": "https://figshare.com/articles/preprint/28114370" },
+    { "@type": "CreativeWork", "name": "Energy Flow as the Fundamental Dynamic of the Universe", "identifier": "https://doi.org/10.6084/m9.figshare.28113542", "datePublished": "2024-12-31", "publisher": "Figshare", "url": "https://figshare.com/articles/preprint/28113542" },
+    { "@type": "CreativeWork", "name": "Flow, Entropy, and Spacetime Distortion in Cosmological Clusters", "identifier": "https://doi.org/10.6084/m9.figshare.28112096", "datePublished": "2024-12-30", "publisher": "Figshare", "url": "https://figshare.com/articles/preprint/28112096" },
+    { "@type": "CreativeWork", "name": "Light-Speed as a Regulator of Energy Flow in the Universe: A Unified Framework", "identifier": "https://doi.org/10.6084/m9.figshare.28111925", "datePublished": "2024-12-30", "publisher": "Figshare", "url": "https://figshare.com/articles/preprint/28111925" },
+    { "@type": "CreativeWork", "name": "The Role of Light Speed in Cosmic Dynamics: Beyond a Physical Limit", "identifier": "https://doi.org/10.6084/m9.figshare.28112036", "datePublished": "2024-12-30", "publisher": "Figshare", "url": "https://figshare.com/articles/preprint/28112036" },
+    { "@type": "CreativeWork", "name": "Cosmic Expansion – Applications and Implications – Halo Model of Entropy", "identifier": "https://doi.org/10.6084/m9.figshare.28098308", "datePublished": "2024-12-27", "publisher": "Figshare", "url": "https://figshare.com/articles/preprint/28098308" },
+    { "@type": "CreativeWork", "name": "How Entropy Governs the Balance Between Order and Chaos in Cosmic Evolution – Halo Model of Entropy", "identifier": "https://doi.org/10.6084/m9.figshare.28098344", "datePublished": "2024-12-27", "publisher": "Figshare", "url": "https://figshare.com/articles/preprint/28098344" },
+    { "@type": "CreativeWork", "name": "Hypothesis_Entropy_Energyflow", "identifier": "https://doi.org/10.6084/m9.figshare.28102772", "datePublished": "2024-12-27", "publisher": "Figshare", "url": "https://figshare.com/articles/preprint/28102772" },
+    { "@type": "CreativeWork", "name": "Introduction to Entropy in Cosmic Evolution", "identifier": "https://doi.org/10.6084/m9.figshare.28098320", "datePublished": "2024-12-27", "publisher": "Figshare", "url": "https://figshare.com/articles/preprint/28098320" },
+    { "@type": "CreativeWork", "name": "Is Consciousness Linked to Entropy – Halo Model of Entropy", "identifier": "https://doi.org/10.6084/m9.figshare.28098347", "datePublished": "2024-12-27", "publisher": "Figshare", "url": "https://figshare.com/articles/preprint/28098347" },
+    { "@type": "CreativeWork", "name": "Mathematical Framework for Energy Flow in Space-Time – Halo Model of Entropy", "identifier": "https://doi.org/10.6084/m9.figshare.28098314", "datePublished": "2024-12-27", "publisher": "Figshare", "url": "https://figshare.com/articles/preprint/28098314" },
+    { "@type": "CreativeWork", "name": "Technical Documentation: Energy Flow in Space-Time – Halo Model of Entropy", "identifier": "https://doi.org/10.6084/m9.figshare.28098332", "datePublished": "2024-12-27", "publisher": "Figshare", "url": "https://figshare.com/articles/preprint/28098332" },
+    { "@type": "CreativeWork", "name": "What is the Connection Between Energy Flow and the Now – Halo Model of Entropy", "identifier": "https://doi.org/10.6084/m9.figshare.28098311", "datePublished": "2024-12-27", "publisher": "Figshare", "url": "https://figshare.com/articles/preprint/28098311" },
+    { "@type": "CreativeWork", "name": "Why is Light-Speed a Cosmic Limit – Halo Model of Entropy", "identifier": "https://doi.org/10.6084/m9.figshare.28098305", "datePublished": "2024-12-27", "publisher": "Figshare", "url": "https://figshare.com/articles/preprint/28098305" },
+    { "@type": "CreativeWork", "name": "A Groundbreaking Hypothesis Exploring the Fundamentals of Time, Space, and Consciousness Through the Flow of Energy", "identifier": "https://doi.org/10.6084/m9.figshare.28098386", "datePublished": "2024-12-26", "publisher": "Figshare", "url": "https://figshare.com/articles/preprint/28098386" }
+  ]
+}
