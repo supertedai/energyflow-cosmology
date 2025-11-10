@@ -110,11 +110,3 @@ Distributed under **CC-BY-NC-SA 4.0**.
 [https://energyflow-cosmology.com](https://energyflow-cosmology.com)
 
 ```
-
----
-
-Denne changelog-versjonen:
-- dokumenterer hele utviklingsløpet presist,  
-- inkluderer all kode og prosess-logikk du har implementert,  
-- og er formatert perfekt for GitHub-visning og semantisk versjonshistorikk.
-```
