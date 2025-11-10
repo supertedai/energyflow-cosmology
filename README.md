@@ -1,5 +1,17 @@
 ![Auto Update Sitemap Schema](https://github.com/supertedai/energyflow-cosmology/actions/workflows/update-schema.yml/badge.svg)
 
+Energy-Flow Cosmology (EFC) Initiative
+
+This repository hosts the full public schema and documentation for the EFC framework — a unified thermodynamic model connecting cosmic structure, dynamics and cognition.
+
+• Schema Definitions: /schema/concepts.json — machine-readable vocabulary of all major EFC concepts and models.
+• Documentation Set: /schema/docs-index.json plus companion files in /docs/ — full list of publications, technical papers and preprints with DOIs.
+• Auto-Synced Workflow: Changes are managed via GitHub and pushed automatically into the WordPress site at energyflow-cosmology.com.
+
+Key Links
+
+ORCID: https://orcid.org/0009-0002-4860-5095
+
 # Energy-Flow Cosmology (EFC)
 
 **Author:** Morten Magnusson  
