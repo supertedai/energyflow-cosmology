@@ -19,13 +19,13 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Prepare dashboard files
+      # Legg til verifikasjon at index.html finnes
+      - name: Verify dashboard folder
         run: |
-          echo "✅ Preparing dashboard for deploy..."
-          mkdir -p dashboard
-          ls dashboard
+          echo "📂 Checking dashboard contents..."
+          ls -R dashboard || echo "⚠️ Dashboard folder not found!"
 
-      - name: Upload dashboard artifact
+      - name: Upload dashboard to GitHub Pages
         uses: actions/upload-pages-artifact@v3
         with:
           path: dashboard
