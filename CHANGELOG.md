@@ -110,3 +110,41 @@ Distributed under **CC-BY-NC-SA 4.0**.
 [https://energyflow-cosmology.com](https://energyflow-cosmology.com)
 
 ```
+# Changelog – Energy-Flow Cosmology (EFC) Repository
+
+All notable changes to this project are documented here.
+
+---
+
+## [v1.2.0] – 2025-11-11
+### Major update: Semantic API integration
+
+**Summary:**  
+EFC is now equipped with a complete, automated, and verifiable *Open Semantic API* — enabling structured access to all core and extended concepts of the Energy-Flow Cosmology framework.
+
+---
+
+### 🔹 Added
+
+#### 1. `schema/concepts.json`
+- Introduced the canonical **EFC Concept Set** using `@type: DefinedTermSet` (Schema.org).  
+- Includes all major conceptual nodes:
+  - EFC, GHF, HME, EFI, EFD, IMX, CEM, CDVC, Validation Ledger, etc.
+- Each concept includes:
+  - Persistent `@id` URLs  
+  - DOI links (Figshare)  
+  - ORCID-verified authorship  
+  - Descriptions and relationships
+
+#### 2. `.github/workflows/update-api.yml`
+- Added **automated workflow** to:
+  - Monitor changes in `schema/concepts.json`
+  - Generate individual JSON-LD files under `api/v1/concept/`
+  - Build `api/v1/terms.json` (simplified term list)
+  - Validate all JSON files with `jq` and `jsonlint`
+  - Auto-commit and push results back to the repository
+- Ensures the EFC knowledge base is always machine-readable and error-free.
+
+#### 3. `api/v1/` directory
+- Contains the full set of **publicly accessible JSON-LD concept files**.  
+- Each term can now be accessed via:
