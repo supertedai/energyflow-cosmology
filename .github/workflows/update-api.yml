@@ -22,7 +22,7 @@ jobs:
 
       - name: Generate simple term list
         run: |
-          jq '[.hasDefinedTerm[] | {name: .name, id: .@id, url: ("https://energyflow-cosmology.com/concepts/" + (.name | gsub(" "; "-") | ascii_downcase))}]' schema/concepts.json > api/v1/terms.json
+          jq '[.hasDefinedTerm[] | {name: .name, id: .["@id"], url: ("https://energyflow-cosmology.com/concepts/" + (.name | gsub(" "; "-") | ascii_downcase))}]' schema/concepts.json > api/v1/terms.json
 
       - name: Commit and push changes
         run: |
