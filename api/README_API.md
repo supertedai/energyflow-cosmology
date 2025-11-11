@@ -1,3 +1,4 @@
+
 ---
 
 ## 📘 `api/README_API.md`
@@ -111,3 +112,11 @@ This repository serves as the **official, verifiable semantic source** for the E
 2. Paste the text above  
 3. Commit with message:  
 ```
+
+Add API documentation (README_API.md)
+
+```
+
+---
+
+
