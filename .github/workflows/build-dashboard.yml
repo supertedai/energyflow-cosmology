@@ -1,6 +1,11 @@
-name: Build and Deploy Dashboard
+name: Deploy Dashboard to GitHub Pages
 
 on:
+  push:
+    branches: [main]
+    paths:
+      - "dashboard/**"
+      - ".github/workflows/build-dashboard.yml"
   workflow_dispatch:
 
 permissions:
@@ -19,16 +24,15 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      # Legg til verifikasjon at index.html finnes
-      - name: Verify dashboard folder
+      - name: Verify dashboard files
         run: |
-          echo "📂 Checking dashboard contents..."
-          ls -R dashboard || echo "⚠️ Dashboard folder not found!"
+          echo "📁 Dashboard folder content:"
+          ls -R dashboard
 
-      - name: Upload dashboard to GitHub Pages
+      - name: Upload dashboard artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: dashboard
+          path: dashboard   # 👈 peker direkte på mappen der index.html ligger
 
   deploy:
     needs: build
