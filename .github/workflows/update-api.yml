@@ -4,6 +4,7 @@ on:
     branches: [main]
     paths:
       - 'schema/concepts.json'
+  workflow_dispatch:   # gjør at du kan starte manuelt også
 
 jobs:
   build-api:
@@ -16,11 +17,11 @@ jobs:
           mkdir -p api/v1/concept
           cp schema/concepts.json api/v1/concepts.json
           jq -c '.hasDefinedTerm[]' schema/concepts.json | while read term; do
-            id=$(echo $term | jq -r '.name' | tr ' ' '-' | tr '[:upper:]' '[:lower:]')
-            echo $term > api/v1/concept/${id}.json
+            id=$(echo "$term" | jq -r '.name' | tr ' ' '-' | tr '[:upper:]' '[:lower:]')
+            echo "$term" > api/v1/concept/${id}.json
           done
 
-      - name: Generate simple term list
+      - name: Generate simple term list (robust syntax)
         run: |
           jq '[.hasDefinedTerm[] | {name: .name, id: .["@id"], url: ("https://energyflow-cosmology.com/concepts/" + (.name | gsub(" "; "-") | ascii_downcase))}]' schema/concepts.json > api/v1/terms.json
 
@@ -29,5 +30,5 @@ jobs:
           git config user.name "github-actions"
           git config user.email "actions@github.com"
           git add api/v1
-          git commit -m "Auto-sync API endpoints"
+          git commit -m "Auto-sync API endpoints" || echo "No changes to commit"
           git push
