@@ -5,7 +5,7 @@ on:
     branches:
       - main
   schedule:
-    - cron: "0 3 * * *"  # kjører hver natt kl 03:00
+    - cron: "0 3 * * *"  # kjører hver natt kl 03:00 UTC
   workflow_dispatch:
 
 jobs:
@@ -15,22 +15,27 @@ jobs:
       contents: write
 
     steps:
-      - name: Checkout repository
+      - name: 🧩 Hent repository
         uses: actions/checkout@v4
 
-      - name: Install jq and curl
+      - name: 🛠️ Installer jq og curl
         run: sudo apt-get update && sudo apt-get install -y jq curl
 
-      - name: Run update-schema script
+      - name: 🔄 Kjør update-schema.sh
         run: bash schema/update-schema.sh
 
-      - name: Commit and push changes
+      - name: 💾 Commit og push endringer
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           git config user.name "Morten Magnusson"
           git config user.email "morten@magnusson.as"
-          git add .
-          git commit -m "🤖 Auto-update sitemap-links.json [GitHub Actions]" || echo "No changes to commit"
-          git push origin main
+          git add schema/sitemap-links.json
 
+          if git diff --cached --quiet; then
+            echo "ℹ️ Ingen endringer å pushe."
+          else
+            git commit -m "🤖 Auto-update sitemap-links.json [GitHub Actions]"
+            git push origin main
+            echo "🚀 Oppdatering fullført og pushet til main."
+          fi
