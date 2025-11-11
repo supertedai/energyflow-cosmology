@@ -1,0 +1,24 @@
+{
+  "@context": "https://schema.org",
+  "@type": "Dataset",
+  "name": "Energy-Flow Cosmology (EFC) – Semantic Concept Dataset",
+  "description": "Machine-readable dataset of EFC concepts with Figshare DOIs and ORCID-authenticated authorship.",
+  "url": "https://github.com/supertedai/energyflow-cosmology",
+  "license": "https://creativecommons.org/licenses/by/4.0/",
+  "creator": {
+    "@type": "Person",
+    "name": "Morten Magnusson",
+    "sameAs": [
+      "https://orcid.org/0009-0002-4860-5095",
+      "https://energyflow-cosmology.com"
+    ]
+  },
+  "distribution": {
+    "@type": "DataDownload",
+    "encodingFormat": "application/json",
+    "contentUrl": "https://raw.githubusercontent.com/supertedai/energyflow-cosmology/main/api/concept-index.json"
+  },
+  "isAccessibleForFree": true,
+  "dateModified": "2025-11-11",
+  "includedInDataCatalog": "https://datasetsearch.research.google.com/"
+}
