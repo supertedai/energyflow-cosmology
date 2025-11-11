@@ -1,0 +1,178 @@
+{
+  "@context": "https://schema.org",
+  "@type": "DefinedTermSet",
+  "@id": "https://github.com/supertedai/energyflow-cosmology/schema/concepts.json",
+  "name": "Energy-Flow Cosmology (EFC) Core and Extended Concepts",
+  "version": "v1.0.1",
+  "description": "A unified thermodynamic framework connecting cosmic structure, dynamics, and cognition through energy flow and entropy.",
+
+  "creator": {
+    "@type": "Person",
+    "name": "Morten Magnusson",
+    "affiliation": "Energy-Flow Cosmology Initiative",
+    "sameAs": [
+      "https://orcid.org/0009-0002-4860-5095",
+      "https://figshare.com/authors/Morten_Magnusson/20477774",
+      "https://energyflow-cosmology.com"
+    ]
+  },
+
+  "hasDefinedTerm": [
+    {
+      "@type": "DefinedTerm",
+      "@id": "https://energyflow-cosmology.com/concepts/efc-framework",
+      "name": "Energy-Flow Cosmology (EFC)",
+      "termCode": "EFC",
+      "description": "The foundational thermodynamic framework unifying cosmic structure, dynamics, and cognition through the interaction between energy flow (Ef) and entropy (S).",
+      "url": "https://energyflow-cosmology.com/efc-foundational-framework/",
+      "sameAs": "https://doi.org/10.6084/m9.figshare.30563738",
+      "creator": { "@id": "https://figshare.com/authors/Morten_Magnusson/20477774" }
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "https://energyflow-cosmology.com/concepts/energy-flow-potential",
+      "name": "Energy-Flow Potential (Ef)",
+      "description": "Defines the energetic potential governing thermodynamic curvature, time evolution, and the emergence of structure.",
+      "sameAs": "https://doi.org/10.6084/m9.figshare.30421807",
+      "creator": { "@id": "https://figshare.com/authors/Morten_Magnusson/20477774" }
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "https://energyflow-cosmology.com/concepts/entropy-gradient",
+      "name": "Entropy Gradient (∇S)",
+      "description": "Represents the direction of increasing disorder and the arrow of time; the driver of energy redistribution and structure formation.",
+      "sameAs": "https://doi.org/10.6084/m9.figshare.28098326",
+      "creator": { "@id": "https://figshare.com/authors/Morten_Magnusson/20477774" }
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "https://energyflow-cosmology.com/concepts/grid-higgs-framework",
+      "name": "Grid–Higgs Framework (GHF)",
+      "termCode": "GHF",
+      "description": "Describes the coupling between the universal energy grid and the Higgs field, forming the structural basis for spacetime and mass distribution.",
+      "url": "https://energyflow-cosmology.com/grid-higgs-framework/",
+      "sameAs": "https://doi.org/10.6084/m9.figshare.30402427",
+      "creator": { "@id": "https://figshare.com/authors/Morten_Magnusson/20477774" }
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "https://energyflow-cosmology.com/concepts/halo-model-entropy",
+      "name": "Halo Model of Entropy (HME)",
+      "termCode": "HME",
+      "description": "Explains how entropy gradients generate and stabilize galactic halos without dark matter, linking thermodynamic imbalance to gravitational behavior.",
+      "url": "https://energyflow-cosmology.com/the-halo-model-of-entropy/",
+      "sameAs": "https://doi.org/10.6084/m9.figshare.30468737",
+      "creator": { "@id": "https://figshare.com/authors/Morten_Magnusson/20477774" }
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "https://energyflow-cosmology.com/concepts/energy-flow-interface",
+      "name": "Energy-Flow Interface (EFI)",
+      "termCode": "EFI",
+      "description": "A unified thermodynamic interpretation of dark matter, dark energy, and the CMB within the Grid–Higgs framework.",
+      "url": "https://energyflow-cosmology.com/energy-flow-interface/",
+      "sameAs": "https://doi.org/10.6084/m9.figshare.30468737",
+      "creator": { "@id": "https://figshare.com/authors/Morten_Magnusson/20477774" }
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "https://energyflow-cosmology.com/concepts/energy-flow-dynamics",
+      "name": "Energy-Flow Dynamics (EFD)",
+      "termCode": "EFD",
+      "description": "Describes cosmic expansion, gravitation, and time as emergent properties of energy-rate density and entropy flow.",
+      "url": "https://energyflow-cosmology.com/energy-flow-dynamics/",
+      "sameAs": "https://doi.org/10.6084/m9.figshare.30455237",
+      "creator": { "@id": "https://figshare.com/authors/Morten_Magnusson/20477774" }
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "https://energyflow-cosmology.com/concepts/thermodynamic-curvature",
+      "name": "Thermodynamic Curvature",
+      "description": "Defines spacetime curvature as a thermodynamic property emerging from variations in the energy-flow potential and entropy density.",
+      "sameAs": "https://doi.org/10.6084/m9.figshare.30455237",
+      "creator": { "@id": "https://figshare.com/authors/Morten_Magnusson/20477774" }
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "https://energyflow-cosmology.com/concepts/rayleigh-dissipation-functional",
+      "name": "Rayleigh Dissipation Functional",
+      "description": "Describes energy dissipation mechanisms within non-equilibrium thermodynamic systems, essential to EFC’s dynamic stability.",
+      "sameAs": "https://doi.org/10.6084/m9.figshare.30421807",
+      "creator": { "@id": "https://figshare.com/authors/Morten_Magnusson/20477774" }
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "https://energyflow-cosmology.com/concepts/lyapunov-stability",
+      "name": "Lyapunov Stability in EFC",
+      "description": "Specifies the stability criteria for energy-flow field evolution; ensures convergence to equilibrium or steady-state attractors.",
+      "sameAs": "https://doi.org/10.6084/m9.figshare.30421807",
+      "creator": { "@id": "https://figshare.com/authors/Morten_Magnusson/20477774" }
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "https://energyflow-cosmology.com/concepts/imx",
+      "name": "Informational Metastructure Extension (IMX)",
+      "termCode": "IMX",
+      "description": "Defines the informational architecture linking energy flow, entropy, and cognition. Extends EFC into the semantic and cognitive domain.",
+      "sameAs": "https://doi.org/10.6084/m9.figshare.30468927",
+      "creator": { "@id": "https://figshare.com/authors/Morten_Magnusson/20477774" }
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "https://energyflow-cosmology.com/concepts/cem-cosmos",
+      "name": "CEM-Cosmos",
+      "termCode": "CEM",
+      "description": "A field-theoretic model of consciousness coupled to Energy-Flow Cosmology, extending thermodynamic logic to cognitive systems.",
+      "url": "https://energyflow-cosmology.com/cem-cosmos-model/",
+      "sameAs": "https://doi.org/10.6084/m9.figshare.30275947",
+      "creator": { "@id": "https://figshare.com/authors/Morten_Magnusson/20477774" }
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "https://energyflow-cosmology.com/concepts/cdvc",
+      "name": "Cross-Domain Vector Convergence (CDVC)",
+      "termCode": "CDVC",
+      "description": "Describes resonance and synchronization between physical, informational, and cognitive domains within the EFC framework.",
+      "sameAs": "https://doi.org/10.6084/m9.figshare.30478916",
+      "creator": { "@id": "https://figshare.com/authors/Morten_Magnusson/20477774" }
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "https://energyflow-cosmology.com/concepts/validation-ledger",
+      "name": "Energy-Flow Validation Ledger",
+      "description": "Provides a structured comparison between EFC predictions and observational data (JWST, DESI, Planck), offering an empirical validation framework.",
+      "sameAs": "https://doi.org/10.6084/m9.figshare.30530156",
+      "creator": { "@id": "https://figshare.com/authors/Morten_Magnusson/20477774" }
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "https://energyflow-cosmology.com/concepts/entropy-light-speed",
+      "name": "Entropy–Light Speed Relationship",
+      "description": "Explores how variations in entropy density affect the local propagation speed of light, redefining c as an emergent thermodynamic property.",
+      "sameAs": "https://doi.org/10.6084/m9.figshare.28111925",
+      "creator": { "@id": "https://figshare.com/authors/Morten_Magnusson/20477774" }
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "https://energyflow-cosmology.com/concepts/halo-hypothesis",
+      "name": "Halo Hypothesis",
+      "description": "A derivative of the Halo Model of Entropy proposing that gravitational halos are emergent entropic equilibria, not mass anomalies.",
+      "sameAs": "https://doi.org/10.6084/m9.figshare.28114370",
+      "creator": { "@id": "https://figshare.com/authors/Morten_Magnusson/20477774" }
+    }
+  ],
+
+  "relatedLink": [
+    "https://doi.org/10.6084/m9.figshare.30563738",
+    "https://doi.org/10.6084/m9.figshare.30530156",
+    "https://doi.org/10.6084/m9.figshare.30478916",
+    "https://doi.org/10.6084/m9.figshare.30468737",
+    "https://doi.org/10.6084/m9.figshare.30455237",
+    "https://doi.org/10.6084/m9.figshare.30421807",
+    "https://doi.org/10.6084/m9.figshare.30402427",
+    "https://doi.org/10.6084/m9.figshare.30468927",
+    "https://doi.org/10.6084/m9.figshare.30275947",
+    "https://doi.org/10.6084/m9.figshare.28111925",
+    "https://doi.org/10.6084/m9.figshare.28114370"
+  ]
+}
