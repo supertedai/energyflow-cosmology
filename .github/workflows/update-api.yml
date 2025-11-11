@@ -1,4 +1,5 @@
 name: Update EFC API
+
 on:
   push:
     branches: [main]
@@ -9,29 +10,49 @@ on:
 jobs:
   build-api:
     runs-on: ubuntu-latest
+
     steps:
       - uses: actions/checkout@v4
 
-      - name: Install jq
-        run: sudo apt-get update && sudo apt-get install -y jq
+      - name: Install jq and jsonlint
+        run: |
+          sudo apt-get update -y
+          sudo apt-get install -y jq npm
+          sudo npm install -g jsonlint
 
       - name: Prepare API folders
         run: |
           mkdir -p api/v1/concept
           cp schema/concepts.json api/v1/concepts.json
+
+          # Loop through each defined term and export to its own JSON file
           jq -c '.hasDefinedTerm[]' schema/concepts.json | while read -r term; do
-            id=$(echo "$term" | jq -r '.name' | tr ' ' '-' | tr '[:upper:]' '[:lower:]')
+            # Create clean, URL-safe filename (ascii only, lowercase, no symbols)
+            id=$(echo "$term" | jq -r '.name' \
+              | iconv -f utf8 -t ascii//TRANSLIT \
+              | tr ' ' '-' \
+              | tr '[:upper:]' '[:lower:]' \
+              | tr -cd '[:alnum:]-')
+
             echo "$term" > "api/v1/concept/${id}.json"
           done
 
-      - name: Generate simple term list (final robust quoting)
+      - name: Generate simplified term list
         run: |
-          jq '[.hasDefinedTerm[] | {name: .name, id: .["@id"], url: ("https://energyflow-cosmology.com/concepts/" + (.name | gsub(" "; "-") | ascii_downcase))}]' schema/concepts.json > api/v1/terms.json
+          jq '[.hasDefinedTerm[] | {name: .name, id: .["@id"], url: ("https://energyflow-cosmology.com/concepts/" + (.name | gsub(" "; "-") | ascii_downcase | gsub("[^a-z0-9-]"; "")))}]' schema/concepts.json > api/v1/terms.json
+
+      - name: Validate all generated JSON files
+        run: |
+          echo "Validating JSON files in api/v1/ ..."
+          find api/v1 -name '*.json' -print0 | while IFS= read -r -d '' file; do
+            jsonlint -q "$file" || { echo "❌ Invalid JSON in $file"; exit 1; }
+          done
+          echo "✅ All JSON files valid."
 
       - name: Commit and push changes
         run: |
           git config user.name "github-actions"
           git config user.email "actions@github.com"
           git add api/v1
-          git commit -m "Auto-sync API endpoints" || echo "No changes to commit"
+          git commit -m "Auto-sync EFC API endpoints" || echo "No changes to commit"
           git push
