@@ -114,13 +114,3 @@ This repository serves as the **official, verifiable semantic source** for the E
 2. Paste the text above  
 3. Commit with message:  
 ```
-
-Add API documentation (README_API.md)
-
-```
-
----
-
-Would you like me to generate the optional `api/metadata.json` file next — a JSON-LD “Dataset” descriptor (used by Google Dataset Search and LLM crawlers to recognize your API as a scientific dataset)?  
-That’s what will make EFC appear under *“Dataset results”* and *AI overview cards* in Google and Bing.
-```
