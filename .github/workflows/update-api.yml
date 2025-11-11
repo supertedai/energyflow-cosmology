@@ -28,11 +28,14 @@ jobs:
           # Loop through each defined term and export to its own JSON file
           jq -c '.hasDefinedTerm[]' schema/concepts.json | while read -r term; do
             # Create clean, URL-safe filename (ascii only, lowercase, no symbols)
-            id=$(echo "$term" | jq -r '.name' \
-              | iconv -f utf8 -t ascii//TRANSLIT \
-              | tr ' ' '-' \
-              | tr '[:upper:]' '[:lower:]' \
-              | tr -cd '[:alnum:]-')
+           id=$(echo "$term" | jq -r '.name' \
+  | iconv -f utf8 -t ascii//TRANSLIT \
+  | sed 's/[^a-zA-Z0-9 -]//g' \
+  | tr ' ' '-' \
+  | tr '[:upper:]' '[:lower:]' \
+  | tr -s '-' \
+  | tr -cd '[:alnum:]-')
+
 
             echo "$term" > "api/v1/concept/${id}.json"
           done
