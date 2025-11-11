@@ -1,6 +1,3 @@
-Excellent — here’s the **English version** of the same `README_API.md`, written for international researchers, AI developers, and semantic web systems.
-It’s concise, formal, and matches academic + open-data standards.
-
 ---
 
 ## 📘 `api/README_API.md`
