@@ -1,30 +1,30 @@
 # Energy-Flow Cosmology (EFC) – Open Semantic API
 
-Dette API-et gjør begreper og strukturer fra Energy-Flow Cosmology (EFC) maskinlesbare og gjenbrukbare for forskning, AI-systemer og kunnskapsdatabaser.
+This API provides machine-readable access to the conceptual structure of **Energy-Flow Cosmology (EFC)** — a thermodynamic framework unifying cosmic structure, dynamics, and cognition.
 
-Alle data følger [Schema.org/DefinedTermSet](https://schema.org/DefinedTermSet)-standarden og oppdateres automatisk fra `schema/concepts.json` ved hver commit.
-
----
-
-## 📂 Struktur
-
-| Fil / Mappe | Innhold | Format |
-|--------------|----------|---------|
-| `api/v1/concepts.json` | Hele EFC-begrepssettet (strukturert kjerne) | JSON-LD |
-| `api/v1/terms.json` | Forenklet liste med navn, ID og URL | JSON |
-| `api/v1/concept/` | Én fil per begrep (f.eks. `entropy-gradient.json`) | JSON-LD |
-| `api/index.json` | Manifest med metadata og lenker | JSON |
+All data follows the [Schema.org/DefinedTermSet](https://schema.org/DefinedTermSet) specification and is automatically updated from `schema/concepts.json` on every commit.
 
 ---
 
-## 🧠 Eksempel
+## 📂 Structure
+
+| File / Folder | Content | Format |
+|----------------|----------|---------|
+| `api/v1/concepts.json` | Full EFC concept set (core ontology) | JSON-LD |
+| `api/v1/terms.json` | Simplified term list (name, id, url) | JSON |
+| `api/v1/concept/` | One file per concept (e.g., `entropy-gradient.json`) | JSON-LD |
+| `api/index.json` | Manifest and metadata (optional) | JSON |
+
+---
+
+## 🧠 Examples
 
 ```bash
-# Hent alle begreper
+# Fetch all concepts
 curl https://raw.githubusercontent.com/supertedai/energyflow-cosmology/main/api/v1/concepts.json
 
-# Hent kortliste
+# Fetch the simplified term list
 curl https://raw.githubusercontent.com/supertedai/energyflow-cosmology/main/api/v1/terms.json
 
-# Hent ett begrep
+# Fetch one specific concept
 curl https://raw.githubusercontent.com/supertedai/energyflow-cosmology/main/api/v1/concept/entropy-gradient.json
