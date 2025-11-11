@@ -2,6 +2,7 @@
   "@context": "https://schema.org",
   "@type": "CreativeWorkSeries",
   "name": "Energy-Flow Cosmology Schema Map",
+  "description": "Master index linking all structured schema components of the Energy-Flow Cosmology (EFC) framework, providing semantic cohesion across homepage, about, concepts, resources, and contact metadata.",
   "creator": {
     "@type": "Person",
     "name": "Morten Magnusson",
@@ -15,6 +16,8 @@
     "schema/resources.jsonld",
     "schema/contact.jsonld"
   ],
+  "version": "1.0.0",
+  "license": "https://creativecommons.org/licenses/by/4.0/",
   "inLanguage": "en-US",
   "dateCreated": "2025-11-08"
 }
