@@ -1,0 +1,21 @@
+name: Update concepts from Figshare
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "0 7 * * *"
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: python scripts/fetch_figshare.py
+      - run: |
+          git config user.name "auto"
+          git config user.email "bot@energyflow"
+          git add schema/concepts.json
+          git commit -m "auto: update concepts.json" || echo "no changes"
+          git push
