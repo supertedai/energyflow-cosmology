@@ -4,7 +4,7 @@ on:
     branches: [main]
     paths:
       - 'schema/concepts.json'
-  workflow_dispatch:   # gjør at du kan starte manuelt også
+  workflow_dispatch:
 
 jobs:
   build-api:
@@ -12,16 +12,19 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - name: Install jq
+        run: sudo apt-get update && sudo apt-get install -y jq
+
       - name: Prepare API folders
         run: |
           mkdir -p api/v1/concept
           cp schema/concepts.json api/v1/concepts.json
-          jq -c '.hasDefinedTerm[]' schema/concepts.json | while read term; do
+          jq -c '.hasDefinedTerm[]' schema/concepts.json | while read -r term; do
             id=$(echo "$term" | jq -r '.name' | tr ' ' '-' | tr '[:upper:]' '[:lower:]')
-            echo "$term" > api/v1/concept/${id}.json
+            echo "$term" > "api/v1/concept/${id}.json"
           done
 
-      - name: Generate simple term list (robust syntax)
+      - name: Generate simple term list (final robust quoting)
         run: |
           jq '[.hasDefinedTerm[] | {name: .name, id: .["@id"], url: ("https://energyflow-cosmology.com/concepts/" + (.name | gsub(" "; "-") | ascii_downcase))}]' schema/concepts.json > api/v1/terms.json
 
