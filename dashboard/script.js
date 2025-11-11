@@ -1,36 +1,60 @@
+async function fetchJSON(urls) {
+  const list = Array.isArray(urls) ? urls : [urls];
+  for (const url of list) {
+    try {
+      const res = await fetch(url, { cache: 'no-store' });
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      const txt = await res.text();
+      try {
+        return JSON.parse(txt);
+      } catch (e) {
+        throw new Error(`Not JSON from ${url}. Starts with: ${txt.slice(0,60)}`);
+      }
+    } catch (e) {
+      console.warn(`Fetch failed: ${e.message}`);
+    }
+  }
+  throw new Error(`All sources failed: ${list.join(' | ')}`);
+}
+
 async function loadDashboard() {
-  const metaURL = "https://raw.githubusercontent.com/supertedai/energyflow-cosmology/main/api/metadata.json";
-  const termsURL = "https://raw.githubusercontent.com/supertedai/energyflow-cosmology/main/api/v1/terms.json";
+  // Primær: jsDelivr (stabil CORS). Fallback: raw.githubusercontent
+  const META_URLS = [
+    'https://cdn.jsdelivr.net/gh/supertedai/energyflow-cosmology@main/api/metadata.json',
+    'https://raw.githubusercontent.com/supertedai/energyflow-cosmology/main/api/metadata.json',
+    'https://raw.githubusercontent.com/supertedai/energyflow-cosmology/main/api/index.json'
+  ];
+
+  const TERMS_URLS = [
+    'https://cdn.jsdelivr.net/gh/supertedai/energyflow-cosmology@main/api/v1/terms.json',
+    'https://raw.githubusercontent.com/supertedai/energyflow-cosmology/main/api/v1/terms.json'
+  ];
 
   try {
     const [meta, terms] = await Promise.all([
-      fetch(metaURL).then((r) => r.json()),
-      fetch(termsURL).then((r) => r.json())
+      fetchJSON(META_URLS),
+      fetchJSON(TERMS_URLS)
     ]);
 
     // --- METADATA ---
-    const metaDiv = document.getElementById("meta-content");
-    metaDiv.innerHTML = `
-      <p><b>Name:</b> ${meta.name}</p>
-      <p><b>Description:</b> ${meta.description}</p>
-      <p><b>Last Updated:</b> ${meta.dateModified}</p>
-      <p><b>License:</b> <a href="${meta.license}" target="_blank">${meta.license}</a></p>
-      <p><b>Accessible:</b> ${meta.isAccessibleForFree ? "✅ Free" : "⚠️ Restricted"}</p>
+    const m = document.getElementById('meta-content');
+    m.innerHTML = `
+      <p><b>Name:</b> ${meta.name ?? 'Energy-Flow Cosmology (EFC) – Dataset'}</p>
+      ${meta.description ? `<p><b>Description:</b> ${meta.description}</p>` : ''}
+      ${meta.version ? `<p><b>Version:</b> ${meta.version}</p>` : ''}
+      <p><b>Last updated:</b> ${meta.dateModified ?? new Date().toISOString().split('T')[0]}</p>
+      ${meta.license ? `<p><b>License:</b> <a href="${meta.license}" target="_blank">${meta.license}</a></p>` : ''}
+      <p><b>Concept count:</b> ${Array.isArray(terms) ? terms.length : 0}</p>
     `;
 
     // --- CONCEPTS ---
-    const tableBody = document.querySelector("#concept-table tbody");
-    tableBody.innerHTML = "";
-    terms.forEach((t) => {
-      const row = document.createElement("tr");
-      row.innerHTML = `
-        <td>${t.name}</td>
-        <td><a href="${t.url}" target="_blank">${t.url}</a></td>
-      `;
-      tableBody.appendChild(row);
-    });
+    const tbody = document.querySelector('#concept-table tbody');
+    tbody.innerHTML = (terms || [])
+      .map(t => `<tr><td>${t.name}</td><td><a href="${t.url}" target="_blank">${t.url}</a></td></tr>`)
+      .join('');
   } catch (err) {
-    document.getElementById("meta-content").innerHTML = `<p style="color:red;">Error loading data: ${err}</p>`;
+    document.getElementById('meta-content').innerHTML =
+      `<p style="color:#b91c1c"><b>Error:</b> ${err.message}</p>`;
   }
 }
 
