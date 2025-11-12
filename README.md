@@ -1,12 +1,4 @@
-Perfekt — du har allerede et imponerende README-grunnlag.
-Her er en **oppdatert versjon** som reflekterer alt vi har gjort de siste dagene:
-– koblingen mellom **to DOI-er (kode + data)**,
-– **automatiserte workflows** (Fetch → Merge → API → Upload),
-– og full integrasjon av **Open Science-loop + EFC API**.
 
----
-
-````markdown
 # 🔭 Energy-Flow Cosmology (EFC)
 
 [![DOI (Codebase)](https://img.shields.io/badge/DOI-10.6084/m9.figshare.30604004-blue)](https://doi.org/10.6084/m9.figshare.30604004)
