@@ -1,0 +1,53 @@
+name: 🔁 Update EFC System (Fetch → Merge → API)
+
+on:
+  workflow_dispatch:
+  schedule:
+    # kjør daglig kl 02:00 UTC
+    - cron: "0 2 * * *"
+
+jobs:
+  update-efc:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install dependencies
+        run: |
+          pip install requests python-dotenv
+
+      - name: 🧩 Fetch Figshare Concepts
+        env:
+          FIGSHARE_TOKEN: ${{ secrets.FIGSHARE_TOKEN }}
+          FIGSHARE_ARTICLE_ID: ${{ secrets.FIGSHARE_ARTICLE_ID }}
+        run: |
+          echo "Fetching concepts from Figshare..."
+          python scripts/fetch_figshare.py
+
+      - name: 🔄 Update Concepts from Figshare
+        run: |
+          echo "Merging new concepts..."
+          python scripts/update_concepts.py
+
+      - name: 🌐 Update EFC API
+        run: |
+          echo "Updating EFC API..."
+          python scripts/update_efc_api.py
+
+      - name: ✅ Commit and push updates
+        run: |
+          git config user.name "github-actions"
+          git config user.email "actions@github.com"
+          git add schema/*.json
+          git add output/*
+          git diff --cached --quiet || git commit -m "🔁 Automated EFC system update [skip ci]"
+          git push origin main
