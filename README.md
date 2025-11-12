@@ -48,7 +48,7 @@ GitHub ↔ Figshare ↔ ORCID ↔ Energyflow-Cosmology.com.
 
 ## 🔹 Reflection Layer
 
-- (https://github.com/supertedai/energyflow-cosmology/tree/main/reflection) — a self-describing metastructure tracking live coherence and system evolution.
+- https://github.com/supertedai/energyflow-cosmology/tree/main/reflection — a self-describing metastructure tracking live coherence and system evolution.
 
 ---
 
