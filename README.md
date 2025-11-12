@@ -36,22 +36,24 @@ GitHub ↔ Figshare ↔ ORCID ↔ Energyflow-Cosmology.com.
 
 ## 🔹 Automated Workflows
 
-| Workflow | Formål | Frekvens |
-|-----------|---------|-----------|
-| **Fetch Figshare Concepts** | Henter siste DOI-metadata fra Figshare | ved behov |
-| **Update Concepts from Figshare** | Fletter Figshare-data med lokale schemaer | etter fetch |
-| **Update EFC API** | Regenererer semantisk API for nettsiden | daglig |
-| **Export EFC Outputs to Figshare** | Laster opp nye resultater til DOI 30478916 | automatisk |
-| **Update EFC System** | Komplett kjede (Fetch → Merge → API) | daglig kl 02:00 UTC |
+| Workflow | Purpose | Frequency |
+|-----------|----------|------------|
+| **Fetch Figshare Concepts** | Retrieves the latest DOI metadata from Figshare | As needed |
+| **Update Concepts from Figshare** | Merges Figshare data with local schema definitions | After fetch |
+| **Update EFC API** | Regenerates the semantic API used by the website | Daily |
+| **Export EFC Outputs to Figshare** | Uploads new validation results to DOI 30478916 | Automatic |
+| **Update EFC System** | Complete synchronization chain (Fetch → Merge → API) | Daily at 02:00 UTC |
+
 
 ---
 
 ## 🔹 Open-Science Principles
 
-1. **Transparens** – alle modeller og data er offentlige  
-2. **Reproduserbarhet** – schema og koder er versjonsstyrt  
-3. **Interoperabilitet** – ORCID + Figshare + GitHub + WordPress  
-4. **Refleksivitet** – AI-assistert metakognitiv prosess er del av selve metoden  
+1. **Transparency** — all models, data, and reasoning are publicly accessible.  
+2. **Reproducibility** — schemas and code are version-controlled and documented.  
+3. **Interoperability** — full integration across ORCID, Figshare, GitHub, and WordPress.  
+4. **Reflectivity** — AI-assisted meta-cognitive reasoning is part of the scientific process itself.  
+  
 
 ---
 
@@ -72,16 +74,17 @@ Morten Magnusson (ORCID 0009-0002-4860-5095)
 ```
 energyflow-cosmology/
 │
-├── .github/          # GitHub-workflows, actions og automasjon
-├── api/              # Semantiske API-definisjoner og endepunkter
-├── data/             # Rå og behandlede datasett
-├── docs/             # Manuskripter og referanser
-├── figshare/         # DOI-koblinger og metadatafiler
-├── methodology/      # Open-science prosess-dokumentasjon
-├── output/           # Valideringsgrafer og dashboards
-├── schema/           # Semantiske definisjoner (Auth, Concept, Methodology)
-├── scripts/          # Python-verktøy for automasjon
-└── src/              # Kildekode og eksperimentelle moduler
+├── .github/          # GitHub workflows, actions, and automation scripts  
+├── api/              # Semantic API definitions and endpoints  
+├── data/             # Raw and processed datasets for validation  
+├── docs/             # Manuscripts, references, and scientific documentation  
+├── figshare/         # DOI-linked metadata and Figshare integration files  
+├── methodology/      # Reflective open-science process documentation  
+├── output/           # Validation plots, figures, and dashboards  
+├── schema/           # Semantic definitions (Auth, Concept, Methodology)  
+├── scripts/          # Python utilities for automation  
+└── src/              # Core source code and experimental modules  
+
 ```
 
 ---
