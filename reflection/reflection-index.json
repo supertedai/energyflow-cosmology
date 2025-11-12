@@ -2,13 +2,13 @@
   "@context": "https://schema.org",
   "@type": "DataCatalog",
   "name": "EFC Reflection Index",
-  "about": "Meta-noder som beskriver tankeprosesser, modellendringer og konseptkoblinger i Energy-Flow Cosmology.",
+  "about": "Meta-nodes describing the evolution of ideas, data validation, and theoretical development in the Energy-Flow Cosmology framework.",
   "dataset": [
     {
       "@type": "CreativeWork",
       "name": "Metastructure Initialization",
       "dateCreated": "2025-11-12",
-      "about": "Etablering av refleksjonslaget i EFC.",
+      "about": "Establishing the Reflection Layer in EFC.",
       "isPartOf": "https://github.com/supertedai/energyflow-cosmology/reflection/state-map.json"
     }
   ]
