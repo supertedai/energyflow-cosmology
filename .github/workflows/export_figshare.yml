@@ -1,4 +1,5 @@
 name: 📤 Export EFC Outputs to Figshare
+
 on:
   push:
     branches:
@@ -29,17 +30,20 @@ jobs:
           FIGSHARE_TOKEN: ${{ secrets.FIGSHARE_TOKEN }}
           FIGSHARE_ARTICLE_ID: ${{ secrets.FIGSHARE_ARTICLE_ID }}
         run: |
-          python <<'PY'
-import os, requests, json
+          python - <<'PY'
+import os, requests, json, sys
 
 token = os.getenv("FIGSHARE_TOKEN")
 article_id = os.getenv("FIGSHARE_ARTICLE_ID")
 
 if not token or not article_id:
-    raise SystemExit("❌ Missing Figshare credentials")
+    sys.exit("❌ Missing Figshare credentials")
 
 headers = {"Authorization": f"token {token}"}
 base_path = "output"
+if not os.path.exists(base_path):
+    sys.exit("⚠️ No output folder found")
+
 files = [f for f in os.listdir(base_path) if not f.startswith(".")]
 
 for f in files:
