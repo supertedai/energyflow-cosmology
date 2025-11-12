@@ -92,6 +92,33 @@
       ]
     },
     {
+      "@type": "CreativeWork",
+      "@id": "https://github.com/supertedai/energyflow-cosmology/schema/methodology-index.json",
+      "name": "EFC Methodology Node",
+      "description": "Documentation of the reflective and open-science methodology used in the development of Energy-Flow Cosmology.",
+      "about": {
+        "@type": "ResearchProcess",
+        "@id": "https://github.com/supertedai/energyflow-cosmology/methodology/open-process.json"
+      },
+      "isPartOf": {
+        "@id": "https://energyflow-cosmology.com/#organization",
+        "@type": "Organization"
+      },
+      "keywords": [
+        "open science",
+        "first-principles reasoning",
+        "reflective methodology",
+        "symbiosis interface",
+        "human-AI collaboration"
+      ],
+      "license": "https://creativecommons.org/licenses/by/4.0/",
+      "creator": {
+        "@type": "Person",
+        "name": "Morten Magnusson",
+        "sameAs": "https://orcid.org/0009-0002-4860-5095"
+      }
+    },
+    {
       "@type": "WebPage",
       "@id": "https://energyflow-cosmology.com/concepts/#webpage",
       "url": "https://energyflow-cosmology.com/concepts/",
