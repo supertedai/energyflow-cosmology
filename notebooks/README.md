@@ -31,24 +31,24 @@ Then open any notebook and **Run → Run All Cells**.
 
 ---
 
-## 🔬 Scientific Context
+### 🔬 Scientific Context
 
-The **Energy-Flow Cosmology (EFC)** model derives cosmic expansion as a function of **entropy gradients** and **energy-flow potential**.
+The **Energy-Flow Cosmology (EFC)** model derives cosmic expansion as a function of **entropy gradients** and **energy-flow potential**.  
 It treats expansion as an *emergent thermodynamic process* rather than a geometric one.
 
 In contrast, the **ΛCDM** model relies on the empirical Friedmann relation:
 
-[
+\[
 H(z) = H_0 \sqrt{ \Omega_m (1 + z)^3 + \Omega_\Lambda }
-]
+\]
 
-where:
+where  
+- \( H_0 \) is the present-day Hubble constant  
+- \( \Omega_m \) is the matter density parameter  
+- \( \Omega_\Lambda \) is the dark-energy density parameter  
 
-* ( H_0 ) is the present-day Hubble constant
-* ( \Omega_m ) is the matter density parameter
-* ( \Omega_\Lambda ) is the dark-energy density parameter
+The **EFC vs ΛCDM** notebook demonstrates where these formulations diverge and shows how **entropy (S)** in EFC can act as a thermodynamic analogue to **redshift (z)** in ΛCDM.
 
-The **EFC vs ΛCDM** notebook demonstrates where these formulations diverge and how **entropy (S)** in EFC can act as a thermodynamic analogue to **redshift (z)** in ΛCDM.
 
 ---
 
