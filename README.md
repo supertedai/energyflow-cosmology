@@ -12,25 +12,25 @@
 
 ---
 
-**Energy-Flow Cosmology (EFC)** er et termodynamisk rammeverk som kobler  
-kosmisk struktur, dynamikk og kognisjon gjennom energiflyt og entropi.  
-Prosjektet kombinerer *open-science-metoder*, *semantisk strukturering*  
-og *refleksivt samarbeid mellom menneske og AI.*
+**Energy-Flow Cosmology (EFC)** is a thermodynamic framework connecting
+cosmic structure, dynamics, and cognition through energy flow and entropy.
+The project combines *open-science methods*, *semantic structuring*,
+and *reflective collaboration between humans and AI.*
 
 ---
 
 ## 🔹 System Architecture
 
-EFC-repoet fungerer som en **selvoppdaterende semantisk graf** som integrerer  
+The EFC repository functions as a **self-updating semantic graph** integrating
 GitHub ↔ Figshare ↔ ORCID ↔ Energyflow-Cosmology.com.
 
-| Node | Formål | Plassering |
-|------|---------|------------|
-| **AuthNode (Who)** | Forfatterskap og provenance | `/schema/site-graph.json` |
-| **ConceptNode (What)** | Vitenskapelig kjerne – energi, entropi, struktur | `/schema/concepts.json` |
-| **MethodologyNode (How)** | Refleksiv, åpen vitenskap og AI-resonnering | `/methodology/` |
-| **EmpiricalNode (Evidence)** | Valideringsdata og figurer | `/output/` |
-| **IntegrationNode** | Automatisk synk mot Figshare og nett-API | `.github/workflows/update_efc_system.yml` |
+| Node                         | Purpose                                      | Location                                  |
+| ---------------------------- | -------------------------------------------- | ----------------------------------------- |
+| **AuthNode (Who)**           | Authorship and provenance                    | `/schema/site-graph.json`                 |
+| **ConceptNode (What)**       | Scientific core – energy, entropy, structure | `/schema/concepts.json`                   |
+| **MethodologyNode (How)**    | Reflective, open-science, and AI reasoning   | `/methodology/`                           |
+| **EmpiricalNode (Evidence)** | Validation data and figures                  | `/output/`                                |
+| **IntegrationNode**          | Automated sync with Figshare and web API     | `.github/workflows/update_efc_system.yml` |
 
 ---
 
