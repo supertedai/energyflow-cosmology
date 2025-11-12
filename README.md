@@ -106,4 +106,3 @@ function efc_load_schema_from_github() {
   }
 }
 add_action('wp_head', 'efc_load_schema_from_github');
-
