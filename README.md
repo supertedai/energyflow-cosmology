@@ -1,4 +1,9 @@
 # Energy-Flow Cosmology (EFC)
+[![DOI](https://img.shields.io/badge/DOI-10.6084/m9.figshare.30478916-blue)](https://doi.org/10.6084/m9.figshare.30478916)
+[![ORCID](https://img.shields.io/badge/ORCID-0009--0002--4860--5095-brightgreen)](https://orcid.org/0009-0002-4860-5095)
+[![License: CC BY 4.0](https://img.shields.io/badge/License-CC--BY--4.0-lightgrey)](https://creativecommons.org/licenses/by/4.0/)
+[![Workflow Status](https://github.com/supertedai/energyflow-cosmology/actions/workflows/update-schema.yml/badge.svg)](https://github.com/supertedai/energyflow-cosmology/actions)
+
 
 **Energy-Flow Cosmology (EFC)** is a unified thermodynamic framework that connects  
 cosmic structure, dynamics, and cognition through energy flow and entropy.  
