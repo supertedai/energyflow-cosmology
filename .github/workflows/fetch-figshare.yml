@@ -13,23 +13,22 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      # ---- Python set-up ----
-      - name: Set up Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: '3.11'
-
-      - name: Install pip and requests
+      - name: Install Python and requests
         run: |
-          python -m ensurepip --upgrade
-          python -m pip install --upgrade pip
-          python -m pip install requests
+          sudo apt-get update -y
+          sudo apt-get install -y python3 python3-pip
+          python3 -m pip install --upgrade pip
+          python3 -m pip install requests
 
-      # ---- Kjør selve skriptet ----
+      - name: Verify installation
+        run: |
+          which python3
+          python3 -V
+          python3 -m pip list | grep requests || true
+
       - name: Run fetch_figshare.py
-        run: python scripts/fetch_figshare.py
+        run: python3 scripts/fetch_figshare.py
 
-      # ---- Commit resultat ----
       - name: Commit and push schema/concepts.json
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
