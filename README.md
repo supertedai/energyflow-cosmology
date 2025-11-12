@@ -52,16 +52,24 @@ which serves as the canonical graph root for search engines, LLMs, and metadata 
 ## 🔹 Repository Layout
 
 ```text
+## 🔹 Repository Layout
+
+```text
 energyflow-cosmology/
 │
-├── schema/           # Semantic graph definitions (Auth, Concept, Methodology)
-├── methodology/      # Reflective and open-science process documentation
+├── .github/          # GitHub workflows, actions, and automation scripts
+├── api/              # API definitions and endpoints (semantic + external access)
+├── data/             # Raw and processed datasets for validation
 ├── docs/             # Manuscripts, references, and scientific documentation
+├── figshare/         # DOI-linked metadata and Figshare integration files
+├── methodology/      # Reflective and open-science process documentation
 ├── output/           # Visual validation material and figures
-└── README.md         # This overview file
-
----
+├── schema/           # Semantic graph definitions (Auth, Concept, Methodology)
+├── scripts/          # Python and automation utilities
+└── src/              # Core source code and experimental modules
 ```
+---
+
 ## 🔹 License
 
 All files in this repository are released under  
