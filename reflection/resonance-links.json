@@ -1,0 +1,16 @@
+{
+  "links": [
+    {
+      "from": "Entropy Gradient (∇S)",
+      "to": "EFC Validation Ledger",
+      "relation": "increases coherence",
+      "weight": 0.87
+    },
+    {
+      "from": "Grid–Higgs Framework",
+      "to": "Halo Model of Entropy",
+      "relation": "conceptually nested",
+      "weight": 0.91
+    }
+  ]
+}
