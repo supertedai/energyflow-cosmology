@@ -1,0 +1,51 @@
+name: Sync Figshare Concepts
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'figshare/figshare-index.json'
+  workflow_dispatch:
+
+jobs:
+  update-concepts:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: 📦 Checkout repository
+        uses: actions/checkout@v4
+
+      - name: 🐍 Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: 📦 Install Python dependencies
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install requests
+
+      - name: 🔄 Fetch metadata from Figshare API
+        run: python scripts/fetch_figshare.py
+
+      - name: ✅ Validate schema/concepts.json
+        run: |
+          if [ -f schema/concepts.json ]; then
+            cat schema/concepts.json | jq . > /dev/null
+            echo "✅ schema/concepts.json is valid JSON."
+          else
+            echo "❌ schema/concepts.json not found!"
+            exit 1
+          fi
+
+      - name: 💾 Commit and push updated concepts
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          git config user.name "github-actions"
+          git config user.email "actions@github.com"
+          git add schema/concepts.json
+          git diff --cached --quiet && echo "ℹ️ No changes to commit." || git commit -m "🤖 Auto-sync concepts.json from Figshare"
+          git push origin main
