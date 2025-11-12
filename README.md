@@ -50,6 +50,13 @@ EFC follows four methodological commitments:
 
 ## 🔹 Repository Layout
 
+energyflow-cosmology/
+│
+├── schema/ # Semantic graph definitions (Auth, Concept, Methodology)
+├── methodology/ # Reflective and open-science process documentation
+├── docs/ # Manuscripts, references, and scientific documentation
+├── output/ # Visual validation material and figures
+└── README.md # This overview file
 
 ---
 
