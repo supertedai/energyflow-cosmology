@@ -5,7 +5,6 @@ Samler alle valideringsplott (JWST, DESI, SPARC) i ett felles “dashboard”-bi
 Kjøres etter at validate_efc.py er brukt for alle tre datasettene.
 """
 
-import matplotlib.pyplot as plt
 from pathlib import Path
 from PIL import Image
 
@@ -27,7 +26,6 @@ def combine_plots(output_dir="output"):
         print("Ingen plott funnet i output/. Kjør validate_efc.py først.")
         return
 
-    # Bestem bredde/høyde basert på første bilde
     widths, heights = zip(*(i.size for i in images))
     total_height = sum(heights)
     max_width = max(widths)
