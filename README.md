@@ -50,6 +50,8 @@ which serves as the canonical graph root for search engines, LLMs, and metadata 
 ---
 
 ## 🔹 Repository Layout
+
+```text
 energyflow-cosmology/
 │
 ├── schema/           # Semantic graph definitions (Auth, Concept, Methodology)
@@ -57,7 +59,6 @@ energyflow-cosmology/
 ├── docs/             # Manuscripts, references, and scientific documentation
 ├── output/           # Visual validation material and figures
 └── README.md         # This overview file
-
 
 ---
 
