@@ -1,87 +1,22 @@
 [
   {
-    "name": "Energy-Flow Cosmology (EFC)",
-    "id": "https://energyflow-cosmology.com/concepts/efc-framework",
-    "url": "https://energyflow-cosmology.com/concepts/energy-flow-cosmology-efc"
+    "name": "Energy–Flow Cosmology v1.2: Foundational Framework and Cross-Field Continuity",
+    "id": "https://energyflow-cosmology.com/concepts/energy–flow-cosmology-v1.2:-foundational-framework-and-cross-field-continuity",
+    "url": "https://energyflow-cosmology.com/concepts/energyflow-cosmology-v12-foundational-framework-and-cross-field-continuity"
   },
   {
-    "name": "Energy-Flow Potential (Ef)",
-    "id": "https://energyflow-cosmology.com/concepts/energy-flow-potential",
-    "url": "https://energyflow-cosmology.com/concepts/energy-flow-potential-ef"
+    "name": "Energy-Flow Cosmology (EFC-v2.1): Unified Thermodynamic Framework across Structure, Dynamics, and Cognition",
+    "id": "https://energyflow-cosmology.com/concepts/energy-flow-cosmology-(efc-v2.1):-unified-thermodynamic-framework-across-structure,-dynamics,-and-cognition",
+    "url": "https://energyflow-cosmology.com/concepts/energy-flow-cosmology-efc-v21-unified-thermodynamic-framework-across-structure-dynamics-and-cognition"
   },
   {
-    "name": "Entropy Gradient (∇S)",
-    "id": "https://energyflow-cosmology.com/concepts/entropy-gradient",
-    "url": "https://energyflow-cosmology.com/concepts/entropy-gradient-s"
+    "name": "Applied Energy-Flow Cosmology v2.2 – Cross-Field Integration Summary (2025)",
+    "id": "https://energyflow-cosmology.com/concepts/applied-energy-flow-cosmology-v2.2-–-cross-field-integration-summary-(2025)",
+    "url": "https://energyflow-cosmology.com/concepts/applied-energy-flow-cosmology-v22--cross-field-integration-summary-2025"
   },
   {
-    "name": "Grid–Higgs Framework (GHF)",
-    "id": "https://energyflow-cosmology.com/concepts/grid-higgs-framework",
-    "url": "https://energyflow-cosmology.com/concepts/gridhiggs-framework-ghf"
-  },
-  {
-    "name": "Halo Model of Entropy (HME)",
-    "id": "https://energyflow-cosmology.com/concepts/halo-model-entropy",
-    "url": "https://energyflow-cosmology.com/concepts/halo-model-of-entropy-hme"
-  },
-  {
-    "name": "Energy-Flow Interface (EFI)",
-    "id": "https://energyflow-cosmology.com/concepts/energy-flow-interface",
-    "url": "https://energyflow-cosmology.com/concepts/energy-flow-interface-efi"
-  },
-  {
-    "name": "Energy-Flow Dynamics (EFD)",
-    "id": "https://energyflow-cosmology.com/concepts/energy-flow-dynamics",
-    "url": "https://energyflow-cosmology.com/concepts/energy-flow-dynamics-efd"
-  },
-  {
-    "name": "Thermodynamic Curvature",
-    "id": "https://energyflow-cosmology.com/concepts/thermodynamic-curvature",
-    "url": "https://energyflow-cosmology.com/concepts/thermodynamic-curvature"
-  },
-  {
-    "name": "Rayleigh Dissipation Functional",
-    "id": "https://energyflow-cosmology.com/concepts/rayleigh-dissipation-functional",
-    "url": "https://energyflow-cosmology.com/concepts/rayleigh-dissipation-functional"
-  },
-  {
-    "name": "Lyapunov Stability in EFC",
-    "id": "https://energyflow-cosmology.com/concepts/lyapunov-stability",
-    "url": "https://energyflow-cosmology.com/concepts/lyapunov-stability-in-efc"
-  },
-  {
-    "name": "Informational Metastructure Extension (IMX)",
-    "id": "https://energyflow-cosmology.com/concepts/imx",
-    "url": "https://energyflow-cosmology.com/concepts/informational-metastructure-extension-imx"
-  },
-  {
-    "name": "CEM-Cosmos",
-    "id": "https://energyflow-cosmology.com/concepts/cem-cosmos",
-    "url": "https://energyflow-cosmology.com/concepts/cem-cosmos"
-  },
-  {
-    "name": "Cross-Domain Vector Convergence (CDVC)",
-    "id": "https://energyflow-cosmology.com/concepts/cdvc",
-    "url": "https://energyflow-cosmology.com/concepts/cross-domain-vector-convergence-cdvc"
-  },
-  {
-    "name": "Energy-Flow Validation Ledger",
-    "id": "https://energyflow-cosmology.com/concepts/validation-ledger",
-    "url": "https://energyflow-cosmology.com/concepts/energy-flow-validation-ledger"
-  },
-  {
-    "name": "Entropy–Light Speed Relationship",
-    "id": "https://energyflow-cosmology.com/concepts/entropy-light-speed",
-    "url": "https://energyflow-cosmology.com/concepts/entropylight-speed-relationship"
-  },
-  {
-    "name": "Halo Hypothesis",
-    "id": "https://energyflow-cosmology.com/concepts/halo-hypothesis",
-    "url": "https://energyflow-cosmology.com/concepts/halo-hypothesis"
-  },
-  {
-    "name": "Comprehensive Introduction – Energy-Flow Cosmology (EFC)",
-    "id": "https://energyflow-cosmology.com/concepts/comprehensive-introduction-energy-flow-cosmology-efc",
-    "url": "https://energyflow-cosmology.com/concepts/comprehensive-introduction--energy-flow-cosmology-efc"
+    "name": "CEM-Cosmos: A Field-Theoretic Model of ConsciousnessCoupled to Energy-Flow Cosmology",
+    "id": "https://energyflow-cosmology.com/concepts/cem-cosmos:-a-field-theoretic-model-of-consciousnesscoupled-to-energy-flow-cosmology",
+    "url": "https://energyflow-cosmology.com/concepts/cem-cosmos-a-field-theoretic-model-of-consciousnesscoupled-to-energy-flow-cosmology"
   }
 ]
