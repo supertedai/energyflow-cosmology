@@ -1,0 +1,65 @@
+name: 📤 Export EFC Outputs to Figshare
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'output/**'
+      - '.github/workflows/export_figshare.yml'
+
+jobs:
+  upload-to-figshare:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install dependencies
+        run: |
+          pip install requests python-dotenv
+
+      - name: Upload files to Figshare
+        env:
+          FIGSHARE_TOKEN: ${{ secrets.FIGSHARE_TOKEN }}
+          FIGSHARE_ARTICLE_ID: ${{ secrets.FIGSHARE_ARTICLE_ID }}
+        run: |
+          import os, requests, json
+
+          token = os.getenv("FIGSHARE_TOKEN")
+          article_id = os.getenv("FIGSHARE_ARTICLE_ID")
+          headers = {"Authorization": f"token {token}"}
+
+          base_path = "output"
+          files = [f for f in os.listdir(base_path) if not f.startswith(".")]
+
+          for f in files:
+              file_path = os.path.join(base_path, f)
+              print(f"→ Uploading {file_path}")
+
+              # Step 1: initiate upload
+              r = requests.post(
+                  f"https://api.figshare.com/v2/account/articles/{article_id}/files",
+                  headers=headers,
+                  json={"name": f}
+              )
+              file_info = r.json()
+              upload_url = file_info["upload_url"]
+
+              # Step 2: upload binary
+              with open(file_path, "rb") as fp:
+                  requests.put(upload_url, data=fp, headers={"Authorization": f"token {token}"})
+
+              # Step 3: mark upload complete
+              requests.post(
+                  f"https://api.figshare.com/v2/account/articles/{article_id}/files/{file_info['id']}",
+                  headers=headers
+              )
+
+          print("✅ All output files uploaded to Figshare article:", article_id)
