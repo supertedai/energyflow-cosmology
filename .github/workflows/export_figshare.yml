@@ -1,5 +1,4 @@
 name: 📤 Export EFC Outputs to Figshare
-
 on:
   push:
     branches:
@@ -30,36 +29,44 @@ jobs:
           FIGSHARE_TOKEN: ${{ secrets.FIGSHARE_TOKEN }}
           FIGSHARE_ARTICLE_ID: ${{ secrets.FIGSHARE_ARTICLE_ID }}
         run: |
-          import os, requests, json
+          python <<'PY'
+import os, requests, json
 
-          token = os.getenv("FIGSHARE_TOKEN")
-          article_id = os.getenv("FIGSHARE_ARTICLE_ID")
-          headers = {"Authorization": f"token {token}"}
+token = os.getenv("FIGSHARE_TOKEN")
+article_id = os.getenv("FIGSHARE_ARTICLE_ID")
 
-          base_path = "output"
-          files = [f for f in os.listdir(base_path) if not f.startswith(".")]
+if not token or not article_id:
+    raise SystemExit("❌ Missing Figshare credentials")
 
-          for f in files:
-              file_path = os.path.join(base_path, f)
-              print(f"→ Uploading {file_path}")
+headers = {"Authorization": f"token {token}"}
+base_path = "output"
+files = [f for f in os.listdir(base_path) if not f.startswith(".")]
 
-              # Step 1: initiate upload
-              r = requests.post(
-                  f"https://api.figshare.com/v2/account/articles/{article_id}/files",
-                  headers=headers,
-                  json={"name": f}
-              )
-              file_info = r.json()
-              upload_url = file_info["upload_url"]
+for f in files:
+    file_path = os.path.join(base_path, f)
+    print(f"→ Uploading {file_path}")
 
-              # Step 2: upload binary
-              with open(file_path, "rb") as fp:
-                  requests.put(upload_url, data=fp, headers={"Authorization": f"token {token}"})
+    # Step 1: initiate upload
+    r = requests.post(
+        f"https://api.figshare.com/v2/account/articles/{article_id}/files",
+        headers=headers,
+        json={"name": f}
+    )
+    r.raise_for_status()
+    file_info = r.json()
+    upload_url = file_info["upload_url"]
 
-              # Step 3: mark upload complete
-              requests.post(
-                  f"https://api.figshare.com/v2/account/articles/{article_id}/files/{file_info['id']}",
-                  headers=headers
-              )
+    # Step 2: upload binary
+    with open(file_path, "rb") as fp:
+        put = requests.put(upload_url, data=fp)
+        put.raise_for_status()
 
-          print("✅ All output files uploaded to Figshare article:", article_id)
+    # Step 3: mark upload complete
+    done = requests.post(
+        f"https://api.figshare.com/v2/account/articles/{article_id}/files/{file_info['id']}",
+        headers=headers
+    )
+    done.raise_for_status()
+
+print("✅ All output files uploaded to Figshare article:", article_id)
+PY
