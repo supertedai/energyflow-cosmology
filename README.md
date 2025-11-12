@@ -52,7 +52,6 @@ which serves as the canonical graph root for search engines, LLMs, and metadata 
 ## 🔹 Repository Layout
 
 ```
-```text
 energyflow-cosmology/
 │
 ├── .github/          # GitHub workflows, actions, and automation scripts
