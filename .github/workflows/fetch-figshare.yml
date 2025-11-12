@@ -1,4 +1,4 @@
-name: Fetch Figshare Concepts
+name: 🔄 Fetch Figshare Concepts
 
 on:
   workflow_dispatch:
@@ -13,28 +13,27 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Install Python and requests
-        run: |
-          sudo apt-get update -y
-          sudo apt-get install -y python3 python3-pip
-          python3 -m pip install --upgrade pip
-          python3 -m pip install requests
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
 
-      - name: Verify installation
-        run: |
-          which python3
-          python3 -V
-          python3 -m pip list | grep requests || true
+      - name: Install dependencies
+        run: pip install requests
 
       - name: Run fetch_figshare.py
-        run: python3 scripts/fetch_figshare.py
+        env:
+          FIGSHARE_TOKEN: ${{ secrets.FIGSHARE_TOKEN }}
+          FIGSHARE_ARTICLE_ID: ${{ secrets.FIGSHARE_ARTICLE_ID }}
+        run: |
+          python scripts/fetch_figshare.py
 
       - name: Commit and push schema/concepts.json
         env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           git config user.name "github-actions"
           git config user.email "actions@github.com"
           git add schema/concepts.json
-          git diff --cached --quiet || git commit -m "Auto-sync concepts.json from Figshare"
+          git diff --cached --quiet || git commit -m "🔄 Auto-sync concepts.json from Figshare [skip ci]"
           git push origin main
