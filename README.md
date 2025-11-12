@@ -44,6 +44,11 @@ GitHub ↔ Figshare ↔ ORCID ↔ Energyflow-Cosmology.com.
 | **Export EFC Outputs to Figshare** | Uploads new validation results to DOI 30478916 | Automatic |
 | **Update EFC System** | Complete synchronization chain (Fetch → Merge → API) | Daily at 02:00 UTC |
 
+---
+
+## 🔹 Reflection Layer
+
+- (https://github.com/supertedai/energyflow-cosmology/tree/main/reflection) — a self-describing metastructure tracking live coherence and system evolution.
 
 ---
 
