@@ -3,6 +3,10 @@
 [![ORCID](https://img.shields.io/badge/ORCID-0009--0002--4860--5095-brightgreen)](https://orcid.org/0009-0002-4860-5095)
 [![License: CC BY 4.0](https://img.shields.io/badge/License-CC--BY--4.0-lightgrey)](https://creativecommons.org/licenses/by/4.0/)
 [![Workflow Status](https://github.com/supertedai/energyflow-cosmology/actions/workflows/update-schema.yml/badge.svg)](https://github.com/supertedai/energyflow-cosmology/actions)
+[![Schema Workflow](https://github.com/supertedai/energyflow-cosmology/actions/workflows/update-schema.yml/badge.svg)](https://github.com/supertedai/energyflow-cosmology/actions/workflows/update-schema.yml)
+[![Validation Workflow](https://github.com/supertedai/energyflow-cosmology/actions/workflows/run-validation.yml/badge.svg)](https://github.com/supertedai/energyflow-cosmology/actions/workflows/run-validation.yml)
+[![Date Update](https://github.com/supertedai/energyflow-cosmology/actions/workflows/update-readme-date.yml/badge.svg)](https://github.com/supertedai/energyflow-cosmology/actions/workflows/update-readme-date.yml)
+
 
 **Energy-Flow Cosmology (EFC)** is a unified thermodynamic framework that connects  
 cosmic structure, dynamics, and cognition through energy flow and entropy.  
