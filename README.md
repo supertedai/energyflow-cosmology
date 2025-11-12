@@ -51,7 +51,7 @@ which serves as the canonical graph root for search engines, LLMs, and metadata 
 
 ## 🔹 Repository Layout
 
-```text
+```
 ## 🔹 Repository Layout
 
 ```text
