@@ -26,6 +26,9 @@ jobs:
       - name: ⚙️ Set PYTHONPATH
         run: echo "PYTHONPATH=$PYTHONPATH:$(pwd)" >> $GITHUB_ENV
 
+      - name: 🧪 Import tests
+        run: python3 scripts/check_imports.py
+
       - name: 🧮 Run EFC validation (JWST)
         run: python3 scripts/validate_efc.py --dataset jwst
 
