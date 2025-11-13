@@ -1,32 +1,38 @@
 """
-efc_core.py
------------
-Grunnmodul for EFC. Inneholder de sentrale ligningene og 
-relasjonene mellom energitetthet (ρ), entropi (S) og energiflyt (Ef).
+efc_core.py – Hovedmodell med ekte EFC-ligninger.
 """
 
+from dataclasses import dataclass
 import numpy as np
 
-# Fysiske konstanter
-c = 3.0e8             # lyshastighet (m/s)
-kB = 1.380649e-23     # Boltzmanns konstant (J/K)
-G = 6.67430e-11       # gravitasjonskonstant (m³/kg/s²)
 
-def efc_potential(rho, S):
-    """Energiflytpotensial: Ef = ρ * (1 - S)"""
-    return rho * (1 - S)
+@dataclass
+class EFCParameters:
+    entropy_scale: float      # S0
+    length_scale: float       # Ls
+    flow_constant: float      # k
+    seed: int = 42
 
-def entropy_gradient(E, V):
-    """Entropigradient ∇S = ∂S/∂x ~ ∂E/∂x / V"""
-    return np.gradient(E) / V
 
-def expansion_rate(Ef, S):
-    """Ekspansjonsrate ~ H, basert på energiflyt og entropi."""
-    return np.sqrt(np.abs(Ef) / (1 - S + 1e-9))
+class EFCModel:
+    def __init__(self, params: EFCParameters):
+        self.params = params
+        np.random.seed(params.seed)
 
-if __name__ == "__main__":
-    rho = np.linspace(1e-27, 1e-24, 100)
-    S = np.linspace(0.1, 0.9, 100)
-    Ef = efc_potential(rho, S)
-    H = expansion_rate(Ef, S)
-    print("EFC baseline H:", np.mean(H))
+    def compute_state(self, x):
+        from .efc_entropy import entropy_field, entropy_gradient
+        from .efc_potential import energy_flow_potential
+
+        S = entropy_field(x, self.params)
+        gradS = entropy_gradient(x, self.params)
+        Ef = energy_flow_potential(x, self.params)
+
+        return {"S": S, "gradS": gradS, "Ef": Ef}
+
+    def rotation_velocity(self, r):
+        """
+        EFC-D rotasjon: v(r) = sqrt(|Ef(r)| * r)
+        """
+        x = np.stack([r, np.zeros_like(r), np.zeros_like(r)], axis=-1)
+        Ef = self.compute_state(x)["Ef"]
+        return np.sqrt(np.abs(Ef) * r)
