@@ -1,75 +1,83 @@
-from src.efc_validation import validate_rotation_curve
-from src.efc_validation import compare_with_sparc
-
+#!/usr/bin/env python3
 """
-run_efc_baseline.py – kjør ekte EFC-baseline.
+run_efc_baseline.py
+Kjører baseline EFC-kjøring for utvikling og debugging.
+
+Leser:
+- output/parameters.json
+
+Produserer:
+- output/run_metadata.json
+- output/validation/rotation_curve.json
 """
 
 import json
-from pathlib import Path
-from datetime import datetime
 import subprocess
+from datetime import datetime, UTC
+from pathlib import Path
 
-from src.efc_core import EFCModel, EFCParameters
-from src.efc_validation import validate_rotation_curve
+import numpy as np
 
+from src.efc_core import EFCModel, load_parameters
 
 ROOT = Path(__file__).resolve().parents[1]
 PARAMS_PATH = ROOT / "output" / "parameters.json"
-FIG_DIR = ROOT / "output" / "figures"
-VAL_DIR = ROOT / "output" / "validation"
-META_PATH = ROOT / "output" / "run_metadata.json"
+OUT_DIR = ROOT / "output" / "validation"
+OUT_DIR.mkdir(parents=True, exist_ok=True)
 
 
-def load_parameters():
-    with PARAMS_PATH.open() as f:
-        cfg = json.load(f)
-    return EFCParameters(**cfg["efc_parameters"])
-
-
-def get_git_commit():
+def get_git_commit() -> str:
     try:
         return subprocess.check_output(
             ["git", "rev-parse", "HEAD"],
-            cwd=ROOT
+            cwd=ROOT,
         ).decode().strip()
     except Exception:
         return "unknown"
 
 
+def simple_rotation_curve(model: EFCModel):
+    r = np.linspace(0.1, 20.0, 100)
+    x = np.stack([r, np.zeros_like(r), np.zeros_like(r)], axis=-1)
+
+    state = model.compute_state(x)
+    Ef = state["Ef"]
+
+    v = np.sqrt(np.abs(Ef))
+
+    return {
+        "r_kpc": r.tolist(),
+        "v_model": v.tolist(),
+    }
+
+
 def main():
-    params = load_parameters()
+    if not PARAMS_PATH.exists():
+        raise FileNotFoundError(f"Fant ikke parameterfil: {PARAMS_PATH}")
+
+    params = load_parameters(PARAMS_PATH)
     model = EFCModel(params)
 
-    # 1) intern syntetisk kurve (som før)
-    rot_data = validate_rotation_curve(model, VAL_DIR)
-    (VAL_DIR / "rotation_curve.json").write_text(json.dumps(rot_data, indent=2))
+    result = simple_rotation_curve(model)
 
-    # 2) SPARC – velg galakse fra parameters.json (eller fallback)
-    sparc_root = ROOT / "data" / "sparc"
-    galaxy = "NGC2403"  # fallback
-    try:
-        with PARAMS_PATH.open() as f:
-            cfg = json.load(f)
-        galaxy = cfg.get("sparc", {}).get("galaxy", galaxy)
-    except Exception:
-        pass
-
-    if sparc_root.exists():
-        cmp_data = compare_with_sparc(model, sparc_root, galaxy, VAL_DIR)
-    else:
-        cmp_data = {"error": "SPARC ikke lastet. Kjør scripts/fetch_sparc_rc.py"}
-
-    (VAL_DIR / "sparc_comparison.json").write_text(json.dumps(cmp_data, indent=2))
+    out_json = OUT_DIR / "rotation_curve.json"
+    with out_json.open("w", encoding="utf-8") as f:
+        json.dump(result, f, indent=2)
 
     meta = {
-        "timestamp": datetime.utcnow().isoformat() + "Z",
+        "timestamp": datetime.now(UTC).isoformat(),
         "git_commit": get_git_commit(),
-        "parameters_file": str(PARAMS_PATH),
-        "validation_dir": str(VAL_DIR),
-        "figures_dir": str(FIG_DIR),
-        "sparc_root": str(sparc_root),
-        "sparc_galaxy": galaxy
+        "params": str(PARAMS_PATH),
     }
-    META_PATH.write_text(json.dumps(meta, indent=2))
-    print("EFC baseline + SPARC sammenlikning ferdig.")
+
+    meta_path = ROOT / "output" / "run_metadata.json"
+    with meta_path.open("w", encoding="utf-8") as f:
+        json.dump(meta, f, indent=2)
+
+    print("[EFC] Baseline run fullført.")
+    print(f"- rotation curve: {out_json}")
+    print(f"- metadata: {meta_path}")
+
+
+if __name__ == "__main__":
+    main()

@@ -24,3 +24,12 @@ drafts/
 
 __pycache__/
 */.ipynb_checkpoints/*
+
+# Ignore all output artifacts
+output/
+
+# Ignore backup and temp files
+*.save
+
+# Ignore raw external data
+data/external/
