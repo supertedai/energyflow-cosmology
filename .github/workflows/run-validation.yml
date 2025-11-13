@@ -1,4 +1,4 @@
-name: EFC Auto Validation + Commit
+name: EFC Auto Validation
 
 on:
   push:
@@ -13,9 +13,6 @@ jobs:
     steps:
       - name: 📥 Checkout repository
         uses: actions/checkout@v4
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          persist-credentials: true
 
       - name: 🧩 Set up Python
         uses: actions/setup-python@v5
@@ -41,10 +38,4 @@ jobs:
       - name: 📊 Combine plots
         run: python3 scripts/plot_results.py
 
-      - name: 🧾 Commit updated dashboard to /output/
-        run: |
-          git config --global user.name "github-actions[bot]"
-          git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          git add output/EFC_Validation_Dashboard.png || true
-          git commit -m "Auto-update: EFC_Validation_Dashboard.png [skip ci]" || echo "No changes to commit"
-          git push origin main
+      # Removed commit step (output is intentionally ignored from Git)
