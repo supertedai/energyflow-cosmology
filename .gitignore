@@ -46,3 +46,12 @@ validation/logs/*
 models/*.onnx
 models/*.pkl
 
+
+# Ignore temporary build artifacts
+*.tmp
+*.cache
+
+# Ignore ML models
+models/*.onnx
+models/*.pkl
+
