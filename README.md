@@ -1,131 +1,138 @@
-
 # 🔭 Energy-Flow Cosmology (EFC)
 
 [![DOI (Codebase)](https://img.shields.io/badge/DOI-10.6084/m9.figshare.30604004-blue)](https://doi.org/10.6084/m9.figshare.30604004)
 [![DOI (Data & Validation)](https://img.shields.io/badge/DOI-10.6084/m9.figshare.30478916-blue)](https://doi.org/10.6084/m9.figshare.30478916)
 [![ORCID](https://img.shields.io/badge/ORCID-0009--0002--4860--5095-brightgreen)](https://orcid.org/0009-0002-4860-5095)
 [![License: CC BY 4.0](https://img.shields.io/badge/License-CC--BY--4.0-lightgrey)](https://creativecommons.org/licenses/by/4.0/)
-[![Workflow: Update EFC System](https://github.com/supertedai/energyflow-cosmology/actions/workflows/update_efc_system.yml/badge.svg)](https://github.com/supertedai/energyflow-cosmology/actions/workflows/update_efc_system.yml)
-[![Workflow: Schema Validation](https://github.com/supertedai/energyflow-cosmology/actions/workflows/update-schema.yml/badge.svg)](https://github.com/supertedai/energyflow-cosmology/actions/workflows/update-schema.yml)
-[![Workflow: Validation Plots](https://github.com/supertedai/energyflow-cosmology/actions/workflows/run-validation.yml/badge.svg)](https://github.com/supertedai/energyflow-cosmology/actions/workflows/run-validation.yml)
-[![Workflow: README Date Update](https://github.com/supertedai/energyflow-cosmology/actions/workflows/update-readme-date.yml/badge.svg)](https://github.com/supertedai/energyflow-cosmology/actions/workflows/update-readme-date.yml)
+
+[![Workflow: Update EFC System](https://github.com/supertedai/energyflow-cosmology/actions/workflows/update_efc_system.yml/badge.svg)]
+[![Workflow: Schema Validation](https://github.com/supertedai/energyflow-cosmology/actions/workflows/update-schema.yml/badge.svg)]
+[![Workflow: Validation Plots](https://github.com/supertedai/energyflow-cosmology/actions/workflows/run-validation.yml/badge.svg)]
+[![Workflow: README Date Update](https://github.com/supertedai/energyflow-cosmology/actions/workflows/update-readme-date.yml/badge.svg)]
 
 ---
 
-**Energy-Flow Cosmology (EFC)** is a thermodynamic framework connecting
-cosmic structure, dynamics, and cognition through energy flow and entropy.
-The project combines *open-science methods*, *semantic structuring*,
-and *reflective collaboration between humans and AI.*
+# 📘 Overview
+
+**Energy-Flow Cosmology (EFC)** is a thermodynamic framework describing cosmic structure, dynamics, and cognition through energy flow and entropy.
+
+This repository acts as a **self-updating semantic and computational system**, integrating:
+
+* GitHub
+* Figshare
+* ORCID
+* Energyflow-Cosmology.com (WordPress)
+* Automated validation pipelines
+* A machine-readable semantic API
 
 ---
 
-## 🔹 System Architecture
+# 🧩 System Architecture
 
-The EFC repository functions as a **self-updating semantic graph** integrating
-GitHub ↔ Figshare ↔ ORCID ↔ Energyflow-Cosmology.com.
+The repository functions as a **semantic graph**, organized into five node types:
 
-| Node                         | Purpose                                      | Location                                  |
-| ---------------------------- | -------------------------------------------- | ----------------------------------------- |
-| **AuthNode (Who)**           | Authorship and provenance                    | `/schema/site-graph.json`                 |
-| **ConceptNode (What)**       | Scientific core – energy, entropy, structure | `/schema/concepts.json`                   |
-| **MethodologyNode (How)**    | Reflective, open-science, and AI reasoning   | `/methodology/`                           |
-| **EmpiricalNode (Evidence)** | Validation data and figures                  | `/output/`                                |
-| **IntegrationNode**          | Automated sync with Figshare and web API     | `.github/workflows/update_efc_system.yml` |
-
----
-
-## 🔹 Automated Workflows
-
-| Workflow | Purpose | Frequency |
-|-----------|----------|------------|
-| **Fetch Figshare Concepts** | Retrieves the latest DOI metadata from Figshare | As needed |
-| **Update Concepts from Figshare** | Merges Figshare data with local schema definitions | After fetch |
-| **Update EFC API** | Regenerates the semantic API used by the website | Daily |
-| **Export EFC Outputs to Figshare** | Uploads new validation results to DOI 30478916 | Automatic |
-| **Update EFC System** | Complete synchronization chain (Fetch → Merge → API) | Daily at 02:00 UTC |
+| Node                | Purpose                                        | Location                  |
+| ------------------- | ---------------------------------------------- | ------------------------- |
+| **AuthNode**        | Authorship, ORCID, provenance                  | `/schema/site-graph.json` |
+| **ConceptNode**     | Core scientific definitions: Ef, ∇S, GHF, IMX  | `/schema/concepts.json`   |
+| **MethodologyNode** | Reflective reasoning and open-science workflow | `/methodology/`           |
+| **EmpiricalNode**   | Validation datasets, rotation curves           | `/output/`                |
+| **IntegrationNode** | Automation, Figshare sync, API build           | `.github/workflows/`      |
 
 ---
 
-## 🔹 Reflection Layer
+# ⚙️ Automated Workflows
 
-- https://github.com/supertedai/energyflow-cosmology/tree/main/reflection — a self-describing metastructure tracking live coherence and system evolution.
+EFC includes a full automation chain.
 
----
-
-## 🔹 Open-Science Principles
-
-1. **Transparency** — all models, data, and reasoning are publicly accessible.  
-2. **Reproducibility** — schemas and code are version-controlled and documented.  
-3. **Interoperability** — full integration across ORCID, Figshare, GitHub, and WordPress.  
-4. **Reflectivity** — AI-assisted meta-cognitive reasoning is part of the scientific process itself.  
-  
+| Workflow                   | Purpose                                             |
+| -------------------------- | --------------------------------------------------- |
+| **update-schema.yml**      | Validates all schema files and regenerates metadata |
+| **update_efc_system.yml**  | Full pipeline: Fetch → Merge → API rebuild          |
+| **run-validation.yml**     | Runs EFC validation (SPARC, JWST, rotation curves)  |
+| **export_figshare.yml**    | Exports validation outputs to Figshare DOIs         |
+| **update-readme-date.yml** | Auto-updates the README timestamp                   |
 
 ---
 
-## 🔹 DOI-Network Map
+# 🔬 Computational Core (`src/`)
 
-```text
-Morten Magnusson (ORCID 0009-0002-4860-5095)
-   ├── Figshare Codebase DOI (30604004)
-   │      └── isSupplementTo → Validation Dataset (30478916)
-   └── Figshare Dataset DOI (30478916)
-          └── isBasedOn → GitHub Repository (30604004)
-````
+| Module              | Function                                        |
+| ------------------- | ----------------------------------------------- |
+| `efc_core.py`       | EFCModel, parameter handling, state computation |
+| `efc_entropy.py`    | EFC-S: entropy field S(r) and gradient ∇S       |
+| `efc_potential.py`  | Energy-flow: Ef = ρ(1–S), dEf/dt                |
+| `efc_validation.py` | General validation utilities                    |
+| `sparc_io.py`       | SPARC rotation curve data loader                |
 
 ---
 
-## 🔹 Repository Layout
+# 📊 Validation Pipelines
+
+### **SPARC (Galaxy Rotation Curves)**
+
+* Parser: `parse_sparc_table1.py`
+* Validation: `run_sparc_validation.py`
+* Output stored in `/output/validation/`
+
+### **Baseline EFC Run**
+
+* `run_efc_baseline.py`
+* Generates:
+
+  * `rotation_curve.json`
+  * `run_metadata.json` (with Git commit hash)
+
+---
+
+# 🧠 Reflective Layer
+
+EFC includes a built-in meta-scientific loop:
+
+| Stage       | Purpose                            | Component            |
+| ----------- | ---------------------------------- | -------------------- |
+| **Fetch**   | Retrieves DOI metadata             | `fetch_figshare.py`  |
+| **Merge**   | Combines metadata with schema      | `update_concepts.py` |
+| **API**     | Rebuilds semantic API              | `update_efc_api.py`  |
+| **Publish** | Outputs data to Figshare + Website | GitHub Actions       |
+| **Reflect** | Human–AI evaluation                | `/methodology/`      |
+| **Refine**  | Update models, definitions, schema | `/schema/`           |
+
+This loop drives the evolution of EFC as a transparent, reproducible, and reflective scientific system.
+
+---
+
+# 📚 Repository Layout
 
 ```
 energyflow-cosmology/
 │
-├── .github/          # GitHub workflows, actions, and automation scripts  
-├── api/              # Semantic API definitions and endpoints  
-├── data/             # Raw and processed datasets for validation  
-├── docs/             # Manuscripts, references, and scientific documentation  
-├── figshare/         # DOI-linked metadata and Figshare integration files  
-├── methodology/      # Reflective open-science process documentation  
-├── output/           # Validation plots, figures, and dashboards  
+├── .github/          # Automation and workflows  
+├── api/              # Machine-readable semantic API  
+├── data/             # Raw + processed datasets  
+├── docs/             # Manuscripts, references  
+├── figshare/         # DOI-linked metadata  
+├── methodology/      # Reflective open-science notes  
+├── output/           # Validation results and plots  
 ├── schema/           # Semantic definitions (Auth, Concept, Methodology)  
-├── scripts/          # Python utilities for automation  
-└── src/              # Core source code and experimental modules  
-
+├── scripts/          # Automation + validation scripts  
+└── src/              # Computational EFC core  
 ```
 
 ---
 
-## 🔹 License
+# 📄 License
 
-All files are released under
-**[Creative Commons Attribution 4.0 International (CC-BY-4.0)](https://creativecommons.org/licenses/by/4.0/)**
+All content is released under
+**Creative Commons Attribution 4.0 (CC-BY-4.0)**.
 
----
----
-
-## 🧠 EFC Reflective Loop
-
-The **EFC Reflective Loop** describes the self-reinforcing cycle connecting human reasoning, AI synthesis, and open-data publication.
-
-
-*Last updated: 2025-11-12*
-
-
-### 🔹 Process Breakdown
-| Stage | Function | System Layer |
-|--------|-----------|---------------|
-| **Fetch** | Retrieves new concepts, datasets, and metadata from Figshare | `fetch_figshare.py` |
-| **Merge** | Integrates external updates with local semantic structures | `update_concepts.py` |
-| **API** | Rebuilds the machine-readable semantic endpoint for EFC | `update_efc_api.py` |
-| **Publish** | Exports validation data, schema updates, and graphs to Figshare and website | GitHub Actions / Figshare API |
-| **Reflect** | Human–AI evaluation of reasoning accuracy, coherence, and novelty | Methodology layer (`/methodology/`) |
-| **Refine** | Adjusts definitions, models, and schema for the next iteration | `/schema/` and `/docs/` |
-
-### 🔹 Purpose
-This loop forms the **core of EFC’s meta-scientific design**:
-- The system learns and reorganizes itself through reflection.
-- Every iteration strengthens the connection between *data integrity*, *theoretical clarity*, and *semantic transparency*.
-- Human and AI reasoning are treated as complementary nodes in the same thermodynamic-informational cycle.
+© 2025 — *Morten Magnusson*, Energy-Flow Cosmology Initiative
 
 ---
 
-_Last updated: 2025-11-13_
+# 📅 Last updated
+
+**2025-11-13**
+
+---
+
