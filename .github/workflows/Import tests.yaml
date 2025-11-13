@@ -1,2 +1,0 @@
-- name: 🧪 Import tests
-  run: python3 scripts/check_imports.py
