@@ -5,10 +5,10 @@
 [![ORCID](https://img.shields.io/badge/ORCID-0009--0002--4860--5095-brightgreen)](https://orcid.org/0009-0002-4860-5095)
 [![License: CC BY 4.0](https://img.shields.io/badge/License-CC--BY--4.0-lightgrey)](https://creativecommons.org/licenses/by/4.0/)
 
-[![Workflow: Update EFC System](https://github.com/supertedai/energyflow-cosmology/actions/workflows/update_efc_system.yml/badge.svg)]
-[![Workflow: Schema Validation](https://github.com/supertedai/energyflow-cosmology/actions/workflows/update-schema.yml/badge.svg)]
-[![Workflow: Validation Plots](https://github.com/supertedai/energyflow-cosmology/actions/workflows/run-validation.yml/badge.svg)]
-[![Workflow: README Date Update](https://github.com/supertedai/energyflow-cosmology/actions/workflows/update-readme-date.yml/badge.svg)]
+[![Workflow: Update EFC System](https://github.com/supertedai/energyflow-cosmology/actions/workflows/update_efc_system.yml/badge.svg)
+[![Workflow: Schema Validation](https://github.com/supertedai/energyflow-cosmology/actions/workflows/update-schema.yml/badge.svg)
+[![Workflow: Validation Plots](https://github.com/supertedai/energyflow-cosmology/actions/workflows/run-validation.yml/badge.svg)
+[![Workflow: README Date Update](https://github.com/supertedai/energyflow-cosmology/actions/workflows/update-readme-date.yml/badge.svg)
 
 ---
 
