@@ -1,5 +1,5 @@
 import numpy as np
-from .efc_core import EFCParameters
+from ..core.efc_core import EFCParameters
 
 
 def entropy_field(x, params: EFCParameters) -> np.ndarray:

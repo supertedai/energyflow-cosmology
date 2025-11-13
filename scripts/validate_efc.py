@@ -14,7 +14,7 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 from pathlib import Path
-from src import efc_core
+from src.efc.core import efc_core
 
 # ----------------------------
 # 1. MOCK-DATA GENERATOR

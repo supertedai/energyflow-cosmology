@@ -6,7 +6,7 @@ Ekte EFC-basert validering mot rotasjonskurver.
 import numpy as np
 import matplotlib.pyplot as plt
 from pathlib import Path
-from .efc_core import EFCModel
+from ..core.efc_core import EFCModel
 
 <<<<<<< HEAD
 
@@ -21,7 +21,7 @@ def load_parameters(path):
     Leser output/parameters.json og returnerer et EFCParameters-objekt.
     """
     import json
-    from .efc_core import EFCParameters
+    from ..core.efc_core import EFCParameters
 
     with open(path, "r") as f:
         cfg = json.load(f)
