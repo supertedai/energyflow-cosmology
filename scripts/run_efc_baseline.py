@@ -41,27 +41,35 @@ def main():
     params = load_parameters()
     model = EFCModel(params)
 
-    # --- Validation ---
+    # 1) intern syntetisk kurve (som før)
     rot_data = validate_rotation_curve(model, VAL_DIR)
-    (VAL_DIR / "rotation_curve.json").write_text(
-        json.dumps(rot_data, indent=2)
-    )
+    (VAL_DIR / "rotation_curve.json").write_text(json.dumps(rot_data, indent=2))
 
-    # --- Metadata ---
+    # 2) SPARC – velg galakse fra parameters.json (eller fallback)
+    sparc_root = ROOT / "data" / "sparc"
+    galaxy = "NGC2403"  # fallback
+    try:
+        with PARAMS_PATH.open() as f:
+            cfg = json.load(f)
+        galaxy = cfg.get("sparc", {}).get("galaxy", galaxy)
+    except Exception:
+        pass
+
+    if sparc_root.exists():
+        cmp_data = compare_with_sparc(model, sparc_root, galaxy, VAL_DIR)
+    else:
+        cmp_data = {"error": "SPARC ikke lastet. Kjør scripts/fetch_sparc_rc.py"}
+
+    (VAL_DIR / "sparc_comparison.json").write_text(json.dumps(cmp_data, indent=2))
+
     meta = {
         "timestamp": datetime.utcnow().isoformat() + "Z",
         "git_commit": get_git_commit(),
         "parameters_file": str(PARAMS_PATH),
         "validation_dir": str(VAL_DIR),
         "figures_dir": str(FIG_DIR),
+        "sparc_root": str(sparc_root),
+        "sparc_galaxy": galaxy
     }
-
     META_PATH.write_text(json.dumps(meta, indent=2))
-
-    print("EFC baseline validation complete.")
-    print(f"- rotation curve: {VAL_DIR/'rotation_curve.json'}")
-    print(f"- metadata: {META_PATH}")
-
-
-if __name__ == "__main__":
-    main()
+    print("EFC baseline + SPARC sammenlikning ferdig.")
