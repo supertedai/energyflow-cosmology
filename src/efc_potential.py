@@ -1,31 +1,28 @@
 """
 efc_potential.py
-<<<<<<< HEAD
-EFC-D: Energy-flow potential fra ∇S.
-=======
-EFC-D: Energy-flow potential fra entropigradient.
->>>>>>> 6fe47b1 (Add complete SPARC validation pipeline + parsers + EFC baseline integration)
+Energy-flow potential for EFC.
 """
 
 import numpy as np
-from .efc_core import EFCParameters
-from .efc_entropy import entropy_gradient
 
 
-def energy_flow_potential(x, params: EFCParameters) -> np.ndarray:
+def compute_energy_flow(rho, S):
     """
-    Ef(r) = -k * |∇S(r)|
+    Energistrømpotensial:
+    Ef = ρ * (1 - S)
     """
-    gradS = entropy_gradient(x, params)
-<<<<<<< HEAD
-    mag = np.linalg.norm(gradS, axis=-1)
+    return rho * (1 - S)
 
-    k = params.flow_constant
-    return -k * mag
-=======
-    magnitude = np.linalg.norm(gradS, axis=-1)
 
-    k = params.flow_constant
-    return -k * magnitude
+def energy_density(mass, volume):
+    """
+    ρ = m / V
+    """
+    return mass / volume
 
->>>>>>> 6fe47b1 (Add complete SPARC validation pipeline + parsers + EFC baseline integration)
+
+def energy_flow_rate(Ef, t):
+    """
+    dEf/dt beregnet numerisk langs t
+    """
+    return np.gradient(Ef, t)
