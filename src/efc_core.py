@@ -143,6 +143,22 @@ def expansion_rate(Ef, S):
     """
     base = np.sqrt(np.abs(Ef))
     return base * (1 + S)
+    
+# legg til i dataclass:
+@dataclass
+class EFCParameters:
+    entropy_scale: float
+    length_scale: float
+    flow_constant: float
+    seed: int = 42
+    velocity_scale: float = 1.0  # NY: km/s per modell-enhet
+
+# endre rotation_velocity:
+    def rotation_velocity(self, r):
+        x = np.stack([r, np.zeros_like(r), np.zeros_like(r)], axis=-1)
+        Ef = self.compute_state(x)["Ef"]
+        v = np.sqrt(np.abs(Ef) * r)
+        return self.params.velocity_scale * v
 
 
 
