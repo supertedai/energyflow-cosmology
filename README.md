@@ -128,4 +128,4 @@ This loop forms the **core of EFC’s meta-scientific design**:
 
 ---
 
-_Last updated: 2025-11-12_
+_Last updated: 2025-11-13_
