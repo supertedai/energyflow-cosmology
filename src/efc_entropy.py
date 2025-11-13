@@ -1,22 +1,37 @@
 """
 efc_entropy.py
---------------
-Håndterer entropirelaterte beregninger i EFC, inkludert gradienter
-og utvikling av entropi over tid og rom.
+Ekte EFC-S: Entropy field S(r) og gradient ∇S(r)
 """
 
 import numpy as np
+from .efc_core import EFCParameters
 
-def compute_entropy_gradient(E, V):
-    """
-    Beregner lokal entropigradient ∇S ≈ ∂E/∂x / V
-    """
-    return np.gradient(E) / V
 
-def entropy_evolution(S0, Ef, dt):
+def entropy_field(x, params: EFCParameters) -> np.ndarray:
     """
-    Enkel modell for entropiutvikling:
-    dS/dt ∝ Ef  => S(t+1) = S(t) + α * Ef * dt
+    EFC-S: S(r) = S0 * (1 - exp(-r/Ls))
     """
-    alpha = 1e-3
-    return S0 + alpha * Ef * dt
+    r = np.linalg.norm(x, axis=-1)
+    S0 = params.entropy_scale
+    Ls = params.length_scale
+
+    return S0 * (1.0 - np.exp(-r / Ls))
+
+
+def entropy_gradient(x, params: EFCParameters) -> np.ndarray:
+    """
+    ∇S(r) = (S0/Ls) * exp(-r/Ls)
+    Retur: gradient langs radial retning.
+    """
+    r = np.linalg.norm(x, axis=-1)
+    S0 = params.entropy_scale
+    Ls = params.length_scale
+
+    dSdr = (S0 / Ls) * np.exp(-r / Ls)
+
+    # enhetvektor
+    direction = np.zeros_like(x)
+    mask = r > 0
+    direction[mask] = x[mask] / r[mask][:, None]
+
+    return dSdr[:, None] * direction
