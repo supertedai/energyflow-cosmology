@@ -41,7 +41,7 @@ class EFCModel:
         }
 
     def _compute_Ef(self, x):
-        from .efc_potential import compute_energy_flow
+        from ..potential.efc_potential import compute_energy_flow
 
         rho = 1e-24 * np.ones(x.shape[0])
         S = 0.5 * np.ones(x.shape[0])
@@ -49,7 +49,7 @@ class EFCModel:
         return compute_energy_flow(rho, S)
 
     def _compute_entropy_gradient(self, x):
-        from .efc_entropy import entropy_gradient
+        from ..entropy.efc_entropy import entropy_gradient
         return entropy_gradient(x, self.params)
 
 
