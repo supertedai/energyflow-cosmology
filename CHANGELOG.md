@@ -1,150 +1,206 @@
-Her er en **oppdatert og komplett changelog** som dekker alt du har implementert hittil – inkludert WordPress-koblingen, `concepts.json`, `docs-index.json`, GitHub-actions, og semantisk validering.
-Dette kan lagres som `CHANGELOG.md` i rotmappen på GitHub:
+# **CHANGELOG.md — Energy-Flow Cosmology (EFC)**
+
+*Chronological record of all major updates, features, fixes, and structural changes.*
 
 ---
 
-````markdown
-# 🧭 CHANGELOG – Energy-Flow Cosmology (EFC)
+# **📦 v1.3.0 — Core Stabilization & Validation Suite**
 
-This document tracks all major technical and structural updates to the **Energy-Flow Cosmology (EFC)** repository, including schema integration, GitHub–WordPress synchronization, and semantic web enhancements.
+**Date:** 2025-11-13
+**Author:** Morten Magnusson
 
----
+### **Overview**
 
-## v1.2 – Full Semantic Framework Integration  
-**Date:** 2025-11-10  
-**Author:** Morten Magnusson  
-
-### 🔹 Overview  
-Version 1.2 introduces a complete semantic foundation for the Energy-Flow Cosmology repository.  
-All data structures, schema definitions, and documentation are now linked, validated, and auto-synchronized between GitHub and the live WordPress site.  
-
-### ✅ Implemented  
-
-#### 1. **Schema & Documentation Integration**
-- Added [`schema/concepts.json`](https://github.com/supertedai/energyflow-cosmology/blob/main/schema/concepts.json) — complete semantic definition of all EFC concepts, models, and theoretical frameworks.  
-- Added [`schema/docs-index.json`](https://github.com/supertedai/energyflow-cosmology/blob/main/schema/docs-index.json) — unified index of all Figshare publications and DOIs.  
-- Linked all major concepts to verifiable DOIs via the `sameAs` property.  
-- Added `creator` nodes referencing the author’s ORCID and Figshare profiles.  
-- Integrated **IMX (Informational Metastructure Extension)** as a new cross-domain concept.
-
-#### 2. **GitHub → WordPress JSON-LD Bridge**
-Dynamic schema injection implemented in the active WordPress child theme:
-
-```php
-function efc_load_schema_from_github() {
-  $url = 'https://raw.githubusercontent.com/supertedai/energyflow-cosmology/main/site-graph.json';
-  $response = wp_remote_get($url);
-  if (is_array($response) && !is_wp_error($response)) {
-    echo '<script type="application/ld+json">' . $response['body'] . '</script>';
-  }
-}
-add_action('wp_head', 'efc_load_schema_from_github');
-````
-
-This ensures that every page automatically loads the latest validated schema data directly from GitHub.
-
-#### 3. **Automation and Continuous Sync**
-
-* Added GitHub Actions workflow:
-  `.github/workflows/update-schema.yml`
-  → Runs nightly (03:00 UTC) and on every commit.
-* Fetches and validates `sitemap.xml`, `site-graph.json`, and schema files.
-* Auto-commits any detected changes back to the repository.
-* Added execution script `schema/update-schema.sh` for manual refresh.
-
-#### 4. **Repository & Documentation Enhancements**
-
-* Created comprehensive `README.md` with repository overview, structure, architecture, and license.
-* Added `CHANGELOG.md` (this file) to maintain transparent version tracking.
-* Updated footer in WordPress to include:
-  `© Morten Magnusson — Energy-Flow Cosmology Initiative · CC-BY-NC-SA 4.0 · GitHub · Figshare · ORCID · Schema.org auto-sync`.
-
-#### 5. **Semantic and Structural Validation**
-
-* Cross-validated all DOIs (HTTP 200 OK) and schema links.
-* Verified that `concepts.json` ↔ `docs-index.json` share consistent identifiers.
-* Confirmed JSON-LD syntax and schema.org compliance through Google Rich Results Test.
+This version stabilizes the entire computational core of EFC, introduces a validated SPARC pipeline, resolves all Git merge conflicts, synchronizes the development environments across macOS ↔ Codespaces ↔ GitHub, and fixes multiple GitHub Actions workflows.
+It is the first complete “computationally consistent” release of EFC.
 
 ---
 
-## v1.1 – Semantic Integration and GitHub–WordPress Bridge
+## **✨ Added**
+
+### **SPARC validation pipeline**
+
+* `scripts/parse_sparc_table1.py`
+* `scripts/run_sparc_validation.py`
+* Added processed SPARC datasets (`sparc_table1.csv`, `sparc_table1.json`)
+
+### **Baseline EFC run**
+
+* Implemented `run_efc_baseline.py`
+* Generates:
+
+  * `output/validation/rotation_curve.json`
+  * `output/run_metadata.json`
+
+---
+
+## **🛠️ Fixed**
+
+### **EFC computational core**
+
+* Cleaned and unified:
+
+  * `compute_energy_flow`
+  * `energy_flow_rate`
+  * `entropy_gradient`
+* Removed deprecated: `efc_potential`
+* Repaired vector norms, gradient directions, radial masks
+* Eliminated all merge markers across modules
+
+### **Parameter handling**
+
+* Corrected `parameters.json` schema (removed invalid keys)
+* Ensured deterministic behavior via `seed`
+
+---
+
+## **🔧 Git / Repository**
+
+* Resolved a complex divergent-history event
+* Fixed multiple interactive rebase states
+* Recovered from VS Code editor socket failure
+* Hard-synced Codespaces ↔ GitHub
+* Fully reset macOS checkout to `origin/main`
+* Cleaned all conflicts in:
+
+  * `efc_entropy.py`
+  * `efc_core.py`
+  * `sparc_io.py`
+  * `efc_validation.py`
+  * `efc_potential.py`
+  * `__init__.py`
+  * `run_efc_baseline.py`
+
+---
+
+## **⚙️ GitHub Actions**
+
+### Figshare export workflow fixed
+
+* Repaired YAML structure
+* Repaired embedded Python block
+* Corrected secret names
+* Added runtime safety checks for missing secrets
+* Verified workflow execution
+* Ensured no CI failures except when secrets intentionally absent
+
+---
+
+## **🌐 Sync & Environments**
+
+* Codespaces, GitHub, and macOS now in perfect sync
+* Clean, conflict-free, rebase-validated state
+
+---
+
+# **📦 v1.2.0 — Full Semantic Framework Integration**
+
+**Date:** 2025-11-10
+
+### **Overview**
+
+EFC now includes a full cross-platform semantic infrastructure linking GitHub ↔ WordPress ↔ Figshare ↔ ORCID using JSON-LD.
+
+---
+
+## **✨ Added**
+
+### **Semantic schema system**
+
+* `schema/concepts.json` — master concept graph
+* `schema/docs-index.json` — unified Figshare DOI index
+* Introduced:
+
+  * EFC-S
+  * EFC-D
+  * Grid–Higgs Framework (GHF)
+  * Halo Model of Entropy (HME)
+  * Informational Metastructure Extension (IMX)
+
+### **WordPress JSON-LD Loader**
+
+Child-theme PHP hook:
+
+* Loads JSON-LD directly from GitHub raw
+* Ensures all site pages always use latest schema
+* Validated via Google Rich Results + Schema.org tools
+
+---
+
+## **🔧 Automation**
+
+* `.github/workflows/update-schema.yml`
+* Nightly + on-commit validation
+* Auto-commit schema changes when needed
+* Validates:
+
+  * `schema/*.json`
+  * `site-graph.json`
+  * `sitemap.xml`
+
+---
+
+## **📚 Documentation**
+
+* Updated project README
+* Added cross-domain linkage overview
+* Validated all DOIs and `sameAs` references
+
+---
+
+# **📦 v1.1.0 — Semantic Integration & GitHub–WordPress Bridge**
 
 **Date:** 2025-11-09
-**Author:** Morten Magnusson
 
-### 🔹 Overview
+### **✨ Added**
 
-First release of semantic integration between GitHub repository and WordPress front-end via JSON-LD schema injection.
+* First working schema loader in WordPress
+* Base semantic graph (`site-graph.json`)
+* Verified full sync between:
 
-### ✅ Implemented
-
-* Added dynamic JSON-LD loading from GitHub into WordPress `<head>` via PHP bridge.
-* Established base `site-graph.json` and validation routine.
-* Confirmed real-time sync and visibility in search/LLM layers.
+  * GitHub
+  * WordPress site
+  * Figshare DOIs
+* Ensured schema visible to search engines + AI models
 
 ---
 
-## v1.0 – Initial Repository Setup
+# **📦 v1.0.0 — Initial Repository Setup**
 
 **Date:** 2025-11-01
-**Author:** Morten Magnusson
 
-### ✅ Implemented
+### **✨ Added**
 
-* Created core folder structure (`/schema`, `/docs`, `/data`, `/website`, `/scripts`).
-* Added initial Figshare-linked documentation under `/docs/`.
-* Registered repository metadata and Creative Commons license.
+* Base repo structure:
 
----
-
-**Next Milestone (v1.3 – Knowledge Graph Export)**
-
-* Integrate Neo4j JSON-LD → Graph schema export.
-* Introduce `/graph/` folder for knowledge-graph and ontology output.
-* Add `feedback.json` for LLM resonance logging and meta-reflection tracking.
-
----
-
-**© Morten Magnusson — Energy-Flow Cosmology Initiative, 2025**
-Distributed under **CC-BY-NC-SA 4.0**.
-[https://energyflow-cosmology.com](https://energyflow-cosmology.com)
-
-```
-# Changelog – Energy-Flow Cosmology (EFC) Repository
-
-All notable changes to this project are documented here.
+  ```
+  /schema
+  /docs
+  /data
+  /website
+  /scripts
+  ```
+* Initial Figshare-linked documents
+* Creative Commons license
+* Project metadata, initial index files
 
 ---
 
-## [v1.2.0] – 2025-11-11
-### Major update: Semantic API integration
+# **📌 Upcoming: v1.4 — Knowledge Graph API**
 
-**Summary:**  
-EFC is now equipped with a complete, automated, and verifiable *Open Semantic API* — enabling structured access to all core and extended concepts of the Energy-Flow Cosmology framework.
+### Planned:
+
+* Neo4j export schema
+* `/graph/` folder for ontology layers
+* API auto-generation for concept+evidence nodes
+* LLM resonance logs (`feedback.json`)
+* WordPress dashboard for live semantic health
 
 ---
 
-### 🔹 Added
+# **📄 License**
 
-#### 1. `schema/concepts.json`
-- Introduced the canonical **EFC Concept Set** using `@type: DefinedTermSet` (Schema.org).  
-- Includes all major conceptual nodes:
-  - EFC, GHF, HME, EFI, EFD, IMX, CEM, CDVC, Validation Ledger, etc.
-- Each concept includes:
-  - Persistent `@id` URLs  
-  - DOI links (Figshare)  
-  - ORCID-verified authorship  
-  - Descriptions and relationships
+Distributed under **CC-BY-4.0**
+© 2025 — *Morten Magnusson* — Energy-Flow Cosmology Initiative
 
-#### 2. `.github/workflows/update-api.yml`
-- Added **automated workflow** to:
-  - Monitor changes in `schema/concepts.json`
-  - Generate individual JSON-LD files under `api/v1/concept/`
-  - Build `api/v1/terms.json` (simplified term list)
-  - Validate all JSON files with `jq` and `jsonlint`
-  - Auto-commit and push results back to the repository
-- Ensures the EFC knowledge base is always machine-readable and error-free.
-
-#### 3. `api/v1/` directory
-- Contains the full set of **publicly accessible JSON-LD concept files**.  
-- Each term can now be accessed via:
+---
