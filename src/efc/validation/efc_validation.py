@@ -1,3 +1,8 @@
+"""
+efc_validation.py
+Validation utilities for EFC rotation curves and SPARC comparison.
+"""
+
 import json
 import numpy as np
 import matplotlib.pyplot as plt
@@ -5,15 +10,21 @@ from pathlib import Path
 from ..core.efc_core import EFCModel, EFCParameters
 
 
-def load_parameters(path):
+# -------------------------
+# Parameter loader
+# -------------------------
+def load_parameters(path: Path) -> EFCParameters:
     """
-    Load parameters.json and return EFCParameters object.
+    Load parameters.json and return an EFCParameters object.
     """
     with open(path, "r") as f:
         cfg = json.load(f)
     return EFCParameters(**cfg)
 
 
+# -------------------------
+# Rotation curve (EFC)
+# -------------------------
 def rotation_curve_efc(model: EFCModel, r_max: float = 30.0, n: int = 200):
     """
     Compute EFC rotation curve: v(r) = sqrt(|Ef(r)| * r)
@@ -25,15 +36,15 @@ def rotation_curve_efc(model: EFCModel, r_max: float = 30.0, n: int = 200):
 
 def validate_rotation_curve(model: EFCModel, outdir: Path):
     """
-    Generate figure + JSON for rotation curve.
+    Generate a rotation curve figure + JSON output.
     """
     outdir.mkdir(parents=True, exist_ok=True)
 
     r, v = rotation_curve_efc(model)
 
-    # Plot
+    # --- Plot ---
     fig, ax = plt.subplots(figsize=(6, 4))
-    ax.plot(r, v, label="EFC rotation curve")
+    ax.plot(r, v, linewidth=2, label="EFC rotation curve")
     ax.set_xlabel("r (kpc)")
     ax.set_ylabel("v (km/s)")
     ax.legend()
@@ -41,28 +52,41 @@ def validate_rotation_curve(model: EFCModel, outdir: Path):
     fig.savefig(outdir / "rotation_curve.png", dpi=200)
     plt.close(fig)
 
-    # JSON output
+    # --- JSON ---
     data = {"r": r.tolist(), "v_efc": v.tolist()}
     (outdir / "rotation_curve.json").write_text(json.dumps(data, indent=2))
+
     return data
 
 
-def compare_with_sparc(model: EFCModel, sparc_root: Path, galaxy: str, outdir: Path):
+# -------------------------
+# SPARC comparison
+# -------------------------
+def compare_with_sparc(
+    model: EFCModel,
+    sparc_root: Path,
+    galaxy: str,
+    outdir: Path
+):
     """
-    Compare EFC rotation curve to SPARC data for a given galaxy.
+    Compare EFC rotation curve to SPARC observational data.
+    Assumes a file: sparc_root/<galaxy>.csv with columns R and V.
     """
     outdir.mkdir(parents=True, exist_ok=True)
 
-    # Load SPARC rotation curve
+    # Load SPARC CSV
     sparc_file = sparc_root / f"{galaxy}.csv"
+    if not sparc_file.exists():
+        raise FileNotFoundError(f"Missing SPARC file: {sparc_file}")
+
     raw = np.genfromtxt(sparc_file, delimiter=",", names=True)
     r_data = raw["R"]
     v_data = raw["V"]
 
-    # EFC prediction
+    # EFC prediction at similar radius range
     r_efc, v_efc = rotation_curve_efc(model, r_max=max(r_data) * 1.1)
 
-    # Plot comparison
+    # --- Plot comparison ---
     fig, ax = plt.subplots(figsize=(6, 4))
     ax.scatter(r_data, v_data, s=20, label="SPARC data")
     ax.plot(r_efc, v_efc, label="EFC prediction")
@@ -73,7 +97,7 @@ def compare_with_sparc(model: EFCModel, sparc_root: Path, galaxy: str, outdir: P
     fig.savefig(outdir / f"sparc_{galaxy}_comparison.png", dpi=200)
     plt.close(fig)
 
-    # JSON output
+    # --- JSON ---
     data = {
         "galaxy": galaxy,
         "r_data": r_data.tolist(),
