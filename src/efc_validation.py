@@ -8,23 +8,47 @@ import matplotlib.pyplot as plt
 from pathlib import Path
 from .efc_core import EFCModel
 
+<<<<<<< HEAD
 
 def rotation_curve_efc(model: EFCModel, r_max: float = 30.0, n: int = 200):
     """
     EFC rotasjonskurve:
     v(r) = sqrt(|Ef(r)| * r)
     """
+=======
+def load_parameters(path):
+    """
+    Leser output/parameters.json og returnerer et EFCParameters-objekt.
+    """
+    import json
+    from .efc_core import EFCParameters
+
+    with open(path, "r") as f:
+        cfg = json.load(f)
+
+    # Forventer format:
+    # { "efc_parameters": { ... } }
+    return EFCParameters(**cfg["efc_parameters"])
+
+
+
+def rotation_curve_efc(model: EFCModel, r_max: float = 30.0, n: int = 200):
+>>>>>>> 6fe47b1 (Add complete SPARC validation pipeline + parsers + EFC baseline integration)
     r = np.linspace(0.1, r_max, n)
     v = model.rotation_velocity(r)
     return r, v
 
 
 def validate_rotation_curve(model: EFCModel, outdir: Path):
+<<<<<<< HEAD
     """
     Lag figurer + JSON-data for rotasjonskurven.
     """
     outdir.mkdir(parents=True, exist_ok=True)
 
+=======
+    outdir.mkdir(parents=True, exist_ok=True)
+>>>>>>> 6fe47b1 (Add complete SPARC validation pipeline + parsers + EFC baseline integration)
     r, v = rotation_curve_efc(model)
 
     # Plot
@@ -37,6 +61,7 @@ def validate_rotation_curve(model: EFCModel, outdir: Path):
     fig.savefig(outdir / "rotation_curve.png", dpi=200)
     plt.close(fig)
 
+<<<<<<< HEAD
     # JSON-data
     data = {
         "r": r.tolist(),
@@ -99,3 +124,6 @@ def compare_with_sparc(model: EFCModel, sparc_root: Path, galaxy: str, outdir: P
     (outdir / f"sparc_{galaxy}_comparison.json").write_text(json.dumps(data, indent=2))
     return data
 
+=======
+    return {"r": r.tolist(), "v_efc": v.tolist()}
+>>>>>>> 6fe47b1 (Add complete SPARC validation pipeline + parsers + EFC baseline integration)

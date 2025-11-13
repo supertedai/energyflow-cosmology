@@ -1,164 +1,62 @@
 """
-EFC Core Module
-----------------
-Dette er kjernen i Energy-Flow Cosmology (EFC).
-
-Modulen gir:
-- Energy-Flow Potential (efc_potential)
-- Entropigradient (entropy_gradient)
-- Energiflyt (compute_energy_flow)
-- Entropidynamikk (compute_entropy_gradient, entropy_evolution)
-- Ekspansjonsrate (expansion_rate)
-
-Alle funksjonene er enkle og stabile,
-slik at hele valideringskjeden kjører uten feil.
+efc_core.py
+Kjernemodeller for Energy-Flow Cosmology.
 """
 
+from dataclasses import dataclass
 import numpy as np
+from pathlib import Path
+import json
 
 
-# ------------------------------------------------------------
-# 1. Energy-Flow Potential (Ef)
-# ------------------------------------------------------------
-
-def efc_potential(rho, S):
-    """
-    Beregner Energy-Flow Potential (Ef).
-    Enkel baseline-versjon.
-
-    Parametre
-    ---------
-    rho : float eller array
-        Energitetthet
-    S : float eller array
-        Normalisert entropi
-
-    Returnerer
-    ---------
-    float eller array
-    """
-    return rho * (1 - S)
-
-
-# ------------------------------------------------------------
-# 2. Entropigradient
-# ------------------------------------------------------------
-
-def entropy_gradient(S):
-    """
-    Numerisk gradient av entropi.
-
-    Parametre
-    ---------
-    S : array
-
-    Returnerer
-    ---------
-    array
-    """
-    return np.gradient(S)
-
-
-# ------------------------------------------------------------
-# 3. Grunnleggende energiflyt
-# ------------------------------------------------------------
-
-def compute_energy_flow(rho, S):
-    """
-    Beregner enkel energiflyt.
-    Placeholder som matcher EFC-strukturen.
-
-    Parametre
-    ---------
-    rho : float eller array
-    S : float eller array
-
-    Returnerer
-    ---------
-    float eller array
-    """
-    Ef = efc_potential(rho, S)
-    return Ef * np.exp(-S)
-
-
-def energy_density(Ef):
-    """
-    Inverterer energiflytpotensial til estimert tetthet.
-
-    Parametre
-    ---------
-    Ef : float eller array
-
-    Returnerer
-    ---------
-    float eller array
-    """
-    return np.abs(Ef)
-
-
-# ------------------------------------------------------------
-# 4. Entropidynamikk
-# ------------------------------------------------------------
-
-def compute_entropy_gradient(S):
-    """
-    Wrapper for entropigradient.
-    Brukes av valideringsskriptene.
-    """
-    return entropy_gradient(S)
-
-
-def entropy_evolution(S, dt=1.0):
-    """
-    Enkel tidsutvikling av entropi.
-
-    Parametre
-    ---------
-    S : array
-    dt : float
-
-    Returnerer
-    ---------
-    array
-    """
-    dS = entropy_gradient(S)
-    return S + dS * dt
-
-# ------------------------------------------------------------
-# 5. Ekspansjonsrate
-# ------------------------------------------------------------
-
-def expansion_rate(Ef, S):
-    """
-    Estimerer ekspansjonsraten H(Ef, S).
-
-    Parametre
-    ---------
-    Ef : float eller array
-    S  : float eller array
-
-    Returnerer
-    ---------
-    float eller array
-    """
-    base = np.sqrt(np.abs(Ef))
-    return base * (1 + S)
-    
-# legg til i dataclass:
 @dataclass
 class EFCParameters:
     entropy_scale: float
     length_scale: float
     flow_constant: float
+    velocity_scale: float
     seed: int = 42
-    velocity_scale: float = 1.0  # NY: km/s per modell-enhet
-
-# endre rotation_velocity:
-    def rotation_velocity(self, r):
-        x = np.stack([r, np.zeros_like(r), np.zeros_like(r)], axis=-1)
-        Ef = self.compute_state(x)["Ef"]
-        v = np.sqrt(np.abs(Ef) * r)
-        return self.params.velocity_scale * v
+    grid_resolution: int = 32
+    time_steps: int = 10
 
 
+class EFCModel:
+    def __init__(self, params: EFCParameters):
+        self.params = params
+        np.random.seed(params.seed)
 
+    def compute_state(self, x):
+        """
+        Returnerer:
+        {
+            "Ef": Ef(r),
+            "gradS": ∇S(r)
+        }
+        """
+        Ef = self._compute_Ef(x)
+        gradS = self._compute_entropy_gradient(x)
+        return {
+            "Ef": Ef,
+            "gradS": gradS,
+        }
+
+    def _compute_Ef(self, x):
+        from .efc_potential import compute_energy_flow
+
+        rho = 1e-24 * np.ones(x.shape[0])
+        S = 0.5 * np.ones(x.shape[0])
+
+        return compute_energy_flow(rho, S)
+
+    def _compute_entropy_gradient(self, x):
+        from .efc_entropy import entropy_gradient
+        return entropy_gradient(x, self.params)
+
+
+def load_parameters(path: Path) -> EFCParameters:
+    """
+    Leser output/parameters.json og returnerer EFCParameters.
+    """
+    with open(path, "r") as f:
+        cfg = json.load(f)
+    return EFCParameters(**cfg["efc_parameters"])

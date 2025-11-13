@@ -1,38 +1,17 @@
 """
-Energy-Flow Cosmology (EFC) Core Package
-----------------------------------------
-
-Dette er kjernemodulen for EFC – et termodynamisk rammeverk som beskriver
-universets struktur, dynamikk og kognisjon gjennom energiflyt (Ef)
-og entropigradient (∇S).
-
-Alle kjernefunksjoner ligger nå i efc_core.py for maksimal stabilitet.
+EFC core module
 """
 
-__version__ = "1.0.0"
-__author__ = "Morten Magnusson"
-__license__ = "CC-BY-4.0"
+from .efc_core import EFCModel, EFCParameters
+from .efc_entropy import entropy_gradient, entropy_field
+from .efc_potential import compute_energy_flow, energy_density, energy_flow_rate
 
-
-# Importer alt fra efc_core (ren og stabil struktur)
-from .efc_core import (
-    efc_potential,
-    entropy_gradient,
-    expansion_rate,
-    compute_energy_flow,
-    energy_density,
-    compute_entropy_gradient,
-    entropy_evolution,
-)
-
-
-# Eksponer symbolene
 __all__ = [
-    "efc_potential",
+    "EFCModel",
+    "EFCParameters",
     "entropy_gradient",
-    "expansion_rate",
+    "entropy_field",
     "compute_energy_flow",
     "energy_density",
-    "compute_entropy_gradient",
-    "entropy_evolution",
+    "energy_flow_rate",
 ]
