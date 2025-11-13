@@ -1,38 +1,58 @@
 """
-efc_core.py – Hovedmodell med ekte EFC-ligninger.
+EFC Core Functions
+------------------
+Dette er kjernen av Energy-Flow Cosmology.
+
+Funksjonene her brukes av alle valideringsscript (JWST, DESI, SPARC, CMB).
 """
 
-from dataclasses import dataclass
 import numpy as np
 
 
-@dataclass
-class EFCParameters:
-    entropy_scale: float      # S0
-    length_scale: float       # Ls
-    flow_constant: float      # k
-    seed: int = 42
+def efc_potential(Ef, S):
+    """
+    Energy-Flow Potential (Ef).
+    Placeholder-implementasjon.
+
+    Parametre
+    ---------
+    Ef : float eller array
+    S  : float eller array
+
+    Returnerer
+    ---------
+    float eller array
+    """
+    return Ef - S
 
 
-class EFCModel:
-    def __init__(self, params: EFCParameters):
-        self.params = params
-        np.random.seed(params.seed)
+def entropy_gradient(S):
+    """
+    Entropy Gradient (∇S).
+    Forenklet numerisk gradient.
 
-    def compute_state(self, x):
-        from .efc_entropy import entropy_field, entropy_gradient
-        from .efc_potential import energy_flow_potential
+    Parametre
+    ---------
+    S : array
 
-        S = entropy_field(x, self.params)
-        gradS = entropy_gradient(x, self.params)
-        Ef = energy_flow_potential(x, self.params)
+    Returnerer
+    ---------
+    array
+    """
+    return np.gradient(S)
 
-        return {"S": S, "gradS": gradS, "Ef": Ef}
 
-    def rotation_velocity(self, r):
-        """
-        EFC-D rotasjon: v(r) = sqrt(|Ef(r)| * r)
-        """
-        x = np.stack([r, np.zeros_like(r), np.zeros_like(r)], axis=-1)
-        Ef = self.compute_state(x)["Ef"]
-        return np.sqrt(np.abs(Ef) * r)
+def expansion_rate(Ef):
+    """
+    Expansion Rate H(Ef).
+    Forenklet placeholder.
+
+    Parametre
+    ---------
+    Ef : float eller array
+
+    Returnerer
+    ---------
+    float eller array
+    """
+    return np.sqrt(np.abs(Ef))
