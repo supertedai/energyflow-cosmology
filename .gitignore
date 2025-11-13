@@ -33,3 +33,16 @@ output/
 
 # Ignore raw external data
 data/external/
+
+# Ignore validation outputs
+validation/results/*.png
+validation/logs/*
+
+# Ignore temporary build artifacts
+*.tmp
+*.cache
+
+# Ignore ML models
+models/*.onnx
+models/*.pkl
+
