@@ -44,3 +44,58 @@ def validate_rotation_curve(model: EFCModel, outdir: Path):
     }
 
     return data
+    from .sparc_io import load_rotation_curve
+import json
+
+def compare_with_sparc(model: EFCModel, sparc_root: Path, galaxy: str, outdir: Path):
+    """
+    Laster én SPARC-galakse og lager sammenlikning EFC vs. Vobs.
+    Forventer filer under data/sparc/<GAL>/.../*.txt (standard SPARC ZIP-struktur).
+    """
+    gal_dir = sparc_root / galaxy
+    if not gal_dir.exists():
+        raise FileNotFoundError(f"Fant ikke katalog for '{galaxy}' under {sparc_root}")
+
+    # Heuristikk: finn en fil som inneholder 'rotmod' eller 'rot' og slutter på .txt
+    candidates = sorted(list(gal_dir.rglob("*.txt")))
+    if not candidates:
+        raise FileNotFoundError(f"Ingen .txt i {gal_dir}")
+    rc_file = None
+    for p in candidates:
+        name = p.name.lower()
+        if "rotmod" in name or "rot" in name:
+            rc_file = p
+            break
+    if rc_file is None:
+        rc_file = candidates[0]
+
+    R, Vobs, eV = load_rotation_curve(rc_file)
+
+    # Modellprediksjon på samme radii
+    v_efc = model.rotation_velocity(R)
+
+    # Plot
+    outdir.mkdir(parents=True, exist_ok=True)
+    import matplotlib.pyplot as plt
+    fig, ax = plt.subplots()
+    ax.errorbar(R, Vobs, yerr=eV, fmt="o", ms=3, alpha=0.8, label=f"SPARC: {galaxy}")
+    ax.plot(R, v_efc, lw=2, label="EFC")
+    ax.set_xlabel("R (kpc)")
+    ax.set_ylabel("V (km/s)")
+    ax.set_title(f"EFC vs SPARC – {galaxy}")
+    ax.legend()
+    fig.savefig(outdir / f"sparc_{galaxy}_comparison.png", dpi=200)
+    plt.close(fig)
+
+    # JSON
+    data = {
+        "galaxy": galaxy,
+        "rc_file": str(rc_file),
+        "R_kpc": R.tolist(),
+        "Vobs_kms": Vobs.tolist(),
+        "eV_kms": eV.tolist(),
+        "Vefc_kms": v_efc.tolist()
+    }
+    (outdir / f"sparc_{galaxy}_comparison.json").write_text(json.dumps(data, indent=2))
+    return data
+
