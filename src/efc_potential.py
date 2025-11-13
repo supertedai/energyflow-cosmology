@@ -1,22 +1,19 @@
 """
 efc_potential.py
-----------------
-Definerer energiflytpotensialet (Ef) og relaterte hjelpefunksjoner.
+EFC-D: Energy-flow potential fra ∇S.
 """
 
 import numpy as np
+from .efc_core import EFCParameters
+from .efc_entropy import entropy_gradient
 
-def compute_energy_flow(rho, S):
+
+def energy_flow_potential(x, params: EFCParameters) -> np.ndarray:
     """
-    Beregner energiflytpotensialet (Ef).
-    Ef = ρ * (1 - S)
+    Ef(r) = -k * |∇S(r)|
     """
-    return rho * (1 - S)
+    gradS = entropy_gradient(x, params)
+    mag = np.linalg.norm(gradS, axis=-1)
 
-def energy_density(mass, volume):
-    """Enkel energitetthet (ρ = m/V)."""
-    return mass / volume
-
-def energy_flow_rate(Ef, t):
-    """Estimert endring i Ef over tid."""
-    return np.gradient(Ef, t)
+    k = params.flow_constant
+    return -k * mag
