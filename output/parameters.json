@@ -1,0 +1,8 @@
+{
+  "efc_parameters": {
+    "entropy_scale": 1.0,
+    "length_scale": 5.0,
+    "flow_constant": 0.8,
+    "seed": 42
+  }
+}
