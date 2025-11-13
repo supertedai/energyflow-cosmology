@@ -124,22 +124,25 @@ def entropy_evolution(S, dt=1.0):
     dS = entropy_gradient(S)
     return S + dS * dt
 
-
 # ------------------------------------------------------------
 # 5. Ekspansjonsrate
 # ------------------------------------------------------------
 
-def expansion_rate(Ef):
+def expansion_rate(Ef, S):
     """
-    Estimerer ekspansjonsraten H(Ef).
-    Placeholder som er stabil og matematisk trygg.
+    Estimerer ekspansjonsraten H(Ef, S).
 
     Parametre
     ---------
     Ef : float eller array
+    S  : float eller array
 
     Returnerer
     ---------
     float eller array
     """
-    return np.sqrt(np.abs(Ef)) + 1e-9  # unngår zero-issues
+    base = np.sqrt(np.abs(Ef))
+    return base * (1 + S)
+
+
+
