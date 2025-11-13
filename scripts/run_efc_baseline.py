@@ -1,3 +1,6 @@
+from src.efc_validation import validate_rotation_curve
+from src.efc_validation import compare_with_sparc
+
 """
 run_efc_baseline.py – kjør ekte EFC-baseline.
 """
