@@ -49,14 +49,19 @@ def load_dataset(name):
 
 def efc_prediction(z):
     """
-    Enkel EFC-relasjon: H(z) ~ sqrt(Ef / (1 - S))
-    Her brukes z som en proxy for entropi S = z / (z + 1)
+    Enkel EFC-baseline-prediksjon for observasjonsdata.
+    Konverterer rødforskyvning z → simplifisert energiflyt.
     """
-    rho = 1e-26 * (1 + z)**3
-    S = z / (z + 1)
-    Ef = efc_core.efc_potential(rho, S)
-    H = efc_core.expansion_rate(Ef, S)
-    return H / np.max(H)  # normaliser
+
+    # placeholder fysikk — fjernes når du legger inn EFC-D
+    rho = 1e-26 * (1 + z)
+    S = 0.5 + 0.1 * z
+
+    from src.efc_potential import compute_energy_flow
+    Ef = compute_energy_flow(rho, S)
+
+    return Ef
+
 
 # ----------------------------
 # 3. ΛCDM-BENCHMARK
