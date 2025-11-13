@@ -57,7 +57,7 @@ def efc_prediction(z):
     rho = 1e-26 * (1 + z)
     S = 0.5 + 0.1 * z
 
-    from src.efc_potential import compute_energy_flow
+    from src.efc.potential.efc_potential import compute_energy_flow
     Ef = compute_energy_flow(rho, S)
 
     return Ef
