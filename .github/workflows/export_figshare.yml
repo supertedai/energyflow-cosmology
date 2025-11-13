@@ -30,47 +30,56 @@ jobs:
           FIGSHARE_TOKEN: ${{ secrets.FIGSHARE_TOKEN }}
           FIGSHARE_ARTICLE_ID: ${{ secrets.FIGSHARE_ARTICLE_ID }}
         run: |
-          python -c "
-import os, requests, json, sys
+          python - << 'EOF'
+          import os
+          import json
+          import requests
+          from pathlib import Path
 
-token = os.getenv('FIGSHARE_TOKEN')
-article_id = os.getenv('FIGSHARE_ARTICLE_ID')
+          token = os.getenv("FIGSHARE_TOKEN")
+          article_id = os.getenv("FIGSHARE_ARTICLE_ID")
+          if not token or not article_id:
+              raise SystemExit("FIGSHARE_TOKEN or FIGSHARE_ARTICLE_ID is not set")
 
-if not token or not article_id:
-    sys.exit('❌ Missing Figshare credentials')
+          ROOT = Path(__file__).resolve().parents[2]
+          OUTPUT_DIR = ROOT / "output"
 
-headers = {'Authorization': f'token {token}'}
-base_path = 'output'
-if not os.path.exists(base_path):
-    sys.exit('⚠️ No output folder found')
+          session = requests.Session()
+          session.headers.update({
+              "Authorization": f"token {token}"
+          })
 
-files = [f for f in os.listdir(base_path) if not f.startswith('.')]
+          def upload_file(article_id: str, file_path: Path) -> None:
+              print(f"[Figshare] Uploading {file_path}")
+              # Initialize upload
+              init_res = session.post(
+                  f"https://api.figshare.com/v2/account/articles/{article_id}/files",
+                  json={"name": file_path.name}
+              )
+              init_res.raise_for_status()
+              file_info = init_res.json()
+              file_id = file_info["id"]
+              upload_url = file_info["upload_url"]
 
-for f in files:
-    file_path = os.path.join(base_path, f)
-    print(f'→ Uploading {file_path}')
+              # Upload the file content (single-part upload)
+              with file_path.open("rb") as f:
+                  put_res = requests.put(upload_url, data=f)
+                  put_res.raise_for_status()
 
-    # Step 1: initiate upload
-    r = requests.post(
-        f'https://api.figshare.com/v2/account/articles/{article_id}/files',
-        headers=headers,
-        json={'name': f}
-    )
-    r.raise_for_status()
-    file_info = r.json()
-    upload_url = file_info['upload_url']
+              # Mark file as complete
+              complete_res = session.post(
+                  f"https://api.figshare.com/v2/account/articles/{article_id}/files/{file_id}"
+              )
+              complete_res.raise_for_status()
+              print(f"[Figshare] Uploaded {file_path.name} (file_id={file_id})")
 
-    # Step 2: upload binary
-    with open(file_path, 'rb') as fp:
-        put = requests.put(upload_url, data=fp)
-        put.raise_for_status()
+          if not OUTPUT_DIR.exists():
+              raise SystemExit(f"No output directory found at: {OUTPUT_DIR}")
 
-    # Step 3: mark upload complete
-    done = requests.post(
-        f'https://api.figshare.com/v2/account/articles/{article_id}/files/{file_info['id']}',
-        headers=headers
-    )
-    done.raise_for_status()
+          # Gå gjennom alle filer under output/
+          for path in OUTPUT_DIR.rglob("*"):
+              if path.is_file():
+                  upload_file(article_id, path)
 
-print('✅ All output files uploaded to Figshare article:', article_id)
-"
+          print("[Figshare] Upload completed.")
+          EOF
