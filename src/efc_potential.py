@@ -11,7 +11,7 @@ def compute_energy_flow(rho, S):
     Energistrømpotensial:
     Ef = ρ * (1 - S)
     """
-    return rho * (1 - S)
+    return rho * (1.0 - S)
 
 
 def energy_density(mass, volume):
@@ -23,6 +23,6 @@ def energy_density(mass, volume):
 
 def energy_flow_rate(Ef, t):
     """
-    dEf/dt beregnet numerisk langs t
+    dEf/dt beregnet numerisk langs t.
     """
     return np.gradient(Ef, t)
