@@ -1,0 +1,57 @@
+name: 🧪 Validate JSON Schema
+
+on:
+  push:
+    branches: [ "main" ]
+    paths:
+      - "**/*.json"
+      - ".github/workflows/validate-schema.yml"
+  pull_request:
+    paths:
+      - "**/*.json"
+
+jobs:
+  validate-json:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Install JSON schema validator
+        run: |
+          npm init -y
+          npm install -g ajv-cli
+
+      - name: Syntax check for all JSON files
+        run: |
+          echo "Checking syntax of all JSON files..."
+          find . -name "*.json" -print0 | xargs -0 -I{} sh -c 'echo "Checking {}"; cat {} | jq . > /dev/null || exit 1'
+
+      - name: Validate open-process.json (schema.org CreativeWork)
+        run: |
+          echo "Validating methodology/open-process.json"
+          # Minimum structural schema
+          cat <<EOF > schema-open-process.json
+          {
+            "type": "object",
+            "properties": {
+              "@context": { "type": "string" },
+              "@type": { "type": "string" },
+              "name": { "type": "string" },
+              "description": { "type": "string" },
+              "creator": { "type": "object" },
+              "hasPart": { "type": "array" },
+              "keywords": { "type": "array" },
+              "license": { "type": "string" }
+            },
+            "required": ["@context", "@type", "name", "description", "hasPart"]
+          }
+          EOF
+
+          ajv validate -s schema-open-process.json -d methodology/open-process.json
