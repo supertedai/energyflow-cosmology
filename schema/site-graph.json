@@ -91,52 +91,79 @@
         }
       ]
     },
+
+    /* --------------------------- NEW METHODOLOGY SECTION --------------------------- */
+
     {
-      "@type": "CreativeWork",
-      "@id": "https://github.com/supertedai/energyflow-cosmology/schema/methodology-index.json",
-      "name": "EFC Methodology Node",
-      "description": "Documentation of the reflective and open-science methodology used in the development of Energy-Flow Cosmology.",
-      "about": {
-        "@type": "ResearchProcess",
-        "@id": "https://github.com/supertedai/energyflow-cosmology/methodology/open-process.json"
-      },
-      "isPartOf": {
-        "@id": "https://energyflow-cosmology.com/#organization",
-        "@type": "Organization"
-      },
-      "keywords": [
-        "open science",
-        "first-principles reasoning",
-        "reflective methodology",
-        "symbiosis interface",
-        "human-AI collaboration"
-      ],
-      "license": "https://creativecommons.org/licenses/by/4.0/",
+      "@type": "ResearchProcess",
+      "@id": "https://energyflow-cosmology.com/#methodology-process",
+      "name": "EFC Methodology Layer",
+      "description": "Structured, reflective and symbiotic methodology used to develop the Energy-Flow Cosmology framework.",
+      "url": "https://github.com/supertedai/energyflow-cosmology/blob/main/methodology/open-process.json",
+      "isPartOf": { "@id": "https://energyflow-cosmology.com/#organization" },
       "creator": {
         "@type": "Person",
         "name": "Morten Magnusson",
         "sameAs": "https://orcid.org/0009-0002-4860-5095"
-      }
+      },
+      "keywords": [
+        "open science",
+        "reflective reasoning",
+        "first-principles",
+        "symbiosis interface",
+        "human-AI collaboration",
+        "methodology"
+      ],
+      "hasPart": [
+        {
+          "@type": "CreativeWork",
+          "name": "open-method.md",
+          "url": "https://github.com/supertedai/energyflow-cosmology/blob/main/methodology/open-method.md"
+        },
+        {
+          "@type": "CreativeWork",
+          "name": "author-method-note.md",
+          "url": "https://github.com/supertedai/energyflow-cosmology/blob/main/methodology/author-method-note.md"
+        },
+        {
+          "@type": "CreativeWork",
+          "name": "symbiosis-interface.md",
+          "url": "https://github.com/supertedai/energyflow-cosmology/blob/main/methodology/symbiosis-interface.md"
+        },
+        {
+          "@type": "CreativeWork",
+          "name": "symbiotic-process.md",
+          "url": "https://github.com/supertedai/energyflow-cosmology/blob/main/methodology/symbiotic-process.md"
+        },
+        {
+          "@type": "CreativeWork",
+          "name": "symbiotic-process-llm.md",
+          "url": "https://github.com/supertedai/energyflow-cosmology/blob/main/methodology/symbiotic-process-llm.md"
+        },
+        {
+          "@type": "CreativeWork",
+          "name": "symbiotic-process-summary.md",
+          "url": "https://github.com/supertedai/energyflow-cosmology/blob/main/methodology/symbiotic-process-summary.md"
+        }
+      ]
     },
     {
-      "@type": "WebPage",
-      "@id": "https://energyflow-cosmology.com/concepts/#webpage",
-      "url": "https://energyflow-cosmology.com/concepts/",
-      "name": "Concepts — Energy-Flow Cosmology",
-      "isPartOf": { "@id": "https://energyflow-cosmology.com/#website" },
-      "about": { "@id": "https://energyflow-cosmology.com/concepts/#efc-series" },
-      "mainEntity": { "@id": "https://energyflow-cosmology.com/concepts/#efc-series" },
-      "inLanguage": "en-US"
-    },
-    {
-      "@type": "WebPage",
-      "@id": "https://energyflow-cosmology.com/#webpage",
-      "url": "https://energyflow-cosmology.com/",
-      "name": "Energy-Flow Cosmology — Official Site",
-      "isPartOf": { "@id": "https://energyflow-cosmology.com/#website" },
-      "about": { "@id": "https://energyflow-cosmology.com/#organization" },
-      "mainEntity": { "@id": "https://energyflow-cosmology.com/#organization" },
-      "inLanguage": "en-US"
+      "@type": "Dataset",
+      "@id": "https://energyflow-cosmology.com/api/methodology",
+      "name": "EFC Methodology API",
+      "description": "Machine-readable API exposing the methodological structure of Energy-Flow Cosmology.",
+      "url": "https://energyflow-cosmology.com/api/methodology",
+      "isPartOf": { "@id": "https://energyflow-cosmology.com/#organization" },
+      "about": { "@id": "https://energyflow-cosmology.com/#methodology-process" },
+      "keywords": [
+        "methodology",
+        "symbiosis",
+        "reflection",
+        "LLM integration",
+        "semantic graph",
+        "open process"
+      ],
+      "license": "https://creativecommons.org/licenses/by/4.0/"
     }
   ]
 }
