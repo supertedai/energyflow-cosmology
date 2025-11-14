@@ -57,7 +57,7 @@
         },
         {
           "name": "reproducibility-guide.md",
-          "path": "docs/reproducibility-guide.md",
+          "path": "methodology/reproducibility-guide.md",
           "type": "guide",
           "role": "Detailed instructions for local validation and workflow execution"
         }
