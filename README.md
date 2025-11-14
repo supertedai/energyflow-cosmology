@@ -112,4 +112,17 @@ This loop drives continuous improvement and reproducibility.
 ---
 
 ## 📚 Repository Layout
+energyflow-cosmology/
+│
+├── .github/          # CI/CD workflows
+├── api/              # Regenerated semantic API
+├── data/             # Raw + processed datasets
+├── docs/             # Manuscripts and references
+├── figshare/         # DOI-linked metadata
+├── methodology/      # Open-science + epistemology
+├── output/           # Validation results and plots
+├── schema/           # Semantic definitions (Auth, Concept, Methodology)
+├── scripts/          # Automation + validation scripts
+└── src/              # Computational EFC core
 
+---
