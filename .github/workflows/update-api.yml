@@ -25,11 +25,9 @@ jobs:
       - name: Prepare API folders
         run: |
           mkdir -p api/v1/concept
-          # Remove old concept files before regeneration
           rm -f api/v1/concept/*.json
           cp schema/concepts.json api/v1/concepts.json
 
-          # Loop through each defined term and export to its own JSON file
           jq -c '.hasDefinedTerm[]' schema/concepts.json | while read -r term; do
             id=$(echo "$term" | jq -r '.name' \
               | iconv -f utf8 -t ascii//TRANSLIT \
@@ -38,20 +36,18 @@ jobs:
               | tr '[:upper:]' '[:lower:]' \
               | tr -s '-' \
               | tr -cd '[:alnum:]-')
-
             echo "$term" > "api/v1/concept/${id}.json"
-            echo "✅ Generated: api/v1/concept/${id}.json"
           done
 
       - name: Generate simplified term list
         run: |
           jq '[.hasDefinedTerm[] | {
-              name: .name,
-              id: .["@id"],
-              url: ("https://energyflow-cosmology.com/concepts/" +
-                    (.name | gsub(" "; "-")
-                            | ascii_downcase
-                            | gsub("[^a-z0-9-]"; "")))
+            name: .name,
+            id: .["@id"],
+            url: ("https://energyflow-cosmology.com/concepts/" +
+                  (.name | gsub(" "; "-")
+                          | ascii_downcase
+                          | gsub("[^a-z0-9-]"; "")))
           }]' schema/concepts.json > api/v1/terms.json
 
       - name: Generate methodology API
@@ -59,16 +55,16 @@ jobs:
 
       - name: Validate all generated JSON files
         run: |
-          echo "🔎 Validating JSON files in api/v1/ ..."
+          echo "🔎 Validating JSON..."
           find api/v1 -name '*.json' -print0 | while IFS= read -r -d '' file; do
             jsonlint -q "$file" || { echo "❌ Invalid JSON in $file"; exit 1; }
           done
-          echo "✅ All JSON files valid."
+          echo "✅ All JSON valid."
 
       - name: Commit and push changes
         run: |
           git config user.name "github-actions"
           git config user.email "actions@github.com"
           git add api/v1
-          git commit -m "Auto-sync EFC API endpoints + methodology layer" || echo "No changes to commit"
+          git commit -m "Auto-sync EFC API (concepts + terms + methodology)" || echo "No changes to commit"
           git push
