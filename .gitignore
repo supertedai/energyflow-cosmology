@@ -26,7 +26,7 @@ __pycache__/
 */.ipynb_checkpoints/*
 
 # Ignore all output artifacts
-output/
+
 
 # Ignore backup and temp files
 *.save
