@@ -145,7 +145,3 @@ Free to share, remix, and build upon with attribution.
 ## 📅 Last updated
 2025-11-14
 ```
-
-* eller lage en **badge-seksjon med skjold for hver workflow**.
-
-Bare si “2”, “3” eller “lag badges”.
