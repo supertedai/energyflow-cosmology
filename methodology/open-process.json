@@ -2,19 +2,50 @@
   "@context": "https://schema.org",
   "@type": "ResearchProcess",
   "@id": "https://github.com/supertedai/energyflow-cosmology/methodology/open-process.json",
+
   "name": "Open Cognitive Methodology of Energy-Flow Cosmology",
-  "description": "Machine-readable documentation of the reflective reasoning process behind the Energy-Flow Cosmology framework.",
+  "description": "Machine-readable documentation of the reflective human–AI reasoning process behind the Energy-Flow Cosmology (EFC) framework.",
+
   "creator": {
     "@type": "Person",
     "name": "Morten Magnusson",
     "sameAs": "https://orcid.org/0009-0002-4860-5095",
     "url": "https://energyflow-cosmology.com"
   },
+
   "hasPart": [
-    { "@type": "CreativeWork", "name": "open-method.md", "encodingFormat": "text/markdown" },
-    { "@type": "CreativeWork", "name": "author-method-note.md", "encodingFormat": "text/markdown" },
-    { "@type": "CreativeWork", "name": "symbiosis-interface.md", "encodingFormat": "text/markdown" }
+    {
+      "@type": "CreativeWork",
+      "name": "open-method.md",
+      "encodingFormat": "text/markdown"
+    },
+    {
+      "@type": "CreativeWork",
+      "name": "author-method-note.md",
+      "encodingFormat": "text/markdown"
+    },
+    {
+      "@type": "CreativeWork",
+      "name": "symbiosis-interface.md",
+      "encodingFormat": "text/markdown"
+    },
+    {
+      "@type": "CreativeWork",
+      "name": "symbiotic-process.md",
+      "encodingFormat": "text/markdown"
+    },
+    {
+      "@type": "CreativeWork",
+      "name": "symbiotic-process-llm.md",
+      "encodingFormat": "text/markdown"
+    },
+    {
+      "@type": "CreativeWork",
+      "name": "symbiotic-process-summary.md",
+      "encodingFormat": "text/markdown"
+    }
   ],
+
   "keywords": [
     "first-principles reasoning",
     "top-down synthesis",
@@ -25,5 +56,6 @@
     "human-AI collaboration",
     "open science"
   ],
+
   "license": "https://creativecommons.org/licenses/by/4.0/"
 }
