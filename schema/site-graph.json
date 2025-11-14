@@ -1,169 +1,97 @@
 {
-  "@context": "https://schema.org",
-  "@graph": [
-    {
-      "@type": "Organization",
-      "@id": "https://energyflow-cosmology.com/#organization",
-      "name": "Energy-Flow Cosmology Initiative",
-      "url": "https://energyflow-cosmology.com/",
-      "logo": {
-        "@type": "ImageObject",
-        "url": "https://energyflow-cosmology.com/wp-content/uploads/logo.png"
-      },
-      "sameAs": [
-        "https://figshare.com/authors/Morten_Magnusson/20477774",
-        "https://github.com/supertedai/energyflow-cosmology"
-      ],
-      "founder": {
-        "@id": "https://energyflow-cosmology.com/#person"
-      }
-    },
-    {
-      "@type": "Person",
-      "@id": "https://energyflow-cosmology.com/#person",
-      "name": "Morten Magnusson",
-      "jobTitle": "Founder & Researcher",
-      "affiliation": {
-        "@id": "https://energyflow-cosmology.com/#organization"
-      },
-      "identifier": "https://orcid.org/0009-0002-4860-5095",
-      "sameAs": [
-        "https://figshare.com/authors/Morten_Magnusson/20477774"
-      ],
-      "email": "contact@energyflow-cosmology.com"
-    },
-    {
-      "@type": "WebSite",
-      "@id": "https://energyflow-cosmology.com/#website",
-      "url": "https://energyflow-cosmology.com/",
-      "name": "Energy-Flow Cosmology",
-      "publisher": {
-        "@id": "https://energyflow-cosmology.com/#organization"
-      },
-      "inLanguage": "en-US",
-      "potentialAction": {
-        "@type": "SearchAction",
-        "target": "https://energyflow-cosmology.com/?s={search_term_string}",
-        "query-input": "required name=search_term_string"
-      }
-    },
-    {
-      "@type": "AboutPage",
-      "@id": "https://energyflow-cosmology.com/about/#webpage",
-      "url": "https://energyflow-cosmology.com/about/",
-      "name": "About — Energy-Flow Cosmology",
-      "isPartOf": { "@id": "https://energyflow-cosmology.com/#website" },
-      "about": { "@id": "https://energyflow-cosmology.com/#person" },
-      "inLanguage": "en-US"
-    },
-    {
-      "@type": "CollectionPage",
-      "@id": "https://energyflow-cosmology.com/resources/#webpage",
-      "url": "https://energyflow-cosmology.com/resources/",
-      "name": "Resources — Energy-Flow Cosmology",
-      "isPartOf": { "@id": "https://energyflow-cosmology.com/#website" },
-      "about": { "@id": "https://energyflow-cosmology.com/#organization" },
-      "inLanguage": "en-US"
-    },
-    {
-      "@type": "DefinedTermSet",
-      "@id": "https://energyflow-cosmology.com/concepts/#efc-series",
-      "name": "EFC Concept Framework",
-      "description": "Core conceptual modules of Energy-Flow Cosmology, including the Grid–Higgs Framework, Halo Model of Entropy, and CEM-Cosmos.",
-      "hasDefinedTerm": [
+  "project_name": "Energy-Flow Cosmology (EFC)",
+  "version": "2.0.0",
+  "last_updated": "2025-11-14",
+  "node_schema_version": "1.0",
+  "nodes": {
+    "AuthNode": {
+      "description": "Information regarding authorship, ORCID, and provenance.",
+      "files": [
         {
-          "@type": "DefinedTerm",
-          "@id": "https://energyflow-cosmology.com/concepts/grid-higgs-framework/#term",
-          "name": "Grid–Higgs Framework",
-          "url": "https://energyflow-cosmology.com/concepts/grid-higgs-framework/"
-        },
-        {
-          "@type": "DefinedTerm",
-          "@id": "https://energyflow-cosmology.com/concepts/halo-model-of-entropy/#term",
-          "name": "Halo Model of Entropy",
-          "url": "https://energyflow-cosmology.com/concepts/halo-model-of-entropy/"
-        },
-        {
-          "@type": "DefinedTerm",
-          "@id": "https://energyflow-cosmology.com/concepts/cem-cosmos/#term",
-          "name": "CEM-Cosmos",
-          "url": "https://energyflow-cosmology.com/concepts/cem-cosmos/"
+          "name": "authors.json",
+          "path": "schema/authors.json",
+          "type": "metadata"
         }
       ]
     },
-
-    /* --------------------------- NEW METHODOLOGY SECTION --------------------------- */
-
-    {
-      "@type": "ResearchProcess",
-      "@id": "https://energyflow-cosmology.com/#methodology-process",
-      "name": "EFC Methodology Layer",
-      "description": "Structured, reflective and symbiotic methodology used to develop the Energy-Flow Cosmology framework.",
-      "url": "https://github.com/supertedai/energyflow-cosmology/blob/main/methodology/open-process.json",
-      "isPartOf": { "@id": "https://energyflow-cosmology.com/#organization" },
-      "creator": {
-        "@type": "Person",
-        "name": "Morten Magnusson",
-        "sameAs": "https://orcid.org/0009-0002-4860-5095"
-      },
-      "keywords": [
-        "open science",
-        "reflective reasoning",
-        "first-principles",
-        "symbiosis interface",
-        "human-AI collaboration",
-        "methodology"
-      ],
-      "hasPart": [
+    "ConceptNode": {
+      "description": "Core scientific definitions and conceptual relationships (EFC-S, EFC-D, GHF, IMX).",
+      "files": [
         {
-          "@type": "CreativeWork",
-          "name": "open-method.md",
-          "url": "https://github.com/supertedai/energyflow-cosmology/blob/main/methodology/open-method.md"
+          "name": "concepts.json",
+          "path": "schema/concepts.json",
+          "type": "definitions"
         },
         {
-          "@type": "CreativeWork",
-          "name": "author-method-note.md",
-          "url": "https://github.com/supertedai/energyflow-cosmology/blob/main/methodology/author-method-note.md"
+          "name": "efc_formal_spec.pdf",
+          "path": "theory/formal/efc_formal_spec.pdf",
+          "type": "formal_specification"
+        }
+      ]
+    },
+    "MethodologyNode": {
+      "description": "Reflective reasoning, open-science workflow, and protocols for research process transparency, including the Human-AI co-development process.",
+      "files": [
+        {
+          "name": "open-science-principles.md",
+          "path": "methodology/open-science-principles.md",
+          "type": "documentation"
         },
         {
-          "@type": "CreativeWork",
-          "name": "symbiosis-interface.md",
-          "url": "https://github.com/supertedai/energyflow-cosmology/blob/main/methodology/symbiosis-interface.md"
-        },
-        {
-          "@type": "CreativeWork",
           "name": "symbiotic-process.md",
-          "url": "https://github.com/supertedai/energyflow-cosmology/blob/main/methodology/symbiotic-process.md"
+          "path": "methodology/symbiotic-process.md",
+          "type": "documentation",
+          "role": "Human-AI Co-development Protocol (Human-readable)"
         },
         {
-          "@type": "CreativeWork",
           "name": "symbiotic-process-llm.md",
-          "url": "https://github.com/supertedai/energyflow-cosmology/blob/main/methodology/symbiotic-process-llm.md"
+          "path": "methodology/symbiotic-process-llm.md",
+          "type": "documentation",
+          "role": "LLM Operational Protocol (AI-facing specification)"
         },
         {
-          "@type": "CreativeWork",
           "name": "symbiotic-process-summary.md",
-          "url": "https://github.com/supertedai/energyflow-cosmology/blob/main/methodology/symbiotic-process-summary.md"
+          "path": "methodology/symbiotic-process-summary.md",
+          "type": "documentation",
+          "role": "1-page process summary"
+        },
+        {
+          "name": "reproducibility-guide.md",
+          "path": "docs/reproducibility-guide.md",
+          "type": "guide",
+          "role": "Detailed instructions for local validation and workflow execution"
         }
       ]
     },
-    {
-      "@type": "Dataset",
-      "@id": "https://energyflow-cosmology.com/api/methodology",
-      "name": "EFC Methodology API",
-      "description": "Machine-readable API exposing the methodological structure of Energy-Flow Cosmology.",
-      "url": "https://energyflow-cosmology.com/api/methodology",
-      "isPartOf": { "@id": "https://energyflow-cosmology.com/#organization" },
-      "about": { "@id": "https://energyflow-cosmology.com/#methodology-process" },
-      "keywords": [
-        "methodology",
-        "symbiosis",
-        "reflection",
-        "LLM integration",
-        "semantic graph",
-        "open process"
-      ],
-      "license": "https://creativecommons.org/licenses/by/4.0/"
+    "EmpiricalNode": {
+      "description": "Outputs, validation data, and generated plots from model execution.",
+      "files": [
+        {
+          "name": "validation_data.csv",
+          "path": "output/validation/validation_data.csv",
+          "type": "data"
+        },
+        {
+          "name": "sparc_rotation_plots.png",
+          "path": "output/plots/sparc_rotation_plots.png",
+          "type": "plot"
+        }
+      ]
+    },
+    "IntegrationNode": {
+      "description": "Automation, continuous integration/delivery (CI/CD), and external data synchronization.",
+      "files": [
+        {
+          "name": "run-validation.yml",
+          "path": ".github/workflows/run-validation.yml",
+          "type": "workflow"
+        },
+        {
+          "name": "update_efc_system.yml",
+          "path": ".github/workflows/update_efc_system.yml",
+          "type": "workflow"
+        }
+      ]
     }
-  ]
+  }
 }
