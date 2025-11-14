@@ -1,24 +1,44 @@
 \section{EFC-D: Energy-Flow Dynamics}
 
-The dynamical sector governs the relationship between the entropy 
-field and the energy-flow field $E_f(\bm{x})$.
+The energy-flow field $E_f(\mathbf{x})$ represents the directional
+flow of energy across entropy gradients.
+
+\subsection{Energy-Flow Field}
+
+We define:
+\begin{equation}
+    E_f : \mathbb{R}^3 \rightarrow \mathbb{R}.
+\end{equation}
+
+Physically, $E_f$ measures how strongly energy is "channeled" along
+structures created by gradients in $S$.
 
 \subsection{Energy-Flow Potential}
 
-We define an effective potential:
+EFC defines an effective potential:
 \begin{equation}
-    \Phi = A_\Phi \, F(E_f, S),
-\end{equation}
-where $F$ is an interaction term specified in the implementation.
-
-A minimal working model used in the code is:
-\begin{equation}
-    \Phi(E_f, S) = A_\Phi \, E_f \,(1 + S).
+    \Phi(E_f,S) = A_\Phi \, E_f \, (1 + S).
 \end{equation}
 
-\subsection{Coupling to Structure}
-
-The potential determines circular velocity and local curvature via:
+This is the baseline form used in the Python implementation:
 \begin{equation}
-    v^2(r) \propto r \frac{\partial \Phi}{\partial r}.
+    \Phi \propto E_f S + E_f.
 \end{equation}
+
+More general forms (not yet implemented) include:
+\begin{equation}
+    \Phi = A_\Phi E_f (1 + S^\beta),
+\end{equation}
+where $\beta$ controls non-linear coupling.
+
+\subsection{Circular Velocity Relation}
+
+For rotation curves:
+\begin{equation}
+    v(r) = 
+    \sqrt{
+        r \frac{\partial \Phi}{\partial r}
+    }.
+\end{equation}
+
+This connects the potential directly to SPARC data.
