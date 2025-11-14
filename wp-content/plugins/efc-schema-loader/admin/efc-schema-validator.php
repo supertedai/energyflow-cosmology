@@ -3,6 +3,10 @@
  * EFC Schema Validator — Admin Dashboard
  */
 
+if (!defined('ABSPATH')) {
+    exit;
+}
+
 add_action('admin_menu', function () {
     add_menu_page(
         'EFC Schema Validator',
@@ -16,13 +20,23 @@ add_action('admin_menu', function () {
 });
 
 function efc_admin_schema_dashboard() {
+    if (!function_exists('efc_all_schema_sources')) {
+        echo '<div class="notice notice-error"><p>efc_all_schema_sources() not available. Check loader-core.php.</p></div>';
+        return;
+    }
+
     $sources = efc_all_schema_sources();
 
-    echo "<div class='wrap'><h1>EFC Schema Validator</h1>";
+    echo '<div class="wrap">';
+    echo '<h1>EFC Schema Validator</h1>';
+    echo '<p>This dashboard checks each schema source in the EFC GitHub repository and validates JSON.</p>';
 
-    echo "<table class='widefat'><thead><tr>
-            <th>Key</th><th>URL</th><th>Status</th>
-          </tr></thead><tbody>";
+    echo '<table class="widefat fixed striped">';
+    echo '<thead><tr>
+            <th>Key</th>
+            <th>URL</th>
+            <th>Status</th>
+          </tr></thead><tbody>';
 
     foreach ($sources as $key => $url) {
         $start = microtime(true);
@@ -30,18 +44,25 @@ function efc_admin_schema_dashboard() {
         $time  = round((microtime(true) - $start) * 1000, 2);
 
         if (is_wp_error($resp)) {
-            $status = "<span style='color:red'>WP Error</span>";
+            $status = '<span style="color:red">WP_Error: ' . esc_html($resp->get_error_message()) . '</span>';
         } elseif (wp_remote_retrieve_response_code($resp) !== 200) {
-            $status = "<span style='color:red'>HTTP " . wp_remote_retrieve_response_code($resp) . "</span>";
+            $status = '<span style="color:red">HTTP ' . intval(wp_remote_retrieve_response_code($resp)) . '</span>';
         } else {
-            json_decode(wp_remote_retrieve_body($resp));
-            $status = (json_last_error() === JSON_ERROR_NONE)
-                ? "<span style='color:green'>Valid JSON ({$time} ms)</span>"
-                : "<span style='color:red'>Invalid JSON</span>";
+            $body = wp_remote_retrieve_body($resp);
+            json_decode($body);
+            if (json_last_error() === JSON_ERROR_NONE) {
+                $status = '<span style="color:green">Valid JSON (' . $time . ' ms)</span>';
+            } else {
+                $status = '<span style="color:red">Invalid JSON (' . $time . ' ms)</span>';
+            }
         }
 
-        echo "<tr><td>" . esc_html($key) . "</td><td><a href='" . esc_url($url) . "' target='_blank'>" . esc_html($url) . "</a></td><td>{$status}</td></tr>";
+        echo '<tr>';
+        echo '<td>' . esc_html($key) . '</td>';
+        echo '<td><a href="' . esc_url($url) . '" target="_blank" rel="noopener noreferrer">' . esc_html($url) . '</a></td>';
+        echo '<td>' . $status . '</td>';
+        echo '</tr>';
     }
 
-    echo "</tbody></table></div>";
+    echo '</tbody></table></div>';
 }
