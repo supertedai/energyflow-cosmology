@@ -1,3 +1,116 @@
+\documentclass[a4paper,11pt]{article}
+
+% -------------------------------------------------------
+% Packages
+% -------------------------------------------------------
+\usepackage{amsmath,amssymb}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{physics}
+\usepackage{bm}
+\usepackage{geometry}
+\geometry{margin=2.5cm}
+
+% -------------------------------------------------------
+% Document
+% -------------------------------------------------------
+\begin{document}
+
+\title{Energy-Flow Cosmology (EFC)\\
+Formal Specification}
+\author{Morten Magnusson}
+\date{\today}
+\maketitle
+
+\tableofcontents
+\newpage
+
+% -------------------------------------------------------
+\section{Introduction}
+
+Energy-Flow Cosmology (EFC) is a thermodynamic framework in which
+structure, dynamics, and observable propagation all emerge from the
+interaction between the entropy field $S$, the energy--flow field $E_f$,
+and the grid-level resistance that shapes how energy and light move
+through spacetime.
+
+This document defines the mathematical objects, structural relationships,
+and dynamical laws that form the formal specification of EFC.
+
+% -------------------------------------------------------
+\section{Foundations of EFC}
+
+The two core scalar fields of EFC are:
+
+\begin{itemize}
+    \item the entropy field $S(\mathbf{x})$;
+    \item the energy--flow field $E_f(\mathbf{x})$.
+\end{itemize}
+
+All dynamical and observable quantities are derived from these.
+
+% -------------------------------------------------------
+\subsection{Entropy Field}
+
+The entropy field $S(\mathbf{x})$ encodes the resistance of the grid and
+defines the focusing and defocusing tendencies of both energy and light.
+
+Two dynamic endpoints bound the entropy domain:
+
+\[
+S_0 \quad \text{(s$_0$: low entropy, high structure)}, \qquad
+S_1 \quad \text{(s$_1$: high entropy, structural loosening)}.
+\]
+
+The midpoint and entropy span are:
+
+\[
+S_{\text{mid}} = \frac{1}{2}(S_0 + S_1),
+\qquad
+\Delta S = S_1 - S_0.
+\]
+
+% -------------------------------------------------------
+\section{Dynamical Sector (EFC-D)}
+
+The energy-flow field is defined as:
+
+\[
+E_f : \mathbb{R}^3 \rightarrow \mathbb{R}.
+\]
+
+It describes the directional flow of energy along entropy gradients.
+
+\subsection{Energy-Flow Potential}
+
+The effective potential that governs structural and dynamical behavior is:
+
+\[
+\Phi(E_f,S) = A_\Phi \, E_f \, (1 + S).
+\]
+
+More general couplings such as
+
+\[
+\Phi = A_\Phi E_f (1 + S^\beta)
+\]
+
+may be introduced but are not implemented in the baseline model.
+
+\subsection{Circular Velocity Relation}
+
+Rotation curves follow:
+
+\[
+v(r) = \sqrt{\, r \, \frac{\partial \Phi}{\partial r} \, }.
+\]
+
+Here the observed behavior depends both on $\Phi$ and the entropy-modified
+light propagation defined in the next section.
+
+% -------------------------------------------------------
+\section{Light Propagation in EFC}
+
 \subsection{Effective light speed as a derived quantity}
 
 In EFC, the speed of light is not a universal constant. It is an
@@ -43,3 +156,39 @@ computed using $c(S)$ rather than a fixed constant $c$.
 
 This entropy-dependent propagation law is therefore a central element
 in the formal EFC framework.
+
+% -------------------------------------------------------
+\subsection{Light Travel Times and Lensing}
+
+The observable travel time of a photon following trajectory $\gamma$ is:
+
+\[
+t_{\text{obs}} = \int_{\gamma} \frac{dl}{c(S(l))}.
+\]
+
+Consequences include:
+
+\begin{itemize}
+    \item faster propagation near s$_0$ and s$_1$ (enhanced $c(S)$);
+    \item modified magnification and distortion patterns;
+    \item altered time-delay ratios even with identical mass distributions;
+    \item redshift--distance relations dependent on the entropy field.
+\end{itemize}
+
+% -------------------------------------------------------
+\section{Structural Sector (EFC-S)}
+
+Structures in EFC arise from the interplay of $S$, $E_f$, $\Phi(E_f,S)$,
+and the effective light speed $c(S)$. The mid-entropy region where
+$c(S)$ is minimal forms a natural stability band for halo-like
+configurations.
+
+% -------------------------------------------------------
+\section{Conclusion}
+
+This formal specification defines the mathematical backbone of
+Energy-Flow Cosmology: the entropy field, the energy-flow field, the
+effective potential, and the emergent propagation law $c(S)$ that shapes
+all null-propagation observables.
+
+\end{document}
