@@ -1,14 +1,29 @@
-\section{Parameter Definitions}
+\section{Model Parameters}
 
-This section lists the parameters used in the EFC model.
+EFC uses a small set of structural and dynamical parameters.  
+These are conceptually defined here; numerical defaults appear in
+\texttt{src/efc/parameters.py}.
+
+\subsection{Entropy Parameters}
 
 \begin{itemize}
-    \item $S_{\min}, S_{\max}$ : bounds of the entropy coordinate.
-    \item $E_{f,0}$ : reference energy-flow normalization.
-    \item $A_\Phi$ : scaling constant for the energy-flow potential.
-    \item $A_H$ : normalization factor for the expansion mapping.
-    \item $k_S$ : gradient scaling for the entropy field.
+    \item $S_{\min}$, $S_{\max}$ : bounds of the entropy coordinate.
+    \item $k_S$ : scaling factor controlling the strength of entropy gradients.
 \end{itemize}
 
-All parameter defaults are defined in the implementation under:
-\texttt{src/efc/parameters.py}.
+\subsection{Energy-Flow Parameters}
+
+\begin{itemize}
+    \item $E_{f,0}$ : reference scale for the energy-flow field.
+    \item $A_\Phi$ : normalization constant for the energy-flow potential.
+\end{itemize}
+
+\subsection{Expansion Parameters}
+
+\begin{itemize}
+    \item $A_H$ : normalization constant for the expansion mapping $H$.
+    \item $\alpha$ : optional exponent controlling non-linearity of the expansion law.
+\end{itemize}
+
+These parameters form the bridge between theory and numerics and determine
+the scaling of all observables.
