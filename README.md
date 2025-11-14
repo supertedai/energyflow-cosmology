@@ -110,17 +110,6 @@ EFC includes a meta-scientific reflection loop:
 This loop drives continuous improvement and reproducibility.
 
 ---
-Klart — her er **Repository Layout** gjenskapt i ren, perfekt Markdown med korrekt tree-struktur.
-Ingen kaos, ingen sammenklemte linjer — bare pen, stabil visning på GitHub.
-
----
-
-# ✅ **Ferdig formattert Repository Layout (Markdown)**
-
-```markdown
-## 📚 Repository Layout
-
-```
 
 energyflow-cosmology/
 │
@@ -134,25 +123,6 @@ energyflow-cosmology/
 ├── schema/           # Semantic definitions (Auth, Concept, Methodology)
 ├── scripts/          # Automation + validation scripts
 └── src/              # Computational EFC core
-
-```
-```
-
----
-
-👉 Denne vises **perfekt** i GitHub med monospace tree.
-👉 Ingen ødelagt formatering, ingen inline-glitching.
-👉 Dette er standarden for profesjonell open-science repos.
-
----
-
-Hvis du ønsker, kan jeg også generere:
-
-* en **SVG map** av hele mappestrukturen
-* en **utvidet tree** som inkluderer *filer* i hver mappe
-* en **interaktiv tree** for dashboardet ditt
-
-Bare si ifra.
 
 ---
 
