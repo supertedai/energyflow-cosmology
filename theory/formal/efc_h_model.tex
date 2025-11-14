@@ -1,18 +1,26 @@
 \section{EFC-H: Expansion Mapping}
 
-The expansion mapping $H$ is defined as a function of 
-energy-flow and entropy:
+The expansion rate $H$ in EFC is not derived from density as in
+$\Lambda$CDM, but from the interaction of energy-flow and entropy.
 
+\subsection{Baseline Expansion Law}
+
+The current implementation defines:
 \begin{equation}
-    H(E_f, S) = A_H \, G(E_f, S).
+    H(E_f, S) = A_H \sqrt{|E_f|}\,(1 + S).
 \end{equation}
 
-The baseline model implemented in 
-\texttt{efc\_core.expansion\_rate} uses:
+This links:
+\begin{itemize}
+    \item entropy to redshift evolution,
+    \item energy-flow to effective curvature,
+    \item structural conditions to expansion behaviour.
+\end{itemize}
 
+\subsection{Generalized Form}
+
+A more general version can be written as:
 \begin{equation}
-    H(E_f, S) = \sqrt{|E_f|}\,(1 + S).
+    H(E_f,S) = A_H |E_f|^{\alpha/2} (1 + S)^\gamma,
 \end{equation}
-
-This expression can be generalized by modifying the 
-functional dependence of $G$.
+with tunable exponents $\alpha, \gamma$.
