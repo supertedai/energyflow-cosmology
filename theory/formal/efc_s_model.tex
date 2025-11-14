@@ -1,24 +1,28 @@
-\section{EFC-S: Entropy Field and Gradient}
+\section{EFC-S: Entropy Field and Structural Sector}
 
-The EFC-S sector defines the entropy field $S(\mathbf{x})$.
-This field encodes local structural organization and acts as a
-non-mass-based driver of curvature-like behavior.
+The structural sector (EFC-S) defines the entropy field $S(\mathbf{x})$
+and its gradient. This field encodes local organization, anisotropy,
+and structural complexity. It acts as a non-mass-based generator of
+effective curvature and guides the flow of energy in the EFC framework.
 
 \subsection{Entropy Field}
 
-The entropy field is treated as a scalar function:
+The entropy field is a scalar function over spatial configuration space:
 \begin{equation}
     S : \mathbb{R}^3 \rightarrow [S_{\min}, S_{\max}].
 \end{equation}
 
-The field can be interpreted as a measure of information or
-organizational density in configuration space.
+It represents the local degree of information organization.  
+Low values correspond to homogeneous, featureless regions;  
+high values correspond to strongly structured zones.
+
+For practical computations we treat $S$ as differentiable and bounded.
 
 \subsection{Entropy Gradient}
 
-The entropy gradient is:
+The gradient of the entropy field is:
 \begin{equation}
-    \nabla S(\mathbf{x}) = 
+    \nabla S(\mathbf{x}) =
     \left(
       \frac{\partial S}{\partial x},
       \frac{\partial S}{\partial y},
@@ -26,10 +30,54 @@ The entropy gradient is:
     \right).
 \end{equation}
 
-The scaled physical gradient used in the model is:
+The gradient quantifies directional changes in structural organization.
+It provides the preferred direction for energy redistribution.
+
+\subsection{Scaled Structural Gradient}
+
+In the physical model, the raw gradient is scaled by a structural
+coupling constant $k_S$:
 \begin{equation}
-    \mathbf{g}_S = k_S \nabla S.
+    \mathbf{g}_S(\mathbf{x}) = k_S \nabla S(\mathbf{x}).
 \end{equation}
 
-This gradient introduces directional asymmetry which couples
-to the energy-flow field and affects structure formation.
+This scaled gradient is the term that directly enters:
+
+\begin{itemize}
+    \item the energy-flow potential $V_{\text{EFC}}$,
+    \item the expansion mapping $H(E_f, S)$,
+    \item the structural force balance in EFC-S.
+\end{itemize}
+
+\subsection{Radial Reduction (Spherical Symmetry)}
+
+For many astrophysical systems we approximate spherical symmetry:
+\begin{equation}
+    S(\mathbf{x}) = S(r),
+\end{equation}
+leading to
+\begin{equation}
+    \nabla S = \frac{dS}{dr} \hat{\mathbf{r}}.
+\end{equation}
+
+The structural gradient becomes:
+\begin{equation}
+    g_S(r) = k_S \frac{dS}{dr}.
+\end{equation}
+
+This form is used in the halo model (EFC-S) and the dynamical model
+(EFC-D) for rotation curves.
+
+\subsection{Interpretation in EFC}
+
+The gradient acts as a geometric driver:
+
+\begin{itemize}
+    \item it introduces anisotropic structure,
+    \item it modifies local effective curvature,
+    \item it couples to the energy-flow field,
+    \item it regulates stability and shape of halos.
+\end{itemize}
+
+EFC-S is therefore the structural backbone of the full EFC model,
+and all dynamical sectors reference $g_S$ directly.
