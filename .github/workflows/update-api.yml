@@ -5,6 +5,8 @@ on:
     branches: [main]
     paths:
       - 'schema/concepts.json'
+      - 'methodology/**'
+      - 'scripts/generate_methodology_api.py'
   workflow_dispatch:
 
 jobs:
@@ -23,13 +25,12 @@ jobs:
       - name: Prepare API folders
         run: |
           mkdir -p api/v1/concept
-          # Remove old files before regeneration
+          # Remove old concept files before regeneration
           rm -f api/v1/concept/*.json
           cp schema/concepts.json api/v1/concepts.json
 
           # Loop through each defined term and export to its own JSON file
           jq -c '.hasDefinedTerm[]' schema/concepts.json | while read -r term; do
-            # Create clean, URL-safe filename (ASCII only, lowercase, no symbols)
             id=$(echo "$term" | jq -r '.name' \
               | iconv -f utf8 -t ascii//TRANSLIT \
               | sed 's/[^a-zA-Z0-9 -]//g' \
@@ -53,6 +54,9 @@ jobs:
                             | gsub("[^a-z0-9-]"; "")))
           }]' schema/concepts.json > api/v1/terms.json
 
+      - name: Generate methodology API
+        run: python3 scripts/generate_methodology_api.py
+
       - name: Validate all generated JSON files
         run: |
           echo "🔎 Validating JSON files in api/v1/ ..."
@@ -66,5 +70,5 @@ jobs:
           git config user.name "github-actions"
           git config user.email "actions@github.com"
           git add api/v1
-          git commit -m "Auto-sync EFC API endpoints" || echo "No changes to commit"
+          git commit -m "Auto-sync EFC API endpoints + methodology layer" || echo "No changes to commit"
           git push
