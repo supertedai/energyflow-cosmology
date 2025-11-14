@@ -52,17 +52,24 @@ jobs:
           session = requests.Session()
           session.headers.update({"Authorization": f"token {token}"})
 
-          # Fetch existing filenames from Figshare
+          # Allowed filetypes
+          ALLOWED = {".pdf", ".png", ".jpg", ".jpeg", ".csv"}
+
+          # Fetch existing filenames
           existing_files = session.get(
               f"https://api.figshare.com/v2/account/articles/{article_id}/files"
           ).json()
-
           existing_names = {f["name"] for f in existing_files}
 
-          print("Existing files in Figshare:", existing_names)
+          print("Existing files:", existing_names)
 
-          def upload_file(article_id: str, file_path: Path) -> None:
-              # Skip existing file
+          def upload_file(file_path: Path):
+              # Only upload allowed file types
+              if file_path.suffix.lower() not in ALLOWED:
+                  print(f"[Figshare] Skipping unsupported file type: {file_path.name}")
+                  return
+
+              # Skip existing files
               if file_path.name in existing_names:
                   print(f"[Figshare] Skipping existing file: {file_path.name}")
                   return
@@ -75,25 +82,23 @@ jobs:
               )
               init_res.raise_for_status()
 
-              file_info = init_res.json()
-              file_id = file_info["id"]
-              upload_url = file_info["upload_url"]
+              info = init_res.json()
+              file_id = info["id"]
+              upload_url = info["upload_url"]
 
               with file_path.open("rb") as f:
                   put_res = requests.put(upload_url, data=f)
                   put_res.raise_for_status()
 
-              complete_res = session.post(
+              session.post(
                   f"https://api.figshare.com/v2/account/articles/{article_id}/files/{file_id}"
               )
-              complete_res.raise_for_status()
 
-              print(f"[Figshare] Uploaded {file_path.name} (file_id={file_id})")
-
+              print(f"[Figshare] Uploaded {file_path.name}")
 
           for path in OUTPUT_DIR.rglob("*"):
               if path.is_file():
-                  upload_file(article_id, path)
+                  upload_file(path)
 
           print("[Figshare] Upload completed.")
           EOF
