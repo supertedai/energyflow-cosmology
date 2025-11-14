@@ -126,3 +126,15 @@ energyflow-cosmology/
 └── src/              # Computational EFC core
 
 ---
+
+## 📄 License
+
+**Creative Commons Attribution 4.0 (CC BY 4.0)**  
+Free to share, remix, and build upon with attribution.
+
+© 2025 — **Morten Magnusson**, Energy-Flow Cosmology Initiative
+
+---
+
+## 📅 Last updated
+2025-11-14
