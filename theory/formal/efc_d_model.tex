@@ -1,0 +1,24 @@
+\section{EFC-D: Energy-Flow Dynamics}
+
+The dynamical sector governs the relationship between the entropy 
+field and the energy-flow field $E_f(\bm{x})$.
+
+\subsection{Energy-Flow Potential}
+
+We define an effective potential:
+\begin{equation}
+    \Phi = A_\Phi \, F(E_f, S),
+\end{equation}
+where $F$ is an interaction term specified in the implementation.
+
+A minimal working model used in the code is:
+\begin{equation}
+    \Phi(E_f, S) = A_\Phi \, E_f \,(1 + S).
+\end{equation}
+
+\subsection{Coupling to Structure}
+
+The potential determines circular velocity and local curvature via:
+\begin{equation}
+    v^2(r) \propto r \frac{\partial \Phi}{\partial r}.
+\end{equation}
