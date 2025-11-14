@@ -1,74 +1,19 @@
-name: Update EFC API
-
-on:
-  push:
-    branches: [main]
-    paths:
-      - 'schema/concepts.json'
-  workflow_dispatch:
-
-jobs:
-  build-api:
-    runs-on: ubuntu-latest
-
-    steps:
-      - uses: actions/checkout@v4
-
-      - name: Install jq and jsonlint
-        run: |
-          sudo apt-get update -y
-          sudo apt-get install -y jq npm
-          sudo npm install -g jsonlint
-
-      - name: Prepare API folders
-        run: |
-          mkdir -p api/v1/concept
-          cp schema/concepts.json api/v1/concepts.json
-
-          # Loop through each defined term and export to its own JSON file
-          jq -c '.hasDefinedTerm[]' schema/concepts.json | while read -r term; do
-            # Create clean, URL-safe filename (ascii only, lowercase, no symbols)
-            id=$(echo "$term" | jq -r '.name' \
-              | iconv -f utf8 -t ascii//TRANSLIT \
-              | sed 's/[^a-zA-Z0-9 -]//g' \
-              | tr ' ' '-' \
-              | tr '[:upper:]' '[:lower:]' \
-              | tr -s '-' \
-              | tr -cd '[:alnum:]-')
-
-            echo "$term" > "api/v1/concept/${id}.json"
-          done
-
-      - name: Generate simplified term list
-        run: |
-          jq '[.hasDefinedTerm[] | {
-            name: .name,
-            id: .["@id"],
-            url: ("https://energyflow-cosmology.com/concepts/" + (.name | gsub(" "; "-") | ascii_downcase | gsub("[^a-z0-9-]"; "")))
-          }]' schema/concepts.json > api/v1/terms.json
-
-      - name: Validate all generated JSON files
-        run: |
-          echo "Validating JSON files in api/v1/ ..."
-          find api/v1 -name '*.json' -print0 | while IFS= read -r -d '' file; do
-            jsonlint -q "$file" || { echo "❌ Invalid JSON in $file"; exit 1; }
-          done
-          echo "✅ All JSON files valid."
-
-      - name: Update dataset metadata date
-        run: |
-          if [ -f api/metadata.json ]; then
-            today=$(date +%Y-%m-%d)
-            jq --arg today "$today" '.dateModified = $today' api/metadata.json > tmp.$$.json && mv tmp.$$.json api/metadata.json
-            echo "🕓 Updated metadata.json dateModified to $today"
-          else
-            echo "⚠️ No metadata.json found; skipping date update."
-          fi
-
-      - name: Commit and push changes
-        run: |
-          git config user.name "github-actions"
-          git config user.email "actions@github.com"
-          git add api/v1 api/metadata.json
-          git commit -m "Auto-sync EFC API endpoints and update dataset metadata" || echo "No changes to commit"
-          git push
+{
+  "@context": "https://schema.org",
+  "@type": "Dataset",
+  "name": "Energy-Flow Cosmology API",
+  "description": "Machine-readable API endpoints for EFC concepts and terminology.",
+  "dateCreated": "2025-01-01",
+  "dateModified": "2025-01-01",
+  "version": "1.0.0",
+  "license": "https://creativecommons.org/licenses/by/4.0/",
+  "source": "https://github.com/supertedai/energyflow-cosmology",
+  "keywords": [
+    "EFC",
+    "cosmology",
+    "thermodynamics",
+    "concepts",
+    "schema",
+    "open science"
+  ]
+}
