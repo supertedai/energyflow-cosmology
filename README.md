@@ -47,20 +47,18 @@ validation, metadata integration, Figshare export, and repository consistency.
 
 | Workflow | File | Purpose | Status |
 |---------|------|----------|--------|
-| **Update EFC System** | `.github/workflows/update_efc_system.yml` | Full pipeline: Fetch → Merge → API rebuild → Sync | ![Update EFC System](https://github.com/supertedai/energyflow-cosmology/actions/workflows/update_efc_system.yml/badge.svg) |
-| **Schema Validation** | `.github/workflows/update-schema.yml` | Validates JSON-LD schema + regenerates metadata | ![Schema Validation](https://github.com/supertedai/energyflow-cosmology/actions/workflows/update-schema.yml/badge.svg) |
-| **Validation Pipeline** | `.github/workflows/run-validation.yml` | Runs SPARC/JWST validation + baseline model | ![Validation Pipeline](https://github.com/supertedai/energyflow-cosmology/actions/workflows/run-validation.yml/badge.svg) |
-| **Export to Figshare** | `.github/workflows/export_figshare.yml` | Uploads outputs to DOI-linked Figshare articles | ![Export to Figshare](https://github.com/supertedai/energyflow-cosmology/actions/workflows/export_figshare.yml/badge.svg) |
-| **README Date Update** | `.github/workflows/update-readme-date.yml` | Auto-updates timestamp in README | ![README Date Update](https://github.com/supertedai/energyflow-cosmology/actions/workflows/update-readme-date.yml/badge.svg) |
-| **API Autogeneration** | `.github/workflows/generate_api.yml` | Rebuilds the semantic API in `/api/` | ![API Autogeneration](https://github.com/supertedai/energyflow-cosmology/actions/workflows/generate_api.yml/badge.svg) |
-| **Import Tests** | `.github/workflows/check-imports.yml` | Ensures clean imports for `/src` and `/scripts` | ![Import Tests](https://github.com/supertedai/energyflow-cosmology/actions/workflows/check-imports.yml/badge.svg) |
-| **File Mapping Consistency** | `.github/workflows/validate_project_map.yml` | Validates site-graph.json ↔ actual file structure | ![File Mapping Consistency](https://github.com/supertedai/energyflow-cosmology/actions/workflows/validate_project_map.yml/badge.svg) |
-| **Static Analysis** | `.github/workflows/static-analysis.yml` | Linting and structural checks | ![Static Analysis](https://github.com/supertedai/energyflow-cosmology/actions/workflows/static-analysis.yml/badge.svg) |
-| **Formal Spec Build (LaTeX)** | `.github/workflows/build_efc_pdf.yml` | Builds `efc_formal_spec.pdf` | ![Formal Spec Build](https://github.com/supertedai/energyflow-cosmology/actions/workflows/build_efc_pdf.yml/badge.svg) |
-| **Dataset Sync** | `.github/workflows/sync_datasets.yml` | Ensures SPARC/JWST data availability | ![Dataset Sync](https://github.com/supertedai/energyflow-cosmology/actions/workflows/sync_datasets.yml/badge.svg) |
-| **Dashboard Auto-Update** | `.github/workflows/update_dashboard.yml` | Regenerates dashboard figures | ![Dashboard Auto-Update](https://github.com/supertedai/energyflow-cosmology/actions/workflows/update_dashboard.yml/badge.svg) |
-
-
+| **Update EFC System** | `.github/workflows/update_efc_system.yml` | Full pipeline: Fetch → Merge → API rebuild → Sync | ![](https://github.com/supertedai/energyflow-cosmology/actions/workflows/update_efc_system.yml/badge.svg?branch=main) |
+| **Schema Validation** | `.github/workflows/update-schema.yml` | Validates JSON-LD schema + regenerates metadata | ![](https://github.com/supertedai/energyflow-cosmology/actions/workflows/update-schema.yml/badge.svg?branch=main) |
+| **Validation Pipeline** | `.github/workflows/run-validation.yml` | Runs SPARC/JWST validation + baseline model | ![](https://github.com/supertedai/energyflow-cosmology/actions/workflows/run-validation.yml/badge.svg?branch=main) |
+| **Export to Figshare** | `.github/workflows/export_figshare.yml` | Uploads outputs to DOI-linked Figshare articles | ![](https://github.com/supertedai/energyflow-cosmology/actions/workflows/export_figshare.yml/badge.svg?branch=main) |
+| **README Date Update** | `.github/workflows/update-readme-date.yml` | Auto-updates timestamp in README | ![](https://github.com/supertedai/energyflow-cosmology/actions/workflows/update-readme-date.yml/badge.svg?branch=main) |
+| **API Autogeneration** | `.github/workflows/generate_api.yml` | Rebuilds the semantic API in `/api/` | ![](https://github.com/supertedai/energyflow-cosmology/actions/workflows/generate_api.yml/badge.svg?branch=main) |
+| **Import Tests** | `.github/workflows/check-imports.yml` | Ensures clean imports for `/src` and `/scripts` | ![](https://github.com/supertedai/energyflow-cosmology/actions/workflows/check-imports.yml/badge.svg?branch=main) |
+| **File Mapping Consistency** | `.github/workflows/validate_project_map.yml` | Validates site-graph.json ↔ file structure | ![](https://github.com/supertedai/energyflow-cosmology/actions/workflows/validate_project_map.yml/badge.svg?branch=main) |
+| **Static Analysis** | `.github/workflows/static-analysis.yml` | Linting and structural checks | ![](https://github.com/supertedai/energyflow-cosmology/actions/workflows/static-analysis.yml/badge.svg?branch=main) |
+| **Formal Spec Build (LaTeX)** | `.github/workflows/build_efc_pdf.yml` | Builds `efc_formal_spec.pdf` | ![](https://github.com/supertedai/energyflow-cosmology/actions/workflows/build_efc_pdf.yml/badge.svg?branch=main) |
+| **Dataset Sync** | `.github/workflows/sync_datasets.yml` | Ensures SPARC/JWST data availability | ![](https://github.com/supertedai/energyflow-cosmology/actions/workflows/sync_datasets.yml/badge.svg?branch=main) |
+| **Dashboard Auto-Update** | `.github/workflows/update_dashboard.yml` | Regenerates dashboard figures | ![](https://github.com/supertedai/energyflow-cosmology/actions/workflows/update_dashboard.yml/badge.svg?branch=main) |
 
 ---
 
