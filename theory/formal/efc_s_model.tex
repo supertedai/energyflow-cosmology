@@ -1,20 +1,35 @@
-\section{EFC-S: Entropy Field}
+\section{EFC-S: Entropy Field and Gradient}
 
-The structural sector (EFC-S) defines an entropy-like field
-$S(\bm{x})$ which encodes the degree of information content, 
-organization or anisotropy in the system.
+The EFC-S sector defines the entropy field $S(\mathbf{x})$.
+This field encodes local structural organization and acts as a
+non-mass-based driver of curvature-like behavior.
+
+\subsection{Entropy Field}
+
+The entropy field is treated as a scalar function:
+\begin{equation}
+    S : \mathbb{R}^3 \rightarrow [S_{\min}, S_{\max}].
+\end{equation}
+
+The field can be interpreted as a measure of information or
+organizational density in configuration space.
 
 \subsection{Entropy Gradient}
 
-The entropy gradient is defined as:
+The entropy gradient is:
 \begin{equation}
-    \bm{g}_S(\bm{x}) = \nabla S(\bm{x}).
+    \nabla S(\mathbf{x}) = 
+    \left(
+      \frac{\partial S}{\partial x},
+      \frac{\partial S}{\partial y},
+      \frac{\partial S}{\partial z}
+    \right).
 \end{equation}
 
-In the implementation:
+The scaled physical gradient used in the model is:
 \begin{equation}
-    \bm{g}_S = k_S \,\nabla S.
+    \mathbf{g}_S = k_S \nabla S.
 \end{equation}
 
-This gradient interacts directly with the energy-flow potential 
-and the expansion mapping.
+This gradient introduces directional asymmetry which couples
+to the energy-flow field and affects structure formation.
