@@ -37,14 +37,12 @@
           "path": "methodology/open-science-principles.md",
           "type": "documentation"
         },
-        // NY OPPFØRING FOR EPISTEMOLOGI ER LAGT TIL HER 
         {
           "name": "EFC-epistemology.md",
           "path": "methodology/EFC-epistemology.md",
           "type": "documentation",
           "role": "Defining the EFC knowledge pathway and core philosophical principles"
         },
-        //
         {
           "name": "symbiotic-process.md",
           "path": "methodology/symbiotic-process.md",
