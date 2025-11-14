@@ -1,83 +1,63 @@
-\section{EFC-S: Entropy Field and Structural Sector}
+\section{EFC-S: Entropy-Stabilised Structures}
 
-The structural sector (EFC-S) defines the entropy field $S(\mathbf{x})$
-and its gradient. This field encodes local organization, anisotropy,
-and structural complexity. It acts as a non-mass-based generator of
-effective curvature and guides the flow of energy in the EFC framework.
+The structural sector of EFC describes how matter, light, and energy
+organize themselves in regions with non-trivial entropy gradients. The
+presence of the entropy-dependent effective speed of light,
+\[
+c(S) = c_0 \left( 1 + a_{\text{edge}} \, x(S)^2 \right),
+\]
+plays a central role in determining both stability conditions and
+observable properties of halo-like configurations.
 
-\subsection{Entropy Field}
+\subsection{Entropy Gradients and Structural Support}
 
-The entropy field is a scalar function over spatial configuration space:
-\begin{equation}
-    S : \mathbb{R}^3 \rightarrow [S_{\min}, S_{\max}].
-\end{equation}
+Structures in EFC form where entropy gradients guide the energy-flow
+field $E_f(\mathbf{x})$. In such regions, the grid exhibits varying
+resistance, which directly modulates the propagation speed of light.
 
-It represents the local degree of information organization.  
-Low values correspond to homogeneous, featureless regions;  
-high values correspond to strongly structured zones.
+\paragraph{Focusing regime (s$_0$-side).}
 
-For practical computations we treat $S$ as differentiable and bounded.
+Near s$_0$ (low entropy, high structure), we have $x(S)\to -1$ and
+$c(S)$ is enhanced. Enhanced propagation speed leads to inward focusing
+of light trajectories, which increases effective surface brightness and
+reduces observed time delays. This focusing contributes naturally to
+the appearance of halo-like rotation curves without invoking additional
+mass components.
 
-\subsection{Entropy Gradient}
+\paragraph{Defocusing regime (s$_1$-side).}
 
-The gradient of the entropy field is:
-\begin{equation}
-    \nabla S(\mathbf{x}) =
-    \left(
-      \frac{\partial S}{\partial x},
-      \frac{\partial S}{\partial y},
-      \frac{\partial S}{\partial z}
-    \right).
-\end{equation}
+Near s$_1$ (high entropy, structural loosening), we have $x(S)\to +1$
+and $c(S)$ increases again. Light traverses these regions more rapidly,
+leading to outward defocusing. This contributes to large-scale
+acceleration effects and modified anisotropies without a separate
+dark-energy component.
 
-The gradient quantifies directional changes in structural organization.
-It provides the preferred direction for energy redistribution.
+\paragraph{Mid-entropy stability band.}
 
-\subsection{Scaled Structural Gradient}
+In the mid-entropy region $S \approx S_{\text{mid}}$, $c(S)$ is at its
+minimum. This region exhibits maximal grid resistance and supports
+long-lived structural configurations. Many halo-like formations arise
+naturally in this band.
 
-In the physical model, the raw gradient is scaled by a structural
-coupling constant $k_S$:
-\begin{equation}
-    \mathbf{g}_S(\mathbf{x}) = k_S \nabla S(\mathbf{x}).
-\end{equation}
+\subsection{Structural Radius and Observables}
 
-This scaled gradient is the term that directly enters:
+Because focusing, defocusing, and stability depend on the functional
+form of $c(S)$, even identical mass distributions can produce different
+observable signatures depending on the entropy field.
 
-\begin{itemize}
-    \item the energy-flow potential $V_{\text{EFC}}$,
-    \item the expansion mapping $H(E_f, S)$,
-    \item the structural force balance in EFC-S.
-\end{itemize}
-
-\subsection{Radial Reduction (Spherical Symmetry)}
-
-For many astrophysical systems we approximate spherical symmetry:
-\begin{equation}
-    S(\mathbf{x}) = S(r),
-\end{equation}
-leading to
-\begin{equation}
-    \nabla S = \frac{dS}{dr} \hat{\mathbf{r}}.
-\end{equation}
-
-The structural gradient becomes:
-\begin{equation}
-    g_S(r) = k_S \frac{dS}{dr}.
-\end{equation}
-
-This form is used in the halo model (EFC-S) and the dynamical model
-(EFC-D) for rotation curves.
-
-\subsection{Interpretation in EFC}
-
-The gradient acts as a geometric driver:
+Observable consequences include:
 
 \begin{itemize}
-    \item it introduces anisotropic structure,
-    \item it modifies local effective curvature,
-    \item it couples to the energy-flow field,
-    \item it regulates stability and shape of halos.
+    \item modified rotation curves from the interplay of $\Phi(E_f,S)$
+          and the focusing contribution of $c(S)$;
+    \item altered lensing magnification profiles in regions where the
+          entropy approaches s$_0$ or s$_1$;
+    \item anisotropic surface–brightness patterns arising from spatial
+          variations in $c(S)$;
+    \item structural stability conditions governed jointly by the entropy
+          gradient and the mid-entropy minimum of $c(S)$.
 \end{itemize}
 
-EFC-S is therefore the structural backbone of the full EFC model,
-and all dynamical sectors reference $g_S$ directly.
+EFC-S thus provides a unified description of halo-like phenomena in terms
+of entropy structure, energy flow, and the emergent propagation law
+$c(S)$, without requiring additional matter components.

@@ -1,37 +1,45 @@
-\documentclass[11pt,a4paper]{article}
+\subsection{Effective light speed as a derived quantity}
 
-\usepackage[utf8]{inputenc}
-\usepackage[T1]{fontenc}
-\usepackage{lmodern}
-\usepackage{amsmath, amssymb, amsthm}
-\usepackage{bm}
-\usepackage{hyperref}
-\usepackage{geometry}
-\geometry{margin=2.5cm}
+In EFC, the speed of light is not a universal constant. It is an
+\emph{effective} propagation speed that emerges from the entropy field
+$S$, the s$_0$--s$_1$ endpoint structure, and the resistance of the
+energy–flow grid.
 
-\title{Energy-Flow Cosmology (EFC)\\Formal Mathematical Specification}
-\author{Morten Magnusson}
-\date{\today}
+\paragraph{Definition.}
 
-\begin{document}
-\maketitle
+Let $S_0$ and $S_1$ denote the endpoint entropies. Define
+\[
+S_{\text{mid}} = \frac{1}{2}(S_0 + S_1),
+\qquad
+\Delta S = S_1 - S_0,
+\qquad
+x(S) = \frac{S - S_{\text{mid}}}{\Delta S / 2}.
+\]
 
-\begin{abstract}
-This document provides the complete mathematical specification of 
-Energy-Flow Cosmology (EFC). It defines the entropy coordinate, 
-the energy-flow field, the structural and dynamical equations, 
-and all related constructs used in the computational implementation 
-found in \texttt{src/efc/}. 
-\end{abstract}
+The effective speed of light is then
+\begin{equation}
+    c(S) = c_0 \left( 1 + a_{\text{edge}} \, x(S)^2 \right),
+\end{equation}
+with $c_0$ the baseline mid-entropy speed and $a_{\text{edge}} > 0$ a
+dimensionless parameter controlling enhancement toward the endpoints.
 
-\tableofcontents
+\paragraph{Interpretation.}
 
-\input{notation}
-\input{parameters}
-\input{efc_s_model}
-\input{efc_d_model}
-\input{efc_h_model}
-\input{efc_structure_model}
-\input{observables}
+\begin{itemize}
+    \item $c(S)$ is minimal in the mid-entropy regime.
+    \item $c(S)$ increases smoothly as $S \to S_0$ (focusing).
+    \item $c(S)$ increases smoothly as $S \to S_1$ (defocusing).
+\end{itemize}
 
-\end{document}
+\paragraph{Implications.}
+
+Light propagation depends on the path integral
+\[
+t_{\text{obs}} = \int_{\gamma} \frac{dl}{c(S(l))},
+\]
+meaning that all observable quantities that rely on null propagation
+(time delays, redshift–distance relations, lensing patterns) must be
+computed using $c(S)$ rather than a fixed constant $c$.
+
+This entropy-dependent propagation law is therefore a central element
+in the formal EFC framework.
