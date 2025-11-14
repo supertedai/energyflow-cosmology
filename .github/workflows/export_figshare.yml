@@ -1,3 +1,30 @@
+name: 📤 Export EFC Outputs to Figshare
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'output/**'
+      - '.github/workflows/export_figshare.yml'
+
+jobs:
+  upload-to-figshare:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install dependencies
+        run: |
+          pip install requests python-dotenv
+
       - name: Upload files to Figshare
         env:
           FIGSHARE_TOKEN: ${{ secrets.FIGSHARE_TOKEN }}
@@ -17,7 +44,7 @@ OUTPUT_DIR = ROOT / "output"
 print("Checking output directory:", OUTPUT_DIR)
 if not OUTPUT_DIR.exists():
     print(f"No output directory found at: {OUTPUT_DIR}")
-    raise SystemExit(0)   # EXIT SUCCESS
+    raise SystemExit(0)
 
 session = requests.Session()
 session.headers.update({"Authorization": f"token {token}"})
@@ -36,19 +63,16 @@ except Exception as e:
 print("Existing files:", existing_names)
 
 def upload_file(file_path: Path):
-    # Skip unsupported
     if file_path.suffix.lower() not in ALLOWED:
         print(f"[Figshare] Skipping unsupported file: {file_path.name}")
         return
 
-    # Skip existing
     if file_path.name in existing_names:
         print(f"[Figshare] Already exists, skipping: {file_path.name}")
         return
 
     print(f"[Figshare] Uploading {file_path.name}")
 
-    # 1. INIT
     init_res = session.post(
         f"https://api.figshare.com/v2/account/articles/{article_id}/files",
         json={"name": file_path.name}
@@ -61,15 +85,12 @@ def upload_file(file_path: Path):
     upload_url = info["upload_url"]
     file_id = info["id"]
 
-    # 2. UPLOAD
     with file_path.open("rb") as f:
         put_res = requests.put(upload_url, data=f)
-
     if not put_res.ok:
         print(f"[Figshare] UPLOAD FAILED {file_path.name}: {put_res.text}")
         return
 
-    # 3. COMPLETE
     complete_res = session.post(
         f"https://api.figshare.com/v2/account/articles/{article_id}/files/{file_id}"
     )
@@ -78,7 +99,6 @@ def upload_file(file_path: Path):
         return
 
     print(f"[Figshare] Uploaded OK: {file_path.name}")
-
 
 for path in OUTPUT_DIR.rglob("*"):
     if path.is_file():
