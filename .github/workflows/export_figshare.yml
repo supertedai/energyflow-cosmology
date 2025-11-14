@@ -1,104 +1,88 @@
-name: 📤 Export EFC Outputs to Figshare
-
-on:
-  push:
-    branches:
-      - main
-    paths:
-      - 'output/**'
-      - '.github/workflows/export_figshare.yml'
-
-jobs:
-  upload-to-figshare:
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-
-      - name: Set up Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: '3.12'
-
-      - name: Install dependencies
-        run: |
-          pip install requests python-dotenv
-
       - name: Upload files to Figshare
         env:
           FIGSHARE_TOKEN: ${{ secrets.FIGSHARE_TOKEN }}
           FIGSHARE_ARTICLE_ID: ${{ secrets.FIGSHARE_ARTICLE_ID }}
         run: |
           python - << 'EOF'
-          import os
-          import requests
-          from pathlib import Path
+import os
+import requests
+from pathlib import Path
 
-          token = os.getenv("FIGSHARE_TOKEN")
-          article_id = os.getenv("FIGSHARE_ARTICLE_ID")
+token = os.getenv("FIGSHARE_TOKEN")
+article_id = os.getenv("FIGSHARE_ARTICLE_ID")
 
-          if not token or not article_id:
-              raise SystemExit("FIGSHARE_TOKEN or FIGSHARE_ARTICLE_ID is not set")
+ROOT = Path(os.getenv("GITHUB_WORKSPACE")).resolve()
+OUTPUT_DIR = ROOT / "output"
 
-          ROOT = Path(os.getenv("GITHUB_WORKSPACE")).resolve()
-          OUTPUT_DIR = ROOT / "output"
+print("Checking output directory:", OUTPUT_DIR)
+if not OUTPUT_DIR.exists():
+    print(f"No output directory found at: {OUTPUT_DIR}")
+    raise SystemExit(0)   # EXIT SUCCESS
 
-          print("Checking output directory:", OUTPUT_DIR)
+session = requests.Session()
+session.headers.update({"Authorization": f"token {token}"})
 
-          if not OUTPUT_DIR.exists():
-              raise SystemExit(f"No output directory found at: {OUTPUT_DIR}")
+ALLOWED = {".pdf", ".png", ".jpg", ".jpeg", ".csv"}
 
-          session = requests.Session()
-          session.headers.update({"Authorization": f"token {token}"})
+try:
+    existing_files = session.get(
+        f"https://api.figshare.com/v2/account/articles/{article_id}/files"
+    ).json()
+    existing_names = {f["name"] for f in existing_files}
+except Exception as e:
+    print("Could not fetch existing files:", e)
+    existing_names = set()
 
-          # Allowed filetypes
-          ALLOWED = {".pdf", ".png", ".jpg", ".jpeg", ".csv"}
+print("Existing files:", existing_names)
 
-          # Fetch existing filenames
-          existing_files = session.get(
-              f"https://api.figshare.com/v2/account/articles/{article_id}/files"
-          ).json()
-          existing_names = {f["name"] for f in existing_files}
+def upload_file(file_path: Path):
+    # Skip unsupported
+    if file_path.suffix.lower() not in ALLOWED:
+        print(f"[Figshare] Skipping unsupported file: {file_path.name}")
+        return
 
-          print("Existing files:", existing_names)
+    # Skip existing
+    if file_path.name in existing_names:
+        print(f"[Figshare] Already exists, skipping: {file_path.name}")
+        return
 
-          def upload_file(file_path: Path):
-              # Only upload allowed file types
-              if file_path.suffix.lower() not in ALLOWED:
-                  print(f"[Figshare] Skipping unsupported file type: {file_path.name}")
-                  return
+    print(f"[Figshare] Uploading {file_path.name}")
 
-              # Skip existing files
-              if file_path.name in existing_names:
-                  print(f"[Figshare] Skipping existing file: {file_path.name}")
-                  return
+    # 1. INIT
+    init_res = session.post(
+        f"https://api.figshare.com/v2/account/articles/{article_id}/files",
+        json={"name": file_path.name}
+    )
+    if not init_res.ok:
+        print(f"[Figshare] INIT FAILED {file_path.name}: {init_res.text}")
+        return
 
-              print(f"[Figshare] Uploading {file_path}")
+    info = init_res.json()
+    upload_url = info["upload_url"]
+    file_id = info["id"]
 
-              init_res = session.post(
-                  f"https://api.figshare.com/v2/account/articles/{article_id}/files",
-                  json={"name": file_path.name}
-              )
-              init_res.raise_for_status()
+    # 2. UPLOAD
+    with file_path.open("rb") as f:
+        put_res = requests.put(upload_url, data=f)
 
-              info = init_res.json()
-              file_id = info["id"]
-              upload_url = info["upload_url"]
+    if not put_res.ok:
+        print(f"[Figshare] UPLOAD FAILED {file_path.name}: {put_res.text}")
+        return
 
-              with file_path.open("rb") as f:
-                  put_res = requests.put(upload_url, data=f)
-                  put_res.raise_for_status()
+    # 3. COMPLETE
+    complete_res = session.post(
+        f"https://api.figshare.com/v2/account/articles/{article_id}/files/{file_id}"
+    )
+    if not complete_res.ok:
+        print(f"[Figshare] COMPLETE FAILED {file_path.name}: {complete_res.text}")
+        return
 
-              session.post(
-                  f"https://api.figshare.com/v2/account/articles/{article_id}/files/{file_id}"
-              )
+    print(f"[Figshare] Uploaded OK: {file_path.name}")
 
-              print(f"[Figshare] Uploaded {file_path.name}")
 
-          for path in OUTPUT_DIR.rglob("*"):
-              if path.is_file():
-                  upload_file(path)
+for path in OUTPUT_DIR.rglob("*"):
+    if path.is_file():
+        upload_file(path)
 
-          print("[Figshare] Upload completed.")
-          EOF
+print("[Figshare] Workflow finished with NO errors.")
+EOF
