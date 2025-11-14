@@ -1,0 +1,16 @@
+{
+  "@context": "https://schema.org",
+  "@type": "Dataset",
+  "name": "EFC Methodology Layer",
+  "description": "Documentation of the cognitive, reflective and symbiotic methodology used to develop the Energy-Flow Cosmology framework.",
+  "source": "https://github.com/supertedai/energyflow-cosmology",
+  "license": "https://creativecommons.org/licenses/by/4.0/",
+  "hasPart": [
+    { "name": "open-method.md", "url": "https://github.com/supertedai/energyflow-cosmology/blob/main/methodology/open-method.md" },
+    { "name": "author-method-note.md", "url": "https://github.com/supertedai/energyflow-cosmology/blob/main/methodology/author-method-note.md" },
+    { "name": "symbiosis-interface.md", "url": "https://github.com/supertedai/energyflow-cosmology/blob/main/methodology/symbiosis-interface.md" },
+    { "name": "symbiotic-process.md", "url": "https://github.com/supertedai/energyflow-cosmology/blob/main/methodology/symbiotic-process.md" },
+    { "name": "symbiotic-process-llm.md", "url": "https://github.com/supertedai/energyflow-cosmology/blob/main/methodology/symbiotic-process-llm.md" },
+    { "name": "symbiotic-process-summary.md", "url": "https://github.com/supertedai/energyflow-cosmology/blob/main/methodology/symbiotic-process-summary.md" }
+  ]
+}
