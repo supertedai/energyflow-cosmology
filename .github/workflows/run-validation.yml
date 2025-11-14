@@ -7,8 +7,6 @@ on:
     paths:
       - "src/**"
       - "scripts/**"
-      - "notebooks/**"
-      - "output/**"
       - ".github/workflows/run-validation.yml"
   workflow_dispatch:
 
@@ -20,18 +18,18 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Set up Python
+      - name: Setup Python
         uses: actions/setup-python@v5
         with:
           python-version: "3.12"
 
       - name: Install dependencies
         run: |
-          if [ -f requirements.txt ]; then
-            pip install -r requirements.txt
-          else
-            pip install numpy pandas matplotlib requests
-          fi
+          pip install numpy pandas matplotlib requests
+
+      - name: Add src to PYTHONPATH
+        run: |
+          echo "PYTHONPATH=$PYTHONPATH:$(pwd)" >> $GITHUB_ENV
 
       - name: Run import tests
         run: |
