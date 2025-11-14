@@ -55,3 +55,4 @@ models/*.pkl
 models/*.onnx
 models/*.pkl
 
+output/
