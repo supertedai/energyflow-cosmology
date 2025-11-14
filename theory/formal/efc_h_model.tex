@@ -1,0 +1,18 @@
+\section{EFC-H: Expansion Mapping}
+
+The expansion mapping $H$ is defined as a function of 
+energy-flow and entropy:
+
+\begin{equation}
+    H(E_f, S) = A_H \, G(E_f, S).
+\end{equation}
+
+The baseline model implemented in 
+\texttt{efc\_core.expansion\_rate} uses:
+
+\begin{equation}
+    H(E_f, S) = \sqrt{|E_f|}\,(1 + S).
+\end{equation}
+
+This expression can be generalized by modifying the 
+functional dependence of $G$.
