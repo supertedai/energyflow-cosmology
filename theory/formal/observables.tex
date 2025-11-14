@@ -1,20 +1,29 @@
 \section{Observables and Validation Mapping}
 
-\subsection{JWST}
+\subsection{JWST Predictions}
 
-EFC predicts early galaxy presence via the 
-$(E_f, S)$-dependent structural growth rate.
+The structural growth function $G(E_f,S)$ determines the abundance
+and luminosity of early galaxies.
+Higher entropy gradients accelerate early structure formation.
 
 \subsection{DESI / BAO}
 
-The expansion curve derived from $H(E_f,S)$ maps to 
-$H(z)$ and BAO observables.
-
-\subsection{SPARC}
-
-The circular velocity is given by:
+The expansion law produces:
 \begin{equation}
-    v(r) = \sqrt{r \frac{\partial \Phi}{\partial r}}.
+    H(z) = H(E_f(z), S(z)).
 \end{equation}
 
-This provides direct comparison with rotation curve datasets.
+This maps directly to DESI measurements of the expansion curve.
+
+\subsection{SPARC Rotation Curves}
+
+Given:
+\begin{equation}
+    \Phi(r) = A_\Phi E_f(r)(1 + S(r)),
+\end{equation}
+rotation curves follow:
+\begin{equation}
+    v(r) = \sqrt{r \frac{d\Phi}{dr}}.
+\end{equation}
+
+This is computed numerically in \texttt{efc\_validation.py}.
