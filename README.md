@@ -1,4 +1,3 @@
-```markdown
 # 🔭 Energy-Flow Cosmology (EFC)
 
 **DOI (Codebase)** · **DOI (Data & Validation)** · **ORCID**  
@@ -114,34 +113,3 @@ This loop drives continuous improvement and reproducibility.
 
 ## 📚 Repository Layout
 
-```
-
-energyflow-cosmology/
-│
-├── .github/          # CI/CD workflows
-├── api/              # Regenerated semantic API
-├── data/             # Raw + processed datasets
-├── docs/             # Manuscripts and references
-├── figshare/         # DOI-linked metadata
-├── methodology/      # Open-science + epistemology
-├── output/           # Validation results and plots
-├── schema/           # Semantic definitions (Auth, Concept, Methodology)
-├── scripts/          # Automation + validation scripts
-└── src/              # Computational EFC core
-
-```
-
----
-
-## 📄 License
-
-**Creative Commons Attribution 4.0 (CC BY 4.0)**  
-Free to share, remix, and build upon with attribution.
-
-© 2025 — **Morten Magnusson**, Energy-Flow Cosmology Initiative
-
----
-
-## 📅 Last updated
-2025-11-14
-```
