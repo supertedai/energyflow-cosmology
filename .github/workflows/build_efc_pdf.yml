@@ -1,0 +1,52 @@
+name: Build EFC Formal Specification (PDF)
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "theory/formal/**"
+      - ".github/workflows/build_efc_pdf.yml"
+  workflow_dispatch:
+
+jobs:
+  build-pdf:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install LaTeX
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y texlive texlive-latex-extra texlive-science latexmk
+
+      - name: Compile EFC PDF
+        working-directory: theory/formal
+        run: |
+          latexmk -pdf efc_formal_spec.tex -interaction=nonstopmode
+
+      - name: Upload PDF Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: efc_formal_spec
+          path: theory/formal/efc_formal_spec.pdf
+
+      - name: Configure Git
+        run: |
+          git config --global user.name "github-actions"
+          git config --global user.email "actions@github.com"
+
+      - name: Pull latest changes
+        run: |
+          git pull --rebase origin main || true
+
+      - name: Commit generated PDF
+        run: |
+          cd theory/formal
+          git add efc_formal_spec.pdf
+          git commit -m "Auto-build EFC Formal Specification PDF [skip ci]" || echo "No changes to commit"
+
+      - name: Push changes
+        run: |
+          git push origin main || echo "Push skipped"
