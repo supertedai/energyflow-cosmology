@@ -52,7 +52,21 @@ jobs:
           session = requests.Session()
           session.headers.update({"Authorization": f"token {token}"})
 
+          # Fetch existing filenames from Figshare
+          existing_files = session.get(
+              f"https://api.figshare.com/v2/account/articles/{article_id}/files"
+          ).json()
+
+          existing_names = {f["name"] for f in existing_files}
+
+          print("Existing files in Figshare:", existing_names)
+
           def upload_file(article_id: str, file_path: Path) -> None:
+              # Skip existing file
+              if file_path.name in existing_names:
+                  print(f"[Figshare] Skipping existing file: {file_path.name}")
+                  return
+
               print(f"[Figshare] Uploading {file_path}")
 
               init_res = session.post(
@@ -75,6 +89,7 @@ jobs:
               complete_res.raise_for_status()
 
               print(f"[Figshare] Uploaded {file_path.name} (file_id={file_id})")
+
 
           for path in OUTPUT_DIR.rglob("*"):
               if path.is_file():
