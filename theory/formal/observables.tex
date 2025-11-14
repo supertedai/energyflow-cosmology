@@ -1,29 +1,61 @@
-\section{Observables and Validation Mapping}
+\subsection{Light travel times and lensing with $c(S)$}
 
-\subsection{JWST Predictions}
+In EFC, light propagation is governed by the entropy–dependent effective
+speed of light
+\[
+c(S) = c_0 \left( 1 + a_{\text{edge}} \, x(S)^2 \right),
+\]
+where
+\[
+x(S) = \frac{S - S_{\text{mid}}}{\Delta S / 2},
+\qquad
+S_{\text{mid}} = \frac{1}{2}(S_0 + S_1),
+\qquad
+\Delta S = S_1 - S_0.
+\]
 
-The structural growth function $G(E_f,S)$ determines the abundance
-and luminosity of early galaxies.
-Higher entropy gradients accelerate early structure formation.
-
-\subsection{DESI / BAO}
-
-The expansion law produces:
+Thus, photons do not propagate with a fixed constant speed, but with a
+locally varying speed determined by the entropy field sampled along their
+path. The observable travel time for a photon following a trajectory
+$\gamma$ is therefore
 \begin{equation}
-    H(z) = H(E_f(z), S(z)).
+    t_{\text{obs}} = \int_{\gamma} \frac{\mathrm{d}l}{c(S(l))}.
 \end{equation}
 
-This maps directly to DESI measurements of the expansion curve.
+\paragraph{Consequences.}
 
-\subsection{SPARC Rotation Curves}
+Relative to a constant-$c$ model, the following effects arise naturally:
 
-Given:
-\begin{equation}
-    \Phi(r) = A_\Phi E_f(r)(1 + S(r)),
-\end{equation}
-rotation curves follow:
-\begin{equation}
-    v(r) = \sqrt{r \frac{d\Phi}{dr}}.
-\end{equation}
+\begin{itemize}
+    \item \textbf{Enhanced propagation near s$_0$ and s$_1$.}  
+          In regions where $S$ approaches either endpoint (low-entropy
+          s$_0$ or high-entropy s$_1$), $c(S)$ increases. Photons traverse
+          these regions more quickly, reducing or reshaping time delays.
+    
+    \item \textbf{Modified lensing without additional mass.}  
+          Because the propagation speed is a function of the entropy field
+          rather than a universal constant, magnification patterns,
+          distortion angles, and time-delay ratios can differ from GR-based
+          predictions even when the underlying mass distribution is the same.
+          These deviations arise from variations in $c(S)$ rather than
+          from unseen mass components.
+    
+    \item \textbf{Redshift--distance relations depend on $c(S)$.}  
+          Cosmological observables inferred from lightlike probes must be
+          interpreted using the integral
+          \[
+              d_L(z),\, d_A(z) \propto \int \frac{\mathrm{d}l}{c(S(l))},
+          \]
+          not the usual expression with constant $c$.  
+          This provides an alternative route to late-time acceleration
+          without introducing a separate dark-energy component.
+    
+    \item \textbf{Path dependence becomes physical.}  
+          Light rays passing through different entropy structures sample
+          different functional forms of $c(S)$, making anisotropies and
+          direction-dependent time delays a natural prediction of EFC.
+\end{itemize}
 
-This is computed numerically in \texttt{efc\_validation.py}.
+In summary, lensing, time-delay measurements, and distance–redshift
+relations in EFC are shaped not only by the mass-energy distribution but
+also by the entropy field through the function $c(S)$.

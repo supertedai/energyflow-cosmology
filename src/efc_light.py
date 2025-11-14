@@ -1,50 +1,43 @@
-"""
-EFC Light Propagation Utilities
-
-Provisional implementation of c(S) for exploring s0–s1 endpoint behaviour.
-This is NOT a final physical model, but a testing scaffold.
-"""
-
 import numpy as np
 
-
-def c_of_S(S, c0=3.0e8, S0=0.0, S1=1.0, a0=0.4, a1=0.4):
+def c_of_S(S, c0=3.0e8, S0=0.0, S1=1.0, a_edge=0.6):
     """
-    Toy model for effective speed of light as a function of entropy S.
+    Symmetric endpoint model for effective speed of light as a function of entropy S.
 
-    Idea:
-        - c is approximately c0 in mid-range S
-        - c increases near both endpoints S0 (s0) and S1 (s1)
-        - no divergences (smooth asymptotic bumps)
+    Behaviour:
+        - c is lowest around the midpoint between S0 and S1
+        - c increases smoothly towards both endpoints: s0 (S=S0) and s1 (S=S1)
+        - No divergences, no discontinuities
 
     Parameters
     ----------
     S : float or array-like
-        Entropy coordinate (normalized between S0 and S1 for now).
+        Entropy coordinate.
     c0 : float
-        Baseline speed (approx current measured c in mid-range).
+        Baseline speed (approx measured speed of light in mid-range).
     S0 : float
         Low-entropy endpoint (s0).
     S1 : float
         High-entropy endpoint (s1).
-    a0, a1 : float
-        Amplitudes of the endpoint enhancements.
+    a_edge : float
+        Strength of c-increase near the endpoints. a_edge > 0.
 
     Returns
     -------
     c_eff : float or np.ndarray
-        Effective propagation speed.
+        Effective propagation speed of light.
     """
     S = np.asarray(S, dtype=float)
 
-    # Normalized distance from each endpoint
-    d0 = (S - S0)
-    d1 = (S - S1)
+    # Midpoint between endpoints (lowest c)
+    Smid = 0.5 * (S0 + S1)
+    half_width = 0.5 * (S1 - S0) if S1 != S0 else 1.0
 
-    # Smooth bump functions near S0 and S1
-    bump0 = a0 / (1.0 + d0**2)
-    bump1 = a1 / (1.0 + d1**2)
+    # Normalized coordinate: -1 at S0, 0 at midpoint, +1 at S1
+    x = (S - Smid) / half_width
 
-    factor = 1.0 + bump0 + bump1
+    # Minimum at the middle, higher at both edges
+    factor = 1.0 + a_edge * (x ** 2)
+
     return c0 * factor
 

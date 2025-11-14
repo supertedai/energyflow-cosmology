@@ -1,44 +1,103 @@
 \section{EFC-D: Energy-Flow Dynamics}
 
-The energy-flow field $E_f(\mathbf{x})$ represents the directional
-flow of energy across entropy gradients.
+The dynamical sector of Energy-Flow Cosmology (EFC-D) describes how
+energy propagates through the grid defined by the entropy field $S$ and
+the energy–flow field $E_f(\mathbf{x})$. All dynamical behaviour
+(gravitational focusing, late-time acceleration, structural stability,
+and light propagation) emerges from the coupling between $S$, $E_f$,
+and the effective speed of light $c(S)$.
 
+% ---------------------------------------------------------
 \subsection{Energy-Flow Field}
 
-We define:
+We define the energy–flow field as
 \begin{equation}
     E_f : \mathbb{R}^3 \rightarrow \mathbb{R}.
 \end{equation}
 
-Physically, $E_f$ measures how strongly energy is "channeled" along
-structures created by gradients in $S$.
+Physically, $E_f$ measures how strongly energy is channeled along entropy
+gradients. Regions with strong gradients in $S$ create guided-flow
+structures that influence both matter motion and photon propagation.
 
+% ---------------------------------------------------------
+\subsection{Effective Speed of Light $c(S)$}
+
+In EFC, the speed of light is not a universal constant but an
+\emph{effective} propagation speed determined by the grid resistance,
+which depends on the entropy field $S$ and the s$_0$--s$_1$ endpoint
+structure.
+
+Let $S_0$ and $S_1$ denote the entropy values associated with the
+dynamic endpoints s$_0$ (low entropy, high structure) and s$_1$
+(high entropy, structure collapse). Define:
+\[
+S_{\text{mid}} = \frac{1}{2}(S_0 + S_1), 
+\qquad
+\Delta S = S_1 - S_0.
+\]
+
+A normalized entropy coordinate:
+\[
+x(S) = \frac{S - S_{\text{mid}}}{\Delta S / 2},
+\]
+gives $x=-1$ at s$_0$, $x=0$ at the midpoint, and $x=+1$ at s$_1$.
+
+The effective speed of light is then:
+\begin{equation}
+    c(S) = c_0 \left( 1 + a_{\text{edge}} \, x(S)^2 \right),
+\end{equation}
+where $c_0$ is the baseline mid-range light speed and 
+$a_{\text{edge}} > 0$ regulates the endpoint enhancement.
+
+Key properties:
+\begin{itemize}
+    \item $c(S)$ is \emph{minimum} at the entropy midpoint.
+    \item $c(S)$ increases smoothly as $S \to S_0$ (s$_0$-side focusing).
+    \item $c(S)$ also increases as $S \to S_1$ (s$_1$-side defocusing).
+\end{itemize}
+
+Thus, light propagation, time delays, and apparent dynamical behaviour
+must be treated as functionals of $c(S)$, not a fixed constant $c$.
+
+% ---------------------------------------------------------
 \subsection{Energy-Flow Potential}
 
-EFC defines an effective potential:
+The effective potential governing matter and energy transport is
 \begin{equation}
-    \Phi(E_f,S) = A_\Phi \, E_f \, (1 + S).
+    \Phi(E_f,S) = A_\Phi \, E_f \, (1 + S),
 \end{equation}
+which is the baseline form used in the Python implementation,
+\[
+\Phi \propto E_f S + E_f.
+\]
 
-This is the baseline form used in the Python implementation:
-\begin{equation}
-    \Phi \propto E_f S + E_f.
-\end{equation}
-
-More general forms (not yet implemented) include:
+A more general family (not yet implemented) is
 \begin{equation}
     \Phi = A_\Phi E_f (1 + S^\beta),
 \end{equation}
-where $\beta$ controls non-linear coupling.
+with $\beta$ controlling non-linear coupling strength.
 
+The coupling to $c(S)$ becomes relevant when computing dynamical
+quantities that depend on characteristic propagation speeds
+(e.g.\ effective horizon scales, entropy-damped flow rates,
+and null trajectories).
+
+% ---------------------------------------------------------
 \subsection{Circular Velocity Relation}
 
-For rotation curves:
+For rotation curves, the circular velocity is:
 \begin{equation}
-    v(r) = 
+    v(r) =
     \sqrt{
         r \frac{\partial \Phi}{\partial r}
     }.
 \end{equation}
 
-This connects the potential directly to SPARC data.
+In EFC-D, this expression is formally unchanged, but its interpretation
+is modified by the presence of the entropy-dependent propagation speed
+$c(S)$, which influences observed velocities through focusing/defocusing
+of photon trajectories and the inferred gravitational field.
+
+Regions where $S(r)$ shifts toward s$_0$ or s$_1$ effectively modify
+light propagation and the appearance of rotation curves without invoking
+dark matter or additional free parameters.
