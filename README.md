@@ -54,11 +54,12 @@ validation, metadata integration, Figshare export, and repository consistency.
 | **README Date Update** | `.github/workflows/update-readme-date.yml` | Auto-updates timestamp in README | ![status](https://github.com/supertedai/energyflow-cosmology/actions/workflows/update-readme-date.yml/badge.svg) |
 | **API Autogeneration** | `.github/workflows/generate_api.yml` | Rebuilds the semantic API in `/api/` | ![status](https://github.com/supertedai/energyflow-cosmology/actions/workflows/generate_api.yml/badge.svg) |
 | **Import Tests** | `.github/workflows/check-imports.yml` | Ensures clean imports for `/src` and `/scripts` | ![status](https://github.com/supertedai/energyflow-cosmology/actions/workflows/check-imports.yml/badge.svg) |
-| **File Mapping Consistency** | `.github/workflows/validate_project_map.yml` | Validates site-graph.json ↔ file structure | ![status](https://github.com/supertedai/energyflow-cosmology/actions/workflows/validate_project_map.yml/badge.svg) |
+| **File Mapping Consistency** | `.github/workflows/validate_project_map.yml` | Validates site-graph.json ↔ actual file structure | ![status](https://github.com/supertedai/energyflow-cosmology/actions/workflows/validate_project_map.yml/badge.svg) |
 | **Static Analysis** | `.github/workflows/static-analysis.yml` | Linting and structural checks | ![status](https://github.com/supertedai/energyflow-cosmology/actions/workflows/static-analysis.yml/badge.svg) |
 | **Formal Spec Build (LaTeX)** | `.github/workflows/build_efc_pdf.yml` | Builds `efc_formal_spec.pdf` | ![status](https://github.com/supertedai/energyflow-cosmology/actions/workflows/build_efc_pdf.yml/badge.svg) |
 | **Dataset Sync** | `.github/workflows/sync_datasets.yml` | Ensures SPARC/JWST data availability | ![status](https://github.com/supertedai/energyflow-cosmology/actions/workflows/sync_datasets.yml/badge.svg) |
 | **Dashboard Auto-Update** | `.github/workflows/update_dashboard.yml` | Regenerates dashboard figures | ![status](https://github.com/supertedai/energyflow-cosmology/actions/workflows/update_dashboard.yml/badge.svg) |
+
 
 
 ---
