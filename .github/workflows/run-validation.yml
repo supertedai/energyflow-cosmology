@@ -1,114 +1,50 @@
-name: Export Figshare Outputs
+name: Run EFC validation
 
 on:
   push:
     branches:
       - main
     paths:
+      - "src/**"
+      - "scripts/**"
+      - "notebooks/**"
       - "output/**"
-      - ".github/workflows/export_figshare.yml"
+      - ".github/workflows/run-validation.yml"
+  workflow_dispatch:
 
 jobs:
-  upload-to-figshare:
+  validate-efc:
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Setup Python
+      - name: Set up Python
         uses: actions/setup-python@v5
         with:
           python-version: "3.12"
 
       - name: Install dependencies
-        run: pip install requests python-dotenv
-
-      - name: Upload files to Figshare
-        env:
-          FIGSHARE_TOKEN: ${{ secrets.FIGSHARE_TOKEN }}
-          FIGSHARE_ARTICLE_ID: ${{ secrets.FIGSHARE_ARTICLE_ID }}
         run: |
-          python - << "EOF"
-import os
-import requests
-from pathlib import Path
+          if [ -f requirements.txt ]; then
+            pip install -r requirements.txt
+          else
+            pip install numpy pandas matplotlib requests
+          fi
 
-token = os.getenv("FIGSHARE_TOKEN")
-article_id = os.getenv("FIGSHARE_ARTICLE_ID")
+      - name: Run import tests
+        run: |
+          python3 scripts/check_imports.py
 
-# Workaround for yaml-safe inline script
-root = Path(os.getenv("GITHUB_WORKSPACE") or ".").resolve()
-output_dir = root / "output"
+      - name: Run SPARC validation
+        run: |
+          python3 scripts/validate_efc.py --dataset sparc
 
-print("Checking output directory:", output_dir)
-if not output_dir.exists():
-    print("No output directory found - exiting cleanly.")
-    raise SystemExit(0)
+      - name: Run JWST validation
+        run: |
+          python3 scripts/validate_efc.py --dataset jwst
 
-# Allowed file extensions for Figshare
-ALLOWED = {".pdf", ".png", ".jpg", ".jpeg", ".csv"}
-
-session = requests.Session()
-session.headers.update({"Authorization": f"token {token}"})
-
-# Get list of existing files (safe fallback)
-try:
-    res = session.get(f"https://api.figshare.com/v2/account/articles/{article_id}/files")
-    existing_files = res.json()
-    existing_names = {f.get("name") for f in existing_files}
-except Exception as e:
-    print("Could not fetch existing file list:", e)
-    existing_names = set()
-
-print("Existing files:", existing_names)
-
-def upload(path: Path):
-    ext = path.suffix.lower()
-
-    if ext not in ALLOWED:
-        print("Skipping unsupported file:", path.name)
-        return
-
-    if path.name in existing_names:
-        print("Skipping existing file:", path.name)
-        return
-
-    print("Uploading:", path)
-
-    # 1. Initialize upload
-    init = session.post(
-        f"https://api.figshare.com/v2/account/articles/{article_id}/files",
-        json={"name": path.name}
-    )
-    if not init.ok:
-        print("Init failed:", init.status_code, init.text)
-        return
-    info = init.json()
-    upload_url = info.get("upload_url")
-    file_id = info.get("id")
-
-    # 2. Upload content
-    with path.open("rb") as f:
-        put = requests.put(upload_url, data=f)
-    if not put.ok:
-        print("Upload failed:", put.status_code, put.text)
-        return
-
-    # 3. Mark complete
-    complete = session.post(
-        f"https://api.figshare.com/v2/account/articles/{article_id}/files/{file_id}"
-    )
-    if not complete.ok:
-        print("Complete failed:", complete.status_code, complete.text)
-        return
-
-    print("Upload OK:", path.name)
-
-# Walk output dir
-for p in output_dir.rglob("*"):
-    if p.is_file():
-        upload(p)
-
-print("Figshare upload completed without hard errors.")
-EOF
+      - name: Run DESI validation
+        run: |
+          python3 scripts/validate_efc.py --dataset desi
