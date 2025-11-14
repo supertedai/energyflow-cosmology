@@ -169,6 +169,81 @@ continuously updating, self-correcting, and traceable.
 
 ---
 
+flowchart TD
+
+    %% === Theory Layer ===
+    T1[theory/<br>EFC-S / EFC-D / EFC-C / IMX] 
+    T2[theory/architecture.md<br>Model Architecture]
+
+    T1 --> T2
+
+    %% === Source Code Layer ===
+    subgraph SRC[ src/efc/ ]
+        C1[core/efc_core.py<br>EFCModel, EFCParameters]
+        C2[potential/efc_potential.py<br>compute_energy_flow]
+        C3[entropy/efc_entropy.py<br>entropy_field, entropy_gradient]
+        C4[validation/efc_validation.py<br>rotation curves, SPARC tools]
+    end
+
+    T2 --> SRC
+
+    %% === Scripts Layer ===
+    subgraph SCRIPTS[ scripts/ ]
+        S1[run_efc_baseline.py<br>Numerical baseline run]
+        S2[validate_efc.py<br>JWST / DESI / SPARC validation]
+        S3[check_imports.py<br>Module integrity checks]
+        S4[update_efc_api.py<br>Generate api/v1/]
+    end
+
+    SRC --> S1
+    SRC --> S2
+    SRC --> S3
+    SRC --> S4
+
+    %% === Data / Validation Layer ===
+    subgraph DATA[data/ + external datasets]
+        D1[JWST catalog]
+        D2[DESI / BAO data]
+        D3[SPARC rotation curves]
+    end
+
+    D1 --> S2
+    D2 --> S2
+    D3 --> S2
+
+    S2 --> OUT1[output/validation/<br>figures + metrics]
+    S1 --> OUT2[output/baseline/]
+
+    %% === Semantic Layer ===
+    subgraph SEM[Semantic Layer]
+        SC1[schema/concepts.json<br>Concept Graph]
+        SC2[schema/site-graph.json<br>AuthNode]
+        SC3[figshare/figshare-index.json]
+        SC4[methodology/<br>Open Method & Symbiosis]
+    end
+
+    SC1 --> S4
+    S4 --> API[api/v1/<br>JSON-LD Endpoints]
+
+    %% === Open Science / External ===
+    OUT1 --> FS[Figshare Upload<br>(GitHub Action)]
+    OUT2 --> FS
+
+    SC1 --> FS
+    SC3 --> FS
+
+    FS --> DOI[Figshare DOIs<br>CC-BY-4.0]
+
+    %% === Reflection Layer ===
+    API --> REF[reflection/<br>symbiosis + meta-analysis]
+
+    T1 --> REF
+    SC2 --> REF
+    FS --> REF
+
+
+---
+
 ## 📅 Last updated
 
 **Automatically updated by update-readme-date.yml**
