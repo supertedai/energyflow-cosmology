@@ -40,7 +40,7 @@ function efc_admin_schema_dashboard() {
                 : "<span style='color:red'>Invalid JSON</span>";
         }
 
-        echo "<tr><td>{$key}</td><td><a href='{$url}' target='_blank'>{$url}</a></td><td>{$status}</td></tr>";
+        echo "<tr><td>" . esc_html($key) . "</td><td><a href='" . esc_url($url) . "' target='_blank'>" . esc_html($url) . "</a></td><td>{$status}</td></tr>";
     }
 
     echo "</tbody></table></div>";
