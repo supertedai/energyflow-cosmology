@@ -111,7 +111,16 @@ This loop drives continuous improvement and reproducibility.
 
 ---
 
+Klart — her er **Repository Layout** gjenskapt i ren, perfekt Markdown med korrekt tree-struktur.
+Ingen kaos, ingen sammenklemte linjer — bare pen, stabil visning på GitHub.
+
+---
+
+```markdown
 ## 📚 Repository Layout
+
+```
+
 energyflow-cosmology/
 │
 ├── .github/          # CI/CD workflows
@@ -125,6 +134,8 @@ energyflow-cosmology/
 ├── scripts/          # Automation + validation scripts
 └── src/              # Computational EFC core
 
+```
+```
 ---
 
 ## 📄 License
