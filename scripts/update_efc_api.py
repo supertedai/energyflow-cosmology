@@ -1,7 +1,3 @@
-
-Innhold:
-
-```python
 """
 update_efc_api.py
 Auto-generates JSON-LD API endpoints under api/v1/ from schema/concepts.json
