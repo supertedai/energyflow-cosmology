@@ -1,16 +1,60 @@
-\section{Light Dynamics Near the s$_0$--s$_1$ Endpoints}
+\section{s0--s1 Light Propagation Dynamics}
 
-Light propagation in EFC is modulated by the entropy-dependent speed
+This section describes how variations in the entropy field between the
+endpoints $s_0$ and $s_1$ govern the effective speed of light, photon
+trajectories and observable timing signatures.
+
+\subsection{Entropy Endpoints}
+
+The entropy field $S(\mathbf{x})$ has two structural endpoints:
+
+\begin{itemize}
+    \item \textbf{$s_0$}: low--entropy, high--structure, focusing regime
+    \item \textbf{$s_1$}: high--entropy, structural--loosening, defocusing regime
+\end{itemize}
+
+We define:
 \[
-c(S) = c_0 \left(1 + a_{\text{edge}} x(S)^2\right),
+S_{\text{mid}} = \frac{1}{2}(S_0 + S_1), \qquad
+\Delta S = S_1 - S_0,
+\qquad
+x(S) = \frac{S - S_{\text{mid}}}{\Delta S / 2}.
 \]
-where $x(S)$ is the normalized entropy coordinate.
 
-At the endpoints $S_0$ and $S_1$ an enhancement occurs:
+\subsection{Effective Speed of Light}
+
+The effective light speed is:
 \[
-c(S_0) > c(S_{\text{mid}}), \qquad
-c(S_1) > c(S_{\text{mid}}).
+c(S) = c_0\left(1 + a_{\text{edge}}\, x(S)^2\right),
 \]
+with minimum at $S_{\text{mid}}$ and symmetric enhancement toward $s_0$
+and $s_1$.
 
-This creates focusing near s$_0$ and defocusing near s$_1$, shaping
-lensing geometry, time delays and redshift--distance relations.
+\subsection{Physical Interpretation}
+
+\begin{itemize}
+    \item Near $s_0$: increased $c(S)$ produces focusing of photon paths.
+    \item Near $s_1$: increased $c(S)$ produces large--scale defocusing.
+    \item Mid--entropy: $c(S)$ attains its minimum and sets the baseline propagation regime.
+\end{itemize}
+
+\subsection{Light Travel Time}
+
+Observable timing is modified by the integral:
+\[
+t_{\text{obs}}
+= \int_\gamma \frac{dl}{c(S(l))},
+\]
+where $\gamma$ is the photon trajectory and $S(l)$ is the sampled
+entropy profile.
+
+\subsection{Consequences for Lensing}
+
+\begin{itemize}
+    \item focusing wells near $s_0$
+    \item horizon--scale defocusing near $s_1$
+    \item modified time--delay ratios
+    \item altered redshift--distance relations
+\end{itemize}
+
+These effects arise without invoking dark energy or a fixed speed of light.
