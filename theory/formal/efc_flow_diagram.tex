@@ -1,18 +1,29 @@
-\begin{figure}[h!]
-\centering
-\begin{tikzpicture}[node distance=2.5cm, auto]
+\begin{center}
+\begin{tikzpicture}[
+    node distance=1.8cm,
+    box/.style={
+        rectangle,
+        draw=black,
+        rounded corners,
+        minimum width=4.2cm,
+        minimum height=1.1cm,
+        align=center
+    },
+    arrow/.style={->, thick}
+]
 
-\node (S)   [draw, rounded corners] {$S$ (Entropy Field)};
-\node (Ef)  [draw, rounded corners, right of=S] {$E_f$ (Energy-Flow)};
-\node (Phi) [draw, rounded corners, right of=Ef] {$\Phi(E_f,S)$};
-\node (cS)  [draw, rounded corners, right of=Phi] {$c(S)$};
-\node (Obs) [draw, rounded corners, right of=cS] {Observables};
+% Nodes
+\node[box] (S)         {Entropy Field \\ $S(\mathbf{x})$};
+\node[box, below of=S] (Ef)        {Energy-Flow Field \\ $E_f(\mathbf{x})$};
+\node[box, below of=Ef] (Phi)     {Effective Potential \\ $\Phi(E_f,S)$};
+\node[box, below of=Phi] (cS)     {Effective Light Speed \\ $c(S)$};
+\node[box, below of=cS] (Obs)     {Observables \\ (Lensing, RCs, Expansion)};
 
-\draw[->] (S)   -- (Ef);
-\draw[->] (Ef)  -- (Phi);
-\draw[->] (Phi) -- (cS);
-\draw[->] (cS)  -- (Obs);
+% Arrows
+\draw[arrow] (S)   -- (Ef);
+\draw[arrow] (Ef)  -- (Phi);
+\draw[arrow] (Phi) -- (cS);
+\draw[arrow] (cS)  -- (Obs);
 
 \end{tikzpicture}
-\caption{Core dependency chain in the Energy-Flow Cosmology framework.}
-\end{figure}
+\end{center}
