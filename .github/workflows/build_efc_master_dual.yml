@@ -1,4 +1,4 @@
-name: 📚 Build EFC Master (PDF + HTML)
+name: 📚 Build EFC Master — PDF + HTML
 
 on:
   push:
@@ -28,18 +28,17 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y pandoc
 
-      - name: Build HTML
+      - name: Build HTML (efc_master.html)
         run: |
           mkdir -p output
           cp theory/formal/efc_master.pdf output/efc_master.pdf
-
           pandoc theory/formal/efc_master.tex \
             -s \
             --mathjax \
             --metadata title="Energy-Flow Cosmology — Master Theory" \
             -o output/efc_master.html
 
-      - name: Upload Artifacts
+      - name: Upload artifacts
         uses: actions/upload-artifact@v4
         with:
           name: efc-master
