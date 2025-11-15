@@ -1,0 +1,64 @@
+name: 📚 Build EFC Master — CLEAN PDF
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - "theory/formal/**"
+      - ".github/workflows/build_master_clean.yml"
+
+  workflow_dispatch:
+
+jobs:
+  build-master-clean:
+    runs-on: ubuntu-latest
+
+    steps:
+
+      # --------------------------------------------------
+      # 1. Checkout repository
+      # --------------------------------------------------
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # --------------------------------------------------
+      # 2. Install LaTeX (minimal but includes physics.sty)
+      # --------------------------------------------------
+      - name: Install LaTeX packages
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y \
+            texlive-latex-base \
+            texlive-latex-extra \
+            texlive-fonts-recommended \
+            texlive-science \
+            texlive-plain-generic
+
+      # --------------------------------------------------
+      # 3. Build efc_master.pdf
+      # --------------------------------------------------
+      - name: Build EFC Master PDF
+        uses: xu-cheng/latex-action@v3
+        with:
+          root_file: theory/formal/efc_master.tex
+          latexmk_shell_escape: true
+        env:
+          TEXINPUTS: ".:./theory//:./theory/formal//:"
+
+      # --------------------------------------------------
+      # 4. Copy PDF to output/
+      # --------------------------------------------------
+      - name: Move built PDF
+        run: |
+          mkdir -p output
+          cp theory/formal/efc_master.pdf output/efc_master.pdf
+
+      # --------------------------------------------------
+      # 5. Upload PDF as artifact
+      # --------------------------------------------------
+      - name: Upload PDF artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: efc-master-clean-pdf
+          path: output/efc_master.pdf
