@@ -1,61 +1,60 @@
-\subsection{Light travel times and lensing with $c(S)$}
+\section{Observables in the EFC Framework}
 
-In EFC, light propagation is governed by the entropy–dependent effective
-speed of light
+In EFC, all observables based on null propagation depend on the
+entropy-dependent effective light speed $c(S)$ rather than a universal
+constant $c$. The propagation of light is therefore tied directly to the
+entropy field structure sampled along a photon trajectory.
+
+\subsection{Null Propagation in an Entropy Field}
+
+For any photon trajectory $\gamma$, the observed travel time is
 \[
-c(S) = c_0 \left( 1 + a_{\text{edge}} \, x(S)^2 \right),
+t_{\text{obs}} = \int_{\gamma} \frac{dl}{c(S(l))},
 \]
-where
+where $S(l)$ is the entropy encountered along the path. The effective
+light speed is defined as
 \[
-x(S) = \frac{S - S_{\text{mid}}}{\Delta S / 2},
+c(S) = c_0 \left( 1 + a_{\text{edge}}\, x(S)^2 \right),
 \qquad
-S_{\text{mid}} = \frac{1}{2}(S_0 + S_1),
-\qquad
-\Delta S = S_1 - S_0.
+x(S) = \frac{S - S_{\text{mid}}}{\Delta S / 2}.
 \]
 
-Thus, photons do not propagate with a fixed constant speed, but with a
-locally varying speed determined by the entropy field sampled along their
-path. The observable travel time for a photon following a trajectory
-$\gamma$ is therefore
-\begin{equation}
-    t_{\text{obs}} = \int_{\gamma} \frac{\mathrm{d}l}{c(S(l))}.
-\end{equation}
+Because $c(S)$ varies with entropy, observables become environmental
+rather than purely geometric quantities.
 
-\paragraph{Consequences.}
+\subsection{Rotation Curves}
 
-Relative to a constant-$c$ model, the following effects arise naturally:
+The observed rotation velocity depends jointly on
+\[
+\partial_r \Phi(E_f,S)
+\quad \text{and} \quad
+c(S(r)),
+\]
+leading to the modified observational mapping
+\[
+v_{\text{obs}}(r)
+    = f\!\bigl(\partial_r \Phi,\, c(S(r))\bigr).
+\]
 
-\begin{itemize}
-    \item \textbf{Enhanced propagation near s$_0$ and s$_1$.}  
-          In regions where $S$ approaches either endpoint (low-entropy
-          s$_0$ or high-entropy s$_1$), $c(S)$ increases. Photons traverse
-          these regions more quickly, reducing or reshaping time delays.
-    
-    \item \textbf{Modified lensing without additional mass.}  
-          Because the propagation speed is a function of the entropy field
-          rather than a universal constant, magnification patterns,
-          distortion angles, and time-delay ratios can differ from GR-based
-          predictions even when the underlying mass distribution is the same.
-          These deviations arise from variations in $c(S)$ rather than
-          from unseen mass components.
-    
-    \item \textbf{Redshift--distance relations depend on $c(S)$.}  
-          Cosmological observables inferred from lightlike probes must be
-          interpreted using the integral
-          \[
-              d_L(z),\, d_A(z) \propto \int \frac{\mathrm{d}l}{c(S(l))},
-          \]
-          not the usual expression with constant $c$.  
-          This provides an alternative route to late-time acceleration
-          without introducing a separate dark-energy component.
-    
-    \item \textbf{Path dependence becomes physical.}  
-          Light rays passing through different entropy structures sample
-          different functional forms of $c(S)$, making anisotropies and
-          direction-dependent time delays a natural prediction of EFC.
-\end{itemize}
+The mid-entropy minimum of $c(S)$ produces enhanced confinement and
+naturally yields flat rotation-curve plateaus without invoking
+non-baryonic dark matter.
 
-In summary, lensing, time-delay measurements, and distance–redshift
-relations in EFC are shaped not only by the mass-energy distribution but
-also by the entropy field through the function $c(S)$.
+\subsection{Gravitational Lensing}
+
+Time-delay ratios follow
+\[
+\Delta t_{ij}
+  = \int_{\gamma_i} \frac{dl}{c(S(l))}
+  - \int_{\gamma_j} \frac{dl}{c(S(l))}.
+\]
+
+Identical mass distributions may produce different lensing signatures
+depending solely on the entropy landscape.
+
+\subsection{Redshift--Distance Relations}
+
+Because the light-propagation speed varies with $S$, luminosity distance
+and angular-diameter distance acquire entropy-dependent corrections.
+Late-time acceleration arises through $c(S)$ alone and does not require
+a separate dark-energy field.
