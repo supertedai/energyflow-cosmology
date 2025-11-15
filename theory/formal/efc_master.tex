@@ -1,73 +1,50 @@
-\documentclass[11pt]{article}
+\section*{s0–s1 Light Propagation Dynamics}
 
-% -------------------------------
-% Packages
-% -------------------------------
-\usepackage{amsmath, amssymb}
-\usepackage{geometry}
-\usepackage{graphicx}
-\usepackage{hyperref}
-\usepackage{bm}
-\usepackage{physics}
-\usepackage{tikz}
-\usepackage{xcolor}
+% No unicode. Everything ASCII. Clean LaTeX.
 
-\geometry{margin=2.5cm}
+\subsection*{Entropy Endpoints}
 
-\title{Energy-Flow Cosmology\\
-Master Formal Specification}
-\author{Morten Magnusson}
-\date{\today}
+We define two entropy endpoints:
+\begin{itemize}
+    \item $s_0$: low–entropy, high–structure endpoint
+    \item $s_1$: high–entropy, high–diffusion endpoint
+\end{itemize}
 
-\begin{document}
+The midpoint is
+\[
+S_{\text{mid}} = \frac{1}{2}(s_0 + s_1),
+\]
+and the entropy span is
+\[
+\Delta S = s_1 - s_0.
+\]
 
-\maketitle
-\tableofcontents
-\newpage
+Define the normalized entropy coordinate:
+\[
+x(S) = \frac{S - S_{\text{mid}}}{\Delta S/2}.
+\]
 
-% -----------------------------------------------------------
-% 1. EFC-D: Energy-Flow Dynamics
-% -----------------------------------------------------------
-\section{EFC-D: Energy-Flow Dynamics}
-\input{efc_d_model.tex}
+\subsection*{Speed of Light Variation}
 
-\newpage
+The effective speed of light becomes:
+\[
+c(S) = c_0 \left( 1 + a_{\text{edge}} x(S)^2 \right),
+\]
+where $a_{\text{edge}}$ determines endpoint curvature.
 
-% -----------------------------------------------------------
-% 2. EFC-S: Structure Model
-% -----------------------------------------------------------
-\section{EFC-S: Structure Model}
-\input{efc_s_model.tex}
+\subsection*{Light Travel Time}
 
-\newpage
+For a photon moving along a path $\gamma$, the travel time becomes:
+\[
+t_{\text{obs}} = \int_{\gamma} \frac{dl}{c(S(l))}.
+\]
 
-% -----------------------------------------------------------
-% 3. s0–s1 Light Propagation Dynamics
-% -----------------------------------------------------------
-\section{Light Propagation Across Entropy Endpoints (s0--s1)}
-\input{../s0_s1_light_dynamics.tex}
+Regions with $S \approx s_0$ focus light;  
+regions with $S \approx s_1$ defocus light.
 
-\newpage
+\subsection*{Lensing Behavior}
 
-% -----------------------------------------------------------
-% 4. Observables and Light Propagation
-% -----------------------------------------------------------
-\section{Observables and Light Propagation}
-\input{observables.tex}
+Low–entropy endpoints act as focusing wells;  
+high–entropy endpoints contribute to large–scale defocusing.
 
-\newpage
-
-% -----------------------------------------------------------
-% 5. Figures (Optional)
-% -----------------------------------------------------------
-\section{Figures}
-
-If additional figures are generated, they are included here.
-
-\begin{figure}[h!]
-\centering
-\includegraphics[width=0.9\textwidth]{../../output/EFC_vs_LCDM_plot.png}
-\caption{EFC vs.\ $\Lambda$CDM comparison (example figure).}
-\end{figure}
-
-\end{document}
+This generates a dual–lens profile consistent with observed halo asymmetries.
