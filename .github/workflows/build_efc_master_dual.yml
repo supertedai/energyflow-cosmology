@@ -1,0 +1,46 @@
+name: 📚 Build EFC Master (PDF + HTML)
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'theory/formal/**'
+      - '.github/workflows/build_efc_master_dual.yml'
+  workflow_dispatch:
+
+jobs:
+  build-master:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Build PDF (efc_master.pdf)
+        uses: xu-cheng/latex-action@v3
+        with:
+          root_file: theory/formal/efc_master.tex
+          latexmk_shell_escape: true
+
+      - name: Install Pandoc
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y pandoc
+
+      - name: Build HTML
+        run: |
+          mkdir -p output
+          cp theory/formal/efc_master.pdf output/efc_master.pdf
+
+          pandoc theory/formal/efc_master.tex \
+            -s \
+            --mathjax \
+            --metadata title="Energy-Flow Cosmology — Master Theory" \
+            -o output/efc_master.html
+
+      - name: Upload Artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: efc-master
+          path: output/
