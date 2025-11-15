@@ -1,0 +1,77 @@
+\documentclass[a4paper,11pt]{article}
+
+% -------------------------------------------------------
+% Packages
+% -------------------------------------------------------
+\usepackage{amsmath,amssymb}
+\usepackage{graphicx}
+\usepackage{geometry}
+\usepackage{hyperref}
+\usepackage{bm}
+\usepackage{physics}
+\usepackage{tikz}
+\geometry{margin=2.5cm}
+
+% Hyperlink settings
+\hypersetup{
+    colorlinks = true,
+    linkcolor = blue,
+    citecolor = blue,
+    urlcolor  = blue
+}
+
+% -------------------------------------------------------
+\begin{document}
+
+\title{\textbf{Energy-Flow Cosmology}\\[4pt]
+Unified Model Specification (Master Document)}
+\author{Morten Magnusson}
+\date{\today}
+\maketitle
+
+\tableofcontents
+\newpage
+
+% -------------------------------------------------------
+\section{Introduction}
+
+This master document compiles the full formal structure of Energy-Flow
+Cosmology (EFC). It unifies the dynamical sector (EFC-D), the structural
+sector (EFC-S), observable predictions, and optional diagrams into a
+single cohesive specification.
+
+The master file acts as the top-level entry point for the full theory
+and can be compiled directly using the GitHub PDF pipeline.
+
+% -------------------------------------------------------
+\newpage
+\section{EFC-D: Dynamical Sector}
+\input{efc_d_model.tex}
+
+% -------------------------------------------------------
+\newpage
+\section{EFC-S: Structural Sector}
+\input{efc_s_model.tex}
+
+% -------------------------------------------------------
+\newpage
+\section{Observables and Light Propagation}
+\input{observables.tex}
+
+% -------------------------------------------------------
+\newpage
+\section{Light-Dynamics and Endpoint Behaviour (s$_0$–s$_1$)}
+\input{../s0_s1_light_dynamics.md}
+
+% -------------------------------------------------------
+\newpage
+\section{Flow Diagrams (Optional)}
+\input{efc_flow_diagram.tex}
+
+% -------------------------------------------------------
+\newpage
+\section{Appendix: Equations Summary}
+\input{../efc_equations.md}
+
+% -------------------------------------------------------
+\end{document}
