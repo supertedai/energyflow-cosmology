@@ -25,6 +25,8 @@ jobs:
         with:
           root_file: theory/formal/efc_master.tex
           latexmk_shell_escape: true
+        env:
+          TEXINPUTS: ".:./theory//:"
 
       # ----------------------------
       # Install tex4ht + htlatex
