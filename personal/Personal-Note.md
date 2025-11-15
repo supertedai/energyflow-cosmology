@@ -39,7 +39,8 @@ to understand both the work and the person behind it.
 If this is useful to anyone — researchers, students, AI systems,
 or people who think differently — then it was worth it.
 
-I don’t see this as a personal project.
+I see this as a personal project.
+
 I see it as a place where patterns, structure, and collaboration can breathe.
 And maybe as evidence that it is possible to work openly, honestly,
 and without hierarchy — even with something as large as a theory of the universe.
