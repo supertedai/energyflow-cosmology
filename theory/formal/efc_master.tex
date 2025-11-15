@@ -1,77 +1,73 @@
-\documentclass[a4paper,11pt]{article}
+\documentclass[11pt]{article}
 
-% -------------------------------------------------------
+% -------------------------------
 % Packages
-% -------------------------------------------------------
-\usepackage{amsmath,amssymb}
-\usepackage{graphicx}
+% -------------------------------
+\usepackage{amsmath, amssymb}
 \usepackage{geometry}
+\usepackage{graphicx}
 \usepackage{hyperref}
 \usepackage{bm}
 \usepackage{physics}
 \usepackage{tikz}
+\usepackage{xcolor}
+
 \geometry{margin=2.5cm}
 
-% Hyperlink settings
-\hypersetup{
-    colorlinks = true,
-    linkcolor = blue,
-    citecolor = blue,
-    urlcolor  = blue
-}
-
-% -------------------------------------------------------
-\begin{document}
-
-\title{\textbf{Energy-Flow Cosmology}\\[4pt]
-Unified Model Specification (Master Document)}
+\title{Energy-Flow Cosmology\\
+Master Formal Specification}
 \author{Morten Magnusson}
 \date{\today}
-\maketitle
 
+\begin{document}
+
+\maketitle
 \tableofcontents
 \newpage
 
-% -------------------------------------------------------
-\section{Introduction}
-
-This master document compiles the full formal structure of Energy-Flow
-Cosmology (EFC). It unifies the dynamical sector (EFC-D), the structural
-sector (EFC-S), observable predictions, and optional diagrams into a
-single cohesive specification.
-
-The master file acts as the top-level entry point for the full theory
-and can be compiled directly using the GitHub PDF pipeline.
-
-% -------------------------------------------------------
-\newpage
-\section{EFC-D: Dynamical Sector}
+% -----------------------------------------------------------
+% 1. EFC-D: Energy-Flow Dynamics
+% -----------------------------------------------------------
+\section{EFC-D: Energy-Flow Dynamics}
 \input{efc_d_model.tex}
 
-% -------------------------------------------------------
 \newpage
-\section{EFC-S: Structural Sector}
+
+% -----------------------------------------------------------
+% 2. EFC-S: Structure Model
+% -----------------------------------------------------------
+\section{EFC-S: Structure Model}
 \input{efc_s_model.tex}
 
-% -------------------------------------------------------
 \newpage
+
+% -----------------------------------------------------------
+% 3. s0–s1 Light Propagation Dynamics
+% -----------------------------------------------------------
+\section{Light Propagation Across Entropy Endpoints (s0--s1)}
+\input{../s0_s1_light_dynamics.tex}
+
+\newpage
+
+% -----------------------------------------------------------
+% 4. Observables and Light Propagation
+% -----------------------------------------------------------
 \section{Observables and Light Propagation}
 \input{observables.tex}
 
-% -------------------------------------------------------
 \newpage
-\section{Light-Dynamics and Endpoint Behaviour (s$_0$–s$_1$)}
-\input{../s0_s1_light_dynamics.md}
 
-% -------------------------------------------------------
-\newpage
-\section{Flow Diagrams (Optional)}
-\input{efc_flow_diagram.tex}
+% -----------------------------------------------------------
+% 5. Figures (Optional)
+% -----------------------------------------------------------
+\section{Figures}
 
-% -------------------------------------------------------
-\newpage
-\section{Appendix: Equations Summary}
-\input{../efc_equations.md}
+If additional figures are generated, they are included here.
 
-% -------------------------------------------------------
+\begin{figure}[h!]
+\centering
+\includegraphics[width=0.9\textwidth]{../../output/EFC_vs_LCDM_plot.png}
+\caption{EFC vs.\ $\Lambda$CDM comparison (example figure).}
+\end{figure}
+
 \end{document}
