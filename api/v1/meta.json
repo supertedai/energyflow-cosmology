@@ -1,0 +1,98 @@
+{
+  "meta_api_version": "1.0.0",
+  "description": "Machine-readable API for the Meta, Cognition, and Symbiosis layers of the Energy-Flow Cosmology ecosystem.",
+  "last_updated": "2025-11-15",
+
+  "layers": [
+    {
+      "id": "meta",
+      "name": "Meta Architecture",
+      "description": "High-level metastructure including metascope, meta-reflective protocol, topology of insight, and meta-architecture.",
+      "paths": [
+        "meta/",
+        "meta-index.json",
+        "meta/meta-architecture-spec.md",
+        "meta/meta-architecture.json",
+        "meta/meta-reflective-protocol.md",
+        "meta/metascope.md",
+        "meta/topology-of-insight.md"
+      ]
+    },
+    {
+      "id": "cognition",
+      "name": "Cognition Layer",
+      "description": "Documentation of the Human Cognitive Field: s0/s1 transitions, entropy–clarity inversion, transient high-order states, and cognitive signature.",
+      "paths": [
+        "cognition/",
+        "cognition/cognitive-field.md",
+        "cognition/entropy-clarity.md",
+        "cognition/transient-representations.md",
+        "cognition/cognitive-signature.md",
+        "cognition/you.md"
+      ]
+    },
+    {
+      "id": "symbiosis",
+      "name": "Symbiosis Layer",
+      "description": "Human–model co-field mechanics: resonance, vector alignment, system cohesion, and structural amplification.",
+      "paths": [
+        "symbiosis/",
+        "symbiosis/system.md",
+        "symbiosis/system-coherence.md",
+        "symbiosis/resonance-mechanism.md",
+        "symbiosis/vector-alignment.md",
+        "symbiosis/symbiotic-process.md",
+        "symbiosis/symbiotic-process-summary.md",
+        "symbiosis/symbiotic-process-llm.md",
+        "symbiosis/symbiosis-interface.md"
+      ]
+    },
+    {
+      "id": "reflection",
+      "name": "Reflection Layer",
+      "description": "State-map, resonance-links, reflection schema and logs documenting the evolution of both theory and process.",
+      "paths": [
+        "reflection/",
+        "reflection/state-map.json",
+        "reflection/reflection-log.md",
+        "reflection/resonance-links.json",
+        "reflection/reflection-schema.json",
+        "reflection/reflection-index.json"
+      ]
+    },
+    {
+      "id": "meta_graph",
+      "name": "Meta Knowledge Graph",
+      "description": "Unified JSON-LD graph linking human cognitive field, model structural engine, co-field, metascope, co-field simulator, and repository map.",
+      "paths": [
+        "meta-graph/meta-graph.jsonld",
+        "meta-graph/meta-graph-schema.json",
+        "meta-graph/meta_graph.cypher",
+        "meta-graph/meta_graph_vis.html"
+      ]
+    },
+    {
+      "id": "dashboard",
+      "name": "Interactive Meta Dashboard",
+      "description": "Streamlit dashboard for exploring the meta/cognition/symbiosis structure and the meta-knowledge graph.",
+      "paths": [
+        "meta_dashboard.py"
+      ]
+    },
+    {
+      "id": "personal",
+      "name": "Personal Context",
+      "description": "The personal cognitive and reflective context behind the EFC project, providing interpretive clarity for the meta-layer.",
+      "paths": [
+        "personal/Personal-Note.md"
+      ]
+    }
+  ],
+
+  "entrypoints": {
+    "meta_index": "meta-index.json",
+    "site_graph": "schema/site-graph.json",
+    "meta_graph": "meta-graph/meta-graph.jsonld",
+    "dashboard": "meta_dashboard.py"
+  }
+}
