@@ -63,5 +63,13 @@
     "@type": "CreativeWork",
     "name": "Transparency and Research Integrity",
     "description": "All EFC work adheres to FAIR principles (Findable, Accessible, Interoperable, Reusable) and public documentation of validation methods, ensuring trust in AI and scientific reproducibility."
+  },
+
+  "hasPart": {
+    "@type": "CreativeWork",
+    "name": "Personal Note",
+    "description": "A reflective description of the author's cognitive process, including s0–s1 dynamics and the emergence of clarity through structured collaboration.",
+    "url": "https://energyflow-cosmology.com/personal/Personal-Note-EN.md",
+    "encodingFormat": "text/markdown"
   }
 }
