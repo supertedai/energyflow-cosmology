@@ -1,0 +1,18 @@
+\begin{figure}[h!]
+\centering
+\begin{tikzpicture}[node distance=2.5cm, auto]
+
+\node (S)   [draw, rounded corners] {$S$ (Entropy Field)};
+\node (Ef)  [draw, rounded corners, right of=S] {$E_f$ (Energy-Flow)};
+\node (Phi) [draw, rounded corners, right of=Ef] {$\Phi(E_f,S)$};
+\node (cS)  [draw, rounded corners, right of=Phi] {$c(S)$};
+\node (Obs) [draw, rounded corners, right of=cS] {Observables};
+
+\draw[->] (S)   -- (Ef);
+\draw[->] (Ef)  -- (Phi);
+\draw[->] (Phi) -- (cS);
+\draw[->] (cS)  -- (Obs);
+
+\end{tikzpicture}
+\caption{Core dependency chain in the Energy-Flow Cosmology framework.}
+\end{figure}
