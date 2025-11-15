@@ -1,0 +1,31 @@
+{
+  "version": "1.0",
+  "description": "Lightweight schema for the EFC metascope meta-graph.",
+  "node_types": [
+    "efc:Component",
+    "efc:System",
+    "efc:Method",
+    "efc:Specification",
+    "schema:CreativeWork",
+    "schema:SoftwareApplication",
+    "schema:SoftwareSourceCode",
+    "schema:Dataset"
+  ],
+  "edge_types": [
+    "efc:dependsOn",
+    "efc:produces",
+    "efc:stabilises",
+    "efc:amplifies",
+    "efc:emergesFrom",
+    "efc:implementedBy",
+    "efc:documentedIn"
+  ],
+  "layers": [
+    "cognition",
+    "symbiosis",
+    "meta",
+    "meta_process",
+    "methodology",
+    "theory"
+  ]
+}
