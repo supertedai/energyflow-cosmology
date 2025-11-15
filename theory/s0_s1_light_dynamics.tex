@@ -1,60 +1,44 @@
-\section{s0--s1 Light Propagation Dynamics}
+\section*{s0–s1 Light Propagation Dynamics}
 
-This section describes how variations in the entropy field between the
-endpoints $s_0$ and $s_1$ govern the effective speed of light, photon
-trajectories and observable timing signatures.
+\subsection*{Entropy Endpoints}
 
-\subsection{Entropy Endpoints}
-
-The entropy field $S(\mathbf{x})$ has two structural endpoints:
-
+We define two entropy endpoints:
 \begin{itemize}
-    \item \textbf{$s_0$}: low--entropy, high--structure, focusing regime
-    \item \textbf{$s_1$}: high--entropy, structural--loosening, defocusing regime
+    \item $s_0$: low–entropy, high–structure endpoint
+    \item $s_1$: high–entropy, high–diffusion endpoint
 \end{itemize}
 
-We define:
+The midpoint is
 \[
-S_{\text{mid}} = \frac{1}{2}(S_0 + S_1), \qquad
-\Delta S = S_1 - S_0,
-\qquad
-x(S) = \frac{S - S_{\text{mid}}}{\Delta S / 2}.
+S_{\text{mid}} = \frac{1}{2}(s_0 + s_1),
+\]
+and the entropy span is
+\[
+\Delta S = s_1 - s_0.
 \]
 
-\subsection{Effective Speed of Light}
-
-The effective light speed is:
+Define the normalized entropy coordinate:
 \[
-c(S) = c_0\left(1 + a_{\text{edge}}\, x(S)^2\right),
+x(S) = \frac{S - S_{\text{mid}}}{\Delta S/2}.
 \]
-with minimum at $S_{\text{mid}}$ and symmetric enhancement toward $s_0$
-and $s_1$.
 
-\subsection{Physical Interpretation}
+\subsection*{Speed of Light Variation}
 
-\begin{itemize}
-    \item Near $s_0$: increased $c(S)$ produces focusing of photon paths.
-    \item Near $s_1$: increased $c(S)$ produces large--scale defocusing.
-    \item Mid--entropy: $c(S)$ attains its minimum and sets the baseline propagation regime.
-\end{itemize}
-
-\subsection{Light Travel Time}
-
-Observable timing is modified by the integral:
+The effective speed of light becomes:
 \[
-t_{\text{obs}}
-= \int_\gamma \frac{dl}{c(S(l))},
+c(S) = c_0 \left( 1 + a_{\text{edge}} x(S)^2 \right),
 \]
-where $\gamma$ is the photon trajectory and $S(l)$ is the sampled
-entropy profile.
 
-\subsection{Consequences for Lensing}
+\subsection*{Light Travel Time}
 
-\begin{itemize}
-    \item focusing wells near $s_0$
-    \item horizon--scale defocusing near $s_1$
-    \item modified time--delay ratios
-    \item altered redshift--distance relations
-\end{itemize}
+\[
+t_{\text{obs}} = \int_{\gamma} \frac{dl}{c(S(l))}.
+\]
 
-These effects arise without invoking dark energy or a fixed speed of light.
+Regions with $S \approx s_0$ focus light;  
+regions with $S \approx s_1$ defocus light.
+
+\subsection*{Lensing Behavior}
+
+Low–entropy endpoints act as focusing wells;  
+high–entropy endpoints contribute to horizon-scale defocusing.
