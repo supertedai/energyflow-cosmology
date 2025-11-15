@@ -1,23 +1,57 @@
 {
-  "@context": "https://schema.org",
-  "@type": "CreativeWorkSeries",
-  "name": "Energy-Flow Cosmology Schema Map",
-  "description": "Master index linking all structured schema components of the Energy-Flow Cosmology (EFC) framework, providing semantic cohesion across homepage, about, concepts, resources, and contact metadata.",
-  "creator": {
-    "@type": "Person",
-    "name": "Morten Magnusson",
-    "identifier": "https://orcid.org/0009-0002-4860-5095",
-    "sameAs": "https://figshare.com/authors/Morten_Magnusson/20477774"
+  "project": "Energy-Flow Cosmology (EFC)",
+  "version": "2.0",
+  "last_updated": "2025-11-15",
+
+  "layers": {
+    "theory": {
+      "description": "Formal scientific components of EFC",
+      "includes": [
+        "theory/formal/efc_master.tex",
+        "theory/formal/efc_formal_spec.pdf",
+        "src/efc/core/",
+        "src/efc/potential/",
+        "src/efc/entropy/"
+      ]
+    },
+
+    "validation": {
+      "description": "Empirical validation datasets and figures",
+      "includes": [
+        "output/",
+        "data/",
+        "scripts/validate_efc.py"
+      ]
+    },
+
+    "meta": {
+      "description": "Meta-architecture, co-field, metascope, reflective processes",
+      "includes": [
+        "meta/",
+        "meta-index.json",
+        "meta-process/",
+        "meta-graph/meta-graph.jsonld",
+        "meta-graph/meta_graph_vis.html"
+      ]
+    },
+
+    "cognition": {
+      "description": "Cognitive mechanics: HCF, entropy-clarity, transient states",
+      "includes": [
+        "cognition/"
+      ]
+    },
+
+    "symbiosis": {
+      "description": "Human–model interaction structures",
+      "includes": [
+        "symbiosis/"
+      ]
+    }
   },
-  "hasPart": [
-    "schema/homepage.jsonld",
-    "schema/about.jsonld",
-    "schema/concepts.jsonld",
-    "schema/resources.jsonld",
-    "schema/contact.jsonld"
-  ],
-  "version": "1.0.0",
-  "license": "https://creativecommons.org/licenses/by/4.0/",
-  "inLanguage": "en-US",
-  "dateCreated": "2025-11-08"
+
+  "special_artifacts": {
+    "repo_map_html": "output/repo_map.html",
+    "personal_note": "personal/Personal-Note.md"
+  }
 }
