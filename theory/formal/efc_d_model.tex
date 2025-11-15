@@ -1,103 +1,114 @@
-\section{EFC-D: Energy-Flow Dynamics}
+\section{EFC-D: Dynamical Sector}
 
-The dynamical sector of Energy-Flow Cosmology (EFC-D) describes how
-energy propagates through the grid defined by the entropy field $S$ and
-the energy–flow field $E_f(\mathbf{x})$. All dynamical behaviour
-(gravitational focusing, late-time acceleration, structural stability,
-and light propagation) emerges from the coupling between $S$, $E_f$,
-and the effective speed of light $c(S)$.
+The dynamical sector EFC-D describes how the energy-flow field $E_f$,
+the effective potential $\Phi(E_f,S)$ and the expansion rate $H$ emerge
+from the entropy field $S$ and its gradients. It is the bridge between
+thermodynamics and the observable evolution of structures.
 
-% ---------------------------------------------------------
+% -------------------------------------------------------
 \subsection{Energy-Flow Field}
 
-We define the energy–flow field as
+We define the scalar energy-flow field
+\[
+E_f : \mathbb{R}^3 \rightarrow \mathbb{R},
+\]
+which encodes the strength and directionality of energy transport along
+entropy gradients. In regions with strong gradients $\nabla S$, the
+magnitude $|E_f|$ is large, while in nearly uniform regions $E_f$
+approaches zero.
+
+We assume that $E_f$ is aligned with $-\nabla S$ at leading order,
+\[
+E_f \propto - \nabla S,
+\]
+reflecting that energy tends to flow from low- to high-entropy regions.
+
+% -------------------------------------------------------
+\subsection{Effective Potential \texorpdfstring{$\Phi(E_f,S)$}{Phi(Ef,S)}}
+
+The effective potential is defined as
+\[
+\Phi(E_f,S) = A_\Phi \, E_f \, (1 + S),
+\]
+where $A_\Phi$ is a constant that sets the overall scale. This form
+captures the idea that the potential is driven by both the flow field
+and the local entropy level. For small $S$ the potential is dominated by
+the flow itself, while for larger $S$ the contribution of entropy
+becomes important.
+
+A more general family of couplings can be written as
+\[
+\Phi(E_f,S) = A_\Phi E_f \bigl(1 + S^\beta\bigr),
+\]
+with $\beta$ controlling the non-linear response to entropy. The present
+baseline implementation uses the linear case $\beta = 1$.
+
+% -------------------------------------------------------
+\subsection{Expansion Rate \texorpdfstring{$H(E_f,S)$}{H(Ef,S)}}
+
+EFC defines an effective expansion rate $H(E_f,S)$ as a function of the
+energy-flow amplitude and the entropy level. In the simplest working
+model we take
 \begin{equation}
-    E_f : \mathbb{R}^3 \rightarrow \mathbb{R}.
+    H(E_f,S) = \sqrt{|E_f|}\, (1 + S).
 \end{equation}
 
-Physically, $E_f$ measures how strongly energy is channeled along entropy
-gradients. Regions with strong gradients in $S$ create guided-flow
-structures that influence both matter motion and photon propagation.
+This choice reflects:
 
-% ---------------------------------------------------------
-\subsection{Effective Speed of Light $c(S)$}
-
-In EFC, the speed of light is not a universal constant but an
-\emph{effective} propagation speed determined by the grid resistance,
-which depends on the entropy field $S$ and the s$_0$--s$_1$ endpoint
-structure.
-
-Let $S_0$ and $S_1$ denote the entropy values associated with the
-dynamic endpoints s$_0$ (low entropy, high structure) and s$_1$
-(high entropy, structure collapse). Define:
-\[
-S_{\text{mid}} = \frac{1}{2}(S_0 + S_1), 
-\qquad
-\Delta S = S_1 - S_0.
-\]
-
-A normalized entropy coordinate:
-\[
-x(S) = \frac{S - S_{\text{mid}}}{\Delta S / 2},
-\]
-gives $x=-1$ at s$_0$, $x=0$ at the midpoint, and $x=+1$ at s$_1$.
-
-The effective speed of light is then:
-\begin{equation}
-    c(S) = c_0 \left( 1 + a_{\text{edge}} \, x(S)^2 \right),
-\end{equation}
-where $c_0$ is the baseline mid-range light speed and 
-$a_{\text{edge}} > 0$ regulates the endpoint enhancement.
-
-Key properties:
 \begin{itemize}
-    \item $c(S)$ is \emph{minimum} at the entropy midpoint.
-    \item $c(S)$ increases smoothly as $S \to S_0$ (s$_0$-side focusing).
-    \item $c(S)$ also increases as $S \to S_1$ (s$_1$-side defocusing).
+    \item the dependence of expansion on the strength of the underlying
+          energy flow, via $\sqrt{|E_f|}$;
+    \item the modulation of this expansion by entropy, through $(1+S)$.
 \end{itemize}
 
-Thus, light propagation, time delays, and apparent dynamical behaviour
-must be treated as functionals of $c(S)$, not a fixed constant $c$.
+The functional form can be generalized, but this minimal ansatz gives a
+clear and testable link between $E_f$, $S$ and large-scale dynamics. In
+particular, late-time acceleration can be understood as arising from
+changes in $S$ and $E_f$ rather than from an external dark-energy field.
 
-% ---------------------------------------------------------
-\subsection{Energy-Flow Potential}
+% -------------------------------------------------------
+\subsection{Rotation Curves and the Potential Gradient}
 
-The effective potential governing matter and energy transport is
-\begin{equation}
-    \Phi(E_f,S) = A_\Phi \, E_f \, (1 + S),
-\end{equation}
-which is the baseline form used in the Python implementation,
+The effective circular velocity at radius $r$ in a stationary
+configuration is given by
 \[
-\Phi \propto E_f S + E_f.
+v(r) = \sqrt{\, r \, \frac{\partial \Phi}{\partial r} \, }.
 \]
 
-A more general family (not yet implemented) is
-\begin{equation}
-    \Phi = A_\Phi E_f (1 + S^\beta),
-\end{equation}
-with $\beta$ controlling non-linear coupling strength.
+Because $\Phi$ depends on both $E_f$ and $S$, and both of these are
+shaped by the entropy landscape, the observed rotation curves are
+emergent thermodynamic features. They do not require additional
+non-baryonic matter components but arise from the combined roles of
+grid resistance, energy flow and $c(S)$.
 
-The coupling to $c(S)$ becomes relevant when computing dynamical
-quantities that depend on characteristic propagation speeds
-(e.g.\ effective horizon scales, entropy-damped flow rates,
-and null trajectories).
+% -------------------------------------------------------
+\subsection{Coupling to the Effective Light Speed}
 
-% ---------------------------------------------------------
-\subsection{Circular Velocity Relation}
+The dynamical sector is not independent of light propagation. The
+entropy-dependent effective light speed
+\[
+c(S) = c_0 \left( 1 + a_{\text{edge}}\, x(S)^2 \right)
+\]
+modifies how dynamical information is inferred from observations.
 
-For rotation curves, the circular velocity is:
-\begin{equation}
-    v(r) =
-    \sqrt{
-        r \frac{\partial \Phi}{\partial r}
-    }.
-\end{equation}
+Even if the underlying $\Phi(E_f,S)$ and $E_f$ fields are fixed, the
+measured velocities, time delays and inferred accelerations depend on
+$c(S)$ along the relevant lines of sight. EFC-D therefore works together
+with the light-propagation sector to produce the observed cosmological
+signals.
 
-In EFC-D, this expression is formally unchanged, but its interpretation
-is modified by the presence of the entropy-dependent propagation speed
-$c(S)$, which influences observed velocities through focusing/defocusing
-of photon trajectories and the inferred gravitational field.
+% -------------------------------------------------------
+\subsection{Summary}
 
-Regions where $S(r)$ shifts toward s$_0$ or s$_1$ effectively modify
-light propagation and the appearance of rotation curves without invoking
-dark matter or additional free parameters.
+EFC-D provides a thermodynamic definition of:
+
+\begin{itemize}
+    \item the energy-flow field $E_f$,
+    \item the effective potential $\Phi(E_f,S)$,
+    \item the expansion rate $H(E_f,S)$,
+    \item and the coupling of these quantities to $c(S)$.
+\end{itemize}
+
+The resulting dynamics can be tested against large-scale structure,
+expansion-history data and rotation-curve measurements within a single
+unified framework.
