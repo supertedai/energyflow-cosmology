@@ -11,7 +11,7 @@
 
 \geometry{margin=2.5cm}
 
-\title{Energy-Flow Cosmology \\ Master Formal Specification}
+\title{Energy-Flow Cosmology\\Master Formal Specification}
 \author{Morten Magnusson}
 \date{\today}
 
@@ -21,18 +21,24 @@
 \tableofcontents
 \newpage
 
-\section{EFC-D: Energy Flow Dynamics}
+% -----------------------------------------------------------
+% 1. EFC-D: Energy-Flow Dynamics
+% -----------------------------------------------------------
+\section{EFC-D: Energy-Flow Dynamics}
 \input{efc_d_model.tex}
 
 \newpage
 
+% -----------------------------------------------------------
+% 2. EFC-S: Structure Model
+% -----------------------------------------------------------
 \section{EFC-S: Structure Model}
 \input{efc_s_model.tex}
 
 \newpage
 
 % -----------------------------------------------------------
-% 3. s0--s1 Light Propagation Dynamics
+% 3. Light Propagation Across s0--s1 Endpoints
 % -----------------------------------------------------------
 \section{s0--s1 Light Propagation Dynamics}
 \input{../s0_s1_light_dynamics.tex}
@@ -40,21 +46,22 @@
 \newpage
 
 % -----------------------------------------------------------
-% 4. Observables and Light Propagation
+% 4. Observables
 % -----------------------------------------------------------
-\section{Observables and Light Propagation}
+\section{Observables}
 \input{observables.tex}
 
 \newpage
 
 % -----------------------------------------------------------
-% 5. Figures (Optional)
+% 5. Figures
 % -----------------------------------------------------------
 \section{Figures}
+
 \begin{figure}[h!]
 \centering
-\includegraphics[width=0.9\textwidth]{../../output/EFC_vs_LCDM_plot.png}
-\caption{EFC vs.\ $\Lambda$CDM comparison (example figure).}
+\includegraphics[width=0.9\textwidth]{EFC_vs_LCDM_plot.png}
+\caption{EFC vs.\ $\Lambda$CDM comparison.}
 \end{figure}
 
 \end{document}
