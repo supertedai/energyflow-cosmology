@@ -2,11 +2,9 @@ name: 📚 Build EFC Master — PDF + HTML
 
 on:
   push:
-    branches:
-      - main
     paths:
-      - 'theory/formal/**'
-      - '.github/workflows/build_efc_master_dual.yml'
+      - "theory/formal/**"
+      - ".github/workflows/build_efc_master_dual.yml"
   workflow_dispatch:
 
 jobs:
@@ -17,29 +15,46 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Build PDF (efc_master.pdf)
-        uses: xu-cheng/latex-action@v3
-        with:
-          root_file: theory/formal/efc_master.tex
-          latexmk_shell_escape: true
-
-      - name: Install Pandoc
+      - name: Install TeX Live
         run: |
           sudo apt-get update
-          sudo apt-get install -y pandoc
+          sudo apt-get install -y \
+            texlive \
+            texlive-latex-extra \
+            texlive-fonts-recommended \
+            texlive-fonts-extra \
+            texlive-science \
+            texlive-luatex \
+            latexmk \
+            tex4ht
 
-      - name: Build HTML (efc_master.html)
+      # -------------------------------------
+      # PDF BUILD
+      # -------------------------------------
+      - name: Build PDF (efc_master.tex)
+        working-directory: theory/formal
         run: |
-          mkdir -p output
-          cp theory/formal/efc_master.pdf output/efc_master.pdf
-          pandoc theory/formal/efc_master.tex \
-            -s \
-            --mathjax \
-            --metadata title="Energy-Flow Cosmology — Master Theory" \
-            -o output/efc_master.html
+          latexmk -pdf -interaction=nonstopmode efc_master.tex
 
-      - name: Upload artifacts
+      # -------------------------------------
+      # HTML BUILD  (FIX FOR YOUR ERROR)
+      # -------------------------------------
+      - name: Build HTML (efc_master.tex)
+        working-directory: theory/formal
+        run: |
+          latexmk -html -interaction=nonstopmode efc_master.tex
+
+      # -------------------------------------
+      # Upload outputs
+      # -------------------------------------
+      - name: Upload PDF & HTML artifacts
         uses: actions/upload-artifact@v4
         with:
-          name: efc-master
-          path: output/
+          name: efc_master_outputs
+          path: |
+            theory/formal/*.pdf
+            theory/formal/*.html
+            theory/formal/*.css
+            theory/formal/*.idv
+            theory/formal/*.lg
+            theory/formal/*.xref
