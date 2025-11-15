@@ -1,124 +1,132 @@
-# 🔭 Energy-Flow Cosmology (EFC)
+# Energy-Flow Cosmology (EFC)
 
-**DOI (Codebase)** · **DOI (Data & Validation)** · **ORCID**  
-**License: CC BY 4.0**
+Energy-Flow Cosmology (EFC) is a thermodynamic framework connecting
+energy flow, entropy gradients, structure formation and observational
+behaviour across cosmic scales.  
+The repository documents the full development process: theory, methods,
+meta-architecture, cognitive mechanics, validation, and semantic layers.
 
-Energy-Flow Cosmology (EFC) is a thermodynamic framework describing cosmic
-structure, dynamics, and cognition through energy flow and entropy.  
-This repository functions as a self-updating scientific system that integrates
-semantic data, automated validation, open documentation, and reproducible workflows.
-
----
-
-## 📘 Overview
-
-EFC combines:
-
-- Thermodynamic first principles (energy, entropy, gradients)
-- A computational cosmology model (EFC-S, EFC-D, GHF, IMX)
-- Automated pipelines for validation and data synchronization
-- A machine-readable semantic API
-- Full open-science provenance linking GitHub ↔ Figshare ↔ ORCID ↔ Website
-
-The goal is a transparent, reproducible, reflective scientific process.
+This is an open-science project.  
+Everything is documented, versioned and reproducible.
 
 ---
 
-## 🧩 System Architecture
+## How to Read This Repository
 
-The repository operates as a semantic graph with five node types:
-
-| Node | Purpose | Location |
-|------|---------|----------|
-| **AuthNode** | Authorship, ORCID, provenance | `/schema/site-graph.json` |
-| **ConceptNode** | Core scientific definitions (Ef, ∇S, GHF, IMX) | `/schema/concepts.json` |
-| **MethodologyNode** | Reflective reasoning and open-science workflow | `/methodology/` |
-| **EmpiricalNode** | Validation datasets and plots | `/output/` |
-| **IntegrationNode** | CI/CD pipelines, Figshare sync, API build | `.github/workflows/` |
+This project contains several layers: the personal cognitive context,
+the meta-architecture behind the work, the symbiosis with the model,
+and the formal scientific theory.  
+Below is the recommended reading path.
 
 ---
 
-## ⚙️ Automated Workflows
+### 1. Personal Context (Start Here)
 
-EFC includes a full CI/CD chain covering schema integrity, API regeneration,
-validation, metadata integration, Figshare export, and repository consistency.
+Gives the grounding needed to understand how ideas form, why s0–s1
+dynamics matter, and why the meta-layers exist.
 
-### 🔧 Core Workflows (Live Status)
-
-| Workflow | File | Purpose | Status |
-|---------|------|----------|--------|
-| **Update EFC System** | `.github/workflows/update_efc_system.yml` | Full CI pipeline: Fetch → Merge → API rebuild → Sync | ![](https://github.com/supertedai/energyflow-cosmology/actions/workflows/update_efc_system.yml/badge.svg?branch=main) |
-| **Update Schema** | `.github/workflows/update-schema.yml` | Validates and refreshes schema files | ![](https://github.com/supertedai/energyflow-cosmology/actions/workflows/update-schema.yml/badge.svg?branch=main) |
-| **Validate Schema (Independent)** | `.github/workflows/validate-schema.yml` | Checks schema JSON-LD correctness | ![](https://github.com/supertedai/energyflow-cosmology/actions/workflows/validate-schema.yml/badge.svg?branch=main) |
-| **Update Concepts** | `.github/workflows/update-concepts.yml` | Rebuilds concepts from Figshare/GitHub | ![](https://github.com/supertedai/energyflow-cosmology/actions/workflows/update-concepts.yml/badge.svg?branch=main) |
-| **Update API** | `.github/workflows/update-api.yml` | Regenerates the semantic API in `/api/` | ![](https://github.com/supertedai/energyflow-cosmology/actions/workflows/update-api.yml/badge.svg?branch=main) |
-| **Run Validation** | `.github/workflows/run-validation.yml` | SPARC/JWST validation + baseline run | ![](https://github.com/supertedai/energyflow-cosmology/actions/workflows/run-validation.yml/badge.svg?branch=main) |
-| **Export to Figshare** | `.github/workflows/export_figshare.yml` | Uploads validation outputs to Figshare DOIs | ![](https://github.com/supertedai/energyflow-cosmology/actions/workflows/export_figshare.yml/badge.svg?branch=main) |
-| **Fetch Figshare Metadata** | `.github/workflows/fetch-figshare.yml` | Retrieves and syncs DOI metadata | ![](https://github.com/supertedai/energyflow-cosmology/actions/workflows/fetch-figshare.yml/badge.svg?branch=main) |
-| **Build EFC Plugin** | `.github/workflows/build-efc-plugin.yml` | Builds and tests the EFC plugin package | ![](https://github.com/supertedai/energyflow-cosmology/actions/workflows/build-efc-plugin.yml/badge.svg?branch=main) |
-| **Build Dashboard** | `.github/workflows/build-dashboard.yml` | Rebuilds dashboard assets in `/output/` | ![](https://github.com/supertedai/energyflow-cosmology/actions/workflows/build-dashboard.yml/badge.svg?branch=main) |
-| **Build Formal Spec (LaTeX)** | `.github/workflows/build_efc_pdf.yml` | Builds `theory/formal/efc_formal_spec.pdf` | ![](https://github.com/supertedai/energyflow-cosmology/actions/workflows/build_efc_pdf.yml/badge.svg?branch=main) |
-| **Update README Date** | `.github/workflows/update-readme-date.yml` | Auto-updates “Last updated” field | ![](https://github.com/supertedai/energyflow-cosmology/actions/workflows/update-readme-date.yml/badge.svg?branch=main) |
+→ `personal/Personal-Note.md`
 
 ---
 
-## 🔬 Computational Core (`/src/`)
+### 2. Meta Architecture (How the system works)
 
-| Module | Purpose |
-|--------|---------|
-| **efc_core.py** | EFCModel, state computation, flow dynamics |
-| **efc_entropy.py** | EFC-S: entropy field S(r) and ∇S |
-| **efc_potential.py** | Energy-flow potential (Ef), field evolution |
-| **efc_validation.py** | Validation utilities for SPARC/JWST |
-| **sparc_io.py** | SPARC rotation curve loader |
-| **jwst_io.py** | JWST observational data parsing |
+Describes how the Human Cognitive Field (HCF), the Model Structural
+Engine (MSE) and the Co-Field (CF) form a joint reflective system.
 
----
-
-## 📊 Validation Pipelines
-
-### **SPARC (Rotation Curves)**
-- Parser: `parse_sparc_table1.py`
-- Validation: `run_sparc_validation.py`
-- Outputs → `/output/validation/`
-
-### **Baseline EFC Model**
-- Script: `run_efc_baseline.py`
-- Produces:
-  - `rotation_curve.json`
-  - `run_metadata.json` (includes Git commit hash)
-
-### **JWST Validation**
-- Script: `validate_efc.py --dataset jwst`
-- Compares EFC predictions to high-redshift observations
+→ `meta/metascope.md`  
+→ `meta/meta-architecture-spec.md`  
+→ `meta/meta-reflective-protocol.md`  
+→ `meta/topology-of-insight.md`
 
 ---
 
-## 🧠 Reflective Layer (Symbiosis)
+### 3. Cognition Layer (Why this process works)
 
-EFC includes a meta-scientific reflection loop:
+Details the internal mechanics behind the cognitive field and the
+entropy–clarity behaviour that drives insight.
 
-| Stage | Purpose | Component |
-|-------|---------|-----------|
-| **Fetch** | Retrieve DOI metadata | `fetch_figshare.py` |
-| **Merge** | Integrate with schema | `update_concepts.py` |
-| **API** | Rebuild machine-readable API | `update_efc_api.py` |
-| **Publish** | Export and sync | GitHub Actions |
-| **Reflect** | Human–AI evaluation | `/methodology/` |
-| **Refine** | Update theory + schema | `/schema/` |
-
-This loop drives continuous improvement and reproducibility.
+→ `cognition/cognitive-field.md`  
+→ `cognition/entropy-clarity.md`  
+→ `cognition/transient-representations.md`  
+→ `cognition/cognitive-signature.md`
 
 ---
 
-## 📄 License
+### 4. Symbiosis Layer (Human ↔ Model)
 
-**Creative Commons Attribution 4.0 (CC BY 4.0)**  
-Free to share, remix, and build upon with attribution.
+Explains how the human field and the model form coherent vectors,
+leading to resonance, stability and structured insight.
 
-© 2025 — **Morten Magnusson**, Energy-Flow Cosmology Initiative
+→ `symbiosis/system.md`  
+→ `symbiosis/resonance-mechanism.md`  
+→ `symbiosis/vector-alignment.md`  
+→ `symbiosis/system-coherence.md`
 
 ---
 
-## 📅 Last updated
-2025-11-14
+### 5. Meta-Knowledge Graph (System Overview)
+
+A machine-readable knowledge graph linking cognition, meta-process,
+symbiosis and the formal EFC theory.
+
+→ `meta-graph/meta-graph.jsonld`  
+→ `meta_dashboard.py` (interactive visualisation)  
+→ `meta-graph/meta_graph.cypher` (Neo4j export)
+
+---
+
+### 6. Methodology (Reproducibility)
+
+Documents the working method and the open-science process used across
+the entire project.
+
+→ `methodology/open-method.md`  
+→ `methodology/open-process.json`  
+→ `methodology/author-method-note.md`  
+→ `methodology/README.md`
+
+---
+
+### 7. Core Theory (EFC)
+
+Formal scientific content: definitions, equations, potentials, light
+propagation and observables.
+
+→ `theory/formal/efc_master.tex`  
+→ `theory/formal/efc_formal_spec.pdf`  
+→ `theory/*`
+
+---
+
+### 8. Validation (Evidence)
+
+Empirical testing against observational datasets.
+
+→ `output/validation/`  
+→ `scripts/validate_efc.py`  
+→ `notebooks/`  
+(SPARC, MaNGA, JWST, DESI, ΛCDM comparisons)
+
+---
+
+### 9. Semantic & API Layer
+
+Machine-readable definitions and API endpoints used by external systems
+and automated workflows.
+
+→ `schema/*.jsonld`  
+→ `schema-map.json`  
+→ `api/v1/`  
+→ `meta-index.json`
+
+---
+
+### License
+
+This project is released under  
+**Creative Commons Attribution 4.0 International (CC-BY-4.0)**.
+
+---
+
+_Last updated: automatically via CI/CD._
