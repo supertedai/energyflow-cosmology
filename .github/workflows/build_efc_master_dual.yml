@@ -5,8 +5,7 @@ on:
     branches:
       - main
     paths:
-      - 'theory/**'
-      - 'docs/**'
+      - 'theory/formal/**'
       - 'output/**'
       - '.github/workflows/build_efc_master_dual.yml'
 
@@ -16,49 +15,48 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-
     - name: Checkout repository
       uses: actions/checkout@v4
 
-    # Cache LaTeX packages for faster builds
-    - name: Cache LaTeX
+    # Cache LaTeX installation for speed
+    - name: Cache TeX Live
       uses: actions/cache@v3
       with:
         path: /tmp/texlive
         key: texlive-cache
 
-    - name: Install TeX Live (full)
+    - name: Install TeX Live + Pandoc
       run: |
         sudo apt-get update
         sudo apt-get install -y texlive-full pandoc
 
     - name: Build EFC Master PDF
-      working-directory: ./theory
+      working-directory: ./theory/formal
       run: |
         latexmk -pdf -interaction=nonstopmode efc_master.tex || true
 
-    - name: Check for PDF output
+    - name: Verify PDF output
       run: |
-        if [ ! -f theory/efc_master.pdf ]; then
+        if [ ! -f theory/formal/efc_master.pdf ]; then
           echo "❌ Build failed: efc_master.pdf not found"
           exit 1
         fi
 
-    - name: Build HTML via Pandoc
-      working-directory: ./theory
+    - name: Build EFC Master HTML
+      working-directory: ./theory/formal
       run: |
         pandoc efc_master.tex -s -o efc_master.html || true
 
-    - name: Check for HTML output
+    - name: Verify HTML output
       run: |
-        if [ ! -f theory/efc_master.html ]; then
-          echo "⚠️ HTML build missing — continuing without stopping..."
+        if [ ! -f theory/formal/efc_master.html ]; then
+          echo "⚠️ HTML output missing — continuing..."
         fi
 
-    - name: Upload build artifacts
+    - name: Upload artifacts
       uses: actions/upload-artifact@v4
       with:
         name: efc_master_build
         path: |
-          theory/efc_master.pdf
-          theory/efc_master.html
+          theory/formal/efc_master.pdf
+          theory/formal/efc_master.html
