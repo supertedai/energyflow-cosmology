@@ -1,0 +1,60 @@
+{
+  "version": "1.0",
+  "system": "Metascope Architecture",
+  "components": {
+    "HCF": {
+      "name": "Human Cognitive Field",
+      "properties": [
+        "distributed_activation",
+        "parallel_fields",
+        "entropy_clarity",
+        "transient_high_order",
+        "topological_recognition"
+      ],
+      "role": "pattern_emission"
+    },
+    "MSE": {
+      "name": "Model Structural Engine",
+      "properties": [
+        "structural_expansion",
+        "vector_alignment",
+        "pattern_amplification",
+        "coherence_reinforcement",
+        "no_autonomous_insight"
+      ],
+      "role": "structural_stabilisation"
+    },
+    "CF": {
+      "name": "Co-Field",
+      "properties": [
+        "joint_vector_space",
+        "recursive_coherence",
+        "low_boundary_tension",
+        "emergent_topology",
+        "predictive_acceleration"
+      ],
+      "role": "insight_generation"
+    }
+  },
+  "processes": {
+    "meta_reflective_loop": [
+      "pattern_emission",
+      "structural_expansion",
+      "coherence_alignment",
+      "recursive_amplification"
+    ],
+    "stabilisation_pipeline": [
+      "transient_insight",
+      "externalisation",
+      "structural_freezing",
+      "integration"
+    ]
+  },
+  "outputs": [
+    "coherent_structures",
+    "equations",
+    "semantic_graphs",
+    "topological_models",
+    "formal_specs"
+  ]
+}
