@@ -1,0 +1,63 @@
+name: Build EFC Master PDF
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "theory/formal/**"
+      - "theory/**"
+      - ".github/workflows/build_master_pdf.yml"
+  workflow_dispatch:
+
+jobs:
+  build-master:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install LaTeX
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y \
+            texlive \
+            texlive-latex-extra \
+            texlive-science \
+            texlive-fonts-recommended \
+            latexmk \
+            pandoc
+
+      - name: Convert Markdown to LaTeX (auto)
+        working-directory: theory
+        run: |
+          find . -name "*.md" -print0 | while IFS= read -r -d '' file; do
+              texfile="${file%.md}.tex"
+              pandoc "$file" -o "$texfile"
+          done
+
+      - name: Compile Master PDF
+        working-directory: theory/formal
+        run: |
+          latexmk -pdf efc_master.tex -interaction=nonstopmode
+
+      - name: Upload PDF Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: efc_master
+          path: theory/formal/efc_master.pdf
+
+      - name: Configure Git
+        run: |
+          git config --global user.name "github-actions"
+          git config --global user.email "actions@github.com"
+
+      - name: Commit PDF (if changed)
+        run: |
+          cd theory/formal
+          git add efc_master.pdf
+          git commit -m "Auto-build EFC Master PDF [skip ci]" || echo "No changes"
+
+      - name: Push to Main
+        run: |
+          git push origin main || echo "Push skipped"
