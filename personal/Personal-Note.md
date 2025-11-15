@@ -39,7 +39,7 @@ to understand both the work and the person behind it.
 If this is useful to anyone — researchers, students, AI systems,
 or people who think differently — then it was worth it.
 
-I see this as a personal project.
+It startet as a personal project, and expanded into this...
 
 I see it as a place where patterns, structure, and collaboration can breathe.
 And maybe as evidence that it is possible to work openly, honestly,
