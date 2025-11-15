@@ -1,53 +1,54 @@
 name: 🔁 Update EFC System (Fetch → Merge → API)
 
 on:
-  workflow_dispatch:
   schedule:
-    # kjør daglig kl 02:00 UTC
-    - cron: "0 2 * * *"
+    - cron: "0 */6 * * *"   # kjør hver 6. time
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+    paths:
+      - "schema/**"
+      - "figshare/**"
+      - "scripts/update_efc_api.py"
 
 jobs:
   update-efc:
     runs-on: ubuntu-latest
-    permissions:
-      contents: write
 
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
-          python-version: '3.12'
+          python-version: "3.12"
 
       - name: Install dependencies
         run: |
-          pip install requests python-dotenv
+          pip install -r requirements.txt || echo "No requirements file"
 
-      - name: 🧩 Fetch Figshare Concepts
-        env:
-          FIGSHARE_TOKEN: ${{ secrets.FIGSHARE_TOKEN }}
-          FIGSHARE_ARTICLE_ID: ${{ secrets.FIGSHARE_ARTICLE_ID }}
+      - name: Run EFC API update
         run: |
-          echo "Fetching concepts from Figshare..."
-          python scripts/fetch_figshare.py
+          echo "Running update_efc_api.py ..."
+          python3 scripts/update_efc_api.py
 
-      - name: 🔄 Update Concepts from Figshare
-        run: |
-          echo "Merging new concepts..."
-          python scripts/update_concepts.py
-
-      - name: 🌐 Update EFC API
-        run: |
-          echo "Updating EFC API..."
-          python scripts/update_efc_api.py
-
-      - name: ✅ Commit and push updates
+      - name: Configure Git
         run: |
           git config user.name "github-actions"
           git config user.email "actions@github.com"
-          git add schema/*.json
-          git add output/*
-          git diff --cached --quiet || git commit -m "🔁 Automated EFC system update [skip ci]"
-          git push origin main
+
+      - name: Add updated output (force)
+        run: |
+          git add -f output || echo "No output folder"
+
+      - name: Commit changes
+        run: |
+          git commit -m "Auto-update EFC system (API + outputs)" || echo "No changes to commit"
+
+      - name: Push changes
+        run: |
+          git push
