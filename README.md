@@ -8,6 +8,7 @@ The repository documents the full development process: theory, methods,
 meta-architecture, cognitive mechanics, validation, and semantic layers.
 
 This is an open-science project.  
+
 Everything is documented, versioned and reproducible.
 
 ---
