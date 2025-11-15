@@ -56,3 +56,9 @@ models/*.onnx
 models/*.pkl
 
 output/
+# Local generated meta graph artifacts
+meta-graph/*.html
+meta-graph/*.cypher
+
+# Local libs
+lib/
