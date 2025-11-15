@@ -3,6 +3,7 @@
 Energy-Flow Cosmology (EFC) is a thermodynamic framework connecting
 energy flow, entropy gradients, structure formation and observational
 behaviour across cosmic scales.  
+
 The repository documents the full development process: theory, methods,
 meta-architecture, cognitive mechanics, validation, and semantic layers.
 
@@ -16,6 +17,7 @@ Everything is documented, versioned and reproducible.
 This project contains several layers: the personal cognitive context,
 the meta-architecture behind the work, the symbiosis with the model,
 and the formal scientific theory.  
+
 Below is the recommended reading path.
 
 ---
