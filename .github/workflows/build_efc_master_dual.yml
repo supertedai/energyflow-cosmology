@@ -19,34 +19,30 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install -y \
-            texlive \
-            texlive-latex-extra \
-            texlive-fonts-recommended \
-            texlive-fonts-extra \
-            texlive-science \
-            texlive-luatex \
-            latexmk \
-            tex4ht
+            texlive-full \
+            latexmk
 
-      # -------------------------------------
-      # PDF BUILD
-      # -------------------------------------
-      - name: Build PDF (efc_master.tex)
+      # ==========================
+      # BUILD PDF
+      # ==========================
+      - name: Build PDF
         working-directory: theory/formal
         run: |
           latexmk -pdf -interaction=nonstopmode efc_master.tex
 
-      # -------------------------------------
-      # HTML BUILD  (FIX FOR YOUR ERROR)
-      # -------------------------------------
-      - name: Build HTML (efc_master.tex)
+      # ==========================
+      # BUILD HTML (correct method)
+      # ==========================
+      - name: Build HTML via htlatex
         working-directory: theory/formal
         run: |
-          latexmk -html -interaction=nonstopmode efc_master.tex
+          htlatex efc_master.tex "xhtml,mathjax" " -cunihtf -utf8"
+          # Copy CSS so artifact is complete
+          cp efc_master.css efc_master_html.css || true
 
-      # -------------------------------------
-      # Upload outputs
-      # -------------------------------------
+      # ==========================
+      # Upload artifacts
+      # ==========================
       - name: Upload PDF & HTML artifacts
         uses: actions/upload-artifact@v4
         with:
@@ -55,6 +51,4 @@ jobs:
             theory/formal/*.pdf
             theory/formal/*.html
             theory/formal/*.css
-            theory/formal/*.idv
-            theory/formal/*.lg
-            theory/formal/*.xref
+            theory/formal/*.png
