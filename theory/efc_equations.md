@@ -1,72 +1,72 @@
 # Energy-Flow Cosmology — Core Equations
 
-Denne fila samler de sentrale ligningene i EFC i kompakt form.  
-Den er ment som et raskt oppslagsverk, ikke som full teori.
+This document collects the central equations of EFC in compact form.  
+It is intended as a quick reference, not a full theoretical exposition.
 
 ---
 
-## 1. Entropifelt og endepunkter
+## 1. Entropy Field and Endpoint Structure
 
-- Entropifelt:
+- Entropy field:
   \[
   S(\mathbf{x})
   \]
 
-- Endepunkter:
+- Endpoint values:
   \[
-  S_0 \quad (\text{s}_0: \text{lav entropi, høy struktur}), \qquad
-  S_1 \quad (\text{s}_1: \text{høy entropi, strukturell løsere}).
+  S_0 \quad (\text{s}_0: \text{low entropy, high structural order}), \qquad
+  S_1 \quad (\text{s}_1: \text{high entropy, structurally diffuse}).
   \]
 
-- Midtpunkt og spenn:
+- Midpoint and span:
   \[
   S_{\text{mid}} = \frac{1}{2}(S_0 + S_1),
   \qquad
   \Delta S = S_1 - S_0.
   \]
 
-- Normalisert koordinat:
+- Normalized entropy coordinate:
   \[
   x(S) = \frac{S - S_{\text{mid}}}{\Delta S / 2}.
   \]
 
 ---
 
-## 2. Effektiv lysfart c(S)
+## 2. Effective Light Speed \(c(S)\)
 
 \[
 c(S) = c_0 \left( 1 + a_{\text{edge}}\, x(S)^2 \right),
 \]
 
-med:
+with:
 
-- \(c_0\): baseline lysfart ved midt-entropi  
-- \(a_{\text{edge}} > 0\): styrer økning mot s₀ og s₁.
+- \(c_0\): baseline light speed at the mid-entropy point  
+- \(a_{\text{edge}} > 0\): controls enhancement toward the s₀ and s₁ endpoints.
 
-Egenskaper:
+Characteristics:
 
-- Minimum ved \(S = S_{\text{mid}}\).  
-- Øker når \(S \to S_0\) (fokuserende regime).  
-- Øker når \(S \to S_1\) (defokuserende regime).
+- Minimum at \(S = S_{\text{mid}}\).  
+- Increases as \(S \to S_0\) (focusing regime).  
+- Increases as \(S \to S_1\) (defocusing regime).
 
 ---
 
-## 3. Energiflyt og potensial Φ(Ef, S)
+## 3. Energy Flow and Potential \(\Phi(E_f, S)\)
 
-- Energiflytfelt:
+- Energy-flow field:
   \[
   E_f(\mathbf{x}) : \mathbb{R}^3 \to \mathbb{R},
   \qquad
   E_f \propto -\nabla S.
   \]
 
-- Effektivt potensial:
+- Effective potential:
   \[
   \Phi(E_f,S) = A_\Phi E_f (1 + S),
   \]
-  (baseline-modell, lineær i S).
+  (baseline model, linear in \(S\)).
 
-Utvidet form (ikke implementert i baseline):
+Extended (not used in baseline):
 
 \[
 \Phi(E_f,S) = A_\Phi E_f (1 + S^\beta).
@@ -74,40 +74,40 @@ Utvidet form (ikke implementert i baseline):
 
 ---
 
-## 4. Ekspansjonsrate H(Ef, S)
+## 4. Expansion Rate \(H(E_f, S)\)
 
 \[
 H(E_f,S) = \sqrt{|E_f|}\, (1 + S).
 \]
 
-Tolkning:
+Interpretation:
 
-- \(\sqrt{|E_f|}\): styrke i energiflyt.  
-- \((1+S)\): termodynamisk modulasjon.  
-- Senere akselerasjon kan komme fra endring i \((E_f, S)\), ikke fra egen mørk-energi.
+- \(\sqrt{|E_f|}\): strength of energy flow  
+- \((1 + S)\): thermodynamic modulation  
+- Late-time acceleration can arise from changes in \((E_f, S)\), not from a separate dark-energy field.
 
 ---
 
-## 5. Rotasjonskurver
+## 5. Rotation Curves
 
 \[
 v(r) = \sqrt{\, r \, \frac{\partial \Phi}{\partial r} \, }.
 \]
 
-- Φ avhenger av \(E_f\) og S.  
-- c(S) påvirker hvordan v(r) måles observasjonelt.  
-- Flate rotasjonskurver kan oppstå fra stabilitetsbånd rundt \(S_{\text{mid}}\).
+- The potential \(\Phi\) depends on \(E_f\) and \(S\).  
+- The effective light speed \(c(S)\) affects how velocities are inferred from observations.  
+- Flat rotation curves can emerge from stability bands around \(S_{\text{mid}}\).
 
 ---
 
-## 6. Lysgang og tidsforsinkelser
+## 6. Light Travel and Time Delays
 
-- Lysgangstid langs bane \(\gamma\):
+- Light-travel time along a path \(\gamma\):
   \[
   t_{\text{obs}} = \int_{\gamma} \frac{dl}{c(S(l))}.
   \]
 
-- Tidsforskjell mellom to bilder i lensing:
+- Time-delay difference between two lensing images:
   \[
   \Delta t_{ij}
     = \int_{\gamma_i} \frac{dl}{c(S(l))}
@@ -116,20 +116,20 @@ v(r) = \sqrt{\, r \, \frac{\partial \Phi}{\partial r} \, }.
 
 ---
 
-## 7. Lensing og signaturer
+## 7. Lensing and Observable Signatures
 
-- Lensing-signaler (magnifikasjon, shear, tidsforsinkelser) avhenger av:
-  \[
-  \text{massestruktur} + S(\mathbf{x}) + c(S).
-  \]
+Lensing signals (magnification, shear, time delays) depend on:
+\[
+\text{mass distribution} + S(\mathbf{x}) + c(S).
+\]
 
-Samme massefordeling kan gi ulike lensing-mønstre hvis S-feltet er forskjellig.
+A fixed mass distribution can generate different lensing patterns if the entropy field differs.
 
 ---
 
-## 8. Triade: S → Ef → Φ → c(S) → Observables
+## 8. Triad: \(S \rightarrow E_f \rightarrow \Phi \rightarrow c(S) \rightarrow \) Observables
 
-Kjernestrukturen i EFC kan skrives som:
+The core structure of EFC can be written as:
 
 \[
 S(\mathbf{x})
@@ -143,4 +143,4 @@ S(\mathbf{x})
   \text{Observables}.
 \]
 
-Alt (dynamikk, struktur og observasjoner) har dermed samme termodynamiske kilde.
+Thus, dynamics, structure formation, and observational signatures all share the same thermodynamic origin.
