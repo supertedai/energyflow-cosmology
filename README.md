@@ -1,7 +1,50 @@
-> 📘 **Start Here:**  
-If you are new to the Energy-Flow Cosmology project, begin with  
-👉 **[`START-HERE.md`](./START-HERE.md)**  
-This file gives a full orientation to the theory, the meta-architecture, the cognitive method, and the repository layout.
+# Energy-Flow Cosmology (EFC)
+
+📘 **Start Here**  
+Hvis du er ny til prosjektet, start med:  
+👉 **[START-HERE.md](START-HERE.md)**  
+Denne filen gir en full og enkel orientering til hele repositoriet: teori, meta-arkitektur, kognisjon, symbiose, struktur og validering.
+
+---
+
+## 📐 Quick Map of the Repository
+
+| Area | Description | Path |
+|------|-------------|-------|
+| **Start / Overview** | Første steg, orientering, forklaring av struktur | `START-HERE.md` |
+| **Theory** | EFC-D, EFC-S, s₀–s₁, potensialer, formell spesifikasjon | `theory/formal/` |
+| **Core Models (Code)** | Python-modellene for EFC | `src/efc/` |
+| **Validation** | SPARC, JWST, DESI, lensing, figurer, scripts | `output/`, `notebooks/` |
+| **Schema / Semantic Graph** | Concepts, site-graph, JSON-LD | `schema/` |
+| **Meta Layer** | Meta-arkitektur, metascope, topologi, protokoller | `meta/` |
+| **Cognition Layer** | Kognitive mekanismer, transient states, entropy→clarity | `cognition/` |
+| **Symbiosis Layer** | Samspillet menneske ↔ modell, vektorjustering | `symbiosis/` |
+| **Reflection Layer** | Reflective logs, resonance maps, state maps | `reflection/` |
+| **Meta-Knowledge Graph** | Maskinlesbart meta-nettverk | `meta-graph/` |
+| **Personal Note** | Bakgrunn, kontekst og tenkemåte | `personal/Personal-Note.md` |
+
+---
+
+## 🎯 What This Repository Contains
+
+1. **The full scientific theory (EFC)**  
+   – formelle ligninger, modeller, potensialer, strukturer
+
+2. **Validation layer**  
+   – figurer, datasett, notebook-simuleringer
+
+3. **Meta / Cognitive / Symbiosis layer**  
+   – dokumentasjon av hele tankestrukturen, prosessene og systemet som genererte teorien
+
+4. **Semantic graph**  
+   – JSON-LD + meta-graph som gjør alt maskinlesbart
+
+Alt er åpent, reproduksjonssikkert og strukturert for fagfolk, AI-modeller og fremtidige lesere.
+
+---
+
+*(Resten av README-en din kan stå som den er.)*
+
 
 # Energy-Flow Cosmology (EFC)
 
