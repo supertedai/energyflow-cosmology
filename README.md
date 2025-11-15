@@ -1,3 +1,8 @@
+> 📘 **Start Here:**  
+If you are new to the Energy-Flow Cosmology project, begin with  
+👉 **[`START-HERE.md`](./START-HERE.md)**  
+This file gives a full orientation to the theory, the meta-architecture, the cognitive method, and the repository layout.
+
 # Energy-Flow Cosmology (EFC)
 
 Energy-Flow Cosmology (EFC) is a thermodynamic framework connecting
