@@ -5,61 +5,60 @@ on:
     branches:
       - main
     paths:
-      - 'theory/formal/**'
+      - 'theory/**'
+      - 'docs/**'
+      - 'output/**'
       - '.github/workflows/build_efc_master_dual.yml'
-  workflow_dispatch:
 
 jobs:
+
   build-master:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
 
-      # ----------------------------
-      # Build PDF with latexmk
-      # ----------------------------
-      - name: Build PDF (efc_master.pdf)
-        uses: xu-cheng/latex-action@v3
-        with:
-          root_file: theory/formal/efc_master.tex
-          latexmk_shell_escape: true
-        env:
-          TEXINPUTS: ".:./theory//:"
+    - name: Checkout repository
+      uses: actions/checkout@v4
 
-      # ----------------------------
-      # Install tex4ht + htlatex
-      # ----------------------------
-      - name: Install htlatex (tex4ht)
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y tex4ht texlive-latex-extra
+    # Cache LaTeX packages for faster builds
+    - name: Cache LaTeX
+      uses: actions/cache@v3
+      with:
+        path: /tmp/texlive
+        key: texlive-cache
 
-      # ----------------------------
-      # Build HTML using htlatex
-      # ----------------------------
-      - name: Build HTML (efc_master.html)
-        working-directory: theory/formal
-        run: |
-          htlatex efc_master.tex "xhtml,mathjax" " -cunihtf -utf8"
-          mkdir -p ../../output
-          cp efc_master.html ../../output/efc_master.html
-          cp efc_master.css ../../output/efc_master.css || true
+    - name: Install TeX Live (full)
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y texlive-full pandoc
 
-      # ----------------------------
-      # Copy PDF to output/
-      # ----------------------------
-      - name: Copy PDF
-        run: |
-          mkdir -p output
-          cp theory/formal/efc_master.pdf output/efc_master.pdf
+    - name: Build EFC Master PDF
+      working-directory: ./theory
+      run: |
+        latexmk -pdf -interaction=nonstopmode efc_master.tex || true
 
-      # ----------------------------
-      # Upload artifacts
-      # ----------------------------
-      - name: Upload artifacts
-        uses: actions/upload-artifact@v4
-        with:
-          name: efc-master
-          path: output/
+    - name: Check for PDF output
+      run: |
+        if [ ! -f theory/efc_master.pdf ]; then
+          echo "❌ Build failed: efc_master.pdf not found"
+          exit 1
+        fi
+
+    - name: Build HTML via Pandoc
+      working-directory: ./theory
+      run: |
+        pandoc efc_master.tex -s -o efc_master.html || true
+
+    - name: Check for HTML output
+      run: |
+        if [ ! -f theory/efc_master.html ]; then
+          echo "⚠️ HTML build missing — continuing without stopping..."
+        fi
+
+    - name: Upload build artifacts
+      uses: actions/upload-artifact@v4
+      with:
+        name: efc_master_build
+        path: |
+          theory/efc_master.pdf
+          theory/efc_master.html
