@@ -2,9 +2,11 @@ name: 📚 Build EFC Master — PDF + HTML
 
 on:
   push:
+    branches:
+      - main
     paths:
-      - "theory/formal/**"
-      - ".github/workflows/build_efc_master_dual.yml"
+      - 'theory/formal/**'
+      - '.github/workflows/build_efc_master_dual.yml'
   workflow_dispatch:
 
 jobs:
@@ -15,40 +17,47 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Install TeX Live
+      # ----------------------------
+      # Build PDF with latexmk
+      # ----------------------------
+      - name: Build PDF (efc_master.pdf)
+        uses: xu-cheng/latex-action@v3
+        with:
+          root_file: theory/formal/efc_master.tex
+          latexmk_shell_escape: true
+
+      # ----------------------------
+      # Install tex4ht + htlatex
+      # ----------------------------
+      - name: Install htlatex (tex4ht)
         run: |
           sudo apt-get update
-          sudo apt-get install -y \
-            texlive-full \
-            latexmk
+          sudo apt-get install -y tex4ht texlive-latex-extra
 
-      # ==========================
-      # BUILD PDF
-      # ==========================
-      - name: Build PDF
-        working-directory: theory/formal
-        run: |
-          latexmk -pdf -interaction=nonstopmode efc_master.tex
-
-      # ==========================
-      # BUILD HTML (correct method)
-      # ==========================
-      - name: Build HTML via htlatex
+      # ----------------------------
+      # Build HTML using htlatex
+      # ----------------------------
+      - name: Build HTML (efc_master.html)
         working-directory: theory/formal
         run: |
           htlatex efc_master.tex "xhtml,mathjax" " -cunihtf -utf8"
-          # Copy CSS so artifact is complete
-          cp efc_master.css efc_master_html.css || true
+          mkdir -p ../../output
+          cp efc_master.html ../../output/efc_master.html
+          cp efc_master.css ../../output/efc_master.css || true
 
-      # ==========================
+      # ----------------------------
+      # Copy PDF to output/
+      # ----------------------------
+      - name: Copy PDF
+        run: |
+          mkdir -p output
+          cp theory/formal/efc_master.pdf output/efc_master.pdf
+
+      # ----------------------------
       # Upload artifacts
-      # ==========================
-      - name: Upload PDF & HTML artifacts
+      # ----------------------------
+      - name: Upload artifacts
         uses: actions/upload-artifact@v4
         with:
-          name: efc_master_outputs
-          path: |
-            theory/formal/*.pdf
-            theory/formal/*.html
-            theory/formal/*.css
-            theory/formal/*.png
+          name: efc-master
+          path: output/
