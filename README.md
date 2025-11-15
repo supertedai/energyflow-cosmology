@@ -129,4 +129,4 @@ This project is released under
 
 ---
 
-_Last updated: automatically via CI/CD._
+_Last updated: 2025-11-15_
