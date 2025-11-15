@@ -1,0 +1,105 @@
+% ===========================================================
+% s0--s1 Light Propagation Dynamics
+% Clean, self-contained LaTeX version
+% ===========================================================
+
+\section*{s0--s1 Light Propagation Dynamics}
+
+This section describes how the entropy field determines
+variations in the effective speed of light, photon travel time,
+and lensing behavior across the EFC grid.
+
+% -----------------------------------------------------------
+\subsection*{Entropy Endpoints}
+
+We define two entropy endpoints:
+
+\begin{itemize}
+    \item $s_0$: low-entropy, high-structure endpoint
+    \item $s_1$: high-entropy, high-diffusion endpoint
+\end{itemize}
+
+The midpoint is
+
+\[
+S_{\text{mid}} = \frac{1}{2}(s_0 + s_1),
+\]
+
+and the entropy span is
+
+\[
+\Delta S = s_1 - s_0.
+\]
+
+We define the normalized entropy coordinate
+
+\[
+x(S) = \frac{S - S_{\text{mid}}}{\Delta S/2}.
+\]
+
+% -----------------------------------------------------------
+\subsection*{Variation of the Effective Speed of Light}
+
+The effective speed of light becomes:
+
+\[
+c(S) = c_0 \left( 1 + a_{\text{edge}} \, x(S)^2 \right),
+\]
+
+where $a_{\text{edge}}$ controls the strength of edge-driven variation.
+
+Interpretation:
+
+\begin{itemize}
+    \item near $s_0$: locally increased $c(S)$ → focusing
+    \item near $s_1$: large-scale increase in $c(S)$ → defocusing
+    \item around $S_{\text{mid}}$: the slowest propagation regime
+\end{itemize}
+
+This yields a nonuniform propagation landscape across the cosmic grid.
+
+% -----------------------------------------------------------
+\subsection*{Light Travel Time}
+
+A photon's travel time along a trajectory $\gamma$ is
+
+\[
+t_{\text{obs}} = \int_{\gamma} \frac{dl}{c(S(l))}.
+\]
+
+Regions of slow light $(c(S)\text{ small})$ increase observed delays,
+while fast-light zones near $s_0$ and $s_1$ reduce them.
+
+% -----------------------------------------------------------
+\subsection*{Lensing Behavior}
+
+Low-entropy endpoints act as focusing wells;  
+high-entropy endpoints contribute to large-scale defocusing.
+
+This yields a dual-lens structure:
+
+\begin{itemize}
+    \item $s_0$ regions produce sharp focusing, similar to mass overdensities,
+    \item $s_1$ regions create gentle, large-area defocusing,
+    \item transitions between the two define asymmetric lensing profiles.
+\end{itemize}
+
+Such behavior is consistent with halo asymmetries observed in
+galaxy rotation curves and gravitational lensing systems.
+
+% -----------------------------------------------------------
+\subsection*{Summary}
+
+The $s_0$--$s_1$ entropy axis determines:
+
+\begin{itemize}
+    \item effective $c(S)$,
+    \item photon geodesics,
+    \item observed delays,
+    \item lensing,
+    \item halo asymmetry,
+    \item structural formation boundaries.
+\end{itemize}
+
+This provides a thermodynamic explanation for several phenomena
+traditionally attributed to dark matter or modified gravity.
