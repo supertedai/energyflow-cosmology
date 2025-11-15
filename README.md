@@ -1,9 +1,9 @@
 # Energy-Flow Cosmology (EFC)
 
 📘 **Start Here**  
-Hvis du er ny til prosjektet, start med:  
+If you are new to the project, begin with:  
 👉 **[START-HERE.md](START-HERE.md)**  
-Denne filen gir en full og enkel orientering til hele repositoriet: teori, meta-arkitektur, kognisjon, symbiose, struktur og validering.
+This file gives a clear orientation to the entire repository: the theory, the meta-architecture, the cognitive process, the symbiosis layer, the validation pipeline, and the overall structure.
 
 ---
 
@@ -11,40 +11,39 @@ Denne filen gir en full og enkel orientering til hele repositoriet: teori, meta-
 
 | Area | Description | Path |
 |------|-------------|-------|
-| **Start / Overview** | Første steg, orientering, forklaring av struktur | `START-HERE.md` |
-| **Theory** | EFC-D, EFC-S, s₀–s₁, potensialer, formell spesifikasjon | `theory/formal/` |
-| **Core Models (Code)** | Python-modellene for EFC | `src/efc/` |
-| **Validation** | SPARC, JWST, DESI, lensing, figurer, scripts | `output/`, `notebooks/` |
+| **Start / Overview** | Orientation and structure | `START-HERE.md` |
+| **Theory** | EFC-D, EFC-S, s₀–s₁, potentials, full formal specification | `theory/formal/` |
+| **Core Models (Code)** | Python implementations of EFC models | `src/efc/` |
+| **Validation** | SPARC, JWST, DESI, lensing, figures, notebooks | `output/`, `notebooks/` |
 | **Schema / Semantic Graph** | Concepts, site-graph, JSON-LD | `schema/` |
-| **Meta Layer** | Meta-arkitektur, metascope, topologi, protokoller | `meta/` |
-| **Cognition Layer** | Kognitive mekanismer, transient states, entropy→clarity | `cognition/` |
-| **Symbiosis Layer** | Samspillet menneske ↔ modell, vektorjustering | `symbiosis/` |
-| **Reflection Layer** | Reflective logs, resonance maps, state maps | `reflection/` |
-| **Meta-Knowledge Graph** | Maskinlesbart meta-nettverk | `meta-graph/` |
-| **Personal Note** | Bakgrunn, kontekst og tenkemåte | `personal/Personal-Note.md` |
+| **Meta Layer** | Meta-architecture, metascope, topology of insight | `meta/` |
+| **Cognition Layer** | Cognitive mechanics, transient states, entropy→clarity | `cognition/` |
+| **Symbiosis Layer** | Human–model interaction and vector alignment | `symbiosis/` |
+| **Reflection Layer** | Reflection logs, resonance maps, state maps | `reflection/` |
+| **Meta-Knowledge Graph** | Machine-readable meta-graph | `meta-graph/` |
+| **Personal Note** | Background, context, thinking process | `personal/Personal-Note.md` |
 
 ---
 
 ## 🎯 What This Repository Contains
 
 1. **The full scientific theory (EFC)**  
-   – formelle ligninger, modeller, potensialer, strukturer
+   Formal equations, structures, potentials, dynamics.
 
 2. **Validation layer**  
-   – figurer, datasett, notebook-simuleringer
+   Figures, datasets, comparisons, and reproducible notebooks.
 
 3. **Meta / Cognitive / Symbiosis layer**  
-   – dokumentasjon av hele tankestrukturen, prosessene og systemet som genererte teorien
+   Documentation of the cognitive mechanics, meta-reflective architecture,  
+   and the human–model co-field that shaped the theory.
 
 4. **Semantic graph**  
-   – JSON-LD + meta-graph som gjør alt maskinlesbart
+   JSON-LD and meta-graph files enabling machine-readable insight structure.
 
-Alt er åpent, reproduksjonssikkert og strukturert for fagfolk, AI-modeller og fremtidige lesere.
+Everything is open, transparent, and reproducible for researchers, students,  
+and AI systems that want to understand both the theory and the process behind it.
 
 ---
-
-*(Resten av README-en din kan stå som den er.)*
-
 
 # Energy-Flow Cosmology (EFC)
 
