@@ -2,10 +2,7 @@
 <html lang="en" data-theme="light">
 <head>
   <meta charset="UTF-8" />
-  <title>Energy-Flow Cosmology<br />
-Master Document (EFC-D, EFC-S, EFC-C<span
-class="math inline"><sub>0</sub></span>, Light Dynamics,
-Observables)</title>
+  <title>Energy-Flow Cosmology — Master Formal Specification</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
   
@@ -117,208 +114,131 @@ Observables)</title>
 
 <nav id="toc">
   <div id="toc-header">
-    <div id="toc-title">Energy-Flow Cosmology<br />
-Master Document (EFC-D, EFC-S, EFC-C<span
-class="math inline"><sub>0</sub></span>, Light Dynamics,
-Observables)</div>
+    <div id="toc-title">Energy-Flow Cosmology — Master Formal
+Specification</div>
     <button id="theme-toggle" type="button">☾ Dark</button>
   </div>
 
   <ul>
-  <li><a href="#efc-d-dynamics-model"
-  id="toc-efc-d-dynamics-model">EFC-D: Dynamics Model</a>
+  <li><a href="#efc-d-energy-flow-dynamics"
+  id="toc-efc-d-energy-flow-dynamics">EFC-D: Energy-Flow Dynamics</a>
   <ul>
-  <li><a href="#overview" id="toc-overview">Overview</a></li>
-  <li><a href="#energyentropy-relation"
-  id="toc-energyentropy-relation">Energy–Entropy Relation</a></li>
-  <li><a href="#effective-potential"
-  id="toc-effective-potential">Effective Potential</a></li>
+  <li><a href="#density" id="toc-density">Density</a></li>
+  <li><a href="#energy-flow-rate" id="toc-energy-flow-rate">Energy-Flow
+  Rate</a></li>
+  </ul></li>
+  <li><a href="#efc-s-entropy-field-and-gradient"
+  id="toc-efc-s-entropy-field-and-gradient">EFC-S: Entropy Field and
+  Gradient</a></li>
+  <li><a href="#light-propagation-s0-s1"
+  id="toc-light-propagation-s0-s1">Light Propagation (s0 → s1)</a></li>
+  <li><a href="#observables-in-efc"
+  id="toc-observables-in-efc">Observables in EFC</a>
+  <ul>
+  <li><a href="#lensing" id="toc-lensing">Lensing</a></li>
+  <li><a href="#rotation-curves" id="toc-rotation-curves">Rotation
+  Curves</a></li>
   <li><a href="#expansion-rate" id="toc-expansion-rate">Expansion
   Rate</a></li>
   </ul></li>
-  <li><a href="#efc-s-structure-model"
-  id="toc-efc-s-structure-model">EFC-S: Structure Model</a>
-  <ul>
-  <li><a href="#overview-1" id="toc-overview-1">Overview</a></li>
-  <li><a href="#local-entropy-well" id="toc-local-entropy-well">Local
-  Entropy Well</a></li>
-  <li><a href="#effective-density" id="toc-effective-density">Effective
-  Density</a></li>
-  <li><a href="#rotation-curve-prediction"
-  id="toc-rotation-curve-prediction">Rotation Curve Prediction</a></li>
-  </ul></li>
-  <li><a href="#efc-c_0-cognitiveinformational-layer"
-  id="toc-efc-c_0-cognitiveinformational-layer">EFC-C<span
-  class="math inline"><sub>0</sub></span>: Cognitive/Informational
-  Layer</a>
-  <ul>
-  <li><a href="#overview-2" id="toc-overview-2">Overview</a></li>
-  <li><a href="#entropyrefractive-index-relation"
-  id="toc-entropyrefractive-index-relation">Entropy–Refractive Index
-  Relation</a></li>
-  <li><a href="#local-speed-of-light"
-  id="toc-local-speed-of-light">Local Speed of Light</a></li>
-  <li><a href="#fermat-functional" id="toc-fermat-functional">Fermat
-  Functional</a></li>
-  <li><a href="#dual-lensing" id="toc-dual-lensing">Dual
-  Lensing</a></li>
-  </ul></li>
-  <li><a href="#light-dynamics-s0-s1-transitions"
-  id="toc-light-dynamics-s0-s1-transitions">Light Dynamics: s0 → s1
-  Transitions</a>
-  <ul>
-  <li><a href="#overview-3" id="toc-overview-3">Overview</a></li>
-  <li><a href="#propagation-law" id="toc-propagation-law">Propagation
-  Law</a></li>
-  <li><a href="#coupling-between-layers"
-  id="toc-coupling-between-layers">Coupling Between Layers</a></li>
-  </ul></li>
-  <li><a href="#observables" id="toc-observables">Observables</a>
-  <ul>
-  <li><a href="#overview-4" id="toc-overview-4">Overview</a></li>
-  <li><a href="#rotation-curves" id="toc-rotation-curves">Rotation
-  Curves</a></li>
-  <li><a href="#lensing-angle" id="toc-lensing-angle">Lensing
-  Angle</a></li>
-  <li><a href="#expansion-signal" id="toc-expansion-signal">Expansion
-  Signal</a></li>
-  </ul></li>
-  <li><a href="#figures" id="toc-figures">Figures</a>
-  <ul>
-  <li><a href="#figures-1" id="toc-figures-1">Figures</a></li>
-  </ul></li>
+  <li><a href="#figures" id="toc-figures">Figures</a></li>
+  <li><a href="#meta-reflective-development"
+  id="toc-meta-reflective-development">Meta-Reflective
+  Development</a></li>
   </ul>
 </nav>
 
 <main id="content">
-  <h1 id="efc-d-dynamics-model">EFC-D: Dynamics Model</h1>
-  <h2 class="unnumbered" id="overview">Overview</h2>
-  <p>EFC-D describes cosmic dynamics as the result of energy flow along
-  entropy gradients. The central quantity is the energy field <span
-  class="math inline"><em>E</em><sub><em>f</em></sub>(<em>S</em>)</span>,
-  which varies with the local entropy density <span
-  class="math inline"><em>S</em></span>.</p>
-  <h2 class="unnumbered" id="energyentropy-relation">Energy–Entropy
-  Relation</h2>
-  <p>Dynamics arise when:</p>
-  <p><span class="math display">∇<em>S</em> ≠ 0</span></p>
-  <p>Energy moves toward increasing entropy:</p>
+  <h1 class="unnumbered" id="efc-d-energy-flow-dynamics">EFC-D:
+  Energy-Flow Dynamics</h1>
+  <p>The local energy-flow potential <span
+  class="math inline"><em>E</em><sub><em>f</em></sub></span> is defined
+  as a function of mass density <span
+  class="math inline"><em>ρ</em></span> and entropy <span
+  class="math inline"><em>S</em></span>:</p>
   <p><span
-  class="math display"><em>v⃗</em><sub><em>E</em></sub> =  − <em>k</em> ∇<em>S</em></span></p>
-  <p>with <span class="math inline"><em>k</em></span> controlling the
-  field response.</p>
-  <h2 class="unnumbered" id="effective-potential">Effective
-  Potential</h2>
-  <p>We define an effective potential:</p>
-  <p><span
-  class="math display"><em>Φ</em><sub><em>E</em></sub>(<em>S</em>) =  − ∫<em>E</em><sub><em>f</em></sub>(<em>S</em>) <em>d</em><em>S</em></span></p>
-  <p>Acceleration follows as:</p>
-  <p><span
-  class="math display"><em>a⃗</em> =  − ∇<em>Φ</em><sub><em>E</em></sub>.</span></p>
-  <h2 class="unnumbered" id="expansion-rate">Expansion Rate</h2>
-  <p>The expansion rate predicted by EFC-D is:</p>
-  <p><span class="math display">$$H(S) = \sqrt{|E_f(S)|} \, (1 +
-  S),$$</span></p>
-  <p>used for comparison with DESI, CMB, and BAO measurements.</p>
-  <h1 id="efc-s-structure-model">EFC-S: Structure Model</h1>
-  <h2 class="unnumbered" id="overview-1">Overview</h2>
-  <p>EFC-S describes structure formation as the emergence of stable
-  configurations in the entropy field. Halos, nodes, and filaments arise
-  from local curvature in <span
-  class="math inline"><em>S</em>(<em>r</em>)</span>.</p>
-  <h2 class="unnumbered" id="local-entropy-well">Local Entropy Well</h2>
-  <p>A halo is modeled as:</p>
-  <p><span
-  class="math display"><em>S</em>(<em>r</em>) = <em>S</em><sub>0</sub> <em>e</em><sup>−<em>r</em>/<em>r</em><sub><em>s</em></sub></sup>,</span></p>
-  <p>where <span
-  class="math inline"><em>r</em><sub><em>s</em></sub></span> is the
-  scale length.</p>
-  <h2 class="unnumbered" id="effective-density">Effective Density</h2>
-  <p>The effective density follows directly from entropy curvature:</p>
-  <p><span
-  class="math display"><em>ρ</em><sub>eff</sub>(<em>r</em>) = ∇<sup>2</sup><em>S</em>(<em>r</em>).</span></p>
-  <h2 class="unnumbered" id="rotation-curve-prediction">Rotation Curve
-  Prediction</h2>
-  <p>The predicted rotation velocity is:</p>
-  <p><span class="math display">$$v(r) = \sqrt{ r \, \partial_r
-  \Phi_E(r) },$$</span></p>
-  <p>leading to dark-matter–free rotation curve fits for SPARC/MaNGA
-  galaxies.</p>
-  <h1 id="efc-c_0-cognitiveinformational-layer">EFC-C<span
-  class="math inline"><sub>0</sub></span>: Cognitive/Informational
-  Layer</h1>
-  <h2 class="unnumbered" id="overview-2">Overview</h2>
-  <p>EFC-C<span class="math inline"><sub>0</sub></span> describes how
-  information and light interact with entropy through an effective
-  refractive index. This layer connects EFC to observational lensing and
-  signal propagation.</p>
-  <h2 class="unnumbered"
-  id="entropyrefractive-index-relation">Entropy–Refractive Index
-  Relation</h2>
-  <p>We define:</p>
-  <p><span
-  class="math display"><em>n</em>(<em>S</em>) = 1 + <em>α</em><em>S</em>,</span></p>
-  <p>where <span class="math inline"><em>α</em></span> is the response
-  coefficient.</p>
-  <h2 class="unnumbered" id="local-speed-of-light">Local Speed of
-  Light</h2>
-  <p>Light speed is reduced according to:</p>
-  <p><span class="math display">$$c(S) = \frac{c_0}{n(S)}.$$</span></p>
-  <h2 class="unnumbered" id="fermat-functional">Fermat Functional</h2>
-  <p>Light paths minimize:</p>
-  <p><span
-  class="math display"><em>τ</em> = ∫<em>n</em>(<em>S</em>) <em>d</em><em>s</em>,</span></p>
-  <p>giving an entropy-driven lensing law.</p>
-  <h2 class="unnumbered" id="dual-lensing">Dual Lensing</h2>
-  <p>Two effects appear:</p>
+  class="math display"><em>E</em><sub><em>f</em></sub> = <em>ρ</em>(1−<em>S</em>).</span></p>
+  <p>Interpretation:</p>
   <ul>
-  <li><p>geometric deviation</p></li>
-  <li><p>entropy-induced refraction</p></li>
+  <li><p>high density and low entropy <span class="math inline">⇒</span>
+  large <span
+  class="math inline"><em>E</em><sub><em>f</em></sub></span></p></li>
+  <li><p>high entropy suppresses <span
+  class="math inline"><em>E</em><sub><em>f</em></sub></span></p></li>
   </ul>
-  <p>This forms the observational core of EFC lensing.</p>
-  <h1 id="light-dynamics-s0-s1-transitions">Light Dynamics: s0 → s1
-  Transitions</h1>
-  <h2 class="unnumbered" id="overview-3">Overview</h2>
-  <p>The s<span class="math inline"><sub>0</sub>→</span> s<span
-  class="math inline"><sub>1</sub></span> transition describes how light
-  changes mode of propagation inside an entropy field.</p>
-  <h2 class="unnumbered" id="propagation-law">Propagation Law</h2>
-  <p><span class="math display">$$\frac{d\vec{k}}{ds} = -\nabla
-  n(S),$$</span></p>
-  <p>which is optically equivalent to gravitational lensing, but driven
-  by <span class="math inline">∇<em>S</em></span> rather than mass.</p>
-  <h2 class="unnumbered" id="coupling-between-layers">Coupling Between
-  Layers</h2>
-  <p>Light follows modified trajectories whenever:</p>
-  <p><span class="math display">∇<em>S</em> ≠ 0.</span></p>
-  <p>This couples EFC-D (dynamics) and EFC-C<span
-  class="math inline"><sub>0</sub></span> (refraction) into a unified
-  signal-propagation model.</p>
-  <h1 id="observables">Observables</h1>
-  <h2 class="unnumbered" id="overview-4">Overview</h2>
-  <p>Observable predictions arise directly from <span
-  class="math inline"><em>S</em>(<em>r</em>)</span>, <span
-  class="math inline"><em>n</em>(<em>S</em>)</span>, and the effective
-  potential <span
-  class="math inline"><em>Φ</em><sub><em>E</em></sub></span>.</p>
-  <h2 class="unnumbered" id="rotation-curves">Rotation Curves</h2>
-  <p><span class="math display">$$v(r) = \sqrt{ r \, \partial_r
-  \Phi_E(r) }.$$</span></p>
-  <h2 class="unnumbered" id="lensing-angle">Lensing Angle</h2>
+  <h2 class="unnumbered" id="density">Density</h2>
+  <p>The mass density is</p>
+  <p><span class="math display">$$\rho = \frac{m}{V}.$$</span></p>
+  <h2 class="unnumbered" id="energy-flow-rate">Energy-Flow Rate</h2>
+  <p>The temporal change is</p>
+  <p><span class="math display">$$\frac{dE_f}{dt} = \nabla_t
+  E_f.$$</span></p>
+  <h1 class="unnumbered" id="efc-s-entropy-field-and-gradient">EFC-S:
+  Entropy Field and Gradient</h1>
+  <p>The entropy field <span
+  class="math inline"><em>S</em>(<strong>x</strong>) ∈ [0,1]</span>
+  describes local thermodynamic ordering.</p>
   <p><span
-  class="math display"><em>θ</em> = ∫∇<em>n</em>(<em>S</em>) <em>d</em><em>s</em>.</span></p>
-  <h2 class="unnumbered" id="expansion-signal">Expansion Signal</h2>
-  <p><span class="math display">$$H(S) =
-  \sqrt{|E_f(S)|}(1+S),$$</span></p>
-  <p>used when comparing with DESI, Euclid, JWST, and weak-lensing
-  surveys.</p>
-  <h1 id="figures">Figures</h1>
-  <h2 class="unnumbered" id="figures-1">Figures</h2>
+  class="math display"><em>S</em>(<strong>x</strong>) ∈ [0,1]</span></p>
+  <p>Entropy gradient:</p>
+  <p><span class="math display">$$\nabla S(\mathbf{x}) =
+    \left(
+    \frac{\partial S}{\partial x},
+    \frac{\partial S}{\partial y},
+    \frac{\partial S}{\partial z}
+    \right)$$</span></p>
+  <p>Magnitude:</p>
+  <p><span class="math display">$$\lvert \nabla S \rvert =
+    \sqrt{
+      \left( \frac{\partial S}{\partial x} \right)^2 +
+      \left( \frac{\partial S}{\partial y} \right)^2 +
+      \left( \frac{\partial S}{\partial z} \right)^2
+    }.$$</span></p>
+  <h1 class="unnumbered" id="light-propagation-s0-s1">Light Propagation
+  (s0 → s1)</h1>
+  <p>Entropy endpoints:</p>
+  <p><span class="math display">$$S_{\text{mid}} = \tfrac{1}{2}(s_0 +
+  s_1),
+    \qquad
+    \Delta S = s_1 - s_0.$$</span></p>
+  <p>Normalized entropy coordinate:</p>
+  <p><span class="math display">$$x(S) = \frac{S -
+  S_{\text{mid}}}{\Delta S/2}.$$</span></p>
+  <p>Effective light speed:</p>
+  <p><span
+  class="math display"><em>c</em>(<em>S</em>) = <em>c</em><sub>0</sub>(1+<em>a</em><sub>edge</sub> <em>x</em>(<em>S</em>)<sup>2</sup>).</span></p>
+  <p>Light-travel time:</p>
+  <p><span class="math display">$$t_{\text{obs}} = \int_{\gamma}
+  \frac{dl}{c(S(l))}.$$</span></p>
+  <h1 class="unnumbered" id="observables-in-efc">Observables in EFC</h1>
+  <h2 class="unnumbered" id="lensing">Lensing</h2>
+  <p><span class="math display">Lensing = Mass
+  Distribution + <em>S</em>(<strong>x</strong>) + <em>c</em>(<em>S</em>).</span></p>
+  <h2 class="unnumbered" id="rotation-curves">Rotation Curves</h2>
+  <p><span class="math display">$$v(r) = \sqrt{\, r \, \frac{\partial
+  \Phi}{\partial r} \, }.$$</span></p>
+  <h2 class="unnumbered" id="expansion-rate">Expansion Rate</h2>
+  <p><span class="math display">$$H(E_f, S) = \sqrt{|E_f|}\,(1 +
+  S).$$</span></p>
+  <p>Core chain:</p>
+  <p><span
+  class="math display"><em>S</em>(<strong>x</strong>) → <em>E</em><sub><em>f</em></sub>(<strong>x</strong>) → <em>Φ</em>(<em>E</em><sub><em>f</em></sub>,<em>S</em>) → <em>c</em>(<em>S</em>) → <em>H</em>(<em>E</em><sub><em>f</em></sub>,<em>S</em>) → Observables.</span></p>
+  <h1 class="unnumbered" id="figures">Figures</h1>
   <figure>
-  <img src="EFC_vs_LCDM_plot.png" style="width:95.0%" />
-  <figcaption>Comparison between EFC predictions and <span
+  <img src="EFC_vs_LCDM_plot.png" />
+  <figcaption>Comparison between EFC baseline behaviour and <span
   class="math inline"><em>Λ</em></span>CDM.</figcaption>
   </figure>
+  <h1 class="unnumbered"
+  id="meta-reflective-development">Meta-Reflective Development</h1>
+  <p>The EFC framework evolves iteratively through thermodynamic,
+  observational, and structural consistency checks.</p>
+  <ul>
+  <li><p>SPARC rotation curves</p></li>
+  <li><p>JWST early galaxies</p></li>
+  <li><p>DESI expansion history</p></li>
+  <li><p>Lensing structure</p></li>
+  </ul>
 </main>
 
 <script>
