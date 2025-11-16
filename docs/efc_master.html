@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <title>Energy-Flow Cosmology — Master Formal Specification</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- MathJax for LaTeX rendering -->
+  <script>
+  window.MathJax = {
+    tex: {inlineMath: [['$','$'], ['\\(','\\)']]},
+    svg: {fontCache: 'global'}
+  };
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+
+  <style>
+    :root {
+      --bg: #fafafa;
+      --fg: #111111;
+      --fg-soft: #444444;
+      --accent: #1f8fff;
+      --accent-soft: #e3f1ff;
+      --sidebar-bg: #111111;
+      --sidebar-fg: #ffffff;
+      --sidebar-muted: #bbbbbb;
+      --border-subtle: #e0e0e0;
+      --code-bg: #1d1f21;
+    }
+    [data-theme="dark"] {
+      --bg: #050608;
+      --fg: #f4f4f4;
+      --fg-soft: #c9c9c9;
+      --accent: #7ed0ff;
+      --accent-soft: #102030;
+      --sidebar-bg: #050608;
+      --sidebar-fg: #f4f4f4;
+      --sidebar-muted: #777777;
+      --border-subtle: #222222;
+      --code-bg: #111419;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Inter", "Helvetica Neue", Arial, sans-serif;
+      line-height: 1.55;
+      background: radial-gradient(circle at top left, rgba(126,208,255,0.10), transparent 55%),
+                  radial-gradient(circle at bottom right, rgba(126,208,255,0.08), transparent 55%),
+                  var(--bg);
+      color: var(--fg);
+      display: flex;
+      min-height: 100vh;
+    }
+
+    /* Sidebar / TOC */
+    #toc {
+      width: 260px;
+      height: 100vh;
+      position: sticky;
+      top: 0;
+      left: 0;
+      overflow-y: auto;
+      background: var(--sidebar-bg);
+      color: var(--sidebar-fg);
+      padding: 20px 22px;
+      border-right: 1px solid #222;
+    }
+
+    #toc-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      margin-bottom: 18px;
+    }
+
+    #toc-title {
+      font-size: 17px;
+      font-weight: 600;
+      color: var(--accent);
+    }
+
+    #theme-toggle {
+      border: 1px solid #444;
+      background: transparent;
+      color: var(--sidebar-fg);
+      font-size: 11px;
+      padding: 4px 8px;
+      border-radius: 999px;
+      cursor: pointer;
+    }
+
+    #theme-toggle:hover {
+      border-color: #888;
+    }
+
+    #toc small {
+      display: block;
+      margin-bottom: 10px;
+      font-size: 11px;
+      color: var(--sidebar-muted);
+    }
+
+    #toc a {
+      display: block;
+      padding: 5px 0;
+      color: var(--sidebar-muted);
+      text-decoration: none;
+      font-size: 13px;
+    }
+
+    #toc a:hover {
+      color: var(--sidebar-fg);
+    }
+
+    /* Content */
+    #content {
+      flex: 1;
+      padding: 32px 40px 60px;
+      max-width: 980px;
+      margin: 0 auto;
+    }
+
+    h1, h2, h3 {
+      font-weight: 600;
+      margin-top: 32px;
+      margin-bottom: 12px;
+      scroll-margin-top: 80px;
+    }
+    h1 {
+      font-size: 30px;
+    }
+    h2 {
+      font-size: 22px;
+      border-bottom: 1px solid var(--border-subtle);
+      padding-bottom: 6px;
+    }
+    h3 {
+      font-size: 18px;
+      margin-top: 24px;
+    }
+
+    p {
+      margin: 12px 0;
+      color: var(--fg-soft);
+    }
+
+    ul, ol {
+      color: var(--fg-soft);
+    }
+
+    em {
+      color: var(--fg-soft);
+    }
+
+    .meta-line {
+      font-size: 13px;
+      color: var(--fg-soft);
+    }
+
+    .tagline {
+      margin-top: 6px;
+      font-size: 14px;
+      color: var(--fg-soft);
+    }
+
+    /* Figure */
+    .figure {
+      margin: 32px 0;
+      text-align: center;
+    }
+    .figure img {
+      max-width: 100%;
+      border-radius: 8px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.16);
+    }
+    .caption {
+      font-size: 13px;
+      color: var(--fg-soft);
+      margin-top: 8px;
+    }
+
+    /* Code-style */
+    pre {
+      background: var(--code-bg);
+      color: #f4f4f4;
+      padding: 10px 12px;
+      border-radius: 6px;
+      overflow-x: auto;
+      font-size: 13px;
+    }
+
+    /* Simple callout */
+    .callout {
+      border-left: 3px solid var(--accent);
+      background: var(--accent-soft);
+      padding: 10px 12px;
+      margin: 18px 0;
+      font-size: 13px;
+    }
+
+    @media (max-width: 900px) {
+      #toc {
+        display: none;
+      }
+      #content {
+        margin-left: 0;
+        padding: 18px 16px 40px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Sidebar / TOC -->
+<nav id="toc">
+  <div id="toc-header">
+    <div id="toc-title">EFC Master</div>
+    <button id="theme-toggle" type="button">☾ Dark</button>
+  </div>
+  <small>Formal specification</small>
+  <a href="#efcd">EFC-D — Energy-Flow Dynamics</a>
+  <a href="#efcs">EFC-S — Entropy Field</a>
+  <a href="#light">s0 → s1 Light Dynamics</a>
+  <a href="#obs">Observables</a>
+  <a href="#figs">Figure: EFC vs ΛCDM</a>
+  <a href="#meta">Meta-Reflective</a>
+  <a href="#meta-arch">Meta-Architecture</a>
+</nav>
+
+<!-- Main content -->
+<main id="content">
+
+  <h1>Energy-Flow Cosmology — Master Formal Specification</h1>
+  <p class="meta-line"><em>Morten Magnusson</em></p>
+  <p class="tagline">
+    Thermodynamic cosmology defined by an entropy field $S(\\mathbf{x})$, energy-flow potential $E_f$,  
+    effective light speed $c(S)$, and expansion rate $H(E_f,S)$.
+  </p>
+
+  <!-- ========================= EFC-D ======================== -->
+  <h2 id="efcd">EFC-D: Energy-Flow Dynamics</h2>
+
+  <p>
+    The local energy-flow potential $E_f$ is defined as a function of mass density $\\rho$
+    and entropy $S$:
+  </p>
+
+  <p>
+    $$ E_f = \\rho\\,(1 - S) $$
+  </p>
+
+  <p>
+    Interpretation:
+  </p>
+  <ul>
+    <li>High density and low entropy $\\Rightarrow$ large $E_f$</li>
+    <li>High entropy suppresses $E_f$</li>
+  </ul>
+
+  <h3>Density</h3>
+  <p>
+    The mass density is
+  </p>
+  <p>
+    $$ \\rho = \\frac{m}{V} $$
+  </p>
+
+  <h3>Energy-Flow Rate</h3>
+  <p>
+    The temporal change in the energy-flow potential is written as
+  </p>
+  <p>
+    $$ \\frac{dE_f}{dt} = \\nabla_t E_f. $$
+  </p>
+
+  <p class="callout">
+    <strong>Code reference:</strong> <code>src/efc_potential.py</code>
+  </p>
+
+  <!-- ========================= EFC-S ======================== -->
+  <h2 id="efcs">EFC-S: Entropy Field &amp; Gradient</h2>
+
+  <p>
+    EFC begins with a thermodynamic field $S(\\mathbf{x})$ representing the local
+    entropy state of the matter–information configuration.
+  </p>
+
+  <h3>Entropy Field</h3>
+  <p>
+    The entropy field is modeled as
+  </p>
+  <p>
+    $$ S(\\mathbf{x}) \\in [0,1], $$
+  </p>
+  <p>
+    where
+  </p>
+  <ul>
+    <li>$S = 0$: highly ordered regions</li>
+    <li>$S = 1$: high-entropy regions</li>
+  </ul>
+
+  <h3>Entropy Gradient</h3>
+  <p>
+    The gradient drives anisotropic flow:
+  </p>
+  <p>
+    $$ \\nabla S(\\mathbf{x}) =
+      \\left(
+        \\frac{\\partial S}{\\partial x},
+        \\frac{\\partial S}{\\partial y},
+        \\frac{\\partial S}{\\partial z}
+      \\right) $$
+  </p>
+  <p>
+    Its magnitude is
+  </p>
+  <p>
+    $$ \\lvert \\nabla S \\rvert =
+    \\sqrt{
+      \\left( \\frac{\\partial S}{\\partial x} \\right)^2 +
+      \\left( \\frac{\\partial S}{\\partial y} \\right)^2 +
+      \\left( \\frac{\\partial S}{\\partial z} \\right)^2
+    }. $$
+  </p>
+
+  <p class="callout">
+    <strong>Code reference:</strong> <code>src/efc_entropy.py</code>
+  </p>
+
+  <!-- ========================= Light Dynamics ======================== -->
+  <h2 id="light">s0 → s1 Light Propagation Dynamics</h2>
+
+  <h3>Entropy Endpoints</h3>
+  <p>
+    Two entropy endpoints are defined:
+  </p>
+  <ul>
+    <li>$s_0$: low-entropy, high-structure endpoint</li>
+    <li>$s_1$: high-entropy, high-diffusion endpoint</li>
+  </ul>
+
+  <p>
+    The midpoint and entropy span are
+  </p>
+  <p>
+    $$ S_{\\text{mid}} = \\tfrac{1}{2}(s_0 + s_1), \\qquad
+       \\Delta S = s_1 - s_0. $$
+  </p>
+
+  <p>
+    Define a normalized entropy coordinate
+  </p>
+  <p>
+    $$ x(S) = \\frac{S - S_{\\text{mid}}}{\\Delta S/2}. $$
+  </p>
+
+  <h3>Effective Speed of Light</h3>
+  <p>
+    The effective speed of light becomes
+  </p>
+  <p>
+    $$ c(S) = c_0 \\bigl( 1 + a_{\\text{edge}} \\, x(S)^2 \\bigr), $$
+  </p>
+  <p>
+    where $a_{\\text{edge}}$ controls the strength of edge-driven variation.
+  </p>
+
+  <p>
+    Interpretation:
+  </p>
+  <ul>
+    <li>Near $s_0$: locally increased $c(S)$ $\Rightarrow$ focusing</li>
+    <li>Near $s_1$: large-scale increase in $c(S)$ $\Rightarrow$ defocusing</li>
+    <li>Around $S_{\\text{mid}}$: slowest propagation regime</li>
+  </ul>
+
+  <h3>Light Travel Time</h3>
+  <p>
+    For a photon moving along a path $\\gamma$, the observed travel time is
+  </p>
+  <p>
+    $$ t_{\\text{obs}} = \\int_{\\gamma} \\frac{dl}{c(S(l))}. $$
+  </p>
+
+  <h3>Lensing Behaviour</h3>
+  <p>
+    Low-entropy endpoints act as focusing wells, while high-entropy endpoints
+    contribute to large-scale defocusing. This yields a dual-lens structure:
+  </p>
+  <ul>
+    <li>$s_0$ regions produce sharp focusing, similar to mass overdensities</li>
+    <li>$s_1$ regions create gentle, large-area defocusing</li>
+    <li>Transitions between them define asymmetric lensing profiles</li>
+  </ul>
+
+  <!-- ========================= Observables ======================== -->
+  <h2 id="obs">Observables in Energy-Flow Cosmology</h2>
+
+  <p>
+    All observable quantities are modulated by the entropy field
+    $S(\\mathbf{x})$, the energy-flow field $E_f(\\mathbf{x})$, and
+    the derived effective light speed $c(S)$.
+  </p>
+
+  <h3>Light Propagation</h3>
+  <p>
+    The light-travel time along a photon trajectory $\\gamma$ is
+  </p>
+  <p>
+    $$ t_{\\text{obs}} = \\int_{\\gamma} \\frac{dl}{c(S(l))}. $$
+  </p>
+
+  <p>
+    Because $c(S)$ varies across the grid:
+  </p>
+  <ul>
+    <li>regions near $s_0$ increase local $c(S)$ and produce focusing,</li>
+    <li>regions near $s_1$ increase $c(S)$ on large scales and produce defocusing,</li>
+    <li>mid-entropy regions produce the slowest propagation and longest delays.</li>
+  </ul>
+
+  <h3>Lensing</h3>
+  <p>
+    In GR, lensing depends only on the mass distribution.  
+    In EFC it depends on both mass and entropy structure:
+  </p>
+  <p>
+    $$ \\text{Lensing} = \\text{Mass Distribution} + S(\\mathbf{x}) + c(S). $$
+  </p>
+
+  <ul>
+    <li>focusing from $s_0$ regions can mimic excess mass,</li>
+    <li>defocusing from $s_1$ regions can mimic mass deficits,</li>
+    <li>time-delay ratios are modified,</li>
+    <li>shear patterns depend on how photon paths sample $S(\\mathbf{x})$.</li>
+  </ul>
+
+  <h3>Rotation Curves</h3>
+  <p>
+    Circular velocities follow from the potential $\\Phi$:
+  </p>
+  <p>
+    $$ v(r) = \\sqrt{\\, r \\, \\frac{\\partial \\Phi}{\\partial r} \\, }. $$
+  </p>
+  <p>
+    Since $\\Phi(E_f, S)$ depends on both $E_f$ and $S$, rotation curves
+    can flatten without invoking dark matter.
+  </p>
+
+  <h3>Expansion Rate</h3>
+  <p>
+    The expansion rate is defined as
+  </p>
+  <p>
+    $$ H(E_f, S) = \\sqrt{|E_f|}\\,(1 + S), $$
+  </p>
+  <p>
+    so acceleration arises from the joint evolution of $(E_f, S)$ rather than
+    dark energy or a cosmological constant.
+  </p>
+
+  <h3>Dependency Chain</h3>
+  <p>
+    The core dependency chain is
+  </p>
+  <p>
+    $$ S(\\mathbf{x})
+       \\Rightarrow
+       E_f(\\mathbf{x})
+       \\Rightarrow
+       \\Phi(E_f,S)
+       \\Rightarrow
+       c(S)
+       \\Rightarrow
+       \\text{Observables}. $$
+  </p>
+
+  <!-- ========================= Figure ======================== -->
+  <h2 id="figs">Figure: EFC vs ΛCDM</h2>
+
+  <div class="figure">
+    <!-- For GitHub Pages: keep PNG in same folder as this HTML -->
+    <img src="EFC_vs_LCDM_plot.png" alt="EFC vs ΛCDM" />
+    <div class="caption">
+      Comparison between EFC baseline behaviour and $\\Lambda$CDM
+      at the level of rotation curves and structure response.
+    </div>
+  </div>
+
+  <!-- ========================= Meta-Reflective ======================== -->
+  <h2 id="meta">Meta-Reflective Theory Development</h2>
+
+  <p>
+    The development of Energy-Flow Cosmology follows an iterative,
+    meta-reflective process instead of a purely linear derivation.
+  </p>
+
+  <ul>
+    <li>Equations are refined against empirical constraints.</li>
+    <li>Entropy structure and expansion dynamics are updated together.</li>
+    <li>Conceptual invariants are tracked across thermodynamic layers.</li>
+    <li>Assumptions and transformations are documented explicitly.</li>
+  </ul>
+
+  <p>
+    The reflective loop is built from three components:
+  </p>
+  <ol>
+    <li><strong>Observation layer:</strong> SPARC, JWST, DESI, lensing.</li>
+    <li><strong>Mathematical layer:</strong> thermodynamic equations linking $S$, $E_f$, $c(S)$, and $H$.</li>
+    <li><strong>Interpretation layer:</strong> model adjustments, conceptual updates, stability checks.</li>
+  </ol>
+
+  <p>
+    Entropy acts as the organizing variable, defining structural boundaries,
+    light-speed modulation, large-scale expansion, and the $s_0 \\rightarrow s_1$
+    transition.
+  </p>
+
+  <!-- ========================= Meta-Architecture ======================== -->
+  <h2 id="meta-arch">Meta-Architecture Specification</h2>
+
+  <p>
+    The meta-architecture describes how $S(\\mathbf{x})$, $E_f(\\mathbf{x})$,
+    $c(S)$ and $H(E_f,S)$ interact as one coherent thermodynamic system.
+  </p>
+
+  <p>
+    The dependency chain is
+  </p>
+  <p>
+    $$ S(\\mathbf{x})
+       \\Rightarrow
+       E_f(\\mathbf{x})
+       \\Rightarrow
+       \\Phi(E_f,S)
+       \\Rightarrow
+       c(S)
+       \\Rightarrow
+       H(E_f,S)
+       \\Rightarrow
+       \\text{Observables}. $$
+  </p>
+
+  <p>
+    Stability conditions include
+  </p>
+  <p>
+    $$ \\nabla E_f \\approx 0 \\Rightarrow \\text{quasi-stable halo}, $$
+  </p>
+  <p>
+    and small $|\\nabla S|$ supporting structural persistence.
+  </p>
+
+  <p>
+    The architecture enforces:
+  </p>
+  <ul>
+    <li>coherent thermodynamic interaction,</li>
+    <li>tight mapping across observables,</li>
+    <li>predictive constraints from $(S,E_f)$ alone,</li>
+    <li>model reduction without surplus entities.</li>
+  </ul>
+
+</main>
+
+<script>
+  const btn = document.getElementById('theme-toggle');
+  const html = document.documentElement;
+
+  function updateLabel() {
+    const theme = html.getAttribute('data-theme') || 'light';
+    btn.textContent = theme === 'light' ? '☾ Dark' : '☀ Light';
+  }
+
+  btn.addEventListener('click', () => {
+    const current = html.getAttribute('data-theme') || 'light';
+    const next = current === 'light' ? 'dark' : 'light';
+    html.setAttribute('data-theme', next);
+    updateLabel();
+  });
+
+  updateLabel();
+</script>
+
+</body>
+</html>
