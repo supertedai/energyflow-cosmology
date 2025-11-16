@@ -12,17 +12,11 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # -------------------------------
-      # Checkout repo
-      # -------------------------------
       - name: Checkout repository
         uses: actions/checkout@v4
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
 
-      # -------------------------------
-      # Install LaTeX + Pandoc
-      # -------------------------------
       - name: Install LaTeX + Pandoc
         run: |
           sudo apt-get update
@@ -35,116 +29,56 @@ jobs:
             texlive-science \
             latexmk
 
-      # -------------------------------
-      # Clean old HTML so no fallback occurs
-      # -------------------------------
+      # Clean old files
       - name: Remove old generated HTML
         run: |
           rm -f theory/master/efc_master.html
           rm -f docs/efc_master.html
 
-      # -------------------------------
       # Build PDF
-      # -------------------------------
       - name: Build EFC Master PDF
         working-directory: theory/master
         run: |
           latexmk -pdf -interaction=nonstopmode efc_master.tex
 
-      # -------------------------------
-      # Create HTML Template (perfect clean version)
-      # -------------------------------
+      # Create HTML template (safe echo version)
       - name: Create HTML Template
         working-directory: theory/master
         run: |
-          cat > efc_html_template.html << 'EOF'
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8" />
-<title>EFC Master Document</title>
+          echo '<!DOCTYPE html>' > efc_html_template.html
+          echo '<html lang="en">' >> efc_html_template.html
+          echo '<head>' >> efc_html_template.html
+          echo '<meta charset="UTF-8" />' >> efc_html_template.html
+          echo '<title>EFC Master Document</title>' >> efc_html_template.html
+          echo '<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>' >> efc_html_template.html
 
-<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+          echo '<style>' >> efc_html_template.html
+          echo ':root { --max-width: 38rem; --font-body: system-ui, -apple-system, BlinkMacSystemFont, sans-serif; --font-size: 17px; }' >> efc_html_template.html
+          echo 'html[data-theme="light"] { background:#fbfbfb; color:#111; }' >> efc_html_template.html
+          echo 'html[data-theme="dark"]  { background:#111; color:#ddd; }' >> efc_html_template.html
+          echo 'body { margin:0 auto; max-width:var(--max-width); padding:3rem 1.8rem; font-family:var(--font-body); font-size:var(--font-size); line-height:1.6; }' >> efc_html_template.html
+          echo 'h1, h2, h3 { font-weight:600; margin-top:2.2rem; }' >> efc_html_template.html
+          echo 'img { max-width:100%; height:auto; border-radius:4px; }' >> efc_html_template.html
+          echo 'pre, code { background:#f0f0f0; padding:0.5rem; border-radius:4px; }' >> efc_html_template.html
+          echo '#TOC { margin-bottom:2.5rem; padding-bottom:1.5rem; border-bottom:1px solid #ccc; }' >> efc_html_template.html
+          echo '#TOC ul { padding-left:0; list-style:none; }' >> efc_html_template.html
+          echo '#TOC li { margin:0.35rem 0; }' >> efc_html_template.html
+          echo '.theme-toggle { position:fixed; top:12px; right:12px; padding:0.3rem 0.7rem; background:#444; color:#fff; border-radius:4px; cursor:pointer; font-size:0.8rem; opacity:0.85; }' >> efc_html_template.html
+          echo '</style>' >> efc_html_template.html
 
-<style>
-  :root {
-    --max-width: 38rem;
-    --font-body: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-    --font-size: 17px;
-  }
+          echo '<script>' >> efc_html_template.html
+          echo 'function toggleTheme(){ let h=document.documentElement; h.dataset.theme=(h.dataset.theme==="dark")?"light":"dark"; }' >> efc_html_template.html
+          echo 'document.documentElement.dataset.theme="light";' >> efc_html_template.html
+          echo '</script>' >> efc_html_template.html
 
-  html[data-theme="light"] { background:#fbfbfb; color:#111; }
-  html[data-theme="dark"]  { background:#111; color:#ddd; }
+          echo '</head>' >> efc_html_template.html
+          echo '<body>' >> efc_html_template.html
+          echo '<button class="theme-toggle" onclick="toggleTheme()">Theme</button>' >> efc_html_template.html
+          echo '$body$' >> efc_html_template.html
+          echo '</body>' >> efc_html_template.html
+          echo '</html>' >> efc_html_template.html
 
-  body {
-    margin: 0 auto;
-    max-width: var(--max-width);
-    padding: 3rem 1.8rem;
-    font-family: var(--font-body);
-    font-size: var(--font-size);
-    line-height: 1.6;
-  }
-
-  h1, h2, h3 {
-    font-weight: 600;
-    margin-top: 2.2rem;
-  }
-
-  img {
-    max-width: 100%;
-    height: auto;
-  }
-
-  pre, code {
-    background: #f0f0f0;
-    padding: 0.5rem;
-    border-radius: 4px;
-  }
-
-  #TOC {
-    margin-bottom: 2.5rem;
-    padding-bottom: 1.5rem;
-    border-bottom: 1px solid #ccc;
-  }
-
-  #TOC ul { list-style: none; padding-left: 0; }
-  #TOC li { margin: 0.35rem 0; }
-
-  .theme-toggle {
-    position: fixed;
-    top: 12px;
-    right: 12px;
-    padding: 0.3rem 0.7rem;
-    background: #444;
-    color: #fff;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 0.8rem;
-    opacity: 0.85;
-  }
-</style>
-
-<script>
-  function toggleTheme() {
-    let h = document.documentElement;
-    h.dataset.theme = (h.dataset.theme === "dark") ? "light" : "dark";
-  }
-  document.documentElement.dataset.theme = "light";
-</script>
-
-</head>
-<body>
-<button class="theme-toggle" onclick="toggleTheme()">Theme</button>
-
-$body$
-
-</body>
-</html>
-EOF
-
-      # -------------------------------
-      # Build HTML via Pandoc Template
-      # -------------------------------
+      # Build HTML
       - name: Build HTML via Pandoc Template
         working-directory: theory/master
         run: |
@@ -157,21 +91,17 @@ EOF
             --metadata title="EFC Master Document" \
             --output=efc_master.html
 
-      # -------------------------------
-      # Sanity check: ensure template was actually used
-      # -------------------------------
+      # Verify template applied
       - name: Verify template usage
         working-directory: theory/master
         run: |
           if ! grep -q "theme-toggle" efc_master.html; then
-            echo "TEMPLATE NOT APPLIED — FAILING BUILD"
+            echo "ERROR: Template not applied"
             exit 1
           fi
 
-      # -------------------------------
-      # Copy to docs + force commit
-      # -------------------------------
-      - name: Deploy HTML + figure to docs
+      # Force update docs + push
+      - name: Deploy HTML and Figures
         run: |
           mkdir -p docs
           cp theory/master/efc_master.html docs/efc_master.html
@@ -180,12 +110,10 @@ EOF
           git config user.name "github-actions"
           git config user.email "actions@github.com"
           git add -A docs/
-          git commit -m "Update EFC Master HTML (auto-deploy)" || true
+          git commit -m "Update EFC Master HTML (auto)" || true
           git push
 
-      # -------------------------------
       # Upload artifacts
-      # -------------------------------
       - name: Upload PDF Artifact
         uses: actions/upload-artifact@v4
         with:
