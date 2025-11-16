@@ -4,6 +4,7 @@ on:
   push:
     paths:
       - "theory/master/**"
+      - ".github/workflows/build_efc_master_dual.yml"
   workflow_dispatch:
 
 jobs:
@@ -11,9 +12,16 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+
+      # -------------------------------
+      # Checkout repository
+      # -------------------------------
       - name: Checkout repository
         uses: actions/checkout@v4
 
+      # -------------------------------
+      # Install LaTeX + Pandoc
+      # -------------------------------
       - name: Install LaTeX + Pandoc
         run: |
           sudo apt-get update
@@ -22,43 +30,63 @@ jobs:
             texlive-latex-extra texlive-fonts-recommended \
             texlive-science
 
-      - name: Copy figure for LaTeX build
-        run: cp docs/EFC_vs_LCDM_plot.png theory/master/EFC_vs_LCDM_plot.png || true
+      # -------------------------------
+      # Copy figure for LaTeX build
+      # -------------------------------
+      - name: Copy figure into LaTeX folder
+        run: |
+          cp docs/EFC_vs_LCDM_plot.png theory/master/EFC_vs_LCDM_plot.png || true
 
+      # -------------------------------
+      # Build PDF
+      # -------------------------------
       - name: Build PDF
         working-directory: theory/master
         run: latexmk -pdf -interaction=nonstopmode efc_master.tex
 
-      - name: Confirm HTML template exists
+      # -------------------------------
+      # Verify HTML template exists
+      # -------------------------------
+      - name: Verify HTML template
         working-directory: theory/master
         run: |
           if [ ! -f "efc_html_template.html" ]; then
-            echo "ERROR: Template missing!"
+            echo "ERROR: Missing HTML template!"
             exit 1
           fi
 
-      - name: Build HTML with template
+      # -------------------------------
+      # Build HTML (no template engine)
+      # -------------------------------
+      - name: Build HTML
         working-directory: theory/master
         run: |
           pandoc efc_master.tex \
-            --template=efc_html_template.html \
             --from=latex \
             --to=html5 \
             --mathjax \
             --standalone \
+            --include-after-body=efc_html_template.html \
+            --metadata title="EFC Master Document" \
             --output=efc_master.html
 
+      # -------------------------------
+      # Deploy HTML to /docs
+      # -------------------------------
       - name: Deploy HTML to docs
         run: |
           mkdir -p docs
           cp theory/master/efc_master.html docs/efc_master.html
-
           git config user.name "github-actions"
           git config user.email "actions@github.com"
           git add docs/efc_master.html
-          git commit -m "Auto-update EFC Master HTML" || true
+          git commit -m "Auto-update HTML" || true
+          git pull --rebase origin main || true
           git push
 
+      # -------------------------------
+      # Upload artifacts
+      # -------------------------------
       - name: Upload PDF artifact
         uses: actions/upload-artifact@v4
         with:
