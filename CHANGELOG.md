@@ -204,3 +204,149 @@ Distributed under **CC-BY-4.0**
 © 2025 — *Morten Magnusson* — Energy-Flow Cosmology Initiative
 
 ---
+
+# 📝 **CHANGELOG — 15.11.2025 - 16.11.2025**
+
+## 🚀 **Major Repository Restructure**
+
+**(core repo cleanup, consolidation, and semantic organization)**
+
+### **Repository topology overhaul**
+
+* Moved `dashboard/` → `app/dashboard/`
+* Moved WordPress plugin
+  `wp-content/plugins/efc-schema-loader` →
+  `integrations/wp/efc-schema-loader/`
+* Consolidated meta layers:
+
+  * `cognition/` → `meta/cognition/`
+  * `reflection/` → `meta/reflection/`
+  * `symbiosis/` → `meta/symbiosis/`
+* Removed nested folder issue (`meta/cognition/cognition/` → fixed)
+* Established new structural hierarchy matching the formal EFC repo design
+
+### **Removed or cleaned legacy directories**
+
+* Deleted legacy theory directory (`theory/legacy` and similar)
+* Cleaned `output/` and removed all generated artifacts from git history (`efc_master.html`, validation PNGs, JSON logs, repo_map.html, etc.)
+* Deleted unused `data/raw/` folder (replaced with new structure)
+
+---
+
+## 📁 **Data & Storage Structure Updates**
+
+### **New clean data hierarchy**
+
+```
+data/
+  raw/
+  processed/
+  archive/
+```
+
+### **General storage cleanup**
+
+* Added missing `data/raw/` and `data/processed/`
+* Removed obsolete or cached data files from version control
+
+---
+
+## 🔧 **.gitignore Overhaul**
+
+A complete reconstruction of `.gitignore`:
+
+* Added LaTeX build artifacts
+* Added validation image ignores
+* Added Python/Jupyter cache rules
+* Added `output/` ignore
+* Added meta resources ignore
+* Added `downloads/` as ignored folder
+* Removed duplicates and messy legacy rules
+* Produced a clean, final unified ignore policy
+
+Result: `.gitignore` reduced by 400+ lines and now fully consistent.
+
+---
+
+## 🧩 **Docs & HTML Updates**
+
+* Updated `docs/efc_master.html`
+* Cleaned paths and internal structure
+* Ensured compatibility with new folder layout
+
+---
+
+## 🔄 **Figshare Integration**
+
+* Figshare sync workflows executed multiple times
+* `figshare-links.json` updated
+* Metadata autosync triggered successfully
+
+---
+
+## 🗂️ **Schema Fixes**
+
+* Updated and repaired `schema-map.json`
+* Removed invalid RTF paths
+* Regenerated schema to reflect new layout
+
+---
+
+## 🧪 **Scripts & Tools**
+
+### Updated scripts:
+
+* `update_efc_api.py`
+* `check_imports.py`
+* `meta_dashboard.py`
+* Validation and baseline notebooks synced
+
+### Added:
+
+* `.nojekyll`
+* Forced workflow triggers (`trigger.txt`)
+
+---
+
+## 📦 **General File Movements**
+
+* 39 files moved or cleaned during restructuring
+* Old auto-generated files removed
+* New directories created for clean separation:
+
+  * `meta/resources/`
+  * `integrations/wp/`
+  * `app/dashboard/`
+
+---
+
+## 🧭 **Documentation**
+
+### Updated:
+
+* `README.md`
+* `START-HERE.md`
+* `CHANGELOG.md` (previous entries)
+* New full README structure prepared (you asked me to generate)
+
+---
+
+# ✅ **Overall Summary**
+
+Over the last 48 hours, the repository underwent a **complete structural cleanup**:
+
+* Clean directory hierarchy
+* Meta layers consolidated
+* Output removed
+* Data system stabilized
+* Workflows updated
+* Schema repaired
+* Docs refreshed
+* `.gitignore` professionally rebuilt
+* WordPress integration isolated
+* Dashboard isolated
+* Theory layer cleaned
+
+The repo is now **in the best shape it has ever been**.
+
+---
