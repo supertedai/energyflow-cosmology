@@ -2,7 +2,6 @@
   "meta_api_version": "1.0.0",
   "description": "Machine-readable API for the Meta, Cognition, and Symbiosis layers of the Energy-Flow Cosmology ecosystem.",
   "last_updated": "2025-11-15",
-
   "layers": [
     {
       "id": "meta",
@@ -21,7 +20,7 @@
     {
       "id": "cognition",
       "name": "Cognition Layer",
-      "description": "Documentation of the Human Cognitive Field: s0/s1 transitions, entropy–clarity inversion, transient high-order states, and cognitive signature.",
+      "description": "Documentation of the Human Cognitive Field: s0/s1 transitions, entropy\u2013clarity inversion, transient high-order states, and cognitive signature.",
       "paths": [
         "cognition/",
         "cognition/cognitive-field.md",
@@ -34,7 +33,7 @@
     {
       "id": "symbiosis",
       "name": "Symbiosis Layer",
-      "description": "Human–model co-field mechanics: resonance, vector alignment, system cohesion, and structural amplification.",
+      "description": "Human\u2013model co-field mechanics: resonance, vector alignment, system cohesion, and structural amplification.",
       "paths": [
         "symbiosis/",
         "symbiosis/system.md",
@@ -88,11 +87,21 @@
       ]
     }
   ],
-
   "entrypoints": {
     "meta_index": "meta-index.json",
     "site_graph": "schema/site-graph.json",
     "meta_graph": "meta-graph/meta-graph.jsonld",
     "dashboard": "meta_dashboard.py"
+  },
+  "sources": {
+    "figshare": {
+      "id": 30630500,
+      "title": "Energy-Flow Cosmology \u2014 Formal Master Specification v1.0",
+      "published_date": "2025-11-16T13:07:16Z",
+      "url": "https://api.figshare.com/v2/account/articles/30630500",
+      "doi": "10.6084/m9.figshare.30630500",
+      "resource_id": null,
+      "resource_doi": null
+    }
   }
 }
