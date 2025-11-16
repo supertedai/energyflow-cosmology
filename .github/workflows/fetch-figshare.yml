@@ -1,4 +1,4 @@
-name: 🔄 Fetch Figshare Concepts
+name: Fetch Figshare Concepts
 
 on:
   workflow_dispatch:
