@@ -1,0 +1,46 @@
+name: Build EFC Master HTML
+
+on:
+  push:
+    paths:
+      - "theory/master/efc_master.tex"
+      - "docs/efc_master.css"
+      - ".github/workflows/build_efc_master_html.yml"
+  workflow_dispatch:
+
+jobs:
+  build-html:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install Pandoc
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y pandoc
+
+      - name: Build HTML from LaTeX
+        working-directory: docs
+        run: |
+          # Kopier figuren inn i docs slik at HTML finner den
+          cp ../theory/master/EFC_vs_LCDM_plot.png . || true
+
+          # Bygg HTML direkte fra LaTeX, ingen templates, kun CSS + MathJax
+          pandoc ../theory/master/efc_master.tex \
+            --from=latex \
+            --to=html5 \
+            --standalone \
+            --mathjax \
+            -c efc_master.css \
+            -o efc_master.html
+
+      - name: Commit HTML
+        run: |
+          git config user.name "github-actions"
+          git config user.email "actions@github.com"
+          git add docs/efc_master.html
+          git commit -m "Update EFC master HTML" || true
+          git pull --rebase origin main || true
+          git push
