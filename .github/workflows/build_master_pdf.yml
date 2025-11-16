@@ -5,6 +5,8 @@ on:
     paths:
       - "docs/efc_master.tex"
       - "docs/sections/**"
+      - "docs/**/*.tex"
+      - ".github/workflows/build_master_pdf.yml"
   workflow_dispatch:
 
 jobs:
@@ -12,29 +14,26 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout
+      - name: Checkout repository
         uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
 
       - name: Install LaTeX
         run: |
           sudo apt-get update
-          sudo apt-get install -y latexmk \
-            texlive-latex-base texlive-latex-recommended \
-            texlive-latex-extra texlive-fonts-recommended \
+          sudo apt-get install -y \
+            latexmk \
+            texlive-latex-base \
+            texlive-latex-recommended \
+            texlive-latex-extra \
+            texlive-fonts-recommended \
             texlive-science
 
       - name: Build PDF
         working-directory: docs
-        run: |
-          echo "PWD = $(pwd)"
-          echo "LISTING FILES:"
-          ls -la
-          latexmk -pdf -interaction=nonstopmode efc_master.tex
+        run: latexmk -pdf -interaction=nonstopmode efc_master.tex
 
       - name: Upload PDF
         uses: actions/upload-artifact@v4
         with:
-          name: efc_master_pdf
+          name: EFC_Master_PDF
           path: docs/efc_master.pdf
