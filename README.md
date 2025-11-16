@@ -79,8 +79,7 @@ The implementation of EFC simulations, validation, and tools.
 # 📁 **Repository Structure**
 
 ````markdown
-<details>
-<summary><strong>📁 Repository Structure (click to expand)</strong></summary>
+📁 Repository Structure (click to expand)
 
 ```
 /
@@ -167,7 +166,6 @@ The implementation of EFC simulations, validation, and tools.
 └── README.md
 ```
 
-</details>
 ````
 
 ---
