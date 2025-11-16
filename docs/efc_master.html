@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8"/>
+<title>EFC Master Specification</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<style>
+:root {
+  --bg: #fafafa;
+  --fg: #222;
+  --sidebar-bg: #111;
+  --sidebar-fg: #fff;
+  --accent: #1f8fff;
+}
+[data-theme="dark"] {
+  --bg: #050608;
+  --fg: #eee;
+  --sidebar-bg: #000;
+  --sidebar-fg: #ddd;
+  --accent: #7ed0ff;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: system-ui, sans-serif;
+  background: var(--bg);
+  color: var(--fg);
+  display: flex;
+  overflow-x: hidden;
+}
+
+#sidebar {
+  width: 260px;
+  background: var(--sidebar-bg);
+  color: var(--sidebar-fg);
+  height: 100vh;
+  position: fixed;
+  left: -260px;
+  top: 0;
+  padding: 20px;
+  overflow-y: auto;
+  transition: left 0.25s ease;
+  z-index: 10;
+}
+
+#sidebar.open {
+  left: 0;
+}
+
+#sidebar h2 {
+  margin-top: 0;
+  color: var(--accent);
+}
+
+#sidebar a {
+  color: #aaa;
+  text-decoration: none;
+  display: block;
+  padding: 5px 0;
+}
+#sidebar a:hover {
+  color: var(--sidebar-fg);
+}
+
+#content {
+  flex: 1;
+  padding: 40px;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+#menu-btn, #theme-btn {
+  position: fixed;
+  top: 15px;
+  background: var(--sidebar-bg);
+  color: var(--sidebar-fg);
+  border: none;
+  padding: 8px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  z-index: 20;
+}
+
+#menu-btn {
+  left: 15px;
+}
+
+#theme-btn {
+  right: 15px;
+}
+
+img {
+  max-width: 100%;
+  border-radius: 6px;
+  margin: 20px 0;
+}
+</style>
+</head>
+
+<body>
+
+<button id="menu-btn"><i class="fa fa-bars"></i></button>
+<button id="theme-btn"><i class="fa fa-moon"></i></button>
+
+<nav id="sidebar">
+<h2>Contents</h2>
+
+</nav>
+
+<main id="content">
+
+</main>
+
+<script>
+const sidebar = document.getElementById("sidebar");
+const btn = document.getElementById("menu-btn");
+btn.onclick = () => sidebar.classList.toggle("open");
+
+const themeBtn = document.getElementById("theme-btn");
+themeBtn.onclick = () => {
+  const html = document.documentElement;
+  html.dataset.theme = html.dataset.theme === "dark" ? "light" : "dark";
+};
+</script>
+
+</body>
+</html>
