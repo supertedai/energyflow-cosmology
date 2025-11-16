@@ -1,4 +1,4 @@
-name: Fetch Full Figshare Metadata
+name: Fetch Full Figshare Metadata (Auto)
 
 on:
   schedule:
@@ -23,12 +23,11 @@ jobs:
       - name: Install dependencies
         run: pip install requests
 
-      - name: Run full Figshare sync
+      - name: Run auto Figshare sync
         env:
           FIGSHARE_TOKEN: ${{ secrets.FIGSHARE_TOKEN }}
-          FIGSHARE_ARTICLE_ID: ${{ secrets.FIGSHARE_ARTICLE_ID }}
         run: |
-          python scripts/fetch_figshare_full.py
+          python scripts/fetch_figshare_auto.py
 
       - name: Commit and push updated Figshare files
         env:
@@ -37,12 +36,10 @@ jobs:
           git config user.name "github-actions"
           git config user.email "actions@github.com"
 
-          git add figshare/figshare-index.json
-          git add figshare/figshare-links.json
-          git add schema/concepts.json
-          git add schema/schema-map.json
+          git add figshare/
+          git add schema/
           git add api/v1/meta.json
           git add docs/docs-index.json
 
-          git diff --cached --quiet || git commit -m "🔄 Full Figshare sync (metadata + graph) [skip ci]"
+          git diff --cached --quiet || git commit -m "🔄 Auto-sync Figshare (latest version discovery) [skip ci]"
           git push origin main
