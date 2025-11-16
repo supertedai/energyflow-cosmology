@@ -1,61 +1,38 @@
-name: 📚 Build EFC Master — PDF + HTML
+name: Build EFC Master PDF
 
 on:
   push:
-    branches:
-      - main
     paths:
-      - 'theory/formal/**'
-      - 'output/**'
-      - '.github/workflows/build_efc_master_dual.yml'
+      - "theory/master/**"
+      - ".github/workflows/build_efc_master_dual.yml"
+  workflow_dispatch:
 
 jobs:
   build-master:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout repository
-      uses: actions/checkout@v4
+      - name: Checkout repository
+        uses: actions/checkout@v4
 
-    # Cache LaTeX installation for speed
-    - name: Cache TeX Live
-      uses: actions/cache@v3
-      with:
-        path: /tmp/texlive
-        key: texlive-cache
+      - name: Install LaTeX
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y \
+            texlive-latex-base \
+            texlive-latex-recommended \
+            texlive-latex-extra \
+            texlive-fonts-recommended \
+            texlive-science \
+            latexmk
 
-    - name: Install TeX Live + Pandoc
-      run: |
-        sudo apt-get update
-        sudo apt-get install -y texlive-full pandoc
+      - name: Build EFC Master PDF
+        working-directory: theory/master
+        run: |
+          latexmk -pdf -interaction=nonstopmode efc_master.tex
 
-    - name: Build EFC Master PDF
-      working-directory: ./theory/formal
-      run: |
-        latexmk -pdf -interaction=nonstopmode efc_master.tex || true
-
-    - name: Verify PDF output
-      run: |
-        if [ ! -f theory/formal/efc_master.pdf ]; then
-          echo "❌ Build failed: efc_master.pdf not found"
-          exit 1
-        fi
-
-    - name: Build EFC Master HTML
-      working-directory: ./theory/formal
-      run: |
-        pandoc efc_master.tex -s -o efc_master.html || true
-
-    - name: Verify HTML output
-      run: |
-        if [ ! -f theory/formal/efc_master.html ]; then
-          echo "⚠️ HTML output missing — continuing..."
-        fi
-
-    - name: Upload artifacts
-      uses: actions/upload-artifact@v4
-      with:
-        name: efc_master_build
-        path: |
-          theory/formal/efc_master.pdf
-          theory/formal/efc_master.html
+      - name: Upload PDF
+        uses: actions/upload-artifact@v4
+        with:
+          name: EFC_Master_PDF
+          path: theory/master/efc_master.pdf
