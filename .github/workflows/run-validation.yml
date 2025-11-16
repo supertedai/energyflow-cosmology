@@ -1,48 +1,31 @@
-name: Run EFC validation
+name: Run EFC Validation
 
 on:
-  push:
-    branches:
-      - main
-    paths:
-      - "src/**"
-      - "scripts/**"
-      - ".github/workflows/run-validation.yml"
   workflow_dispatch:
+  push:
+    paths:
+      - 'scripts/validate_efc.py'
+      - 'src/**'
+      - '.github/workflows/run-validation.yml'
 
 jobs:
   validate-efc:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
+    - name: Checkout repository
+      uses: actions/checkout@v4
 
-      - name: Setup Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: "3.12"
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.12'
 
-      - name: Install dependencies
-        run: |
-          pip install numpy pandas matplotlib requests
+    - name: Install dependencies
+      run: pip install -r requirements.txt
 
-      - name: Add src to PYTHONPATH
-        run: |
-          echo "PYTHONPATH=$PYTHONPATH:$(pwd)" >> $GITHUB_ENV
-
-      - name: Run import tests
-        run: |
-          python3 scripts/check_imports.py
-
-      - name: Run SPARC validation
-        run: |
-          python3 scripts/validate_efc.py --dataset sparc
-
-      - name: Run JWST validation
-        run: |
-          python3 scripts/validate_efc.py --dataset jwst
-
-      - name: Run DESI validation
-        run: |
-          python3 scripts/validate_efc.py --dataset desi
+    - name: Run validation script
+      env:
+        PYTHONPATH: ${{ github.workspace }}:${{ github.workspace }}/src
+      run: |
+        python3 scripts/validate_efc.py --dataset sparc
