@@ -2,104 +2,75 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8" />
-<title>EFC Master Document</title>
 
-<!-- MathJax -->
+$if(title)$
+<title>$title$</title>
+$else$
+<title>EFC Master Document</title>
+$endif$
+
 <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 
 <style>
   :root {
     --max-width: 38rem;
-    --font-body: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    --font-body: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
     --font-size: 17px;
   }
 
-  html[data-theme="light"] {
-    background: #fbfbfb;
-    color: #111;
-  }
-
-  html[data-theme="dark"] {
-    background: #111;
-    color: #ddd;
-  }
+  html[data-theme="light"] { background:#fbfbfb; color:#111; }
+  html[data-theme="dark"]  { background:#111; color:#ddd; }
 
   body {
-    margin: 0 auto;
-    max-width: var(--max-width);
-    padding: 3rem 1.8rem;
-    font-family: var(--font-body);
-    font-size: var(--font-size);
-    line-height: 1.6;
+    margin:0 auto;
+    max-width:var(--max-width);
+    padding:3rem 1.8rem;
+    font-family:var(--font-body);
+    font-size:var(--font-size);
+    line-height:1.6;
   }
 
   h1, h2, h3 {
-    font-weight: 600;
-    margin-top: 2.2rem;
-  }
-
-  h1 {
-    font-size: 2rem;
-    margin-bottom: 1.2rem;
-  }
-
-  h2 {
-    font-size: 1.45rem;
-    margin-top: 2rem;
-  }
-
-  h3 {
-    font-size: 1.2rem;
+    font-weight:600;
+    margin-top:2.2rem;
   }
 
   img {
-    max-width: 100%;
-    height: auto;
-    border-radius: 4px;
+    max-width:100%;
+    height:auto;
+    margin:1.5rem 0;
   }
 
   pre, code {
-    background: #f0f0f0;
-    padding: 0.5rem;
-    border-radius: 4px;
-    font-size: 0.9rem;
+    background:#f0f0f0;
+    padding:0.5rem;
+    border-radius:4px;
   }
 
-  #TOC {
-    margin-bottom: 2.5rem;
-    padding-bottom: 1.5rem;
-    border-bottom: 1px solid #ccc;
-  }
-
-  #TOC ul {
-    padding-left: 0;
-    list-style: none;
-  }
-
-  #TOC li {
-    margin: 0.35rem 0;
-  }
+  #TOC { margin-bottom:2.5rem; padding-bottom:1.5rem; border-bottom:1px solid #ccc; }
+  #TOC ul { padding-left:0; list-style:none; }
+  #TOC li { margin:0.35rem 0; }
 
   .theme-toggle {
-    position: fixed;
-    top: 12px;
-    right: 12px;
-    padding: 0.3rem 0.7rem;
-    background: #444;
-    color: #fff;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 0.8rem;
-    opacity: 0.85;
+    position:fixed;
+    top:12px;
+    right:12px;
+    padding:0.3rem 0.7rem;
+    background:#444;
+    color:#fff;
+    border-radius:4px;
+    cursor:pointer;
+    font-size:0.8rem;
+    opacity:0.85;
   }
 </style>
 
 <script>
-  function toggleTheme() {
-    let h = document.documentElement;
-    h.dataset.theme = (h.dataset.theme === "dark") ? "light" : "dark";
-  }
-  document.documentElement.dataset.theme = "light";
+function toggleTheme(){
+  let h=document.documentElement;
+  h.dataset.theme=(h.dataset.theme==="dark")?"light":"dark";
+}
+document.documentElement.dataset.theme="light";
 </script>
 
 </head>
