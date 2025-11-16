@@ -1,16 +1,14 @@
 name: Build EFC Master PDF
 
 on:
-  workflow_dispatch:
   push:
     paths:
-      - 'docs/efc_master.tex'
-      - 'docs/efc_master.html'
-      - 'docs/efc_master.css'
-      - '.github/workflows/build_efc_master.yml'
+      - "docs/efc_master.tex"
+      - "docs/sections/**"
+  workflow_dispatch:
 
 jobs:
-  build:
+  pdf:
     runs-on: ubuntu-latest
 
     steps:
@@ -20,58 +18,17 @@ jobs:
       - name: Install LaTeX
         run: |
           sudo apt-get update
-          sudo apt-get install -y \
-            latexmk \
-            texlive-latex-base \
-            texlive-latex-recommended \
-            texlive-latex-extra \
-            texlive-fonts-recommended \
-            texlive-fonts-extra \
+          sudo apt-get install -y latexmk \
+            texlive-latex-base texlive-latex-recommended \
+            texlive-latex-extra texlive-fonts-recommended \
             texlive-science
 
-      - name: Prepare output folder
-        run: mkdir -p output/master
-
-      # --------------------------
-      # PDF BUILD
-      # --------------------------
-      - name: Build EFC Master PDF
+      - name: Build PDF
         working-directory: docs
-        run: |
-          latexmk -pdf -interaction=nonstopmode efc_master.tex
-          cp efc_master.pdf ../output/master/efc_master.pdf
+        run: latexmk -pdf -interaction=nonstopmode efc_master.tex
 
-      # --------------------------
-      # HTML BUILD
-      # --------------------------
-      # Vi bruker HTML du vedlikeholder selv (statisk master)
-      # og kopierer den til docs/ som deploy
-      - name: Deploy HTML Master
-        run: |
-          mkdir -p docs
-          cp docs/efc_master.html docs/efc_master_deploy.html
-          cp docs/efc_master.css docs/efc_master_deploy.css
-
-      # --------------------------
-      # Auto-commit HTML
-      # --------------------------
-      - name: Commit HTML Deployment
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          git config user.name "github-actions"
-          git config user.email "actions@github.com"
-          git add docs/efc_master_deploy.html
-          git add docs/efc_master_deploy.css
-          git commit -m "Update EFC Master HTML deploy" || true
-          git pull --rebase origin main || true
-          git push
-
-      # --------------------------
-      # UPLOAD ARTIFACTS
-      # --------------------------
-      - name: Upload PDF Artifact
+      - name: Upload PDF
         uses: actions/upload-artifact@v4
         with:
-          name: EFC_Master_PDF
-          path: output/master/efc_master.pdf
+          name: efc_master_pdf
+          path: docs/efc_master.pdf
