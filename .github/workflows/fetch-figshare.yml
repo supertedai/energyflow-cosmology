@@ -1,9 +1,9 @@
-name: Fetch Figshare Concepts
+name: Fetch Full Figshare Metadata
 
 on:
   schedule:
-    - cron: "*/15 * * * *"   # Kjør hvert 15. minutt, automatisk
-  workflow_dispatch:          # Tillat manuell kjøring fra GitHub Actions
+    - cron: "*/15 * * * *"
+  workflow_dispatch:
 
 jobs:
   fetch:
@@ -23,25 +23,26 @@ jobs:
       - name: Install dependencies
         run: pip install requests
 
-      - name: Run fetch_figshare.py
+      - name: Run full Figshare sync
         env:
           FIGSHARE_TOKEN: ${{ secrets.FIGSHARE_TOKEN }}
           FIGSHARE_ARTICLE_ID: ${{ secrets.FIGSHARE_ARTICLE_ID }}
         run: |
-          python scripts/fetch_figshare.py
+          python scripts/fetch_figshare_full.py
 
-      - name: Commit and push updated schema files
+      - name: Commit and push updated Figshare files
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           git config user.name "github-actions"
           git config user.email "actions@github.com"
 
-          # Legg til alle Figshare-relaterte filer
           git add figshare/figshare-index.json
           git add figshare/figshare-links.json
-          git add schema/concepts.json || true
+          git add schema/concepts.json
+          git add schema/schema-map.json
+          git add api/v1/meta.json
+          git add docs/docs-index.json
 
-          # Commit kun hvis det er endringer
-          git diff --cached --quiet || git commit -m "🔄 Auto-sync from Figshare [skip ci]"
+          git diff --cached --quiet || git commit -m "🔄 Full Figshare sync (metadata + graph) [skip ci]"
           git push origin main
