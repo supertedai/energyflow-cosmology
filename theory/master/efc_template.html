@@ -1,20 +1,9 @@
-$if(title)$
 <!DOCTYPE html>
 <html lang="en" data-theme="light">
 <head>
 <meta charset="utf-8"/>
 <title>$title$</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-$endif$
-
-<!-- MathJax -->
-<script>
-window.MathJax = {
-  tex: {inlineMath: [["$","$"], ["\\(","\\)"]]},
-  svg: {fontCache: "global"}
-};
-</script>
-<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
 
 <style>
 body {
@@ -24,7 +13,6 @@ body {
   background: #fafafa;
 }
 
-/* Sidebar */
 #toc {
   width: 240px;
   padding: 20px;
@@ -37,7 +25,6 @@ body {
 #toc a { color: #aaa; text-decoration: none; display: block; padding: 4px 0; }
 #toc a:hover { color: #fff; }
 
-/* Content */
 #content {
   flex: 1;
   padding: 40px;
@@ -50,6 +37,7 @@ img {
   border-radius: 6px;
 }
 </style>
+
 </head>
 
 <body>
