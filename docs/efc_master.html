@@ -130,10 +130,9 @@ Specification</div>
   <li><a href="#efc-s-entropy-field-and-gradient"
   id="toc-efc-s-entropy-field-and-gradient">EFC-S: Entropy Field and
   Gradient</a></li>
-  <li><a href="#light-propagation-s0-s1"
-  id="toc-light-propagation-s0-s1">Light Propagation (s0 → s1)</a></li>
-  <li><a href="#observables-in-efc"
-  id="toc-observables-in-efc">Observables in EFC</a>
+  <li><a href="#s0-s1-light-propagation"
+  id="toc-s0-s1-light-propagation">s0 → s1 Light Propagation</a></li>
+  <li><a href="#observables" id="toc-observables">Observables</a>
   <ul>
   <li><a href="#lensing" id="toc-lensing">Lensing</a></li>
   <li><a href="#rotation-curves" id="toc-rotation-curves">Rotation
@@ -141,7 +140,7 @@ Specification</div>
   <li><a href="#expansion-rate" id="toc-expansion-rate">Expansion
   Rate</a></li>
   </ul></li>
-  <li><a href="#figures" id="toc-figures">Figures</a></li>
+  <li><a href="#figure" id="toc-figure">Figure</a></li>
   <li><a href="#meta-reflective-development"
   id="toc-meta-reflective-development">Meta-Reflective
   Development</a></li>
@@ -149,8 +148,7 @@ Specification</div>
 </nav>
 
 <main id="content">
-  <h1 class="unnumbered" id="efc-d-energy-flow-dynamics">EFC-D:
-  Energy-Flow Dynamics</h1>
+  <h1 id="efc-d-energy-flow-dynamics">EFC-D: Energy-Flow Dynamics</h1>
   <p>The local energy-flow potential <span
   class="math inline"><em>E</em><sub><em>f</em></sub></span> is defined
   as a function of mass density <span
@@ -166,78 +164,75 @@ Specification</div>
   <li><p>high entropy suppresses <span
   class="math inline"><em>E</em><sub><em>f</em></sub></span></p></li>
   </ul>
-  <h2 class="unnumbered" id="density">Density</h2>
-  <p>The mass density is</p>
+  <h2 id="density">Density</h2>
+  <p>The mass density is:</p>
   <p><span class="math display">$$\rho = \frac{m}{V}.$$</span></p>
-  <h2 class="unnumbered" id="energy-flow-rate">Energy-Flow Rate</h2>
-  <p>The temporal change is</p>
+  <h2 id="energy-flow-rate">Energy-Flow Rate</h2>
+  <p>The temporal change is:</p>
   <p><span class="math display">$$\frac{dE_f}{dt} = \nabla_t
   E_f.$$</span></p>
-  <h1 class="unnumbered" id="efc-s-entropy-field-and-gradient">EFC-S:
-  Entropy Field and Gradient</h1>
+  <h1 id="efc-s-entropy-field-and-gradient">EFC-S: Entropy Field and
+  Gradient</h1>
   <p>The entropy field <span
-  class="math inline"><em>S</em>(<strong>x</strong>) ∈ [0,1]</span>
-  describes local thermodynamic ordering.</p>
+  class="math inline"><em>S</em>(<strong>x</strong>)</span> ranges
+  between ordered and disordered regions:</p>
   <p><span
-  class="math display"><em>S</em>(<strong>x</strong>) ∈ [0,1]</span></p>
+  class="math display"><em>S</em>(<strong>x</strong>) ∈ [0,1].</span></p>
   <p>Entropy gradient:</p>
   <p><span class="math display">$$\nabla S(\mathbf{x}) =
-    \left(
-    \frac{\partial S}{\partial x},
-    \frac{\partial S}{\partial y},
-    \frac{\partial S}{\partial z}
-    \right)$$</span></p>
+  \left(
+  \frac{\partial S}{\partial x},
+  \frac{\partial S}{\partial y},
+  \frac{\partial S}{\partial z}
+  \right).$$</span></p>
   <p>Magnitude:</p>
-  <p><span class="math display">$$\lvert \nabla S \rvert =
-    \sqrt{
-      \left( \frac{\partial S}{\partial x} \right)^2 +
-      \left( \frac{\partial S}{\partial y} \right)^2 +
-      \left( \frac{\partial S}{\partial z} \right)^2
-    }.$$</span></p>
-  <h1 class="unnumbered" id="light-propagation-s0-s1">Light Propagation
-  (s0 → s1)</h1>
+  <p><span class="math display">$$|\nabla S| =
+  \sqrt{
+  \left(\frac{\partial S}{\partial x}\right)^2 +
+  \left(\frac{\partial S}{\partial y}\right)^2 +
+  \left(\frac{\partial S}{\partial z}\right)^2
+  }.$$</span></p>
+  <h1 id="s0-s1-light-propagation">s0 → s1 Light Propagation</h1>
   <p>Entropy endpoints:</p>
-  <p><span class="math display">$$S_{\text{mid}} = \tfrac{1}{2}(s_0 +
+  <p><span class="math display">$$S_{\text{mid}} = \frac{1}{2}(s_0 +
   s_1),
-    \qquad
-    \Delta S = s_1 - s_0.$$</span></p>
+  \qquad
+  \Delta S = s_1 - s_0.$$</span></p>
   <p>Normalized entropy coordinate:</p>
   <p><span class="math display">$$x(S) = \frac{S -
-  S_{\text{mid}}}{\Delta S/2}.$$</span></p>
+  S_{\text{mid}}}{\Delta S / 2}.$$</span></p>
   <p>Effective light speed:</p>
   <p><span
   class="math display"><em>c</em>(<em>S</em>) = <em>c</em><sub>0</sub>(1+<em>a</em><sub>edge</sub> <em>x</em>(<em>S</em>)<sup>2</sup>).</span></p>
   <p>Light-travel time:</p>
   <p><span class="math display">$$t_{\text{obs}} = \int_{\gamma}
   \frac{dl}{c(S(l))}.$$</span></p>
-  <h1 class="unnumbered" id="observables-in-efc">Observables in EFC</h1>
-  <h2 class="unnumbered" id="lensing">Lensing</h2>
+  <h1 id="observables">Observables</h1>
+  <h2 id="lensing">Lensing</h2>
   <p><span class="math display">Lensing = Mass
   Distribution + <em>S</em>(<strong>x</strong>) + <em>c</em>(<em>S</em>).</span></p>
-  <h2 class="unnumbered" id="rotation-curves">Rotation Curves</h2>
-  <p><span class="math display">$$v(r) = \sqrt{\, r \, \frac{\partial
-  \Phi}{\partial r} \, }.$$</span></p>
-  <h2 class="unnumbered" id="expansion-rate">Expansion Rate</h2>
-  <p><span class="math display">$$H(E_f, S) = \sqrt{|E_f|}\,(1 +
+  <h2 id="rotation-curves">Rotation Curves</h2>
+  <p><span class="math display">$$v(r) = \sqrt{r \, \frac{\partial
+  \Phi}{\partial r}}.$$</span></p>
+  <h2 id="expansion-rate">Expansion Rate</h2>
+  <p><span class="math display">$$H(E_f, S) = \sqrt{|E_f|}(1 +
   S).$$</span></p>
   <p>Core chain:</p>
   <p><span
   class="math display"><em>S</em>(<strong>x</strong>) → <em>E</em><sub><em>f</em></sub>(<strong>x</strong>) → <em>Φ</em>(<em>E</em><sub><em>f</em></sub>,<em>S</em>) → <em>c</em>(<em>S</em>) → <em>H</em>(<em>E</em><sub><em>f</em></sub>,<em>S</em>) → Observables.</span></p>
-  <h1 class="unnumbered" id="figures">Figures</h1>
+  <h1 id="figure">Figure</h1>
   <figure>
   <img src="EFC_vs_LCDM_plot.png" />
   <figcaption>Comparison between EFC baseline behaviour and <span
   class="math inline"><em>Λ</em></span>CDM.</figcaption>
   </figure>
-  <h1 class="unnumbered"
-  id="meta-reflective-development">Meta-Reflective Development</h1>
-  <p>The EFC framework evolves iteratively through thermodynamic,
-  observational, and structural consistency checks.</p>
+  <h1 id="meta-reflective-development">Meta-Reflective Development</h1>
+  <p>The theory evolves through iterative refinement using:</p>
   <ul>
   <li><p>SPARC rotation curves</p></li>
   <li><p>JWST early galaxies</p></li>
-  <li><p>DESI expansion history</p></li>
-  <li><p>Lensing structure</p></li>
+  <li><p>DESI expansion data</p></li>
+  <li><p>gravitational lensing structure</p></li>
   </ul>
 </main>
 
