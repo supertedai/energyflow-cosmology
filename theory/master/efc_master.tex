@@ -1,192 +1,59 @@
-\documentclass[11pt]{article}
+name: Build EFC Master (PDF + HTML)
 
-% --------------------------------------------------
-% Basic packages (safe for Pandoc → HTML + PDF)
-% --------------------------------------------------
-\usepackage[utf8]{inputenc}
-\usepackage{amsmath, amssymb}
-\usepackage{graphicx}
-\usepackage{geometry}
-\geometry{margin=2.4cm}
+on:
+  push:
+    paths:
+      - "docs/efc_master.tex"
+      - "docs/sections/**"
+      - ".github/workflows/build_efc_master.yml"
+  workflow_dispatch:
 
-\usepackage{hyperref}
-\hypersetup{
-    colorlinks=true,
-    linkcolor=blue,
-    urlcolor=blue
-}
+jobs:
+  build:
+    runs-on: ubuntu-latest
 
-% --------------------------------------------------
-% Title metadata
-% --------------------------------------------------
-\title{Energy-Flow Cosmology --- Master Formal Specification}
-\author{Morten Magnusson}
-\date{\today}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
-\begin{document}
+      - name: Install LaTeX + Pandoc
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y pandoc latexmk \
+            texlive-latex-base texlive-latex-recommended \
+            texlive-latex-extra texlive-fonts-recommended \
+            texlive-science
 
-\maketitle
+      - name: Build PDF
+        working-directory: docs
+        run: latexmk -pdf -interaction=nonstopmode efc_master.tex
 
-% -------------------
-% CONTENT START
-% -------------------
+      - name: Build HTML (from TeX → MD → HTML)
+        working-directory: docs
+        run: |
+          pandoc efc_master.tex -o efc_master.md
 
-\section{EFC-D: Energy-Flow Dynamics}
+          pandoc efc_master.md \
+            --standalone \
+            --include-in-header=mathjax_header.html \
+            --template=efc_master_template.html \
+            --toc \
+            -o efc_master.html
 
-The local energy-flow potential \(E_f\) is defined as a function of
-mass density \(\rho\) and entropy \(S\):
+      - name: Deploy HTML to docs/
+        run: |
+          git config user.name "github-actions"
+          git config user.email "actions@github.com"
 
-\[
-E_f = \rho (1 - S).
-\]
+          git add docs/efc_master.html || true
+          git commit -m "Update EFC Master HTML" || true
+          git pull --rebase origin main || true
+          git push origin HEAD:main
 
-Interpretation:
-
-\begin{itemize}
-  \item high density and low entropy \( \Rightarrow \) large \(E_f\)
-  \item high entropy suppresses \(E_f\)
-\end{itemize}
-
-\subsection{Density}
-
-The mass density is:
-
-\[
-\rho = \frac{m}{V}.
-\]
-
-\subsection{Energy-Flow Rate}
-
-The temporal change is:
-
-\[
-\frac{dE_f}{dt} = \nabla_t E_f.
-\]
-
-
-% --------------------------------------------------
-\section{EFC-S: Entropy Field and Gradient}
-
-The entropy field \(S(\mathbf{x})\) ranges between ordered and disordered regions:
-
-\[
-S(\mathbf{x}) \in [0,1].
-\]
-
-Entropy gradient:
-
-\[
-\nabla S(\mathbf{x}) =
-\left(
-\frac{\partial S}{\partial x},
-\frac{\partial S}{\partial y},
-\frac{\partial S}{\partial z}
-\right).
-\]
-
-Magnitude:
-
-\[
-|\nabla S| =
-\sqrt{
-\left(\frac{\partial S}{\partial x}\right)^2 +
-\left(\frac{\partial S}{\partial y}\right)^2 +
-\left(\frac{\partial S}{\partial z}\right)^2
-}.
-\]
-
-
-% --------------------------------------------------
-\section{s0 → s1 Light Propagation}
-
-Entropy endpoints:
-
-\[
-S_{\text{mid}} = \frac{1}{2}(s_0 + s_1),
-\qquad
-\Delta S = s_1 - s_0.
-\]
-
-Normalized entropy coordinate:
-
-\[
-x(S) = \frac{S - S_{\text{mid}}}{\Delta S / 2}.
-\]
-
-Effective light speed:
-
-\[
-c(S) = c_0\left(1 + a_{\text{edge}}\, x(S)^2\right).
-\]
-
-Light-travel time:
-
-\[
-t_{\text{obs}} = \int_{\gamma} \frac{dl}{c(S(l))}.
-\]
-
-
-% --------------------------------------------------
-\section{Observables}
-
-\subsection{Lensing}
-
-\[
-\text{Lensing} =
-\text{Mass Distribution}
-+ S(\mathbf{x})
-+ c(S).
-\]
-
-\subsection{Rotation Curves}
-
-\[
-v(r) = \sqrt{r \, \frac{\partial \Phi}{\partial r}}.
-\]
-
-\subsection{Expansion Rate}
-
-\[
-H(E_f, S) = \sqrt{|E_f|}(1 + S).
-\]
-
-Core chain:
-
-\[
-S(\mathbf{x})
-\rightarrow
-E_f(\mathbf{x})
-\rightarrow
-\Phi(E_f, S)
-\rightarrow
-c(S)
-\rightarrow
-H(E_f, S)
-\rightarrow
-\text{Observables}.
-\]
-
-
-% --------------------------------------------------
-\section{Figure}
-
-\begin{figure}[h!]
-\centering
-\includegraphics[width=0.95\linewidth]{EFC_vs_LCDM_plot.png}
-\caption{Comparison between EFC baseline behaviour and \(\Lambda\)CDM.}
-\end{figure}
-
-
-% --------------------------------------------------
-\section{Meta-Reflective Development}
-
-The theory evolves through iterative refinement using:
-
-\begin{itemize}
-    \item SPARC rotation curves
-    \item JWST early galaxies
-    \item DESI expansion data
-    \item gravitational lensing structure
-\end{itemize}
-
-\end{document}
+      - name: Upload PDF
+        uses: actions/upload-artifact@v4
+        with:
+          name: EFC_Master_PDF
+          path: docs/efc_master.pdf
