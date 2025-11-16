@@ -1,4 +1,4 @@
-name: Build EFC Master (PDF + HTML)
+name: Build EFC Master PDF
 
 on:
   workflow_dispatch:
