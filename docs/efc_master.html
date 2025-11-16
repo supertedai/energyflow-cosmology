@@ -1,259 +1,163 @@
 <!DOCTYPE html>
 <html lang="en" data-theme="light">
 <head>
-  <meta charset="UTF-8" />
-  <title>Energy-Flow Cosmology — Master Formal Specification</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta charset="utf-8"/>
+<title>Energy-Flow Cosmology — Master Formal Specification</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
-  
-  <style>
-    :root {
-      --bg: #fafafa;
-      --fg: #111111;
-      --fg-soft: #444444;
-      --accent: #1f8fff;
-      --accent-soft: #e3f1ff;
-      --sidebar-bg: #111111;
-      --sidebar-fg: #ffffff;
-      --sidebar-muted: #bbbbbb;
-      --border-subtle: #e0e0e0;
-      --code-bg: #1d1f21;
-    }
-    [data-theme="dark"] {
-      --bg: #050608;
-      --fg: #f4f4f4;
-      --fg-soft: #c9c9c9;
-      --accent: #7ed0ff;
-      --accent-soft: #102030;
-      --sidebar-bg: #050608;
-      --sidebar-fg: #f4f4f4;
-      --sidebar-muted: #777777;
-      --border-subtle: #222222;
-      --code-bg: #111419;
-    }
+<style>
+body {
+  margin: 0;
+  font-family: system-ui, sans-serif;
+  display: flex;
+  background: #fafafa;
+}
 
-    * { box-sizing: border-box; }
+#toc {
+  width: 240px;
+  padding: 20px;
+  background: #111;
+  color: #fff;
+  height: 100vh;
+  overflow-y: auto;
+}
 
-    body {
-      margin: 0;
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Inter", "Helvetica Neue", Arial, sans-serif;
-      line-height: 1.55;
-      background:
-        radial-gradient(circle at top left, rgba(126,208,255,0.10), transparent 55%),
-        radial-gradient(circle at bottom right, rgba(126,208,255,0.08), transparent 55%),
-        var(--bg);
-      color: var(--fg);
-      display: flex;
-      min-height: 100vh;
-    }
+#toc a { color: #aaa; text-decoration: none; display: block; padding: 4px 0; }
+#toc a:hover { color: #fff; }
 
-    #toc {
-      width: 260px;
-      height: 100vh;
-      position: sticky;
-      top: 0;
-      left: 0;
-      overflow-y: auto;
-      background: var(--sidebar-bg);
-      color: var(--sidebar-fg);
-      padding: 20px 22px;
-      border-right: 1px solid #222;
-    }
+#content {
+  flex: 1;
+  padding: 40px;
+  max-width: 900px;
+  color: #111;
+}
 
-    #toc-header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 8px;
-      margin-bottom: 18px;
-    }
+img {
+  max-width: 100%;
+  border-radius: 6px;
+}
+</style>
 
-    #toc-title {
-      font-size: 17px;
-      font-weight: 600;
-      color: var(--accent);
-    }
-
-    #theme-toggle {
-      border: 1px solid #444;
-      background: transparent;
-      color: var(--sidebar-fg);
-      font-size: 11px;
-      padding: 4px 8px;
-      border-radius: 999px;
-      cursor: pointer;
-    }
-
-    #toc a {
-      display: block;
-      padding: 5px 0;
-      color: var(--sidebar-muted);
-      text-decoration: none;
-      font-size: 13px;
-    }
-
-    #content {
-      flex: 1;
-      padding: 32px 40px 60px;
-      max-width: 980px;
-      margin: 0 auto;
-    }
-
-    pre {
-      background: var(--code-bg);
-      color: #f4f4f4;
-      padding: 10px 12px;
-      border-radius: 6px;
-      overflow-x: auto;
-      font-size: 13px;
-    }
-  </style>
 </head>
 
 <body>
 
 <nav id="toc">
-  <div id="toc-header">
-    <div id="toc-title">Energy-Flow Cosmology — Master Formal
-Specification</div>
-    <button id="theme-toggle" type="button">☾ Dark</button>
-  </div>
-
-  <ul>
-  <li><a href="#efc-d-energy-flow-dynamics"
-  id="toc-efc-d-energy-flow-dynamics">EFC-D: Energy-Flow Dynamics</a>
-  <ul>
-  <li><a href="#density" id="toc-density">Density</a></li>
-  <li><a href="#energy-flow-rate" id="toc-energy-flow-rate">Energy-Flow
-  Rate</a></li>
-  </ul></li>
-  <li><a href="#efc-s-entropy-field-and-gradient"
-  id="toc-efc-s-entropy-field-and-gradient">EFC-S: Entropy Field and
-  Gradient</a></li>
-  <li><a href="#s0-s1-light-propagation"
-  id="toc-s0-s1-light-propagation">s0 → s1 Light Propagation</a></li>
-  <li><a href="#observables" id="toc-observables">Observables</a>
-  <ul>
-  <li><a href="#lensing" id="toc-lensing">Lensing</a></li>
-  <li><a href="#rotation-curves" id="toc-rotation-curves">Rotation
-  Curves</a></li>
-  <li><a href="#expansion-rate" id="toc-expansion-rate">Expansion
-  Rate</a></li>
-  </ul></li>
-  <li><a href="#figure" id="toc-figure">Figure</a></li>
-  <li><a href="#meta-reflective-development"
-  id="toc-meta-reflective-development">Meta-Reflective
-  Development</a></li>
-  </ul>
+<h3>Energy-Flow Cosmology — Master Formal Specification</h3>
+<ul>
+<li><a href="#efc-d-energy-flow-dynamics"
+id="toc-efc-d-energy-flow-dynamics">EFC-D: Energy-Flow Dynamics</a>
+<ul>
+<li><a href="#density" id="toc-density">Density</a></li>
+<li><a href="#energy-flow-rate" id="toc-energy-flow-rate">Energy-Flow
+Rate</a></li>
+</ul></li>
+<li><a href="#efc-s-entropy-field-and-gradient"
+id="toc-efc-s-entropy-field-and-gradient">EFC-S: Entropy Field and
+Gradient</a></li>
+<li><a href="#s0-s1-light-propagation"
+id="toc-s0-s1-light-propagation">s0 → s1 Light Propagation</a></li>
+<li><a href="#observables" id="toc-observables">Observables</a>
+<ul>
+<li><a href="#lensing" id="toc-lensing">Lensing</a></li>
+<li><a href="#rotation-curves" id="toc-rotation-curves">Rotation
+Curves</a></li>
+<li><a href="#expansion-rate" id="toc-expansion-rate">Expansion
+Rate</a></li>
+</ul></li>
+<li><a href="#figure" id="toc-figure">Figure</a></li>
+<li><a href="#meta-reflective-development"
+id="toc-meta-reflective-development">Meta-Reflective
+Development</a></li>
+</ul>
 </nav>
 
 <main id="content">
-  <h1 id="efc-d-energy-flow-dynamics">EFC-D: Energy-Flow Dynamics</h1>
-  <p>The local energy-flow potential <span
-  class="math inline"><em>E</em><sub><em>f</em></sub></span> is defined
-  as a function of mass density <span
-  class="math inline"><em>ρ</em></span> and entropy <span
-  class="math inline"><em>S</em></span>:</p>
-  <p><span
-  class="math display"><em>E</em><sub><em>f</em></sub> = <em>ρ</em>(1−<em>S</em>).</span></p>
-  <p>Interpretation:</p>
-  <ul>
-  <li><p>high density and low entropy <span class="math inline">⇒</span>
-  large <span
-  class="math inline"><em>E</em><sub><em>f</em></sub></span></p></li>
-  <li><p>high entropy suppresses <span
-  class="math inline"><em>E</em><sub><em>f</em></sub></span></p></li>
-  </ul>
-  <h2 id="density">Density</h2>
-  <p>The mass density is:</p>
-  <p><span class="math display">$$\rho = \frac{m}{V}.$$</span></p>
-  <h2 id="energy-flow-rate">Energy-Flow Rate</h2>
-  <p>The temporal change is:</p>
-  <p><span class="math display">$$\frac{dE_f}{dt} = \nabla_t
-  E_f.$$</span></p>
-  <h1 id="efc-s-entropy-field-and-gradient">EFC-S: Entropy Field and
-  Gradient</h1>
-  <p>The entropy field <span
-  class="math inline"><em>S</em>(<strong>x</strong>)</span> ranges
-  between ordered and disordered regions:</p>
-  <p><span
-  class="math display"><em>S</em>(<strong>x</strong>) ∈ [0,1].</span></p>
-  <p>Entropy gradient:</p>
-  <p><span class="math display">$$\nabla S(\mathbf{x}) =
-  \left(
-  \frac{\partial S}{\partial x},
-  \frac{\partial S}{\partial y},
-  \frac{\partial S}{\partial z}
-  \right).$$</span></p>
-  <p>Magnitude:</p>
-  <p><span class="math display">$$|\nabla S| =
-  \sqrt{
-  \left(\frac{\partial S}{\partial x}\right)^2 +
-  \left(\frac{\partial S}{\partial y}\right)^2 +
-  \left(\frac{\partial S}{\partial z}\right)^2
-  }.$$</span></p>
-  <h1 id="s0-s1-light-propagation">s0 → s1 Light Propagation</h1>
-  <p>Entropy endpoints:</p>
-  <p><span class="math display">$$S_{\text{mid}} = \frac{1}{2}(s_0 +
-  s_1),
-  \qquad
-  \Delta S = s_1 - s_0.$$</span></p>
-  <p>Normalized entropy coordinate:</p>
-  <p><span class="math display">$$x(S) = \frac{S -
-  S_{\text{mid}}}{\Delta S / 2}.$$</span></p>
-  <p>Effective light speed:</p>
-  <p><span
-  class="math display"><em>c</em>(<em>S</em>) = <em>c</em><sub>0</sub>(1+<em>a</em><sub>edge</sub> <em>x</em>(<em>S</em>)<sup>2</sup>).</span></p>
-  <p>Light-travel time:</p>
-  <p><span class="math display">$$t_{\text{obs}} = \int_{\gamma}
-  \frac{dl}{c(S(l))}.$$</span></p>
-  <h1 id="observables">Observables</h1>
-  <h2 id="lensing">Lensing</h2>
-  <p><span class="math display">Lensing = Mass
-  Distribution + <em>S</em>(<strong>x</strong>) + <em>c</em>(<em>S</em>).</span></p>
-  <h2 id="rotation-curves">Rotation Curves</h2>
-  <p><span class="math display">$$v(r) = \sqrt{r \, \frac{\partial
-  \Phi}{\partial r}}.$$</span></p>
-  <h2 id="expansion-rate">Expansion Rate</h2>
-  <p><span class="math display">$$H(E_f, S) = \sqrt{|E_f|}(1 +
-  S).$$</span></p>
-  <p>Core chain:</p>
-  <p><span
-  class="math display"><em>S</em>(<strong>x</strong>) → <em>E</em><sub><em>f</em></sub>(<strong>x</strong>) → <em>Φ</em>(<em>E</em><sub><em>f</em></sub>,<em>S</em>) → <em>c</em>(<em>S</em>) → <em>H</em>(<em>E</em><sub><em>f</em></sub>,<em>S</em>) → Observables.</span></p>
-  <h1 id="figure">Figure</h1>
-  <figure>
-  <img src="EFC_vs_LCDM_plot.png" />
-  <figcaption>Comparison between EFC baseline behaviour and <span
-  class="math inline"><em>Λ</em></span>CDM.</figcaption>
-  </figure>
-  <h1 id="meta-reflective-development">Meta-Reflective Development</h1>
-  <p>The theory evolves through iterative refinement using:</p>
-  <ul>
-  <li><p>SPARC rotation curves</p></li>
-  <li><p>JWST early galaxies</p></li>
-  <li><p>DESI expansion data</p></li>
-  <li><p>gravitational lensing structure</p></li>
-  </ul>
+<h1 id="efc-d-energy-flow-dynamics">EFC-D: Energy-Flow Dynamics</h1>
+<p>The local energy-flow potential <span
+class="math inline"><em>E</em><sub><em>f</em></sub></span> is defined as
+a function of mass density <span class="math inline"><em>ρ</em></span>
+and entropy <span class="math inline"><em>S</em></span>:</p>
+<p><span
+class="math display"><em>E</em><sub><em>f</em></sub> = <em>ρ</em>(1−<em>S</em>).</span></p>
+<p>Interpretation:</p>
+<ul>
+<li><p>high density and low entropy <span class="math inline">⇒</span>
+large <span
+class="math inline"><em>E</em><sub><em>f</em></sub></span></p></li>
+<li><p>high entropy suppresses <span
+class="math inline"><em>E</em><sub><em>f</em></sub></span></p></li>
+</ul>
+<h2 id="density">Density</h2>
+<p>The mass density is:</p>
+<p><span class="math display">$$\rho = \frac{m}{V}.$$</span></p>
+<h2 id="energy-flow-rate">Energy-Flow Rate</h2>
+<p>The temporal change is:</p>
+<p><span class="math display">$$\frac{dE_f}{dt} = \nabla_t
+E_f.$$</span></p>
+<h1 id="efc-s-entropy-field-and-gradient">EFC-S: Entropy Field and
+Gradient</h1>
+<p>The entropy field <span
+class="math inline"><em>S</em>(<strong>x</strong>)</span> ranges between
+ordered and disordered regions:</p>
+<p><span
+class="math display"><em>S</em>(<strong>x</strong>) ∈ [0,1].</span></p>
+<p>Entropy gradient:</p>
+<p><span class="math display">$$\nabla S(\mathbf{x}) =
+\left(
+\frac{\partial S}{\partial x},
+\frac{\partial S}{\partial y},
+\frac{\partial S}{\partial z}
+\right).$$</span></p>
+<p>Magnitude:</p>
+<p><span class="math display">$$|\nabla S| =
+\sqrt{
+\left(\frac{\partial S}{\partial x}\right)^2 +
+\left(\frac{\partial S}{\partial y}\right)^2 +
+\left(\frac{\partial S}{\partial z}\right)^2
+}.$$</span></p>
+<h1 id="s0-s1-light-propagation">s0 → s1 Light Propagation</h1>
+<p>Entropy endpoints:</p>
+<p><span class="math display">$$S_{\text{mid}} = \frac{1}{2}(s_0 + s_1),
+\qquad
+\Delta S = s_1 - s_0.$$</span></p>
+<p>Normalized entropy coordinate:</p>
+<p><span class="math display">$$x(S) = \frac{S - S_{\text{mid}}}{\Delta
+S / 2}.$$</span></p>
+<p>Effective light speed:</p>
+<p><span
+class="math display"><em>c</em>(<em>S</em>) = <em>c</em><sub>0</sub>(1+<em>a</em><sub>edge</sub> <em>x</em>(<em>S</em>)<sup>2</sup>).</span></p>
+<p>Light-travel time:</p>
+<p><span class="math display">$$t_{\text{obs}} = \int_{\gamma}
+\frac{dl}{c(S(l))}.$$</span></p>
+<h1 id="observables">Observables</h1>
+<h2 id="lensing">Lensing</h2>
+<p><span class="math display">Lensing = Mass
+Distribution + <em>S</em>(<strong>x</strong>) + <em>c</em>(<em>S</em>).</span></p>
+<h2 id="rotation-curves">Rotation Curves</h2>
+<p><span class="math display">$$v(r) = \sqrt{r \, \frac{\partial
+\Phi}{\partial r}}.$$</span></p>
+<h2 id="expansion-rate">Expansion Rate</h2>
+<p><span class="math display">$$H(E_f, S) = \sqrt{|E_f|}(1 +
+S).$$</span></p>
+<p>Core chain:</p>
+<p><span
+class="math display"><em>S</em>(<strong>x</strong>) → <em>E</em><sub><em>f</em></sub>(<strong>x</strong>) → <em>Φ</em>(<em>E</em><sub><em>f</em></sub>,<em>S</em>) → <em>c</em>(<em>S</em>) → <em>H</em>(<em>E</em><sub><em>f</em></sub>,<em>S</em>) → Observables.</span></p>
+<h1 id="figure">Figure</h1>
+<figure>
+<img src="EFC_vs_LCDM_plot.png" />
+<figcaption>Comparison between EFC baseline behaviour and <span
+class="math inline"><em>Λ</em></span>CDM.</figcaption>
+</figure>
+<h1 id="meta-reflective-development">Meta-Reflective Development</h1>
+<p>The theory evolves through iterative refinement using:</p>
+<ul>
+<li><p>SPARC rotation curves</p></li>
+<li><p>JWST early galaxies</p></li>
+<li><p>DESI expansion data</p></li>
+<li><p>gravitational lensing structure</p></li>
+</ul>
 </main>
-
-<script>
-  const btn = document.getElementById('theme-toggle');
-  const html = document.documentElement;
-
-  function updateLabel() {
-    const theme = html.getAttribute('data-theme') || "light";
-    btn.textContent = (theme === "light") ? "☾ Dark" : "☀ Light";
-  }
-
-  btn.addEventListener("click", () => {
-    const cur = html.getAttribute("data-theme") || "light";
-    const next = (cur === "light") ? "dark" : "light";
-    html.setAttribute("data-theme", next);
-    updateLabel();
-  });
-
-  updateLabel();
-</script>
 
 </body>
 </html>
