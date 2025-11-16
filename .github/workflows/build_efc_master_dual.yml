@@ -36,9 +36,9 @@ jobs:
           latexmk -pdf -interaction=nonstopmode efc_master.tex
 
       # -------------------------------
-      # Build HTML (LaTeX → HTML)
+      # Build HTML
       # -------------------------------
-      - name: Convert LaTeX → HTML
+      - name: Convert LaTeX → HTML (raw)
         working-directory: theory/master
         run: |
           pandoc efc_master.tex \
@@ -48,58 +48,44 @@ jobs:
             --standalone \
             --output=efc_master_raw.html
 
-      - name: Inject CSS + Theme Toggle (header/footer)
+      - name: Create Header/Footer (safe YAML version)
         working-directory: theory/master
         run: |
-          cat << 'EOF' > temp_header.html
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset='UTF-8'>
-<title>EFC Master Document</title>
+          echo '<!DOCTYPE html>' > header.html
+          echo '<html>' >> header.html
+          echo '<head>' >> header.html
+          echo '<meta charset="UTF-8">' >> header.html
+          echo '<title>EFC Master Document</title>' >> header.html
+          echo '<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>' >> header.html
 
-<script src='https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js'></script>
+          echo '<style>' >> header.html
+          echo 'body { max-width: 900px; margin: auto; padding: 2rem; font-family: sans-serif; }' >> header.html
+          echo 'img { max-width: 100%; height: auto; }' >> header.html
+          echo 'pre, code { background: #f2f2f2; padding: 0.5rem; }' >> header.html
+          echo 'html[data-theme="dark"] { background: #111; color: #ddd; }' >> header.html
+          echo 'html[data-theme="light"] { background: #fff; color: #222; }' >> header.html
+          echo '.theme-toggle { position: fixed; top: 10px; right: 10px; padding: 0.4rem 0.7rem; cursor: pointer; background: #444; color: #fff; border-radius: 5px; }' >> header.html
+          echo '</style>' >> header.html
 
-<style>
-  body { max-width: 900px; margin: auto; padding: 2rem; font-family: sans-serif; }
-  img { max-width: 100%; height: auto; }
-  pre, code { background: #f2f2f2; padding: 0.5rem; }
+          echo '<script>' >> header.html
+          echo 'function toggleTheme() {' >> header.html
+          echo '  let h = document.documentElement;' >> header.html
+          echo '  h.dataset.theme = (h.dataset.theme === "dark") ? "light" : "dark";' >> header.html
+          echo '}' >> header.html
+          echo '</script>' >> header.html
 
-  html[data-theme='dark'] { background: #111; color: #ddd; }
-  html[data-theme='light'] { background: #fff; color: #222; }
+          echo '</head>' >> header.html
+          echo '<body data-theme="light">' >> header.html
+          echo '<button class="theme-toggle" onclick="toggleTheme()">Toggle Theme</button>' >> header.html
 
-  .theme-toggle {
-    position: fixed;
-    top: 10px;
-    right: 10px;
-    padding: 0.4rem 0.7rem;
-    cursor: pointer;
-    background: #444;
-    color: #fff;
-    border-radius: 5px;
-  }
-</style>
-
-<script>
-function toggleTheme() {
-  let h = document.documentElement;
-  h.dataset.theme = (h.dataset.theme === 'dark') ? 'light' : 'dark';
-}
-</script>
-
-</head>
-<body data-theme='light'>
-<button class='theme-toggle' onclick='toggleTheme()'>Toggle Theme</button>
-EOF
-
-          echo "</body></html>" > temp_footer.html
+          echo '</body></html>' > footer.html
 
       - name: Assemble Final HTML
         working-directory: theory/master
         run: |
-          cat temp_header.html efc_master_raw.html temp_footer.html > efc_master.html
+          cat header.html efc_master_raw.html footer.html > efc_master.html
 
-      - name: Move HTML to docs folder
+      - name: Move HTML to docs/
         run: |
           mkdir -p docs
           cp theory/master/efc_master.html docs/efc_master.html
