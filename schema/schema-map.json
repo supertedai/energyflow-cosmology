@@ -50,7 +50,7 @@
   },
   "nodes": {
     "FigshareNode": {
-      "description": "Auto-synkronisert Figshare-kilde for siste publiserte EFC-arbeid.",
+      "description": "Auto-synkronisert Figshare-kilde for siste publiserte EFC-masterspesifikasjon.",
       "files": [
         {
           "name": "latest.json",
@@ -60,6 +60,56 @@
           "doi": "10.6084/m9.figshare.30630500",
           "url": "https://api.figshare.com/v2/account/articles/30630500",
           "published_date": "2025-11-16T13:07:16Z"
+        }
+      ],
+      "links": [
+        {
+          "type": "covers_concept",
+          "ref": "EFC-S"
+        },
+        {
+          "type": "covers_concept",
+          "ref": "EFC-D"
+        },
+        {
+          "type": "covers_concept",
+          "ref": "EFC-C\u2080"
+        },
+        {
+          "type": "covers_concept",
+          "ref": "Grid-Higgs Framework"
+        },
+        {
+          "type": "covers_concept",
+          "ref": "Halo Entropy Model"
+        },
+        {
+          "type": "covers_concept",
+          "ref": "CEM-Cosmos"
+        },
+        {
+          "type": "covers_concept",
+          "ref": "IMX"
+        },
+        {
+          "type": "uses_method",
+          "ref": "Open Cognitive Methodology"
+        },
+        {
+          "type": "uses_method",
+          "ref": "Reflective Loop"
+        },
+        {
+          "type": "uses_method",
+          "ref": "Author-Method-Note"
+        },
+        {
+          "type": "uses_method",
+          "ref": "Symbiose Interface"
+        },
+        {
+          "type": "uses_method",
+          "ref": "EFC Epistemology v1"
         }
       ]
     }
