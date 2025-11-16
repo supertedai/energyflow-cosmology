@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
+<meta charset="UTF-8">
 
 $if(title)$
 <title>$title$</title>
@@ -13,64 +13,100 @@ $endif$
 
 <style>
   :root {
-    --max-width: 38rem;
+    --max-width: 36rem;
     --font-body: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
     --font-size: 17px;
   }
 
-  html[data-theme="light"] { background:#fbfbfb; color:#111; }
-  html[data-theme="dark"]  { background:#111; color:#ddd; }
-
-  body {
-    margin:0 auto;
-    max-width:var(--max-width);
-    padding:3rem 1.8rem;
-    font-family:var(--font-body);
-    font-size:var(--font-size);
-    line-height:1.6;
+  html[data-theme="light"] {
+    background: #ffffff;
+    color: #111;
   }
 
-  h1, h2, h3 {
-    font-weight:600;
-    margin-top:2.2rem;
+  html[data-theme="dark"] {
+    background: #181818;
+    color: #ddd;
+  }
+
+  body {
+    margin: 0 auto;
+    padding: 2.8rem 1.8rem;
+    max-width: var(--max-width);
+    font-family: var(--font-body);
+    font-size: var(--font-size);
+    line-height: 1.65;
+    text-rendering: optimizeLegibility;
+  }
+
+  h1 {
+    font-size: 1.9rem;
+    font-weight: 600;
+    margin-top: 2.2rem;
+    margin-bottom: 1.3rem;
+  }
+
+  h2 {
+    font-size: 1.45rem;
+    font-weight: 600;
+    margin-top: 2rem;
+    margin-bottom: 0.8rem;
+  }
+
+  h3 {
+    font-size: 1.15rem;
+    font-weight: 600;
+    margin-top: 1.6rem;
   }
 
   img {
-    max-width:100%;
-    height:auto;
-    margin:1.5rem 0;
+    max-width: 100%;
+    height: auto;
+    margin: 1.4rem 0;
+    border-radius: 4px;
   }
 
   pre, code {
-    background:#f0f0f0;
-    padding:0.5rem;
-    border-radius:4px;
+    background: #f3f3f3;
+    padding: 0.5rem;
+    border-radius: 4px;
+    font-size: 0.9rem;
   }
 
-  #TOC { margin-bottom:2.5rem; padding-bottom:1.5rem; border-bottom:1px solid #ccc; }
-  #TOC ul { padding-left:0; list-style:none; }
-  #TOC li { margin:0.35rem 0; }
+  #TOC {
+    margin-bottom: 2.3rem;
+    padding-bottom: 1.3rem;
+    border-bottom: 1px solid #ccc;
+  }
+
+  #TOC ul {
+    list-style: none;
+    padding-left: 0;
+  }
+
+  #TOC li {
+    margin: 0.35rem 0;
+  }
 
   .theme-toggle {
-    position:fixed;
-    top:12px;
-    right:12px;
-    padding:0.3rem 0.7rem;
-    background:#444;
-    color:#fff;
-    border-radius:4px;
-    cursor:pointer;
-    font-size:0.8rem;
-    opacity:0.85;
+    position: fixed;
+    top: 12px;
+    right: 12px;
+    padding: 0.3rem 0.7rem;
+    background: #444;
+    color: #fff;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.8rem;
+    opacity: 0.85;
   }
 </style>
 
 <script>
-function toggleTheme(){
-  let h=document.documentElement;
-  h.dataset.theme=(h.dataset.theme==="dark")?"light":"dark";
+function toggleTheme() {
+    let h = document.documentElement;
+    h.dataset.theme = (h.dataset.theme === "dark") ? "light" : "dark";
 }
-document.documentElement.dataset.theme="light";
+document.documentElement.dataset.theme = "light";
 </script>
 
 </head>
