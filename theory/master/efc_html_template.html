@@ -3,143 +3,128 @@
 <head>
 <meta charset="UTF-8">
 
-$if(title)$
 <title>$title$</title>
-$else$
-<title>EFC Master Document</title>
-$endif$
 
-<!-- MathJax -->
 <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 
-<!-- Responsive academic layout -->
 <style>
-  :root {
-    --max-width: 38rem;
-    --font-body: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
-    --font-size: 17px;
-  }
-
-  html[data-theme="light"] {
-    background: #ffffff;
-    color: #111;
-  }
-
-  html[data-theme="dark"] {
-    background: #1a1a1a;
-    color: #ddd;
-  }
-
-  body {
-    margin: 0 auto;
-    padding: 2.5rem 1.2rem;
-    max-width: var(--max-width);
-    font-family: var(--font-body);
-    font-size: var(--font-size);
-    line-height: 1.65;
-    text-rendering: optimizeLegibility;
-    overflow-x: hidden;
-  }
-
-  /* Headings */
-  h1 {
-    margin-top: 2.5rem;
-    margin-bottom: 1.2rem;
-    font-size: 1.85rem;
-    font-weight: 600;
-  }
-
-  h2 {
-    margin-top: 2rem;
-    margin-bottom: 0.9rem;
-    font-size: 1.45rem;
-    font-weight: 600;
-  }
-
-  h3 {
-    margin-top: 1.6rem;
-    font-size: 1.15rem;
-    font-weight: 600;
-  }
-
-  /* Paragraphs */
-  p {
-    margin-bottom: 1.1rem;
-    overflow-wrap: break-word;
-    word-break: normal;
-  }
-
-  /* Images */
-  img {
-    display: block;
-    margin: 1.5rem auto;
-    max-width: 100%;
-    height: auto;
-    object-fit: contain;
-  }
-
-  /* Prevent content sliding on mobile */
-  @media (max-width: 600px) {
-    body {
-      padding: 1.5rem 1.1rem;
-    }
-    h1 { margin-top: 2rem; }
-    img { margin: 1.2rem auto; }
-  }
-
-  /* Code blocks */
-  pre, code {
-    background: #f3f3f3;
-    padding: 0.5rem;
-    border-radius: 4px;
-    overflow-x: auto;
-  }
-
-  /* TOC */
-  #TOC {
-    margin-bottom: 2.3rem;
-    padding-bottom: 1.4rem;
-    border-bottom: 1px solid #ccc;
-  }
-  #TOC ul {
-    list-style: none;
-    padding-left: 0;
-  }
-  #TOC li {
-    margin: 0.3rem 0;
-  }
-
-  /* Theme toggle */
-  .theme-toggle {
-    position: fixed;
-    top: 12px;
-    right: 12px;
-    padding: 0.32rem 0.8rem;
-    background: #444;
-    color: #fff;
-    border-radius: 4px;
-    font-size: 0.8rem;
-    cursor: pointer;
-    opacity: 0.85;
-    z-index: 9999;
-  }
-</style>
-
-<script>
-function toggleTheme() {
-    let h = document.documentElement;
-    h.dataset.theme = (h.dataset.theme === "dark") ? "light" : "dark";
+/* PAGE BACKGROUND */
+html, body {
+  background: #f5f7fa;
+  margin: 0;
+  padding: 0;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
 }
-document.documentElement.dataset.theme = "light";
-</script>
+
+/* MAIN CONTAINER */
+.main {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 2rem 1.2rem;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+}
+
+/* HEADINGS */
+h1 {
+  font-size: 2.0rem;
+  font-weight: 650;
+  border-bottom: 3px solid #e1e4e8;
+  padding-bottom: 0.4rem;
+  margin-top: 2.2rem;
+  margin-bottom: 1.6rem;
+}
+
+h2 {
+  font-size: 1.45rem;
+  font-weight: 600;
+  border-bottom: 2px solid #e5e7eb;
+  padding-bottom: 0.35rem;
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+}
+
+h3 {
+  font-size: 1.15rem;
+  font-weight: 600;
+  margin-top: 1.4rem;
+  margin-bottom: 0.7rem;
+}
+
+/* PARAGRAPHS */
+p {
+  line-height: 1.65;
+  margin-bottom: 1.1rem;
+}
+
+/* LISTS */
+ul, ol {
+  margin-left: 1.2rem;
+  margin-bottom: 1.2rem;
+}
+
+/* MATHJAX */
+mjx-container {
+  font-size: 1.05em !important;
+}
+
+/* CODE BOXES */
+pre, code {
+  background: #eef4ff;
+  padding: 0.6rem;
+  border-left: 4px solid #3b82f6;
+  border-radius: 4px;
+  overflow-x: auto;
+}
+
+/* INFO BOX (as in screenshot) */
+.info-box {
+  background: #eef4ff;
+  padding: 0.9rem;
+  border-left: 4px solid #3b82f6;
+  margin: 1.4rem 0;
+  border-radius: 4px;
+  font-size: 0.95rem;
+}
+
+/* IMAGES */
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: 1.8rem auto;
+  border-radius: 6px;
+  object-fit: contain;
+}
+
+/* THEME BUTTON — hidden for now */
+.theme-toggle {
+  display: none;
+}
+
+/* MOBILE */
+@media (max-width: 600px) {
+  .main {
+    padding: 1.3rem 0.9rem;
+    margin-top: 0;
+    border-radius: 0;
+  }
+  h1 {
+    margin-top: 1.2rem;
+  }
+}
+</style>
 
 </head>
 
 <body>
 
-<button class="theme-toggle" onclick="toggleTheme()">Theme</button>
+<div class="main">
 
 $body$
+
+</div>
 
 </body>
 </html>
