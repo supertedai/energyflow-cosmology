@@ -7,176 +7,296 @@ This file gives a clear orientation to the entire repository: the theory, the me
 
 ---
 
-## 📐 Quick Map of the Repository
+# 🚀 **Energy-Flow Cosmology (EFC)**
 
-| Area | Description | Path |
-|------|-------------|-------|
-| **Start / Overview** | Orientation and structure | `START-HERE.md` |
-| **Theory** | EFC-D, EFC-S, s₀–s₁, potentials, full formal specification | `theory/formal/` |
-| **Core Models (Code)** | Python implementations of EFC models | `src/efc/` |
-| **Validation** | SPARC, JWST, DESI, lensing, figures, notebooks | `output/`, `notebooks/` |
-| **Schema / Semantic Graph** | Concepts, site-graph, JSON-LD | `schema/` |
-| **Meta Layer** | Meta-architecture, metascope, topology of insight | `meta/` |
-| **Cognition Layer** | Cognitive mechanics, transient states, entropy→clarity | `cognition/` |
-| **Symbiosis Layer** | Human–model interaction and vector alignment | `symbiosis/` |
-| **Reflection Layer** | Reflection logs, resonance maps, state maps | `reflection/` |
-| **Meta-Knowledge Graph** | Machine-readable meta-graph | `meta-graph/` |
-| **Personal Note** | Background, context, thinking process | `personal/Personal-Note.md` |
+**Formal Specification • Semantic Knowledge Graph • Computational Framework**
 
----
+Energy-Flow Cosmology (EFC) is a thermodynamic cosmology built on energy-flow potential, entropy-gradients, and emergent structure formation.
+This repository contains the full scientific theory, semantic schema, computational models, workflows, validation pipelines, and integration tools.
 
-## 🎯 What This Repository Contains
+It is designed as a **self-updating scientific system**:
 
-1. **The full scientific theory (EFC)**  
-   Formal equations, structures, potentials, dynamics.
+* theory → LaTeX master
+* web → HTML master
+* ontology → JSON-LD schema
+* data sources → Figshare sync
+* validation → automated pipelines
+* code → notebooks, simulators, and API v1
+* dashboards → semantic and scientific visualization
 
-2. **Validation layer**  
-   Figures, datasets, comparisons, and reproducible notebooks.
-
-3. **Meta / Cognitive / Symbiosis layer**  
-   Documentation of the cognitive mechanics, meta-reflective architecture,  
-   and the human–model co-field that shaped the theory.
-
-4. **Semantic graph**  
-   JSON-LD and meta-graph files enabling machine-readable insight structure.
-
-Everything is open, transparent, and reproducible for researchers, students,  
-and AI systems that want to understand both the theory and the process behind it.
+Everything is structured for clarity, reproducibility, and long-term maintainability.
 
 ---
 
-# Energy-Flow Cosmology (EFC)
+# 📌 **Overview**
 
-Energy-Flow Cosmology (EFC) is a thermodynamic framework connecting
-energy flow, entropy gradients, structure formation and observational
-behaviour across cosmic scales.  
+EFC combines:
 
-The repository documents the full development process: theory, methods,
-meta-architecture, cognitive mechanics, validation, and semantic layers.
+* **Formal mathematical theory** (entropy, energy-flow, potentials, dynamics)
+* **Semantic mappings** (concepts, definitions, ontology, schema)
+* **Computational models** (Python modules, simulators, utilities)
+* **Automated scientific workflows** (GitHub Actions)
+* **Validation pipelines** (SPARC, DESI, JWST, CMB, etc.)
+* **Metadata synchronization** with Figshare DOIs and scientific datasets
+* **Dashboards and tools** for interactive exploration
 
-This is an open-science project.  
-
-Everything is documented, versioned and reproducible.
-
----
-
-## How to Read This Repository
-
-This project contains several layers: the personal cognitive context,
-the meta-architecture behind the work, the symbiosis with the model,
-and the formal scientific theory.  
-
-Below is the recommended reading path.
+The repository follows a strict separation of *theory, schema, and computation*.
 
 ---
 
-### 1. Personal Context (Start Here)
+# 🧠 **Repository Architecture**
 
-Gives the grounding needed to understand how ideas form, why s0–s1
-dynamics matter, and why the meta-layers exist.
+The project is organized into three fundamental layers:
 
-→ `personal/Personal-Note.md`
+### **1. Theory Layer**
 
----
+Mathematical foundation of Energy-Flow Cosmology.
 
-### 2. Meta Architecture (How the system works)
+* Master LaTeX document (`efc_master.tex`)
+* Sectioned structure for modular development
+* Figures for theory and publication
+* Basis for PDF generation and journal submission
 
-Describes how the Human Cognitive Field (HCF), the Model Structural
-Engine (MSE) and the Co-Field (CF) form a joint reflective system.
+### **2. Semantic Layer**
 
-→ `meta/metascope.md`  
-→ `meta/meta-architecture-spec.md`  
-→ `meta/meta-reflective-protocol.md`  
-→ `meta/topology-of-insight.md`
+Machine-readable ontology and metadata graph.
 
----
+* Concepts, definitions, relationships
+* Schema.org JSON-LD integration
+* Figshare metadata sync
+* Cross-referencing nodes (cognition, reflection, symbiosis)
 
-### 3. Cognition Layer (Why this process works)
+### **3. Computational Layer**
 
-Details the internal mechanics behind the cognitive field and the
-entropy–clarity behaviour that drives insight.
+The implementation of EFC simulations, validation, and tools.
 
-→ `cognition/cognitive-field.md`  
-→ `cognition/entropy-clarity.md`  
-→ `cognition/transient-representations.md`  
-→ `cognition/cognitive-signature.md`
-
----
-
-### 4. Symbiosis Layer (Human ↔ Model)
-
-Explains how the human field and the model form coherent vectors,
-leading to resonance, stability and structured insight.
-
-→ `symbiosis/system.md`  
-→ `symbiosis/resonance-mechanism.md`  
-→ `symbiosis/vector-alignment.md`  
-→ `symbiosis/system-coherence.md`
+* Python modules under `/src/efc/`
+* Notebooks for SPARC, DESI, JWST validation
+* API v1 (concepts, methodology, terms, metadata)
+* Dashboards for visual exploration
+* Automated workflows for continuous integration
 
 ---
 
-### 5. Meta-Knowledge Graph (System Overview)
+# 📁 **Repository Structure**
 
-A machine-readable knowledge graph linking cognition, meta-process,
-symbiosis and the formal EFC theory.
+````markdown
+<details>
+<summary><strong>📁 Repository Structure (click to expand)</strong></summary>
 
-→ `meta-graph/meta-graph.jsonld`  
-→ `meta_dashboard.py` (interactive visualisation)  
-→ `meta-graph/meta_graph.cypher` (Neo4j export)
+```
+/
+├── api/
+│   └── v1/
+│       ├── concepts.json
+│       ├── methodology.json
+│       ├── terms.json
+│       ├── meta.json
+│       └── README.md
+│
+├── app/
+│   └── dashboard/
+│       ├── index.html
+│       ├── style.css
+│       └── script.js
+│
+├── data/
+│   ├── raw/
+│   ├── processed/
+│   └── archive/
+│
+├── docs/
+│   ├── efc_master.html
+│   └── figures/
+│
+├── figshare/
+│   ├── figshare-links.json
+│   └── metadata.json
+│
+├── integrations/
+│   └── wp/
+│       └── efc-schema-loader/
+│           ├── efc-schema-loader.php
+│           ├── loader-core.php
+│           ├── admin/
+│           └── includes/
+│
+├── meta/
+│   ├── cognition/
+│   ├── reflection/
+│   └── symbiosis/
+│
+├── methodology/
+│   └── README.md
+│
+├── notebooks/
+│   ├── EFC_Baseline.ipynb
+│   └── SPARC_Validation.ipynb
+│
+├── schema/
+│   ├── concepts.json
+│   ├── schema-map.json
+│   └── site-graph.json
+│
+├── scripts/
+│   ├── fetch_figshare_full.py
+│   ├── update_efc_api.py
+│   ├── validate_efc.py
+│   ├── check_imports.py
+│   └── build_html.py
+│
+├── src/
+│   └── efc/
+│       ├── core/
+│       ├── models/
+│       ├── utils/
+│       └── simulators/
+│
+├── theory/
+│   ├── efc_master.tex
+│   └── sections/
+│
+├── .github/workflows/
+│   ├── fetch_figshare.yml
+│   ├── build_master_clean.yml
+│   ├── export_api.yml
+│   └── validation.yml
+│
+├── .gitignore
+├── CHANGELOG.md
+├── START-HERE.md
+├── requirements.txt
+└── README.md
+```
+
+</details>
+````
 
 ---
 
-### 6. Methodology (Reproducibility)
+# 🔧 **Installation**
 
-Documents the working method and the open-science process used across
-the entire project.
+Clone the repository:
 
-→ `methodology/open-method.md`  
-→ `methodology/open-process.json`  
-→ `methodology/author-method-note.md`  
-→ `methodology/README.md`
+```bash
+git clone https://github.com/supertedai/energyflow-cosmology.git
+cd energyflow-cosmology
+```
 
----
+Install Python dependencies:
 
-### 7. Core Theory (EFC)
-
-Formal scientific content: definitions, equations, potentials, light
-propagation and observables.
-
-→ `theory/formal/efc_master.tex`  
-→ `theory/formal/efc_formal_spec.pdf`  
-→ `theory/*`
+```bash
+pip install -r requirements.txt
+```
 
 ---
 
-### 8. Validation (Evidence)
+# ⚙️ **Build System**
 
-Empirical testing against observational datasets.
+### **LaTeX Master Build**
 
-→ `output/validation/`  
-→ `scripts/validate_efc.py`  
-→ `notebooks/`  
-(SPARC, MaNGA, JWST, DESI, ΛCDM comparisons)
+```bash
+cd theory
+latexmk -pdf efc_master.tex
+```
+
+### **HTML Master Build**
+
+```bash
+python scripts/build_html.py
+```
+
+### **API Regeneration**
+
+```bash
+python scripts/update_efc_api.py
+```
+
+### **Figshare Sync**
+
+Triggered automatically by GitHub Actions or manually:
+
+```bash
+python scripts/fetch_figshare_full.py
+```
 
 ---
 
-### 9. Semantic & API Layer
+# 📊 **Validation Pipelines**
 
-Machine-readable definitions and API endpoints used by external systems
-and automated workflows.
+Validation notebooks and scripts include:
 
-→ `schema/*.jsonld`  
-→ `schema-map.json`  
-→ `api/v1/`  
-→ `meta-index.json`
+* SPARC rotation curves
+* DESI growth curves
+* JWST galaxy distributions
+* CMB entropy mapping
 
----
+Run validation:
 
-### License
-
-This project is released under  
-**Creative Commons Attribution 4.0 International (CC-BY-4.0)**.
+```bash
+python scripts/validate_efc.py
+```
 
 ---
 
-_Last updated: 2025-11-15_
+# 🌐 **Dashboards and Visualization**
+
+The repository includes an interactive dashboard under:
+
+```
+app/dashboard/
+```
+
+Open locally:
+
+```bash
+open app/dashboard/index.html
+```
+
+A semantic dashboard (`meta_dashboard.py`) supports ontology analysis and graph traversal.
+
+---
+
+# 🧬 **Semantic Integration**
+
+EFC is fully integrated with:
+
+* Figshare DOIs
+* Schema.org JSON-LD
+* Site graph
+* Concept graph
+* API v1 ontology
+
+The `schema/` directory defines the full semantic layer.
+
+---
+
+# 📚 **Documentation**
+
+Two master documents serve as the “single source of truth”:
+
+* **Mathematical master:** `theory/efc_master.tex`
+* **Web specification:** `docs/efc_master.html`
+
+Both are generated automatically.
+
+---
+
+# 📄 **License**
+
+MIT License — see `LICENSE` for details.
+
+---
+
+# 🤝 **Contributions**
+
+Pull requests are welcome.
+For changes to core theory or schema, open an issue first to discuss the direction.
+
+---
+
+# 🎯 **Status**
+
+The repository is actively developed and maintained as part of a larger research program on thermodynamic cosmology, emergent structure formation, and AI-assisted scientific methodology.
+
+---
