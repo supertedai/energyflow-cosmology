@@ -3,6 +3,7 @@
 
 import os
 import sys
+import json
 import requests
 from datetime import datetime
 
@@ -43,22 +44,31 @@ def pick_latest(articles):
     if not articles:
         raise RuntimeError("Ingen artikler returnert fra Figshare API")
 
-    # Normaliser published_date
     def safe_date(a):
         d = a.get("published_date")
-        # Håndter None, tom string eller manglende felt
         if isinstance(d, str) and len(d) > 0:
             return d
-        return "0000-00-00"   # laveste sorteringsverdi
+        return "0000-00-00"
 
-    # Sorter etter dato
     sorted_list = sorted(
         articles,
         key=safe_date,
         reverse=True
     )
-
     return sorted_list[0]
+
+
+# ---------------------------------------------------------
+# Lagring av metadata
+# ---------------------------------------------------------
+def save_metadata(latest):
+    os.makedirs("figshare", exist_ok=True)
+
+    out_path = "figshare/latest.json"
+    with open(out_path, "w") as f:
+        json.dump(latest, f, indent=2)
+
+    log(f"Lagret: {out_path}")
 
 
 # ---------------------------------------------------------
@@ -75,10 +85,7 @@ def main():
         log(f"Publiseringsdato: {latest.get('published_date', 'Ingen dato')}")
         log("------------------------------------------------")
 
-        # Her kan du lagre metadata hvis du ønsker senere
-        # f.eks.:
-        # with open("figshare/latest.json", "w") as f:
-        #     json.dump(latest, f, indent=2)
+        save_metadata(latest)
 
     except Exception as e:
         log(f"Feil: {e}")
