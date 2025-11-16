@@ -17,7 +17,7 @@
 }
 
 % --------------------------------------------------
-% Title metadata (HTML + PDF)
+% Title metadata
 % --------------------------------------------------
 \title{Energy-Flow Cosmology --- Master Formal Specification}
 \author{Morten Magnusson}
@@ -25,23 +25,19 @@
 
 \begin{document}
 
-% Render title
 \maketitle
 
-% --------------------------------------------------
+% -------------------
 % CONTENT START
-% --------------------------------------------------
+% -------------------
 
-% Insert the EFC-D, EFC-S, light propagation, observables, etc.
-% Everything below this line is produced as-is and converted by Pandoc.
+\section{EFC-D: Energy-Flow Dynamics}
 
-\section*{EFC-D: Energy-Flow Dynamics}
-
-The local energy-flow potential \( E_f \) is defined as a function of
-mass density \( \rho \) and entropy \( S \):
+The local energy-flow potential \(E_f\) is defined as a function of
+mass density \(\rho\) and entropy \(S\):
 
 \[
-  E_f = \rho (1 - S).
+E_f = \rho (1 - S).
 \]
 
 Interpretation:
@@ -51,129 +47,128 @@ Interpretation:
   \item high entropy suppresses \(E_f\)
 \end{itemize}
 
-\subsection*{Density}
+\subsection{Density}
 
-The mass density is
-
-\[
-  \rho = \frac{m}{V}.
-\]
-
-\subsection*{Energy-Flow Rate}
-
-The temporal change is
+The mass density is:
 
 \[
-  \frac{dE_f}{dt} = \nabla_t E_f.
+\rho = \frac{m}{V}.
 \]
+
+\subsection{Energy-Flow Rate}
+
+The temporal change is:
+
+\[
+\frac{dE_f}{dt} = \nabla_t E_f.
+\]
+
 
 % --------------------------------------------------
+\section{EFC-S: Entropy Field and Gradient}
 
-\section*{EFC-S: Entropy Field and Gradient}
-
-The entropy field \( S(\mathbf{x}) \in [0,1] \) describes local
-thermodynamic ordering.
+The entropy field \(S(\mathbf{x})\) ranges between ordered and disordered regions:
 
 \[
-  S(\mathbf{x}) \in [0,1]
+S(\mathbf{x}) \in [0,1].
 \]
 
 Entropy gradient:
 
 \[
-  \nabla S(\mathbf{x}) =
-  \left(
-  \frac{\partial S}{\partial x},
-  \frac{\partial S}{\partial y},
-  \frac{\partial S}{\partial z}
-  \right)
+\nabla S(\mathbf{x}) =
+\left(
+\frac{\partial S}{\partial x},
+\frac{\partial S}{\partial y},
+\frac{\partial S}{\partial z}
+\right).
 \]
 
 Magnitude:
 
 \[
-  \lvert \nabla S \rvert =
-  \sqrt{
-    \left( \frac{\partial S}{\partial x} \right)^2 +
-    \left( \frac{\partial S}{\partial y} \right)^2 +
-    \left( \frac{\partial S}{\partial z} \right)^2
-  }.
+|\nabla S| =
+\sqrt{
+\left(\frac{\partial S}{\partial x}\right)^2 +
+\left(\frac{\partial S}{\partial y}\right)^2 +
+\left(\frac{\partial S}{\partial z}\right)^2
+}.
 \]
 
-% --------------------------------------------------
 
-\section*{Light Propagation (s0 → s1)}
+% --------------------------------------------------
+\section{s0 → s1 Light Propagation}
 
 Entropy endpoints:
 
 \[
-  S_{\text{mid}} = \tfrac{1}{2}(s_0 + s_1),
-  \qquad
-  \Delta S = s_1 - s_0.
+S_{\text{mid}} = \frac{1}{2}(s_0 + s_1),
+\qquad
+\Delta S = s_1 - s_0.
 \]
 
 Normalized entropy coordinate:
 
 \[
-  x(S) = \frac{S - S_{\text{mid}}}{\Delta S/2}.
+x(S) = \frac{S - S_{\text{mid}}}{\Delta S / 2}.
 \]
 
 Effective light speed:
 
 \[
-  c(S) = c_0 \left( 1 + a_{\text{edge}}\, x(S)^2 \right).
+c(S) = c_0\left(1 + a_{\text{edge}}\, x(S)^2\right).
 \]
 
 Light-travel time:
 
 \[
-  t_{\text{obs}} = \int_{\gamma} \frac{dl}{c(S(l))}.
+t_{\text{obs}} = \int_{\gamma} \frac{dl}{c(S(l))}.
 \]
+
 
 % --------------------------------------------------
+\section{Observables}
 
-\section*{Observables in EFC}
-
-\subsection*{Lensing}
+\subsection{Lensing}
 
 \[
-  \text{Lensing} =
-    \text{Mass Distribution}
-    + S(\mathbf{x})
-    + c(S).
+\text{Lensing} =
+\text{Mass Distribution}
++ S(\mathbf{x})
++ c(S).
 \]
 
-\subsection*{Rotation Curves}
+\subsection{Rotation Curves}
 
 \[
-  v(r) = \sqrt{\, r \, \frac{\partial \Phi}{\partial r} \, }.
+v(r) = \sqrt{r \, \frac{\partial \Phi}{\partial r}}.
 \]
 
-\subsection*{Expansion Rate}
+\subsection{Expansion Rate}
 
 \[
-  H(E_f, S) = \sqrt{|E_f|}\,(1 + S).
+H(E_f, S) = \sqrt{|E_f|}(1 + S).
 \]
 
 Core chain:
 
 \[
-  S(\mathbf{x})
-  \rightarrow
-  E_f(\mathbf{x})
-  \rightarrow
-  \Phi(E_f,S)
-  \rightarrow
-  c(S)
-  \rightarrow
-  H(E_f,S)
-  \rightarrow
-  \text{Observables}.
+S(\mathbf{x})
+\rightarrow
+E_f(\mathbf{x})
+\rightarrow
+\Phi(E_f, S)
+\rightarrow
+c(S)
+\rightarrow
+H(E_f, S)
+\rightarrow
+\text{Observables}.
 \]
 
-% --------------------------------------------------
 
-\section*{Figures}
+% --------------------------------------------------
+\section{Figure}
 
 \begin{figure}[h!]
 \centering
@@ -181,18 +176,17 @@ Core chain:
 \caption{Comparison between EFC baseline behaviour and \(\Lambda\)CDM.}
 \end{figure}
 
+
 % --------------------------------------------------
+\section{Meta-Reflective Development}
 
-\section*{Meta-Reflective Development}
-
-The EFC framework evolves iteratively through thermodynamic,
-observational, and structural consistency checks.
+The theory evolves through iterative refinement using:
 
 \begin{itemize}
-  \item SPARC rotation curves
-  \item JWST early galaxies
-  \item DESI expansion history
-  \item Lensing structure
+    \item SPARC rotation curves
+    \item JWST early galaxies
+    \item DESI expansion data
+    \item gravitational lensing structure
 \end{itemize}
 
 \end{document}
