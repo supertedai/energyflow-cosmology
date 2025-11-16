@@ -9,7 +9,7 @@ from datetime import datetime
 
 API_URL = "https://api.figshare.com/v2/account/articles"
 
-# Harde semantiske koblinger for master-spesifikasjonen
+# Semantiske koblinger for master-spesifikasjonen
 CONCEPT_LINKS = [
     "EFC-S",
     "EFC-D",
@@ -27,6 +27,8 @@ METHODOLOGY_LINKS = [
     "Symbiose Interface",
     "EFC Epistemology v1"
 ]
+
+MASTER_ROLE = "master_spec"
 
 
 def log(msg):
@@ -95,21 +97,37 @@ def update_api_meta(latest):
     else:
         meta = {}
 
+    doi = latest.get("doi")
+    fig_id = latest.get("id")
+    url = latest.get("url")
+    published_date = latest.get("published_date")
+
+    # Kilde-lag
     meta.setdefault("sources", {})
     meta["sources"]["figshare"] = {
-        "id": latest.get("id"),
+        "id": fig_id,
         "title": latest.get("title"),
-        "published_date": latest.get("published_date"),
-        "url": latest.get("url"),
-        "doi": latest.get("doi"),
+        "published_date": published_date,
+        "url": url,
+        "doi": doi,
         "resource_id": latest.get("resource_id"),
         "resource_doi": latest.get("resource_doi")
+    }
+
+    # DOI-lag (sentral indeks i API-et)
+    meta.setdefault("doi", {})
+    meta["doi"][MASTER_ROLE] = {
+        "doi": doi,
+        "figshare_id": fig_id,
+        "url": url,
+        "published_date": published_date,
+        "source": "figshare"
     }
 
     with open(meta_path, "w") as f:
         json.dump(meta, f, indent=2)
 
-    log(f"Oppdatert: {meta_path}")
+    log(f"Oppdatert: {meta_path} (sources.figshare + doi.{MASTER_ROLE})")
 
 
 # --------------------------
@@ -125,10 +143,9 @@ def _ensure_list(node: dict, key: str):
 
 
 def _append_unique(ref_list, item, key_fields):
-    """Legg til item i ref_list hvis det ikke finnes fra før basert på key_fields."""
     for existing in ref_list:
         if all(existing.get(k) == item.get(k) for k in key_fields):
-            return  # finnes allerede
+            return
     ref_list.append(item)
 
 
@@ -157,7 +174,7 @@ def update_schema_map(latest):
     schema["last_updated"] = datetime.now().date().isoformat()
     nodes = schema.setdefault("nodes", {})
 
-    # ---------------- FigshareNode ----------------
+    # -------- FigshareNode --------
     fig_node = {
         "description": "Auto-synkronisert Figshare-kilde for siste publiserte EFC-masterspesifikasjon.",
         "files": [
@@ -174,7 +191,6 @@ def update_schema_map(latest):
         "links": []
     }
 
-    # legg til semantiske lenker fra FigshareNode til konsepter og metodologi
     for cname in CONCEPT_LINKS:
         fig_node["links"].append({
             "type": "covers_concept",
@@ -188,7 +204,7 @@ def update_schema_map(latest):
 
     nodes["FigshareNode"] = fig_node
 
-    # ---------------- ConceptNode ----------------
+    # -------- ConceptNode --------
     concept_node = nodes.get("ConceptNode")
     if concept_node is not None:
         refs = _ensure_list(concept_node, "figshare_refs")
@@ -198,13 +214,13 @@ def update_schema_map(latest):
                 "id": fig_id,
                 "doi": doi,
                 "url": url,
-                "role": "master_spec"
+                "role": MASTER_ROLE
             },
             key_fields=["id", "doi"]
         )
         nodes["ConceptNode"] = concept_node
 
-    # ---------------- MethodologyNode ----------------
+    # -------- MethodologyNode --------
     methodology_node = nodes.get("MethodologyNode")
     if methodology_node is not None:
         refs = _ensure_list(methodology_node, "figshare_refs")
@@ -214,16 +230,31 @@ def update_schema_map(latest):
                 "id": fig_id,
                 "doi": doi,
                 "url": url,
-                "role": "master_spec"
+                "role": MASTER_ROLE
             },
             key_fields=["id", "doi"]
         )
         nodes["MethodologyNode"] = methodology_node
 
+    # -------- Global DOI-indeks i schema --------
+    doi_index = schema.setdefault("doi_index", [])
+    if doi:
+        _append_unique(
+            doi_index,
+            {
+                "doi": doi,
+                "figshare_id": fig_id,
+                "url": url,
+                "role": MASTER_ROLE,
+                "node": "FigshareNode"
+            },
+            key_fields=["doi", "figshare_id"]
+        )
+
     with open(schema_path, "w") as f:
         json.dump(schema, f, indent=2)
 
-    log(f"Oppdatert: {schema_path} (FigshareNode + figshare_refs)")
+    log(f"Oppdatert: {schema_path} (FigshareNode + figshare_refs + doi_index)")
 
 
 # --------------------------
@@ -238,6 +269,7 @@ def main():
         log(f"ID: {latest.get('id')}")
         log(f"Tittel: {latest.get('title')}")
         log(f"Publisert: {latest.get('published_date')}")
+        log(f"DOI: {latest.get('doi')}")
         log("--------------------------------------")
 
         save_latest_json(latest)
