@@ -36,9 +36,9 @@ def log(msg):
     print(f"[{ts}] {msg}")
 
 
-# --------------------------
-# Hent artikler fra Figshare
-# --------------------------
+# -----------------------------------------------------
+#  Hent artikler fra Figshare (private + public)
+# -----------------------------------------------------
 def get_articles():
     token = os.environ.get("FIGSHARE_TOKEN")
     if not token:
@@ -55,24 +55,32 @@ def get_articles():
     return r.json()
 
 
-# --------------------------
-# Velg nyeste artikkel
-# --------------------------
+# -----------------------------------------------------
+#  Velg nyeste artikkel (fallback hvis published mangler)
+# -----------------------------------------------------
 def pick_latest(articles):
     if not articles:
         raise RuntimeError("Ingen artikler returnert fra Figshare API")
 
     def safe_date(a):
+        # Hovedregel: bruk published_date
         d = a.get("published_date")
-        return d if isinstance(d, str) and len(d) > 0 else "0000-00-00"
+        if d and isinstance(d, str) and len(d) > 0:
+            return d
+        # Fallback: bruk created_date
+        c = a.get("created_date")
+        if c and isinstance(c, str) and len(c) > 0:
+            return c
+        # Hvis alt mangler
+        return "0000-00-00"
 
     sorted_list = sorted(articles, key=safe_date, reverse=True)
     return sorted_list[0]
 
 
-# --------------------------
-# Lagre figshare/latest.json
-# --------------------------
+# -----------------------------------------------------
+#  Lagre figshare/latest.json
+# -----------------------------------------------------
 def save_latest_json(latest):
     os.makedirs("figshare", exist_ok=True)
     out_path = "figshare/latest.json"
@@ -81,9 +89,9 @@ def save_latest_json(latest):
     log(f"Lagret: {out_path}")
 
 
-# --------------------------
-# Oppdater api/v1/meta.json
-# --------------------------
+# -----------------------------------------------------
+#  Oppdater api/v1/meta.json (sentral DOI-kilde)
+# -----------------------------------------------------
 def update_api_meta(latest):
     meta_path = "api/v1/meta.json"
 
@@ -114,7 +122,7 @@ def update_api_meta(latest):
         "resource_doi": latest.get("resource_doi")
     }
 
-    # DOI-lag (sentral indeks i API-et)
+    # DOI-lag
     meta.setdefault("doi", {})
     meta["doi"][MASTER_ROLE] = {
         "doi": doi,
@@ -130,9 +138,9 @@ def update_api_meta(latest):
     log(f"Oppdatert: {meta_path} (sources.figshare + doi.{MASTER_ROLE})")
 
 
-# --------------------------
-# Hjelpere for schema-map
-# --------------------------
+# -----------------------------------------------------
+#  Hjelpere for schema-map.json
+# -----------------------------------------------------
 def _ensure_list(node: dict, key: str):
     val = node.get(key)
     if val is None:
@@ -149,9 +157,9 @@ def _append_unique(ref_list, item, key_fields):
     ref_list.append(item)
 
 
-# --------------------------
-# Oppdater schema/schema-map.json
-# --------------------------
+# -----------------------------------------------------
+#  Oppdater schema/schema-map.json
+# -----------------------------------------------------
 def update_schema_map(latest):
     schema_path = "schema/schema-map.json"
 
@@ -174,7 +182,7 @@ def update_schema_map(latest):
     schema["last_updated"] = datetime.now().date().isoformat()
     nodes = schema.setdefault("nodes", {})
 
-    # -------- FigshareNode --------
+    # ---------------- FigshareNode ----------------
     fig_node = {
         "description": "Auto-synkronisert Figshare-kilde for siste publiserte EFC-masterspesifikasjon.",
         "files": [
@@ -196,6 +204,7 @@ def update_schema_map(latest):
             "type": "covers_concept",
             "ref": cname
         })
+
     for mname in METHODOLOGY_LINKS:
         fig_node["links"].append({
             "type": "uses_method",
@@ -204,7 +213,7 @@ def update_schema_map(latest):
 
     nodes["FigshareNode"] = fig_node
 
-    # -------- ConceptNode --------
+    # ---------------- ConceptNode ----------------
     concept_node = nodes.get("ConceptNode")
     if concept_node is not None:
         refs = _ensure_list(concept_node, "figshare_refs")
@@ -220,7 +229,7 @@ def update_schema_map(latest):
         )
         nodes["ConceptNode"] = concept_node
 
-    # -------- MethodologyNode --------
+    # ---------------- MethodologyNode -------------
     methodology_node = nodes.get("MethodologyNode")
     if methodology_node is not None:
         refs = _ensure_list(methodology_node, "figshare_refs")
@@ -236,7 +245,7 @@ def update_schema_map(latest):
         )
         nodes["MethodologyNode"] = methodology_node
 
-    # -------- Global DOI-indeks i schema --------
+    # ---------------- DOI-index -------------------
     doi_index = schema.setdefault("doi_index", [])
     if doi:
         _append_unique(
@@ -257,9 +266,9 @@ def update_schema_map(latest):
     log(f"Oppdatert: {schema_path} (FigshareNode + figshare_refs + doi_index)")
 
 
-# --------------------------
+# -----------------------------------------------------
 # Main
-# --------------------------
+# -----------------------------------------------------
 def main():
     try:
         articles = get_articles()

@@ -1,0 +1,18 @@
+# Core dependencies
+numpy
+pandas
+scipy
+matplotlib
+
+# Astronomy / cosmology
+astropy
+
+# API + HTTP handling
+requests
+
+# Jupyter + research workflow
+jupyter
+notebook
+
+# Utilities
+pyyaml
