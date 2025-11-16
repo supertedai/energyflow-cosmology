@@ -1,131 +1,132 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<html lang="en" data-theme="light">
 <head>
-  <meta charset="utf-8" />
-  <meta name="generator" content="pandoc" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
-  <meta name="author" content="Morten Magnusson" />
-  <meta name="dcterms.date" content="2025-11-16" />
-  <title>Energy-Flow Cosmology — Master Formal Specification</title>
-  <style>
-    code{white-space: pre-wrap;}
-    span.smallcaps{font-variant: small-caps;}
-    div.columns{display: flex; gap: min(4vw, 1.5em);}
-    div.column{flex: auto; overflow-x: auto;}
-    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
-    /* The extra [class] is a hack that increases specificity enough to
-       override a similar rule in reveal.js */
-    ul.task-list[class]{list-style: none;}
-    ul.task-list li input[type="checkbox"] {
-      font-size: inherit;
-      width: 0.8em;
-      margin: 0 0.8em 0.2em -1.6em;
-      vertical-align: middle;
-    }
-  </style>
-  <link rel="stylesheet" href="efc_master.css" />
-  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-  <script src="/usr/share/javascript/mathjax/MathJax.js"
-  type="text/javascript"></script>
+<meta charset="utf-8"/>
+<title>EFC Master Specification</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<style>
+:root {
+  --bg: #fafafa;
+  --fg: #222;
+  --sidebar-bg: #111;
+  --sidebar-fg: #fff;
+  --accent: #1f8fff;
+}
+[data-theme="dark"] {
+  --bg: #050608;
+  --fg: #eee;
+  --sidebar-bg: #000;
+  --sidebar-fg: #ddd;
+  --accent: #7ed0ff;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: system-ui, sans-serif;
+  background: var(--bg);
+  color: var(--fg);
+  display: flex;
+  overflow-x: hidden;
+}
+
+#sidebar {
+  width: 260px;
+  background: var(--sidebar-bg);
+  color: var(--sidebar-fg);
+  height: 100vh;
+  position: fixed;
+  left: -260px;
+  top: 0;
+  padding: 20px;
+  overflow-y: auto;
+  transition: left 0.25s ease;
+  z-index: 10;
+}
+
+#sidebar.open {
+  left: 0;
+}
+
+#sidebar h2 {
+  margin-top: 0;
+  color: var(--accent);
+}
+
+#sidebar a {
+  color: #aaa;
+  text-decoration: none;
+  display: block;
+  padding: 5px 0;
+}
+#sidebar a:hover {
+  color: var(--sidebar-fg);
+}
+
+#content {
+  flex: 1;
+  padding: 40px;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+#menu-btn, #theme-btn {
+  position: fixed;
+  top: 15px;
+  background: var(--sidebar-bg);
+  color: var(--sidebar-fg);
+  border: none;
+  padding: 8px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  z-index: 20;
+}
+
+#menu-btn {
+  left: 15px;
+}
+
+#theme-btn {
+  right: 15px;
+}
+
+img {
+  max-width: 100%;
+  border-radius: 6px;
+  margin: 20px 0;
+}
+</style>
 </head>
+
 <body>
-<header id="title-block-header">
-<h1 class="title">Energy-Flow Cosmology — Master Formal
-Specification</h1>
-<p class="author">Morten Magnusson</p>
-<p class="date">2025-11-16</p>
-</header>
-<h1 id="efc-d-energy-flow-dynamics">EFC-D: Energy-Flow Dynamics</h1>
-<p>The local energy-flow potential <span
-class="math inline">\(E_f\)</span> is defined as a function of mass
-density <span class="math inline">\(\rho\)</span> and entropy <span
-class="math inline">\(S\)</span>:</p>
-<p><span class="math display">\[E_f = \rho (1 - S).\]</span></p>
-<p>Interpretation:</p>
-<ul>
-<li><p>high density and low entropy <span
-class="math inline">\(\Rightarrow\)</span> large <span
-class="math inline">\(E_f\)</span></p></li>
-<li><p>high entropy suppresses <span
-class="math inline">\(E_f\)</span></p></li>
-</ul>
-<h2 id="density">Density</h2>
-<p>The mass density is:</p>
-<p><span class="math display">\[\rho = \frac{m}{V}.\]</span></p>
-<h2 id="energy-flow-rate">Energy-Flow Rate</h2>
-<p>The temporal change is:</p>
-<p><span class="math display">\[\frac{dE_f}{dt} = \nabla_t
-E_f.\]</span></p>
-<h1 id="efc-s-entropy-field-and-gradient">EFC-S: Entropy Field and
-Gradient</h1>
-<p>The entropy field <span class="math inline">\(S(\mathbf{x})\)</span>
-ranges between ordered and disordered regions:</p>
-<p><span class="math display">\[S(\mathbf{x}) \in [0,1].\]</span></p>
-<p>Entropy gradient:</p>
-<p><span class="math display">\[\nabla S(\mathbf{x}) =
-\left(
-\frac{\partial S}{\partial x},
-\frac{\partial S}{\partial y},
-\frac{\partial S}{\partial z}
-\right).\]</span></p>
-<p>Magnitude:</p>
-<p><span class="math display">\[|\nabla S| =
-\sqrt{
-\left(\frac{\partial S}{\partial x}\right)^2 +
-\left(\frac{\partial S}{\partial y}\right)^2 +
-\left(\frac{\partial S}{\partial z}\right)^2
-}.\]</span></p>
-<h1 id="s0-s1-light-propagation">s0 → s1 Light Propagation</h1>
-<p>Entropy endpoints:</p>
-<p><span class="math display">\[S_{\text{mid}} = \frac{1}{2}(s_0 + s_1),
-\qquad
-\Delta S = s_1 - s_0.\]</span></p>
-<p>Normalized entropy coordinate:</p>
-<p><span class="math display">\[x(S) = \frac{S - S_{\text{mid}}}{\Delta
-S / 2}.\]</span></p>
-<p>Effective light speed:</p>
-<p><span class="math display">\[c(S) = c_0\left(1 + a_{\text{edge}}\,
-x(S)^2\right).\]</span></p>
-<p>Light-travel time:</p>
-<p><span class="math display">\[t_{\text{obs}} = \int_{\gamma}
-\frac{dl}{c(S(l))}.\]</span></p>
-<h1 id="observables">Observables</h1>
-<h2 id="lensing">Lensing</h2>
-<p><span class="math display">\[\text{Lensing} =
-\text{Mass Distribution}
-+ S(\mathbf{x})
-+ c(S).\]</span></p>
-<h2 id="rotation-curves">Rotation Curves</h2>
-<p><span class="math display">\[v(r) = \sqrt{r \, \frac{\partial
-\Phi}{\partial r}}.\]</span></p>
-<h2 id="expansion-rate">Expansion Rate</h2>
-<p><span class="math display">\[H(E_f, S) = \sqrt{|E_f|}(1 +
-S).\]</span></p>
-<p>Core chain:</p>
-<p><span class="math display">\[S(\mathbf{x})
-\rightarrow
-E_f(\mathbf{x})
-\rightarrow
-\Phi(E_f, S)
-\rightarrow
-c(S)
-\rightarrow
-H(E_f, S)
-\rightarrow
-\text{Observables}.\]</span></p>
-<h1 id="figure">Figure</h1>
-<figure>
-<img src="EFC_vs_LCDM_plot.png" />
-<figcaption>Comparison between EFC baseline behaviour and <span
-class="math inline">\(\Lambda\)</span>CDM.</figcaption>
-</figure>
-<h1 id="meta-reflective-development">Meta-Reflective Development</h1>
-<p>The theory evolves through iterative refinement using:</p>
-<ul>
-<li><p>SPARC rotation curves</p></li>
-<li><p>JWST early galaxies</p></li>
-<li><p>DESI expansion data</p></li>
-<li><p>gravitational lensing structure</p></li>
-</ul>
+
+<button id="menu-btn"><i class="fa fa-bars"></i></button>
+<button id="theme-btn"><i class="fa fa-moon"></i></button>
+
+<nav id="sidebar">
+<h2>Contents</h2>
+
+</nav>
+
+<main id="content">
+
+</main>
+
+<script>
+const sidebar = document.getElementById("sidebar");
+const btn = document.getElementById("menu-btn");
+btn.onclick = () => sidebar.classList.toggle("open");
+
+const themeBtn = document.getElementById("theme-btn");
+themeBtn.onclick = () => {
+  const html = document.documentElement;
+  html.dataset.theme = html.dataset.theme === "dark" ? "light" : "dark";
+};
+</script>
+
 </body>
 </html>
