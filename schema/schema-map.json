@@ -113,5 +113,14 @@
         }
       ]
     }
-  }
+  },
+  "doi_index": [
+    {
+      "doi": "10.6084/m9.figshare.30630500",
+      "figshare_id": 30630500,
+      "url": "https://api.figshare.com/v2/account/articles/30630500",
+      "role": "master_spec",
+      "node": "FigshareNode"
+    }
+  ]
 }
