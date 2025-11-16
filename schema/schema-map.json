@@ -1,8 +1,7 @@
 {
   "project": "Energy-Flow Cosmology (EFC)",
   "version": "2.0",
-  "last_updated": "2025-11-15",
-
+  "last_updated": "2025-11-16",
   "layers": {
     "theory": {
       "description": "Formal scientific components of EFC",
@@ -14,7 +13,6 @@
         "src/efc/entropy/"
       ]
     },
-
     "validation": {
       "description": "Empirical validation datasets and figures",
       "includes": [
@@ -23,7 +21,6 @@
         "scripts/validate_efc.py"
       ]
     },
-
     "meta": {
       "description": "Meta-architecture, co-field, metascope, reflective processes",
       "includes": [
@@ -34,24 +31,37 @@
         "meta-graph/meta_graph_vis.html"
       ]
     },
-
     "cognition": {
       "description": "Cognitive mechanics: HCF, entropy-clarity, transient states",
       "includes": [
         "cognition/"
       ]
     },
-
     "symbiosis": {
-      "description": "Human–model interaction structures",
+      "description": "Human\u2013model interaction structures",
       "includes": [
         "symbiosis/"
       ]
     }
   },
-
   "special_artifacts": {
     "repo_map_html": "output/repo_map.html",
     "personal_note": "personal/Personal-Note.md"
+  },
+  "nodes": {
+    "FigshareNode": {
+      "description": "Auto-synkronisert Figshare-kilde for siste publiserte EFC-arbeid.",
+      "files": [
+        {
+          "name": "latest.json",
+          "path": "figshare/latest.json",
+          "type": "latest_metadata",
+          "figshare_id": 30630500,
+          "doi": "10.6084/m9.figshare.30630500",
+          "url": "https://api.figshare.com/v2/account/articles/30630500",
+          "published_date": "2025-11-16T13:07:16Z"
+        }
+      ]
+    }
   }
 }
