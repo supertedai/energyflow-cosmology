@@ -1,7 +1,9 @@
 name: Fetch Figshare Concepts
 
 on:
-  workflow_dispatch:
+  schedule:
+    - cron: "*/15 * * * *"   # Kjør hvert 15. minutt, automatisk
+  workflow_dispatch:          # Tillat manuell kjøring fra GitHub Actions
 
 jobs:
   fetch:
@@ -28,12 +30,18 @@ jobs:
         run: |
           python scripts/fetch_figshare.py
 
-      - name: Commit and push schema/concepts.json
+      - name: Commit and push updated schema files
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           git config user.name "github-actions"
           git config user.email "actions@github.com"
-          git add schema/concepts.json
-          git diff --cached --quiet || git commit -m "🔄 Auto-sync concepts.json from Figshare [skip ci]"
+
+          # Legg til alle Figshare-relaterte filer
+          git add figshare/figshare-index.json
+          git add figshare/figshare-links.json
+          git add schema/concepts.json || true
+
+          # Commit kun hvis det er endringer
+          git diff --cached --quiet || git commit -m "🔄 Auto-sync from Figshare [skip ci]"
           git push origin main
