@@ -9,18 +9,14 @@ from datetime import datetime
 
 API_URL = "https://api.figshare.com/v2/account/articles"
 
-
-# ---------------------------------------------------------
-# Logging
-# ---------------------------------------------------------
 def log(msg):
     ts = datetime.now().isoformat()
     print(f"[{ts}] {msg}")
 
 
-# ---------------------------------------------------------
-# Hent artikler fra Figshare API
-# ---------------------------------------------------------
+# --------------------------
+# Henter artikler fra Figshare
+# --------------------------
 def get_articles():
     token = os.environ.get("FIGSHARE_TOKEN")
     if not token:
@@ -37,55 +33,76 @@ def get_articles():
     return r.json()
 
 
-# ---------------------------------------------------------
-# Finn nyeste artikkel (safe sort)
-# ---------------------------------------------------------
+# --------------------------
+# Velger nyeste artikkel
+# --------------------------
 def pick_latest(articles):
-    if not articles:
-        raise RuntimeError("Ingen artikler returnert fra Figshare API")
-
     def safe_date(a):
         d = a.get("published_date")
-        if isinstance(d, str) and len(d) > 0:
-            return d
-        return "0000-00-00"
+        return d if isinstance(d, str) and len(d) > 0 else "0000-00-00"
 
-    sorted_list = sorted(
-        articles,
-        key=safe_date,
-        reverse=True
-    )
+    sorted_list = sorted(articles, key=safe_date, reverse=True)
     return sorted_list[0]
 
 
-# ---------------------------------------------------------
-# Lagring av metadata
-# ---------------------------------------------------------
-def save_metadata(latest):
+# --------------------------
+# Lagre Figshare metadata
+# --------------------------
+def save_latest_json(latest):
     os.makedirs("figshare", exist_ok=True)
-
     out_path = "figshare/latest.json"
     with open(out_path, "w") as f:
         json.dump(latest, f, indent=2)
-
     log(f"Lagret: {out_path}")
 
 
-# ---------------------------------------------------------
+# --------------------------
+# Oppdaterer API v1
+# --------------------------
+def update_api_meta(latest):
+    meta_path = "api/v1/meta.json"
+
+    # Les eksisterende meta
+    if os.path.exists(meta_path):
+        with open(meta_path, "r") as f:
+            meta = json.load(f)
+    else:
+        meta = {}
+
+    # Oppdater Figshare-seksjon
+    meta["figshare"] = {
+        "id": latest.get("id"),
+        "title": latest.get("title"),
+        "published_date": latest.get("published_date"),
+        "url": latest.get("url"),
+        "doi": latest.get("doi"),
+        "resource_id": latest.get("resource_id"),
+        "resource_doi": latest.get("resource_doi")
+    }
+
+    # Lagre
+    with open(meta_path, "w") as f:
+        json.dump(meta, f, indent=2)
+
+    log(f"Oppdatert: {meta_path}")
+
+
+# --------------------------
 # Main
-# ---------------------------------------------------------
+# --------------------------
 def main():
     try:
         articles = get_articles()
         latest = pick_latest(articles)
 
-        log("------ Nyeste Figshare-artikkel funnet ------")
+        log("------ Nyeste Figshare-artikkel ------")
         log(f"ID: {latest['id']}")
-        log(f"Tittel: {latest.get('title', 'Ukjent')}")
-        log(f"Publiseringsdato: {latest.get('published_date', 'Ingen dato')}")
-        log("------------------------------------------------")
+        log(f"Tittel: {latest.get('title')}")
+        log(f"Publisert: {latest.get('published_date')}")
+        log("--------------------------------------")
 
-        save_metadata(latest)
+        save_latest_json(latest)
+        update_api_meta(latest)
 
     except Exception as e:
         log(f"Feil: {e}")
