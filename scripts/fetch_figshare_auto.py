@@ -1,48 +1,45 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
-import requests
-import re
+import os
 import sys
+import requests
 from datetime import datetime
 
-PROFILE_URL = "https://figshare.com/authors/Morten_Magnusson/20477774"
+API_URL = "https://api.figshare.com/v2/account/articles"
 
 def log(msg):
     ts = datetime.now().isoformat()
     print(f"[{ts}] {msg}")
 
-def fetch_profile_html():
-    log("Henter HTML fra Figshare-profil…")
-    r = requests.get(PROFILE_URL, timeout=20, headers={
+def get_articles():
+    token = os.environ.get("FIGSHARE_TOKEN")
+    if not token:
+        raise RuntimeError("FIGSHARE_TOKEN er ikke satt i miljøvariabler")
+
+    headers = {
+        "Authorization": f"token {token}",
         "User-Agent": "Mozilla/5.0"
-    })
+    }
+
+    r = requests.get(API_URL, headers=headers, timeout=20)
     r.raise_for_status()
-    return r.text
+    return r.json()
 
-def extract_article_ids(html):
-    """
-    Finne alle artikkel-IDer fra profile HTML.
-    Pattern: /articles/.../<id>
-    """
-    pattern = r"/articles/[A-Za-z0-9_\-]+/(\d+)"
-    found = re.findall(pattern, html)
-    return list(set(found))  # fjern duplikater
-
-def pick_latest(article_ids):
-    if not article_ids:
-        raise RuntimeError("Fant ingen artikkel-IDer på Figshare-profilen.")
-    article_ids = [int(x) for x in article_ids]
-    return max(article_ids)
+def pick_latest(articles):
+    if not articles:
+        raise RuntimeError("Ingen artikler returnert fra Figshare API")
+    # published_date finnes alltid
+    sorted_list = sorted(articles, key=lambda x: x.get("published_date", ""), reverse=True)
+    return sorted_list[0]
 
 def main():
     try:
-        html = fetch_profile_html()
-        ids = extract_article_ids(html)
-        log(f"Fant ID-er: {ids}")
-
-        latest = pick_latest(ids)
-        log(f"Siste Figshare-artikkel: {latest}")
+        log("Henter liste over artikler via Figshare API…")
+        articles = get_articles()
+        latest = pick_latest(articles)
+        log(f"Siste artikkel-ID: {latest['id']}")
+        log(f"Tittel: {latest.get('title', 'ukjent')}")
 
     except Exception as e:
         log(f"Feil: {e}")
