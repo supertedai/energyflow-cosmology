@@ -12,11 +12,17 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      # -------------------------------
+      # Checkout repository
+      # -------------------------------
       - name: Checkout repository
         uses: actions/checkout@v4
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
 
+      # -------------------------------
+      # Install LaTeX + Pandoc
+      # -------------------------------
       - name: Install LaTeX + Pandoc
         run: |
           sudo apt-get update
@@ -29,19 +35,25 @@ jobs:
             texlive-science \
             latexmk
 
-      # Clean old files
+      # -------------------------------
+      # Clean old HTML so no fallback occurs
+      # -------------------------------
       - name: Remove old generated HTML
         run: |
           rm -f theory/master/efc_master.html
           rm -f docs/efc_master.html
 
+      # -------------------------------
       # Build PDF
+      # -------------------------------
       - name: Build EFC Master PDF
         working-directory: theory/master
         run: |
           latexmk -pdf -interaction=nonstopmode efc_master.tex
 
-      # Create HTML template (safe echo version)
+      # -------------------------------
+      # Create HTML Template
+      # -------------------------------
       - name: Create HTML Template
         working-directory: theory/master
         run: |
@@ -78,7 +90,9 @@ jobs:
           echo '</body>' >> efc_html_template.html
           echo '</html>' >> efc_html_template.html
 
-      # Build HTML
+      # -------------------------------
+      # Build HTML via Pandoc Template
+      # -------------------------------
       - name: Build HTML via Pandoc Template
         working-directory: theory/master
         run: |
@@ -91,7 +105,9 @@ jobs:
             --metadata title="EFC Master Document" \
             --output=efc_master.html
 
-      # Verify template applied
+      # -------------------------------
+      # Verify template usage
+      # -------------------------------
       - name: Verify template usage
         working-directory: theory/master
         run: |
@@ -100,7 +116,9 @@ jobs:
             exit 1
           fi
 
-      # Force update docs + push
+      # -------------------------------
+      # Deploy HTML + FIGURES + FORCE PUSH
+      # -------------------------------
       - name: Deploy HTML and Figures
         run: |
           mkdir -p docs
@@ -109,11 +127,17 @@ jobs:
 
           git config user.name "github-actions"
           git config user.email "actions@github.com"
+
           git add -A docs/
           git commit -m "Update EFC Master HTML (auto)" || true
-          git push
 
-      # Upload artifacts
+          git pull --rebase origin main || true
+
+          git push origin main
+
+      # -------------------------------
+      # Upload Artifacts
+      # -------------------------------
       - name: Upload PDF Artifact
         uses: actions/upload-artifact@v4
         with:
