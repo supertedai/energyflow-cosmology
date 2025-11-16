@@ -14,6 +14,8 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0   # viktig: gjør at push ikke trigger workspace-wipe
 
       - name: Set up Python
         uses: actions/setup-python@v5
@@ -28,7 +30,7 @@ jobs:
           FIGSHARE_TOKEN: ${{ secrets.FIGSHARE_TOKEN }}
         run: python scripts/fetch_figshare_auto.py
 
-      - name: Commit and push (if any changes)
+      - name: Commit and push changes safely
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
@@ -39,5 +41,9 @@ jobs:
           git add schema/ || true
           git add api/v1/meta.json || true
 
+          # commit only when there are changes
           git diff --cached --quiet || git commit -m "🔄 Auto-sync Figshare [skip ci]"
-          git push origin main
+
+          # FIX: safe push that avoids wiping workspace
+          git pull --rebase origin main || true
+          git push origin HEAD:main
