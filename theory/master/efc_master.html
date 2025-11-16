@@ -2,17 +2,20 @@
 <html lang="en" data-theme="light">
 <head>
   <meta charset="UTF-8" />
-  <title>Energy-Flow Cosmology — Formal Master Specification v1.0</title>
+  <title>Energy-Flow Cosmology — Master Specification v1.1</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
   <!-- MathJax -->
   <script>
     window.MathJax = {
-      tex: { inlineMath: [['$','$'], ['\\(','\\)']] },
+      tex: {
+        inlineMath: [['$','$'], ['\\(','\\)']],
+        displayMath: [['$$','$$'], ['\\[','\\]']]
+      },
       svg: { fontCache: 'global' }
     };
   </script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" defer></script>
 
   <style>
     :root {
@@ -22,740 +25,767 @@
       --accent: #1f8fff;
       --accent-soft: #e3f1ff;
       --border-subtle: #e0e0e0;
-      --sidebar-bg: #111111;
-      --sidebar-fg: #ffffff;
-      --sidebar-muted: #bbbbbb;
-      --code-bg: #f3f3f3;
-    }
-
-    [data-theme="dark"] {
-      --bg: #050608;
-      --fg: #f5f5f5;
-      --fg-soft: #bbbbbb;
-      --accent: #4ea2ff;
-      --accent-soft: #13253b;
-      --border-subtle: #22252b;
-      --sidebar-bg: #050608;
-      --sidebar-fg: #f5f5f5;
-      --sidebar-muted: #777777;
-      --code-bg: #111318;
-    }
-
-    * {
-      box-sizing: border-box;
+      --code-bg: #f2f2f2;
+      --shadow-soft: 0 8px 24px rgba(0,0,0,0.06);
+      --radius-lg: 12px;
+      --radius-md: 8px;
+      --radius-sm: 4px;
+      --toc-bg: #ffffff;
     }
 
     html, body {
       margin: 0;
       padding: 0;
-      height: 100%;
+      background: var(--bg);
+      color: var(--fg);
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text",
+                   "Segoe UI", sans-serif;
+      -webkit-font-smoothing: antialiased;
     }
 
     body {
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      background: var(--bg);
-      color: var(--fg);
-      line-height: 1.6;
+      padding: 24px 16px 48px;
     }
 
-    .layout {
-      display: grid;
-      grid-template-columns: 260px minmax(0, 1fr);
-      min-height: 100vh;
+    .page {
+      max-width: 900px;
+      margin: 0 auto;
+      background: #ffffff;
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-soft);
+      padding: 32px 28px 40px;
+      box-sizing: border-box;
     }
 
-    aside.sidebar {
-      background: var(--sidebar-bg);
-      color: var(--sidebar-fg);
-      padding: 1.8rem 1.4rem;
-      border-right: 1px solid rgba(255,255,255,0.06);
+    @media (max-width: 720px) {
+      .page {
+        padding: 20px 16px 28px;
+        margin: 0;
+        border-radius: 0;
+        box-shadow: none;
+      }
     }
 
-    .sidebar h1 {
-      font-size: 1.2rem;
-      margin: 0 0 0.4rem 0;
+    header {
+      border-bottom: 1px solid var(--border-subtle);
+      padding-bottom: 16px;
+      margin-bottom: 24px;
     }
 
-    .sidebar .tagline {
+    header h1 {
+      font-size: 1.9rem;
+      letter-spacing: 0.02em;
+      margin: 0 0 4px;
+    }
+
+    header .subtitle {
+      font-size: 1.05rem;
+      color: var(--fg-soft);
+      margin-bottom: 8px;
+    }
+
+    header .meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
       font-size: 0.85rem;
-      color: var(--sidebar-muted);
-      margin-bottom: 1.4rem;
+      color: var(--fg-soft);
+      align-items: baseline;
     }
 
-    .sidebar-section-title {
-      font-size: 0.78rem;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      color: var(--sidebar-muted);
-      margin: 1.4rem 0 0.4rem;
+    header .meta span {
+      white-space: nowrap;
     }
 
-    .sidebar nav ul {
-      list-style: none;
-      padding: 0;
-      margin: 0;
-      font-size: 0.92rem;
+    header .meta .doi {
+      margin-left: auto;
+      color: var(--accent);
     }
 
-    .sidebar nav li {
-      margin: 0.15rem 0;
+    @media (max-width: 640px) {
+      header .meta {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      header .meta .doi {
+        margin-left: 0;
+      }
     }
 
-    .sidebar nav a {
-      color: var(--sidebar-fg);
+    a {
+      color: var(--accent);
       text-decoration: none;
-      opacity: 0.92;
     }
 
-    .sidebar nav a:hover {
-      opacity: 1;
+    a:hover {
       text-decoration: underline;
     }
 
-    main {
-      padding: 1.8rem 2.4rem 3rem;
-      max-width: 980px;
-      margin: 0 auto;
+    .abstract-card {
+      background: var(--accent-soft);
+      border-radius: var(--radius-md);
+      padding: 16px 18px;
+      margin-bottom: 24px;
+      border: 1px solid rgba(31,143,255,0.25);
     }
 
-    header.page-header {
-      border-bottom: 1px solid var(--border-subtle);
-      padding-bottom: 1rem;
-      margin-bottom: 1.8rem;
-    }
-
-    .efc-label {
-      font-size: 0.8rem;
-      text-transform: uppercase;
-      letter-spacing: 0.12em;
-      color: var(--fg-soft);
-      margin-bottom: 0.4rem;
-    }
-
-    .page-title {
-      font-size: 1.9rem;
-      margin: 0 0 0.3rem 0;
-    }
-
-    .page-subtitle {
-      font-size: 0.98rem;
-      color: var(--fg-soft);
-      margin: 0.1rem 0 0.8rem 0;
-    }
-
-    .meta-line {
-      font-size: 0.8rem;
-      color: var(--fg-soft);
-    }
-
-    .meta-line span + span::before {
-      content: "•";
-      margin: 0 0.35rem;
-      opacity: 0.7;
-    }
-
-    .toc {
-      border: 1px solid var(--border-subtle);
-      border-radius: 0.6rem;
-      padding: 1rem 1.2rem;
-      background: rgba(0,0,0,0.01);
-      font-size: 0.92rem;
-      margin-bottom: 1.8rem;
-    }
-
-    .toc-title {
-      font-weight: 600;
-      margin-bottom: 0.3rem;
-    }
-
-    .toc small {
-      color: var(--fg-soft);
-      font-size: 0.78rem;
-    }
-
-    .toc ol {
-      margin: 0.6rem 0 0;
-      padding-left: 1.4rem;
-    }
-
-    .toc ol li {
-      margin: 0.15rem 0;
-    }
-
-    section {
-      margin-bottom: 2.1rem;
-    }
-
-    section h2 {
-      font-size: 1.25rem;
-      margin: 0 0 0.5rem 0;
-      border-bottom: 1px solid var(--border-subtle);
-      padding-bottom: 0.2rem;
-    }
-
-    section h3 {
-      font-size: 1.05rem;
-      margin: 1.1rem 0 0.2rem;
-    }
-
-    p {
-      margin: 0.2rem 0 0.5rem;
-    }
-
-    ul {
-      margin: 0.2rem 0 0.7rem;
-      padding-left: 1.3rem;
-    }
-
-    code {
-      font-family: "JetBrains Mono", SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
-      background: var(--code-bg);
-      padding: 0.05rem 0.3rem;
-      border-radius: 0.2rem;
-      font-size: 0.9em;
-    }
-
-    .equation-block {
-      margin: 0.8rem 0;
-      padding: 0.7rem 0.9rem;
-      background: var(--code-bg);
-      border-radius: 0.5rem;
-      font-size: 0.96rem;
-      overflow-x: auto;
-    }
-
-    .eq-label {
-      font-size: 0.78rem;
+    .abstract-card h2 {
+      font-size: 1rem;
+      margin: 0 0 4px;
       text-transform: uppercase;
       letter-spacing: 0.08em;
       color: var(--fg-soft);
-      margin-bottom: 0.2rem;
     }
 
-    table {
-      border-collapse: collapse;
-      width: 100%;
-      font-size: 0.9rem;
+    .abstract-card p {
+      margin: 4px 0;
+      font-size: 0.95rem;
+      line-height: 1.55;
     }
 
-    th, td {
+    .toc {
+      background: var(--toc-bg);
+      border-radius: var(--radius-md);
       border: 1px solid var(--border-subtle);
-      padding: 0.4rem 0.5rem;
-      text-align: left;
+      padding: 14px 18px;
+      margin-bottom: 28px;
     }
 
-    th {
-      background: rgba(0,0,0,0.03);
+    .toc-title {
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.09em;
+      color: var(--fg-soft);
+      margin-bottom: 6px;
     }
 
-    footer {
-      margin-top: 2.5rem;
-      padding-top: 1rem;
-      border-top: 1px solid var(--border-subtle);
-      font-size: 0.8rem;
+    .toc ul {
+      list-style: none;
+      padding-left: 0;
+      margin: 0;
+      font-size: 0.95rem;
+    }
+
+    .toc li {
+      margin: 3px 0;
+    }
+
+    .toc a {
+      text-decoration: none;
       color: var(--fg-soft);
     }
 
-    @media (max-width: 900px) {
-      .layout {
-        grid-template-columns: 1fr;
-      }
-      aside.sidebar {
-        border-right: none;
-        border-bottom: 1px solid rgba(255,255,255,0.06);
-      }
-      main {
-        padding: 1.4rem 1.2rem 2.4rem;
-      }
+    .toc a:hover {
+      color: var(--accent);
+    }
+
+    h2 {
+      font-size: 1.25rem;
+      margin-top: 28px;
+      margin-bottom: 8px;
+    }
+
+    h3 {
+      font-size: 1.05rem;
+      margin-top: 20px;
+      margin-bottom: 6px;
+    }
+
+    p {
+      font-size: 0.95rem;
+      line-height: 1.6;
+      margin: 6px 0 8px;
+    }
+
+    ul {
+      margin: 4px 0 10px;
+      padding-left: 20px;
+      font-size: 0.95rem;
+    }
+
+    li {
+      margin: 3px 0;
+    }
+
+    .math-block {
+      margin: 10px 0 14px;
+    }
+
+    figure {
+      margin: 18px 0 20px;
+      text-align: center;
+    }
+
+    figure img {
+      max-width: 100%;
+      height: auto;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--border-subtle);
+      background: #ffffff;
+    }
+
+    figcaption {
+      font-size: 0.85rem;
+      color: var(--fg-soft);
+      margin-top: 6px;
+    }
+
+    .section-divider {
+      margin: 28px 0;
+      border: 0;
+      border-top: 1px solid var(--border-subtle);
+    }
+
+    .symbol-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 10px 0 14px;
+      font-size: 0.9rem;
+    }
+
+    .symbol-table th,
+    .symbol-table td {
+      border: 1px solid var(--border-subtle);
+      padding: 6px 8px;
+      text-align: left;
+    }
+
+    .symbol-table th {
+      background: #f6f6f6;
+      font-weight: 600;
+    }
+
+    .pill {
+      display: inline-block;
+      padding: 2px 8px;
+      border-radius: 999px;
+      background: #f2f2f2;
+      font-size: 0.78rem;
+      color: var(--fg-soft);
+    }
+
+    .how-to-cite {
+      background: #f9fafc;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--border-subtle);
+      padding: 14px 16px;
+      margin-top: 12px;
+      font-size: 0.92rem;
+    }
+
+    .how-to-cite-title {
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      letter-spacing: 0.09em;
+      color: var(--fg-soft);
+      margin-bottom: 6px;
     }
   </style>
 </head>
 <body>
-  <div class="layout">
-    <!-- Sidebar -->
-    <aside class="sidebar">
-      <h1>EFC — Master Spec v1.0</h1>
-      <div class="tagline">Structure · Dynamics · Cognition Base</div>
-
-      <div class="sidebar-section-title">Master Sections</div>
-      <nav aria-label="Master navigation">
-        <ul>
-          <li><a href="#frontmatter">Frontmatter</a></li>
-          <li><a href="#abstract">Abstract</a></li>
-          <li><a href="#part-i-efc-s">Part I — EFC-S</a></li>
-          <li><a href="#part-ii-efc-d">Part II — EFC-D</a></li>
-          <li><a href="#part-iii-efc-c0">Part III — EFC-C₀</a></li>
-          <li><a href="#appendix">Appendix</a></li>
-          <li><a href="#references">References</a></li>
-        </ul>
-      </nav>
-
-      <div class="sidebar-section-title">Model Axes</div>
-      <nav aria-label="Model axes">
-        <ul>
-          <li><strong>EFC-S</strong> — Structure / Halos</li>
-          <li><strong>EFC-D</strong> — Energy-Flow Dynamics</li>
-          <li><strong>EFC-C</strong> — Cognition / CEM-Cosmos</li>
-        </ul>
-      </nav>
-    </aside>
-
-    <!-- Main content -->
-    <main>
-      <header class="page-header">
-        <div class="efc-label">Energy-Flow Cosmology — Formal Master Specification</div>
-        <h1 class="page-title">EFC Master Specification v1.0</h1>
-        <p class="page-subtitle">
-          Unified formal description of the Structure (EFC-S), Dynamics (EFC-D), and Cognition Base (EFC-C₀) layers.
-        </p>
-        <div class="meta-line">
-          <span>Author: M. Magnusson</span>
-          <span>Version: 1.0</span>
-          <span>Framework: Energy-Flow Cosmology (EFC)</span>
-        </div>
-      </header>
-
-      <!-- TOC -->
-      <div class="toc">
-        <div class="toc-title">Contents</div>
-        <small>Single static HTML master — can be printed directly to PDF.</small>
-        <ol>
-          <li><a href="#frontmatter">Frontmatter</a></li>
-          <li><a href="#abstract">Overview and Abstract</a></li>
-          <li><a href="#part-i-efc-s">Part I — EFC-S: Structure / Halo Layer</a></li>
-          <li><a href="#part-ii-efc-d">Part II — EFC-D: Energy-Flow Dynamics</a></li>
-          <li><a href="#part-iii-efc-c0">Part III — EFC-C₀: Entropy–Cognition Base Layer</a></li>
-          <li><a href="#appendix">Appendix — Symbols and Definitions</a></li>
-          <li><a href="#references">References</a></li>
-        </ol>
+  <main class="page">
+    <header>
+      <h1>Energy-Flow Cosmology (EFC)</h1>
+      <div class="subtitle">Master Specification v1.1</div>
+      <div class="meta">
+        <span>Author: M. Magnusson</span>
+        <span>Version: v1.1</span>
+        <span>ORCID: <a href="https://orcid.org/0009-0002-4860-5095" target="_blank" rel="noopener">0009-0002-4860-5095</a></span>
+        <span class="doi">DOI: <a href="https://doi.org/10.6084/m9.figshare.30630500" target="_blank" rel="noopener">10.6084/m9.figshare.30630500</a></span>
       </div>
+    </header>
 
-      <!-- Frontmatter -->
-      <section id="frontmatter">
-        <h2>Frontmatter</h2>
+    <section class="abstract-card" id="abstract">
+      <h2>Abstract</h2>
+      <p>
+        Energy-Flow Cosmology (EFC) treats the universe as a thermodynamic information system driven by
+        gradients in energy flow and entropy. Instead of introducing invisible matter or energy components,
+        EFC starts from energy distribution, entropy gradients and information capacity.
+      </p>
+      <p>
+        The theory is organised into three tightly coupled base layers:
+      </p>
+      <ul>
+        <li><strong>EFC-S</strong>: structural and halo-level descriptions,</li>
+        <li><strong>EFC-D</strong>: energy-flow dynamics on top of these structures,</li>
+        <li><strong>EFC-C₀</strong>: base mapping between entropy and information capacity.</li>
+      </ul>
+      <p>
+        This document fixes notation and baseline equations for these three layers, and provides a compact,
+        mathematically explicit core that higher-level models, simulations and epistemic layers can reference
+        without ambiguity. The figures are schematic and illustrate the theoretical structure rather than
+        final data-calibrated fits.
+      </p>
+    </section>
+
+    <nav class="toc">
+      <div class="toc-title">Contents</div>
+      <ul>
+        <li><a href="#frontmatter">1. Frontmatter</a></li>
+        <li><a href="#overview">2. Overview</a></li>
+        <li><a href="#illustrative">3. Illustrative Field and Profiles</a></li>
+        <li><a href="#efc-s">4. Part I — EFC-S: Structure / Halo Layer</a></li>
+        <li><a href="#efc-d">5. Part II — EFC-D: Energy-Flow Dynamics</a></li>
+        <li><a href="#efc-c0">6. Part III — EFC-C₀: Entropy–Cognition Base Layer</a></li>
+        <li><a href="#appendix">7. Appendix: Symbols and Definitions</a></li>
+        <li><a href="#how-to-cite">8. How to Cite</a></li>
+        <li><a href="#references">9. References</a></li>
+      </ul>
+    </nav>
+
+    <section id="frontmatter">
+      <h2>1. Frontmatter</h2>
+      <p>
+        This document is the canonical master specification for Energy-Flow Cosmology (EFC). It defines the
+        formal structure and relations between:
+      </p>
+      <ul>
+        <li><strong>EFC-S</strong>: structural and halo-level descriptions,</li>
+        <li><strong>EFC-D</strong>: energy-flow dynamics on top of these structures,</li>
+        <li><strong>EFC-C₀</strong>: base mapping between entropy and information capacity.</li>
+      </ul>
+      <p>
+        The goal is a compact, mathematically explicit core that higher-level models, simulations and
+        epistemic layers can reference without ambiguity.
+      </p>
+
+      <h3>Version history</h3>
+      <ul>
+        <li><span class="pill">v1.0</span> Initial formal master specification (structure, fields, schematic figures).</li>
+        <li><span class="pill">v1.1</span> Layout polish, improved spacing, figure placement, and explicit DOI frontmatter.</li>
+      </ul>
+    </section>
+
+    <hr class="section-divider" />
+
+    <section id="overview">
+      <h2>2. Overview</h2>
+      <p>
+        EFC treats the universe as a thermodynamic information system driven by gradients in energy flow and
+        entropy. Instead of adding invisible components, the model starts from:
+      </p>
+      <ul>
+        <li>energy distribution,</li>
+        <li>entropy gradients,</li>
+        <li>information capacity.</li>
+      </ul>
+      <p>
+        The three base layers are:
+      </p>
+      <ul>
+        <li><strong>EFC-S</strong> defines how low-entropy matter distributions organise into halo-like structures,</li>
+        <li><strong>EFC-D</strong> defines how local energy-flow potentials and their gradients shape dynamics,</li>
+        <li><strong>EFC-C₀</strong> defines how entropy and structure map to information capacity and cognitive potential.</li>
+      </ul>
+      <p>
+        A central object is the local energy-flow potential:
+      </p>
+      <div class="math-block">
+        $$E_f(\mathbf{x}) = \rho(\mathbf{x})\bigl(1 - S(\mathbf{x})\bigr),$$
+      </div>
+      <p>
+        which couples density and entropy into a single field.
+      </p>
+    </section>
+
+    <hr class="section-divider" />
+
+    <section id="illustrative">
+      <h2>3. Illustrative Field and Profiles</h2>
+      <p>
+        This section collects schematic figures that visualise the basic EFC fields and profiles. They are
+        theoretical examples consistent with the definitions in the later sections.
+      </p>
+
+      <h3>3.1 Energy-flow potential field $E_f(\rho,S)$</h3>
+      <p>
+        Figure&nbsp;1 shows a schematic map of the energy-flow potential
+        $E_f(\rho,S) = \rho(1-S)$ over the $(\rho,S)$ plane.
+      </p>
+      <figure>
+        <img src="efc_Ef_rho_S_heatmap.png" alt="Heatmap of Ef(rho,S)" />
+        <figcaption><strong>Figure 1.</strong> Schematic heatmap of the energy-flow potential
+          $E_f(\rho,S) = \rho(1-S)$ as a function of mass density $\rho$ and dimensionless entropy $S$.</figcaption>
+      </figure>
+
+      <h3>3.2 Halo profiles: mass and entropy</h3>
+      <p>
+        EFC-S models halos as joint profiles in mass density and entropy, $\rho_h(r)$ and $S_h(r)$.
+      </p>
+      <figure>
+        <img src="efc_halo_rho_profile.png" alt="Halo mass density profile" />
+        <figcaption><strong>Figure 2.</strong> Schematic halo mass density profile $\rho_h(r)$.</figcaption>
+      </figure>
+
+      <figure>
+        <img src="efc_halo_S_profile.png" alt="Halo entropy profile" />
+        <figcaption><strong>Figure 3.</strong> Schematic halo entropy profile $S_h(r)$.</figcaption>
+      </figure>
+
+      <h3>3.3 Rotation curves and projected density</h3>
+      <p>
+        Given a halo profile, EFC-D can be used to derive effective rotation curves and projected surface
+        densities. Figure&nbsp;4 shows a schematic comparison between an EFC-like rotation curve and an
+        NFW-like reference. Figure&nbsp;5 shows a corresponding schematic projected surface-density profile.
+      </p>
+      <figure>
+        <img src="efc_schematic_rotation_curves.png" alt="Schematic rotation curves" />
+        <figcaption><strong>Figure 4.</strong> Schematic rotation curves for an EFC-like halo compared to an
+          NFW-like reference.</figcaption>
+      </figure>
+
+      <figure>
+        <img src="efc_schematic_lensing_profile.png" alt="Schematic lensing profile" />
+        <figcaption><strong>Figure 5.</strong> Schematic projected surface density $\Sigma(R)$ associated with
+          an EFC-like halo profile.</figcaption>
+      </figure>
+
+      <h3>3.4 Expansion history and information capacity</h3>
+      <p>
+        EFC treats the effective expansion rate $H(z)$ as a derived quantity from flow and entropy, rather
+        than a primary parameter. Figure&nbsp;6 shows a schematic comparison between an EFC-like expansion
+        history and a $\Lambda$CDM-like reference. Figure&nbsp;7 shows a simple information-capacity curve
+        $I(S) \propto (1-S)$ at fixed density, relevant for EFC-C₀.
+      </p>
+
+      <figure>
+        <img src="efc_schematic_Hz.png" alt="Schematic H(z) history" />
+        <figcaption><strong>Figure 6.</strong> Schematic effective expansion history $H(z)/H_0$ for an EFC-like
+          model compared to a $\Lambda$CDM-like reference.</figcaption>
+      </figure>
+
+      <figure>
+        <img src="efc_information_capacity_vs_S.png" alt="Information capacity vs entropy" />
+        <figcaption><strong>Figure 7.</strong> Schematic information capacity
+          $I(S) \propto (1-S)$ at fixed density, illustrating the EFC-C₀ baseline relation between entropy
+          and information capacity.</figcaption>
+      </figure>
+    </section>
+
+    <hr class="section-divider" />
+
+    <section id="efc-s">
+      <h2>4. Part I — EFC-S: Structure / Halo Layer</h2>
+
+      <h3>4.1 S₀. Low-entropy anchors</h3>
+      <p>
+        EFC-S starts from the idea that structure forms around low-entropy anchors. These are local regions
+        where matter and energy are concentrated in configurations that allow sustained energy flows.
+      </p>
+      <p>
+        Let $s(\mathbf{x})$ denote the entropy density at position $\mathbf{x}$. A low-entropy anchor is a
+        region $\mathcal{A}$ such that:
+      </p>
+      <div class="math-block">
+        $$\langle s \rangle_{\mathcal{A}} \ll \langle s \rangle_{\text{background}},$$
+      </div>
+      <p>
+        where $\langle s \rangle$ denotes a coarse-grained average. These anchors serve as seeds for halo
+        formation and long-range correlations in the energy-flow field.
+      </p>
+
+      <h3>4.2 S₁. Halo Model of Entropy</h3>
+      <p>
+        In EFC-S, halos are not only mass overdensities, but also entropy-structured regions. A halo profile
+        is described by both mass density and entropy:
+      </p>
+      <div class="math-block">
+        $$\rho_h(r), \qquad S_h(r),$$
+      </div>
+      <p>
+        where $\rho_h(r)$ is the radial mass density profile and $S_h(r)$ is a dimensionless entropy profile
+        normalised to $[0,1]$. The combination $(\rho_h(r), S_h(r))$ defines how effective a halo is as a
+        driver for energy flows in EFC-D.
+      </p>
+
+      <h3>4.3 S₂. Radial profiles and halo classes</h3>
+      <p>
+        EFC-S allows families of halos parameterised by a small set of structural parameters (for example
+        central density, scale radius and entropy core size). A simple example parametrisation is:
+      </p>
+      <div class="math-block">
+        $$\rho_h(r) = \rho_0\, f\!\left(\frac{r}{r_s}\right), \qquad
+          S_h(r) = S_0 + (1 - S_0)\, g\!\left(\frac{r}{r_c}\right),$$
+      </div>
+      <p>
+        where $f$ and $g$ are chosen shape functions, $r_s$ is a mass scale radius, and $r_c$ is an entropy
+        core radius. Different functional choices represent different halo classes in the EFC-S catalogue.
+      </p>
+    </section>
+
+    <hr class="section-divider" />
+
+    <section id="efc-d">
+      <h2>5. Part II — EFC-D: Energy-Flow Dynamics</h2>
+
+      <h3>5.1 D₀. Local energy-flow potential $E_f(\rho,S)$</h3>
+      <p>
+        The local energy-flow potential $E_f$ depends on the mass density $\rho$ and entropy $S$. It captures
+        how much structured energy-flow capacity a region has. At the baseline level:
+      </p>
+      <div class="math-block">
+        $$E_f = \rho\,(1 - S).$$
+      </div>
+      <p>
+        High density with low entropy yields large $E_f$. High entropy suppresses $E_f$ even for dense
+        regions.
+      </p>
+
+      <h3>5.2 D₀.2. Mass density</h3>
+      <p>
+        Mass density is defined in the usual way:
+      </p>
+      <div class="math-block">
+        $$\rho = \frac{m}{V},$$
+      </div>
+      <p>
+        where $m$ is mass in a local region and $V$ is the associated volume.
+      </p>
+
+      <h3>5.3 D₁. Energy-flow rate and temporal evolution</h3>
+      <p>
+        The temporal change of the energy-flow potential defines an energy-flow rate:
+      </p>
+      <div class="math-block">
+        $$\frac{dE_f}{dt} = \nabla_t E_f,$$
+      </div>
+      <p>
+        where $\nabla_t$ is the derivative along the chosen time parameter (cosmic time or another evolution
+        parameter).
+      </p>
+      <p>
+        Using the definition of $E_f$ and applying the product rule, one obtains:
+      </p>
+      <div class="math-block">
+        $$\frac{dE_f}{dt}
+          = (1 - S)\,\frac{d\rho}{dt}
+          - \rho\,\frac{dS}{dt}.$$
+      </div>
+      <p>
+        This separates contributions from density change and entropy change: a region can lose energy-flow
+        potential by losing mass, by gaining entropy, or by both.
+      </p>
+
+      <h3>5.4 D₂. Spatial gradients and effective acceleration</h3>
+      <p>
+        Spatial gradients in $E_f$ define preferred directions of energy flow. At the field level:
+      </p>
+      <div class="math-block">
+        $$\nabla E_f(\mathbf{x})
+          = (1 - S(\mathbf{x}))\,\nabla \rho(\mathbf{x})
+          - \rho(\mathbf{x})\,\nabla S(\mathbf{x}),$$
+      </div>
+      <p>
+        which follows directly from the definition via the product rule.
+      </p>
+      <p>
+        At the level of an effective description, one can introduce an acceleration field
+        $\mathbf{a}$ proportional to this gradient:
+      </p>
+      <div class="math-block">
+        $$\mathbf{a}(\mathbf{x}) \propto -\,\nabla E_f(\mathbf{x}).$$
+      </div>
+      <p>
+        The minus sign indicates flow towards regions of lower effective potential, in analogy with standard
+        potential theory, but here the potential is thermodynamic–structural rather than purely gravitational.
+      </p>
+
+      <h3>5.5 D₃. Expansion rate and background behaviour</h3>
+      <p>
+        On large scales, an effective expansion rate $H$ can be linked to coarse-grained energy-flow variables.
+        A simple baseline relation uses the magnitude of $E_f$:
+      </p>
+      <div class="math-block">
+        $$H = H_0\, F(E_f, S),$$
+      </div>
+      <p>
+        where $H_0$ is a reference scale and $F$ is a dimensionless function to be fixed by confrontation with
+        data (e.g. supernovae, BAO, CMB). The important point for this master specification is not the exact
+        form of $F$, but that $H$ is understood as a derived quantity from flow and entropy, not a primary
+        parameter.
+      </p>
+    </section>
+
+    <hr class="section-divider" />
+
+    <section id="efc-c0">
+      <h2>6. Part III — EFC-C₀: Entropy–Cognition Base Layer</h2>
+
+      <h3>6.1 C₀. Entropy and information capacity</h3>
+      <p>
+        EFC-C₀ links thermodynamic entropy to potential for information processing. The goal is not a
+        psychological model, but a base mapping between physical structure and abstract information capacity.
+      </p>
+      <p>
+        A local information capacity $I(\mathbf{x})$ is defined, at baseline, as:
+      </p>
+      <div class="math-block">
+        $$I(\mathbf{x}) \propto \rho(\mathbf{x})\bigl(1 - S(\mathbf{x})\bigr).$$
+      </div>
+      <p>
+        This mirrors the structure of $E_f$, but $I$ is interpreted as a potential for storing and transforming
+        information rather than driving motion directly.
+      </p>
+
+      <h3>6.2 C₁. Local cognitive load</h3>
+      <p>
+        For a coarse-grained region $\mathcal{R}$, define a total information capacity and a used fraction.
+        The total capacity is:
+      </p>
+      <div class="math-block">
+        $$I_{\text{tot}}(\mathcal{R})
+          = \int_{\mathcal{R}} I(\mathbf{x})\, dV.$$
+      </div>
+      <p>
+        A simple scalar cognitive-load variable $L$ can then be defined as:
+      </p>
+      <div class="math-block">
+        $$L = \frac{I_{\text{used}}}{I_{\text{tot}}}, \qquad 0 \leq L \leq 1,$$
+      </div>
+      <p>
+        where $I_{\text{used}}$ is the part of the available capacity that is currently engaged in maintaining
+        or updating structure, patterns or internal models in the region.
+      </p>
+
+      <h3>6.3 C₂. Informational field coupling</h3>
+      <p>
+        EFC-C₀ treats information structures as coupled to the same energy-flow fields that drive dynamics
+        in EFC-D. At a coarse-grained level, one can express this by letting $I$ respond to changes in $E_f$:
+      </p>
+      <div class="math-block">
+        $$\frac{dI}{dt}
+          = \alpha\,\frac{dE_f}{dt}
+          - \beta\,D_I,$$
+      </div>
+      <p>
+        where:
+      </p>
+      <ul>
+        <li>$\alpha$ scales how changes in energy-flow potential translate into increased or decreased
+          information capacity,</li>
+        <li>$\beta$ scales a dissipation term $D_I$ (for example diffusion, noise or degradation of structure).</li>
+      </ul>
+      <p>
+        This is a minimal base equation that later cognitive layers can extend.
+      </p>
+    </section>
+
+    <hr class="section-divider" />
+
+    <section id="appendix">
+      <h2>7. Appendix: Symbols and Definitions</h2>
+      <p>The table below summarises the main symbols used in this master specification.</p>
+
+      <table class="symbol-table">
+        <thead>
+          <tr>
+            <th>Symbol</th>
+            <th>Meaning</th>
+            <th>Notes</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>$\rho$</td>
+            <td>Mass density</td>
+            <td>$\rho = m/V$</td>
+          </tr>
+          <tr>
+            <td>$S$</td>
+            <td>Dimensionless entropy</td>
+            <td>Normalised to $[0,1]$ at chosen scale</td>
+          </tr>
+          <tr>
+            <td>$E_f$</td>
+            <td>Local energy-flow potential</td>
+            <td>$E_f = \rho(1 - S)$</td>
+          </tr>
+          <tr>
+            <td>$\nabla_t$</td>
+            <td>Time derivative</td>
+            <td>Along chosen evolution parameter</td>
+          </tr>
+          <tr>
+            <td>$\rho_h(r)$</td>
+            <td>Halo mass density profile</td>
+            <td>Part of EFC-S halo model</td>
+          </tr>
+          <tr>
+            <td>$S_h(r)$</td>
+            <td>Halo entropy profile</td>
+            <td>Part of EFC-S halo model</td>
+          </tr>
+          <tr>
+            <td>$I(\mathbf{x})$</td>
+            <td>Local information capacity</td>
+            <td>Base variable in EFC-C₀</td>
+          </tr>
+          <tr>
+            <td>$L$</td>
+            <td>Cognitive load</td>
+            <td>$L = I_{\text{used}} / I_{\text{tot}}$</td>
+          </tr>
+          <tr>
+            <td>$H$</td>
+            <td>Effective expansion rate</td>
+            <td>Derived from flow and entropy</td>
+          </tr>
+          <tr>
+            <td>$H_0$</td>
+            <td>Reference expansion scale</td>
+            <td>To be calibrated against data</td>
+          </tr>
+          <tr>
+            <td>$\alpha, \beta$</td>
+            <td>Coupling coefficients</td>
+            <td>Link between $E_f$ and $I$</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <hr class="section-divider" />
+
+    <section id="how-to-cite">
+      <h2>8. How to Cite</h2>
+      <div class="how-to-cite">
+        <div class="how-to-cite-title">Recommended citation</div>
         <p>
-          This document is the canonical master specification for Energy-Flow Cosmology (EFC).
-          It defines the formal structure and relations between:
-        </p>
-        <ul>
-          <li><strong>EFC-S</strong>: structural and halo-level descriptions</li>
-          <li><strong>EFC-D</strong>: energy-flow dynamics on top of these structures</li>
-          <li><strong>EFC-C₀</strong>: base mapping between entropy and information capacity</li>
-        </ul>
-        <p>
-          The goal is a compact, mathematically explicit core that higher-level models,
-          simulations and epistemic layers can reference without ambiguity.
-        </p>
-      </section>
-
-      <!-- Abstract / Overview -->
-      <section id="abstract">
-        <h2>Overview and Abstract</h2>
-        <p>
-          Energy-Flow Cosmology treats the universe as a thermodynamic information system driven by
-          gradients in energy flow and entropy. Instead of adding invisible components, the model
-          starts from energy distribution, entropy gradients and information capacity.
+          Magnusson, M. (2025).
+          <em>Energy-Flow Cosmology (EFC) — Master Specification v1.1</em>.
+          Figshare.
+          <a href="https://doi.org/10.6084/m9.figshare.30630500" target="_blank" rel="noopener">
+            DOI: 10.6084/m9.figshare.30630500
+          </a>.
         </p>
         <p>
-          The theory splits into three tightly coupled base layers:
+          <strong>DOI:</strong>
+          <a href="https://doi.org/10.6084/m9.figshare.30630500" target="_blank" rel="noopener">
+            10.6084/m9.figshare.30630500
+          </a><br />
+          <strong>Author:</strong> M. Magnusson<br />
+          <strong>ORCID:</strong>
+          <a href="https://orcid.org/0009-0002-4860-5095" target="_blank" rel="noopener">
+            0009-0002-4860-5095
+          </a><br />
+          <strong>Licence:</strong> CC-BY 4.0 (Creative Commons Attribution 4.0 International).
         </p>
-        <ul>
-          <li><strong>EFC-S</strong> defines how low-entropy matter distributions organise into halo-like structures.</li>
-          <li><strong>EFC-D</strong> defines how local energy-flow potentials and their gradients shape dynamics.</li>
-          <li><strong>EFC-C₀</strong> defines how entropy and structure map to information capacity and cognitive potential.</li>
-        </ul>
         <p>
-          This master document fixes notation and baseline equations for these three layers.
-          It is designed to be stable enough to cite, yet modular enough to extend in later versions.
+          This HTML representation corresponds to the archived and versioned research object stored on
+          Figshare. Future versions of the theory (EFC v1.x, v2.x) will reference this DOI as the baseline
+          formal specification.
         </p>
-      </section>
+      </div>
+    </section>
 
-      <!-- PART I: EFC-S -->
-      <section id="part-i-efc-s">
-        <h2>Part I — EFC-S: Structure / Halo Layer</h2>
+    <section id="references">
+      <h2>9. References</h2>
+      <p>
+        This master specification can be combined with an external reference list (articles,
+        datasets, code repositories). A fixed bibliography can be embedded in later versions.
+      </p>
+    </section>
 
-        <h3 id="s0-low-entropy-anchors">S0. Low-entropy anchors</h3>
-        <p>
-          EFC-S starts from the idea that structure forms around low-entropy anchors. These are
-          local regions where matter and energy are concentrated in configurations that allow
-          sustained energy flows.
-        </p>
-
-        <div class="equation-block">
-          <div class="eq-label">S0.1 (Entropy density).</div>
-          <p>
-            Let $s(\mathbf{x})$ denote the entropy density at position $\mathbf{x}$.
-            A low-entropy anchor is a region $\mathcal{A}$ such that
-            $$\langle s \rangle_{\mathcal{A}} \ll \langle s \rangle_{\text{background}},$$
-            where $\langle s \rangle$ denotes a coarse-grained average.
-          </p>
-        </div>
-
-        <p>
-          These anchors serve as seeds for halo formation and long-range correlations in the
-          energy-flow field.
-        </p>
-
-        <h3 id="s1-halo-model">S1. Halo Model of Entropy</h3>
-        <p>
-          In EFC-S, halos are not only mass overdensities, but also <em>entropy-structured</em>
-          regions. A halo profile is described by both mass density and entropy:
-        </p>
-
-        <div class="equation-block">
-          <div class="eq-label">S1.1 (Joint halo profile).</div>
-          <p>
-            $$\rho_h(r), \quad S_h(r),$$
-          </p>
-        </div>
-
-        <p>
-          where:
-        </p>
-        <ul>
-          <li>$\rho_h(r)$ is the radial mass density profile,</li>
-          <li>$S_h(r)$ is a dimensionless entropy profile normalised to $[0,1]$.</li>
-        </ul>
-
-        <p>
-          The combination $\big(\rho_h(r), S_h(r)\big)$ defines how effective a halo is as a
-          driver for energy flows in EFC-D.
-        </p>
-
-        <h3 id="s2-radial-profiles">S2. Radial profiles and halo classes</h3>
-        <p>
-          EFC-S allows families of halos parameterised by a small set of structural parameters
-          (for example central density, scale radius and entropy core size).
-        </p>
-
-        <div class="equation-block">
-          <div class="eq-label">S2.1 (Example parametrisation).</div>
-          <p>
-            $$\rho_h(r) = \rho_0\, f\!\left(\frac{r}{r_s}\right), \qquad
-              S_h(r) = S_0 + (1 - S_0)\, g\!\left(\frac{r}{r_c}\right),$$
-          </p>
-        </div>
-
-        <p>
-          where $f$ and $g$ are chosen shape functions, $r_s$ is a mass scale radius,
-          and $r_c$ is an entropy core radius. Different functional choices represent
-          different halo classes in the EFC-S catalogue.
-        </p>
-      </section>
-
-      <!-- PART II: EFC-D -->
-      <section id="part-ii-efc-d">
-        <h2>Part II — EFC-D: Energy-Flow Dynamics</h2>
-
-        <h3 id="d0-local-ef">D0. Local energy-flow potential $E_f(\rho, S)$</h3>
-        <p>
-          The local energy-flow potential $E_f$ depends on the mass density $\rho$
-          and entropy $S$. It captures how much structured energy-flow capacity a
-          region has.
-        </p>
-
-        <div class="equation-block">
-          <div class="eq-label">D0.1 (Energy-flow potential).</div>
-          <p>
-            $$E_f = \rho\,(1 - S).$$
-          </p>
-        </div>
-
-        <p>
-          High density with low entropy yields large $E_f$. High entropy suppresses
-          $E_f$ even for dense regions.
-        </p>
-
-        <h3 id="d0-density">D0.2. Mass density</h3>
-        <p>
-          Mass density is defined in the usual way:
-        </p>
-
-        <div class="equation-block">
-          <div class="eq-label">D0.2 (Mass density).</div>
-          <p>
-            $$\rho = \frac{m}{V},$$
-          </p>
-        </div>
-
-        <p>
-          where $m$ is mass in a local region and $V$ is the associated volume.
-        </p>
-
-        <h3 id="d1-ef-rate">D1. Energy-flow rate and temporal evolution</h3>
-        <p>
-          The temporal change of the energy-flow potential defines an
-          energy-flow rate:
-        </p>
-
-        <div class="equation-block">
-          <div class="eq-label">D1.1 (Energy-flow rate).</div>
-          <p>
-            $$\frac{dE_f}{dt} = \nabla_t E_f,$$
-          </p>
-        </div>
-
-        <p>
-          where $\nabla_t$ is the derivative along the chosen time parameter
-          (cosmic time or another evolution parameter).
-        </p>
-
-        <p>
-          Using the definition of $E_f$ and the product rule:
-        </p>
-
-        <div class="equation-block">
-          <div class="eq-label">D1.2 (Expanded form).</div>
-          <p>
-            $$\frac{dE_f}{dt}
-              = (1 - S)\,\frac{d\rho}{dt}
-              \;-\;
-              \rho\,\frac{dS}{dt}.$$
-          </p>
-        </div>
-
-        <p>
-          This separates contributions from density change and entropy change.
-          A region can lose energy-flow potential by losing mass, by gaining entropy,
-          or by both.
-        </p>
-
-        <h3 id="d2-gradients">D2. Spatial gradients and effective acceleration</h3>
-        <p>
-          Spatial gradients in $E_f$ define preferred directions of energy flow.
-        </p>
-
-        <div class="equation-block">
-          <div class="eq-label">D2.1 (Energy-flow gradient).</div>
-          <p>
-            $$\nabla E_f(\mathbf{x})
-              = (1 - S(\mathbf{x}))\,\nabla \rho(\mathbf{x})
-              \;-\;
-              \rho(\mathbf{x})\,\nabla S(\mathbf{x}).$$
-          </p>
-        </div>
-
-        <p>
-          At the level of an effective description, one can introduce an
-          acceleration field $\mathbf{a}$ proportional to this gradient:
-        </p>
-
-        <div class="equation-block">
-          <div class="eq-label">D2.2 (Effective acceleration field).</div>
-          <p>
-            $$\mathbf{a}(\mathbf{x}) \propto -\,\nabla E_f(\mathbf{x}).$$
-          </p>
-        </div>
-
-        <p>
-          The minus sign indicates flow towards regions of lower effective potential,
-          in analogy with standard potential theory, but here the potential is
-          thermodynamic–structural rather than purely gravitational.
-        </p>
-
-        <h3 id="d3-expansion">D3. Expansion rate and background behaviour</h3>
-        <p>
-          On large scales, an effective expansion rate $H$ can be linked to
-          coarse-grained energy-flow variables. A simple baseline relation uses
-          the magnitude of $E_f$:
-        </p>
-
-        <div class="equation-block">
-          <div class="eq-label">D3.1 (Baseline expansion proxy).</div>
-          <p>
-            $$H = H_0\, F(E_f, S),$$
-          </p>
-        </div>
-
-        <p>
-          where $H_0$ is a reference scale and $F$ is a dimensionless function
-          to be fixed by confrontation with data (e.g. supernovae, BAO, CMB).
-          The important point for this master specification is not the exact
-          form of $F$, but that $H$ is understood as a derived quantity from
-          flow and entropy, not a primary parameter.
-        </p>
-      </section>
-
-      <!-- PART III: EFC-C0 -->
-      <section id="part-iii-efc-c0">
-        <h2>Part III — EFC-C₀: Entropy–Cognition Base Layer</h2>
-
-        <h3 id="c0-entropy-info">C₀. Entropy and information capacity</h3>
-        <p>
-          EFC-C₀ links thermodynamic entropy to potential for information
-          processing. The goal is not a psychological model, but a base mapping
-          between physical structure and abstract information capacity.
-        </p>
-
-        <div class="equation-block">
-          <div class="eq-label">C0.1 (Local information capacity).</div>
-          <p>
-            $$I(\mathbf{x}) \propto \rho(\mathbf{x})\,(1 - S(\mathbf{x})).$$
-          </p>
-        </div>
-
-        <p>
-          This mirrors the structure of $E_f$, but $I$ is interpreted as a
-          potential for storing and transforming information rather than driving
-          motion directly.
-        </p>
-
-        <h3 id="c1-cognitive-load">C₁. Local cognitive load</h3>
-        <p>
-          For a coarse-grained region $\mathcal{R}$, define a total information
-          capacity and a used fraction:
-        </p>
-
-        <div class="equation-block">
-          <div class="eq-label">C1.1 (Total capacity in a region).</div>
-          <p>
-            $$I_{\text{tot}}(\mathcal{R})
-              = \int_{\mathcal{R}} I(\mathbf{x})\, dV.$$
-          </p>
-        </div>
-
-        <p>
-          A simple scalar cognitive load variable $L$ can then be defined as:
-        </p>
-
-        <div class="equation-block">
-          <div class="eq-label">C1.2 (Cognitive load).</div>
-          <p>
-            $$L = \frac{I_{\text{used}}}{I_{\text{tot}}}, \qquad 0 \le L \le 1,$$
-          </p>
-        </div>
-
-        <p>
-          where $I_{\text{used}}$ is the part of the available capacity that is
-          currently engaged in maintaining or updating structure, patterns or
-          internal models in the region.
-        </p>
-
-        <h3 id="c2-informational-field">C₂. Informational field coupling</h3>
-        <p>
-          EFC-C₀ treats information structures as coupled to the same energy-flow
-          fields that drive dynamics in EFC-D. This can be expressed at a
-          coarse-grained level by letting $I$ respond to changes in $E_f$:
-        </p>
-
-        <div class="equation-block">
-          <div class="eq-label">C2.1 (Coupling to energy-flow).</div>
-          <p>
-            $$\frac{dI}{dt}
-              = \alpha\,\frac{dE_f}{dt}
-              \;-\;
-              \beta\,D_I,$$
-          </p>
-        </div>
-
-        <p>
-          where:
-        </p>
-        <ul>
-          <li>$\alpha$ scales how changes in energy-flow potential translate into
-            increased or decreased information capacity,</li>
-          <li>$\beta$ scales a dissipation term $D_I$ (for example diffusion,
-            noise or degradation of structure).</li>
-        </ul>
-
-        <p>
-          This is a minimal base equation that later cognitive layers can extend.
-        </p>
-      </section>
-
-      <!-- Appendix -->
-      <section id="appendix">
-        <h2>Appendix — Symbols and Definitions</h2>
-        <p>
-          The table below summarises the main symbols used in this master
-          specification.
-        </p>
-
-        <table>
-          <thead>
-            <tr>
-              <th>Symbol</th>
-              <th>Meaning</th>
-              <th>Notes</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>$\rho$</td>
-              <td>Mass density</td>
-              <td>$\rho = m/V$</td>
-            </tr>
-            <tr>
-              <td>$S$</td>
-              <td>Dimensionless entropy</td>
-              <td>Normalised to $[0,1]$ at chosen scale</td>
-            </tr>
-            <tr>
-              <td>$E_f$</td>
-              <td>Local energy-flow potential</td>
-              <td>$E_f = \rho\,(1 - S)$</td>
-            </tr>
-            <tr>
-              <td>$\nabla_t$</td>
-              <td>Time derivative</td>
-              <td>Along chosen evolution parameter</td>
-            </tr>
-            <tr>
-              <td>$\rho_h(r)$</td>
-              <td>Halo mass density profile</td>
-              <td>Part of EFC-S halo model</td>
-            </tr>
-            <tr>
-              <td>$S_h(r)$</td>
-              <td>Halo entropy profile</td>
-              <td>Part of EFC-S halo model</td>
-            </tr>
-            <tr>
-              <td>$I(\mathbf{x})$</td>
-              <td>Local information capacity</td>
-              <td>Base variable in EFC-C₀</td>
-            </tr>
-            <tr>
-              <td>$L$</td>
-              <td>Cognitive load</td>
-              <td>$L = I_{\text{used}} / I_{\text{tot}}$</td>
-            </tr>
-            <tr>
-              <td>$H$</td>
-              <td>Effective expansion rate</td>
-              <td>Derived from flow and entropy</td>
-            </tr>
-            <tr>
-              <td>$H_0$</td>
-              <td>Reference expansion scale</td>
-              <td>To be calibrated against data</td>
-            </tr>
-            <tr>
-              <td>$\alpha, \beta$</td>
-              <td>Coupling coefficients</td>
-              <td>Link between $E_f$ and $I$</td>
-            </tr>
-          </tbody>
-        </table>
-      </section>
-
-      <!-- References -->
-      <section id="references">
-        <h2>References</h2>
-        <p>
-          This master specification is designed to be combined with an external
-          reference list (articles, datasets, code repositories). In later
-          versions, a fixed bibliography can be embedded here.
-        </p>
-      </section>
-
-      <footer>
-        <p>
-          EFC Master Specification v1.0 — static HTML. This file can be hosted
-          directly or printed to PDF for archival and citation.
-        </p>
-      </footer>
-    </main>
-  </div>
+  </main>
 </body>
 </html>
