@@ -65,3 +65,38 @@ lib/
 *.aux
 *.out
 *.toc
+##########################################
+# EFC — Required ignores (Do NOT remove)
+##########################################
+
+# Output (never version control)
+output/
+
+# LaTeX build artifacts
+*.aux
+*.log
+*.out
+*.toc
+*.fls
+*.fdb_latexmk
+*.synctex.gz
+*.pdf
+
+# Temporary validation images
+validation/*.png
+validation/**/*.png
+
+# Jupyter cache
+**/.ipynb_checkpoints/
+
+# Python cache
+__pycache__/
+*.pyc
+
+# Local scratch / temp data
+*.tmp
+*.cache
+*.save
+
+# External data (raw external inputs)
+data/external/
