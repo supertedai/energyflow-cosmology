@@ -13,10 +13,16 @@ jobs:
 
     steps:
 
+      # -------------------------------
+      # Checkout repository
+      # -------------------------------
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Install LaTeX and Pandoc
+      # -------------------------------
+      # Install LaTeX + Pandoc
+      # -------------------------------
+      - name: Install LaTeX + Pandoc
         run: |
           sudo apt-get update
           sudo apt-get install -y pandoc latexmk \
@@ -24,36 +30,57 @@ jobs:
             texlive-latex-extra texlive-fonts-recommended \
             texlive-science
 
-      - name: Copy figure
+      # -------------------------------
+      # Copy figure for LaTeX build
+      # -------------------------------
+      - name: Copy figure into LaTeX folder
         run: |
           cp docs/EFC_vs_LCDM_plot.png theory/master/EFC_vs_LCDM_plot.png || true
 
+      # -------------------------------
+      # Build PDF
+      # -------------------------------
       - name: Build PDF
         working-directory: theory/master
-        run: latexmk -pdf -interaction=nonstopmode efc_master.tex
+        run: |
+          latexmk -pdf -interaction=nonstopmode efc_master.tex
 
+      # -------------------------------
+      # Verify template exists
+      # -------------------------------
       - name: Verify HTML template
         working-directory: theory/master
         run: |
           if [ ! -f "efc_template.html" ]; then
-            echo "Template missing: theory/master/efc_template.html"
+            echo "ERROR: Missing efc_template.html"
+            exit 1
+          fi
+          if [ ! -f "mathjax_header.html" ]; then
+            echo "ERROR: Missing mathjax_header.html"
             exit 1
           fi
 
-      - name: Build HTML (Pandoc with custom template)
+      # -------------------------------
+      # Build HTML using: 
+      # - EFC template
+      # - MathJax via header include
+      # -------------------------------
+      - name: Build HTML (Pandoc with template + MathJax)
         working-directory: theory/master
         run: |
           pandoc efc_master.tex \
             --from=latex \
             --to=html5 \
             --standalone \
-            --mathjax \
             --template=efc_template.html \
-            --metadata title="Energy-Flow Cosmology — Master Formal Specification" \
+            --include-in-header=mathjax_header.html \
             --toc \
             -o efc_master.html
 
-      - name: Deploy HTML to docs/
+      # -------------------------------
+      # Deploy HTML to /docs
+      # -------------------------------
+      - name: Deploy HTML to docs
         run: |
           mkdir -p docs
           cp theory/master/efc_master.html docs/efc_master.html
@@ -64,6 +91,9 @@ jobs:
           git pull --rebase origin main || true
           git push
 
+      # -------------------------------
+      # Upload artifacts
+      # -------------------------------
       - name: Upload PDF artifact
         uses: actions/upload-artifact@v4
         with:
