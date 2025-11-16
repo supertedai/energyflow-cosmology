@@ -14,6 +14,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - name: Install LaTeX
         run: |
@@ -25,7 +27,11 @@ jobs:
 
       - name: Build PDF
         working-directory: docs
-        run: latexmk -pdf -interaction=nonstopmode efc_master.tex
+        run: |
+          echo "PWD = $(pwd)"
+          echo "LISTING FILES:"
+          ls -la
+          latexmk -pdf -interaction=nonstopmode efc_master.tex
 
       - name: Upload PDF
         uses: actions/upload-artifact@v4
