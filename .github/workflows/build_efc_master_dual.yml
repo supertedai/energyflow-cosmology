@@ -36,80 +36,41 @@ jobs:
           latexmk -pdf -interaction=nonstopmode efc_master.tex
 
       # -------------------------------
-      # Create HTML Template (D1 style)
+      # Create HTML Template (YAML-safe)
       # -------------------------------
       - name: Create HTML Template
         working-directory: theory/master
         run: |
-          cat << 'EOF' > efc_html_template.html
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <title>EFC Master Document</title>
+          echo '<!DOCTYPE html>' > efc_html_template.html
+          echo '<html lang="en">' >> efc_html_template.html
+          echo '<head>' >> efc_html_template.html
+          echo '<meta charset="UTF-8" />' >> efc_html_template.html
+          echo '<title>EFC Master Document</title>' >> efc_html_template.html
+          echo '<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>' >> efc_html_template.html
 
-  <!-- MathJax -->
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+          echo '<style>' >> efc_html_template.html
+          echo 'html[data-theme="dark"] { background:#111; color:#ddd; }' >> efc_html_template.html
+          echo 'html[data-theme="light"] { background:#fdfdfd; color:#1a1a1a; }' >> efc_html_template.html
+          echo 'body { max-width:36em; margin:0 auto; padding:50px; font-family:system-ui; }' >> efc_html_template.html
+          echo 'img { max-width:100%; height:auto; }' >> efc_html_template.html
+          echo 'pre, code { background:#f2f2f2; padding:0.5rem; }' >> efc_html_template.html
+          echo '.theme-toggle { position:fixed; top:10px; right:10px; padding:0.4rem 0.7rem; background:#444; color:#fff; border-radius:5px; cursor:pointer; }' >> efc_html_template.html
+          echo '</style>' >> efc_html_template.html
 
-  <!-- Minimal journal-style + dark/light toggle -->
-  <style>
-    html[data-theme="dark"] {
-      background: #111;
-      color: #ddd;
-    }
-    html[data-theme="light"] {
-      background: #fdfdfd;
-      color: #1a1a1a;
-    }
-    body {
-      margin: 0 auto;
-      max-width: 36em;
-      padding: 50px;
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
-      text-rendering: optimizeLegibility;
-    }
-    @media (max-width: 600px) {
-      body {
-        font-size: 0.9em;
-        padding: 12px;
-      }
-      h1 { font-size: 1.8em; }
-    }
-    img { max-width: 100%; height: auto; }
-    pre, code { background: #f2f2f2; padding: 0.5rem; }
-    .theme-toggle {
-      position: fixed;
-      top: 10px;
-      right: 10px;
-      padding: 0.4rem 0.7rem;
-      cursor: pointer;
-      background: #444;
-      color: #fff;
-      border-radius: 5px;
-      font-size: 0.9rem;
-    }
-  </style>
+          echo '<script>' >> efc_html_template.html
+          echo 'function toggleTheme(){let h=document.documentElement; h.dataset.theme=(h.dataset.theme==="dark")?"light":"dark";}' >> efc_html_template.html
+          echo 'document.documentElement.dataset.theme="light";' >> efc_html_template.html
+          echo '</script>' >> efc_html_template.html
 
-  <script>
-    function toggleTheme() {
-      const h = document.documentElement;
-      h.dataset.theme = (h.dataset.theme === "dark") ? "light" : "dark";
-    }
-    document.documentElement.dataset.theme = "light";
-  </script>
-</head>
-
-<body>
-<button class="theme-toggle" onclick="toggleTheme()">Toggle theme</button>
-
-$body$
-
-</body>
-</html>
-EOF
+          echo '</head>' >> efc_html_template.html
+          echo '<body>' >> efc_html_template.html
+          echo '<button class="theme-toggle" onclick="toggleTheme()">Toggle theme</button>' >> efc_html_template.html
+          echo '$body$' >> efc_html_template.html
+          echo '</body>' >> efc_html_template.html
+          echo '</html>' >> efc_html_template.html
 
       # -------------------------------
-      # Build Final HTML via template
+      # Build HTML via Pandoc Template
       # -------------------------------
       - name: Build HTML via Pandoc Template
         working-directory: theory/master
@@ -120,11 +81,10 @@ EOF
             --mathjax \
             --template=efc_html_template.html \
             --standalone \
-            --metadata title="EFC Master Document" \
             --output=efc_master.html
 
       # -------------------------------
-      # Move HTML to docs/
+      # Move HTML to docs
       # -------------------------------
       - name: Move HTML to docs/
         run: |
