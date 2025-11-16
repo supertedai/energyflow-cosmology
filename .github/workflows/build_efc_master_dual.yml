@@ -36,7 +36,7 @@ jobs:
           latexmk -pdf -interaction=nonstopmode efc_master.tex
 
       # -------------------------------
-      # Create HTML Template (YAML-safe)
+      # Create HTML Template
       # -------------------------------
       - name: Create HTML Template
         working-directory: theory/master
@@ -51,10 +51,11 @@ jobs:
           echo '<style>' >> efc_html_template.html
           echo 'html[data-theme="dark"] { background:#111; color:#ddd; }' >> efc_html_template.html
           echo 'html[data-theme="light"] { background:#fdfdfd; color:#1a1a1a; }' >> efc_html_template.html
-          echo 'body { max-width:36em; margin:0 auto; padding:50px; font-family:system-ui; }' >> efc_html_template.html
+          echo 'body { max-width:42em; margin:0 auto; padding:50px; font-family:system-ui; line-height:1.55; }' >> efc_html_template.html
           echo 'img { max-width:100%; height:auto; }' >> efc_html_template.html
-          echo 'pre, code { background:#f2f2f2; padding:0.5rem; }' >> efc_html_template.html
-          echo '.theme-toggle { position:fixed; top:10px; right:10px; padding:0.4rem 0.7rem; background:#444; color:#fff; border-radius:5px; cursor:pointer; }' >> efc_html_template.html
+          echo 'pre, code { background:#f2f2f2; padding:0.4rem; border-radius:4px; }' >> efc_html_template.html
+          echo '#TOC { margin-bottom:2.5rem; padding-bottom:1.5rem; border-bottom:1px solid #ccc; }' >> efc_html_template.html
+          echo '.theme-toggle { position:fixed; top:10px; right:10px; padding:0.4rem 0.7rem; background:#444; color:#fff; border-radius:5px; cursor:pointer; opacity:0.85; }' >> efc_html_template.html
           echo '</style>' >> efc_html_template.html
 
           echo '<script>' >> efc_html_template.html
@@ -64,7 +65,7 @@ jobs:
 
           echo '</head>' >> efc_html_template.html
           echo '<body>' >> efc_html_template.html
-          echo '<button class="theme-toggle" onclick="toggleTheme()">Toggle theme</button>' >> efc_html_template.html
+          echo '<button class="theme-toggle" onclick="toggleTheme()">Theme</button>' >> efc_html_template.html
           echo '$body$' >> efc_html_template.html
           echo '</body>' >> efc_html_template.html
           echo '</html>' >> efc_html_template.html
@@ -81,15 +82,17 @@ jobs:
             --mathjax \
             --template=efc_html_template.html \
             --standalone \
+            --metadata title="EFC Master Document" \
             --output=efc_master.html
 
       # -------------------------------
-      # Move HTML to docs
+      # Move HTML + Figures to docs/
       # -------------------------------
-      - name: Move HTML to docs/
+      - name: Move HTML + Figures to docs/
         run: |
           mkdir -p docs
           cp theory/master/efc_master.html docs/efc_master.html
+          cp output/EFC_vs_LCDM_plot.png docs/EFC_vs_LCDM_plot.png
 
       # -------------------------------
       # Upload Artifacts
