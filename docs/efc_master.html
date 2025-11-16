@@ -1,29 +1,127 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
+<meta charset="UTF-8">
+
 <title>EFC Master Document</title>
+
 <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
 <style>
-:root { --max-width: 38rem; --font-body: system-ui, -apple-system, BlinkMacSystemFont, sans-serif; --font-size: 17px; }
-html[data-theme="light"] { background:#fbfbfb; color:#111; }
-html[data-theme="dark"]  { background:#111; color:#ddd; }
-body { margin:0 auto; max-width:var(--max-width); padding:3rem 1.8rem; font-family:var(--font-body); font-size:var(--font-size); line-height:1.6; }
-h1, h2, h3 { font-weight:600; margin-top:2.2rem; }
-img { max-width:100%; height:auto; border-radius:4px; }
-pre, code { background:#f0f0f0; padding:0.5rem; border-radius:4px; }
-#TOC { margin-bottom:2.5rem; padding-bottom:1.5rem; border-bottom:1px solid #ccc; }
-#TOC ul { padding-left:0; list-style:none; }
-#TOC li { margin:0.35rem 0; }
-.theme-toggle { position:fixed; top:12px; right:12px; padding:0.3rem 0.7rem; background:#444; color:#fff; border-radius:4px; cursor:pointer; font-size:0.8rem; opacity:0.85; }
+/* PAGE BACKGROUND */
+html, body {
+  background: #f5f7fa;
+  margin: 0;
+  padding: 0;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+/* MAIN CONTAINER */
+.main {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 2rem 1.2rem;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+}
+
+/* HEADINGS */
+h1 {
+  font-size: 2.0rem;
+  font-weight: 650;
+  border-bottom: 3px solid #e1e4e8;
+  padding-bottom: 0.4rem;
+  margin-top: 2.2rem;
+  margin-bottom: 1.6rem;
+}
+
+h2 {
+  font-size: 1.45rem;
+  font-weight: 600;
+  border-bottom: 2px solid #e5e7eb;
+  padding-bottom: 0.35rem;
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+}
+
+h3 {
+  font-size: 1.15rem;
+  font-weight: 600;
+  margin-top: 1.4rem;
+  margin-bottom: 0.7rem;
+}
+
+/* PARAGRAPHS */
+p {
+  line-height: 1.65;
+  margin-bottom: 1.1rem;
+}
+
+/* LISTS */
+ul, ol {
+  margin-left: 1.2rem;
+  margin-bottom: 1.2rem;
+}
+
+/* MATHJAX */
+mjx-container {
+  font-size: 1.05em !important;
+}
+
+/* CODE BOXES */
+pre, code {
+  background: #eef4ff;
+  padding: 0.6rem;
+  border-left: 4px solid #3b82f6;
+  border-radius: 4px;
+  overflow-x: auto;
+}
+
+/* INFO BOX (as in screenshot) */
+.info-box {
+  background: #eef4ff;
+  padding: 0.9rem;
+  border-left: 4px solid #3b82f6;
+  margin: 1.4rem 0;
+  border-radius: 4px;
+  font-size: 0.95rem;
+}
+
+/* IMAGES */
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: 1.8rem auto;
+  border-radius: 6px;
+  object-fit: contain;
+}
+
+/* THEME BUTTON — hidden for now */
+.theme-toggle {
+  display: none;
+}
+
+/* MOBILE */
+@media (max-width: 600px) {
+  .main {
+    padding: 1.3rem 0.9rem;
+    margin-top: 0;
+    border-radius: 0;
+  }
+  h1 {
+    margin-top: 1.2rem;
+  }
+}
 </style>
-<script>
-function toggleTheme(){ let h=document.documentElement; h.dataset.theme=(h.dataset.theme==="dark")?"light":"dark"; }
-document.documentElement.dataset.theme="light";
-</script>
+
 </head>
+
 <body>
-<button class="theme-toggle" onclick="toggleTheme()">Theme</button>
+
+<div class="main">
+
 <h1 id="efc-d-dynamics-model">EFC-D: Dynamics Model</h1>
 <h2 class="unnumbered" id="overview">Overview</h2>
 <p>EFC-D describes cosmic dynamics as the result of energy flow along
@@ -141,5 +239,8 @@ surveys.</p>
 <figcaption>Comparison between EFC predictions and <span
 class="math inline">\(\Lambda\)</span>CDM.</figcaption>
 </figure>
+
+</div>
+
 </body>
 </html>
