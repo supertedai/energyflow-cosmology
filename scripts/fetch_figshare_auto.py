@@ -18,7 +18,7 @@ def log(msg):
         f.write(f"[{ts}] {msg}\\n")
 
 def get_articles(user_id):
-    url = f"https://api.figshare.com/v2/accounts/{user_id}/articles"
+    url = f"https://api.figshare.com/v2/authors/{user_id}/articles"
     r = requests.get(url, timeout=30)
     r.raise_for_status()
     return r.json()
