@@ -9,6 +9,25 @@ from datetime import datetime
 
 API_URL = "https://api.figshare.com/v2/account/articles"
 
+# Harde semantiske koblinger for master-spesifikasjonen
+CONCEPT_LINKS = [
+    "EFC-S",
+    "EFC-D",
+    "EFC-C₀",
+    "Grid-Higgs Framework",
+    "Halo Entropy Model",
+    "CEM-Cosmos",
+    "IMX"
+]
+
+METHODOLOGY_LINKS = [
+    "Open Cognitive Methodology",
+    "Reflective Loop",
+    "Author-Method-Note",
+    "Symbiose Interface",
+    "EFC Epistemology v1"
+]
+
 
 def log(msg):
     ts = datetime.now().isoformat()
@@ -50,7 +69,7 @@ def pick_latest(articles):
 
 
 # --------------------------
-# Lagre Figshare/latest.json
+# Lagre figshare/latest.json
 # --------------------------
 def save_latest_json(latest):
     os.makedirs("figshare", exist_ok=True)
@@ -61,7 +80,7 @@ def save_latest_json(latest):
 
 
 # --------------------------
-# Oppdater API v1 meta.json
+# Oppdater api/v1/meta.json
 # --------------------------
 def update_api_meta(latest):
     meta_path = "api/v1/meta.json"
@@ -94,6 +113,26 @@ def update_api_meta(latest):
 
 
 # --------------------------
+# Hjelpere for schema-map
+# --------------------------
+def _ensure_list(node: dict, key: str):
+    val = node.get(key)
+    if val is None:
+        node[key] = []
+    elif not isinstance(val, list):
+        node[key] = [val]
+    return node[key]
+
+
+def _append_unique(ref_list, item, key_fields):
+    """Legg til item i ref_list hvis det ikke finnes fra før basert på key_fields."""
+    for existing in ref_list:
+        if all(existing.get(k) == item.get(k) for k in key_fields):
+            return  # finnes allerede
+    ref_list.append(item)
+
+
+# --------------------------
 # Oppdater schema/schema-map.json
 # --------------------------
 def update_schema_map(latest):
@@ -110,32 +149,81 @@ def update_schema_map(latest):
             log("Advarsel: schema-map.json var korrupt, hopper over oppdatering.")
             return
 
-    # Oppdater last_updated
-    schema["last_updated"] = datetime.now().date().isoformat()
+    doi = latest.get("doi")
+    fig_id = latest.get("id")
+    url = latest.get("url")
+    published_date = latest.get("published_date")
 
-    # Sørg for at nodes finnes
+    schema["last_updated"] = datetime.now().date().isoformat()
     nodes = schema.setdefault("nodes", {})
 
-    # FigshareNode beskriver koblingen mellom repo og Figshare
-    nodes["FigshareNode"] = {
-        "description": "Auto-synkronisert Figshare-kilde for siste publiserte EFC-arbeid.",
+    # ---------------- FigshareNode ----------------
+    fig_node = {
+        "description": "Auto-synkronisert Figshare-kilde for siste publiserte EFC-masterspesifikasjon.",
         "files": [
             {
                 "name": "latest.json",
                 "path": "figshare/latest.json",
                 "type": "latest_metadata",
-                "figshare_id": latest.get("id"),
-                "doi": latest.get("doi"),
-                "url": latest.get("url"),
-                "published_date": latest.get("published_date")
+                "figshare_id": fig_id,
+                "doi": doi,
+                "url": url,
+                "published_date": published_date
             }
-        ]
+        ],
+        "links": []
     }
+
+    # legg til semantiske lenker fra FigshareNode til konsepter og metodologi
+    for cname in CONCEPT_LINKS:
+        fig_node["links"].append({
+            "type": "covers_concept",
+            "ref": cname
+        })
+    for mname in METHODOLOGY_LINKS:
+        fig_node["links"].append({
+            "type": "uses_method",
+            "ref": mname
+        })
+
+    nodes["FigshareNode"] = fig_node
+
+    # ---------------- ConceptNode ----------------
+    concept_node = nodes.get("ConceptNode")
+    if concept_node is not None:
+        refs = _ensure_list(concept_node, "figshare_refs")
+        _append_unique(
+            refs,
+            {
+                "id": fig_id,
+                "doi": doi,
+                "url": url,
+                "role": "master_spec"
+            },
+            key_fields=["id", "doi"]
+        )
+        nodes["ConceptNode"] = concept_node
+
+    # ---------------- MethodologyNode ----------------
+    methodology_node = nodes.get("MethodologyNode")
+    if methodology_node is not None:
+        refs = _ensure_list(methodology_node, "figshare_refs")
+        _append_unique(
+            refs,
+            {
+                "id": fig_id,
+                "doi": doi,
+                "url": url,
+                "role": "master_spec"
+            },
+            key_fields=["id", "doi"]
+        )
+        nodes["MethodologyNode"] = methodology_node
 
     with open(schema_path, "w") as f:
         json.dump(schema, f, indent=2)
 
-    log(f"Oppdatert: {schema_path} (FigshareNode)")
+    log(f"Oppdatert: {schema_path} (FigshareNode + figshare_refs)")
 
 
 # --------------------------
