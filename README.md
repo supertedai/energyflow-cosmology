@@ -7,8 +7,6 @@ This file gives a clear orientation to the entire repository: the theory, the me
 
 ---
 
-# 🚀 **Energy-Flow Cosmology (EFC)**
-
 **Formal Specification • Semantic Knowledge Graph • Computational Framework**
 
 Energy-Flow Cosmology (EFC) is a thermodynamic cosmology built on energy-flow potential, entropy-gradients, and emergent structure formation.
