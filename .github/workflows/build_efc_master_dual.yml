@@ -13,10 +13,16 @@ jobs:
 
     steps:
 
+      # -------------------------------
+      # Checkout
+      # -------------------------------
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Install LaTeX + Pandoc
+      # -------------------------------
+      # Install LaTeX + Pandoc
+      # -------------------------------
+      - name: Install LaTeX and Pandoc
         run: |
           sudo apt-get update
           sudo apt-get install -y pandoc latexmk \
@@ -24,15 +30,36 @@ jobs:
             texlive-latex-extra texlive-fonts-recommended \
             texlive-science
 
-      - name: Copy figure
+      # -------------------------------
+      # Copy figure
+      # -------------------------------
+      - name: Copy figure into master folder
         run: |
           cp docs/EFC_vs_LCDM_plot.png theory/master/EFC_vs_LCDM_plot.png || true
 
+      # -------------------------------
+      # Build PDF
+      # -------------------------------
       - name: Build PDF
         working-directory: theory/master
-        run: latexmk -pdf -interaction=nonstopmode efc_master.tex
+        run: |
+          latexmk -pdf -interaction=nonstopmode efc_master.tex
 
-      - name: Build clean HTML
+      # -------------------------------
+      # Verify template file exists
+      # -------------------------------
+      - name: Verify HTML template presence
+        working-directory: theory/master
+        run: |
+          if [ ! -f "efc_html_template.html" ]; then
+            echo "Missing template: efc_html_template.html"
+            exit 1
+          fi
+
+      # -------------------------------
+      # Build HTML (using your template)
+      # -------------------------------
+      - name: Build HTML
         working-directory: theory/master
         run: |
           pandoc efc_master.tex \
@@ -40,21 +67,35 @@ jobs:
             --to=html5 \
             --standalone \
             --mathjax \
+            --template=efc_html_template.html \
+            --metadata title="Energy-Flow Cosmology — Master Formal Specification" \
             -o efc_master.html
 
-      - name: Deploy HTML
+      # -------------------------------
+      # Deploy HTML to /docs
+      # -------------------------------
+      - name: Deploy HTML to docs
         run: |
           mkdir -p docs
           cp theory/master/efc_master.html docs/efc_master.html
           git config user.name "github-actions"
           git config user.email "actions@github.com"
           git add docs/efc_master.html
-          git commit -m "Auto-update HTML" || true
+          git commit -m "Auto-update EFC master HTML" || true
           git pull --rebase origin main || true
           git push
 
-      - name: Upload artifacts
+      # -------------------------------
+      # Upload artifacts
+      # -------------------------------
+      - name: Upload PDF artifact
         uses: actions/upload-artifact@v4
         with:
-          name: efc_master_html
+          name: EFC_Master_PDF
+          path: theory/master/efc_master.pdf
+
+      - name: Upload HTML artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: EFC_Master_HTML
           path: docs/efc_master.html
