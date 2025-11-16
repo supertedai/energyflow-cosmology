@@ -1,297 +1,330 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<html lang="en" data-theme="light">
 <head>
-  <meta charset="utf-8" />
-  <meta name="generator" content="pandoc" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
-  <meta name="author" content="Morten Magnusson" />
-  <meta name="dcterms.date" content="2025-11-16" />
-  <title>Energy-Flow Cosmology Master Document (EFC-D, EFC-S, EFC-C_0, Light Dynamics, Observables)</title>
+  <meta charset="UTF-8" />
+  <title>Energy-Flow Cosmology — Master Formal Specification</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  
   <style>
-    html {
-      color: #1a1a1a;
-      background-color: #fdfdfd;
+    :root {
+      --bg: #fafafa;
+      --fg: #111111;
+      --fg-soft: #444444;
+      --accent: #1f8fff;
+      --accent-soft: #e3f1ff;
+      --sidebar-bg: #111111;
+      --sidebar-fg: #ffffff;
+      --sidebar-muted: #bbbbbb;
+      --border-subtle: #e0e0e0;
+      --code-bg: #1d1f21;
     }
+    [data-theme="dark"] {
+      --bg: #050608;
+      --fg: #f4f4f4;
+      --fg-soft: #c9c9c9;
+      --accent: #7ed0ff;
+      --accent-soft: #102030;
+      --sidebar-bg: #050608;
+      --sidebar-fg: #f4f4f4;
+      --sidebar-muted: #777777;
+      --border-subtle: #222222;
+      --code-bg: #111419;
+    }
+
+    * { box-sizing: border-box; }
+
     body {
-      margin: 0 auto;
-      max-width: 36em;
-      padding-left: 50px;
-      padding-right: 50px;
-      padding-top: 50px;
-      padding-bottom: 50px;
-      hyphens: auto;
-      overflow-wrap: break-word;
-      text-rendering: optimizeLegibility;
-      font-kerning: normal;
-    }
-    @media (max-width: 600px) {
-      body {
-        font-size: 0.9em;
-        padding: 12px;
-      }
-      h1 {
-        font-size: 1.8em;
-      }
-    }
-    @media print {
-      html {
-        background-color: white;
-      }
-      body {
-        background-color: transparent;
-        color: black;
-        font-size: 12pt;
-      }
-      p, h2, h3 {
-        orphans: 3;
-        widows: 3;
-      }
-      h2, h3, h4 {
-        page-break-after: avoid;
-      }
-    }
-    p {
-      margin: 1em 0;
-    }
-    a {
-      color: #1a1a1a;
-    }
-    a:visited {
-      color: #1a1a1a;
-    }
-    img {
-      max-width: 100%;
-    }
-    h1, h2, h3, h4, h5, h6 {
-      margin-top: 1.4em;
-    }
-    h5, h6 {
-      font-size: 1em;
-      font-style: italic;
-    }
-    h6 {
-      font-weight: normal;
-    }
-    ol, ul {
-      padding-left: 1.7em;
-      margin-top: 1em;
-    }
-    li > ol, li > ul {
-      margin-top: 0;
-    }
-    blockquote {
-      margin: 1em 0 1em 1.7em;
-      padding-left: 1em;
-      border-left: 2px solid #e6e6e6;
-      color: #606060;
-    }
-    code {
-      font-family: Menlo, Monaco, Consolas, 'Lucida Console', monospace;
-      font-size: 85%;
       margin: 0;
-      hyphens: manual;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Inter", "Helvetica Neue", Arial, sans-serif;
+      line-height: 1.55;
+      background:
+        radial-gradient(circle at top left, rgba(126,208,255,0.10), transparent 55%),
+        radial-gradient(circle at bottom right, rgba(126,208,255,0.08), transparent 55%),
+        var(--bg);
+      color: var(--fg);
+      display: flex;
+      min-height: 100vh;
     }
-    pre {
-      margin: 1em 0;
-      overflow: auto;
+
+    #toc {
+      width: 260px;
+      height: 100vh;
+      position: sticky;
+      top: 0;
+      left: 0;
+      overflow-y: auto;
+      background: var(--sidebar-bg);
+      color: var(--sidebar-fg);
+      padding: 20px 22px;
+      border-right: 1px solid #222;
     }
-    pre code {
-      padding: 0;
-      overflow: visible;
-      overflow-wrap: normal;
+
+    #toc-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      margin-bottom: 18px;
     }
-    .sourceCode {
-     background-color: transparent;
-     overflow: visible;
+
+    #toc-title {
+      font-size: 17px;
+      font-weight: 600;
+      color: var(--accent);
     }
-    hr {
-      background-color: #1a1a1a;
-      border: none;
-      height: 1px;
-      margin: 1em 0;
+
+    #theme-toggle {
+      border: 1px solid #444;
+      background: transparent;
+      color: var(--sidebar-fg);
+      font-size: 11px;
+      padding: 4px 8px;
+      border-radius: 999px;
+      cursor: pointer;
     }
-    table {
-      margin: 1em 0;
-      border-collapse: collapse;
-      width: 100%;
-      overflow-x: auto;
+
+    #toc a {
       display: block;
-      font-variant-numeric: lining-nums tabular-nums;
-    }
-    table caption {
-      margin-bottom: 0.75em;
-    }
-    tbody {
-      margin-top: 0.5em;
-      border-top: 1px solid #1a1a1a;
-      border-bottom: 1px solid #1a1a1a;
-    }
-    th {
-      border-top: 1px solid #1a1a1a;
-      padding: 0.25em 0.5em 0.25em 0.5em;
-    }
-    td {
-      padding: 0.125em 0.5em 0.25em 0.5em;
-    }
-    header {
-      margin-bottom: 4em;
-      text-align: center;
-    }
-    #TOC li {
-      list-style: none;
-    }
-    #TOC ul {
-      padding-left: 1.3em;
-    }
-    #TOC > ul {
-      padding-left: 0;
-    }
-    #TOC a:not(:hover) {
+      padding: 5px 0;
+      color: var(--sidebar-muted);
       text-decoration: none;
+      font-size: 13px;
     }
-    code{white-space: pre-wrap;}
-    span.smallcaps{font-variant: small-caps;}
-    div.columns{display: flex; gap: min(4vw, 1.5em);}
-    div.column{flex: auto; overflow-x: auto;}
-    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
-    /* The extra [class] is a hack that increases specificity enough to
-       override a similar rule in reveal.js */
-    ul.task-list[class]{list-style: none;}
-    ul.task-list li input[type="checkbox"] {
-      font-size: inherit;
-      width: 0.8em;
-      margin: 0 0.8em 0.2em -1.6em;
-      vertical-align: middle;
+
+    #content {
+      flex: 1;
+      padding: 32px 40px 60px;
+      max-width: 980px;
+      margin: 0 auto;
+    }
+
+    pre {
+      background: var(--code-bg);
+      color: #f4f4f4;
+      padding: 10px 12px;
+      border-radius: 6px;
+      overflow-x: auto;
+      font-size: 13px;
     }
   </style>
-  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-  <script src="/usr/share/javascript/mathjax/MathJax.js"
-  type="text/javascript"></script>
 </head>
+
 <body>
-<header id="title-block-header">
-<h1 class="title">Energy-Flow Cosmology<br />
-Master Document (EFC-D, EFC-S, EFC-C<span
-class="math inline">\(_0\)</span>, Light Dynamics, Observables)</h1>
-<p class="author">Morten Magnusson</p>
-<p class="date">2025-11-16</p>
-</header>
-<h1 id="efc-d-dynamics-model">EFC-D: Dynamics Model</h1>
-<h2 class="unnumbered" id="overview">Overview</h2>
-<p>EFC-D describes cosmic dynamics as the result of energy flow along
-entropy gradients. The central quantity is the energy field <span
-class="math inline">\(E_f(S)\)</span>, which varies with the local
-entropy density <span class="math inline">\(S\)</span>.</p>
-<h2 class="unnumbered" id="energyentropy-relation">Energy–Entropy
-Relation</h2>
-<p>Dynamics arise when:</p>
-<p><span class="math display">\[\nabla S \neq 0\]</span></p>
-<p>Energy moves toward increasing entropy:</p>
-<p><span class="math display">\[\vec{v}_E = -k \, \nabla S\]</span></p>
-<p>with <span class="math inline">\(k\)</span> controlling the field
-response.</p>
-<h2 class="unnumbered" id="effective-potential">Effective Potential</h2>
-<p>We define an effective potential:</p>
-<p><span class="math display">\[\Phi_E(S) = -\int E_f(S) \,
-dS\]</span></p>
-<p>Acceleration follows as:</p>
-<p><span class="math display">\[\vec{a} = -\nabla \Phi_E .\]</span></p>
-<h2 class="unnumbered" id="expansion-rate">Expansion Rate</h2>
-<p>The expansion rate predicted by EFC-D is:</p>
-<p><span class="math display">\[H(S) = \sqrt{|E_f(S)|} \, (1 +
-S),\]</span></p>
-<p>used for comparison with DESI, CMB, and BAO measurements.</p>
-<h1 id="efc-s-structure-model">EFC-S: Structure Model</h1>
-<h2 class="unnumbered" id="overview-1">Overview</h2>
-<p>EFC-S describes structure formation as the emergence of stable
-configurations in the entropy field. Halos, nodes, and filaments arise
-from local curvature in <span class="math inline">\(S(r)\)</span>.</p>
-<h2 class="unnumbered" id="local-entropy-well">Local Entropy Well</h2>
-<p>A halo is modeled as:</p>
-<p><span class="math display">\[S(r) = S_0 \, e^{-r/r_s},\]</span></p>
-<p>where <span class="math inline">\(r_s\)</span> is the scale
-length.</p>
-<h2 class="unnumbered" id="effective-density">Effective Density</h2>
-<p>The effective density follows directly from entropy curvature:</p>
-<p><span class="math display">\[\rho_{\text{eff}}(r) = \nabla^2
-S(r).\]</span></p>
-<h2 class="unnumbered" id="rotation-curve-prediction">Rotation Curve
-Prediction</h2>
-<p>The predicted rotation velocity is:</p>
-<p><span class="math display">\[v(r) = \sqrt{ r \, \partial_r \Phi_E(r)
-},\]</span></p>
-<p>leading to dark-matter–free rotation curve fits for SPARC/MaNGA
-galaxies.</p>
-<h1 id="efc-c_0-cognitiveinformational-layer">EFC-C<span
-class="math inline">\(_0\)</span>: Cognitive/Informational Layer</h1>
-<h2 class="unnumbered" id="overview-2">Overview</h2>
-<p>EFC-C<span class="math inline">\(_0\)</span> describes how
-information and light interact with entropy through an effective
-refractive index. This layer connects EFC to observational lensing and
-signal propagation.</p>
-<h2 class="unnumbered"
-id="entropyrefractive-index-relation">Entropy–Refractive Index
-Relation</h2>
-<p>We define:</p>
-<p><span class="math display">\[n(S) = 1 + \alpha S,\]</span></p>
-<p>where <span class="math inline">\(\alpha\)</span> is the response
-coefficient.</p>
-<h2 class="unnumbered" id="local-speed-of-light">Local Speed of
-Light</h2>
-<p>Light speed is reduced according to:</p>
-<p><span class="math display">\[c(S) = \frac{c_0}{n(S)}.\]</span></p>
-<h2 class="unnumbered" id="fermat-functional">Fermat Functional</h2>
-<p>Light paths minimize:</p>
-<p><span class="math display">\[\tau = \int n(S) \, ds,\]</span></p>
-<p>giving an entropy-driven lensing law.</p>
-<h2 class="unnumbered" id="dual-lensing">Dual Lensing</h2>
-<p>Two effects appear:</p>
-<ul>
-<li><p>geometric deviation</p></li>
-<li><p>entropy-induced refraction</p></li>
-</ul>
-<p>This forms the observational core of EFC lensing.</p>
-<h1 id="light-dynamics-s0-s1-transitions">Light Dynamics: s0 → s1
-Transitions</h1>
-<h2 class="unnumbered" id="overview-3">Overview</h2>
-<p>The s<span class="math inline">\(_0 \rightarrow\)</span> s<span
-class="math inline">\(_1\)</span> transition describes how light changes
-mode of propagation inside an entropy field.</p>
-<h2 class="unnumbered" id="propagation-law">Propagation Law</h2>
-<p><span class="math display">\[\frac{d\vec{k}}{ds} = -\nabla
-n(S),\]</span></p>
-<p>which is optically equivalent to gravitational lensing, but driven by
-<span class="math inline">\(\nabla S\)</span> rather than mass.</p>
-<h2 class="unnumbered" id="coupling-between-layers">Coupling Between
-Layers</h2>
-<p>Light follows modified trajectories whenever:</p>
-<p><span class="math display">\[\nabla S \neq 0.\]</span></p>
-<p>This couples EFC-D (dynamics) and EFC-C<span
-class="math inline">\(_0\)</span> (refraction) into a unified
-signal-propagation model.</p>
-<h1 id="observables">Observables</h1>
-<h2 class="unnumbered" id="overview-4">Overview</h2>
-<p>Observable predictions arise directly from <span
-class="math inline">\(S(r)\)</span>, <span
-class="math inline">\(n(S)\)</span>, and the effective potential <span
-class="math inline">\(\Phi_E\)</span>.</p>
-<h2 class="unnumbered" id="rotation-curves">Rotation Curves</h2>
-<p><span class="math display">\[v(r) = \sqrt{ r \, \partial_r \Phi_E(r)
-}.\]</span></p>
-<h2 class="unnumbered" id="lensing-angle">Lensing Angle</h2>
-<p><span class="math display">\[\theta = \int \nabla n(S) \,
-ds.\]</span></p>
-<h2 class="unnumbered" id="expansion-signal">Expansion Signal</h2>
-<p><span class="math display">\[H(S) =
-\sqrt{|E_f(S)|}(1+S),\]</span></p>
-<p>used when comparing with DESI, Euclid, JWST, and weak-lensing
-surveys.</p>
-<h1 id="figures">Figures</h1>
-<h2 class="unnumbered" id="figures-1">Figures</h2>
-<figure>
-<img src="EFC_vs_LCDM_plot.png" style="width:95.0%" />
-<figcaption>Comparison between EFC predictions and <span
-class="math inline">\(\Lambda\)</span>CDM.</figcaption>
-</figure>
+
+<nav id="toc">
+  <div id="toc-header">
+    <div id="toc-title">Energy-Flow Cosmology — Master Formal
+Specification</div>
+    <button id="theme-toggle" type="button">☾ Dark</button>
+  </div>
+
+  <ul>
+  <li><a href="#efc-d-dynamics-model"
+  id="toc-efc-d-dynamics-model">EFC-D: Dynamics Model</a>
+  <ul>
+  <li><a href="#overview" id="toc-overview">Overview</a></li>
+  <li><a href="#energyentropy-relation"
+  id="toc-energyentropy-relation">Energy–Entropy Relation</a></li>
+  <li><a href="#effective-potential"
+  id="toc-effective-potential">Effective Potential</a></li>
+  <li><a href="#expansion-rate" id="toc-expansion-rate">Expansion
+  Rate</a></li>
+  </ul></li>
+  <li><a href="#efc-s-structure-model"
+  id="toc-efc-s-structure-model">EFC-S: Structure Model</a>
+  <ul>
+  <li><a href="#overview-1" id="toc-overview-1">Overview</a></li>
+  <li><a href="#local-entropy-well" id="toc-local-entropy-well">Local
+  Entropy Well</a></li>
+  <li><a href="#effective-density" id="toc-effective-density">Effective
+  Density</a></li>
+  <li><a href="#rotation-curve-prediction"
+  id="toc-rotation-curve-prediction">Rotation Curve Prediction</a></li>
+  </ul></li>
+  <li><a href="#efc-c_0-cognitiveinformational-layer"
+  id="toc-efc-c_0-cognitiveinformational-layer">EFC-C<span
+  class="math inline">\(_0\)</span>: Cognitive/Informational Layer</a>
+  <ul>
+  <li><a href="#overview-2" id="toc-overview-2">Overview</a></li>
+  <li><a href="#entropyrefractive-index-relation"
+  id="toc-entropyrefractive-index-relation">Entropy–Refractive Index
+  Relation</a></li>
+  <li><a href="#local-speed-of-light"
+  id="toc-local-speed-of-light">Local Speed of Light</a></li>
+  <li><a href="#fermat-functional" id="toc-fermat-functional">Fermat
+  Functional</a></li>
+  <li><a href="#dual-lensing" id="toc-dual-lensing">Dual
+  Lensing</a></li>
+  </ul></li>
+  <li><a href="#light-dynamics-s0-s1-transitions"
+  id="toc-light-dynamics-s0-s1-transitions">Light Dynamics: s0 → s1
+  Transitions</a>
+  <ul>
+  <li><a href="#overview-3" id="toc-overview-3">Overview</a></li>
+  <li><a href="#propagation-law" id="toc-propagation-law">Propagation
+  Law</a></li>
+  <li><a href="#coupling-between-layers"
+  id="toc-coupling-between-layers">Coupling Between Layers</a></li>
+  </ul></li>
+  <li><a href="#observables" id="toc-observables">Observables</a>
+  <ul>
+  <li><a href="#overview-4" id="toc-overview-4">Overview</a></li>
+  <li><a href="#rotation-curves" id="toc-rotation-curves">Rotation
+  Curves</a></li>
+  <li><a href="#lensing-angle" id="toc-lensing-angle">Lensing
+  Angle</a></li>
+  <li><a href="#expansion-signal" id="toc-expansion-signal">Expansion
+  Signal</a></li>
+  </ul></li>
+  <li><a href="#figures" id="toc-figures">Figures</a>
+  <ul>
+  <li><a href="#figures-1" id="toc-figures-1">Figures</a></li>
+  </ul></li>
+  </ul>
+</nav>
+
+<main id="content">
+  <h1 id="efc-d-dynamics-model">EFC-D: Dynamics Model</h1>
+  <h2 class="unnumbered" id="overview">Overview</h2>
+  <p>EFC-D describes cosmic dynamics as the result of energy flow along
+  entropy gradients. The central quantity is the energy field <span
+  class="math inline">\(E_f(S)\)</span>, which varies with the local
+  entropy density <span class="math inline">\(S\)</span>.</p>
+  <h2 class="unnumbered" id="energyentropy-relation">Energy–Entropy
+  Relation</h2>
+  <p>Dynamics arise when:</p>
+  <p><span class="math display">\[\nabla S \neq 0\]</span></p>
+  <p>Energy moves toward increasing entropy:</p>
+  <p><span class="math display">\[\vec{v}_E = -k \, \nabla
+  S\]</span></p>
+  <p>with <span class="math inline">\(k\)</span> controlling the field
+  response.</p>
+  <h2 class="unnumbered" id="effective-potential">Effective
+  Potential</h2>
+  <p>We define an effective potential:</p>
+  <p><span class="math display">\[\Phi_E(S) = -\int E_f(S) \,
+  dS\]</span></p>
+  <p>Acceleration follows as:</p>
+  <p><span class="math display">\[\vec{a} = -\nabla \Phi_E
+  .\]</span></p>
+  <h2 class="unnumbered" id="expansion-rate">Expansion Rate</h2>
+  <p>The expansion rate predicted by EFC-D is:</p>
+  <p><span class="math display">\[H(S) = \sqrt{|E_f(S)|} \, (1 +
+  S),\]</span></p>
+  <p>used for comparison with DESI, CMB, and BAO measurements.</p>
+  <h1 id="efc-s-structure-model">EFC-S: Structure Model</h1>
+  <h2 class="unnumbered" id="overview-1">Overview</h2>
+  <p>EFC-S describes structure formation as the emergence of stable
+  configurations in the entropy field. Halos, nodes, and filaments arise
+  from local curvature in <span class="math inline">\(S(r)\)</span>.</p>
+  <h2 class="unnumbered" id="local-entropy-well">Local Entropy Well</h2>
+  <p>A halo is modeled as:</p>
+  <p><span class="math display">\[S(r) = S_0 \, e^{-r/r_s},\]</span></p>
+  <p>where <span class="math inline">\(r_s\)</span> is the scale
+  length.</p>
+  <h2 class="unnumbered" id="effective-density">Effective Density</h2>
+  <p>The effective density follows directly from entropy curvature:</p>
+  <p><span class="math display">\[\rho_{\text{eff}}(r) = \nabla^2
+  S(r).\]</span></p>
+  <h2 class="unnumbered" id="rotation-curve-prediction">Rotation Curve
+  Prediction</h2>
+  <p>The predicted rotation velocity is:</p>
+  <p><span class="math display">\[v(r) = \sqrt{ r \, \partial_r
+  \Phi_E(r) },\]</span></p>
+  <p>leading to dark-matter–free rotation curve fits for SPARC/MaNGA
+  galaxies.</p>
+  <h1 id="efc-c_0-cognitiveinformational-layer">EFC-C<span
+  class="math inline">\(_0\)</span>: Cognitive/Informational Layer</h1>
+  <h2 class="unnumbered" id="overview-2">Overview</h2>
+  <p>EFC-C<span class="math inline">\(_0\)</span> describes how
+  information and light interact with entropy through an effective
+  refractive index. This layer connects EFC to observational lensing and
+  signal propagation.</p>
+  <h2 class="unnumbered"
+  id="entropyrefractive-index-relation">Entropy–Refractive Index
+  Relation</h2>
+  <p>We define:</p>
+  <p><span class="math display">\[n(S) = 1 + \alpha S,\]</span></p>
+  <p>where <span class="math inline">\(\alpha\)</span> is the response
+  coefficient.</p>
+  <h2 class="unnumbered" id="local-speed-of-light">Local Speed of
+  Light</h2>
+  <p>Light speed is reduced according to:</p>
+  <p><span class="math display">\[c(S) = \frac{c_0}{n(S)}.\]</span></p>
+  <h2 class="unnumbered" id="fermat-functional">Fermat Functional</h2>
+  <p>Light paths minimize:</p>
+  <p><span class="math display">\[\tau = \int n(S) \, ds,\]</span></p>
+  <p>giving an entropy-driven lensing law.</p>
+  <h2 class="unnumbered" id="dual-lensing">Dual Lensing</h2>
+  <p>Two effects appear:</p>
+  <ul>
+  <li><p>geometric deviation</p></li>
+  <li><p>entropy-induced refraction</p></li>
+  </ul>
+  <p>This forms the observational core of EFC lensing.</p>
+  <h1 id="light-dynamics-s0-s1-transitions">Light Dynamics: s0 → s1
+  Transitions</h1>
+  <h2 class="unnumbered" id="overview-3">Overview</h2>
+  <p>The s<span class="math inline">\(_0 \rightarrow\)</span> s<span
+  class="math inline">\(_1\)</span> transition describes how light
+  changes mode of propagation inside an entropy field.</p>
+  <h2 class="unnumbered" id="propagation-law">Propagation Law</h2>
+  <p><span class="math display">\[\frac{d\vec{k}}{ds} = -\nabla
+  n(S),\]</span></p>
+  <p>which is optically equivalent to gravitational lensing, but driven
+  by <span class="math inline">\(\nabla S\)</span> rather than mass.</p>
+  <h2 class="unnumbered" id="coupling-between-layers">Coupling Between
+  Layers</h2>
+  <p>Light follows modified trajectories whenever:</p>
+  <p><span class="math display">\[\nabla S \neq 0.\]</span></p>
+  <p>This couples EFC-D (dynamics) and EFC-C<span
+  class="math inline">\(_0\)</span> (refraction) into a unified
+  signal-propagation model.</p>
+  <h1 id="observables">Observables</h1>
+  <h2 class="unnumbered" id="overview-4">Overview</h2>
+  <p>Observable predictions arise directly from <span
+  class="math inline">\(S(r)\)</span>, <span
+  class="math inline">\(n(S)\)</span>, and the effective potential <span
+  class="math inline">\(\Phi_E\)</span>.</p>
+  <h2 class="unnumbered" id="rotation-curves">Rotation Curves</h2>
+  <p><span class="math display">\[v(r) = \sqrt{ r \, \partial_r
+  \Phi_E(r) }.\]</span></p>
+  <h2 class="unnumbered" id="lensing-angle">Lensing Angle</h2>
+  <p><span class="math display">\[\theta = \int \nabla n(S) \,
+  ds.\]</span></p>
+  <h2 class="unnumbered" id="expansion-signal">Expansion Signal</h2>
+  <p><span class="math display">\[H(S) =
+  \sqrt{|E_f(S)|}(1+S),\]</span></p>
+  <p>used when comparing with DESI, Euclid, JWST, and weak-lensing
+  surveys.</p>
+  <h1 id="figures">Figures</h1>
+  <h2 class="unnumbered" id="figures-1">Figures</h2>
+  <figure>
+  <img src="EFC_vs_LCDM_plot.png" style="width:95.0%" />
+  <figcaption>Comparison between EFC predictions and <span
+  class="math inline">\(\Lambda\)</span>CDM.</figcaption>
+  </figure>
+</main>
+
+<script>
+  const btn = document.getElementById('theme-toggle');
+  const html = document.documentElement;
+
+  function updateLabel() {
+    const theme = html.getAttribute('data-theme') || "light";
+    btn.textContent = theme === "light" ? "☾ Dark" : "☀ Light";
+  }
+
+  btn.addEventListener("click", () => {
+    const cur = html.getAttribute("data-theme") || "light";
+    const next = cur === "light" ? "dark" : "light";
+    html.setAttribute("data-theme", next);
+    updateLabel();
+  });
+
+  updateLabel();
+</script>
+
 </body>
 </html>
