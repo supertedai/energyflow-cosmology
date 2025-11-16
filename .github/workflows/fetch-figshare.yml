@@ -1,45 +1,60 @@
-name: Fetch Full Figshare Metadata (Auto)
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
 
-on:
-  schedule:
-    - cron: "*/15 * * * *"
-  workflow_dispatch:
+import os
+import sys
+import requests
+from datetime import datetime
 
-jobs:
-  fetch:
-    runs-on: ubuntu-latest
-    permissions:
-      contents: write
+API_URL = "https://api.figshare.com/v2/account/articles"
 
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
+def log(msg):
+    ts = datetime.now().isoformat()
+    print(f"[{ts}] {msg}")
 
-      - name: Set up Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: '3.12'
+def get_articles():
+    token = os.environ.get("FIGSHARE_TOKEN")
+    if not token:
+        raise RuntimeError("FIGSHARE_TOKEN er ikke satt i miljøvariabler")
 
-      - name: Install dependencies
-        run: pip install requests
+    headers = {
+        "Authorization": f"token {token}",
+        "User-Agent": "Mozilla/5.0"
+    }
 
-      - name: Run auto Figshare sync
-        env:
-          FIGSHARE_TOKEN: ${{ secrets.FIGSHARE_TOKEN }}
-        run: |
-          python scripts/fetch_figshare_auto.py
+    log("Kaller Figshare API…")
+    r = requests.get(API_URL, headers=headers, timeout=20)
+    r.raise_for_status()
+    return r.json()
 
-      - name: Commit and push updated Figshare files
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          git config user.name "github-actions"
-          git config user.email "actions@github.com"
+def pick_latest(articles):
+    if not articles:
+        raise RuntimeError("Ingen artikler returnert fra Figshare API")
 
-          git add figshare/
-          git add schema/
-          git add api/v1/meta.json
-          git add docs/docs-index.json
+    # Sorter etter publiseringsdato
+    sorted_list = sorted(
+        articles,
+        key=lambda x: x.get("published_date", ""),
+        reverse=True
+    )
 
-          git diff --cached --quiet || git commit -m "🔄 Auto-sync Figshare (latest version discovery) [skip ci]"
-          git push origin main
+    return sorted_list[0]
+
+def main():
+    try:
+        articles = get_articles()
+        latest = pick_latest(articles)
+
+        log(f"Nyeste artikkel-ID: {latest['id']}")
+        log(f"Tittel: {latest.get('title', 'Ukjent')}")
+
+        # Her kan du velge å lagre data senere
+        # f.eks. til figshare/metadata.json
+        # eller oppdatere schema automatique
+
+    except Exception as e:
+        log(f"Feil: {e}")
+        sys.exit(1)
+
+if __name__ == "__main__":
+    main()
