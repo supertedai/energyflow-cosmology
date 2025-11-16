@@ -62,3 +62,6 @@ meta-graph/*.cypher
 
 # Local libs
 lib/
+*.aux
+*.out
+*.toc
