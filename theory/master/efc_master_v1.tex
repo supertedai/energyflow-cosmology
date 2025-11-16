@@ -92,28 +92,19 @@ which couples density and entropy into a single field.
 
 \section{Illustrative Field and Profiles}
 
-This section collects schematic figures that visualise the basic EFC fields and profiles. They are
-theoretical examples consistent with the definitions in the later sections.
-
 \subsection{Energy-flow potential field $E_f(\rho,S)$}
 
 Figure~\ref{fig:Ef-map} shows a schematic map of the energy-flow potential
-$E_f(\rho,S) = \rho(1-S)$ over the $(\rho,S)$ plane, illustrating how high density and low entropy
-combine to yield large $E_f$.
+$E_f(\rho,S) = \rho(1-S)$ over the $(\rho,S)$ plane.
 
 \begin{figure}[h]
   \centering
   \includegraphics[width=0.65\textwidth]{efc_Ef_rho_S_heatmap.png}
-  \caption{Schematic heatmap of the energy-flow potential
-  $E_f(\rho,S) = \rho(1-S)$ as a function of mass density $\rho$ and dimensionless entropy $S$.}
+  \caption{Schematic heatmap of the energy-flow potential $E_f(\rho,S) = \rho(1-S)$.}
   \label{fig:Ef-map}
 \end{figure}
 
 \subsection{Halo profiles: mass and entropy}
-
-EFC-S models halos as joint profiles in mass density and entropy. A simple schematic example is shown
-in Figures~\ref{fig:halo-rho} and~\ref{fig:halo-S}, which visualise $\rho_h(r)$ and $S_h(r)$ as
-functions of radius $r$.
 
 \begin{figure}[h]
   \centering
@@ -131,45 +122,33 @@ functions of radius $r$.
 
 \subsection{Rotation curves and projected density}
 
-Given a halo profile, EFC-D can be used to derive effective rotation curves and projected surface
-densities. Figure~\ref{fig:rotcurves} shows a schematic comparison between an EFC-like rotation curve
-and an NFW-like reference. Figure~\ref{fig:lensing} shows a corresponding schematic projected
-surface-density profile.
-
 \begin{figure}[h]
   \centering
   \includegraphics[width=0.65\textwidth]{efc_schematic_rotation_curves.png}
-  \caption{Schematic rotation curves for an EFC-like halo compared to an NFW-like reference.}
+  \caption{Schematic rotation curves: EFC-like vs NFW-like.}
   \label{fig:rotcurves}
 \end{figure}
 
 \begin{figure}[h]
   \centering
   \includegraphics[width=0.65\textwidth]{efc_schematic_lensing_profile.png}
-  \caption{Schematic projected surface density $\Sigma(R)$ associated with an EFC-like halo profile.}
+  \caption{Schematic projected surface density $\Sigma(R)$.}
   \label{fig:lensing}
 \end{figure}
 
 \subsection{Expansion history and information capacity}
 
-EFC treats the effective expansion rate $H(z)$ as a derived quantity from flow and entropy, rather
-than a primary parameter. Figure~\ref{fig:Hz} shows a schematic comparison between an EFC-like
-expansion history and a $\Lambda$CDM-like reference. Figure~\ref{fig:info} shows a simple
-information-capacity curve $I(S) \propto (1-S)$ at fixed density, relevant for EFC-C$_0$.
-
 \begin{figure}[h]
   \centering
   \includegraphics[width=0.65\textwidth]{efc_schematic_Hz.png}
-  \caption{Schematic effective expansion history $H(z)/H_0$ for an EFC-like model compared to a
-  $\Lambda$CDM-like reference.}
+  \caption{Schematic expansion history $H(z)/H_0$.}
   \label{fig:Hz}
 \end{figure}
 
 \begin{figure}[h]
   \centering
   \includegraphics[width=0.65\textwidth]{efc_information_capacity_vs_S.png}
-  \caption{Schematic information capacity $I(S) \propto (1-S)$ at fixed density, illustrating the
-  EFC-C$_0$ baseline relation between entropy and information capacity.}
+  \caption{Information capacity $I(S) \propto (1-S)$ at fixed $\rho$.}
   \label{fig:info}
 \end{figure}
 
@@ -179,196 +158,90 @@ information-capacity curve $I(S) \propto (1-S)$ at fixed density, relevant for E
 
 \subsection{S0. Low-entropy anchors}
 
-EFC-S starts from the idea that structure forms around low-entropy anchors. These are local regions
-where matter and energy are concentrated in configurations that allow sustained energy flows.
-
-Let $s(\bm{x})$ denote the entropy density at position $\bm{x}$. A low-entropy anchor is a region
-$\mathcal{A}$ such that
+Let $s(\bm{x})$ denote the entropy density. A low-entropy anchor is a region $\mathcal{A}$ such that
 \begin{equation}
-  \langle s \rangle_{\mathcal{A}} \ll \langle s \rangle_{\text{background}},
-  \label{eq:S0-entropy-density}
+  \langle s \rangle_{\mathcal{A}} \ll \langle s \rangle_{\text{background}}.
 \end{equation}
-where $\langle s \rangle$ denotes a coarse-grained average. These anchors serve as seeds for halo
-formation and long-range correlations in the energy-flow field.
 
 \subsection{S1. Halo Model of Entropy}
 
-In EFC-S, halos are not only mass overdensities, but also \emph{entropy-structured} regions. A halo
-profile is described by both mass density and entropy:
 \begin{equation}
-  \rho_h(r), \qquad S_h(r),
-  \label{eq:S1-joint-profile}
+  \rho_h(r), \qquad S_h(r).
 \end{equation}
-where $\rho_h(r)$ is the radial mass density profile and $S_h(r)$ is a dimensionless entropy profile
-normalised to $[0,1]$. The combination $(\rho_h(r), S_h(r))$ defines how effective a halo is as a
-driver for energy flows in EFC-D.
 
-\subsection{S2. Radial profiles and halo classes}
+\subsection{S2. Radial profiles}
 
-EFC-S allows families of halos parameterised by a small set of structural parameters (for example
-central density, scale radius and entropy core size). A simple example parametrisation is
 \begin{equation}
-  \rho_h(r) = \rho_0\, f\!\left(\frac{r}{r_s}\right),
-  \qquad
-  S_h(r) = S_0 + (1 - S_0)\, g\!\left(\frac{r}{r_c}\right),
-  \label{eq:S2-param}
+  \rho_h(r) = \rho_0 f\!\left(\frac{r}{r_s}\right), \qquad
+  S_h(r) = S_0 + (1 - S_0) g\!\left(\frac{r}{r_c}\right).
 \end{equation}
-where $f$ and $g$ are chosen shape functions, $r_s$ is a mass scale radius, and $r_c$ is an entropy
-core radius. Different functional choices represent different halo classes in the EFC-S catalogue.
 
 \section{Part II --- EFC-D: Energy-Flow Dynamics}
 
-\subsection{D0. Local energy-flow potential $E_f(\rho,S)$}
+\subsection{D0. Local energy-flow potential}
 
-The local energy-flow potential $E_f$ depends on the mass density $\rho$ and entropy $S$. It captures
-how much structured energy-flow capacity a region has. At the baseline level,
 \begin{equation}
-  E_f = \rho\,(1 - S).
-  \label{eq:D0-Ef-def}
+  E_f = \rho(1 - S).
 \end{equation}
-High density with low entropy yields large $E_f$. High entropy suppresses $E_f$ even for dense
-regions.
 
-\subsection{D0.2. Mass density}
+\subsection{D1. Rate}
 
-Mass density is defined in the usual way:
 \begin{equation}
-  \rho = \frac{m}{V},
-  \label{eq:D0-density}
+  \frac{dE_f}{dt} = (1 - S)\frac{d\rho}{dt} - \rho\frac{dS}{dt}.
 \end{equation}
-where $m$ is mass in a local region and $V$ is the associated volume.
 
-\subsection{D1. Energy-flow rate and temporal evolution}
+\subsection{D2. Gradient}
 
-The temporal change of the energy-flow potential defines an energy-flow rate:
 \begin{equation}
-  \frac{dE_f}{dt} = \nabla_t E_f,
-  \label{eq:D1-rate}
+  \nabla E_f = (1 - S)\nabla \rho - \rho\nabla S.
 \end{equation}
-where $\nabla_t$ is the derivative along the chosen time parameter (cosmic time or another evolution
-parameter).
 
-Using the definition of $E_f$ in Eq.~\eqref{eq:D0-Ef-def} and applying the product rule, one obtains
 \begin{equation}
-  \frac{dE_f}{dt}
-    = (1 - S)\,\frac{d\rho}{dt}
-    - \rho\,\frac{dS}{dt}.
-  \label{eq:D1-expanded}
+  \bm{a} \propto -\nabla E_f.
 \end{equation}
-This separates contributions from density change and entropy change: a region can lose energy-flow
-potential by losing mass, by gaining entropy, or by both.
 
-\subsection{D2. Spatial gradients and effective acceleration}
+\section{Part III --- EFC-C$_0$}
 
-Spatial gradients in $E_f$ define preferred directions of energy flow. At the field level,
+\subsection{C0. Information capacity}
+
 \begin{equation}
-  \nabla E_f(\bm{x})
-    = (1 - S(\bm{x}))\,\nabla \rho(\bm{x})
-    - \rho(\bm{x})\,\nabla S(\bm{x}),
-  \label{eq:D2-gradient}
+  I \propto \rho(1-S).
 \end{equation}
-which follows directly from Eq.~\eqref{eq:D0-Ef-def} via the product rule.
 
-At the level of an effective description, one can introduce an acceleration field $\bm{a}$ proportional
-to this gradient:
+\subsection{C1. Load}
+
 \begin{equation}
-  \bm{a}(\bm{x}) \propto -\,\nabla E_f(\bm{x}).
-  \label{eq:D2-acc}
+  I_{\text{tot}} = \int_{\mathcal{R}} I(\bm{x})\,dV, \qquad
+  L = \frac{I_{\text{used}}}{I_{\text{tot}}}.
 \end{equation}
-The minus sign indicates flow towards regions of lower effective potential, in analogy with standard
-potential theory, but here the potential is thermodynamic--structural rather than purely gravitational.
 
-\subsection{D3. Expansion rate and background behaviour}
+\subsection{C2. Coupling}
 
-On large scales, an effective expansion rate $H$ can be linked to coarse-grained energy-flow variables.
-A simple baseline relation uses the magnitude of $E_f$:
 \begin{equation}
-  H = H_0\, F(E_f, S),
-  \label{eq:D3-expansion}
+  \frac{dI}{dt} = \alpha\frac{dE_f}{dt} - \beta D_I.
 \end{equation}
-where $H_0$ is a reference scale and $F$ is a dimensionless function to be fixed by confrontation with
-data (e.g.\ supernovae, BAO, CMB). The important point for this master specification is not the exact
-form of $F$, but that $H$ is understood as a derived quantity from flow and entropy, not a primary
-parameter.
 
-\section{Part III --- EFC-C$_0$: Entropy--Cognition Base Layer}
+\section*{How to Cite}
 
-\subsection{C$_0$. Entropy and information capacity}
+This document is the formal master specification for the Energy-Flow Cosmology (EFC) framework.
 
-EFC-C$_0$ links thermodynamic entropy to potential for information processing. The goal is not a
-psychological model, but a base mapping between physical structure and abstract information capacity.
+\noindent \textbf{Citation:}\\
+Magnusson, M. (2025).
+\textit{Energy-Flow Cosmology (EFC) — Master Specification v1.0}. Figshare.\\
+\href{https://doi.org/10.6084/m9.figshare.30630500}{DOI: 10.6084/m9.figshare.30630500}
 
-A local information capacity $I(\bm{x})$ is defined, at baseline, as
-\begin{equation}
-  I(\bm{x}) \propto \rho(\bm{x})\bigl(1 - S(\bm{x})\bigr).
-  \label{eq:C0-I}
-\end{equation}
-This mirrors the structure of $E_f$, but $I$ is interpreted as a potential for storing and transforming
-information rather than driving motion directly.
+\noindent \textbf{Author:} M. Magnusson \\
+\textbf{ORCID:} \href{https://orcid.org/0009-0002-4860-5095}{0009-0002-4860-5095}
 
-\subsection{C$_1$. Local cognitive load}
-
-For a coarse-grained region $\mathcal{R}$, define a total information capacity and a used fraction. The
-total capacity is
-\begin{equation}
-  I_{\text{tot}}(\mathcal{R})
-    = \int_{\mathcal{R}} I(\bm{x})\, dV.
-  \label{eq:C1-Itot}
-\end{equation}
-A simple scalar cognitive-load variable $L$ can then be defined as
-\begin{equation}
-  L = \frac{I_{\text{used}}}{I_{\text{tot}}}, \qquad 0 \leq L \leq 1,
-  \label{eq:C1-load}
-\end{equation}
-where $I_{\text{used}}$ is the part of the available capacity that is currently engaged in maintaining
-or updating structure, patterns or internal models in the region.
-
-\subsection{C$_2$. Informational field coupling}
-
-EFC-C$_0$ treats information structures as coupled to the same energy-flow fields that drive dynamics
-in EFC-D. At a coarse-grained level, one can express this by letting $I$ respond to changes in $E_f$:
-\begin{equation}
-  \frac{dI}{dt}
-    = \alpha\,\frac{dE_f}{dt}
-    - \beta\,D_I,
-  \label{eq:C2-coupling}
-\end{equation}
-where:
-\begin{itemize}
-  \item $\alpha$ scales how changes in energy-flow potential translate into increased or decreased
-        information capacity,
-  \item $\beta$ scales a dissipation term $D_I$ (for example diffusion, noise or degradation of
-        structure).
-\end{itemize}
-Equation~\eqref{eq:C2-coupling} is a minimal base equation that later cognitive layers can extend.
-
-\section{Appendix: Symbols and Definitions}
-
-The table below summarises the main symbols used in this master specification.
+\noindent \textbf{Licence:} CC-BY 4.0
 
 \medskip
 
-\begin{tabular}{lll}
-  \hline
-  Symbol & Meaning & Notes \\
-  \hline
-  $\rho$           & Mass density                 & $\rho = m/V$ \\
-  $S$              & Dimensionless entropy        & Normalised to $[0,1]$ at chosen scale \\
-  $E_f$            & Local energy-flow potential  & $E_f = \rho(1 - S)$ \\
-  $\nabla_t$       & Time derivative              & Along chosen evolution parameter \\
-  $\rho_h(r)$      & Halo mass density profile    & Part of EFC-S halo model \\
-  $S_h(r)$         & Halo entropy profile         & Part of EFC-S halo model \\
-  $I(\bm{x})$      & Local information capacity   & Base variable in EFC-C$_0$ \\
-  $L$              & Cognitive load               & $L = I_{\text{used}} / I_{\text{tot}}$ \\
-  $H$              & Effective expansion rate     & Derived from flow and entropy \\
-  $H_0$            & Reference expansion scale    & To be calibrated against data \\
-  $\alpha, \beta$  & Coupling coefficients        & Link between $E_f$ and $I$ \\
-  \hline
-\end{tabular}
+\noindent This PDF corresponds to the archived and versioned research object on Figshare.
+Future versions (EFC v1.x, v2.x) will reference this DOI as the baseline formal specification.
 
 \section{References}
 
-This master specification is designed to be combined with an external reference list (articles,
-datasets, code repositories). A fixed bibliography can be embedded here in later versions.
+This specification may be supplemented with external references in future versions.
 
 \end{document}
