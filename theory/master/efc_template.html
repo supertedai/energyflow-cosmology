@@ -9,17 +9,6 @@
   <meta name="$meta.key$" content="$meta.value$" />
   $endfor$
 
-  <!-- MathJax -->
-  <script>
-    window.MathJax = {
-      tex: {
-        inlineMath: [["\\$","\\$"], ["\\\\(","\\\\)"]]
-      },
-      svg: {fontCache: "global"}
-    };
-  </script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
-
   <style>
     :root {
       --bg: #fafafa;
@@ -105,22 +94,12 @@
       text-decoration: none;
       font-size: 13px;
     }
-    #toc a:hover {
-      color: var(--sidebar-fg);
-    }
 
     #content {
       flex: 1;
       padding: 32px 40px 60px;
       max-width: 980px;
       margin: 0 auto;
-    }
-
-    h1, h2, h3 {
-      font-weight: 600;
-      margin-top: 32px;
-      margin-bottom: 12px;
-      scroll-margin-top: 80px;
     }
 
     pre {
@@ -131,8 +110,6 @@
       overflow-x: auto;
       font-size: 13px;
     }
-
-    mjx-container[jax="SVG"] { margin: 18px 0; }
   </style>
 </head>
 
@@ -161,8 +138,8 @@
   }
 
   btn.addEventListener("click", () => {
-    const current = html.getAttribute("data-theme") || "light";
-    const next = current === "light" ? "dark" : "light";
+    const cur = html.getAttribute("data-theme") || "light";
+    const next = cur === "light" ? "dark" : "light";
     html.setAttribute("data-theme", next);
     updateLabel();
   });
