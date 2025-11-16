@@ -1,0 +1,93 @@
+% ============================================================
+% EFC-C₀: Entropy-Dependent Light Propagation
+% ============================================================
+
+\section{EFC-C\textsubscript{0}: Entropy-Dependent Light Propagation}
+\label{sec:efc_c0}
+
+Energy-Flow Cosmology treats the effective speed of light as an
+emergent property of the thermodynamic state of the grid. The
+field $S(\mathbf{x})$ modulates structure, energy-flow and the
+propagation of information.
+
+The closure of the dynamical chain is:
+\[
+  S(\mathbf{x})
+  \;\Rightarrow\;
+  E_f(\mathbf{x})
+  \;\Rightarrow\;
+  \Phi(E_f,S)
+  \;\Rightarrow\;
+  c(S)
+  \;\Rightarrow\;
+  H(E_f,S)
+  \;\Rightarrow\;
+  \text{Observables}.
+\]
+
+% ------------------------------------------------------------
+\subsection{Entropy Endpoints and Normalised Coordinate}
+
+Two entropy endpoints are defined:
+\begin{itemize}
+  \item $s_0$: low-entropy, high-structure endpoint,
+  \item $s_1$: high-entropy, high-diffusion endpoint.
+\end{itemize}
+
+Midpoint and entropy span:
+\[
+  S_{\text{mid}} = \frac{1}{2}(s_0 + s_1),
+  \qquad
+  \Delta S = s_1 - s_0.
+\]
+
+The normalised coordinate becomes:
+\[
+  x(S) = \frac{S - S_{\text{mid}}}{\Delta S / 2}.
+\]
+
+% ------------------------------------------------------------
+\subsection{Effective Speed of Light}
+
+The effective speed of light:
+\[
+  c(S) = c_0 \left( 1 + a_{\text{edge}} x(S)^2 \right).
+\]
+
+Corresponding refractive index:
+\[
+  n(S) = \frac{1}{1 + a_{\text{edge}} x(S)^2}.
+\]
+
+% ------------------------------------------------------------
+\subsection{Light Travel Time}
+
+Observed travel time for a photon path $\gamma$:
+\[
+  t_{\text{obs}}
+  = \int_{\gamma} \frac{dl}{c(S(l))}
+  = \frac{1}{c_0} \int_{\gamma} n(S(l)) dl.
+\]
+
+% ------------------------------------------------------------
+\subsection{Dual Focusing--Defocusing Behaviour}
+
+\begin{itemize}
+  \item $s_0$: local focusing by entropy-controlled refractive index,
+  \item $s_1$: broad-scale defocusing,
+  \item $S_{\text{mid}}$: slowest propagation and maximal time delays.
+\end{itemize}
+
+% ------------------------------------------------------------
+\subsection{Coupling to EFC Dynamics}
+
+Because $S(\mathbf{x})$ modulates:
+\[
+E_f = \rho (1-S),
+\qquad
+H(E_f,S) = \sqrt{|E_f|} (1+S),
+\]
+the same entropy field governs structure, expansion, and light
+propagation. Apparent anomalies in lensing, time delays and expansion
+rates can therefore emerge from entropy-structured light propagation
+rather than additional dark components.
