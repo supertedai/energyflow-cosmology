@@ -9,13 +9,14 @@ from datetime import datetime
 
 API_URL = "https://api.figshare.com/v2/account/articles"
 
+
 def log(msg):
     ts = datetime.now().isoformat()
     print(f"[{ts}] {msg}")
 
 
 # --------------------------
-# Henter artikler fra Figshare
+# Hent artikler fra Figshare
 # --------------------------
 def get_articles():
     token = os.environ.get("FIGSHARE_TOKEN")
@@ -34,9 +35,12 @@ def get_articles():
 
 
 # --------------------------
-# Velger nyeste artikkel
+# Velg nyeste artikkel
 # --------------------------
 def pick_latest(articles):
+    if not articles:
+        raise RuntimeError("Ingen artikler returnert fra Figshare API")
+
     def safe_date(a):
         d = a.get("published_date")
         return d if isinstance(d, str) and len(d) > 0 else "0000-00-00"
@@ -46,7 +50,7 @@ def pick_latest(articles):
 
 
 # --------------------------
-# Lagre Figshare metadata
+# Lagre Figshare/latest.json
 # --------------------------
 def save_latest_json(latest):
     os.makedirs("figshare", exist_ok=True)
@@ -57,20 +61,23 @@ def save_latest_json(latest):
 
 
 # --------------------------
-# Oppdaterer API v1
+# Oppdater API v1 meta.json
 # --------------------------
 def update_api_meta(latest):
     meta_path = "api/v1/meta.json"
 
-    # Les eksisterende meta
     if os.path.exists(meta_path):
         with open(meta_path, "r") as f:
-            meta = json.load(f)
+            try:
+                meta = json.load(f)
+            except json.JSONDecodeError:
+                log("Advarsel: api/v1/meta.json var korrupt, lager ny.")
+                meta = {}
     else:
         meta = {}
 
-    # Oppdater Figshare-seksjon
-    meta["figshare"] = {
+    meta.setdefault("sources", {})
+    meta["sources"]["figshare"] = {
         "id": latest.get("id"),
         "title": latest.get("title"),
         "published_date": latest.get("published_date"),
@@ -80,11 +87,55 @@ def update_api_meta(latest):
         "resource_doi": latest.get("resource_doi")
     }
 
-    # Lagre
     with open(meta_path, "w") as f:
         json.dump(meta, f, indent=2)
 
     log(f"Oppdatert: {meta_path}")
+
+
+# --------------------------
+# Oppdater schema/schema-map.json
+# --------------------------
+def update_schema_map(latest):
+    schema_path = "schema/schema-map.json"
+
+    if not os.path.exists(schema_path):
+        log(f"Schema-map ikke funnet ({schema_path}), hopper over oppdatering.")
+        return
+
+    with open(schema_path, "r") as f:
+        try:
+            schema = json.load(f)
+        except json.JSONDecodeError:
+            log("Advarsel: schema-map.json var korrupt, hopper over oppdatering.")
+            return
+
+    # Oppdater last_updated
+    schema["last_updated"] = datetime.now().date().isoformat()
+
+    # Sørg for at nodes finnes
+    nodes = schema.setdefault("nodes", {})
+
+    # FigshareNode beskriver koblingen mellom repo og Figshare
+    nodes["FigshareNode"] = {
+        "description": "Auto-synkronisert Figshare-kilde for siste publiserte EFC-arbeid.",
+        "files": [
+            {
+                "name": "latest.json",
+                "path": "figshare/latest.json",
+                "type": "latest_metadata",
+                "figshare_id": latest.get("id"),
+                "doi": latest.get("doi"),
+                "url": latest.get("url"),
+                "published_date": latest.get("published_date")
+            }
+        ]
+    }
+
+    with open(schema_path, "w") as f:
+        json.dump(schema, f, indent=2)
+
+    log(f"Oppdatert: {schema_path} (FigshareNode)")
 
 
 # --------------------------
@@ -96,13 +147,14 @@ def main():
         latest = pick_latest(articles)
 
         log("------ Nyeste Figshare-artikkel ------")
-        log(f"ID: {latest['id']}")
+        log(f"ID: {latest.get('id')}")
         log(f"Tittel: {latest.get('title')}")
         log(f"Publisert: {latest.get('published_date')}")
         log("--------------------------------------")
 
         save_latest_json(latest)
         update_api_meta(latest)
+        update_schema_map(latest)
 
     except Exception as e:
         log(f"Feil: {e}")
