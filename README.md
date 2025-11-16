@@ -278,9 +278,10 @@ Both are generated automatically.
 
 ---
 
-# 📄 **License**
+# **📄 License**
 
-MIT License — see `LICENSE` for details.
+Distributed under **CC-BY-4.0**
+© 2025 — *Morten Magnusson* — Energy-Flow Cosmology Initiative
 
 ---
 
