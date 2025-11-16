@@ -48,7 +48,8 @@ jobs:
             --standalone \
             --output=efc_master_raw.html
 
-      - name: Inject CSS + Theme Toggle
+      - name: Inject CSS + Theme Toggle (header/footer)
+        working-directory: theory/master
         run: |
           cat << 'EOF' > temp_header.html
 <!DOCTYPE html>
@@ -96,7 +97,7 @@ EOF
       - name: Assemble Final HTML
         working-directory: theory/master
         run: |
-          cat ../temp_header.html efc_master_raw.html ../temp_footer.html > efc_master.html
+          cat temp_header.html efc_master_raw.html temp_footer.html > efc_master.html
 
       - name: Move HTML to docs folder
         run: |
