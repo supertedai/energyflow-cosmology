@@ -13,15 +13,9 @@ jobs:
 
     steps:
 
-      # -------------------------------
-      # Checkout repository
-      # -------------------------------
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      # -------------------------------
-      # Install LaTeX + Pandoc
-      # -------------------------------
       - name: Install LaTeX + Pandoc
         run: |
           sudo apt-get update
@@ -30,50 +24,25 @@ jobs:
             texlive-latex-extra texlive-fonts-recommended \
             texlive-science
 
-      # -------------------------------
-      # Copy figure for LaTeX build
-      # -------------------------------
-      - name: Copy figure into LaTeX folder
+      - name: Copy figure
         run: |
           cp docs/EFC_vs_LCDM_plot.png theory/master/EFC_vs_LCDM_plot.png || true
 
-      # -------------------------------
-      # Build PDF
-      # -------------------------------
       - name: Build PDF
         working-directory: theory/master
         run: latexmk -pdf -interaction=nonstopmode efc_master.tex
 
-      # -------------------------------
-      # Verify HTML template exists
-      # -------------------------------
-      - name: Verify HTML template
-        working-directory: theory/master
-        run: |
-          if [ ! -f "efc_html_template.html" ]; then
-            echo "ERROR: Missing HTML template!"
-            exit 1
-          fi
-
-      # -------------------------------
-      # Build HTML (no template engine)
-      # -------------------------------
-      - name: Build HTML
+      - name: Build clean HTML
         working-directory: theory/master
         run: |
           pandoc efc_master.tex \
             --from=latex \
             --to=html5 \
-            --mathjax \
             --standalone \
-            --include-after-body=efc_html_template.html \
-            --metadata title="EFC Master Document" \
-            --output=efc_master.html
+            --mathjax \
+            -o efc_master.html
 
-      # -------------------------------
-      # Deploy HTML to /docs
-      # -------------------------------
-      - name: Deploy HTML to docs
+      - name: Deploy HTML
         run: |
           mkdir -p docs
           cp theory/master/efc_master.html docs/efc_master.html
@@ -84,17 +53,8 @@ jobs:
           git pull --rebase origin main || true
           git push
 
-      # -------------------------------
-      # Upload artifacts
-      # -------------------------------
-      - name: Upload PDF artifact
+      - name: Upload artifacts
         uses: actions/upload-artifact@v4
         with:
-          name: EFC_Master_PDF
-          path: theory/master/efc_master.pdf
-
-      - name: Upload HTML artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: EFC_Master_HTML
+          name: efc_master_html
           path: docs/efc_master.html
