@@ -313,12 +313,12 @@ Specification</div>
 
   function updateLabel() {
     const theme = html.getAttribute('data-theme') || "light";
-    btn.textContent = theme === "light" ? "☾ Dark" : "☀ Light";
+    btn.textContent = (theme === "light") ? "☾ Dark" : "☀ Light";
   }
 
   btn.addEventListener("click", () => {
     const cur = html.getAttribute("data-theme") || "light";
-    const next = cur === "light" ? "dark" : "light";
+    const next = (cur === "light") ? "dark" : "light";
     html.setAttribute("data-theme", next);
     updateLabel();
   });
