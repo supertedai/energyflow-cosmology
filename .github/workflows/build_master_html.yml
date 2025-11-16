@@ -15,16 +15,23 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - name: Install Pandoc
         run: |
           sudo apt-get update
           sudo apt-get install -y pandoc
 
-      - name: Convert TeX → MD → HTML
+      - name: Convert TeX → Markdown
         working-directory: docs
         run: |
+          ls -la
           pandoc efc_master.tex -o efc_master.md
+
+      - name: Convert Markdown → HTML
+        working-directory: docs
+        run: |
           pandoc efc_master.md \
             --standalone \
             --include-in-header=mathjax_header.html \
