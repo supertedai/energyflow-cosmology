@@ -100,3 +100,4 @@ __pycache__/
 
 # External data (raw external inputs)
 data/external/
+downloads/
