@@ -1,127 +1,48 @@
 % ============================================================
-% EFC-C₀: Entropy-Dependent Light Propagation
+% s0 → s1 Light Propagation Dynamics
 % ============================================================
 
-\section{EFC-C\textsubscript{0}: Entropy-Dependent Light Propagation}
-\label{sec:efc_c0}
+\section{s0--s1 Light Propagation Dynamics}
 
-Energy-Flow Cosmology treats the effective speed of light as an
-emergent property of the thermodynamic state of the grid. The
-field $S(\mathbf{x})$ does not only modulate structure and
-energy-flow, but also the propagation of information.
+\subsection*{Entropy Endpoints}
 
-EFC-C\textsubscript{0} closes the chain
-\[
-  S(\mathbf{x})
-  \;\Rightarrow\;
-  E_f(\mathbf{x})
-  \;\Rightarrow\;
-  \Phi(E_f,S)
-  \;\Rightarrow\;
-  c(S)
-  \;\Rightarrow\;
-  H(E_f,S)
-  \;\Rightarrow\;
-  \text{Observables}.
-\]
-
-% ------------------------------------------------------------
-\subsection{Entropy Endpoints and Normalised Coordinate}
-
-We define two entropy endpoints
+We define two entropy endpoints:
 \begin{itemize}
-  \item $s_0$: low-entropy, high-structure endpoint,
-  \item $s_1$: high-entropy, high-diffusion endpoint,
-\end{itemize}
-with midpoint and span
-\[
-  S_{\text{mid}} = \frac{1}{2}(s_0 + s_1),
-  \qquad
-  \Delta S = s_1 - s_0.
-\]
-
-A normalised entropy coordinate is
-\[
-  x(S) = \frac{S - S_{\text{mid}}}{\Delta S/2},
-\]
-so that $x = -1$ corresponds to $S = s_0$ and $x = +1$ to $S = s_1$.
-
-% ------------------------------------------------------------
-\subsection{Effective Speed of Light and Refractive Index}
-
-The effective speed of light is modeled as an even function around
-$S_{\text{mid}}$:
-\[
-  c(S) = c_0 \left( 1 + a_{\text{edge}}\, x(S)^2 \right),
-\]
-where $a_{\text{edge}}$ controls the strength of edge-driven
-modulation. The corresponding refractive index is
-\[
-  n(S) = \frac{c_0}{c(S)}
-       = \frac{1}{1 + a_{\text{edge}}\, x(S)^2}.
-\]
-
-In the EFC grid frame, $c_0$ is the reference value in a
-weakly-structured, mid-entropy background. Deviations are entirely
-encoded in $S$.
-
-% ------------------------------------------------------------
-\subsection{Light Travel Time and Fermat Principle}
-
-For a photon trajectory $\gamma$ the observed travel time is
-\[
-  t_{\text{obs}}
-  = \int_{\gamma} \frac{dl}{c(S(l))}
-  = \frac{1}{c_0} \int_{\gamma} n\bigl(S(l)\bigr)\, dl.
-\]
-
-The path is determined by a thermodynamic Fermat principle:
-\[
-  \delta \int_{\gamma} n\bigl(S(\mathbf{x})\bigr)\, dl = 0.
-\]
-
-Gradients in $S$ therefore act as an effective refractive medium,
-even at fixed mass distribution.
-
-% ------------------------------------------------------------
-\subsection{Dual Focusing–Defocusing Behaviour}
-
-The entropy endpoints have distinct optical roles:
-\begin{itemize}
-  \item Near $s_0$ (low entropy, strong structure) the local
-    modulation of $c(S)$ and $n(S)$ produces focusing similar to
-    mass overdensities.
-  \item Near $s_1$ (high entropy, loosened structure) the same
-    mechanism generates large-scale defocusing.
-  \item Around $S_{\text{mid}}$ the propagation is slowest, giving
-    maximal time delays.
+    \item $s_0$: low-entropy, high-structure endpoint,
+    \item $s_1$: high-entropy, high-diffusion endpoint.
 \end{itemize}
 
-This yields a dual-lens profile:
-\begin{align*}
-  s_0 &\;\Rightarrow\; \text{sharp, local focusing}, \\
-  s_1 &\;\Rightarrow\; \text{broad, diffuse defocusing}.
-\end{align*}
-
-% ------------------------------------------------------------
-\subsection{Coupling to the EFC Potential and Expansion}
-
-Because $S(\mathbf{x})$ also controls the energy-flow potential
-\(
-  E_f = \rho(1-S)
-\),
-the same field that modulates $c(S)$ drives the potential
-$\Phi(E_f,S)$ and the expansion rate
+The midpoint is
 \[
-  H(E_f,S) = \sqrt{|E_f|}\,(1+S).
+S_{\text{mid}} = \frac{1}{2}(s_0 + s_1),
+\]
+and the entropy span is
+\[
+\Delta S = s_1 - s_0.
 \]
 
-In EFC-C\textsubscript{0}, apparent anomalies in
-\begin{itemize}
-  \item lensing strength,
-  \item time-delay ratios,
-  \item inferred distances and expansion rates,
-\end{itemize}
-are interpreted as consequences of entropy-structured
-light propagation rather than missing mass or a separate dark energy
-component.
+Define the normalized entropy coordinate:
+\[
+x(S) = \frac{S - S_{\text{mid}}}{\Delta S/2}.
+\]
+
+\subsection*{Speed of Light Variation}
+
+The effective speed of light becomes:
+\[
+c(S) = c_0 \left( 1 + a_{\text{edge}} x(S)^2 \right).
+\]
+
+\subsection*{Light Travel Time}
+
+For a photon moving along a path $\gamma$, the travel time becomes:
+\[
+t_{\text{obs}} = \int_{\gamma} \frac{dl}{c(S(l))}.
+\]
+
+\subsection*{Lensing Behavior}
+
+Low-entropy endpoints act as focusing wells;  
+high-entropy endpoints contribute to large-scale defocusing.
+
+This generates a dual-lens profile consistent with observed halo asymmetries.
