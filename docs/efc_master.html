@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
   <meta name="author" content="Morten Magnusson" />
   <meta name="dcterms.date" content="2025-11-16" />
-  <title>EFC Master Document</title>
+  <title>Energy-Flow Cosmology Master Document (EFC-D, EFC-S, EFC-C_0, Light Dynamics, Observables)</title>
   <style>
     html {
       color: #1a1a1a;
@@ -170,7 +170,9 @@
 </head>
 <body>
 <header id="title-block-header">
-<h1 class="title">EFC Master Document</h1>
+<h1 class="title">Energy-Flow Cosmology<br />
+Master Document (EFC-D, EFC-S, EFC-C<span
+class="math inline">\(_0\)</span>, Light Dynamics, Observables)</h1>
 <p class="author">Morten Magnusson</p>
 <p class="date">2025-11-16</p>
 </header>
@@ -291,62 +293,5 @@ surveys.</p>
 <figcaption>Comparison between EFC predictions and <span
 class="math inline">\(\Lambda\)</span>CDM.</figcaption>
 </figure>
-<!DOCTYPE html>
-<html lang="en" data-theme="light">
-<head>
-  <meta charset="UTF-8" />
-  <title>$title$</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-  <!-- Pandoc metadata -->
-  $for(meta)$
-  <meta name="$meta.key$" content="$meta.value$" />
-  $endfor$
-
-  <!-- MathJax -->
-  <script>
-    window.MathJax = {
-      tex: {inlineMath: [['$','$'], ['\\(','\\)']]},
-      svg: {fontCache: 'global'}
-    };
-  </script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
-
-  <!-- Styles -->
-  <style>
-    $styles.html()$
-  </style>
-</head>
-
-<body>
-
-<nav id="toc">
-  $toc$
-</nav>
-
-<main id="content">
-  $body$
-</main>
-
-<script>
-  const btn = document.getElementById('theme-toggle');
-  const html = document.documentElement;
-  function updateLabel() {
-    const theme = html.getAttribute('data-theme') || 'light';
-    if(btn) btn.textContent = theme === 'light' ? '☾ Dark' : '☀ Light';
-  }
-  if(btn){
-    btn.addEventListener('click', () => {
-      const current = html.getAttribute('data-theme') || 'light';
-      const next = current === 'light' ? 'dark' : 'light';
-      html.setAttribute('data-theme', next);
-      updateLabel();
-    });
-  }
-  updateLabel();
-</script>
-
-</body>
-</html>
 </body>
 </html>
