@@ -1,1 +1,57 @@
-efc_master.tex kommer her
+\documentclass[11pt]{article}
+
+% ------------------------------------------
+% Packages
+% ------------------------------------------
+\usepackage{amsmath, amssymb}
+\usepackage{geometry}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{physics}
+\usepackage{siunitx}
+\usepackage{bm}
+
+\geometry{margin=2.5cm}
+
+% ------------------------------------------
+% Document
+% ------------------------------------------
+\begin{document}
+
+\title{Energy-Flow Cosmology\\
+Master Document (EFC-D, EFC-S, EFC-C$_0$, Light Dynamics, Observables)}
+\author{Morten Magnusson}
+\date{\today}
+
+\maketitle
+\tableofcontents
+\newpage
+
+% ------------------------------------------
+% Sections
+% ------------------------------------------
+
+\section{EFC-D: Dynamics Model}
+\input{sections/efc_d.tex}
+
+\newpage
+\section{EFC-S: Structure Model}
+\input{sections/efc_s.tex}
+
+\newpage
+\section{EFC-C$_0$: Cognitive/Informational Layer}
+\input{sections/efc_c0.tex}
+
+\newpage
+\section{Light Dynamics: s0 → s1 Transitions}
+\input{sections/s0_s1_light_dynamics.tex}
+
+\newpage
+\section{Observables}
+\input{sections/observables.tex}
+
+\newpage
+\section{Figures}
+\input{sections/figures.tex}
+
+\end{document}
