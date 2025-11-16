@@ -1,13 +1,41 @@
-% ===========================================================
-% EFC Meta-Level Index
-% This file collects all meta-level tex sections used
-% in the EFC Master Formal Specification.
-% ===========================================================
+% ============================================================
+% META SECTIONS — COLLECTED
+% ============================================================
 
 \section{Meta-Reflective Theory Development}
-\input{meta_reflective_section.tex}
+
+Energy-Flow Cosmology is developed through an iterative, reflective
+method where thermodynamic structure, empirical constraints, and
+mathematical consistency co-evolve. Adjustments to $S(\mathbf{x})$,
+$E_f$, $c(S)$ and $H(E_f,S)$ are made as new empirical results emerge.
+
+\subsection*{Method Layers}
+\begin{itemize}
+    \item \textbf{Observation Layer:} SPARC, DESI, JWST, lensing systems.
+    \item \textbf{Mathematical Layer:} Thermodynamic potentials and
+          entropy-driven propagation.
+    \item \textbf{Interpretation Layer:} Structural stability,
+          quasi-equilibria, entropy endpoints.
+\end{itemize}
 
 \newpage
 
 \section{Meta-Architecture Specification}
-\input{meta_architecture_section.tex}
+
+The global architecture of EFC is defined by the interaction:
+\[
+S(\mathbf{x})
+\Rightarrow E_f(\mathbf{x})
+\Rightarrow \Phi(E_f,S)
+\Rightarrow c(S)
+\Rightarrow H(E_f,S)
+\Rightarrow \text{Observables}.
+\]
+
+Stability conditions such as:
+\[
+\nabla E_f \approx 0
+\quad\Rightarrow\quad \text{quasi-stable halo}
+\]
+and small entropy gradients encode structural persistence without
+dark components.
