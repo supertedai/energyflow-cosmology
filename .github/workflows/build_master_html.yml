@@ -35,7 +35,7 @@ jobs:
           pandoc efc_master.md \
             --standalone \
             --include-in-header=mathjax_header.html \
-            --template=efc_master_template.html \
+            --template=./efc_master_template.html \
             --toc \
             -o efc_master.html
 
