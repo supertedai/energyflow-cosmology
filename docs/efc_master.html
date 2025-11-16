@@ -1,52 +1,132 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<html lang="en" data-theme="light">
 <head>
-  <meta charset="utf-8" />
-  <meta name="generator" content="pandoc" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
-  <title>efc_master</title>
-  <style>
-    code{white-space: pre-wrap;}
-    span.smallcaps{font-variant: small-caps;}
-    div.columns{display: flex; gap: min(4vw, 1.5em);}
-    div.column{flex: auto; overflow-x: auto;}
-    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
-    /* The extra [class] is a hack that increases specificity enough to
-       override a similar rule in reveal.js */
-    ul.task-list[class]{list-style: none;}
-    ul.task-list li input[type="checkbox"] {
-      font-size: inherit;
-      width: 0.8em;
-      margin: 0 0.8em 0.2em -1.6em;
-      vertical-align: middle;
-    }
-  </style>
-  <link rel="stylesheet" href="efc_master.css" />
+<meta charset="utf-8"/>
+<title>EFC Master Specification</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<style>
+:root {
+  --bg: #fafafa;
+  --fg: #222;
+  --sidebar-bg: #111;
+  --sidebar-fg: #fff;
+  --accent: #1f8fff;
+}
+[data-theme="dark"] {
+  --bg: #050608;
+  --fg: #eee;
+  --sidebar-bg: #000;
+  --sidebar-fg: #ddd;
+  --accent: #7ed0ff;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: system-ui, sans-serif;
+  background: var(--bg);
+  color: var(--fg);
+  display: flex;
+  overflow-x: hidden;
+}
+
+#sidebar {
+  width: 260px;
+  background: var(--sidebar-bg);
+  color: var(--sidebar-fg);
+  height: 100vh;
+  position: fixed;
+  left: -260px;
+  top: 0;
+  padding: 20px;
+  overflow-y: auto;
+  transition: left 0.25s ease;
+  z-index: 10;
+}
+
+#sidebar.open {
+  left: 0;
+}
+
+#sidebar h2 {
+  margin-top: 0;
+  color: var(--accent);
+}
+
+#sidebar a {
+  color: #aaa;
+  text-decoration: none;
+  display: block;
+  padding: 5px 0;
+}
+#sidebar a:hover {
+  color: var(--sidebar-fg);
+}
+
+#content {
+  flex: 1;
+  padding: 40px;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+#menu-btn, #theme-btn {
+  position: fixed;
+  top: 15px;
+  background: var(--sidebar-bg);
+  color: var(--sidebar-fg);
+  border: none;
+  padding: 8px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  z-index: 20;
+}
+
+#menu-btn {
+  left: 15px;
+}
+
+#theme-btn {
+  right: 15px;
+}
+
+img {
+  max-width: 100%;
+  border-radius: 6px;
+  margin: 20px 0;
+}
+</style>
 </head>
+
 <body>
-<p>name: Build EFC Master (PDF + HTML)</p>
-<p>on: push: paths: - "docs/efc_master.tex" - "docs/sections/**" -
-".github/workflows/build_efc_master.yml" workflow_dispatch:</p>
-<p>jobs: build: runs-on: ubuntu-latest</p>
-<p>steps: - name: Checkout uses: actions/checkout@v4 with: fetch-depth:
-0</p>
-<p>- name: Install LaTeX + Pandoc run: | sudo apt-get update sudo
-apt-get install -y pandoc latexmk  texlive-latex-base
-texlive-latex-recommended  texlive-latex-extra texlive-fonts-recommended
- texlive-science</p>
-<p>- name: Build PDF working-directory: docs run: latexmk -pdf
--interaction=nonstopmode efc_master.tex</p>
-<p>- name: Build HTML (from TeX → MD → HTML) working-directory: docs
-run: | pandoc efc_master.tex -o efc_master.md</p>
-<p>pandoc efc_master.md  –standalone
- –include-in-header=mathjax_header.html
- –template=efc_master_template.html  –toc  -o efc_master.html</p>
-<p>- name: Deploy HTML to docs/ run: | git config user.name
-"github-actions" git config user.email "actions@github.com"</p>
-<p>git add docs/efc_master.html || true git commit -m "Update EFC Master
-HTML" || true git pull –rebase origin main || true git push origin
-HEAD:main</p>
-<p>- name: Upload PDF uses: actions/upload-artifact@v4 with: name:
-EFC_Master_PDF path: docs/efc_master.pdf</p>
+
+<button id="menu-btn"><i class="fa fa-bars"></i></button>
+<button id="theme-btn"><i class="fa fa-moon"></i></button>
+
+<nav id="sidebar">
+<h2>Contents</h2>
+
+</nav>
+
+<main id="content">
+
+</main>
+
+<script>
+const sidebar = document.getElementById("sidebar");
+const btn = document.getElementById("menu-btn");
+btn.onclick = () => sidebar.classList.toggle("open");
+
+const themeBtn = document.getElementById("theme-btn");
+themeBtn.onclick = () => {
+  const html = document.documentElement;
+  html.dataset.theme = html.dataset.theme === "dark" ? "light" : "dark";
+};
+</script>
+
 </body>
 </html>
