@@ -1,102 +1,69 @@
-import json
-import os
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+
 import requests
+import json
+import sys
+import os
+from datetime import datetime
 
-TOKEN = os.environ.get("FIGSHARE_TOKEN")
-HEADERS = {"Authorization": f"token {TOKEN}"} if TOKEN else {}
+FIGSHARE_USER_ID = 20477774
+OUTPUT_DIR = "downloads"        # mappe for å lagre nedlastinger
+LOG_FILE = "fetch_figshare_auto.log"
 
-def search_latest_efc_article():
-    """Søk etter alle Figshare-artikler med DOI som inneholder 'm9.figshare'."""
-    url = "https://api.figshare.com/v2/articles/search"
-    params = {"search_for": "m9.figshare"}
-    r = requests.get(url, params=params, headers=HEADERS)
-    r.raise_for_status()
-    articles = r.json()
+def log(msg):
+    ts = datetime.utcnow().isoformat()
+    print(f"[{ts}] {msg}")
+    with open(LOG_FILE, "a") as f:
+        f.write(f"[{ts}] {msg}\\n")
 
-    if not articles:
-        raise RuntimeError("Ingen Figshare-artikler funnet med DOI 'm9.figshare'.")
-
-    # Sorter etter publiseringsdato (nyeste først)
-    articles.sort(key=lambda a: a.get("published_date", ""), reverse=True)
-    return articles[0]["id"]
-
-
-def fetch_article_metadata(article_id):
-    url = f"https://api.figshare.com/v2/articles/{article_id}"
-    r = requests.get(url, headers=HEADERS)
+def get_articles(user_id):
+    url = f"https://api.figshare.com/v2/accounts/{user_id}/articles"
+    r = requests.get(url, timeout=30)
     r.raise_for_status()
     return r.json()
 
+def pick_latest(articles):
+    # Antar at objektene har 'published_date' eller bruker id
+    sorted_list = sorted(
+        articles,
+        key=lambda x: x.get("published_date", ""),
+        reverse=True
+    )
+    if not sorted_list:
+        raise RuntimeError("Ingen artikler funnet for bruker.")
+    return sorted_list[0]
 
-def save_json(path, data):
-    os.makedirs(os.path.dirname(path), exist_ok=True)
-    with open(path, "w", encoding="utf-8") as f:
-        json.dump(data, f, indent=2, ensure_ascii=False)
-
-
-def update_concepts(metadata):
-    """Oppdater schema/concepts.json med Figshare metadata."""
-    path = "schema/concepts.json"
-    if os.path.exists(path):
-        with open(path, "r", encoding="utf-8") as f:
-            concepts = json.load(f)
-    else:
-        concepts = {}
-
-    concepts["figshare"] = {
-        "title": metadata.get("title"),
-        "description": metadata.get("description"),
-        "doi": metadata.get("doi"),
-        "published_date": metadata.get("published_date"),
-        "modified_date": metadata.get("modified_date"),
-        "url": metadata.get("url"),
-        "keywords": metadata.get("tags"),
-        "categories": metadata.get("categories")
-    }
-
-    save_json(path, concepts)
-
+def download_article(article_id):
+    url = f"https://api.figshare.com/v2/articles/{article_id}/files"
+    r = requests.get(url, timeout=30)
+    r.raise_for_status()
+    files = r.json()
+    for f in files:
+        download_url = f.get("download_url")
+        name = f.get("name")
+        if download_url and name:
+            outpath = os.path.join(OUTPUT_DIR, name)
+            log(f"Downloader fil: {name}")
+            with requests.get(download_url, stream=True, timeout=60) as resp:
+                resp.raise_for_status()
+                with open(outpath, "wb") as of:
+                    for chunk in resp.iter_content(chunk_size=8192):
+                        of.write(chunk)
+            log(f"Ferdig: {outpath}")
 
 def main():
-    print("🔍 Søker etter siste Figshare-versjon (m9.figshare)…")
-    latest_id = search_latest_efc_article()
-    print(f"📌 Fant nyeste artikkel-ID: {latest_id}")
-
-    print("🔄 Henter metadata…")
-    metadata = fetch_article_metadata(latest_id)
-
-    # Lagre full metadata
-    save_json("figshare/figshare-index.json", metadata)
-
-    # Lagre lenker
-    save_json("figshare/figshare-links.json", {
-        "doi": metadata.get("doi"),
-        "url": metadata.get("url"),
-        "api": f"https://api.figshare.com/v2/articles/{latest_id}"
-    })
-
-    # Oppdatér concepts.json
-    update_concepts(metadata)
-
-    # Export schema-map
-    schema_map = {
-        "figshare": {
-            "id": latest_id,
-            "doi": metadata.get("doi"),
-            "title": metadata.get("title"),
-            "url": metadata.get("url"),
-            "files": metadata.get("files"),
-            "keywords": metadata.get("tags"),
-            "categories": metadata.get("categories")
-        }
-    }
-
-    save_json("schema/schema-map.json", schema_map)
-    save_json("api/v1/meta.json", schema_map)
-    save_json("docs/docs-index.json", {"figshare": schema_map})
-
-    print("✅ Full Figshare-sync fullført!")
-
+    try:
+        log("Starter henting fra Figshare")
+        articles = get_articles(FIGSHARE_USER_ID)
+        latest = pick_latest(articles)
+        log(f"Nyeste artikkel funnet: id={latest['id']} tittel=\"{latest.get('title')}\"")
+        os.makedirs(OUTPUT_DIR, exist_ok=True)
+        download_article(latest['id'])
+        log("Fullført off-Line prosess")
+    except Exception as e:
+        log(f"Feil: {e}")
+        sys.exit(1)
 
 if __name__ == "__main__":
     main()
