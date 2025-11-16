@@ -10,7 +10,6 @@ on:
       - '.github/workflows/build_efc_master_dual.yml'
 
 jobs:
-
   build-master:
     runs-on: ubuntu-latest
 
