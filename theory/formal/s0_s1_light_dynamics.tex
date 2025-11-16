@@ -1,105 +1,127 @@
-% ===========================================================
-% s0--s1 Light Propagation Dynamics
-% Clean, self-contained LaTeX version
-% ===========================================================
+% ============================================================
+% EFC-C₀: Entropy-Dependent Light Propagation
+% ============================================================
 
-\section*{s0--s1 Light Propagation Dynamics}
+\section{EFC-C\textsubscript{0}: Entropy-Dependent Light Propagation}
+\label{sec:efc_c0}
 
-This section describes how the entropy field determines
-variations in the effective speed of light, photon travel time,
-and lensing behavior across the EFC grid.
+Energy-Flow Cosmology treats the effective speed of light as an
+emergent property of the thermodynamic state of the grid. The
+field $S(\mathbf{x})$ does not only modulate structure and
+energy-flow, but also the propagation of information.
 
-% -----------------------------------------------------------
-\subsection*{Entropy Endpoints}
+EFC-C\textsubscript{0} closes the chain
+\[
+  S(\mathbf{x})
+  \;\Rightarrow\;
+  E_f(\mathbf{x})
+  \;\Rightarrow\;
+  \Phi(E_f,S)
+  \;\Rightarrow\;
+  c(S)
+  \;\Rightarrow\;
+  H(E_f,S)
+  \;\Rightarrow\;
+  \text{Observables}.
+\]
 
-We define two entropy endpoints:
+% ------------------------------------------------------------
+\subsection{Entropy Endpoints and Normalised Coordinate}
 
+We define two entropy endpoints
 \begin{itemize}
-    \item $s_0$: low-entropy, high-structure endpoint
-    \item $s_1$: high-entropy, high-diffusion endpoint
+  \item $s_0$: low-entropy, high-structure endpoint,
+  \item $s_1$: high-entropy, high-diffusion endpoint,
+\end{itemize}
+with midpoint and span
+\[
+  S_{\text{mid}} = \frac{1}{2}(s_0 + s_1),
+  \qquad
+  \Delta S = s_1 - s_0.
+\]
+
+A normalised entropy coordinate is
+\[
+  x(S) = \frac{S - S_{\text{mid}}}{\Delta S/2},
+\]
+so that $x = -1$ corresponds to $S = s_0$ and $x = +1$ to $S = s_1$.
+
+% ------------------------------------------------------------
+\subsection{Effective Speed of Light and Refractive Index}
+
+The effective speed of light is modeled as an even function around
+$S_{\text{mid}}$:
+\[
+  c(S) = c_0 \left( 1 + a_{\text{edge}}\, x(S)^2 \right),
+\]
+where $a_{\text{edge}}$ controls the strength of edge-driven
+modulation. The corresponding refractive index is
+\[
+  n(S) = \frac{c_0}{c(S)}
+       = \frac{1}{1 + a_{\text{edge}}\, x(S)^2}.
+\]
+
+In the EFC grid frame, $c_0$ is the reference value in a
+weakly-structured, mid-entropy background. Deviations are entirely
+encoded in $S$.
+
+% ------------------------------------------------------------
+\subsection{Light Travel Time and Fermat Principle}
+
+For a photon trajectory $\gamma$ the observed travel time is
+\[
+  t_{\text{obs}}
+  = \int_{\gamma} \frac{dl}{c(S(l))}
+  = \frac{1}{c_0} \int_{\gamma} n\bigl(S(l)\bigr)\, dl.
+\]
+
+The path is determined by a thermodynamic Fermat principle:
+\[
+  \delta \int_{\gamma} n\bigl(S(\mathbf{x})\bigr)\, dl = 0.
+\]
+
+Gradients in $S$ therefore act as an effective refractive medium,
+even at fixed mass distribution.
+
+% ------------------------------------------------------------
+\subsection{Dual Focusing–Defocusing Behaviour}
+
+The entropy endpoints have distinct optical roles:
+\begin{itemize}
+  \item Near $s_0$ (low entropy, strong structure) the local
+    modulation of $c(S)$ and $n(S)$ produces focusing similar to
+    mass overdensities.
+  \item Near $s_1$ (high entropy, loosened structure) the same
+    mechanism generates large-scale defocusing.
+  \item Around $S_{\text{mid}}$ the propagation is slowest, giving
+    maximal time delays.
 \end{itemize}
 
-The midpoint is
+This yields a dual-lens profile:
+\begin{align*}
+  s_0 &\;\Rightarrow\; \text{sharp, local focusing}, \\
+  s_1 &\;\Rightarrow\; \text{broad, diffuse defocusing}.
+\end{align*}
 
+% ------------------------------------------------------------
+\subsection{Coupling to the EFC Potential and Expansion}
+
+Because $S(\mathbf{x})$ also controls the energy-flow potential
+\(
+  E_f = \rho(1-S)
+\),
+the same field that modulates $c(S)$ drives the potential
+$\Phi(E_f,S)$ and the expansion rate
 \[
-S_{\text{mid}} = \frac{1}{2}(s_0 + s_1),
+  H(E_f,S) = \sqrt{|E_f|}\,(1+S).
 \]
 
-and the entropy span is
-
-\[
-\Delta S = s_1 - s_0.
-\]
-
-We define the normalized entropy coordinate
-
-\[
-x(S) = \frac{S - S_{\text{mid}}}{\Delta S/2}.
-\]
-
-% -----------------------------------------------------------
-\subsection*{Variation of the Effective Speed of Light}
-
-The effective speed of light becomes:
-
-\[
-c(S) = c_0 \left( 1 + a_{\text{edge}} \, x(S)^2 \right),
-\]
-
-where $a_{\text{edge}}$ controls the strength of edge-driven variation.
-
-Interpretation:
-
+In EFC-C\textsubscript{0}, apparent anomalies in
 \begin{itemize}
-    \item near $s_0$: locally increased $c(S)$ → focusing
-    \item near $s_1$: large-scale increase in $c(S)$ → defocusing
-    \item around $S_{\text{mid}}$: the slowest propagation regime
+  \item lensing strength,
+  \item time-delay ratios,
+  \item inferred distances and expansion rates,
 \end{itemize}
-
-This yields a nonuniform propagation landscape across the cosmic grid.
-
-% -----------------------------------------------------------
-\subsection*{Light Travel Time}
-
-A photon's travel time along a trajectory $\gamma$ is
-
-\[
-t_{\text{obs}} = \int_{\gamma} \frac{dl}{c(S(l))}.
-\]
-
-Regions of slow light $(c(S)\text{ small})$ increase observed delays,
-while fast-light zones near $s_0$ and $s_1$ reduce them.
-
-% -----------------------------------------------------------
-\subsection*{Lensing Behavior}
-
-Low-entropy endpoints act as focusing wells;  
-high-entropy endpoints contribute to large-scale defocusing.
-
-This yields a dual-lens structure:
-
-\begin{itemize}
-    \item $s_0$ regions produce sharp focusing, similar to mass overdensities,
-    \item $s_1$ regions create gentle, large-area defocusing,
-    \item transitions between the two define asymmetric lensing profiles.
-\end{itemize}
-
-Such behavior is consistent with halo asymmetries observed in
-galaxy rotation curves and gravitational lensing systems.
-
-% -----------------------------------------------------------
-\subsection*{Summary}
-
-The $s_0$--$s_1$ entropy axis determines:
-
-\begin{itemize}
-    \item effective $c(S)$,
-    \item photon geodesics,
-    \item observed delays,
-    \item lensing,
-    \item halo asymmetry,
-    \item structural formation boundaries.
-\end{itemize}
-
-This provides a thermodynamic explanation for several phenomena
-traditionally attributed to dark matter or modified gravity.
+are interpreted as consequences of entropy-structured
+light propagation rather than missing mass or a separate dark energy
+component.
