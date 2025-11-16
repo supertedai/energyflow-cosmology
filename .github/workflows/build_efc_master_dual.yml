@@ -46,9 +46,9 @@ jobs:
           latexmk -pdf -interaction=nonstopmode efc_master.tex
 
       # -------------------------------
-      # Verify template exists
+      # Verify template + header exist
       # -------------------------------
-      - name: Verify HTML template
+      - name: Verify HTML dependencies
         working-directory: theory/master
         run: |
           if [ ! -f "efc_template.html" ]; then
@@ -61,11 +61,9 @@ jobs:
           fi
 
       # -------------------------------
-      # Build HTML using: 
-      # - EFC template
-      # - MathJax via header include
+      # Build HTML (Pandoc + template + MathJax)
       # -------------------------------
-      - name: Build HTML (Pandoc with template + MathJax)
+      - name: Build HTML
         working-directory: theory/master
         run: |
           pandoc efc_master.tex \
