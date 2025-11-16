@@ -14,6 +14,8 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Install LaTeX + Pandoc
         run: |
@@ -86,16 +88,23 @@ jobs:
             --output=efc_master.html
 
       # -------------------------------
-      # Move HTML + Figures to docs/
+      # Copy HTML + figures into docs/
+      # and auto-commit to repo
       # -------------------------------
-      - name: Move HTML + Figures to docs/
+      - name: Auto-update docs folder
         run: |
           mkdir -p docs
           cp theory/master/efc_master.html docs/efc_master.html
           cp output/EFC_vs_LCDM_plot.png docs/EFC_vs_LCDM_plot.png
 
+          git config user.name "github-actions"
+          git config user.email "actions@github.com"
+          git add docs/efc_master.html docs/EFC_vs_LCDM_plot.png
+          git commit -m "Auto-update EFC Master HTML via workflow" || echo "No changes to commit"
+          git push || echo "No changes to push"
+
       # -------------------------------
-      # Upload Artifacts
+      # Upload PDF Artifact
       # -------------------------------
       - name: Upload PDF
         uses: actions/upload-artifact@v4
@@ -103,6 +112,9 @@ jobs:
           name: EFC_Master_PDF
           path: theory/master/efc_master.pdf
 
+      # -------------------------------
+      # Upload HTML Artifact
+      # -------------------------------
       - name: Upload HTML
         uses: actions/upload-artifact@v4
         with:
