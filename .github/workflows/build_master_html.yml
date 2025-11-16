@@ -1,0 +1,42 @@
+name: Build EFC Master HTML
+
+on:
+  push:
+    paths:
+      - "docs/efc_master.tex"
+      - "docs/sections/**"
+      - "docs/efc_master_template.html"
+  workflow_dispatch:
+
+jobs:
+  html:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install Pandoc
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y pandoc
+
+      - name: Convert TeX → MD → HTML
+        working-directory: docs
+        run: |
+          pandoc efc_master.tex -o efc_master.md
+          pandoc efc_master.md \
+            --standalone \
+            --include-in-header=mathjax_header.html \
+            --template=efc_master_template.html \
+            --toc \
+            -o efc_master.html
+
+      - name: Deploy HTML
+        run: |
+          git config user.name "github-actions"
+          git config user.email "actions@github.com"
+          git add docs/efc_master.html || true
+          git commit -m "Update EFC Master HTML" || true
+          git pull --rebase origin main || true
+          git push origin HEAD:main
