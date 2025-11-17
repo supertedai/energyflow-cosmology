@@ -2,13 +2,233 @@
   "version": "1.0",
   "nodes": [
     {
+      "id": "README",
+      "path": "api/README.jsonld",
+      "type": "CreativeWork"
+    },
+    {
+      "id": "README",
+      "path": "api/v1/README.jsonld",
+      "type": "CreativeWork"
+    },
+    {
+      "id": "README",
+      "path": "api/v1/concept/README.jsonld",
+      "type": "CreativeWork"
+    },
+    {
       "id": "author",
       "path": "schema/author.jsonld",
       "type": "CreativeWork"
     },
     {
+      "id": "topology-of-insight",
+      "path": "meta/topology-of-insight.jsonld",
+      "type": "CreativeWork"
+    },
+    {
+      "id": "README",
+      "path": "meta/personal/README.jsonld",
+      "type": "CreativeWork"
+    },
+    {
+      "id": "README",
+      "path": "meta/reflection/README.jsonld",
+      "type": "CreativeWork"
+    },
+    {
+      "id": "cognitive-signature",
+      "path": "meta/cognition/cognitive-signature.jsonld",
+      "type": "CreativeWork"
+    },
+    {
+      "id": "README",
+      "path": "meta/resources/README.jsonld",
+      "type": "CreativeWork"
+    },
+    {
+      "id": "symbiotic-process-summary",
+      "path": "meta/symbiosis/symbiotic-process-summary.jsonld",
+      "type": "CreativeWork"
+    },
+    {
+      "id": "tasks",
+      "path": "meta/meta-process/tasks.jsonld",
+      "type": "CreativeWork"
+    },
+    {
+      "id": "README",
+      "path": "meta-graph/README.jsonld",
+      "type": "CreativeWork"
+    },
+    {
+      "id": "README",
+      "path": "scripts/README.jsonld",
+      "type": "CreativeWork"
+    },
+    {
+      "id": "README",
+      "path": "scripts/scripts/README.jsonld",
+      "type": "CreativeWork"
+    },
+    {
+      "id": "reproducibility-guide",
+      "path": "methodology/reproducibility-guide.jsonld",
+      "type": "CreativeWork"
+    },
+    {
       "id": "ai_workflow_framework",
       "path": "methodology/  AI-Augmented-Scientific-Workflow-Framework/ai_workflow_framework.jsonld",
+      "type": "CreativeWork"
+    },
+    {
+      "id": "README",
+      "path": "app/README.jsonld",
+      "type": "CreativeWork"
+    },
+    {
+      "id": "README",
+      "path": "app/dashboard/README.jsonld",
+      "type": "CreativeWork"
+    },
+    {
+      "id": "architecture",
+      "path": "theory/architecture.jsonld",
+      "type": "CreativeWork"
+    },
+    {
+      "id": "efc_formal_spec",
+      "path": "theory/formal/efc_formal_spec.jsonld",
+      "type": "CreativeWork"
+    },
+    {
+      "id": "efc_master_v1",
+      "path": "docs/efc_master_v1.jsonld",
+      "type": "CreativeWork"
+    },
+    {
+      "id": "README",
+      "path": "docs/archive/README.jsonld",
+      "type": "CreativeWork"
+    },
+    {
+      "id": "README",
+      "path": "docs/meta/README.jsonld",
+      "type": "CreativeWork"
+    },
+    {
+      "id": "README",
+      "path": "docs/figures/README.jsonld",
+      "type": "CreativeWork"
+    },
+    {
+      "id": "README",
+      "path": "docs/preprints/README.jsonld",
+      "type": "CreativeWork"
+    },
+    {
+      "id": "EFC-CMB-Thermodynamic-Gradient",
+      "path": "docs/articles/EFC-CMB-Thermodynamic-Gradient.jsonld",
+      "type": "CreativeWork"
+    },
+    {
+      "id": "README",
+      "path": "docs/sections/README.jsonld",
+      "type": "CreativeWork"
+    },
+    {
+      "id": "README",
+      "path": "data/README.jsonld",
+      "type": "CreativeWork"
+    },
+    {
+      "id": "README",
+      "path": "data/archive/README.jsonld",
+      "type": "CreativeWork"
+    },
+    {
+      "id": "README",
+      "path": "data/sparc/README.jsonld",
+      "type": "CreativeWork"
+    },
+    {
+      "id": "README",
+      "path": "data/processed/README.jsonld",
+      "type": "CreativeWork"
+    },
+    {
+      "id": "README",
+      "path": "data/raw/README.jsonld",
+      "type": "CreativeWork"
+    },
+    {
+      "id": "README",
+      "path": "figshare/README.jsonld",
+      "type": "CreativeWork"
+    },
+    {
+      "id": "README",
+      "path": "integrations/README.jsonld",
+      "type": "CreativeWork"
+    },
+    {
+      "id": "README",
+      "path": "integrations/wp/README.jsonld",
+      "type": "CreativeWork"
+    },
+    {
+      "id": "README",
+      "path": "integrations/wp/efc-schema-loader/README.jsonld",
+      "type": "CreativeWork"
+    },
+    {
+      "id": "README",
+      "path": "integrations/wp/efc-schema-loader/admin/README.jsonld",
+      "type": "CreativeWork"
+    },
+    {
+      "id": "README",
+      "path": "integrations/wp/efc-schema-loader/includes/README.jsonld",
+      "type": "CreativeWork"
+    },
+    {
+      "id": "README",
+      "path": "notebooks/README.jsonld",
+      "type": "CreativeWork"
+    },
+    {
+      "id": "README",
+      "path": "src/README.jsonld",
+      "type": "CreativeWork"
+    },
+    {
+      "id": "README",
+      "path": "src/efc/README.jsonld",
+      "type": "CreativeWork"
+    },
+    {
+      "id": "README",
+      "path": "src/efc/meta/README.jsonld",
+      "type": "CreativeWork"
+    },
+    {
+      "id": "README",
+      "path": "src/efc/entropy/README.jsonld",
+      "type": "CreativeWork"
+    },
+    {
+      "id": "README",
+      "path": "src/efc/potential/README.jsonld",
+      "type": "CreativeWork"
+    },
+    {
+      "id": "README",
+      "path": "src/efc/core/README.jsonld",
+      "type": "CreativeWork"
+    },
+    {
+      "id": "README",
+      "path": "src/efc/validation/README.jsonld",
       "type": "CreativeWork"
     }
   ]

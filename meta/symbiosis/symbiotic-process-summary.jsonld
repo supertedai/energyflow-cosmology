@@ -1,0 +1,14 @@
+{
+  "@context": "https://schema.org",
+  "@type": "CreativeWork",
+  "name": "Symbiotic-Process-Summary",
+  "identifier": "symbiotic-process-summary",
+  "layer": ".",
+  "description": "# Symbiotic Process \u2013 One-Page Summary   Energy-Flow Cosmology (EFC)  ## Overview   Short summary of how human reasoning and AI structural support co-develop the EFC project.  ---  ## Key Points  ### 1. Shared Context   AI integrates:  - repository   - schema   - workflows   - previous dialogue   - methodological notes    ### 2. Bidirectional Loop   Human and model refine:  - structure   - documen",
+  "version": "1.0",
+  "author": {
+    "@type": "Person",
+    "name": "Morten Magnusson",
+    "identifier": "https://orcid.org/0009-0002-4860-5095"
+  }
+}

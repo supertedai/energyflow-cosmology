@@ -1,0 +1,14 @@
+{
+  "@context": "https://schema.org",
+  "@type": "CreativeWork",
+  "name": "Readme",
+  "identifier": "README",
+  "layer": ".",
+  "description": "# wp  **Abstract:** This folder contains files and substructures related to 'wp', automatically analyzed.  ## \ud83d\udcc1 Subdirectories - `efc-schema-loader/`  *This README is automatically generated.* ",
+  "version": "1.0",
+  "author": {
+    "@type": "Person",
+    "name": "Morten Magnusson",
+    "identifier": "https://orcid.org/0009-0002-4860-5095"
+  }
+}

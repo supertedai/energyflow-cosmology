@@ -1,0 +1,14 @@
+{
+  "@context": "https://schema.org",
+  "@type": "CreativeWork",
+  "name": "Readme",
+  "identifier": "README",
+  "layer": ".",
+  "description": "# meta  **Abstract:** This folder contains meta-level documents, conceptual structures, epistemology, and research reflections.  *This README is automatically generated.* ",
+  "version": "1.0",
+  "author": {
+    "@type": "Person",
+    "name": "Morten Magnusson",
+    "identifier": "https://orcid.org/0009-0002-4860-5095"
+  }
+}
