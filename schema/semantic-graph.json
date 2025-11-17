@@ -1,0 +1,1106 @@
+{
+  "version": "1.0",
+  "generated_at": "2025-11-17T19:05:34.872071Z",
+  "node_count": 94,
+  "doc_node_count": 92,
+  "keyword_count": 80,
+  "nodes": [
+    {
+      "id": "AI-Augmented-Scientific-Workflow-Framework",
+      "path": "methodology/AI-Augmented-Scientific-Workflow-Framework/AI-Augmented-Scientific-Workflow-Framework.jsonld",
+      "layer": "methodology",
+      "parent": "methodology/AI-Augmented-Scientific-Workflow-Framework",
+      "related": []
+    },
+    {
+      "id": "api",
+      "path": "api/api.jsonld",
+      "layer": "api",
+      "parent": "api",
+      "related": []
+    },
+    {
+      "id": "api/README_API",
+      "path": "api/README_API.jsonld",
+      "layer": "api",
+      "parent": "api",
+      "related": [
+        "docs/articles/EFC-v2.2-Cross-Field-Integration-Summary",
+        "meta/architecture",
+        "meta/reflection/reflection-log",
+        "methodology/open-method"
+      ]
+    },
+    {
+      "id": "articles",
+      "path": "docs/articles/articles.jsonld",
+      "layer": "docs",
+      "parent": "docs/articles",
+      "related": []
+    },
+    {
+      "id": "cognition",
+      "path": "meta/cognition/cognition.jsonld",
+      "layer": "meta",
+      "parent": "meta/cognition",
+      "related": []
+    },
+    {
+      "id": "docs",
+      "path": "docs/docs.jsonld",
+      "layer": "docs",
+      "parent": "docs",
+      "related": []
+    },
+    {
+      "id": "docs/articles/EFC-A-Deep-Dive-into-the-Halo-Concept",
+      "path": "docs/articles/EFC-A-Deep-Dive-into-the-Halo-Concept.jsonld",
+      "layer": "docs",
+      "parent": "docs/articles",
+      "related": [
+        "docs/articles/EFC-Applications-and-Implications",
+        "docs/articles/EFC-CMB-Thermodynamic-Gradient",
+        "docs/articles/EFC-Can-Entropy-Drive-Cosmic-Evolution",
+        "docs/articles/EFC-Flow-Entropy-and-Spacetime-Distortion-in-Cosmological-Clusters",
+        "docs/articles/EFC-Grid-Model-Entropic-Dynamics",
+        "docs/articles/EFC-How-Energy-Flow-Sustain-Spacetime",
+        "docs/articles/EFC-Hypothesis-Entropy-and-Energy-Flow",
+        "docs/articles/EFC-Introduction-to-Energy-Flow-in-Space-Time",
+        "docs/articles/EFC-Light-Speed-as-a-Regulator-of-Energy-Flow-in-the-Universe",
+        "docs/articles/EFC-Observational-Evidence-for-Energy-Flow",
+        "docs/articles/EFC-Subhypothesis-Light-Speed-Limit",
+        "docs/articles/EFC-Technical-Documentation-Energy-Flow-in-Space-Time",
+        "docs/articles/EFC-What-Happens-at-the-Universes-Extremes",
+        "docs/articles/EFC-What-is-the-Connection-Between-Energy-Flow-and-the-Now",
+        "docs/articles/EFC-Why-is-Light-Speed-a-Cosmic-Limit",
+        "meta/cognition/CEM-Consciousness-Ego-Mirror"
+      ]
+    },
+    {
+      "id": "docs/articles/EFC-Applications-and-Implications",
+      "path": "docs/articles/EFC-Applications-and-Implications.jsonld",
+      "layer": "docs",
+      "parent": "docs/articles",
+      "related": [
+        "docs/articles/EFC-A-Deep-Dive-into-the-Halo-Concept",
+        "docs/articles/EFC-CMB-Thermodynamic-Gradient",
+        "docs/articles/EFC-Can-Entropy-Drive-Cosmic-Evolution",
+        "docs/articles/EFC-Flow-Entropy-and-Spacetime-Distortion-in-Cosmological-Clusters",
+        "docs/articles/EFC-Grid-Model-Entropic-Dynamics",
+        "docs/articles/EFC-How-Energy-Flow-Sustain-Spacetime",
+        "docs/articles/EFC-Hypothesis-Entropy-and-Energy-Flow",
+        "docs/articles/EFC-Introduction-to-Energy-Flow-in-Space-Time",
+        "docs/articles/EFC-Light-Speed-as-a-Regulator-of-Energy-Flow-in-the-Universe",
+        "docs/articles/EFC-Observational-Evidence-for-Energy-Flow",
+        "docs/articles/EFC-Subhypothesis-Light-Speed-Limit",
+        "docs/articles/EFC-Technical-Documentation-Energy-Flow-in-Space-Time",
+        "docs/articles/EFC-What-Happens-at-the-Universes-Extremes",
+        "docs/articles/EFC-What-is-the-Connection-Between-Energy-Flow-and-the-Now",
+        "docs/articles/EFC-Why-is-Light-Speed-a-Cosmic-Limit",
+        "meta/cognition/CEM-Consciousness-Ego-Mirror"
+      ]
+    },
+    {
+      "id": "docs/articles/EFC-CMB-Thermodynamic-Gradient",
+      "path": "docs/articles/EFC-CMB-Thermodynamic-Gradient.jsonld",
+      "layer": "docs",
+      "parent": "docs/articles",
+      "related": [
+        "docs/articles/EFC-A-Deep-Dive-into-the-Halo-Concept",
+        "docs/articles/EFC-Applications-and-Implications",
+        "docs/articles/EFC-Can-Entropy-Drive-Cosmic-Evolution",
+        "docs/articles/EFC-Flow-Entropy-and-Spacetime-Distortion-in-Cosmological-Clusters",
+        "docs/articles/EFC-Grid-Model-Entropic-Dynamics",
+        "docs/articles/EFC-How-Energy-Flow-Sustain-Spacetime",
+        "docs/articles/EFC-Hypothesis-Entropy-and-Energy-Flow",
+        "docs/articles/EFC-Introduction-to-Energy-Flow-in-Space-Time",
+        "docs/articles/EFC-Light-Speed-as-a-Regulator-of-Energy-Flow-in-the-Universe",
+        "docs/articles/EFC-Observational-Evidence-for-Energy-Flow",
+        "docs/articles/EFC-Subhypothesis-Light-Speed-Limit",
+        "docs/articles/EFC-Technical-Documentation-Energy-Flow-in-Space-Time",
+        "docs/articles/EFC-What-Happens-at-the-Universes-Extremes",
+        "docs/articles/EFC-What-is-the-Connection-Between-Energy-Flow-and-the-Now",
+        "docs/articles/EFC-Why-is-Light-Speed-a-Cosmic-Limit",
+        "meta/cognition/CEM-Consciousness-Ego-Mirror"
+      ]
+    },
+    {
+      "id": "docs/articles/EFC-Can-Energy-Flow-Be-Observed-in-Galactic-Clusters",
+      "path": "docs/articles/EFC-Can-Energy-Flow-Be-Observed-in-Galactic-Clusters.jsonld",
+      "layer": "docs",
+      "parent": "docs/articles",
+      "related": []
+    },
+    {
+      "id": "docs/articles/EFC-Can-Entropy-Drive-Cosmic-Evolution",
+      "path": "docs/articles/EFC-Can-Entropy-Drive-Cosmic-Evolution.jsonld",
+      "layer": "docs",
+      "parent": "docs/articles",
+      "related": [
+        "docs/articles/EFC-A-Deep-Dive-into-the-Halo-Concept",
+        "docs/articles/EFC-Applications-and-Implications",
+        "docs/articles/EFC-CMB-Thermodynamic-Gradient",
+        "docs/articles/EFC-Flow-Entropy-and-Spacetime-Distortion-in-Cosmological-Clusters",
+        "docs/articles/EFC-Grid-Model-Entropic-Dynamics",
+        "docs/articles/EFC-How-Energy-Flow-Sustain-Spacetime",
+        "docs/articles/EFC-Hypothesis-Entropy-and-Energy-Flow",
+        "docs/articles/EFC-Introduction-to-Energy-Flow-in-Space-Time",
+        "docs/articles/EFC-Light-Speed-as-a-Regulator-of-Energy-Flow-in-the-Universe",
+        "docs/articles/EFC-Observational-Evidence-for-Energy-Flow",
+        "docs/articles/EFC-Subhypothesis-Light-Speed-Limit",
+        "docs/articles/EFC-Technical-Documentation-Energy-Flow-in-Space-Time",
+        "docs/articles/EFC-What-Happens-at-the-Universes-Extremes",
+        "docs/articles/EFC-What-is-the-Connection-Between-Energy-Flow-and-the-Now",
+        "docs/articles/EFC-Why-is-Light-Speed-a-Cosmic-Limit",
+        "meta/cognition/CEM-Consciousness-Ego-Mirror"
+      ]
+    },
+    {
+      "id": "docs/articles/EFC-Dynamic-Balance-Entropy-Order-and-Chaos",
+      "path": "docs/articles/EFC-Dynamic-Balance-Entropy-Order-and-Chaos.jsonld",
+      "layer": "docs",
+      "parent": "docs/articles",
+      "related": []
+    },
+    {
+      "id": "docs/articles/EFC-Energy-Flow-as-the-Fundamental-Dynamic-of-the-Universe",
+      "path": "docs/articles/EFC-Energy-Flow-as-the-Fundamental-Dynamic-of-the-Universe.jsonld",
+      "layer": "docs",
+      "parent": "docs/articles",
+      "related": []
+    },
+    {
+      "id": "docs/articles/EFC-Field-Equations-for-Entropy-Driven-Spacetime",
+      "path": "docs/articles/EFC-Field-Equations-for-Entropy-Driven-Spacetime.jsonld",
+      "layer": "docs",
+      "parent": "docs/articles",
+      "related": [
+        "docs/articles/EFC-The-Energy-Flow-Interface",
+        "meta/symbiosis/symbiotic-process-summary"
+      ]
+    },
+    {
+      "id": "docs/articles/EFC-Flow-Entropy-and-Spacetime-Distortion-in-Cosmological-Clusters",
+      "path": "docs/articles/EFC-Flow-Entropy-and-Spacetime-Distortion-in-Cosmological-Clusters.jsonld",
+      "layer": "docs",
+      "parent": "docs/articles",
+      "related": [
+        "docs/articles/EFC-A-Deep-Dive-into-the-Halo-Concept",
+        "docs/articles/EFC-Applications-and-Implications",
+        "docs/articles/EFC-CMB-Thermodynamic-Gradient",
+        "docs/articles/EFC-Can-Entropy-Drive-Cosmic-Evolution",
+        "docs/articles/EFC-Grid-Model-Entropic-Dynamics",
+        "docs/articles/EFC-How-Energy-Flow-Sustain-Spacetime",
+        "docs/articles/EFC-Hypothesis-Entropy-and-Energy-Flow",
+        "docs/articles/EFC-Introduction-to-Energy-Flow-in-Space-Time",
+        "docs/articles/EFC-Light-Speed-as-a-Regulator-of-Energy-Flow-in-the-Universe",
+        "docs/articles/EFC-Observational-Evidence-for-Energy-Flow",
+        "docs/articles/EFC-Subhypothesis-Light-Speed-Limit",
+        "docs/articles/EFC-Technical-Documentation-Energy-Flow-in-Space-Time",
+        "docs/articles/EFC-What-Happens-at-the-Universes-Extremes",
+        "docs/articles/EFC-What-is-the-Connection-Between-Energy-Flow-and-the-Now",
+        "docs/articles/EFC-Why-is-Light-Speed-a-Cosmic-Limit",
+        "meta/cognition/CEM-Consciousness-Ego-Mirror"
+      ]
+    },
+    {
+      "id": "docs/articles/EFC-Grid-Higgs-Framework",
+      "path": "docs/articles/EFC-Grid-Higgs-Framework.jsonld",
+      "layer": "docs",
+      "parent": "docs/articles",
+      "related": []
+    },
+    {
+      "id": "docs/articles/EFC-Grid-Higgs-Paradigm-Shift",
+      "path": "docs/articles/EFC-Grid-Higgs-Paradigm-Shift.jsonld",
+      "layer": "docs",
+      "parent": "docs/articles",
+      "related": []
+    },
+    {
+      "id": "docs/articles/EFC-Grid-Model-Entropic-Dynamics",
+      "path": "docs/articles/EFC-Grid-Model-Entropic-Dynamics.jsonld",
+      "layer": "docs",
+      "parent": "docs/articles",
+      "related": [
+        "docs/articles/EFC-A-Deep-Dive-into-the-Halo-Concept",
+        "docs/articles/EFC-Applications-and-Implications",
+        "docs/articles/EFC-CMB-Thermodynamic-Gradient",
+        "docs/articles/EFC-Can-Entropy-Drive-Cosmic-Evolution",
+        "docs/articles/EFC-Flow-Entropy-and-Spacetime-Distortion-in-Cosmological-Clusters",
+        "docs/articles/EFC-How-Energy-Flow-Sustain-Spacetime",
+        "docs/articles/EFC-Hypothesis-Entropy-and-Energy-Flow",
+        "docs/articles/EFC-Introduction-to-Energy-Flow-in-Space-Time",
+        "docs/articles/EFC-Light-Speed-as-a-Regulator-of-Energy-Flow-in-the-Universe",
+        "docs/articles/EFC-Observational-Evidence-for-Energy-Flow",
+        "docs/articles/EFC-Subhypothesis-Light-Speed-Limit",
+        "docs/articles/EFC-Technical-Documentation-Energy-Flow-in-Space-Time",
+        "docs/articles/EFC-What-Happens-at-the-Universes-Extremes",
+        "docs/articles/EFC-What-is-the-Connection-Between-Energy-Flow-and-the-Now",
+        "docs/articles/EFC-Why-is-Light-Speed-a-Cosmic-Limit",
+        "meta/cognition/CEM-Consciousness-Ego-Mirror"
+      ]
+    },
+    {
+      "id": "docs/articles/EFC-Grid-Model-Entropic-Dynamics.",
+      "path": "docs/articles/EFC-Grid-Model-Entropic-Dynamics..jsonld",
+      "layer": "docs",
+      "parent": "docs/articles",
+      "related": []
+    },
+    {
+      "id": "docs/articles/EFC-How-Does-Balance-Shape-Universal-Structures",
+      "path": "docs/articles/EFC-How-Does-Balance-Shape-Universal-Structures.jsonld",
+      "layer": "docs",
+      "parent": "docs/articles",
+      "related": []
+    },
+    {
+      "id": "docs/articles/EFC-How-Energy-Flow-Sustain-Spacetime",
+      "path": "docs/articles/EFC-How-Energy-Flow-Sustain-Spacetime.jsonld",
+      "layer": "docs",
+      "parent": "docs/articles",
+      "related": [
+        "docs/articles/EFC-A-Deep-Dive-into-the-Halo-Concept",
+        "docs/articles/EFC-Applications-and-Implications",
+        "docs/articles/EFC-CMB-Thermodynamic-Gradient",
+        "docs/articles/EFC-Can-Entropy-Drive-Cosmic-Evolution",
+        "docs/articles/EFC-Flow-Entropy-and-Spacetime-Distortion-in-Cosmological-Clusters",
+        "docs/articles/EFC-Grid-Model-Entropic-Dynamics",
+        "docs/articles/EFC-Hypothesis-Entropy-and-Energy-Flow",
+        "docs/articles/EFC-Introduction-to-Energy-Flow-in-Space-Time",
+        "docs/articles/EFC-Light-Speed-as-a-Regulator-of-Energy-Flow-in-the-Universe",
+        "docs/articles/EFC-Observational-Evidence-for-Energy-Flow",
+        "docs/articles/EFC-Subhypothesis-Light-Speed-Limit",
+        "docs/articles/EFC-Technical-Documentation-Energy-Flow-in-Space-Time",
+        "docs/articles/EFC-What-Happens-at-the-Universes-Extremes",
+        "docs/articles/EFC-What-is-the-Connection-Between-Energy-Flow-and-the-Now",
+        "docs/articles/EFC-Why-is-Light-Speed-a-Cosmic-Limit",
+        "meta/cognition/CEM-Consciousness-Ego-Mirror"
+      ]
+    },
+    {
+      "id": "docs/articles/EFC-Hypothesis-Entropy-and-Energy-Flow",
+      "path": "docs/articles/EFC-Hypothesis-Entropy-and-Energy-Flow.jsonld",
+      "layer": "docs",
+      "parent": "docs/articles",
+      "related": [
+        "docs/articles/EFC-A-Deep-Dive-into-the-Halo-Concept",
+        "docs/articles/EFC-Applications-and-Implications",
+        "docs/articles/EFC-CMB-Thermodynamic-Gradient",
+        "docs/articles/EFC-Can-Entropy-Drive-Cosmic-Evolution",
+        "docs/articles/EFC-Flow-Entropy-and-Spacetime-Distortion-in-Cosmological-Clusters",
+        "docs/articles/EFC-Grid-Model-Entropic-Dynamics",
+        "docs/articles/EFC-How-Energy-Flow-Sustain-Spacetime",
+        "docs/articles/EFC-Introduction-to-Energy-Flow-in-Space-Time",
+        "docs/articles/EFC-Light-Speed-as-a-Regulator-of-Energy-Flow-in-the-Universe",
+        "docs/articles/EFC-Observational-Evidence-for-Energy-Flow",
+        "docs/articles/EFC-Subhypothesis-Light-Speed-Limit",
+        "docs/articles/EFC-Technical-Documentation-Energy-Flow-in-Space-Time",
+        "docs/articles/EFC-What-Happens-at-the-Universes-Extremes",
+        "docs/articles/EFC-What-is-the-Connection-Between-Energy-Flow-and-the-Now",
+        "docs/articles/EFC-Why-is-Light-Speed-a-Cosmic-Limit",
+        "meta/cognition/CEM-Consciousness-Ego-Mirror"
+      ]
+    },
+    {
+      "id": "docs/articles/EFC-Hypothesis-Interrelation-Energy-Entropy",
+      "path": "docs/articles/EFC-Hypothesis-Interrelation-Energy-Entropy.jsonld",
+      "layer": "docs",
+      "parent": "docs/articles",
+      "related": []
+    },
+    {
+      "id": "docs/articles/EFC-Hypothesis-Universe-as-Energy-Driven-System",
+      "path": "docs/articles/EFC-Hypothesis-Universe-as-Energy-Driven-System.jsonld",
+      "layer": "docs",
+      "parent": "docs/articles",
+      "related": []
+    },
+    {
+      "id": "docs/articles/EFC-Integrated-Hypothesis-Time-Entropy",
+      "path": "docs/articles/EFC-Integrated-Hypothesis-Time-Entropy.jsonld",
+      "layer": "docs",
+      "parent": "docs/articles",
+      "related": []
+    },
+    {
+      "id": "docs/articles/EFC-Introduction-to-Energy-Flow-in-Space-Time",
+      "path": "docs/articles/EFC-Introduction-to-Energy-Flow-in-Space-Time.jsonld",
+      "layer": "docs",
+      "parent": "docs/articles",
+      "related": [
+        "docs/articles/EFC-A-Deep-Dive-into-the-Halo-Concept",
+        "docs/articles/EFC-Applications-and-Implications",
+        "docs/articles/EFC-CMB-Thermodynamic-Gradient",
+        "docs/articles/EFC-Can-Entropy-Drive-Cosmic-Evolution",
+        "docs/articles/EFC-Flow-Entropy-and-Spacetime-Distortion-in-Cosmological-Clusters",
+        "docs/articles/EFC-Grid-Model-Entropic-Dynamics",
+        "docs/articles/EFC-How-Energy-Flow-Sustain-Spacetime",
+        "docs/articles/EFC-Hypothesis-Entropy-and-Energy-Flow",
+        "docs/articles/EFC-Light-Speed-as-a-Regulator-of-Energy-Flow-in-the-Universe",
+        "docs/articles/EFC-Observational-Evidence-for-Energy-Flow",
+        "docs/articles/EFC-Subhypothesis-Light-Speed-Limit",
+        "docs/articles/EFC-Technical-Documentation-Energy-Flow-in-Space-Time",
+        "docs/articles/EFC-What-Happens-at-the-Universes-Extremes",
+        "docs/articles/EFC-What-is-the-Connection-Between-Energy-Flow-and-the-Now",
+        "docs/articles/EFC-Why-is-Light-Speed-a-Cosmic-Limit",
+        "meta/cognition/CEM-Consciousness-Ego-Mirror"
+      ]
+    },
+    {
+      "id": "docs/articles/EFC-Introduction-to-Entropy-in-Cosmic-Evolution",
+      "path": "docs/articles/EFC-Introduction-to-Entropy-in-Cosmic-Evolution.jsonld",
+      "layer": "docs",
+      "parent": "docs/articles",
+      "related": []
+    },
+    {
+      "id": "docs/articles/EFC-Is-Consciousness-Linked-to-Entropy",
+      "path": "docs/articles/EFC-Is-Consciousness-Linked-to-Entropy.jsonld",
+      "layer": "docs",
+      "parent": "docs/articles",
+      "related": []
+    },
+    {
+      "id": "docs/articles/EFC-Light-Speed-as-a-Regulator-of-Energy-Flow-in-the-Universe",
+      "path": "docs/articles/EFC-Light-Speed-as-a-Regulator-of-Energy-Flow-in-the-Universe.jsonld",
+      "layer": "docs",
+      "parent": "docs/articles",
+      "related": [
+        "docs/articles/EFC-A-Deep-Dive-into-the-Halo-Concept",
+        "docs/articles/EFC-Applications-and-Implications",
+        "docs/articles/EFC-CMB-Thermodynamic-Gradient",
+        "docs/articles/EFC-Can-Entropy-Drive-Cosmic-Evolution",
+        "docs/articles/EFC-Flow-Entropy-and-Spacetime-Distortion-in-Cosmological-Clusters",
+        "docs/articles/EFC-Grid-Model-Entropic-Dynamics",
+        "docs/articles/EFC-How-Energy-Flow-Sustain-Spacetime",
+        "docs/articles/EFC-Hypothesis-Entropy-and-Energy-Flow",
+        "docs/articles/EFC-Introduction-to-Energy-Flow-in-Space-Time",
+        "docs/articles/EFC-Observational-Evidence-for-Energy-Flow",
+        "docs/articles/EFC-Subhypothesis-Light-Speed-Limit",
+        "docs/articles/EFC-Technical-Documentation-Energy-Flow-in-Space-Time",
+        "docs/articles/EFC-What-Happens-at-the-Universes-Extremes",
+        "docs/articles/EFC-What-is-the-Connection-Between-Energy-Flow-and-the-Now",
+        "docs/articles/EFC-Why-is-Light-Speed-a-Cosmic-Limit",
+        "meta/cognition/CEM-Consciousness-Ego-Mirror"
+      ]
+    },
+    {
+      "id": "docs/articles/EFC-Mathematical-Framework-for-Energy-Flow-in-Space-Time",
+      "path": "docs/articles/EFC-Mathematical-Framework-for-Energy-Flow-in-Space-Time.jsonld",
+      "layer": "docs",
+      "parent": "docs/articles",
+      "related": []
+    },
+    {
+      "id": "docs/articles/EFC-Observational-Evidence-Entropy-Cosmic-Evolution",
+      "path": "docs/articles/EFC-Observational-Evidence-Entropy-Cosmic-Evolution.jsonld",
+      "layer": "docs",
+      "parent": "docs/articles",
+      "related": []
+    },
+    {
+      "id": "docs/articles/EFC-Observational-Evidence-for-Energy-Flow",
+      "path": "docs/articles/EFC-Observational-Evidence-for-Energy-Flow.jsonld",
+      "layer": "docs",
+      "parent": "docs/articles",
+      "related": [
+        "docs/articles/EFC-A-Deep-Dive-into-the-Halo-Concept",
+        "docs/articles/EFC-Applications-and-Implications",
+        "docs/articles/EFC-CMB-Thermodynamic-Gradient",
+        "docs/articles/EFC-Can-Entropy-Drive-Cosmic-Evolution",
+        "docs/articles/EFC-Flow-Entropy-and-Spacetime-Distortion-in-Cosmological-Clusters",
+        "docs/articles/EFC-Grid-Model-Entropic-Dynamics",
+        "docs/articles/EFC-How-Energy-Flow-Sustain-Spacetime",
+        "docs/articles/EFC-Hypothesis-Entropy-and-Energy-Flow",
+        "docs/articles/EFC-Introduction-to-Energy-Flow-in-Space-Time",
+        "docs/articles/EFC-Light-Speed-as-a-Regulator-of-Energy-Flow-in-the-Universe",
+        "docs/articles/EFC-Subhypothesis-Light-Speed-Limit",
+        "docs/articles/EFC-Technical-Documentation-Energy-Flow-in-Space-Time",
+        "docs/articles/EFC-What-Happens-at-the-Universes-Extremes",
+        "docs/articles/EFC-What-is-the-Connection-Between-Energy-Flow-and-the-Now",
+        "docs/articles/EFC-Why-is-Light-Speed-a-Cosmic-Limit",
+        "meta/cognition/CEM-Consciousness-Ego-Mirror"
+      ]
+    },
+    {
+      "id": "docs/articles/EFC-Subhypothesis-Light-Speed-Limit",
+      "path": "docs/articles/EFC-Subhypothesis-Light-Speed-Limit.jsonld",
+      "layer": "docs",
+      "parent": "docs/articles",
+      "related": [
+        "docs/articles/EFC-A-Deep-Dive-into-the-Halo-Concept",
+        "docs/articles/EFC-Applications-and-Implications",
+        "docs/articles/EFC-CMB-Thermodynamic-Gradient",
+        "docs/articles/EFC-Can-Entropy-Drive-Cosmic-Evolution",
+        "docs/articles/EFC-Flow-Entropy-and-Spacetime-Distortion-in-Cosmological-Clusters",
+        "docs/articles/EFC-Grid-Model-Entropic-Dynamics",
+        "docs/articles/EFC-How-Energy-Flow-Sustain-Spacetime",
+        "docs/articles/EFC-Hypothesis-Entropy-and-Energy-Flow",
+        "docs/articles/EFC-Introduction-to-Energy-Flow-in-Space-Time",
+        "docs/articles/EFC-Light-Speed-as-a-Regulator-of-Energy-Flow-in-the-Universe",
+        "docs/articles/EFC-Observational-Evidence-for-Energy-Flow",
+        "docs/articles/EFC-Technical-Documentation-Energy-Flow-in-Space-Time",
+        "docs/articles/EFC-What-Happens-at-the-Universes-Extremes",
+        "docs/articles/EFC-What-is-the-Connection-Between-Energy-Flow-and-the-Now",
+        "docs/articles/EFC-Why-is-Light-Speed-a-Cosmic-Limit",
+        "meta/cognition/CEM-Consciousness-Ego-Mirror"
+      ]
+    },
+    {
+      "id": "docs/articles/EFC-Technical-Documentation-Energy-Flow-in-Space-Time",
+      "path": "docs/articles/EFC-Technical-Documentation-Energy-Flow-in-Space-Time.jsonld",
+      "layer": "docs",
+      "parent": "docs/articles",
+      "related": [
+        "docs/articles/EFC-A-Deep-Dive-into-the-Halo-Concept",
+        "docs/articles/EFC-Applications-and-Implications",
+        "docs/articles/EFC-CMB-Thermodynamic-Gradient",
+        "docs/articles/EFC-Can-Entropy-Drive-Cosmic-Evolution",
+        "docs/articles/EFC-Flow-Entropy-and-Spacetime-Distortion-in-Cosmological-Clusters",
+        "docs/articles/EFC-Grid-Model-Entropic-Dynamics",
+        "docs/articles/EFC-How-Energy-Flow-Sustain-Spacetime",
+        "docs/articles/EFC-Hypothesis-Entropy-and-Energy-Flow",
+        "docs/articles/EFC-Introduction-to-Energy-Flow-in-Space-Time",
+        "docs/articles/EFC-Light-Speed-as-a-Regulator-of-Energy-Flow-in-the-Universe",
+        "docs/articles/EFC-Observational-Evidence-for-Energy-Flow",
+        "docs/articles/EFC-Subhypothesis-Light-Speed-Limit",
+        "docs/articles/EFC-What-Happens-at-the-Universes-Extremes",
+        "docs/articles/EFC-What-is-the-Connection-Between-Energy-Flow-and-the-Now",
+        "docs/articles/EFC-Why-is-Light-Speed-a-Cosmic-Limit",
+        "meta/cognition/CEM-Consciousness-Ego-Mirror"
+      ]
+    },
+    {
+      "id": "docs/articles/EFC-The-Energy-Flow-Interface",
+      "path": "docs/articles/EFC-The-Energy-Flow-Interface.jsonld",
+      "layer": "docs",
+      "parent": "docs/articles",
+      "related": [
+        "docs/articles/EFC-Field-Equations-for-Entropy-Driven-Spacetime",
+        "meta/symbiosis/symbiotic-process-summary"
+      ]
+    },
+    {
+      "id": "docs/articles/EFC-Thermodynamic-Bridge-GR-QFT",
+      "path": "docs/articles/EFC-Thermodynamic-Bridge-GR-QFT.jsonld",
+      "layer": "docs",
+      "parent": "docs/articles",
+      "related": []
+    },
+    {
+      "id": "docs/articles/EFC-Unresolved-Questions-and-Challenges-Entropy",
+      "path": "docs/articles/EFC-Unresolved-Questions-and-Challenges-Entropy.jsonld",
+      "layer": "docs",
+      "parent": "docs/articles",
+      "related": []
+    },
+    {
+      "id": "docs/articles/EFC-What-Happens-at-the-Universes-Extremes",
+      "path": "docs/articles/EFC-What-Happens-at-the-Universes-Extremes.jsonld",
+      "layer": "docs",
+      "parent": "docs/articles",
+      "related": [
+        "docs/articles/EFC-A-Deep-Dive-into-the-Halo-Concept",
+        "docs/articles/EFC-Applications-and-Implications",
+        "docs/articles/EFC-CMB-Thermodynamic-Gradient",
+        "docs/articles/EFC-Can-Entropy-Drive-Cosmic-Evolution",
+        "docs/articles/EFC-Flow-Entropy-and-Spacetime-Distortion-in-Cosmological-Clusters",
+        "docs/articles/EFC-Grid-Model-Entropic-Dynamics",
+        "docs/articles/EFC-How-Energy-Flow-Sustain-Spacetime",
+        "docs/articles/EFC-Hypothesis-Entropy-and-Energy-Flow",
+        "docs/articles/EFC-Introduction-to-Energy-Flow-in-Space-Time",
+        "docs/articles/EFC-Light-Speed-as-a-Regulator-of-Energy-Flow-in-the-Universe",
+        "docs/articles/EFC-Observational-Evidence-for-Energy-Flow",
+        "docs/articles/EFC-Subhypothesis-Light-Speed-Limit",
+        "docs/articles/EFC-Technical-Documentation-Energy-Flow-in-Space-Time",
+        "docs/articles/EFC-What-is-the-Connection-Between-Energy-Flow-and-the-Now",
+        "docs/articles/EFC-Why-is-Light-Speed-a-Cosmic-Limit",
+        "meta/cognition/CEM-Consciousness-Ego-Mirror"
+      ]
+    },
+    {
+      "id": "docs/articles/EFC-What-is-the-Connection-Between-Energy-Flow-and-the-Now",
+      "path": "docs/articles/EFC-What-is-the-Connection-Between-Energy-Flow-and-the-Now.jsonld",
+      "layer": "docs",
+      "parent": "docs/articles",
+      "related": [
+        "docs/articles/EFC-A-Deep-Dive-into-the-Halo-Concept",
+        "docs/articles/EFC-Applications-and-Implications",
+        "docs/articles/EFC-CMB-Thermodynamic-Gradient",
+        "docs/articles/EFC-Can-Entropy-Drive-Cosmic-Evolution",
+        "docs/articles/EFC-Flow-Entropy-and-Spacetime-Distortion-in-Cosmological-Clusters",
+        "docs/articles/EFC-Grid-Model-Entropic-Dynamics",
+        "docs/articles/EFC-How-Energy-Flow-Sustain-Spacetime",
+        "docs/articles/EFC-Hypothesis-Entropy-and-Energy-Flow",
+        "docs/articles/EFC-Introduction-to-Energy-Flow-in-Space-Time",
+        "docs/articles/EFC-Light-Speed-as-a-Regulator-of-Energy-Flow-in-the-Universe",
+        "docs/articles/EFC-Observational-Evidence-for-Energy-Flow",
+        "docs/articles/EFC-Subhypothesis-Light-Speed-Limit",
+        "docs/articles/EFC-Technical-Documentation-Energy-Flow-in-Space-Time",
+        "docs/articles/EFC-What-Happens-at-the-Universes-Extremes",
+        "docs/articles/EFC-Why-is-Light-Speed-a-Cosmic-Limit",
+        "meta/cognition/CEM-Consciousness-Ego-Mirror"
+      ]
+    },
+    {
+      "id": "docs/articles/EFC-Why-is-Light-Speed-a-Cosmic-Limit",
+      "path": "docs/articles/EFC-Why-is-Light-Speed-a-Cosmic-Limit.jsonld",
+      "layer": "docs",
+      "parent": "docs/articles",
+      "related": [
+        "docs/articles/EFC-A-Deep-Dive-into-the-Halo-Concept",
+        "docs/articles/EFC-Applications-and-Implications",
+        "docs/articles/EFC-CMB-Thermodynamic-Gradient",
+        "docs/articles/EFC-Can-Entropy-Drive-Cosmic-Evolution",
+        "docs/articles/EFC-Flow-Entropy-and-Spacetime-Distortion-in-Cosmological-Clusters",
+        "docs/articles/EFC-Grid-Model-Entropic-Dynamics",
+        "docs/articles/EFC-How-Energy-Flow-Sustain-Spacetime",
+        "docs/articles/EFC-Hypothesis-Entropy-and-Energy-Flow",
+        "docs/articles/EFC-Introduction-to-Energy-Flow-in-Space-Time",
+        "docs/articles/EFC-Light-Speed-as-a-Regulator-of-Energy-Flow-in-the-Universe",
+        "docs/articles/EFC-Observational-Evidence-for-Energy-Flow",
+        "docs/articles/EFC-Subhypothesis-Light-Speed-Limit",
+        "docs/articles/EFC-Technical-Documentation-Energy-Flow-in-Space-Time",
+        "docs/articles/EFC-What-Happens-at-the-Universes-Extremes",
+        "docs/articles/EFC-What-is-the-Connection-Between-Energy-Flow-and-the-Now",
+        "meta/cognition/CEM-Consciousness-Ego-Mirror"
+      ]
+    },
+    {
+      "id": "docs/articles/EFC-v1.2-Foundational-Framework",
+      "path": "docs/articles/EFC-v1.2-Foundational-Framework.jsonld",
+      "layer": "docs",
+      "parent": "docs/articles",
+      "related": []
+    },
+    {
+      "id": "docs/articles/EFC-v2.1-Complete-Edition",
+      "path": "docs/articles/EFC-v2.1-Complete-Edition.jsonld",
+      "layer": "docs",
+      "parent": "docs/articles",
+      "related": []
+    },
+    {
+      "id": "docs/articles/EFC-v2.1-Modular-Synthesis",
+      "path": "docs/articles/EFC-v2.1-Modular-Synthesis.jsonld",
+      "layer": "docs",
+      "parent": "docs/articles",
+      "related": []
+    },
+    {
+      "id": "docs/articles/EFC-v2.2-Cross-Field-Integration-Summary",
+      "path": "docs/articles/EFC-v2.2-Cross-Field-Integration-Summary.jsonld",
+      "layer": "docs",
+      "parent": "docs/articles",
+      "related": [
+        "api/README_API",
+        "meta/architecture",
+        "meta/reflection/reflection-log",
+        "methodology/open-method"
+      ]
+    },
+    {
+      "id": "docs/efc_master_v1",
+      "path": "docs/efc_master_v1.jsonld",
+      "layer": "docs",
+      "parent": "docs",
+      "related": []
+    },
+    {
+      "id": "meta",
+      "path": "meta/meta.jsonld",
+      "layer": "meta",
+      "parent": "meta",
+      "related": []
+    },
+    {
+      "id": "meta-process",
+      "path": "meta/meta-process/meta-process.jsonld",
+      "layer": "meta",
+      "parent": "meta/meta-process",
+      "related": []
+    },
+    {
+      "id": "meta/WORKFLOW_MAP",
+      "path": "meta/WORKFLOW_MAP.jsonld",
+      "layer": "meta",
+      "parent": "meta",
+      "related": []
+    },
+    {
+      "id": "meta/architecture",
+      "path": "meta/architecture.jsonld",
+      "layer": "meta",
+      "parent": "meta",
+      "related": [
+        "api/README_API",
+        "docs/articles/EFC-v2.2-Cross-Field-Integration-Summary",
+        "meta/cognition/you",
+        "meta/meta-architecture",
+        "meta/meta-architecture-spec",
+        "meta/reflection/reflection-log",
+        "methodology/open-method"
+      ]
+    },
+    {
+      "id": "meta/cognition/CEM-Consciousness-Ego-Mirror",
+      "path": "meta/cognition/CEM-Consciousness-Ego-Mirror.jsonld",
+      "layer": "meta",
+      "parent": "meta/cognition",
+      "related": [
+        "docs/articles/EFC-A-Deep-Dive-into-the-Halo-Concept",
+        "docs/articles/EFC-Applications-and-Implications",
+        "docs/articles/EFC-CMB-Thermodynamic-Gradient",
+        "docs/articles/EFC-Can-Entropy-Drive-Cosmic-Evolution",
+        "docs/articles/EFC-Flow-Entropy-and-Spacetime-Distortion-in-Cosmological-Clusters",
+        "docs/articles/EFC-Grid-Model-Entropic-Dynamics",
+        "docs/articles/EFC-How-Energy-Flow-Sustain-Spacetime",
+        "docs/articles/EFC-Hypothesis-Entropy-and-Energy-Flow",
+        "docs/articles/EFC-Introduction-to-Energy-Flow-in-Space-Time",
+        "docs/articles/EFC-Light-Speed-as-a-Regulator-of-Energy-Flow-in-the-Universe",
+        "docs/articles/EFC-Observational-Evidence-for-Energy-Flow",
+        "docs/articles/EFC-Subhypothesis-Light-Speed-Limit",
+        "docs/articles/EFC-Technical-Documentation-Energy-Flow-in-Space-Time",
+        "docs/articles/EFC-What-Happens-at-the-Universes-Extremes",
+        "docs/articles/EFC-What-is-the-Connection-Between-Energy-Flow-and-the-Now",
+        "docs/articles/EFC-Why-is-Light-Speed-a-Cosmic-Limit"
+      ]
+    },
+    {
+      "id": "meta/cognition/EFC-Hypothesis-Entropy-and-Energy-Flow",
+      "path": "meta/cognition/EFC-Hypothesis-Entropy-and-Energy-Flow.jsonld",
+      "layer": "meta",
+      "parent": "meta/cognition",
+      "related": []
+    },
+    {
+      "id": "meta/cognition/cognitive-field",
+      "path": "meta/cognition/cognitive-field.jsonld",
+      "layer": "meta",
+      "parent": "meta/cognition",
+      "related": [
+        "meta/cognition/cognitive-signature",
+        "meta/cognition/entropy-clarity",
+        "meta/cognition/you",
+        "meta/meta-process/co-field",
+        "meta/symbiosis/resonance-mechanism",
+        "meta/symbiosis/vector-alignment"
+      ]
+    },
+    {
+      "id": "meta/cognition/cognitive-signature",
+      "path": "meta/cognition/cognitive-signature.jsonld",
+      "layer": "meta",
+      "parent": "meta/cognition",
+      "related": [
+        "meta/cognition/cognitive-field",
+        "meta/cognition/you",
+        "meta/meta-architecture-spec",
+        "meta/symbiosis/symbiotic-process-llm"
+      ]
+    },
+    {
+      "id": "meta/cognition/entropy-clarity",
+      "path": "meta/cognition/entropy-clarity.jsonld",
+      "layer": "meta",
+      "parent": "meta/cognition",
+      "related": [
+        "meta/cognition/cognitive-field",
+        "meta/symbiosis/vector-alignment"
+      ]
+    },
+    {
+      "id": "meta/cognition/transient-representations",
+      "path": "meta/cognition/transient-representations.jsonld",
+      "layer": "meta",
+      "parent": "meta/cognition",
+      "related": []
+    },
+    {
+      "id": "meta/cognition/you",
+      "path": "meta/cognition/you.jsonld",
+      "layer": "meta",
+      "parent": "meta/cognition",
+      "related": [
+        "meta/architecture",
+        "meta/cognition/cognitive-field",
+        "meta/cognition/cognitive-signature",
+        "meta/meta-architecture",
+        "meta/meta-architecture-spec"
+      ]
+    },
+    {
+      "id": "meta/meta-architecture",
+      "path": "meta/meta-architecture.jsonld",
+      "layer": "meta",
+      "parent": "meta",
+      "related": [
+        "meta/architecture",
+        "meta/cognition/you",
+        "meta/meta-architecture-spec",
+        "meta/meta-reflective-protocol"
+      ]
+    },
+    {
+      "id": "meta/meta-architecture-spec",
+      "path": "meta/meta-architecture-spec.jsonld",
+      "layer": "meta",
+      "parent": "meta",
+      "related": [
+        "meta/architecture",
+        "meta/cognition/cognitive-signature",
+        "meta/cognition/you",
+        "meta/meta-architecture",
+        "meta/meta-reflective-protocol",
+        "meta/symbiosis/symbiotic-process-llm"
+      ]
+    },
+    {
+      "id": "meta/meta-process/backlog",
+      "path": "meta/meta-process/backlog.jsonld",
+      "layer": "meta",
+      "parent": "meta/meta-process",
+      "related": []
+    },
+    {
+      "id": "meta/meta-process/co-field",
+      "path": "meta/meta-process/co-field.jsonld",
+      "layer": "meta",
+      "parent": "meta/meta-process",
+      "related": [
+        "meta/cognition/cognitive-field",
+        "meta/meta-reflective-protocol",
+        "meta/metascope",
+        "meta/symbiosis/resonance-mechanism",
+        "meta/symbiosis/symbiosis-interface"
+      ]
+    },
+    {
+      "id": "meta/meta-process/global-dynamics",
+      "path": "meta/meta-process/global-dynamics.jsonld",
+      "layer": "meta",
+      "parent": "meta/meta-process",
+      "related": []
+    },
+    {
+      "id": "meta/meta-process/milestones",
+      "path": "meta/meta-process/milestones.jsonld",
+      "layer": "meta",
+      "parent": "meta/meta-process",
+      "related": []
+    },
+    {
+      "id": "meta/meta-process/process-of-process",
+      "path": "meta/meta-process/process-of-process.jsonld",
+      "layer": "meta",
+      "parent": "meta/meta-process",
+      "related": [
+        "meta/symbiosis/symbiotic-process",
+        "meta/symbiosis/symbiotic-process-summary"
+      ]
+    },
+    {
+      "id": "meta/meta-process/roadmap",
+      "path": "meta/meta-process/roadmap.jsonld",
+      "layer": "meta",
+      "parent": "meta/meta-process",
+      "related": []
+    },
+    {
+      "id": "meta/meta-process/self-evaluation",
+      "path": "meta/meta-process/self-evaluation.jsonld",
+      "layer": "meta",
+      "parent": "meta/meta-process",
+      "related": []
+    },
+    {
+      "id": "meta/meta-process/tasks",
+      "path": "meta/meta-process/tasks.jsonld",
+      "layer": "meta",
+      "parent": "meta/meta-process",
+      "related": []
+    },
+    {
+      "id": "meta/meta-process/validation-plan",
+      "path": "meta/meta-process/validation-plan.jsonld",
+      "layer": "meta",
+      "parent": "meta/meta-process",
+      "related": []
+    },
+    {
+      "id": "meta/meta-process/workflows",
+      "path": "meta/meta-process/workflows.jsonld",
+      "layer": "meta",
+      "parent": "meta/meta-process",
+      "related": []
+    },
+    {
+      "id": "meta/meta-reflective-protocol",
+      "path": "meta/meta-reflective-protocol.jsonld",
+      "layer": "meta",
+      "parent": "meta",
+      "related": [
+        "meta/meta-architecture",
+        "meta/meta-architecture-spec",
+        "meta/meta-process/co-field",
+        "meta/metascope",
+        "meta/symbiosis/symbiosis-interface"
+      ]
+    },
+    {
+      "id": "meta/metascope",
+      "path": "meta/metascope.jsonld",
+      "layer": "meta",
+      "parent": "meta",
+      "related": [
+        "meta/meta-process/co-field",
+        "meta/meta-reflective-protocol",
+        "meta/symbiosis/resonance-mechanism",
+        "meta/symbiosis/symbiosis-interface",
+        "meta/symbiosis/system",
+        "meta/symbiosis/system-coherence",
+        "methodology/reproducibility-guide"
+      ]
+    },
+    {
+      "id": "meta/personal/Personal-Note",
+      "path": "meta/personal/Personal-Note.jsonld",
+      "layer": "meta",
+      "parent": "meta/personal",
+      "related": []
+    },
+    {
+      "id": "meta/reflection/reflection-log",
+      "path": "meta/reflection/reflection-log.jsonld",
+      "layer": "meta",
+      "parent": "meta/reflection",
+      "related": [
+        "api/README_API",
+        "docs/articles/EFC-v2.2-Cross-Field-Integration-Summary",
+        "meta/architecture",
+        "methodology/open-method"
+      ]
+    },
+    {
+      "id": "meta/symbiosis/resonance-mechanism",
+      "path": "meta/symbiosis/resonance-mechanism.jsonld",
+      "layer": "meta",
+      "parent": "meta/symbiosis",
+      "related": [
+        "meta/cognition/cognitive-field",
+        "meta/meta-process/co-field",
+        "meta/metascope",
+        "meta/symbiosis/system",
+        "meta/symbiosis/system-coherence",
+        "methodology/reproducibility-guide"
+      ]
+    },
+    {
+      "id": "meta/symbiosis/symbiosis-interface",
+      "path": "meta/symbiosis/symbiosis-interface.jsonld",
+      "layer": "meta",
+      "parent": "meta/symbiosis",
+      "related": [
+        "meta/meta-process/co-field",
+        "meta/meta-reflective-protocol",
+        "meta/metascope"
+      ]
+    },
+    {
+      "id": "meta/symbiosis/symbiotic-process",
+      "path": "meta/symbiosis/symbiotic-process.jsonld",
+      "layer": "meta",
+      "parent": "meta/symbiosis",
+      "related": [
+        "meta/meta-process/process-of-process",
+        "meta/symbiosis/symbiotic-process-llm",
+        "meta/symbiosis/symbiotic-process-summary"
+      ]
+    },
+    {
+      "id": "meta/symbiosis/symbiotic-process-llm",
+      "path": "meta/symbiosis/symbiotic-process-llm.jsonld",
+      "layer": "meta",
+      "parent": "meta/symbiosis",
+      "related": [
+        "meta/cognition/cognitive-signature",
+        "meta/meta-architecture-spec",
+        "meta/symbiosis/symbiotic-process",
+        "meta/symbiosis/symbiotic-process-summary"
+      ]
+    },
+    {
+      "id": "meta/symbiosis/symbiotic-process-summary",
+      "path": "meta/symbiosis/symbiotic-process-summary.jsonld",
+      "layer": "meta",
+      "parent": "meta/symbiosis",
+      "related": [
+        "docs/articles/EFC-Field-Equations-for-Entropy-Driven-Spacetime",
+        "docs/articles/EFC-The-Energy-Flow-Interface",
+        "meta/meta-process/process-of-process",
+        "meta/symbiosis/symbiotic-process",
+        "meta/symbiosis/symbiotic-process-llm"
+      ]
+    },
+    {
+      "id": "meta/symbiosis/system",
+      "path": "meta/symbiosis/system.jsonld",
+      "layer": "meta",
+      "parent": "meta/symbiosis",
+      "related": [
+        "meta/metascope",
+        "meta/symbiosis/resonance-mechanism",
+        "meta/symbiosis/system-coherence",
+        "methodology/reproducibility-guide"
+      ]
+    },
+    {
+      "id": "meta/symbiosis/system-coherence",
+      "path": "meta/symbiosis/system-coherence.jsonld",
+      "layer": "meta",
+      "parent": "meta/symbiosis",
+      "related": [
+        "meta/metascope",
+        "meta/symbiosis/resonance-mechanism",
+        "meta/symbiosis/system",
+        "methodology/reproducibility-guide"
+      ]
+    },
+    {
+      "id": "meta/symbiosis/vector-alignment",
+      "path": "meta/symbiosis/vector-alignment.jsonld",
+      "layer": "meta",
+      "parent": "meta/symbiosis",
+      "related": [
+        "meta/cognition/cognitive-field",
+        "meta/cognition/entropy-clarity"
+      ]
+    },
+    {
+      "id": "meta/topology-of-insight",
+      "path": "meta/topology-of-insight.jsonld",
+      "layer": "meta",
+      "parent": "meta",
+      "related": []
+    },
+    {
+      "id": "methodology",
+      "path": "methodology/methodology.jsonld",
+      "layer": "methodology",
+      "parent": "methodology",
+      "related": []
+    },
+    {
+      "id": "methodology/AI-Augmented-Scientific-Workflow-Framework/ai_workflow_framework",
+      "path": "methodology/AI-Augmented-Scientific-Workflow-Framework/ai_workflow_framework.jsonld",
+      "layer": "methodology",
+      "parent": "methodology/AI-Augmented-Scientific-Workflow-Framework",
+      "related": []
+    },
+    {
+      "id": "methodology/EFC-epistemology",
+      "path": "methodology/EFC-epistemology.jsonld",
+      "layer": "methodology",
+      "parent": "methodology",
+      "related": []
+    },
+    {
+      "id": "methodology/author-method-note",
+      "path": "methodology/author-method-note.jsonld",
+      "layer": "methodology",
+      "parent": "methodology",
+      "related": []
+    },
+    {
+      "id": "methodology/open-method",
+      "path": "methodology/open-method.jsonld",
+      "layer": "methodology",
+      "parent": "methodology",
+      "related": [
+        "api/README_API",
+        "docs/articles/EFC-v2.2-Cross-Field-Integration-Summary",
+        "meta/architecture",
+        "meta/reflection/reflection-log"
+      ]
+    },
+    {
+      "id": "methodology/reproducibility-guide",
+      "path": "methodology/reproducibility-guide.jsonld",
+      "layer": "methodology",
+      "parent": "methodology",
+      "related": [
+        "meta/metascope",
+        "meta/symbiosis/resonance-mechanism",
+        "meta/symbiosis/system",
+        "meta/symbiosis/system-coherence"
+      ]
+    },
+    {
+      "id": "methodology/symbiosis-interface",
+      "path": "methodology/symbiosis-interface.jsonld",
+      "layer": "methodology",
+      "parent": "methodology",
+      "related": [
+        "methodology/symbiotic-process",
+        "methodology/symbiotic-process-llm",
+        "methodology/symbiotic-process-summary"
+      ]
+    },
+    {
+      "id": "methodology/symbiotic-process",
+      "path": "methodology/symbiotic-process.jsonld",
+      "layer": "methodology",
+      "parent": "methodology",
+      "related": [
+        "methodology/symbiosis-interface",
+        "methodology/symbiotic-process-llm",
+        "methodology/symbiotic-process-summary"
+      ]
+    },
+    {
+      "id": "methodology/symbiotic-process-llm",
+      "path": "methodology/symbiotic-process-llm.jsonld",
+      "layer": "methodology",
+      "parent": "methodology",
+      "related": [
+        "methodology/symbiosis-interface",
+        "methodology/symbiotic-process",
+        "methodology/symbiotic-process-summary"
+      ]
+    },
+    {
+      "id": "methodology/symbiotic-process-summary",
+      "path": "methodology/symbiotic-process-summary.jsonld",
+      "layer": "methodology",
+      "parent": "methodology",
+      "related": [
+        "methodology/symbiosis-interface",
+        "methodology/symbiotic-process",
+        "methodology/symbiotic-process-llm"
+      ]
+    },
+    {
+      "id": "personal",
+      "path": "meta/personal/personal.jsonld",
+      "layer": "meta",
+      "parent": "meta/personal",
+      "related": []
+    },
+    {
+      "id": "reflection",
+      "path": "meta/reflection/reflection.jsonld",
+      "layer": "meta",
+      "parent": "meta/reflection",
+      "related": []
+    },
+    {
+      "id": "symbiosis",
+      "path": "meta/symbiosis/symbiosis.jsonld",
+      "layer": "meta",
+      "parent": "meta/symbiosis",
+      "related": []
+    }
+  ]
+}

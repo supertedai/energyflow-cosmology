@@ -11,6 +11,28 @@
       "description": "# AI-Augmented Scientific Workflow Framework   **Version 1.2 \u2014 DOI: 10.6084/m9.figshare.30636863**  This file describes the document *AI-Augmented Scientific Workflow Framework*, which defines how Large Language Models (LLMs) are integrated into the scientific workflow with clear boundaries, traceability, and separation of roles.  ## Overview - Defines the Question Architecture (QA) layer   - Intr"
     },
     {
+      "id": "api",
+      "path": "api/api.jsonld",
+      "type": "CreativeWork",
+      "name": "api",
+      "layer": "api",
+      "description": "# \ud83d\udce1 **Energy-Flow Cosmology \u2014 API v1**  The **EFC API v1** is the machine-readable interface for accessing all conceptual, methodological, and semantic components of Energy-Flow Cosmology (EFC). It is designed for:  * automated processing * semantic search * ontology-driven exploration * LLM integration * metadata synchronization with Figshare  All files in this directory are **auto-generated** an"
+    },
+    {
+      "id": "api/README_API",
+      "path": "api/README_API.jsonld",
+      "type": "CreativeWork",
+      "name": "\ud83d\udce1 **Energy-Flow Cosmology \u2014 API v1**",
+      "layer": "api",
+      "keywords": [
+        "**energy",
+        "cosmology",
+        "flow",
+        "v1**"
+      ],
+      "description": "The **EFC API v1** is the machine-readable interface for accessing all conceptual, methodological, and semantic components of Energy-Flow Cosmology (EFC). It is designed for:"
+    },
+    {
       "id": "articles",
       "path": "docs/articles/articles.jsonld",
       "type": "CreativeWork",
