@@ -20,5 +20,6 @@
 - `meta-reflective-protocol.md`
 - `metascope.md`
 - `topology-of-insight.md`
+- `topology.json`
 
 *This README is automatically generated.*
