@@ -1,4 +1,4 @@
-# 📦 **EFC Figshare Integration Layer**
+# **EFC Figshare Integration Layer**
 
 The `figshare/` directory contains all metadata, links, and indices synchronized from Figshare into the Energy-Flow Cosmology repository.
 This layer acts as the **central bridge** between:
@@ -12,7 +12,7 @@ All files here are **auto-generated** and updated by GitHub Actions.
 
 ---
 
-# 📁 **Directory Contents**
+# **Directory Contents**
 
 ```
 figshare/
@@ -23,7 +23,7 @@ figshare/
 
 ---
 
-# 📄 **File Descriptions**
+# **File Descriptions**
 
 ### **1. `figshare-index.json`**
 
@@ -87,7 +87,7 @@ Used by automation to:
 
 ---
 
-# 🔄 **Automatic Sync Workflow**
+# **Automatic Sync Workflow**
 
 The Figshare integration runs through:
 
@@ -111,7 +111,7 @@ This creates a **self-updating metadata ecosystem**.
 
 ---
 
-# 🔍 **Purpose of the Figshare Layer**
+# **Purpose of the Figshare Layer**
 
 The Figshare integration is essential for:
 
@@ -132,7 +132,7 @@ It ensures that **all scientific outputs of EFC** remain:
 
 ---
 
-# 📘 **Examples**
+# **Examples**
 
 ### Access the full index:
 
@@ -154,7 +154,7 @@ jq '.[] | .url' figshare/figshare-links.json
 
 ---
 
-# 🧲 **Connected Layers**
+# **Connected Layers**
 
 The Figshare metadata feeds directly into:
 
@@ -181,7 +181,7 @@ The Figshare metadata feeds directly into:
 
 ---
 
-# 🧩 **Summary**
+# **Summary**
 
 The `/figshare/` directory is the **metadata backbone** of EFC:
 
