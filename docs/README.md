@@ -1,4 +1,4 @@
-# 📚 **Energy-Flow Cosmology — Documentation Layer**
+# **Energy-Flow Cosmology — Documentation Layer**
 
 The `docs/` directory contains the **complete documentation system** for Energy-Flow Cosmology (EFC).
 This layer unifies:
@@ -15,7 +15,7 @@ It represents the **public-facing scientific documentation** of EFC.
 
 ---
 
-# 📁 Directory Structure
+# Directory Structure
 
 ```
 docs/
@@ -66,7 +66,7 @@ docs/
 
 ---
 
-# 📌 Purpose of the Documentation Layer
+# Purpose of the Documentation Layer
 
 The `docs/` directory is the **central place where all human-readable EFC material lives**.
 It integrates:
@@ -133,7 +133,7 @@ Stores historic versions of master TeX documents and earlier builds.
 
 ---
 
-# 🧱 Master Documents
+# Master Documents
 
 ## **`efc_master.html`**
 
@@ -155,7 +155,7 @@ Production builds are handled by GitHub Actions.
 
 ---
 
-# 🧪 Building the Master Documents
+# Building the Master Documents
 
 ### **HTML build**
 
@@ -187,7 +187,7 @@ latexmk -pdf efc_master.tex
 
 ---
 
-# 🧩 Summary
+# Summary
 
 The `docs/` directory is the **official documentation hub** for Energy-Flow Cosmology.
 
