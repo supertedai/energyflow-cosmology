@@ -1,0 +1,52 @@
+name: Full EFC Autosync
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+  schedule:
+    - cron: "0 3 * * *"  # daglig kl 03:00 UTC (valgfritt, kan fjernes)
+
+jobs:
+  autosync:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install TeX + deps
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y texlive-latex-extra latexmk
+          python -m pip install --upgrade pip
+          if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+
+      - name: Run full autosync
+        run: |
+          python scripts/full_autosync.py
+
+      - name: Commit and push changes (tracked files only)
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          git config user.name "github-actions"
+          git config user.email "actions@github.com"
+
+          # Kun oppdatere allerede tracked filer (ingen nye output-kataloger tvinges inn)
+          git add -u
+
+          if [ -n "$(git status --porcelain)" ]; then
+            echo "Changes detected, committing..."
+            git commit -m "Auto-sync schema, API, docs, and metadata [skip ci]"
+            git push
+          else
+            echo "No changes to commit."
+          fi
