@@ -60,15 +60,11 @@ Read these first to understand the system, the process, and the person behind it
 All formal models:
 EFC-D, EFC-S, entropy fields, potentials, s₀–s₁ light dynamics.
 
-➡ If you want the science → *start here.*
-
 ---
 
 ### **(2) Validation Track**
 
 SPARC rotation curves, JWST early formation, DESI BAO, lensing, etc.
-
-➡ If you want evidence → *go here.*
 
 ---
 
@@ -81,8 +77,6 @@ How the theory was generated through the interaction between:
 * the co-field
 * the meta-reflective loop
 * the metascope
-
-➡ If you want to understand the process → *this is your path.*
 
 ---
 
