@@ -163,7 +163,7 @@
   "docs/articles/readme": {
     "md": true,
     "html": false,
-    "jsonld": false,
+    "jsonld": true,
     "pdf": false,
     "media": false
   },
@@ -240,7 +240,7 @@
   "docs/articles/README": {
     "md": true,
     "html": false,
-    "jsonld": false,
+    "jsonld": true,
     "pdf": false,
     "media": false
   },
