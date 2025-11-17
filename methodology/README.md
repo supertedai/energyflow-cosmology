@@ -1,12 +1,11 @@
 # methodology
 
-**Abstract:** This folder documents the scientific methodology, reflective framework, meta-procedures, and research process. It includes the following file types: .json, .md, .pdf. A representative file begins with: "# EFC Epistemology".
+**Abstract:** This folder documents the scientific methodology, reflective framework, meta-procedures, and research process. It includes the following file types: .json, .md. A representative file begins with: "# EFC Epistemology".
 
 ## 📁 Subdirectories
 - `  AI-Augmented-Scientific-Workflow-Framework/`
 
 ## 📄 Files
-- `EFC-AI-Augmented-Scientific-Workflow-Framework.pdf`
 - `EFC-epistemology.md`
 - `author-method-note.md`
 - `open-method.md`
