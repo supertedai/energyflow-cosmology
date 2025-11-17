@@ -91,12 +91,6 @@
   },
   {
     "id": null,
-    "name": "Index",
-    "type": "CreativeWork",
-    "path": "./meta/cognition/EFC-Hypothesis-Entropy-and-Energy-Flow/index/index/index.jsonld"
-  },
-  {
-    "id": null,
     "name": "cognition",
     "type": "CreativeWork",
     "path": "./meta/cognition/readme/index.jsonld"
