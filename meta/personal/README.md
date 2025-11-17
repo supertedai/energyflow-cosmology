@@ -1,9 +1,8 @@
-# notebooks
+# personal
 
 Automatisk generert README via `update_all_readmes.py`.
 
 ## 📄 Filer
-- `EFC_Baseline.ipynb`
-- `EFC_vs_LCDM.ipynb`
+- `Personal-Note.md`
 
 *Denne README oppdateres automatisk.*

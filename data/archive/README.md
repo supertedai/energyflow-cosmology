@@ -1,9 +1,8 @@
-# notebooks
+# archive
 
 Automatisk generert README via `update_all_readmes.py`.
 
 ## 📄 Filer
-- `EFC_Baseline.ipynb`
-- `EFC_vs_LCDM.ipynb`
+- `28098386.zip`
 
 *Denne README oppdateres automatisk.*

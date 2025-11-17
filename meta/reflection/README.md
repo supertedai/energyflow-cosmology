@@ -1,12 +1,12 @@
-# Reflection
+# reflection
 
-This directory captures how you observe yourself during the work process.
+Automatisk generert README via `update_all_readmes.py`.
 
-Core areas:
-- metascope (metaspeil)
-- resonance patterns
-- state maps
-- first–third order reflection
+## 📄 Filer
+- `reflection-index.json`
+- `reflection-log.md`
+- `reflection-schema.json`
+- `resonance-links.json`
+- `state-map.json`
 
-Purpose:
-Map the local reflection dynamics that shape insight in the moment.
+*Denne README oppdateres automatisk.*

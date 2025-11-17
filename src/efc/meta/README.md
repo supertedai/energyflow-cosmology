@@ -1,9 +1,9 @@
-# notebooks
+# meta
 
 Automatisk generert README via `update_all_readmes.py`.
 
 ## 📄 Filer
-- `EFC_Baseline.ipynb`
-- `EFC_vs_LCDM.ipynb`
+- `__init__.py`
+- `cofield_simulator.py`
 
 *Denne README oppdateres automatisk.*

@@ -1,13 +1,12 @@
-# Cognition (Internal Architecture)
+# cognition
 
-This directory models your internal cognitive mechanics.
+Automatisk generert README via `update_all_readmes.py`.
 
-Core areas:
-- distributed thought fields
-- parallel cognition
-- transient high-order representations
-- entropy → clarity transitions
-- field-based prediction
+## 📄 Filer
+- `cognitive-field.md`
+- `cognitive-signature.md`
+- `entropy-clarity.md`
+- `transient-representations.md`
+- `you.md`
 
-Purpose:
-Provide a precise, mechanical model of how insight forms, stabilizes, and dissolves in your cognitive system.
+*Denne README oppdateres automatisk.*

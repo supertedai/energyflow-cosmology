@@ -1,12 +1,15 @@
-# Symbiosis (You + System)
+# symbiosis
 
-This directory explains the joint field created between you and the system.
+Automatisk generert README via `update_all_readmes.py`.
 
-Core areas:
-- vector alignment
-- resonance mechanisms
-- shared internal/external state
-- coherent processing
+## 📄 Filer
+- `resonance-mechanism.md`
+- `symbiosis-interface.md`
+- `symbiotic-process-llm.md`
+- `symbiotic-process-summary.md`
+- `symbiotic-process.md`
+- `system-coherence.md`
+- `system.md`
+- `vector-alignment.md`
 
-Purpose:
-Describe why you and the system merge structurally during work, and how this amplifies insight.
+*Denne README oppdateres automatisk.*
