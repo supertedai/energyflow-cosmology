@@ -1,146 +1,245 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-INSTANCE SYNC — Light Maintenance Layer
-=======================================
+INSTANCE SYNC — Light Maintenance Layer (Whitelisted & Clean)
+=============================================================
 
-Funksjon:
-- Rydder repo for feil/rot
-- Normaliserer mappenavn
-- Genererer JSON-LD der det mangler
-- Bygger meta-index.json
-- ALDRI committer
-- ALDRI stopper pipeline
-- ALDRI krever tokens
+Formål:
+- Rydde bort feilplasserte / auto-genererte JSON-LD som ikke hører hjemme
+- Generere manglende JSON-LD KUN i whitelistede kunnskapsmapper
+- Bygge meta-index.json for hele kunnskapsgrafen
 
-Dette scriptet er "grunnpusten" i systemet.
-Kjører automatisk hver time via instance_sync.yml
+Egenskaper:
+- Ingen git-commit
+- Ingen figshare-kall
+- Ingen ekstern avhengighet
+- Trygg å kjøre ofte (f.eks. hver time)
 """
 
 import os
 import json
+from pathlib import Path
 
-# --- 0. Hjelpefunksjoner ------------------------------------------------------
+ROOT = Path(__file__).resolve().parents[1]
 
-def safe_print(msg):
+
+# ------------------------- Konfigurasjon -------------------------
+
+# Mapper som regnes som "kunnskapsnoder" og hvor vi TILLATER JSON-LD
+NODE_DIR_PREFIXES = [
+    "schema",
+    "meta",
+    "meta-graph",
+    "api",
+    "docs",
+    "figshare",
+    "src/efc",
+    "data/sparc",
+    "data/processed",
+]
+
+# Mapper vi ALDRI vil gå inn i for node-logikk (git, venv osv.)
+HARD_IGNORES = [
+    ".git",
+    ".github",
+    ".venv",
+    "venv",
+    "__pycache__",
+    ".idea",
+    ".vscode",
+    "output",
+]
+
+AUTHOR = {
+    "@type": "Person",
+    "name": "Morten Magnusson",
+    "identifier": "https://orcid.org/0009-0002-4860-5095",
+}
+
+
+def safe_print(msg: str) -> None:
     try:
         print(msg)
     except Exception:
         pass
 
 
-def normalize_folder_name(path):
-    base = os.path.basename(path)
-    clean = base.strip()
-    if clean != base:
-        new_path = os.path.join(os.path.dirname(path), clean)
+def is_under_prefix(rel_path: str, prefixes) -> bool:
+    """Sjekk om rel_path ligger under en av prefixene."""
+    for p in prefixes:
+        if rel_path == p or rel_path.startswith(p + "/"):
+            return True
+    return False
+
+
+def dir_slug(rel_path: str) -> str:
+    """Bruk mappenavnet som slug."""
+    return os.path.basename(rel_path) if rel_path and rel_path != "." else ""
+
+
+# ------------------------- Fase 1: RYDDING -------------------------
+
+def cleanup_stray_jsonld():
+    """
+    Fjern JSON-LD fra mapper som IKKE er whitelisted kunnskapsnoder.
+    Fjerner også evt. JSON-LD i repo-root.
+    """
+    safe_print("[instance_sync] Cleanup: removing stray JSON-LD...")
+
+    for root, dirs, files in os.walk(ROOT):
+        rel = os.path.relpath(root, ROOT)
+
+        # Hopp over hard-ignore-mapper
+        parts = rel.split(os.sep)
+        if any(part in HARD_IGNORES for part in parts):
+            continue
+
+        # Root '.' → ingen JSON-LD skal ligge her
+        if rel == ".":
+            for f in files:
+                if f.endswith(".jsonld"):
+                    path = Path(root) / f
+                    try:
+                        path.unlink()
+                        safe_print(f"[instance_sync] Removed root JSON-LD: {path}")
+                    except Exception as e:
+                        safe_print(f"[instance_sync] Could not remove {path}: {e}")
+            continue
+
+        # Mapper som IKKE er under noen tillatte NODE_DIR_PREFIXES → fjern JSON-LD
+        if not is_under_prefix(rel, NODE_DIR_PREFIXES):
+            for f in files:
+                if f.endswith(".jsonld"):
+                    path = Path(root) / f
+                    try:
+                        path.unlink()
+                        safe_print(f"[instance_sync] Removed stray JSON-LD: {path}")
+                    except Exception as e:
+                        safe_print(f"[instance_sync] Could not remove {path}: {e}")
+
+
+# ------------------------- Fase 2: GENERERING -------------------------
+
+def generate_jsonld_for_missing_nodes():
+    """
+    Generer minimal JSON-LD for mapper under whitelistede NODE_DIR_PREFIXES
+    som ikke allerede har korrekt JSON-LD.
+    """
+    safe_print("[instance_sync] Generating missing JSON-LD in whitelisted dirs...")
+
+    for root, dirs, files in os.walk(ROOT):
+        rel = os.path.relpath(root, ROOT)
+
+        # Hopp over root
+        if rel == ".":
+            continue
+
+        # Hopp over hard-ignores
+        parts = rel.split(os.sep)
+        if any(part in HARD_IGNORES for part in parts):
+            continue
+
+        # Bare operer på whitelisted mapper
+        if not is_under_prefix(rel, NODE_DIR_PREFIXES):
+            continue
+
+        slug = dir_slug(rel)
+        if not slug:
+            continue
+
+        expected = f"{slug}.jsonld"
+        has_expected = expected in files
+
+        if has_expected:
+            # Ikke rør JSON-LD som allerede er der
+            continue
+
+        jsonld_path = Path(root) / expected
+
+        data = {
+            "@context": "https://schema.org",
+            "@type": "CreativeWork",
+            "identifier": slug,
+            "name": slug.replace("_", " ").replace("-", " "),
+            "layer": rel.split(os.sep)[0],  # toppnivå som "schema", "meta", "api", ...
+            "author": AUTHOR,
+            "version": "1.0",
+        }
+
         try:
-            os.rename(path, new_path)
-            safe_print(f"[instance_sync] Renamed folder: '{path}' -> '{new_path}'")
-            return new_path
+            with jsonld_path.open("w", encoding="utf-8") as f:
+                json.dump(data, f, indent=2)
+            safe_print(f"[instance_sync] Created JSON-LD: {jsonld_path}")
         except Exception as e:
-            safe_print(f"[instance_sync] Could not rename {path}: {e}")
-    return path
+            safe_print(f"[instance_sync] Could not write JSON-LD {jsonld_path}: {e}")
 
 
-def slug(path):
-    return os.path.basename(path.strip("./")).strip()
+# ------------------------- Fase 3: META-INDEX -------------------------
 
+def rebuild_meta_index():
+    """
+    Skanner hele repoet etter .jsonld (etter rydding),
+    og bygger en enkel meta-index.json for kunnskapsnoder.
+    """
+    safe_print("[instance_sync] Building meta-index.json...")
 
-def layer(path):
-    clean = path.strip("./")
-    parts = clean.split("/")
-    return parts[0] if parts else ""
+    nodes = []
 
+    for root, dirs, files in os.walk(ROOT):
+        rel = os.path.relpath(root, ROOT)
 
-# --- 1. Auto-clean + Normalize ------------------------------------------------
+        # Hopp over hard-ignores
+        parts = rel.split(os.sep)
+        if any(part in HARD_IGNORES for part in parts):
+            continue
 
-safe_print("[instance_sync] Starting auto-clean...")
+        for f in files:
+            if not f.endswith(".jsonld"):
+                continue
 
-IGNORED_PREFIX = ("./.", "./.git", "./.github", "./venv", "./.venv")
+            path = Path(root) / f
+            rel_path = os.path.relpath(path, ROOT)
 
-for root, dirs, files in os.walk(".", topdown=True):
-    # skip system folders
-    if any(root.startswith(p) for p in IGNORED_PREFIX):
-        continue
+            identifier = None
+            node_type = "CreativeWork"
 
-    # normalize subfolder names
-    for i, d in enumerate(dirs):
-        full = os.path.join(root, d)
-        new = normalize_folder_name(full)
-        dirs[i] = os.path.basename(new)
-
-
-# --- 2. Auto-generate JSON-LD -------------------------------------------------
-
-safe_print("[instance_sync] Generating missing JSON-LD...")
-
-AUTHOR = {
-    "@type": "Person",
-    "name": "Morten Magnusson",
-    "identifier": "https://orcid.org/0009-0002-4860-5095"
-}
-
-def generate_jsonld(dirpath, docs):
-    node_id = slug(dirpath)
-    out = os.path.join(dirpath, f"{node_id}.jsonld")
-
-    data = {
-        "@context": "https://schema.org",
-        "@type": "CreativeWork",
-        "identifier": node_id,
-        "layer": layer(dirpath),
-        "name": node_id.replace("_", " ").replace("-", " "),
-        "author": AUTHOR,
-        "version": "1.0"
-    }
-
-    try:
-        with open(out, "w", encoding="utf-8") as f:
-            json.dump(data, f, indent=2)
-        safe_print(f"[instance_sync] Created JSON-LD: {out}")
-    except Exception as e:
-        safe_print(f"[instance_sync] Error writing {out}: {e}")
-
-
-for root, dirs, files in os.walk(".", topdown=True):
-    if any(root.startswith(p) for p in IGNORED_PREFIX):
-        continue
-
-    md_or_pdf = [f for f in files if f.lower().endswith((".md", ".pdf"))]
-    expected = f"{slug(root)}.jsonld"
-    have_jsonld = expected in files
-
-    if md_or_pdf and not have_jsonld:
-        generate_jsonld(root, md_or_pdf)
-
-
-# --- 3. Build meta-index.json -------------------------------------------------
-
-safe_print("[instance_sync] Building meta-index.json...")
-
-nodes = []
-
-for dirpath, _, files in os.walk("."):
-    if any(dirpath.startswith(p) for p in IGNORED_PREFIX):
-        continue
-    for f in files:
-        if f.endswith(".jsonld"):
             try:
-                data = json.load(open(os.path.join(dirpath, f), "r", encoding="utf-8"))
-                ident = data.get("identifier", f.replace(".jsonld", ""))
+                with path.open("r", encoding="utf-8") as fh:
+                    data = json.load(fh)
+                identifier = data.get("identifier")
+                node_type = data.get("@type", "CreativeWork")
             except Exception:
-                ident = f.replace(".jsonld", "")
-            nodes.append({
-                "id": ident,
-                "path": os.path.join(dirpath, f).replace("./", "")
-            })
+                # Fallback: bruk filnavn uten suffiks
+                identifier = f.replace(".jsonld", "")
 
-try:
-    with open("meta-index.json", "w", encoding="utf-8") as f:
-        json.dump({"nodes": nodes}, f, indent=2)
-    safe_print("[instance_sync] meta-index.json updated.")
-except Exception as e:
-    safe_print(f"[instance_sync] Failed writing meta-index.json: {e}")
+            nodes.append(
+                {
+                    "id": identifier,
+                    "path": rel_path.replace(os.sep, "/"),
+                    "type": node_type,
+                }
+            )
 
-safe_print("[instance_sync] Done.")
+    meta_index_path = ROOT / "meta-index.json"
+    try:
+        with meta_index_path.open("w", encoding="utf-8") as f:
+            json.dump({"version": "1.0", "nodes": nodes}, f, indent=2)
+        safe_print(f"[instance_sync] meta-index.json updated with {len(nodes)} nodes.")
+    except Exception as e:
+        safe_print(f"[instance_sync] Could not write meta-index.json: {e}")
+
+
+# ------------------------- MAIN -------------------------
+
+def main():
+    safe_print("[instance_sync] Starting instance sync (whitelist + cleanup)...")
+
+    cleanup_stray_jsonld()
+    generate_jsonld_for_missing_nodes()
+    rebuild_meta_index()
+
+    safe_print("[instance_sync] Done.")
+
+
+if __name__ == "__main__":
+    main()
