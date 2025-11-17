@@ -1,8 +1,8 @@
 # app
 
-Automatisk generert README via `update_all_readmes.py`.
+**Abstract:** This folder contains files and substructures related to 'app', automatically analyzed.
 
-## 📁 Undermapper
+## 📁 Subdirectories
 - `dashboard/`
 
-*Denne README oppdateres automatisk.*
+*This README is automatically generated.*

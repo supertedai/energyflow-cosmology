@@ -1,8 +1,8 @@
 # entropy
 
-Automatisk generert README via `update_all_readmes.py`.
+**Abstract:** This folder contains files and substructures related to 'entropy', automatically analyzed. It includes the following file types: .py. A representative file begins with: "import numpy as np".
 
-## 📄 Filer
+## 📄 Files
 - `efc_entropy.py`
 
-*Denne README oppdateres automatisk.*
+*This README is automatically generated.*

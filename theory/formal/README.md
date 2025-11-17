@@ -1,8 +1,8 @@
 # formal
 
-Automatisk generert README via `update_all_readmes.py`.
+**Abstract:** This folder contains files and substructures related to 'formal', automatically analyzed. It includes the following file types: .pdf, .tex.
 
-## 📄 Filer
+## 📄 Files
 - `efc_d_model.tex`
 - `efc_flow_diagram.tex`
 - `efc_formal_spec.pdf`
@@ -17,4 +17,4 @@ Automatisk generert README via `update_all_readmes.py`.
 - `notation.tex`
 - `parameters.tex`
 
-*Denne README oppdateres automatisk.*
+*This README is automatically generated.*

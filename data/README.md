@@ -1,8 +1,8 @@
 # data
 
-Automatisk generert README via `update_all_readmes.py`.
+**Abstract:** This folder contains files and substructures related to 'data', automatically analyzed.
 
-## 📁 Undermapper
+## 📁 Subdirectories
 - `archive/`
 
-*Denne README oppdateres automatisk.*
+*This README is automatically generated.*

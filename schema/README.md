@@ -1,8 +1,8 @@
 # schema
 
-Automatisk generert README via `update_all_readmes.py`.
+**Abstract:** This folder contains schema definitions, JSON-LD mappings, ontology files, and structural metadata. It includes the following file types: .json, .jsonld, .sh. A representative file begins with: "{".
 
-## 📄 Filer
+## 📄 Files
 - `author.jsonld`
 - `concepts.json`
 - `docs-index.json`
@@ -14,4 +14,4 @@ Automatisk generert README via `update_all_readmes.py`.
 - `sitemap-links.json`
 - `update-schema.sh`
 
-*Denne README oppdateres automatisk.*
+*This README is automatically generated.*

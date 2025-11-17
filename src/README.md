@@ -1,12 +1,12 @@
 # src
 
-Automatisk generert README via `update_all_readmes.py`.
+**Abstract:** This folder contains source code, computational models, simulations, and core EFC components. It includes the following file types: .py. A representative file begins with: "from .efc.core.efc_core import EFCModel, EFCParameters".
 
-## 📁 Undermapper
+## 📁 Subdirectories
 - `efc/`
 
-## 📄 Filer
+## 📄 Files
 - `__init__.py`
 - `efc_light.py`
 
-*Denne README oppdateres automatisk.*
+*This README is automatically generated.*

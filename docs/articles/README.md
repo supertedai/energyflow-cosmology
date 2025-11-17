@@ -1,8 +1,8 @@
 # articles
 
-Automatisk generert README via `update_all_readmes.py`.
+**Abstract:** This folder contains files and substructures related to 'articles', automatically analyzed. It includes the following file types: .md, .pdf. A representative file begins with: "---".
 
-## 📄 Filer
+## 📄 Files
 - `EFC-A-Deep-Dive-into-the-Halo-Concept.md`
 - `EFC-A-Deep-Dive-into-the-Halo-Concept.pdf`
 - `EFC-Applications-and-Implications.md`
@@ -77,4 +77,4 @@ Automatisk generert README via `update_all_readmes.py`.
 - `EFC-v2.2-Cross-Field-Integration-Summary.md`
 - `EFC-v2.2-Cross-Field-Integration-Summary.pdf`
 
-*Denne README oppdateres automatisk.*
+*This README is automatically generated.*

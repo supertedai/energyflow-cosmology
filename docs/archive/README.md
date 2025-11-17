@@ -1,8 +1,8 @@
 # archive
 
-Automatisk generert README via `update_all_readmes.py`.
+**Abstract:** This folder contains files and substructures related to 'archive', automatically analyzed. It includes the following file types: .tex.
 
-## 📄 Filer
+## 📄 Files
 - `efc_master_v1.tex`
 
-*Denne README oppdateres automatisk.*
+*This README is automatically generated.*

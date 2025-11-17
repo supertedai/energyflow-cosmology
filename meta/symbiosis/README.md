@@ -1,8 +1,8 @@
 # symbiosis
 
-Automatisk generert README via `update_all_readmes.py`.
+**Abstract:** This folder contains files and substructures related to 'symbiosis', automatically analyzed. It includes the following file types: .md. A representative file begins with: "# Resonance Mechanism (Human + System Field)".
 
-## 📄 Filer
+## 📄 Files
 - `resonance-mechanism.md`
 - `symbiosis-interface.md`
 - `symbiotic-process-llm.md`
@@ -12,4 +12,4 @@ Automatisk generert README via `update_all_readmes.py`.
 - `system.md`
 - `vector-alignment.md`
 
-*Denne README oppdateres automatisk.*
+*This README is automatically generated.*

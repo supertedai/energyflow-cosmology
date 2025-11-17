@@ -1,12 +1,12 @@
 # reflection
 
-Automatisk generert README via `update_all_readmes.py`.
+**Abstract:** This folder contains files and substructures related to 'reflection', automatically analyzed. It includes the following file types: .json, .md. A representative file begins with: "{".
 
-## 📄 Filer
+## 📄 Files
 - `reflection-index.json`
 - `reflection-log.md`
 - `reflection-schema.json`
 - `resonance-links.json`
 - `state-map.json`
 
-*Denne README oppdateres automatisk.*
+*This README is automatically generated.*

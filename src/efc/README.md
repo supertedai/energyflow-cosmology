@@ -1,12 +1,12 @@
 # efc
 
-Automatisk generert README via `update_all_readmes.py`.
+**Abstract:** This folder contains files and substructures related to 'efc', automatically analyzed.
 
-## 📁 Undermapper
+## 📁 Subdirectories
 - `core/`
 - `entropy/`
 - `meta/`
 - `potential/`
 - `validation/`
 
-*Denne README oppdateres automatisk.*
+*This README is automatically generated.*

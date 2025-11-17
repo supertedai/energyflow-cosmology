@@ -1,9 +1,9 @@
 # notebooks
 
-Automatisk generert README via `update_all_readmes.py`.
+**Abstract:** This folder contains Jupyter notebooks, computational experiments, and numerical exploration tools. It includes the following file types: .ipynb.
 
-## 📄 Filer
+## 📄 Files
 - `EFC_Baseline.ipynb`
 - `EFC_vs_LCDM.ipynb`
 
-*Denne README oppdateres automatisk.*
+*This README is automatically generated.*
