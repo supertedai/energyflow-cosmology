@@ -4,7 +4,6 @@
 
 ## 📁 Subdirectories
 - `archive/`
-- `external/`
 - `processed/`
 - `raw/`
 - `sparc/`
