@@ -12,20 +12,39 @@ jobs:
     timeout-minutes: 10
 
     steps:
+      # ------------------------------------------------------
+      # Checkout repository
+      # ------------------------------------------------------
       - name: Checkout repository
         uses: actions/checkout@v4
 
+      # ------------------------------------------------------
+      # Set up Python
+      # ------------------------------------------------------
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
           python-version: "3.11"
 
+      # ------------------------------------------------------
+      # Install Python dependencies
+      # ------------------------------------------------------
+      - name: Install dependencies
+        run: |
+          pip install requests
+
+      # ------------------------------------------------------
+      # Run Full Autosync (Figshare sync + meta-index builder)
+      # ------------------------------------------------------
       - name: Run full autosync
         env:
           FIGSHARE_TOKEN: ${{ secrets.FIGSHARE_TOKEN }}
         run: |
           python3 scripts/full_autosync.py
 
+      # ------------------------------------------------------
+      # Commit resulting changes
+      # ------------------------------------------------------
       - name: Commit autosync output
         run: |
           git config user.name "github-actions"
@@ -33,6 +52,9 @@ jobs:
           git add -A
           git commit -m "Autosync: system updated [skip ci]" || echo "No changes"
 
+      # ------------------------------------------------------
+      # Push updates back to repository
+      # ------------------------------------------------------
       - name: Push updates
         run: |
-          git push || echo "Push failed (likely due to remote updates)"
+          git push || echo "Push failed (remote may have moved)"
