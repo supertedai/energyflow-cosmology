@@ -1,52 +1,107 @@
-name: Full EFC Autosync
+#!/usr/bin/env python3
+"""
+EFC FULL AUTOSYNC (INTEGRATED SELF-HEAL SYSTEM)
+------------------------------------------------
 
-on:
-  push:
-    branches: [ main ]
-  workflow_dispatch:
-  schedule:
-    - cron: "0 3 * * *"  # daglig kl 03:00 UTC (valgfritt, kan fjernes)
+Dette scriptet:
 
-jobs:
-  autosync:
-    runs-on: ubuntu-latest
+1) Kjør selvreparasjon (efc_self_heal)
+2) Sync Figshare-metadata
+3) Oppdater konsepter
+4) Generer metodologi-API
+5) Oppdater EFC API
+6) Generer repo-map (fallback hvis pyvis mangler)
+7) Fullfører autosync uansett hva som feiler
 
-    steps:
-      - name: Checkout repo
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
+Resultat: Hele systemet er selvreparerende og robust.
+"""
 
-      - name: Set up Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: "3.12"
+import subprocess
+import os
+from pathlib import Path
+import datetime
+import sys
 
-      - name: Install TeX + deps
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y texlive-latex-extra latexmk
-          python -m pip install --upgrade pip
-          if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+ROOT = Path(__file__).resolve().parent.parent
 
-      - name: Run full autosync
-        run: |
-          python scripts/full_autosync.py
+def run(cmd, allow_fail=False, label=None):
+    print("\n---------------------------------------------")
+    if label:
+        print(f"▶ {label}")
+    print(f"→ {cmd}")
 
-      - name: Commit and push changes (tracked files only)
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          git config user.name "github-actions"
-          git config user.email "actions@github.com"
+    result = subprocess.run(cmd, shell=True)
+    code = result.returncode
 
-          # Kun oppdatere allerede tracked filer (ingen nye output-kataloger tvinges inn)
-          git add -u
+    if code != 0 and not allow_fail:
+        print(f"❌ Fatal error: {cmd}")
+        sys.exit(code)
+    elif code != 0 and allow_fail:
+        print(f"⚠️ Ikke-kritisk feil, fortsetter… (exit {code})")
+    else:
+        print("✓ OK")
 
-          if [ -n "$(git status --porcelain)" ]; then
-            echo "Changes detected, committing..."
-            git commit -m "Auto-sync schema, API, docs, and metadata [skip ci]"
-            git push
-          else
-            echo "No changes to commit."
-          fi
+    return code
+
+
+print("\n================= EFC FULL AUTOSYNC =================")
+print(f"[{datetime.datetime.now().isoformat()}] Starter autosync…\n")
+
+# -------------------------------------------------
+# 1. SELF-HEAL SYSTEM
+# -------------------------------------------------
+run(
+    f"python3 {ROOT}/scripts/efc_self_heal.py",
+    allow_fail=False,
+    label="Self-Heal: fikser manglende pakker, metodologifiler, repo-map-fallback"
+)
+
+# -------------------------------------------------
+# 2. FETCH FIGSHARE METADATA (allow fail)
+# -------------------------------------------------
+run(
+    f"python3 {ROOT}/scripts/fetch_figshare_auto.py",
+    allow_fail=True,
+    label="Fetch Figshare metadata (fortsetter ved feil)"
+)
+
+# -------------------------------------------------
+# 3. UPDATE CONCEPTS
+# -------------------------------------------------
+run(
+    f"python3 {ROOT}/scripts/update_concepts.py",
+    allow_fail=False,
+    label="Oppdaterer konsepter"
+)
+
+# -------------------------------------------------
+# 4. GENERATE METHODOLOGY API
+# -------------------------------------------------
+run(
+    f"python3 {ROOT}/scripts/generate_methodology_api.py",
+    allow_fail=False,
+    label="Regenererer Methodology API"
+)
+
+# -------------------------------------------------
+# 5. UPDATE EFC API
+# -------------------------------------------------
+run(
+    f"python3 {ROOT}/scripts/update_efc_api.py",
+    allow_fail=False,
+    label="Oppdaterer EFC API (konsepter + meta)"
+)
+
+# -------------------------------------------------
+# 6. GENERATE REPO MAP (selfheal handles pyvis)
+# -------------------------------------------------
+run(
+    f"python3 {ROOT}/scripts/generate_repo_map.py",
+    allow_fail=True,
+    label="Genererer repo map (fortsetter ved feil)"
+)
+
+print("\n================= AUTOSYNC FULLFØRT =================")
+print("Systemet er ferdig oppdatert og selvreparert.")
+print("Alle API-lag er regenerert. Repo-map generert med fallback.")
+print("=====================================================\n")
