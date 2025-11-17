@@ -1,14 +1,15 @@
 # **EFC Figshare Integration Layer**
 
 The `figshare/` directory contains all metadata, links, and indices synchronized from Figshare into the Energy-Flow Cosmology repository.
-This layer acts as the **central bridge** between:
 
-* the scientific publications stored on Figshare
-* the semantic structure stored in GitHub
+This layer forms the **bridge** between:
+
+* scientific publications stored on Figshare
+* semantic structures defined in GitHub
 * the machine-readable metadata used by API v1
-* automated workflows that maintain the knowledge graph
+* automated workflows that maintain the EFC knowledge graph
 
-All files here are **auto-generated** and updated by GitHub Actions.
+All files here are **auto-generated** and maintained by GitHub Actions.
 
 ---
 
@@ -16,96 +17,107 @@ All files here are **auto-generated** and updated by GitHub Actions.
 
 ```
 figshare/
-├── figshare-index.json     # Global index of all Figshare records
-├── figshare-links.json     # DOI + URL mapping for all EFC publications
-└── latest.json             # Snapshot of the newest published record
+├── figshare-index.json     # Full metadata for all Figshare records
+├── figshare-links.json     # DOI + URL + internal ID mappings
+└── latest.json             # Snapshot of the newest published item
 ```
+
+All three files exist and match your repo exactly.
 
 ---
 
 # **File Descriptions**
 
-### **1. `figshare-index.json`**
+## **1. `figshare-index.json`**
 
-A complete mapping of *all* EFC-related items published on Figshare.
+The full metadata dump for every EFC-related Figshare publication.
 
-Includes for each item:
+Contains for each record:
 
 * DOI
 * version
 * title
-* description
+* abstract / description
 * file list
 * publication date
-* categories / tags
-* internal identifiers
+* categories
+* figshare_id
+* internal graph identifiers
+
+Used by:
+
+* API regeneration
+* schema-map updates
+* semantic link validation
+* dashboard rendering
+* provenance tracking
+
+---
+
+## **2. `figshare-links.json`**
+
+A minimal map used for quick linking:
+
+* DOI → URL
+* ID → DOI
+* latest version detection
 
 This file powers:
 
-* API regeneration
-* semantic linking
-* reference consistency checks
-* automated documentation updates
+* website DOI embedding
+* JSON-LD schema updates
+* `api/v1/meta.json` linking
+* article cross-references
+* citation block generation
 
 ---
 
-### **2. `figshare-links.json`**
+## **3. `latest.json`**
 
-A simplified file containing only the essential links:
+A small snapshot describing the **most recent** Figshare record.
 
-* DOI → URL
-* internal ID → DOI
-* latest version of each entry
-
-Used for:
-
-* embedding DOIs in the website
-* updating schema files
-* linking API metadata
-* generating citation blocks
-
----
-
-### **3. `latest.json`**
-
-A minimal JSON document describing the **newest published Figshare record**.
-
-Includes:
+Contains:
 
 * DOI
-* title
 * version
+* title
 * timestamp
 * figshare_id
 
-Used by automation to:
+Used by automation to detect:
 
-* detect when new scientific content is released
-* trigger API regeneration
-* update semantic structures
-* refresh dashboards
+* new releases
+* version bumps
+* metadata changes
+
+When a new publication appears, this triggers:
+
+1. API regeneration
+2. schema updates
+3. dashboard refresh
+4. semantic graph updates
 
 ---
 
 # **Automatic Sync Workflow**
 
-The Figshare integration runs through:
+Figshare synchronization is executed by:
 
 ```
 .github/workflows/fetch_figshare.yml
-scripts/fetch_figshare_full.py
+scripts/fetch_figshare_auto.py
 scripts/update_efc_api.py
 ```
 
 The workflow:
 
-1. Fetches all metadata from Figshare
-2. Generates `figshare-index.json`
+1. Fetches metadata from Figshare
+2. Rebuilds `figshare-index.json`
 3. Updates `figshare-links.json`
-4. Identifies new releases → writes into `latest.json`
+4. Detects new publications → writes `latest.json`
 5. Triggers API regeneration
 6. Updates schema files
-7. Ensures the EFC knowledge graph is always current
+7. Pushes changes into the EFC knowledge graph
 
 This creates a **self-updating metadata ecosystem**.
 
@@ -115,38 +127,39 @@ This creates a **self-updating metadata ecosystem**.
 
 The Figshare integration is essential for:
 
-* metadata provenance
-* DOI tracking
-* long-term archival stability
-* linking theory, data, and publications
-* enabling semantic search across datasets
-* providing authoritative version history
-* machine-level reproducibility
+* provenance and traceability
+* DOI-based citation stability
+* version-controlled research outputs
+* semantic linking across platforms
+* reproducibility of the scientific process
+* machine-readable access to all publications
 
-It ensures that **all scientific outputs of EFC** remain:
+It ensures all EFC scientific outputs are:
 
-* traceable
 * citable
-* reference-stable
-* synchronized across platforms
+* discoverable
+* archived
+* link-consistent
+* future-proof
+* synchronized
 
 ---
 
 # **Examples**
 
-### Access the full index:
+### Full index:
 
 ```bash
 jq '.' figshare/figshare-index.json
 ```
 
-### Get the latest DOI:
+### Latest DOI:
 
 ```bash
 jq '.doi' figshare/latest.json
 ```
 
-### Extract all publication URLs:
+### Extract all URLs:
 
 ```bash
 jq '.[] | .url' figshare/figshare-links.json
@@ -156,7 +169,7 @@ jq '.[] | .url' figshare/figshare-links.json
 
 # **Connected Layers**
 
-The Figshare metadata feeds directly into:
+Figshare metadata feeds directly into:
 
 ### **Semantic Layer**
 
@@ -166,31 +179,34 @@ The Figshare metadata feeds directly into:
 
 ### **API v1**
 
-* `meta.json`
+* `api/v1/meta.json`
 * `concepts.json`
+* DOI-linked concept definitions
 
 ### **Documentation**
 
 * `docs/efc_master.html`
-* formal specification metadata
+* cross-links inside the master specification
 
 ### **Dashboards**
 
-* EFC Metadata Dashboard
-* Meta-layer reflective dashboards
+* `meta_dashboard.py`
+* metadata and provenance visualizations
 
 ---
 
 # **Summary**
 
-The `/figshare/` directory is the **metadata backbone** of EFC:
+The `figshare/` directory is the **metadata backbone** of Energy-Flow Cosmology.
+
+It:
 
 * connects all official publications
 * ensures versioned provenance
-* automates synchronization
+* synchronizes metadata automatically
 * supports semantic linking
-* feeds the API and schema systems
-* keeps the entire project self-consistent
+* feeds API and schema layers
+* keeps the entire project consistent
 
 This layer guarantees that EFC remains a **clean, open, verifiable scientific system**.
 
