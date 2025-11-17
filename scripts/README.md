@@ -1,6 +1,6 @@
 # scripts
 
-**Abstract:** This folder contains automation scripts, build logic, update routines, and self-healing tools. It includes the following file types: .py. A representative file begins with: """"".
+**Abstract:** This folder contains automation scripts, build logic, update routines, and self-healing tools. It includes the following file types: .bak, .py, .save. A representative file begins with: """"".
 
 ## 📁 Subdirectories
 - `scripts/`
@@ -10,16 +10,19 @@
 - `efc_self_heal.py`
 - `fetch_figshare_auto.py`
 - `fetch_sparc_rc.py`
+- `fetch_sparc_rc.py.save`
 - `full_autosync.py`
 - `generate_efc_vs_lcdm_plot.py`
 - `generate_methodology_api.py`
 - `generate_repo_map.py`
 - `import_methodology_to_neo4j.py`
+- `import_methodology_to_neo4j.py.bak`
 - `parse_sparc_table1.py`
 - `plot_c_of_S.py`
 - `plot_results.py`
 - `run_efc_baseline.py`
 - `run_sparc_validation.py`
+- `run_sparc_validation.py.save`
 - `test_c_entropy.py`
 - `test_gradients.py`
 - `update_all_readmes.py`

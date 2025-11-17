@@ -4,5 +4,9 @@
 
 ## 📁 Subdirectories
 - `archive/`
+- `external/`
+- `processed/`
+- `raw/`
+- `sparc/`
 
 *This README is automatically generated.*
