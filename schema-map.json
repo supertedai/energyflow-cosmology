@@ -17,60 +17,6 @@
     "id": null,
     "name": "Efc Master V1"
   },
-  "author-method-note.jsonld": {
-    "path": "./methodology/author-method-note.jsonld",
-    "type": "CreativeWork",
-    "id": null,
-    "name": "Author\u2019s Method Note"
-  },
-  "symbiosis-interface.jsonld": {
-    "path": "./methodology/symbiosis-interface.jsonld",
-    "type": "CreativeWork",
-    "id": null,
-    "name": "Auto-generated placeholder"
-  },
-  "symbiotic-process-summary.jsonld": {
-    "path": "./methodology/symbiotic-process-summary.jsonld",
-    "type": "CreativeWork",
-    "id": null,
-    "name": "Auto-generated placeholder"
-  },
-  "EFC-epistemology.jsonld": {
-    "path": "./methodology/EFC-epistemology.jsonld",
-    "type": "CreativeWork",
-    "id": null,
-    "name": "EFC Epistemology"
-  },
-  "open-method.jsonld": {
-    "path": "./methodology/open-method.jsonld",
-    "type": "CreativeWork",
-    "id": null,
-    "name": "Open Methodology of Energy-Flow Cosmology (EFC)"
-  },
-  "reproducibility-guide.jsonld": {
-    "path": "./methodology/reproducibility-guide.jsonld",
-    "type": "CreativeWork",
-    "id": null,
-    "name": "\ud83d\udee0\ufe0f Reproducibility Guide: Running the EFC System"
-  },
-  "symbiotic-process-llm.jsonld": {
-    "path": "./methodology/symbiotic-process-llm.jsonld",
-    "type": "CreativeWork",
-    "id": null,
-    "name": "Auto-generated placeholder"
-  },
-  "methodology.jsonld": {
-    "path": "./methodology/methodology.jsonld",
-    "type": "CreativeWork",
-    "id": null,
-    "name": "methodology"
-  },
-  "symbiotic-process.jsonld": {
-    "path": "./methodology/symbiotic-process.jsonld",
-    "type": "CreativeWork",
-    "id": null,
-    "name": "Auto-generated placeholder"
-  },
   "ai_workflow_framework.jsonld": {
     "path": "./methodology/AI-Augmented-Scientific-Workflow-Framework/ai_workflow_framework.jsonld",
     "type": "CreativeWork",
