@@ -1,4 +1,4 @@
-# 📘 **EFC Theory Layer**
+# **EFC Theory Layer**
 
 This directory contains the full scientific and mathematical foundation of **Energy-Flow Cosmology (EFC)**.
 It is split into two levels:
@@ -10,7 +10,7 @@ Together, these define the complete structure, dynamics, and semantics of the EF
 
 ---
 
-# 📁 Directory Structure
+# Directory Structure
 
 ```
 theory/
@@ -35,7 +35,7 @@ theory/
 
 ---
 
-# 🧱 **Purpose of the Theory Layer**
+# **Purpose of the Theory Layer**
 
 The theory layer provides:
 
@@ -50,7 +50,7 @@ It represents the **ground truth** for all scientific statements in EFC.
 
 ---
 
-# 📐 **High-Level Architecture Files**
+# **High-Level Architecture Files**
 
 ### **`architecture.md`**
 
@@ -67,7 +67,7 @@ Useful for readers who want insight before diving into TeX.
 
 ---
 
-# 📚 **Formal Specification (`formal/` directory)**
+# **Formal Specification (`formal/` directory)**
 
 This folder contains the complete TeX-based formalization of EFC.
 
@@ -99,7 +99,7 @@ Includes all subsystems and meta-sections.
 
 ---
 
-# 🔧 **Building the Formal Specification**
+# **Building the Formal Specification**
 
 Build locally:
 
@@ -115,7 +115,7 @@ GitHub Actions automatically builds:
 
 ---
 
-# 🧠 **Design Philosophy**
+# **Design Philosophy**
 
 The theory layer is designed around four principles:
 
@@ -143,7 +143,7 @@ The full theory is published as an open, inspectable TeX specification.
 
 ---
 
-# 🧩 Summary
+# Summary
 
 The `theory/` directory contains:
 
