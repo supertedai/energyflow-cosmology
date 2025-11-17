@@ -1,0 +1,14 @@
+{
+  "@context": "https://schema.org",
+  "@type": "CreativeWork",
+  "name": "Readme",
+  "identifier": "README",
+  "layer": ".",
+  "description": "# concept  **Abstract:** This folder contains files and substructures related to 'concept', automatically analyzed. It includes the following file types: .json. A representative file begins with: \"{\"@type\":\"DefinedTerm\",\"name\":\"Applied Energy-Flow Cosmology v2.2 \u2013 Cross-Field Integration Summary (2025)\",\"description\".  ## \ud83d\udcc4 Files - `applied-energy-flow-cosmology-v22-cross-field-integration-summary",
+  "version": "1.0",
+  "author": {
+    "@type": "Person",
+    "name": "Morten Magnusson",
+    "identifier": "https://orcid.org/0009-0002-4860-5095"
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "@context": "https://schema.org",
+  "@type": "CreativeWork",
+  "name": "Readme",
+  "identifier": "README",
+  "layer": ".",
+  "description": "# api  **Abstract:** This folder contains machine-readable API definitions for the Energy-Flow Cosmology semantic layer. It includes the following file types: .json, .md. A representative file begins with: \"# \ud83d\udce1 **Energy-Flow Cosmology \u2014 API v1**\".  ## \ud83d\udcc1 Subdirectories - `v1/`  ## \ud83d\udcc4 Files - `README_API.md` - `concept-index.json` - `index.json` - `metadata.json`  *This README is automatically genera",
+  "version": "1.0",
+  "author": {
+    "@type": "Person",
+    "name": "Morten Magnusson",
+    "identifier": "https://orcid.org/0009-0002-4860-5095"
+  }
+}

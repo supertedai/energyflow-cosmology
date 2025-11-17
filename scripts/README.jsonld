@@ -1,0 +1,14 @@
+{
+  "@context": "https://schema.org",
+  "@type": "CreativeWork",
+  "name": "Readme",
+  "identifier": "README",
+  "layer": ".",
+  "description": "# scripts  **Abstract:** This folder contains automation scripts, build logic, update routines, and self-healing tools. It includes the following file types: .py. A representative file begins with: \"\"\"\"\".  ## \ud83d\udcc1 Subdirectories - `scripts/`  ## \ud83d\udcc4 Files - `check_imports.py` - `efc_self_heal.py` - `fetch_figshare_auto.py` - `fetch_sparc_rc.py` - `full_autosync.py` - `generate_efc_vs_lcdm_plot.py` - `g",
+  "version": "1.0",
+  "author": {
+    "@type": "Person",
+    "name": "Morten Magnusson",
+    "identifier": "https://orcid.org/0009-0002-4860-5095"
+  }
+}
