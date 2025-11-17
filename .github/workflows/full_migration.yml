@@ -1,0 +1,43 @@
+name: Full Repository Migration
+
+on:
+  workflow_dispatch:
+
+jobs:
+  migrate:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: "3.11"
+
+    - name: Migrate all documents
+      run: python scripts/migrate_all.py
+
+    - name: Clean up
+      run: python scripts/cleanup_after_migration.py
+
+    - name: Update links
+      run: python scripts/update_internal_links.py
+
+    - name: Generate missing MD
+      run: python scripts/generate_missing_md.py
+
+    - name: Update semantic system
+      run: |
+        python scripts/generate_schema_map.py
+        python scripts/generate_node_index.py
+        python scripts/generate_semantic_graph.py
+        python scripts/generate_readmes.py
+        python scripts/generate_migration_status.py
+
+    - name: Commit
+      run: |
+        git config user.email "actions@github.com"
+        git config user.name "GitHub Actions"
+        git add .
+        git commit -m "Full migration + cleanup + link update + MD generator + semantic update" || echo "No changes"
+        git push
