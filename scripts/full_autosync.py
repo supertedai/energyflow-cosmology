@@ -4,10 +4,11 @@
 """
 EFC Full Autosync
 
-Gjør tre ting:
-1) Prøver å hente Figshare-artikler (valgfritt, stopper ikke noe hvis det feiler)
-2) Genererer JSON-LD for mapper som har innhold (MD/PDF) men mangler .jsonld
-3) Bygger global meta-index.json basert på alle .jsonld i repoet
+Funksjoner:
+1. Figshare: prøver å koble til (stopper ikke hvis det feiler)
+2. Auto-clean: Fjerner feil JSON-LD i mapper
+3. Auto-generate: Lager korrekt JSON-LD basert på mappenavn
+4. Auto-index: Bygger global meta-index.json
 """
 
 import os
@@ -15,7 +16,7 @@ import json
 import requests
 
 # ------------------------------------------------------------
-# 1. Figshare-sync (best effort, ikke kritisk)
+# 1. Figshare-sync (ikke kritisk, påvirker ingenting)
 # ------------------------------------------------------------
 
 FIGSHARE_TOKEN = os.environ.get("FIGSHARE_TOKEN")
@@ -35,8 +36,7 @@ def fetch_figshare_articles():
             print(f"[autosync] Figshare failed: HTTP {r.status_code}")
             return
 
-        articles = r.json()
-        print(f"[autosync] Figshare connection OK, {len(articles)} articles listed.")
+        print(f"[autosync] Figshare OK, {len(r.json())} articles available.")
     except Exception as e:
         print(f"[autosync] Figshare connection error: {e}")
 
@@ -44,17 +44,17 @@ fetch_figshare_articles()
 
 
 # ------------------------------------------------------------
-# 2. Auto-JSONLD generator (mappebasert)
+# Auto JSON-LD system
 # ------------------------------------------------------------
 
-print("[autosync] Generating JSON-LD nodes where missing...")
+print("[autosync] Starting JSON-LD auto-clean + auto-generation...")
 
 IGNORED_DIR_PREFIXES = (
     "./.",
     "./.git",
     "./.github",
-    "./.venv",
     "./venv",
+    "./.venv",
 )
 
 IGNORED_DOC_NAMES = {"readme.md", "index.md"}
@@ -63,50 +63,42 @@ AUTHOR_NAME = "Morten Magnusson"
 AUTHOR_ORCID = "https://orcid.org/0009-0002-4860-5095"
 
 
-def slug_from_dirpath(dirpath: str) -> str:
-    """
-    Lager et stabilt id/slug fra mappenavn.
-    Eks: 'methodology/AI-Augmented-Scientific-Workflow-Framework'
-    -> 'AI-Augmented-Scientific-Workflow-Framework'
-    """
-    clean = dirpath.strip("./")
+def slug_from_dirpath(path: str) -> str:
+    """Return stable ID (folder name)."""
+    clean = path.strip("./")
     parts = clean.split("/")
     return parts[-1] if parts else clean
 
 
-def layer_from_dirpath(dirpath: str) -> str:
-    """
-    Tar top-level mappe som 'layer'.
-    Eks: 'methodology/AI-...' -> 'methodology'
-    """
-    clean = dirpath.strip("./")
+def layer_from_dirpath(path: str) -> str:
+    """Top-level folder used as 'layer'."""
+    clean = path.strip("./")
     parts = clean.split("/")
     return parts[0] if parts else ""
 
 
-def build_jsonld_for_directory(dirpath: str, docs: list[str]) -> None:
+def build_jsonld(dirpath: str, docs: list[str]) -> str:
     """
-    Genererer én JSON-LD for en katalog basert på:
-    - mappenavn (id/identifier)
-    - første relevante MD/PDF (for description)
+    Lag JSON-LD basert på mappenavn (ikke dokumentnavn).
+    Returnerer filnavn på jsonld.
     """
     node_id = slug_from_dirpath(dirpath)
     layer = layer_from_dirpath(dirpath)
 
-    # Velg MD hvis finnes, ellers første PDF
     md_docs = [d for d in docs if d.lower().endswith(".md")]
     pdf_docs = [d for d in docs if d.lower().endswith(".pdf")]
 
-    doc_for_desc = md_docs[0] if md_docs else (pdf_docs[0] if pdf_docs else docs[0])
+    # Velg dokument for description
+    doc = md_docs[0] if md_docs else (pdf_docs[0] if pdf_docs else docs[0])
 
     description = ""
-    if doc_for_desc.lower().endswith(".md"):
+    if doc.lower().endswith(".md"):
         try:
-            with open(os.path.join(dirpath, doc_for_desc), "r", encoding="utf-8") as f:
+            with open(os.path.join(dirpath, doc), "r", encoding="utf-8") as f:
                 raw = f.read()
             description = raw[:400].replace("\n", " ")
         except Exception as e:
-            print(f"[autosync] Warning: could not read description from {doc_for_desc}: {e}")
+            print(f"[autosync] Warning: cannot read {doc}: {e}")
 
     jsonld = {
         "@context": "https://schema.org",
@@ -124,17 +116,18 @@ def build_jsonld_for_directory(dirpath: str, docs: list[str]) -> None:
     }
 
     outfile = os.path.join(dirpath, f"{node_id}.jsonld")
-    try:
-        with open(outfile, "w", encoding="utf-8") as fp:
-            json.dump(jsonld, fp, indent=2)
-        print(f"[autosync] Created JSON-LD: {outfile}")
-    except Exception as e:
-        print(f"[autosync] Error writing JSON-LD {outfile}: {e}")
+
+    with open(outfile, "w", encoding="utf-8") as fp:
+        json.dump(jsonld, fp, indent=2)
+
+    print(f"[autosync] Created JSON-LD: {outfile}")
+    return outfile
 
 
-# Gå gjennom alle mapper og lag JSON-LD hvis:
-# - det finnes MD/PDF (som ikke er README/INDEX)
-# - det ikke finnes noen .jsonld fra før
+# ------------------------------------------------------------
+# 2. CLEAN + GENERATE JSON-LD
+# ------------------------------------------------------------
+
 for dirpath, dirnames, filenames in os.walk("."):
     if any(dirpath.startswith(pref) for pref in IGNORED_DIR_PREFIXES):
         continue
@@ -148,40 +141,52 @@ for dirpath, dirnames, filenames in os.walk("."):
         if (f.lower().endswith(".md") or f.lower().endswith(".pdf"))
         and f.lower() not in IGNORED_DOC_NAMES
     ]
+
     jsonlds = [f for f in filenames if f.lower().endswith(".jsonld")]
 
+    # Hvis det finnes jsonld, men navnet er feil -> auto-clean
+    if jsonlds:
+        expected = f"{slug_from_dirpath(dirpath)}.jsonld"
+        for js in jsonlds:
+            if js != expected:
+                try:
+                    os.remove(os.path.join(dirpath, js))
+                    print(f"[autosync] Removed invalid JSON-LD: {dirpath}/{js}")
+                except Exception as e:
+                    print(f"[autosync] Could not remove {js}: {e}")
+        # Re-scan etter cleaning
+        jsonlds = [f for f in os.listdir(dirpath) if f.endswith(".jsonld")]
+
+    # Generer kun hvis det mangler jsonld og det finnes dokumenter
     if docs and not jsonlds:
-        build_jsonld_for_directory(dirpath, docs)
+        build_jsonld(dirpath, docs)
 
 
 # ------------------------------------------------------------
-# 3. Bygg global meta-index.json
+# 3. Build meta-index.json
 # ------------------------------------------------------------
 
 print("[autosync] Building meta-index.json...")
 
-nodes: list[dict] = []
+nodes = []
 
 for dirpath, _, filenames in os.walk("."):
     if any(dirpath.startswith(pref) for pref in IGNORED_DIR_PREFIXES):
         continue
+
     for f in filenames:
         if not f.lower().endswith(".jsonld"):
             continue
 
         full_path = os.path.join(dirpath, f).replace("./", "")
-        node_basename = os.path.splitext(f)[0]
-        identifier = node_basename
-        node_type = "CreativeWork"
 
-        # Prøv å lese identifier/@type fra JSON-LD (best effort)
         try:
-            with open(os.path.join(dirpath, f), "r", encoding="utf-8") as fp:
-                data = json.load(fp)
-            identifier = data.get("identifier", identifier)
-            node_type = data.get("@type", node_type)
-        except Exception as e:
-            print(f"[autosync] Warning: could not parse JSON-LD {full_path}: {e}")
+            data = json.load(open(os.path.join(dirpath, f), "r", encoding="utf-8"))
+            identifier = data.get("identifier", os.path.splitext(f)[0])
+            node_type = data.get("@type", "CreativeWork")
+        except:
+            identifier = os.path.splitext(f)[0]
+            node_type = "CreativeWork"
 
         nodes.append({
             "id": identifier,
@@ -194,13 +199,11 @@ meta_index = {
     "nodes": nodes
 }
 
-try:
-    with open("meta-index.json", "w", encoding="utf-8") as fp:
-        json.dump(meta_index, fp, indent=2)
-    print(f"[autosync] meta-index.json built with {len(nodes)} nodes.")
-    for n in nodes:
-        print("  -", n["id"], "->", n["path"])
-except Exception as e:
-    print(f"[autosync] Error writing meta-index.json: {e}")
+with open("meta-index.json", "w", encoding="utf-8") as fp:
+    json.dump(meta_index, fp, indent=2)
+
+print(f"[autosync] meta-index.json built with {len(nodes)} nodes.")
+for n in nodes:
+    print("  →", n["id"], ":", n["path"])
 
 print("[autosync] Full autosync completed successfully.")
