@@ -1,15 +1,15 @@
 # docs
 
-Automatisk generert README via `update_all_readmes.py`.
+**Abstract:** This folder contains generated documentation, repo maps, visual outputs, and supporting reference files. It includes the following file types: , .css, .html, .json, .pdf, .tex. A representative file begins with: "{".
 
-## 📁 Undermapper
+## 📁 Subdirectories
 - `archive/`
 - `articles/`
 - `figures/`
 - `meta/`
 - `sections/`
 
-## 📄 Filer
+## 📄 Files
 - `.nojekyll`
 - `efc_master.css`
 - `efc_master.html`
@@ -20,7 +20,4 @@ Automatisk generert README via `update_all_readmes.py`.
 - `mathjax_header.html`
 - `repo_map.json`
 
-### 📚 Dokumentasjon
-Repo-genererte filer, HTML o.l.
-
-*Denne README oppdateres automatisk.*
+*This README is automatically generated.*

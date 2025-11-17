@@ -1,8 +1,8 @@
 # methodology
 
-Automatisk generert README via `update_all_readmes.py`.
+**Abstract:** This folder documents the scientific methodology, reflective framework, meta-procedures, and research process. It includes the following file types: .json, .md. A representative file begins with: "# EFC Epistemology".
 
-## 📄 Filer
+## 📄 Files
 - `EFC-epistemology.md`
 - `author-method-note.md`
 - `open-method.md`
@@ -13,7 +13,4 @@ Automatisk generert README via `update_all_readmes.py`.
 - `symbiotic-process-summary.md`
 - `symbiotic-process.md`
 
-### 🧠 Methodology
-Metodologifiler brukt av EFC-systemet.
-
-*Denne README oppdateres automatisk.*
+*This README is automatically generated.*

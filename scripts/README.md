@@ -1,11 +1,11 @@
 # scripts
 
-Automatisk generert README via `update_all_readmes.py`.
+**Abstract:** This folder contains automation scripts, build logic, update routines, and self-healing tools. It includes the following file types: .py. A representative file begins with: """"".
 
-## 📁 Undermapper
+## 📁 Subdirectories
 - `scripts/`
 
-## 📄 Filer
+## 📄 Files
 - `check_imports.py`
 - `efc_self_heal.py`
 - `fetch_figshare_auto.py`
@@ -28,4 +28,4 @@ Automatisk generert README via `update_all_readmes.py`.
 - `validate_all.py`
 - `validate_efc.py`
 
-*Denne README oppdateres automatisk.*
+*This README is automatically generated.*

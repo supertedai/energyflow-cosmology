@@ -1,8 +1,8 @@
 # potential
 
-Automatisk generert README via `update_all_readmes.py`.
+**Abstract:** This folder contains files and substructures related to 'potential', automatically analyzed. It includes the following file types: .py. A representative file begins with: """"".
 
-## 📄 Filer
+## 📄 Files
 - `efc_potential.py`
 
-*Denne README oppdateres automatisk.*
+*This README is automatically generated.*

@@ -1,8 +1,8 @@
 # personal
 
-Automatisk generert README via `update_all_readmes.py`.
+**Abstract:** This folder contains files and substructures related to 'personal', automatically analyzed. It includes the following file types: .md. A representative file begins with: "Dear,".
 
-## 📄 Filer
+## 📄 Files
 - `Personal-Note.md`
 
-*Denne README oppdateres automatisk.*
+*This README is automatically generated.*

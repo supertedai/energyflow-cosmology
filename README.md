@@ -1,15 +1,14 @@
-# Energy-Flow Cosmology Repository
+# Energy-Flow Cosmology — Repository
 
-Automatisk generert README via `update_all_readmes.py`.
+**Abstract:** This folder contains files and substructures related to 'energyflow-cosmology', automatically analyzed. It includes the following file types: , .json, .md, .py, .txt, .xml. A representative file begins with: "# **CHANGELOG.md — Energy-Flow Cosmology (EFC)**".
 
-## 📁 Undermapper
+## 📁 Subdirectories
 - `api/`
 - `app/`
 - `data/`
 - `docs/`
 - `figshare/`
 - `integrations/`
-- `lib/`
 - `meta/`
 - `methodology/`
 - `notebooks/`
@@ -18,7 +17,7 @@ Automatisk generert README via `update_all_readmes.py`.
 - `src/`
 - `theory/`
 
-## 📄 Filer
+## 📄 Files
 - `.gitignore`
 - `.nojekyll`
 - `CHANGELOG.md`
@@ -31,4 +30,4 @@ Automatisk generert README via `update_all_readmes.py`.
 - `sitemap.xml`
 - `trigger.txt`
 
-*Denne README oppdateres automatisk.*
+*This README is automatically generated.*

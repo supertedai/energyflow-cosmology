@@ -1,8 +1,8 @@
 # admin
 
-Automatisk generert README via `update_all_readmes.py`.
+**Abstract:** This folder contains files and substructures related to 'admin', automatically analyzed. It includes the following file types: .php.
 
-## 📄 Filer
+## 📄 Files
 - `efc-schema-validator.php`
 
-*Denne README oppdateres automatisk.*
+*This README is automatically generated.*

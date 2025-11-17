@@ -1,11 +1,11 @@
 # theory
 
-Automatisk generert README via `update_all_readmes.py`.
+**Abstract:** This folder contains theoretical notes, derivations, mathematical material, and conceptual frameworks. It includes the following file types: .md. A representative file begins with: "# 🧠 Energy-Flow Cosmology — Unified Module Architecture".
 
-## 📁 Undermapper
+## 📁 Subdirectories
 - `formal/`
 
-## 📄 Filer
+## 📄 Files
 - `architecture.md`
 
-*Denne README oppdateres automatisk.*
+*This README is automatically generated.*

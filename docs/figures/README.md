@@ -1,8 +1,8 @@
 # figures
 
-Automatisk generert README via `update_all_readmes.py`.
+**Abstract:** This folder contains files and substructures related to 'figures', automatically analyzed. It includes the following file types: .png.
 
-## 📄 Filer
+## 📄 Files
 - `EFC_vs_LCDM_plot.png`
 - `efc_Ef_rho_S_heatmap.png`
 - `efc_halo_S_profile.png`
@@ -12,4 +12,4 @@ Automatisk generert README via `update_all_readmes.py`.
 - `efc_schematic_lensing_profile.png`
 - `efc_schematic_rotation_curves.png`
 
-*Denne README oppdateres automatisk.*
+*This README is automatically generated.*

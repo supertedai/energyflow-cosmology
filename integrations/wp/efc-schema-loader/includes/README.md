@@ -1,8 +1,8 @@
 # includes
 
-Automatisk generert README via `update_all_readmes.py`.
+**Abstract:** This folder contains files and substructures related to 'includes', automatically analyzed. It includes the following file types: .php.
 
-## 📄 Filer
+## 📄 Files
 - `class-efc-cli.php`
 
-*Denne README oppdateres automatisk.*
+*This README is automatically generated.*

@@ -1,15 +1,15 @@
 # meta
 
-Automatisk generert README via `update_all_readmes.py`.
+**Abstract:** This folder contains meta-level documents, conceptual structures, epistemology, and research reflections. It includes the following file types: .html, .json, .md. A representative file begins with: "# `project/WORKFLOW_MAP.md`".
 
-## 📁 Undermapper
+## 📁 Subdirectories
 - `cognition/`
 - `meta-process/`
 - `personal/`
 - `reflection/`
 - `symbiosis/`
 
-## 📄 Filer
+## 📄 Files
 - `WORKFLOW_MAP.html`
 - `WORKFLOW_MAP.md`
 - `architecture.md`
@@ -20,4 +20,4 @@ Automatisk generert README via `update_all_readmes.py`.
 - `metascope.md`
 - `topology-of-insight.md`
 
-*Denne README oppdateres automatisk.*
+*This README is automatically generated.*

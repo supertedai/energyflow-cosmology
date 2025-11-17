@@ -1,10 +1,10 @@
 # figshare
 
-Automatisk generert README via `update_all_readmes.py`.
+**Abstract:** This folder contains files and substructures related to 'figshare', automatically analyzed. It includes the following file types: .json. A representative file begins with: "{".
 
-## 📄 Filer
+## 📄 Files
 - `figshare-index.json`
 - `figshare-links.json`
 - `latest.json`
 
-*Denne README oppdateres automatisk.*
+*This README is automatically generated.*

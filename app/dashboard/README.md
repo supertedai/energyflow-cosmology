@@ -1,10 +1,10 @@
 # dashboard
 
-Automatisk generert README via `update_all_readmes.py`.
+**Abstract:** This folder contains files and substructures related to 'dashboard', automatically analyzed. It includes the following file types: .css, .html, .js.
 
-## 📄 Filer
+## 📄 Files
 - `index.html`
 - `script.js`
 - `style.css`
 
-*Denne README oppdateres automatisk.*
+*This README is automatically generated.*

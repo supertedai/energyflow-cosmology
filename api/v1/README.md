@@ -1,11 +1,11 @@
 # v1
 
-Automatisk generert README via `update_all_readmes.py`.
+**Abstract:** This folder contains machine-readable API definitions for the Energy-Flow Cosmology semantic layer. It includes the following file types: .json, .py. A representative file begins with: "from fastapi import APIRouter".
 
-## 📁 Undermapper
+## 📁 Subdirectories
 - `concept/`
 
-## 📄 Filer
+## 📄 Files
 - `__init__.py`
 - `api_index.json`
 - `applied-energy-flow-cosmology-v2.2-–-cross-field-integration-summary-(2025).json`
@@ -17,4 +17,4 @@ Automatisk generert README via `update_all_readmes.py`.
 - `methodology.json`
 - `terms.json`
 
-*Denne README oppdateres automatisk.*
+*This README is automatically generated.*

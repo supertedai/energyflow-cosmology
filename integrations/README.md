@@ -1,8 +1,8 @@
 # integrations
 
-Automatisk generert README via `update_all_readmes.py`.
+**Abstract:** This folder contains files and substructures related to 'integrations', automatically analyzed.
 
-## 📁 Undermapper
+## 📁 Subdirectories
 - `wp/`
 
-*Denne README oppdateres automatisk.*
+*This README is automatically generated.*
