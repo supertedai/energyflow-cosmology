@@ -1,9 +1,9 @@
 {
   "@context": "https://schema.org",
   "@type": "CreativeWork",
-  "name": "Cognitive-Signature",
-  "identifier": "cognitive-signature",
-  "layer": ".",
+  "name": "cognition",
+  "identifier": "cognition",
+  "layer": "meta",
   "description": "# Cognitive Signature Specification (CSS)  This document defines the cognitive signature of the human field involved in the development of Energy-Flow Cosmology (EFC) and the metascope architecture.  The goal is to provide a formal description of the cognitive mechanics that: - drive high-order insight, - enable cross-domain integration, - allow resonance with model-generated structure, - stabilis",
   "version": "1.0",
   "author": {

@@ -1,9 +1,9 @@
 {
   "@context": "https://schema.org",
   "@type": "CreativeWork",
-  "name": "Efc Formal Spec",
-  "identifier": "efc_formal_spec",
-  "layer": ".",
+  "name": "docs",
+  "identifier": "docs",
+  "layer": "docs",
   "description": "",
   "version": "1.0",
   "author": {

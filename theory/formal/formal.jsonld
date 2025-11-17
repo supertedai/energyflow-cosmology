@@ -1,9 +1,9 @@
 {
   "@context": "https://schema.org",
   "@type": "CreativeWork",
-  "name": "Efc Master V1",
-  "identifier": "efc_master_v1",
-  "layer": ".",
+  "name": "formal",
+  "identifier": "formal",
+  "layer": "theory",
   "description": "",
   "version": "1.0",
   "author": {
