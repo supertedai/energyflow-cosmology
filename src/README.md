@@ -1,4 +1,4 @@
-# ⚙️ **EFC Source Code — Computational Engine**
+# **EFC Source Code — Computational Engine**
 
 The `src/` directory contains the full **computational implementation** of
 **Energy-Flow Cosmology (EFC)**.
@@ -16,7 +16,7 @@ It mirrors the mathematical formalism defined in `/theory/formal/`.
 
 ---
 
-# 📁 **Directory Structure**
+# **Directory Structure**
 
 ```
 src/
@@ -44,7 +44,7 @@ src/
 
 ---
 
-# 🧠 **1. Core Module (`core/`)**
+# **1. Core Module (`core/`)**
 
 ### **`efc_core.py`**
 
@@ -60,7 +60,7 @@ This is the central “physics engine” of the model.
 
 ---
 
-# 🔥 **2. Entropy Module (`entropy/`)**
+# **2. Entropy Module (`entropy/`)**
 
 ### **`efc_entropy.py`**
 
@@ -79,7 +79,7 @@ entropy → potential → expansion → structure
 
 ---
 
-# ⚡ **3. Potential Module (`potential/`)**
+# **3. Potential Module (`potential/`)**
 
 ### **`efc_potential.py`**
 
@@ -94,7 +94,7 @@ This is the EFC-D subsystem.
 
 ---
 
-# 🧩 **4. Validation Module (`validation/`)**
+# **4. Validation Module (`validation/`)**
 
 ### **`efc_validation.py`**
 
@@ -117,7 +117,7 @@ These support all validation scripts in `/scripts/`.
 
 ---
 
-# 🌀 **5. Meta Simulation Layer (`meta/`)**
+# **5. Meta Simulation Layer (`meta/`)**
 
 ### **`cofield_simulator.py`**
 
@@ -138,7 +138,7 @@ This is the most advanced experimental subsystem.
 
 ---
 
-# 💡 **6. Light Boundary Module (`efc_light.py`)**
+# **6. Light Boundary Module (`efc_light.py`)**
 
 Standalone module for:
 
@@ -151,7 +151,7 @@ Serves the EFC-C₀ subsystem.
 
 ---
 
-# 🛠️ **Development Notes**
+# **Development Notes**
 
 ### Imports
 
@@ -174,7 +174,7 @@ Modules are kept:
 
 ---
 
-# 🧪 **Running the Engine**
+# **Running the Engine**
 
 Example:
 
@@ -193,7 +193,7 @@ python scripts/validate_efc.py
 
 ---
 
-# 🧭 **Role of the Source Layer**
+# **Role of the Source Layer**
 
 | Layer        | Function                                   |
 | ------------ | ------------------------------------------ |
@@ -207,7 +207,7 @@ python scripts/validate_efc.py
 
 ---
 
-# 🧩 **Summary**
+# **Summary**
 
 The `/src/` directory contains:
 
