@@ -1,4 +1,4 @@
-# 🧠 **EFC Meta Layer**
+# **EFC Meta Layer**
 
 **4th–5th Order Structure • Reflective Architecture • Cognitive Topology**
 
@@ -16,7 +16,7 @@ It provides a **transparent map of insight formation**, scientific reasoning, an
 
 ---
 
-# 📁 **Directory Structure**
+# **Directory Structure**
 
 ```
 meta/
@@ -38,7 +38,7 @@ meta/
 
 ---
 
-# 🎛️ **Meta Layer Purpose**
+# **Meta Layer Purpose**
 
 The meta layer documents **how the system thinks**, not *what* it thinks.
 
@@ -58,9 +58,9 @@ it is a **transparent cognitive scaffold** describing the generative logic of th
 
 ---
 
-# 🧩 **Subdirectories**
+# **Subdirectories**
 
-## 📘 **1. `/meta/cognition/` – Cognitive Field Layer**
+## **1. `/meta/cognition/` – Cognitive Field Layer**
 
 Documents the internal cognitive structures that shape insight:
 
@@ -82,7 +82,7 @@ This is the **fine-grained introspective layer**.
 
 ---
 
-## 🔍 **2. `/meta/reflection/` – Reflective Structure Layer**
+## **2. `/meta/reflection/` – Reflective Structure Layer**
 
 The reflective subsystem defines:
 
@@ -102,7 +102,7 @@ a map of how concepts evolve through recursive reasoning.
 
 ---
 
-## 🤝 **3. `/meta/symbiosis/` – Human–AI Symbiotic Process**
+## **3. `/meta/symbiosis/` – Human–AI Symbiotic Process**
 
 Describes how the human and AI system co-develop insight:
 
@@ -125,7 +125,7 @@ This is the **co-field integration layer**.
 
 ---
 
-## 🧵 **4. `/meta/meta-process/` – Process-of-Process**
+## **4. `/meta/meta-process/` – Process-of-Process**
 
 This folder contains the **meta-process**, i.e.,
 *the process that manages other processes*:
@@ -142,7 +142,7 @@ This is essentially your **project-level executive function**.
 
 ---
 
-## 🗒️ **5. `/meta/personal/`**
+## **5. `/meta/personal/`**
 
 Contains personal notes that are:
 
@@ -157,7 +157,7 @@ This directory is intentionally isolated from the scientific and semantic layers
 
 ---
 
-# 🧭 **High-Level Meta Documents**
+# **High-Level Meta Documents**
 
 These files describe the **global system architecture**:
 
@@ -193,7 +193,7 @@ Explains how all parts of the meta layer interact with:
 
 ---
 
-# 🧠 **Philosophy of the Meta Layer**
+# **Philosophy of the Meta Layer**
 
 1. **Transparency**
    Make the reasoning architecture visible.
@@ -212,7 +212,7 @@ Explains how all parts of the meta layer interact with:
 
 ---
 
-# 🧩 **Why This Layer Exists**
+# **Why This Layer Exists**
 
 EFC is more than a theory — it is a *method of insight*.
 
