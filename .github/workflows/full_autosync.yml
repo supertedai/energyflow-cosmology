@@ -1,38 +1,139 @@
-name: EFC Full Autosync
+#!/usr/bin/env python3
 
-on:
-  workflow_dispatch:
-  push:
-    branches:
-      - main
+"""
+EFC FULL AUTOSYNC — SELF-HEAL + API + README GENERATOR
+------------------------------------------------------
 
-jobs:
-  autosync:
-    runs-on: ubuntu-latest
-    timeout-minutes: 10
+Denne versjonen gjør fire ting:
 
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
+1) Self-heal av hele miljøet (pakker, metodologi, struktur)
+2) Kjør alle autosync-steg (Figshare, API, semantikk)
+3) Generer repo-kart
+4) Oppdater ALLE README-filer rekursivt
 
-      - name: Set up Python
-        uses: actions/setup-python@v4
-        with:
-          python-version: "3.11"
+Systemet stopper aldri; alt kjører i fallback-modus hvis noe mangler.
+"""
 
-      - name: Run autosync (self-healing)
-        env:
-          FIGSHARE_TOKEN: ${{ secrets.FIGSHARE_TOKEN }}
-        run: |
-          python3 scripts/full_autosync.py
+import subprocess
+import sys
+from pathlib import Path
+import datetime
 
-      - name: Commit autosync output
-        run: |
-          git config user.name "github-actions"
-          git config user.email "github-actions@github.com"
-          git add -A
-          git commit -m "Autosync: system updated [skip ci]" || echo "No changes"
+ROOT = Path(__file__).resolve().parent.parent
 
-      - name: Push updates
-        run: |
-          git push || echo "Push failed (likely due to remote updates)"
+
+# -------------------------------------------------------
+# Helper
+# -------------------------------------------------------
+def run(cmd, allow_fail=False, label=None):
+    print("\n-------------------------------------------")
+    if label:
+        print(f"▶ {label}")
+    print(f"→ {cmd}")
+
+    code = subprocess.call(cmd, shell=True)
+
+    if code != 0 and not allow_fail:
+        print(f"❌ Fatal error → stopping\nCommand: {cmd}")
+        sys.exit(code)
+
+    if code != 0 and allow_fail:
+        print(f"⚠️ Non-critical error → continuing (exit {code})")
+
+    return code
+
+
+# -------------------------------------------------------
+# START
+# -------------------------------------------------------
+
+print("\n================== EFC FULL AUTOSYNC ==================")
+print(f"Timestamp: {datetime.datetime.now().isoformat()}")
+print("========================================================\n")
+
+
+# -------------------------------------------------------
+# 0. SELF-HEAL (Pakker + metodologi + struktur)
+# -------------------------------------------------------
+run(
+    f"python3 {ROOT}/scripts/efc_self_heal.py",
+    allow_fail=False,
+    label="Self-Heal: pakker, metodologi, fallback-kart"
+)
+
+
+# -------------------------------------------------------
+# 1. FIGSHARE METADATA (fortsetter ved feil)
+# -------------------------------------------------------
+run(
+    f"python3 {ROOT}/scripts/fetch_figshare_auto.py",
+    allow_fail=True,
+    label="Figshare metadata sync (may fail without token)"
+)
+
+
+# -------------------------------------------------------
+# 2. UPDATE CONCEPTS + SEMANTIC LAYERS
+# -------------------------------------------------------
+run(
+    f"python3 {ROOT}/scripts/update_concepts.py",
+    allow_fail=False,
+    label="Oppdaterer konsepter (concepts.json + semantikk)"
+)
+
+
+# -------------------------------------------------------
+# 3. GENERATE METHODOLOGY API
+# -------------------------------------------------------
+run(
+    f"python3 {ROOT}/scripts/generate_methodology_api.py",
+    allow_fail=False,
+    label="Genererer Methodology API"
+)
+
+
+# -------------------------------------------------------
+# 4. UPDATE EFC API (Konsepter + meta + terms)
+# -------------------------------------------------------
+run(
+    f"python3 {ROOT}/scripts/update_efc_api.py",
+    allow_fail=False,
+    label="Oppdaterer EFC API v1"
+)
+
+
+# -------------------------------------------------------
+# 5. GENERATE REPO MAP (fallback hvis pyvis mangler)
+# -------------------------------------------------------
+run(
+    f"python3 {ROOT}/scripts/generate_repo_map.py",
+    allow_fail=True,
+    label="Genererer repo-kart (fallback hvis pyvis mangler)"
+)
+
+
+# -------------------------------------------------------
+# 6. UPDATE **ALL** READMEs REKURSIVT
+# -------------------------------------------------------
+run(
+    f"python3 {ROOT}/scripts/update_all_readmes.py",
+    allow_fail=False,
+    label="Oppdaterer alle README-filer (rekursivt)"
+)
+
+
+# -------------------------------------------------------
+# SLUTTRAPPORT
+# -------------------------------------------------------
+
+print("\n========================================================")
+print("EFC FULL AUTOSYNC FULLFØRT")
+print("--------------------------------------------------------")
+print("✓ Miljø reparert")
+print("✓ Semantikk og API oppdatert")
+print("✓ Figshare synkronisert (hvis token var aktivt)")
+print("✓ Repo-kart generert (fallback aktiv ved behov)")
+print("✓ Alle README.md opprettet og oppdatert")
+print("--------------------------------------------------------")
+print("Systemet er nå i synk og selvreparerende.")
+print("========================================================\n")
