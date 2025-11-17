@@ -1,9 +1,9 @@
 {
-  "api.jsonld": {
-    "path": "./api/api.jsonld",
+  "index.jsonld": {
+    "path": "./methodology/symbiotic-process/index.jsonld",
     "type": "CreativeWork",
     "id": null,
-    "name": "api"
+    "name": "Auto-generated placeholder"
   },
   "README_API.jsonld": {
     "path": "./api/README_API.jsonld",
@@ -11,10 +11,10 @@
     "id": null,
     "name": "\ud83d\udce1 **Energy-Flow Cosmology \u2014 API v1**"
   },
-  "index.jsonld": {
-    "path": "./docs/efc-master-v1/index.jsonld",
+  "api.jsonld": {
+    "path": "./api/api.jsonld",
     "type": "CreativeWork",
     "id": null,
-    "name": "Efc Master V1"
+    "name": "api"
   }
 }
