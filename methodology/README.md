@@ -1,18 +1,22 @@
 # **EFC Methodology Layer**
 
-**Open Scientific Method • Epistemology • Process Transparency**
+*Open Scientific Method • Epistemology • Process Transparency*
 
-The `methodology/` directory defines the **scientific method, epistemic structure, and reasoning framework** behind Energy-Flow Cosmology (EFC).
-Where the **theory** explains *what* EFC is, the methodology explains *how it is built, validated, and reasoned about*.
+The `methodology/` directory defines the scientific method, epistemic framework, and research logic behind Energy-Flow Cosmology (EFC).
 
-This layer establishes:
+Where the **theory/** folder describes *what* EFC is,
+and the **meta/** folder describes *how insight forms*,
+the **methodology/** layer describes *how EFC is produced, validated, and maintained as a scientific system*.
+
+It stabilises:
 
 * transparent research principles
 * reproducible workflows
-* the reflective logic that underpins EFC
-* the open-process model used throughout the project
+* falsification logic
+* cross-domain validation
+* the open-process model used across the project
 
-It ensures that EFC remains a **scientifically coherent, traceable, and reproducible system**.
+This is the **scientific operating system** of EFC.
 
 ---
 
@@ -20,155 +24,154 @@ It ensures that EFC remains a **scientifically coherent, traceable, and reproduc
 
 ```
 methodology/
-├── EFC-epistemology.md        # Core epistemic framework
-├── author-method-note.md      # Author reasoning, approach, principles
-├── open-method.md             # Open scientific method for EFC
-├── open-process.json          # Machine-readable process model
-├── reproducibility-guide.md   # How to reproduce EFC from scratch
-└── README.md                  # This file
+├── EFC-epistemology.md        # Core epistemic foundations
+├── author-method-note.md      # Author’s methodological principles
+├── open-method.md             # Transparent scientific method
+├── open-process.json          # Machine-readable method graph
+├── reproducibility-guide.md   # Full reproducibility instructions
+└── README.md                  # Entry point
 ```
+
+This matches your repository structure exactly.
 
 ---
 
 # **File Descriptions**
 
-### **`EFC-epistemology.md` — Core Epistemology**
+## **1. `EFC-epistemology.md` — Core Epistemology**
 
-Defines the philosophical and scientific basis for EFC:
+Defines the epistemic basis for EFC:
 
 * how evidence is interpreted
-* how entropy and energy-flow inform the reasoning structure
-* how conceptual models are built
-* how cross-domain patterns form
-* the epistemic rules governing validation and falsification
+* entropy-driven logic
+* how conceptual models form
+* cross-domain pattern recognition
+* principles of validation and falsification
 
-This file explains **why EFC thinks the way it does**.
+This file describes **why the theory reasons the way it does**.
 
 ---
 
-### **`author-method-note.md` — Author’s Method Principles**
+## **2. `author-method-note.md` — Author’s Method**
 
-Documents the principles shaping the author's approach:
+Documents the principles shaping the author’s approach:
 
-* pattern reasoning
-* entropy-based logic
+* pattern-first reasoning
+* entropy and structural logic
 * reflective integration
-* domain-crossing inference
-* multi-layer reasoning workflow
+* multi-field inference
+* consistency across cognitive states
 
-It provides context for interpreting EFC's development process.
-
----
-
-### **`open-method.md` — Open Scientific Method**
-
-Defines a **transparent, inspectable, open-source method** for all EFC research.
-
-Topics include:
-
-* open-validation
-* open-computation
-* open-reflection
-* open-publication
-* integrating AI as a reflective partner
-
-This is the methodological backbone of the project.
+This provides context for interpreting the development of EFC.
 
 ---
 
-### **`open-process.json` — Machine-Readable Method Graph**
+## **3. `open-method.md` — Open Scientific Method**
 
-A formalized JSON representation of the EFC research process.
+Defines a transparent, open scientific method:
 
-Includes:
+* open validation
+* open computation
+* open documentation
+* open reflection
+* integration of AI as a reflective partner
+
+This establishes the **rules** under which EFC is built and maintained.
+
+---
+
+## **4. `open-process.json` — Machine-Readable Method Graph**
+
+A structured JSON graph describing the full research process:
 
 * process nodes
 * reasoning stages
-* validation checkpoints
 * dependencies
-* semantic links to theory and meta layers
+* validation checkpoints
+* semantic links to theory, meta, and schema layers
 
 Used by:
 
 * dashboards
-* semantic systems
-* agent workflows
-* automated documentation tools
+* semantic crawlers
+* workflow automation
+* agent systems
+
+It is the **machine counterpart** of the open-method.md file.
 
 ---
 
-### **`reproducibility-guide.md`**
+## **5. `reproducibility-guide.md` — How to Reproduce EFC**
 
-A detailed manual describing how to:
+Explains how to rebuild the entire project:
 
-* rebuild the theory
-* reproduce computations
+* reconstruct the theory
+* run computational models
 * validate datasets (SPARC, DESI, JWST, CMB)
-* track versioning
-* regenerate API and schema
-* rebuild the full project from scratch
+* regenerate API outputs
+* rebuild schema and documentation
+* track versioned outputs
 
-Ensures **long-term scientific reproducibility**.
+This ensures the project remains scientifically reproducible long-term.
 
 ---
 
 # **Role of the Methodology Layer**
 
-The methodology layer provides the **bridge** between:
+| Layer            | Role                                                      |
+| ---------------- | --------------------------------------------------------- |
+| **theory/**      | Defines the scientific model                              |
+| **methodology/** | Defines the process that produces and validates the model |
+| **src/**         | Computational engine                                      |
+| **schema/**      | Machine-readable concepts                                 |
+| **meta/**        | Reflective + cognitive architecture                       |
+| **figshare/**    | Published outputs / DOI layer                             |
 
-| Layer            | Relation                            |
-| ---------------- | ----------------------------------- |
-| **theory/**      | defines *what* EFC is               |
-| **methodology/** | defines *how* EFC is produced       |
-| **src/**         | implements computational models     |
-| **schema/**      | makes concepts machine-readable     |
-| **meta/**        | models higher-order reasoning       |
-| **figshare/**    | stores external published artifacts |
+The methodology layer ensures:
 
-Methodology ensures that:
+* theory is disciplined
+* computational layer is reproducible
+* semantics remain consistent
+* meta-reflection remains grounded
+* research is transparent and traceable
 
-* the theory is disciplined
-* the computational layer is reproducible
-* the semantics remain consistent
-* the reflective system remains grounded
-
-It is the operational backbone of the entire EFC ecosystem.
+It is the **operational backbone** of the EFC ecosystem.
 
 ---
 
 # **Scientific Philosophy**
 
-The methodology layer is built on four principles:
-
 ### **1. Transparency**
 
-All reasoning steps are documented and open.
+All reasoning steps are documented and inspectable.
 
 ### **2. Reproducibility**
 
-Every result can be traced and rebuilt.
+Every result can be traced, rerun, and rebuilt.
 
 ### **3. Cross-Domain Rigor**
 
-Patterns are validated across physics, information, entropy, and structure.
+Patterns must hold across physics, entropy, information, and structure.
 
 ### **4. Reflective Stability**
 
-Human + AI co-reflection strengthens methodological consistency.
+Human–AI co-reflection strengthens methodological consistency.
 
 ---
 
 # **Summary**
 
-The `/methodology/` directory defines the **scientific operating system** of Energy-Flow Cosmology:
+The `methodology/` directory defines the **scientific operating system** for Energy-Flow Cosmology:
 
 * epistemology
+* method principles
 * open scientific method
 * reproducibility
-* author method
 * machine-readable process mapping
 
-It ensures that EFC is not just a theory—
-but a **fully transparent, rigorously structured scientific framework**.
+It ensures that EFC is not just a physical theory —
+but a **transparent, structured, rigorously reasoned scientific framework**.
 
 ---
+
+Bare si ifra.
