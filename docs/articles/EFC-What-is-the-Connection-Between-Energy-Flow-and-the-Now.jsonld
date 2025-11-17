@@ -1,0 +1,19 @@
+{
+  "@context": "https://schema.org",
+  "@type": "CreativeWork",
+  "identifier": "docs/articles/EFC-What-is-the-Connection-Between-Energy-Flow-and-the-Now",
+  "name": "Efc What Is The Connection Between Energy Flow And The Now",
+  "author": {
+    "@type": "Person",
+    "name": "Morten Magnusson",
+    "identifier": "https://orcid.org/0009-0002-4860-5095"
+  },
+  "version": "1.0",
+  "isPartOf": {
+    "@type": "CreativeWorkSeries",
+    "name": "docs"
+  },
+  "layer": "docs",
+  "encodingFormat": "pdf",
+  "url": "docs/articles/EFC-What-is-the-Connection-Between-Energy-Flow-and-the-Now.pdf"
+}
