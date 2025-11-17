@@ -1,0 +1,19 @@
+{
+  "@context": "https://schema.org",
+  "@type": "CreativeWork",
+  "identifier": "docs/articles/EFC-Energy-Flow-as-the-Fundamental-Dynamic-of-the-Universe",
+  "name": "Efc Energy Flow As The Fundamental Dynamic Of The Universe",
+  "author": {
+    "@type": "Person",
+    "name": "Morten Magnusson",
+    "identifier": "https://orcid.org/0009-0002-4860-5095"
+  },
+  "version": "1.0",
+  "isPartOf": {
+    "@type": "CreativeWorkSeries",
+    "name": "docs"
+  },
+  "layer": "docs",
+  "encodingFormat": "pdf",
+  "url": "docs/articles/EFC-Energy-Flow-as-the-Fundamental-Dynamic-of-the-Universe.pdf"
+}
