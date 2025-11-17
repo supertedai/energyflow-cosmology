@@ -6,32 +6,45 @@ on:
 jobs:
   migrate:
     runs-on: ubuntu-latest
+
     steps:
-    - uses: actions/checkout@v3
+    - name: Checkout
+      uses: actions/checkout@v3
 
     - name: Python
       uses: actions/setup-python@v4
       with:
         python-version: "3.11"
 
-    # 1 — Flytt ALLE filer til riktig struktur
-    - name: Full file migration (folders + media + rename)
-      run: python scripts/migrate_full_structure.py
+    # -------------------------------------------------------
+    # 1 — FULL folder migration for ALL files
+    # -------------------------------------------------------
+    - name: Full folder migration (ALL files → proper structure)
+      run: python scripts/migrate_everything_into_folders.py
 
-    # 2 — Cleanup
-    - name: Clean up
+    # -------------------------------------------------------
+    # 2 — Cleanup after migration
+    # -------------------------------------------------------
+    - name: Cleanup orphaned and empty paths
       run: python scripts/cleanup_after_migration.py
 
-    # 3 — Fix internal links
-    - name: Update links
+    # -------------------------------------------------------
+    # 3 — Update ALL internal links everywhere
+    # -------------------------------------------------------
+    - name: Update internal links
       run: python scripts/update_internal_links.py
 
-    # 4 — Ensure md structure exists
-    - name: Generate missing MD
+    # -------------------------------------------------------
+    # 4 — Generate missing README.md for all folders
+    # -------------------------------------------------------
+    - name: Generate missing README.md files
       run: python scripts/generate_missing_md.py
 
-    # 5 — Semantic refresh
-    - name: Update semantic system
+    # -------------------------------------------------------
+    # 5 — Semantic rebuild: schema, node index, semantic graph
+    #    + auto-generated READMEs + migration status
+    # -------------------------------------------------------
+    - name: Rebuild semantic system
       run: |
         python scripts/generate_schema_map.py
         python scripts/generate_node_index.py
@@ -39,11 +52,13 @@ jobs:
         python scripts/update_all_readmes.py
         python scripts/generate_migration_status.py
 
-    # 6 — Commit
-    - name: Commit
+    # -------------------------------------------------------
+    # 6 — Commit changes
+    # -------------------------------------------------------
+    - name: Commit changes
       run: |
         git config user.email "actions@github.com"
         git config user.name "GitHub Actions"
         git add .
-        git commit -m "Full repository migration (file structure + semantic update)" || echo "No changes"
+        git commit -m "Full repository migration (all files → folders + cleanup + semantic rebuild)" || echo "No changes"
         git push
