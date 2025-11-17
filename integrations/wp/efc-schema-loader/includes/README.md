@@ -1,9 +1,8 @@
-# notebooks
+# includes
 
 Automatisk generert README via `update_all_readmes.py`.
 
 ## 📄 Filer
-- `EFC_Baseline.ipynb`
-- `EFC_vs_LCDM.ipynb`
+- `class-efc-cli.php`
 
 *Denne README oppdateres automatisk.*

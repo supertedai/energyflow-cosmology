@@ -16,3 +16,8 @@ notebook
 
 # Utilities
 pyyaml
+pyvis
+markdown
+pydantic
+python-dotenv
+PyYAML

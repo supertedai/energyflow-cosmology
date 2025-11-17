@@ -1,11 +1,13 @@
-# theory
+# efc-schema-loader
 
 Automatisk generert README via `update_all_readmes.py`.
 
 ## 📁 Undermapper
-- `formal/`
+- `admin/`
+- `includes/`
 
 ## 📄 Filer
-- `architecture.md`
+- `efc-schema-loader.php`
+- `loader-core.php`
 
 *Denne README oppdateres automatisk.*

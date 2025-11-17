@@ -1,9 +1,10 @@
-# notebooks
+# dashboard
 
 Automatisk generert README via `update_all_readmes.py`.
 
 ## 📄 Filer
-- `EFC_Baseline.ipynb`
-- `EFC_vs_LCDM.ipynb`
+- `index.html`
+- `script.js`
+- `style.css`
 
 *Denne README oppdateres automatisk.*

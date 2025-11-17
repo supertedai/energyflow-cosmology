@@ -1,9 +1,8 @@
-# notebooks
+# app
 
 Automatisk generert README via `update_all_readmes.py`.
 
-## 📄 Filer
-- `EFC_Baseline.ipynb`
-- `EFC_vs_LCDM.ipynb`
+## 📁 Undermapper
+- `dashboard/`
 
 *Denne README oppdateres automatisk.*

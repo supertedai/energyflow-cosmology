@@ -1,0 +1,509 @@
+{
+  ".": {
+    "dirs": [
+      "api",
+      "schema",
+      ".git",
+      "meta",
+      "scripts",
+      ".github",
+      "methodology",
+      "app",
+      "theory",
+      "docs",
+      "data",
+      "figshare",
+      "integrations",
+      "notebooks",
+      "src"
+    ],
+    "files": [
+      "CHANGELOG.md",
+      "requirements.txt",
+      "sitemap-links.json",
+      ".nojekyll",
+      "meta_dashboard.py",
+      ".gitignore",
+      "README.md",
+      "sitemap.xml",
+      "schema-map.json",
+      "trigger.txt",
+      "START-HERE.md",
+      "meta-index.json"
+    ]
+  },
+  "api": {
+    "dirs": [
+      "v1"
+    ],
+    "files": [
+      "metadata.json",
+      "index.json",
+      "concept-index.json",
+      "README_API.md"
+    ]
+  },
+  "api/v1": {
+    "dirs": [
+      "concept"
+    ],
+    "files": [
+      "applied-energy-flow-cosmology-v2.2-\u2013-cross-field-integration-summary-(2025).json",
+      "terms.json",
+      "energy\u2013flow-cosmology-v1.2:-foundational-framework-and-cross-field-continuity.json",
+      "api_index.json",
+      "concepts.json",
+      "cem-cosmos:-a-field-theoretic-model-of-consciousnesscoupled-to-energy-flow-cosmology.json",
+      "meta.json",
+      "__init__.py",
+      "methodology.json",
+      "energy-flow-cosmology-(efc-v2.1):-unified-thermodynamic-framework-across-structure,-dynamics,-and-cognition.json"
+    ]
+  },
+  "api/v1/concept": {
+    "dirs": [],
+    "files": [
+      "applied-energy-flow-cosmology-v22-cross-field-integration-summary-2025.json",
+      "energy-flow-cosmology-efc-v21-unified-thermodynamic-framework-across-structure-dynamics-and-cognition.json",
+      "energy-flow-cosmology-v12-foundational-framework-and-cross-field-continuity.json",
+      "cem-cosmos-a-field-theoretic-model-of-consciousnesscoupled-to-energy-flow-cosmology.json"
+    ]
+  },
+  "schema": {
+    "dirs": [],
+    "files": [
+      "pages-structure.json",
+      "docs-index.json",
+      "sitemap-links.json",
+      "author.jsonld",
+      "update-schema.sh",
+      "README.md",
+      "site-graph.json",
+      "posts-structure.json",
+      "methodology-index.json",
+      "concepts.json",
+      "schema-map.json"
+    ]
+  },
+  "meta": {
+    "dirs": [
+      "personal",
+      "reflection",
+      "cognition",
+      "symbiosis",
+      "meta-process"
+    ],
+    "files": [
+      "WORKFLOW_MAP.html",
+      "topology-of-insight.md",
+      "architecture.md",
+      "README.md",
+      "meta-architecture-spec.md",
+      "meta-architecture.md",
+      "meta-architecture.json",
+      "WORKFLOW_MAP.md",
+      "meta-reflective-protocol.md",
+      "metascope.md"
+    ]
+  },
+  "meta/personal": {
+    "dirs": [],
+    "files": [
+      "Personal-Note.md"
+    ]
+  },
+  "meta/reflection": {
+    "dirs": [],
+    "files": [
+      "reflection-schema.json",
+      "resonance-links.json",
+      "README.md",
+      "state-map.json",
+      "reflection-log.md",
+      "reflection-index.json"
+    ]
+  },
+  "meta/cognition": {
+    "dirs": [],
+    "files": [
+      "cognitive-signature.md",
+      "README.md",
+      "entropy-clarity.md",
+      "cognitive-field.md",
+      "you.md",
+      "transient-representations.md"
+    ]
+  },
+  "meta/symbiosis": {
+    "dirs": [],
+    "files": [
+      "symbiotic-process-summary.md",
+      "symbiosis-interface.md",
+      "resonance-mechanism.md",
+      "README.md",
+      "system-coherence.md",
+      "symbiotic-process-llm.md",
+      "system.md",
+      "vector-alignment.md",
+      "symbiotic-process.md"
+    ]
+  },
+  "meta/meta-process": {
+    "dirs": [],
+    "files": [
+      "tasks.md",
+      "global-dynamics.md",
+      "co-field.md",
+      "validation-plan.md",
+      "roadmap.md",
+      "README.md",
+      "backlog.md",
+      "workflows.md",
+      "process-of-process.md",
+      "milestones.md",
+      "self-evaluation.md"
+    ]
+  },
+  "scripts": {
+    "dirs": [
+      "scripts"
+    ],
+    "files": [
+      "generate_repo_map.py",
+      "plot_c_of_S.py",
+      "run_efc_baseline.py",
+      "import_methodology_to_neo4j.py",
+      "update_all_readmes.py",
+      "test_c_entropy.py",
+      "fetch_figshare_auto.py",
+      "README.md",
+      "full_autosync.py",
+      "generate_methodology_api.py",
+      "validate_all.py",
+      "update_concepts.py",
+      "generate_efc_vs_lcdm_plot.py",
+      "parse_sparc_table1.py",
+      "validate_efc.py",
+      "update_efc_api.py",
+      "fetch_sparc_rc.py",
+      "efc_self_heal.py",
+      "test_gradients.py",
+      "check_imports.py",
+      "plot_results.py",
+      "run_sparc_validation.py"
+    ]
+  },
+  "scripts/scripts": {
+    "dirs": [],
+    "files": [
+      "validate_all.py"
+    ]
+  },
+  "methodology": {
+    "dirs": [],
+    "files": [
+      "reproducibility-guide.md",
+      "symbiotic-process-summary.md",
+      "symbiosis-interface.md",
+      "EFC-epistemology.md",
+      "README.md",
+      "symbiotic-process-llm.md",
+      "open-method.md",
+      "author-method-note.md",
+      "open-process.json",
+      "symbiotic-process.md"
+    ]
+  },
+  "app": {
+    "dirs": [
+      "dashboard"
+    ],
+    "files": []
+  },
+  "app/dashboard": {
+    "dirs": [],
+    "files": [
+      "index.html",
+      "script.js",
+      "style.css"
+    ]
+  },
+  "theory": {
+    "dirs": [
+      "formal"
+    ],
+    "files": [
+      "architecture.md",
+      "README.md"
+    ]
+  },
+  "theory/formal": {
+    "dirs": [],
+    "files": [
+      "efc_structure_model.tex",
+      "efc_h_model.tex",
+      "efc_d_model.tex",
+      "efc_flow_diagram.tex",
+      "meta_architecture_section.tex",
+      "meta_index.tex",
+      "efc_s_model.tex",
+      "efc_formal_spec.pdf",
+      "parameters.tex",
+      "efc_formal_spec.tex",
+      "efc_header.tex",
+      "notation.tex",
+      "meta_reflective_section.tex"
+    ]
+  },
+  "docs": {
+    "dirs": [
+      "archive",
+      "meta",
+      "figures",
+      "articles",
+      "sections"
+    ],
+    "files": [
+      ".nojekyll",
+      "efc_master.html",
+      "index.html",
+      "efc_master_v1.pdf",
+      "efc_master.css",
+      "README.md",
+      "mathjax_header.html",
+      "efc_master_template.html",
+      "efc_master.tex"
+    ]
+  },
+  "docs/archive": {
+    "dirs": [],
+    "files": [
+      "efc_master_v1.tex"
+    ]
+  },
+  "docs/meta": {
+    "dirs": [],
+    "files": [
+      "CEM-Consciousness-Ego-Mirror.pdf",
+      "CEM-Consciousness-Ego-Mirror.md",
+      "EFC-Hypothesis-Entropy-and-Energy-Flow.docx"
+    ]
+  },
+  "docs/figures": {
+    "dirs": [],
+    "files": [
+      "EFC_vs_LCDM_plot.png",
+      "efc_halo_rho_profile.png",
+      "efc_Ef_rho_S_heatmap.png",
+      "efc_schematic_lensing_profile.png",
+      "efc_halo_S_profile.png",
+      "efc_schematic_rotation_curves.png",
+      "efc_schematic_Hz.png",
+      "efc_information_capacity_vs_S.png"
+    ]
+  },
+  "docs/articles": {
+    "dirs": [],
+    "files": [
+      "EFC-CMB-Thermodynamic-Gradient.md",
+      "EFC-v2.1-Complete-Edition.pdf",
+      "EFC-The-Energy-Flow-Interface.md",
+      "EFC-Thermodynamic-Bridge-GR-QFT.pdf",
+      "EFC-v1.2-Foundational-Framework.pdf",
+      "EFC-What-is-the-Connection-Between-Energy-Flow-and-the-Now.md",
+      "EFC-A-Deep-Dive-into-the-Halo-Concept.md",
+      "EFC-Grid-Model-Entropic-Dynamics.md",
+      "EFC-v1.2-Foundational-Framework.md",
+      "EFC-v2.1-Modular-Synthesis.pdf",
+      "EFC-Applications-and-Implications.md",
+      "EFC-Introduction-to-Energy-Flow-in-Space-Time.md",
+      "EFC-Hypothesis-Universe-as-Energy-Driven-System.pdf",
+      "EFC-Technical-Documentation-Energy-Flow-in-Space-Time.md",
+      "EFC-Energy-Flow-as-the-Fundamental-Dynamic-of-the-Universe.pdf",
+      "EFC-Dynamic-Balance-Entropy-Order-and-Chaos.pdf",
+      "EFC-Is-Consciousness-Linked-to-Entropy.pdf",
+      "EFC-The-Energy-Flow-Interface.pdf",
+      "EFC-Can-Energy-Flow-Be-Observed-in-Galactic-Clusters.pdf",
+      "EFC-Observational-Evidence-Entropy-Cosmic-Evolution.pdf",
+      "EFC-Hypothesis-Entropy-and-Energy-Flow.md",
+      "EFC-What-Happens-at-the-Universes-Extremes.md",
+      "EFC-Hypothesis-Interrelation-Energy-Entropy.pdf",
+      "EFC-Grid-Higgs-Paradigm-Shift.pdf",
+      "EFC-Dynamic-Balance-Entropy-Order-and-Chaos.md",
+      "EFC-CMB-Thermodynamic-Gradient.pdf",
+      "EFC-Can-Entropy-Drive-Cosmic-Evolution.md",
+      "EFC-Thermodynamic-Bridge-GR-QFT.md",
+      "EFC-Field-Equations-for-Entropy-Driven-Spacetime.md",
+      "EFC-Why-is-Light-Speed-a-Cosmic-Limit.md",
+      "EFC-Observational-Evidence-Entropy-Cosmic-Evolution.md",
+      "EFC-Light-Speed-as-a-Regulator-of-Energy-Flow-in-the-Universe.md",
+      "EFC-Why-is-Light-Speed-a-Cosmic-Limit.pdf",
+      "EFC-v2.2-Cross-Field-Integration-Summary.md",
+      "EFC-Technical-Documentation-Energy-Flow-in-Space-Time.pdf",
+      "EFC-What-is-the-Connection-Between-Energy-Flow-and-the-Now.pdf",
+      "EFC-Integrated-Hypothesis-Time-Entropy.pdf",
+      "EFC-Introduction-to-Energy-Flow-in-Space-Time.pdf",
+      "EFC-What-Happens-at-the-Universes-Extremes.pdf",
+      "EFC-Can-Energy-Flow-Be-Observed-in-Galactic-Clusters.md",
+      "EFC-Grid-Higgs-Paradigm-Shift.md",
+      "EFC-Is-Consciousness-Linked-to-Entropy.md",
+      "EFC-Hypothesis-Interrelation-Energy-Entropy.md",
+      "EFC-Flow-Entropy-and-Spacetime-Distortion-in-Cosmological-Clusters.md",
+      "EFC-Hypothesis-Universe-as-Energy-Driven-System.md",
+      "EFC-Can-Entropy-Drive-Cosmic-Evolution.pdf",
+      "EFC-Subhypothesis-Light-Speed-Limit.md",
+      "EFC-Integrated-Hypothesis-Time-Entropy.md",
+      "EFC-Field-Equations-for-Entropy-Driven-Spacetime.pdf",
+      "EFC-Introduction-to-Entropy-in-Cosmic-Evolution.pdf",
+      "EFC-v2.1-Modular-Synthesis.md",
+      "EFC-Grid-Model-Entropic-Dynamics..pdf",
+      "EFC-Grid-Higgs-Framework.pdf",
+      "EFC-Energy-Flow-as-the-Fundamental-Dynamic-of-the-Universe.md",
+      "EFC-Light-Speed-as-a-Regulator-of-Energy-Flow-in-the-Universe.pdf",
+      "EFC-Subhypothesis-Light-Speed-Limit.pdf",
+      "EFC-How-Energy-Flow-Sustain-Spacetime.md",
+      "EFC-Unresolved-Questions-and-Challenges-Entropy.pdf",
+      "EFC-Observational-Evidence-for-Energy-Flow.md",
+      "EFC-Applications-and-Implications.pdf",
+      "EFC-Introduction-to-Entropy-in-Cosmic-Evolution.md",
+      "EFC-v2.1-Complete-Edition.md",
+      "EFC-v2.2-Cross-Field-Integration-Summary.pdf",
+      "EFC-A-Deep-Dive-into-the-Halo-Concept.pdf",
+      "EFC-How-Energy-Flow-Sustain-Spacetime.pdf",
+      "EFC-Mathematical-Framework-for-Energy-Flow-in-Space-Time.pdf",
+      "EFC-Flow-Entropy-and-Spacetime-Distortion-in-Cosmological-Clusters.pdf",
+      "EFC-How-Does-Balance-Shape-Universal-Structures.pdf",
+      "EFC-Observational-Evidence-for-Energy-Flow.pdf",
+      "EFC-Grid-Higgs-Framework.md",
+      "EFC-How-Does-Balance-Shape-Universal-Structures.md",
+      "EFC-Mathematical-Framework-for-Energy-Flow-in-Space-Time.md",
+      "EFC-Unresolved-Questions-and-Challenges-Entropy.md"
+    ]
+  },
+  "docs/sections": {
+    "dirs": [],
+    "files": [
+      "figures.tex",
+      "observables.tex",
+      "s0_s1_light_dynamics.tex",
+      "efc_c0.tex",
+      "efc_s.tex",
+      "efc_d.tex"
+    ]
+  },
+  "data": {
+    "dirs": [
+      "archive"
+    ],
+    "files": []
+  },
+  "data/archive": {
+    "dirs": [],
+    "files": [
+      "28098386.zip"
+    ]
+  },
+  "figshare": {
+    "dirs": [],
+    "files": [
+      "README.md",
+      "figshare-index.json",
+      "figshare-links.json",
+      "latest.json"
+    ]
+  },
+  "integrations": {
+    "dirs": [
+      "wp"
+    ],
+    "files": []
+  },
+  "integrations/wp": {
+    "dirs": [
+      "efc-schema-loader"
+    ],
+    "files": []
+  },
+  "integrations/wp/efc-schema-loader": {
+    "dirs": [
+      "admin",
+      "includes"
+    ],
+    "files": [
+      "loader-core.php",
+      "efc-schema-loader.php"
+    ]
+  },
+  "integrations/wp/efc-schema-loader/admin": {
+    "dirs": [],
+    "files": [
+      "efc-schema-validator.php"
+    ]
+  },
+  "integrations/wp/efc-schema-loader/includes": {
+    "dirs": [],
+    "files": [
+      "class-efc-cli.php"
+    ]
+  },
+  "notebooks": {
+    "dirs": [],
+    "files": [
+      "EFC_Baseline.ipynb",
+      "README.md",
+      "EFC_vs_LCDM.ipynb"
+    ]
+  },
+  "src": {
+    "dirs": [
+      "efc"
+    ],
+    "files": [
+      "README.md",
+      "efc_light.py",
+      "__init__.py"
+    ]
+  },
+  "src/efc": {
+    "dirs": [
+      "meta",
+      "entropy",
+      "potential",
+      "core",
+      "validation"
+    ],
+    "files": []
+  },
+  "src/efc/meta": {
+    "dirs": [],
+    "files": [
+      "cofield_simulator.py",
+      "__init__.py"
+    ]
+  },
+  "src/efc/entropy": {
+    "dirs": [],
+    "files": [
+      "efc_entropy.py"
+    ]
+  },
+  "src/efc/potential": {
+    "dirs": [],
+    "files": [
+      "efc_potential.py"
+    ]
+  },
+  "src/efc/core": {
+    "dirs": [],
+    "files": [
+      "efc_core.py"
+    ]
+  },
+  "src/efc/validation": {
+    "dirs": [],
+    "files": [
+      "sparc_io.py",
+      "efc_validation.py"
+    ]
+  }
+}

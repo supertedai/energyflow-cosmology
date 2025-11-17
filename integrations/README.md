@@ -1,9 +1,8 @@
-# notebooks
+# integrations
 
 Automatisk generert README via `update_all_readmes.py`.
 
-## 📄 Filer
-- `EFC_Baseline.ipynb`
-- `EFC_vs_LCDM.ipynb`
+## 📁 Undermapper
+- `wp/`
 
 *Denne README oppdateres automatisk.*
