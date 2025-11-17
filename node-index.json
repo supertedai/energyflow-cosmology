@@ -253,15 +253,15 @@
   },
   {
     "id": null,
-    "name": "AI-Augmented Scientific Workflow Framework",
+    "name": "AI Augmented Scientific Workflow Framework",
     "type": "CreativeWork",
-    "path": "./methodology/AI-Augmented-Scientific-Workflow-Framework/ai_workflow_framework.jsonld"
+    "path": "./methodology/AI-Augmented-Scientific-Workflow-Framework/AI-Augmented-Scientific-Workflow-Framework/index.jsonld"
   },
   {
     "id": null,
-    "name": "AI Augmented Scientific Workflow Framework",
+    "name": "AI-Augmented Scientific Workflow Framework",
     "type": "CreativeWork",
-    "path": "./methodology/AI-Augmented-Scientific-Workflow-Framework/AI-Augmented-Scientific-Workflow-Framework.jsonld"
+    "path": "./methodology/AI-Augmented-Scientific-Workflow-Framework/ai_workflow_framework/index.jsonld"
   },
   {
     "id": null,
@@ -291,7 +291,7 @@
     "id": null,
     "name": "methodology",
     "type": "CreativeWork",
-    "path": "./methodology/methodology/index.jsonld"
+    "path": "./methodology/methodology/index/index.jsonld"
   },
   {
     "id": null,
