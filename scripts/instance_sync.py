@@ -1,31 +1,30 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-INSTANCE SYNC — Light Maintenance Layer (Whitelisted & Clean)
-=============================================================
+INSTANCE SYNC — Production Version
+==================================
 
-Formål:
-- Rydde bort feilplasserte / auto-genererte JSON-LD som ikke hører hjemme
-- Generere manglende JSON-LD KUN i whitelistede kunnskapsmapper
-- Bygge meta-index.json for hele kunnskapsgrafen
+Funksjoner:
+- Rydder bort feilplasserte JSON-LD
+- Genererer manglende JSON-LD i whitelisted nodedirs
+- Rebuilder meta-index.json
+- Commit + push hvis noe er endret
 
-Egenskaper:
-- Ingen git-commit
-- Ingen figshare-kall
-- Ingen ekstern avhengighet
-- Trygg å kjøre ofte (f.eks. hver time)
+Dette er "light maintenance"-laget i EFC.
+Kjører ofte. Lager aldri kaos. Gir rene noder.
+
 """
 
 import os
 import json
+import subprocess
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 
 
-# ------------------------- Konfigurasjon -------------------------
+# --------------------------- Konfig ---------------------------
 
-# Mapper som regnes som "kunnskapsnoder" og hvor vi TILLATER JSON-LD
 NODE_DIR_PREFIXES = [
     "schema",
     "meta",
@@ -38,16 +37,11 @@ NODE_DIR_PREFIXES = [
     "data/processed",
 ]
 
-# Mapper vi ALDRI vil gå inn i for node-logikk (git, venv osv.)
 HARD_IGNORES = [
-    ".git",
-    ".github",
-    ".venv",
-    "venv",
-    "__pycache__",
-    ".idea",
-    ".vscode",
-    "output",
+    ".git", ".github", ".venv", "venv",
+    "__pycache__", ".idea", ".vscode",
+    "output", "notebooks", "scripts",
+    "data/raw", "data/archive",
 ]
 
 AUTHOR = {
@@ -57,7 +51,9 @@ AUTHOR = {
 }
 
 
-def safe_print(msg: str) -> None:
+# ---------------------- Utility Functions ----------------------
+
+def safe_print(msg: str):
     try:
         print(msg)
     except Exception:
@@ -65,7 +61,6 @@ def safe_print(msg: str) -> None:
 
 
 def is_under_prefix(rel_path: str, prefixes) -> bool:
-    """Sjekk om rel_path ligger under en av prefixene."""
     for p in prefixes:
         if rel_path == p or rel_path.startswith(p + "/"):
             return True
@@ -73,73 +68,51 @@ def is_under_prefix(rel_path: str, prefixes) -> bool:
 
 
 def dir_slug(rel_path: str) -> str:
-    """Bruk mappenavnet som slug."""
     return os.path.basename(rel_path) if rel_path and rel_path != "." else ""
 
 
-# ------------------------- Fase 1: RYDDING -------------------------
+# ---------------------------- Cleanup ----------------------------
 
 def cleanup_stray_jsonld():
-    """
-    Fjern JSON-LD fra mapper som IKKE er whitelisted kunnskapsnoder.
-    Fjerner også evt. JSON-LD i repo-root.
-    """
     safe_print("[instance_sync] Cleanup: removing stray JSON-LD...")
 
     for root, dirs, files in os.walk(ROOT):
         rel = os.path.relpath(root, ROOT)
 
-        # Hopp over hard-ignore-mapper
-        parts = rel.split(os.sep)
-        if any(part in HARD_IGNORES for part in parts):
-            continue
-
-        # Root '.' → ingen JSON-LD skal ligge her
         if rel == ".":
             for f in files:
                 if f.endswith(".jsonld"):
                     path = Path(root) / f
-                    try:
-                        path.unlink()
-                        safe_print(f"[instance_sync] Removed root JSON-LD: {path}")
-                    except Exception as e:
-                        safe_print(f"[instance_sync] Could not remove {path}: {e}")
+                    path.unlink(missing_ok=True)
+                    safe_print(f"[instance_sync] Removed root JSON-LD: {path}")
             continue
 
-        # Mapper som IKKE er under noen tillatte NODE_DIR_PREFIXES → fjern JSON-LD
+        parts = rel.split(os.sep)
+        if any(x in HARD_IGNORES for x in parts):
+            continue
+
         if not is_under_prefix(rel, NODE_DIR_PREFIXES):
             for f in files:
                 if f.endswith(".jsonld"):
                     path = Path(root) / f
-                    try:
-                        path.unlink()
-                        safe_print(f"[instance_sync] Removed stray JSON-LD: {path}")
-                    except Exception as e:
-                        safe_print(f"[instance_sync] Could not remove {path}: {e}")
+                    path.unlink(missing_ok=True)
+                    safe_print(f"[instance_sync] Removed stray JSON-LD: {path}")
 
 
-# ------------------------- Fase 2: GENERERING -------------------------
+# ----------------------- JSON-LD Generation -----------------------
 
 def generate_jsonld_for_missing_nodes():
-    """
-    Generer minimal JSON-LD for mapper under whitelistede NODE_DIR_PREFIXES
-    som ikke allerede har korrekt JSON-LD.
-    """
     safe_print("[instance_sync] Generating missing JSON-LD in whitelisted dirs...")
 
     for root, dirs, files in os.walk(ROOT):
         rel = os.path.relpath(root, ROOT)
-
-        # Hopp over root
         if rel == ".":
             continue
 
-        # Hopp over hard-ignores
         parts = rel.split(os.sep)
-        if any(part in HARD_IGNORES for part in parts):
+        if any(x in HARD_IGNORES for x in parts):
             continue
 
-        # Bare operer på whitelisted mapper
         if not is_under_prefix(rel, NODE_DIR_PREFIXES):
             continue
 
@@ -148,39 +121,30 @@ def generate_jsonld_for_missing_nodes():
             continue
 
         expected = f"{slug}.jsonld"
-        has_expected = expected in files
 
-        if has_expected:
-            # Ikke rør JSON-LD som allerede er der
+        if expected in files:
             continue
 
         jsonld_path = Path(root) / expected
-
         data = {
             "@context": "https://schema.org",
             "@type": "CreativeWork",
             "identifier": slug,
             "name": slug.replace("_", " ").replace("-", " "),
-            "layer": rel.split(os.sep)[0],  # toppnivå som "schema", "meta", "api", ...
+            "layer": rel.split(os.sep)[0],
             "author": AUTHOR,
             "version": "1.0",
         }
 
-        try:
-            with jsonld_path.open("w", encoding="utf-8") as f:
-                json.dump(data, f, indent=2)
-            safe_print(f"[instance_sync] Created JSON-LD: {jsonld_path}")
-        except Exception as e:
-            safe_print(f"[instance_sync] Could not write JSON-LD {jsonld_path}: {e}")
+        with jsonld_path.open("w", encoding="utf-8") as f:
+            json.dump(data, f, indent=2)
+
+        safe_print(f"[instance_sync] Created JSON-LD: {jsonld_path}")
 
 
-# ------------------------- Fase 3: META-INDEX -------------------------
+# ------------------------- Meta-index -------------------------
 
 def rebuild_meta_index():
-    """
-    Skanner hele repoet etter .jsonld (etter rydding),
-    og bygger en enkel meta-index.json for kunnskapsnoder.
-    """
     safe_print("[instance_sync] Building meta-index.json...")
 
     nodes = []
@@ -188,9 +152,8 @@ def rebuild_meta_index():
     for root, dirs, files in os.walk(ROOT):
         rel = os.path.relpath(root, ROOT)
 
-        # Hopp over hard-ignores
         parts = rel.split(os.sep)
-        if any(part in HARD_IGNORES for part in parts):
+        if any(x in HARD_IGNORES for x in parts):
             continue
 
         for f in files:
@@ -198,10 +161,7 @@ def rebuild_meta_index():
                 continue
 
             path = Path(root) / f
-            rel_path = os.path.relpath(path, ROOT)
-
-            identifier = None
-            node_type = "CreativeWork"
+            rel_path = os.path.relpath(path, ROOT).replace(os.sep, "/")
 
             try:
                 with path.open("r", encoding="utf-8") as fh:
@@ -209,34 +169,60 @@ def rebuild_meta_index():
                 identifier = data.get("identifier")
                 node_type = data.get("@type", "CreativeWork")
             except Exception:
-                # Fallback: bruk filnavn uten suffiks
                 identifier = f.replace(".jsonld", "")
+                node_type = "CreativeWork"
 
-            nodes.append(
-                {
-                    "id": identifier,
-                    "path": rel_path.replace(os.sep, "/"),
-                    "type": node_type,
-                }
-            )
+            nodes.append({
+                "id": identifier,
+                "path": rel_path,
+                "type": node_type,
+            })
 
-    meta_index_path = ROOT / "meta-index.json"
-    try:
-        with meta_index_path.open("w", encoding="utf-8") as f:
-            json.dump({"version": "1.0", "nodes": nodes}, f, indent=2)
-        safe_print(f"[instance_sync] meta-index.json updated with {len(nodes)} nodes.")
-    except Exception as e:
-        safe_print(f"[instance_sync] Could not write meta-index.json: {e}")
+    meta_path = ROOT / "meta-index.json"
+    with meta_path.open("w", encoding="utf-8") as f:
+        json.dump({"version": "1.0", "nodes": nodes}, f, indent=2)
+
+    safe_print(f"[instance_sync] meta-index.json updated with {len(nodes)} nodes.")
 
 
-# ------------------------- MAIN -------------------------
+# ---------------------- Git Commit + Push ----------------------
+
+def git_status():
+    result = subprocess.run(
+        ["git", "status", "--porcelain"],
+        cwd=ROOT,
+        capture_output=True,
+        text=True
+    )
+    return result.stdout.strip()
+
+
+def commit_and_push():
+    status = git_status()
+    if not status:
+        safe_print("[instance_sync] No changes to commit.")
+        return
+
+    safe_print("[instance_sync] Changes detected:")
+    safe_print(status)
+
+    subprocess.run(["git", "add", "-A"], cwd=ROOT)
+    msg = "Instance sync auto-update [skip ci]"
+    subprocess.run(["git", "commit", "-m", msg], cwd=ROOT)
+    subprocess.run(["git", "push"], cwd=ROOT)
+
+    safe_print("[instance_sync] Changes pushed successfully.")
+
+
+# ------------------------------ MAIN ------------------------------
 
 def main():
-    safe_print("[instance_sync] Starting instance sync (whitelist + cleanup)...")
+    safe_print("[instance_sync] Starting instance sync (clean + generate + push)...")
 
     cleanup_stray_jsonld()
     generate_jsonld_for_missing_nodes()
     rebuild_meta_index()
+    commit_and_push()
 
     safe_print("[instance_sync] Done.")
 
