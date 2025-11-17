@@ -9,9 +9,12 @@
 - `docs/`
 - `figshare/`
 - `integrations/`
+- `lib/`
 - `meta/`
+- `meta-graph/`
 - `methodology/`
 - `notebooks/`
+- `output/`
 - `schema/`
 - `scripts/`
 - `src/`
@@ -24,8 +27,9 @@
 - `START-HERE.md`
 - `meta-index.json`
 - `meta_dashboard.py`
+- `repo_api_list.txt`
+- `repo_structure.txt`
 - `requirements.txt`
-- `schema-map.json`
 - `sitemap-links.json`
 - `sitemap.xml`
 - `trigger.txt`

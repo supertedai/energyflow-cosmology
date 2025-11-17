@@ -7,6 +7,7 @@
 - `meta-process/`
 - `personal/`
 - `reflection/`
+- `resources/`
 - `symbiosis/`
 
 ## 📄 Files

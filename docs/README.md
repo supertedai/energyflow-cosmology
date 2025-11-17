@@ -7,6 +7,7 @@
 - `articles/`
 - `figures/`
 - `meta/`
+- `preprints/`
 - `sections/`
 
 ## 📄 Files
