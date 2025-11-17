@@ -1,6 +1,6 @@
 # Energy-Flow Cosmology (EFC)
 
-📘 **Start Here**  
+**Start Here**  
 If you are new to the project, begin with:  
 👉 **[START-HERE.md](START-HERE.md)**  
 This file gives a clear orientation to the entire repository: the theory, the meta-architecture, the cognitive process, the symbiosis layer, the validation pipeline, and the overall structure.
@@ -26,7 +26,7 @@ Everything is structured for clarity, reproducibility, and long-term maintainabi
 
 ---
 
-# 📌 **Overview**
+# **Overview**
 
 EFC combines:
 
@@ -42,7 +42,7 @@ The repository follows a strict separation of *theory, schema, and computation*.
 
 ---
 
-# 🧠 **Repository Architecture**
+# **Repository Architecture**
 
 The project is organized into three fundamental layers:
 
@@ -76,7 +76,7 @@ The implementation of EFC simulations, validation, and tools.
 
 ---
 
-# 📁 **Repository Structure**
+# **Repository Structure**
 
 ````markdown
 📁 Repository Structure (click to expand)
@@ -170,7 +170,7 @@ The implementation of EFC simulations, validation, and tools.
 
 ---
 
-# 🔧 **Installation**
+# **Installation**
 
 Clone the repository:
 
@@ -187,7 +187,7 @@ pip install -r requirements.txt
 
 ---
 
-# ⚙️ **Build System**
+# **Build System**
 
 ### **LaTeX Master Build**
 
@@ -218,7 +218,7 @@ python scripts/fetch_figshare_full.py
 
 ---
 
-# 📊 **Validation Pipelines**
+# **Validation Pipelines**
 
 Validation notebooks and scripts include:
 
@@ -235,7 +235,7 @@ python scripts/validate_efc.py
 
 ---
 
-# 🌐 **Dashboards and Visualization**
+# **Dashboards and Visualization**
 
 The repository includes an interactive dashboard under:
 
@@ -253,7 +253,7 @@ A semantic dashboard (`meta_dashboard.py`) supports ontology analysis and graph 
 
 ---
 
-# 🧬 **Semantic Integration**
+# **Semantic Integration**
 
 EFC is fully integrated with:
 
@@ -267,7 +267,7 @@ The `schema/` directory defines the full semantic layer.
 
 ---
 
-# 📚 **Documentation**
+# **Documentation**
 
 Two master documents serve as the “single source of truth”:
 
@@ -278,21 +278,21 @@ Both are generated automatically.
 
 ---
 
-# **📄 License**
+# ** License**
 
 Distributed under **CC-BY-4.0**
 © 2025 — *Morten Magnusson* — Energy-Flow Cosmology Initiative
 
 ---
 
-# 🤝 **Contributions**
+# **Contributions**
 
 Pull requests are welcome.
 For changes to core theory or schema, open an issue first to discuss the direction.
 
 ---
 
-# 🎯 **Status**
+# **Status**
 
 The repository is actively developed and maintained as part of a larger research program on thermodynamic cosmology, emergent structure formation, and AI-assisted scientific methodology.
 
