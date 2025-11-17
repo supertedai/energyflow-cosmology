@@ -1,24 +1,21 @@
 {
-  "id": 30630500,
-  "title": "Energy-Flow Cosmology \u2014 Formal Master Specification v1.0",
-  "doi": "10.6084/m9.figshare.30630500",
+  "id": 30636863,
+  "title": "AI-Augmented Scientific Workflow Framework",
+  "doi": "10.6084/m9.figshare.30636863",
   "handle": "",
-  "url": "https://api.figshare.com/v2/account/articles/30630500",
-  "published_date": "2025-11-16T19:38:09Z",
-  "thumb": "https://s3-eu-west-1.amazonaws.com/pfigshare-u-previews/59594525/thumb.png",
+  "url": "https://api.figshare.com/v2/account/articles/30636863",
+  "published_date": null,
+  "thumb": "",
   "defined_type": 12,
   "defined_type_name": "preprint",
   "group_id": null,
-  "url_private_api": "https://api.figshare.com/v2/account/articles/30630500",
-  "url_public_api": "https://api.figshare.com/v2/articles/30630500",
-  "url_private_html": "https://figshare.com/account/articles/30630500",
-  "url_public_html": "https://figshare.com/articles/preprint/Energy-Flow_Cosmology_Formal_Master_Specification_v1_0/30630500",
-  "timeline": {
-    "posted": "2025-11-16T19:38:09",
-    "firstOnline": "2025-11-16T13:07:16"
-  },
+  "url_private_api": "https://api.figshare.com/v2/account/articles/30636863",
+  "url_public_api": "https://api.figshare.com/v2/articles/30636863",
+  "url_private_html": "https://figshare.com/account/articles/30636863",
+  "url_public_html": "https://figshare.com/articles/preprint/_/30636863",
+  "timeline": {},
   "resource_title": null,
   "resource_doi": null,
-  "created_date": "2025-11-16T11:52:47Z",
-  "modified_date": "2025-11-16T19:38:09Z"
+  "created_date": "2025-11-17T11:34:06Z",
+  "modified_date": "2025-11-17T11:34:21Z"
 }
