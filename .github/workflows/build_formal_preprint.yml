@@ -1,0 +1,52 @@
+name: Build EFC Formal Preprint (PDF)
+
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - "theory/formal/**"
+      - ".github/workflows/build_formal_preprint.yml"
+  workflow_dispatch:
+
+jobs:
+  build-pdf:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Install LaTeX
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y \
+            texlive \
+            texlive-latex-extra \
+            texlive-science \
+            latexmk
+
+      - name: Compile PDF
+        working-directory: theory/formal
+        run: |
+          latexmk -pdf efc_formal_spec.tex -interaction=nonstopmode
+
+      - name: Copy PDF to docs/preprints/
+        run: |
+          mkdir -p docs/preprints
+          cp theory/formal/efc_formal_spec.pdf docs/preprints/efc_formal_spec.pdf
+
+      - name: Commit PDF only if changed
+        run: |
+          git config user.name "github-actions"
+          git config user.email "actions@github.com"
+          git add docs/preprints/efc_formal_spec.pdf || true
+
+          if git diff --cached --quiet; then
+            echo "No preprint updates – skip commit."
+            exit 0
+          fi
+
+          git commit -m "Auto-build Formal Preprint PDF [skip ci]"
+          git push
