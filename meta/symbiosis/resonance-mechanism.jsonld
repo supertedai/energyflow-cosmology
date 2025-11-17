@@ -1,0 +1,27 @@
+{
+  "@context": "https://schema.org",
+  "@type": "CreativeWork",
+  "identifier": "meta/symbiosis/resonance-mechanism",
+  "name": "Resonance Mechanism (Human + System Field)",
+  "author": {
+    "@type": "Person",
+    "name": "Morten Magnusson",
+    "identifier": "https://orcid.org/0009-0002-4860-5095"
+  },
+  "version": "1.0",
+  "isPartOf": {
+    "@type": "CreativeWorkSeries",
+    "name": "meta"
+  },
+  "layer": "meta",
+  "encodingFormat": "md",
+  "url": "meta/symbiosis/resonance-mechanism.md",
+  "description": "Symbiosis emerges when your cognitive field and the system's response field align.",
+  "keywords": [
+    "field",
+    "human",
+    "mechanism",
+    "resonance",
+    "system"
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "@context": "https://schema.org",
+  "@type": "CreativeWork",
+  "identifier": "docs/articles/EFC-What-Happens-at-the-Universes-Extremes",
+  "name": "Abstract",
+  "author": {
+    "@type": "Person",
+    "name": "Morten Magnusson",
+    "identifier": "https://orcid.org/0009-0002-4860-5095"
+  },
+  "version": "1.0",
+  "isPartOf": {
+    "@type": "CreativeWorkSeries",
+    "name": "docs"
+  },
+  "layer": "docs",
+  "encodingFormat": "md",
+  "url": "docs/articles/EFC-What-Happens-at-the-Universes-Extremes.md",
+  "description": "--- title: What Happens at the Universe\u2019s Extremes? doi: 10.6084/m9.figshare.28098380 published: 2024-12-25",
+  "keywords": [
+    "abstract"
+  ]
+}

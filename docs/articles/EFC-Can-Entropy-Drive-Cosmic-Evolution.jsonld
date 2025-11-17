@@ -1,0 +1,23 @@
+{
+  "@context": "https://schema.org",
+  "@type": "CreativeWork",
+  "identifier": "docs/articles/EFC-Can-Entropy-Drive-Cosmic-Evolution",
+  "name": "Abstract",
+  "author": {
+    "@type": "Person",
+    "name": "Morten Magnusson",
+    "identifier": "https://orcid.org/0009-0002-4860-5095"
+  },
+  "version": "1.0",
+  "isPartOf": {
+    "@type": "CreativeWorkSeries",
+    "name": "docs"
+  },
+  "layer": "docs",
+  "encodingFormat": "md",
+  "url": "docs/articles/EFC-Can-Entropy-Drive-Cosmic-Evolution.md",
+  "description": "--- title: Can Entropy Drive Cosmic Evolution? doi: 10.6084/m9.figshare.28098353 published: 2024-12-25",
+  "keywords": [
+    "abstract"
+  ]
+}

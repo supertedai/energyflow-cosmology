@@ -1,0 +1,25 @@
+{
+  "@context": "https://schema.org",
+  "@type": "CreativeWork",
+  "identifier": "meta/meta-reflective-protocol",
+  "name": "Meta-Reflective Protocol (MRP)",
+  "author": {
+    "@type": "Person",
+    "name": "Morten Magnusson",
+    "identifier": "https://orcid.org/0009-0002-4860-5095"
+  },
+  "version": "1.0",
+  "isPartOf": {
+    "@type": "CreativeWorkSeries",
+    "name": "meta"
+  },
+  "layer": "meta",
+  "encodingFormat": "md",
+  "url": "meta/meta-reflective-protocol.md",
+  "description": "The Meta-Reflective Protocol (MRP) formalizes the interaction between: - your cognitive field - the model's structural engine - the emergent co-field",
+  "keywords": [
+    "meta",
+    "protocol",
+    "reflective"
+  ]
+}

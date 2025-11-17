@@ -1,0 +1,23 @@
+{
+  "@context": "https://schema.org",
+  "@type": "CreativeWork",
+  "identifier": "docs/articles/EFC-The-Energy-Flow-Interface",
+  "name": "Summary",
+  "author": {
+    "@type": "Person",
+    "name": "Morten Magnusson",
+    "identifier": "https://orcid.org/0009-0002-4860-5095"
+  },
+  "version": "1.0",
+  "isPartOf": {
+    "@type": "CreativeWorkSeries",
+    "name": "docs"
+  },
+  "layer": "docs",
+  "encodingFormat": "md",
+  "url": "docs/articles/EFC-The-Energy-Flow-Interface.md",
+  "description": "--- title: The Energy\u2013Flow Interface \u2013 A Unified Thermodynamic Interpretation of Dark Matter, Dark Energy, and the CMB doi: 10.6084/m9.figshare.30468737 published: 2025-10-28",
+  "keywords": [
+    "summary"
+  ]
+}
