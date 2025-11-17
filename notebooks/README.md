@@ -1,11 +1,11 @@
-# 📘 **Jupyter Notebooks — Energy-Flow Cosmology**
+# **Jupyter Notebooks — Energy-Flow Cosmology**
 
 Interactive notebooks for exploring and validating the **Energy-Flow Cosmology (EFC)** framework.
 They provide baseline simulations, comparisons against ΛCDM, and tests of entropy-driven dynamics.
 
 ---
 
-## 📂 **Contents**
+## **Contents**
 
 | Notebook                                | Purpose                                                                                                                                |
 | --------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------- |
@@ -15,7 +15,7 @@ They provide baseline simulations, comparisons against ΛCDM, and tests of entro
 
 ---
 
-## ⚙️ **Usage**
+## **Usage**
 
 You can run these notebooks locally or inside VS Code / JupyterLab / GitHub Codespaces.
 
