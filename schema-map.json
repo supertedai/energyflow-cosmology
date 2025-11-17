@@ -16,17 +16,5 @@
     "type": "CreativeWork",
     "id": null,
     "name": "Efc Master V1"
-  },
-  "ai_workflow_framework.jsonld": {
-    "path": "./methodology/AI-Augmented-Scientific-Workflow-Framework/ai_workflow_framework.jsonld",
-    "type": "CreativeWork",
-    "id": null,
-    "name": "AI-Augmented Scientific Workflow Framework"
-  },
-  "AI-Augmented-Scientific-Workflow-Framework.jsonld": {
-    "path": "./methodology/AI-Augmented-Scientific-Workflow-Framework/AI-Augmented-Scientific-Workflow-Framework.jsonld",
-    "type": "CreativeWork",
-    "id": null,
-    "name": "AI Augmented Scientific Workflow Framework"
   }
 }
