@@ -1,9 +1,9 @@
 {
   "@context": "https://schema.org",
   "@type": "CreativeWork",
-  "name": "Tasks",
-  "identifier": "tasks",
-  "layer": ".",
+  "name": "meta process",
+  "identifier": "meta-process",
+  "layer": "meta",
   "description": "# EFC Tasks  ## High Priority [ ] Fix Figshare upload workflow   [ ] Add EFC-D full dynamic equation   [ ] Implement Neo4j export module   [ ] Expand JWST validation script   [ ] Add error handling in validation pipeline   [ ] Improve plotting logic in plot_results.py    ## Medium Priority [ ] Add BAO and S8 validation   [ ] Build api/v1/graph endpoint   [ ] Add summary reports to output/    ## Lo",
   "version": "1.0",
   "author": {

@@ -1,9 +1,9 @@
 {
   "@context": "https://schema.org",
   "@type": "CreativeWork",
-  "name": "Efc-Cmb-Thermodynamic-Gradient",
-  "identifier": "EFC-CMB-Thermodynamic-Gradient",
-  "layer": ".",
+  "name": "articles",
+  "identifier": "articles",
+  "layer": "docs",
   "description": "--- title: Hypothesis on Cosmic Microwave Background as a Thermodynamic Temperature Gradient doi: 10.6084/m9.figshare.28570088 published: 2025-03-10 type: Preprint tags: [Energy-Flow Cosmology, CMB, Thermodynamics, Grid-Higgs Framework, Quantum Vacuum, Entropy, Energy Flow] ---  ## Abstract This hypothesis proposes that the **Cosmic Microwave Background (CMB)**, observed at 2.725 K, represents a *",
   "version": "1.0",
   "author": {
