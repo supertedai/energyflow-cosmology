@@ -1,16 +1,20 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-INSTANCE SYNC — Production Version (with Git push)
-==================================================
+INSTANCE SYNC — Semantic Harvest v3
+===================================
 
 Gjør:
-- Fjerner feilplasserte JSON-LD
-- Genererer manglende JSON-LD i whitelisted nodedirs
-- Rebuilder meta-index.json
-- Commit + push hvis noe er endret
+- Rydder bort feilplasserte JSON-LD (utenfor whitelista nodedirs)
+- Genererer EN JSON-LD per dokument (.md/.pdf/.docx/.txt) i whitelista mapper
+- Trekker ut enkel semantikk fra .md:
+  - tittel (første heading)
+  - beskrivelse (første avsnitt)
+  - nøkkelord (fra tittel)
+- Rebuilder meta-index.json med alle noder
+- Commit + push hvis det finnes endringer
 
-Kjøres typisk via .github/workflows/instance_sync.yml
+Kjører trygt både lokalt og i GitHub Actions.
 """
 
 import os
@@ -22,11 +26,11 @@ ROOT = Path(__file__).resolve().parents[1]
 
 # --------------------------- Konfig ---------------------------
 
-# Mapper som kan inneholde kunnskapsnoder (JSON-LD)
+# Mapper som kan inneholde innhold som skal bli noder (fil-baserte)
 NODE_DIR_PREFIXES = [
-    "schema",
     "meta",
-    "meta-graph",
+    "methodology",
+    "schema",
     "api",
     "docs",
     "figshare",
@@ -35,13 +39,19 @@ NODE_DIR_PREFIXES = [
     "data/processed",
 ]
 
-# Mapper vi aldri vil behandle som noder
+# Mapper vi aldri rører
 HARD_IGNORES = [
     ".git", ".github", ".venv", "venv",
     "__pycache__", ".idea", ".vscode",
     "output", "notebooks", "scripts",
     "data/raw", "data/archive",
 ]
+
+# Filtyper som regnes som "dokument"
+DOC_EXTS = [".md", ".pdf", ".docx", ".txt"]
+
+# Dokumenter vi ikke lager egen node for
+IGNORED_DOC_BASENAMES = {"readme", "license", "changelog"}
 
 AUTHOR = {
     "@type": "Person",
@@ -60,7 +70,7 @@ def safe_print(msg: str):
 
 
 def run(cmd, cwd=None, check=True):
-    """Kjør kommando med enkel feilhåndtering."""
+    """Kjør kommando med enkel logging."""
     safe_print(f"[instance_sync] $ {' '.join(cmd)}")
     result = subprocess.run(cmd, cwd=cwd or ROOT, text=True)
     if check and result.returncode != 0:
@@ -76,33 +86,89 @@ def is_under_prefix(rel_path: str, prefixes) -> bool:
     return False
 
 
-def dir_slug(rel_path: str) -> str:
-    return os.path.basename(rel_path) if rel_path and rel_path != "." else ""
+def extract_semantics_from_md(path: Path):
+    """
+    Enkel semantisk høsting fra en .md-fil:
+    - tittel = første heading (# eller ##)
+    - beskrivelse = første avsnitt
+    - keywords = ord > 3 tegn fra tittel
+    """
+    try:
+        text = path.read_text(encoding="utf-8", errors="ignore")
+    except Exception:
+        return None, None, []
+
+    lines = [ln.rstrip() for ln in text.splitlines()]
+
+    title = None
+    for ln in lines:
+        if ln.startswith("#"):
+            title = ln.lstrip("#").strip()
+            if title:
+                break
+
+    # Finn første avsnitt (kontinuerlige ikke-tomme linjer)
+    desc_lines = []
+    started = False
+    for ln in lines:
+        if not started:
+            # hopp over overskrift-linjer
+            if ln.startswith("#"):
+                continue
+            if ln.strip():
+                desc_lines.append(ln.strip())
+                started = True
+        else:
+            if not ln.strip():
+                break
+            desc_lines.append(ln.strip())
+            if len(desc_lines) >= 4:
+                break
+
+    description = " ".join(desc_lines).strip()
+    if len(description) > 600:
+        description = description[:600]
+
+    # Keywords fra tittel
+    keywords = []
+    if title:
+        for word in title.replace("–", " ").replace("-", " ").split():
+            w = word.strip(".,;:!?()[]{}\"'").lower()
+            if len(w) > 3:
+                keywords.append(w)
+    keywords = sorted(set(keywords))
+
+    return title, description or None, keywords
 
 
 # ---------------------------- Cleanup ----------------------------
 
 def cleanup_stray_jsonld():
+    """
+    Fjern JSON-LD:
+    - i root (unntatt meta-index.json)
+    - i mapper som ikke ligger under NODE_DIR_PREFIXES
+    Vi rører ikke JSON-LD inne i whitelista mapper.
+    """
     safe_print("[instance_sync] Cleanup: removing stray JSON-LD...")
 
     for root, dirs, files in os.walk(ROOT):
         rel = os.path.relpath(root, ROOT)
 
-        # Fjern JSON-LD i root
+        # root-mappe
         if rel == ".":
             for f in files:
-                if f.endswith(".jsonld"):
+                if f.endswith(".jsonld") and f != "meta-index.json":
                     path = Path(root) / f
                     path.unlink(missing_ok=True)
                     safe_print(f"[instance_sync] Removed root JSON-LD: {path}")
             continue
 
-        # Ignorer hard-ignores
         parts = rel.split(os.sep)
         if any(x in HARD_IGNORES for x in parts):
             continue
 
-        # Hvis ikke under whitelisted node-prefix → slett JSON-LD
+        # Alt utenfor whitelist → slett .jsonld
         if not is_under_prefix(rel, NODE_DIR_PREFIXES):
             for f in files:
                 if f.endswith(".jsonld"):
@@ -113,8 +179,12 @@ def cleanup_stray_jsonld():
 
 # ----------------------- JSON-LD Generation -----------------------
 
-def generate_jsonld_for_missing_nodes():
-    safe_print("[instance_sync] Generating missing JSON-LD in whitelisted dirs...")
+def generate_jsonld_for_documents():
+    """
+    Lag EN JSON-LD per dokumentfil i whitelista mapper.
+    Overstyrer ikke eksisterende per-fil JSON-LD.
+    """
+    safe_print("[instance_sync] Generating JSON-LD for documents...")
 
     for root, dirs, files in os.walk(ROOT):
         rel = os.path.relpath(root, ROOT)
@@ -128,47 +198,97 @@ def generate_jsonld_for_missing_nodes():
         if not is_under_prefix(rel, NODE_DIR_PREFIXES):
             continue
 
-        slug = dir_slug(rel)
-        if not slug:
-            continue
+        layer = rel.split(os.sep)[0]
 
-        expected = f"{slug}.jsonld"
-        if expected in files:
-            continue  # allerede JSON-LD her
+        for f in files:
+            ext = os.path.splitext(f)[1].lower()
+            if ext not in DOC_EXTS:
+                continue
 
-        jsonld_path = Path(root) / expected
-        data = {
-            "@context": "https://schema.org",
-            "@type": "CreativeWork",
-            "identifier": slug,
-            "name": slug.replace("_", " ").replace("-", " "),
-            "layer": rel.split(os.sep)[0],
-            "author": AUTHOR,
-            "version": "1.0",
-        }
+            base = os.path.splitext(f)[0]
+            if base.lower() in IGNORED_DOC_BASENAMES:
+                continue
 
-        with jsonld_path.open("w", encoding="utf-8") as f:
-            json.dump(data, f, indent=2)
+            # forventet JSON-LD navn: <basename>.jsonld
+            expected_jsonld = f"{base}.jsonld"
+            jsonld_path = Path(root) / expected_jsonld
 
-        safe_print(f"[instance_sync] Created JSON-LD: {jsonld_path}")
+            # ikke overskriv eksisterende per-fil JSON-LD
+            if jsonld_path.exists():
+                continue
+
+            doc_path = Path(root) / f
+            rel_doc_path = os.path.relpath(doc_path, ROOT).replace(os.sep, "/")
+            identifier = rel_doc_path.rsplit(".", 1)[0]
+
+            title = None
+            description = None
+            keywords = []
+
+            if ext == ".md":
+                t, d, kw = extract_semantics_from_md(doc_path)
+                title = t
+                description = d
+                keywords = kw
+
+            # fallback for tittel
+            if not title:
+                human_name = base.replace("_", " ").replace("-", " ")
+                title = human_name.strip().title()
+
+            data = {
+                "@context": "https://schema.org",
+                "@type": "CreativeWork",
+                "identifier": identifier,
+                "name": title,
+                "author": AUTHOR,
+                "version": "1.0",
+                "isPartOf": {
+                    "@type": "CreativeWorkSeries",
+                    "name": layer
+                },
+                "layer": layer,
+                "encodingFormat": ext.lstrip("."),
+                "url": rel_doc_path
+            }
+
+            if description:
+                data["description"] = description
+            if keywords:
+                data["keywords"] = keywords
+
+            with jsonld_path.open("w", encoding="utf-8") as fp:
+                json.dump(data, fp, indent=2)
+
+            safe_print(f"[instance_sync] Created JSON-LD: {jsonld_path}")
 
 
 # ------------------------- Meta-index -------------------------
 
 def rebuild_meta_index():
+    """
+    Bygg meta-index.json med ALLE .jsonld under whitelista mapper.
+    """
     safe_print("[instance_sync] Building meta-index.json...")
 
     nodes = []
 
     for root, dirs, files in os.walk(ROOT):
         rel = os.path.relpath(root, ROOT)
-
         parts = rel.split(os.sep)
         if any(x in HARD_IGNORES for x in parts):
             continue
 
+        # tillat root (meta-index.json ligger der), men ellers whitelist
+        if rel != "." and not is_under_prefix(rel, NODE_DIR_PREFIXES):
+            continue
+
         for f in files:
             if not f.endswith(".jsonld"):
+                continue
+
+            # ikke indekser meta-index selv
+            if rel == "." and f == "meta-index.json":
                 continue
 
             path = Path(root) / f
@@ -177,7 +297,7 @@ def rebuild_meta_index():
             try:
                 with path.open("r", encoding="utf-8") as fh:
                     data = json.load(fh)
-                identifier = data.get("identifier")
+                identifier = data.get("identifier") or f.replace(".jsonld", "")
                 node_type = data.get("@type", "CreativeWork")
             except Exception:
                 identifier = f.replace(".jsonld", "")
@@ -209,7 +329,7 @@ def git_status():
 
 
 def configure_git_user():
-    """Konfigurer git-bruker for Actions og lokal kjøring."""
+    """Sett git-bruker for Actions og lokal kjøring."""
     run(["git", "config", "user.name", "github-actions"], check=False)
     run(["git", "config", "user.email", "github-actions@users.noreply.github.com"], check=False)
 
@@ -227,21 +347,20 @@ def commit_and_push():
     configure_git_user()
 
     run(["git", "add", "-A"])
-    msg = "Instance sync auto-update [skip ci]"
+    msg = "Instance sync semantic harvest [skip ci]"
     run(["git", "commit", "-m", msg])
-
-    # push bruker GITHUB_TOKEN i Actions, eller dine lokale credentials
     run(["git", "push"])
+
     safe_print("[instance_sync] Changes pushed successfully.")
 
 
 # ------------------------------ MAIN ------------------------------
 
 def main():
-    safe_print("[instance_sync] Starting instance sync (clean + generate + meta + push)...")
+    safe_print("[instance_sync] Starting instance sync (semantic harvest)...")
 
     cleanup_stray_jsonld()
-    generate_jsonld_for_missing_nodes()
+    generate_jsonld_for_documents()
     rebuild_meta_index()
     commit_and_push()
 
