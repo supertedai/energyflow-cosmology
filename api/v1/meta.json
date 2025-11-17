@@ -95,21 +95,21 @@
   },
   "sources": {
     "figshare": {
-      "id": 30636863,
-      "title": "AI-Augmented Scientific Workflow Framework",
-      "published_date": "2025-11-17T15:06:47Z",
-      "url": "https://api.figshare.com/v2/account/articles/30636863",
-      "doi": "10.6084/m9.figshare.30636863",
+      "id": 30642497,
+      "title": "Entropy-Dependent Speed of Light and the s\u2080/s\u2081 Phase Thresholds",
+      "published_date": null,
+      "url": "https://api.figshare.com/v2/account/articles/30642497",
+      "doi": "10.6084/m9.figshare.30642497",
       "resource_id": null,
       "resource_doi": null
     }
   },
   "doi": {
     "master_spec": {
-      "doi": "10.6084/m9.figshare.30636863",
-      "figshare_id": 30636863,
-      "url": "https://api.figshare.com/v2/account/articles/30636863",
-      "published_date": "2025-11-17T15:06:47Z",
+      "doi": "10.6084/m9.figshare.30642497",
+      "figshare_id": 30642497,
+      "url": "https://api.figshare.com/v2/account/articles/30642497",
+      "published_date": null,
       "source": "figshare"
     }
   }
