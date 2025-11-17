@@ -1,4 +1,4 @@
-# 🧩 **EFC Schema Layer**
+# **EFC Schema Layer**
 
 **Semantic Structure • JSON-LD Graph • Machine-Readable Ontology**
 
@@ -18,7 +18,7 @@ This layer allows EFC to function as a **structured knowledge graph** rather tha
 
 ---
 
-# 📁 **Directory Structure**
+# **Directory Structure**
 
 ```
 schema/
@@ -37,7 +37,7 @@ schema/
 
 ---
 
-# 🧠 **Purpose of the Schema Layer**
+# **Purpose of the Schema Layer**
 
 The schema layer turns the EFC repository into a:
 
@@ -58,7 +58,7 @@ can understand and navigate the EFC system *algorithmically*.
 
 ---
 
-# 🧩 **Key Files Explained**
+# **Key Files Explained**
 
 ### **`concepts.json`**
 
@@ -181,7 +181,7 @@ Used by:
 
 ---
 
-# 🔄 **Automatic Schema Synchronization**
+# **Automatic Schema Synchronization**
 
 Many files are updated via GitHub Actions:
 
@@ -203,7 +203,7 @@ The result is a **self-maintaining semantic graph**.
 
 ---
 
-# 📬 **How This Layer Connects to the System**
+# **How This Layer Connects to the System**
 
 | Layer              | Relationship                                           |
 | ------------------ | ------------------------------------------------------ |
@@ -218,7 +218,7 @@ Schema = **the central nervous system** of EFC.
 
 ---
 
-# 🧩 **Summary**
+# **Summary**
 
 The `schema/` directory defines the **semantic structure** of Energy-Flow Cosmology:
 
