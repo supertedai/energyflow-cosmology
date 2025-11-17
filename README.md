@@ -9,10 +9,12 @@
 - `docs/`
 - `figshare/`
 - `integrations/`
+- `lib/`
 - `meta/`
 - `meta-graph/`
 - `methodology/`
 - `notebooks/`
+- `output/`
 - `schema/`
 - `scripts/`
 - `src/`
