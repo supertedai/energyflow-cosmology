@@ -1,0 +1,31 @@
+name: System Sync
+
+on:
+  push:
+    paths:
+      - "schema/**"
+      - "meta/**"
+      - "api/**"
+      - "docs/**"
+      - "*.json"
+      - "*.jsonld"
+      - "*.md"
+      - "scripts/system_sync.py"
+  workflow_dispatch:
+
+jobs:
+  system_sync:
+    if: "!contains(github.event.head_commit.message, '[skip ci]')"
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Run system sync
+        run: python scripts/system_sync.py
