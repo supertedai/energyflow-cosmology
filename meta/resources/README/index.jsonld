@@ -1,0 +1,23 @@
+{
+  "@context": "https://schema.org",
+  "@type": "CreativeWork",
+  "identifier": "meta/resources/README/index",
+  "name": "resources",
+  "author": {
+    "@type": "Person",
+    "name": "Morten Magnusson",
+    "identifier": "https://orcid.org/0009-0002-4860-5095"
+  },
+  "version": "1.0",
+  "isPartOf": {
+    "@type": "CreativeWorkSeries",
+    "name": "meta"
+  },
+  "layer": "meta",
+  "encodingFormat": "md",
+  "url": "meta/resources/README/index.md",
+  "description": "**Repository folder.**",
+  "keywords": [
+    "resources"
+  ]
+}
