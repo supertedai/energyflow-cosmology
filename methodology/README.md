@@ -1,4 +1,4 @@
-# 📐 **EFC Methodology Layer**
+# **EFC Methodology Layer**
 
 **Open Scientific Method • Epistemology • Process Transparency**
 
@@ -16,7 +16,7 @@ It ensures that EFC remains a **scientifically coherent, traceable, and reproduc
 
 ---
 
-# 📁 **Directory Structure**
+# **Directory Structure**
 
 ```
 methodology/
@@ -30,7 +30,7 @@ methodology/
 
 ---
 
-# 🧠 **File Descriptions**
+# **File Descriptions**
 
 ### **`EFC-epistemology.md` — Core Epistemology**
 
@@ -112,7 +112,7 @@ Ensures **long-term scientific reproducibility**.
 
 ---
 
-# 🧵 **Role of the Methodology Layer**
+# **Role of the Methodology Layer**
 
 The methodology layer provides the **bridge** between:
 
@@ -136,7 +136,7 @@ It is the operational backbone of the entire EFC ecosystem.
 
 ---
 
-# 🧭 **Scientific Philosophy**
+# **Scientific Philosophy**
 
 The methodology layer is built on four principles:
 
@@ -158,7 +158,7 @@ Human + AI co-reflection strengthens methodological consistency.
 
 ---
 
-# 🧩 **Summary**
+# **Summary**
 
 The `/methodology/` directory defines the **scientific operating system** of Energy-Flow Cosmology:
 
