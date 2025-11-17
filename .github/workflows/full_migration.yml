@@ -31,7 +31,7 @@ jobs:
         python scripts/generate_schema_map.py
         python scripts/generate_node_index.py
         python scripts/generate_semantic_graph.py
-        python scripts/generate_readmes.py
+        python scripts/update_all_readmes.py
         python scripts/generate_migration_status.py
 
     - name: Commit
