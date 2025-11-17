@@ -1,214 +1,118 @@
 #!/usr/bin/env python3
-# -*- coding: utf-8 -*-
-
 """
-EFC Full Autosync (self-healing version)
+full_autosync.py — EFC Autosync v2.0
 
-Funksjoner:
-1) Figshare sync (best effort)
-2) Auto-CLEAN:
-   - fjerner feil/legacy JSON-LD
-   - retter mappenavn med whitespace
-   - rydder ugyldige filer
-3) Auto-GENERATE JSON-LD
-4) Auto-BUILD meta-index.json
+Formål:
+- Hente inn alt av verdi (Figshare, schema, meta, API, README)
+- Oppdatere alle kart og noder
+- Validere hele systemet
+- Kjør self-heal
+- Commit + push hvis noe faktisk er endret
+
+Ingen PDF, ingen LaTeX, ingen output/-støy.
 """
 
-import os
-import json
-import requests
-import shutil
-
-# ------------------------------------------------------------
-# 0. Hjelpefunksjoner
-# ------------------------------------------------------------
-
-def normalize_folder_name(path):
-    """Fjerner leading/trailing whitespace fra mappenavn."""
-    base = os.path.basename(path)
-    clean = base.strip()
-    if clean != base:
-        parent = os.path.dirname(path)
-        new_path = os.path.join(parent, clean)
-        try:
-            os.rename(path, new_path)
-            print(f"[autosync] Renamed folder: '{path}' -> '{new_path}'")
-            return new_path
-        except Exception as e:
-            print(f"[autosync] Could not rename: {path}: {e}")
-    return path
+import subprocess
+import sys
+from pathlib import Path
+from datetime import datetime
 
 
-def slug_from_dirpath(path: str) -> str:
-    return os.path.basename(path.strip("./")).strip()
+REPO_ROOT = Path(__file__).resolve().parents[1]
 
 
-def layer_from_dirpath(path: str) -> str:
-    clean = path.strip("./")
-    parts = clean.split("/")
-    return parts[0] if parts else ""
+STEPS = [
+    ("Fetch Figshare metadata",       ["python", "scripts/fetch_figshare_auto.py"]),
+    ("Update concepts",               ["python", "scripts/update_concepts.py"]),
+    ("Update EFC API",                ["python", "scripts/update_efc_api.py"]),
+    ("Generate repo map",             ["python", "scripts/generate_repo_map.py"]),
+    ("Update all READMEs",            ["python", "scripts/update_all_readmes.py"]),
+    ("Validate full system",          ["python", "scripts/validate_all.py"]),
+    ("Run self-heal",                 ["python", "scripts/efc_self_heal.py"]),
+]
 
 
-# ------------------------------------------------------------
-# 1. Figshare sync
-# ------------------------------------------------------------
+def run(cmd, cwd=None, check=True):
+    """Run a shell command with live output."""
+    print(f"\n──▶ Running: {' '.join(cmd)}")
+    result = subprocess.run(cmd, cwd=cwd, text=True)
+    if check and result.returncode != 0:
+        print(f"✖ Command failed with code {result.returncode}: {' '.join(cmd)}")
+        sys.exit(result.returncode)
+    return result.returncode
 
-FIGSHARE_TOKEN = os.environ.get("FIGSHARE_TOKEN")
 
-def fetch_figshare():
-    if not FIGSHARE_TOKEN:
-        print("[autosync] No FIGSHARE_TOKEN found.")
+def run_step(name, cmd):
+    """Run a named step and log it."""
+    print("\n" + "=" * 80)
+    print(f"STEP: {name}")
+    print("=" * 80)
+    # Hvis scriptet ikke finnes, hopp over men ikke feile hele autosync
+    script_path = REPO_ROOT / cmd[1]
+    if not script_path.exists():
+        print(f"⚠ Script not found, skipping: {script_path}")
+        return
+    run(cmd, cwd=REPO_ROOT, check=True)
+
+
+def git_status_porcelain():
+    """Return raw git status --porcelain output."""
+    completed = subprocess.run(
+        ["git", "status", "--porcelain"],
+        cwd=REPO_ROOT,
+        text=True,
+        capture_output=True,
+    )
+    if completed.returncode != 0:
+        print("⚠ git status failed, continuing without commit.")
+        return ""
+    return completed.stdout.strip()
+
+
+def configure_git_user():
+    """Ensure git user is set (works both locally og i GitHub Actions)."""
+    run(["git", "config", "user.name", "github-actions"], cwd=REPO_ROOT, check=False)
+    run(
+        ["git", "config", "user.email", "github-actions@users.noreply.github.com"],
+        cwd=REPO_ROOT,
+        check=False,
+    )
+
+
+def git_commit_and_push():
+    """Add, commit og push hvis det er endringer."""
+    status = git_status_porcelain()
+    if not status:
+        print("\n✅ Ingen endringer etter autosync. Ingenting å committe.")
         return
 
-    print("[autosync] Figshare: trying sync...")
-    try:
-        r = requests.get(
-            "https://api.figshare.com/v2/account/articles",
-            headers={"Authorization": f"token {FIGSHARE_TOKEN}"},
-            timeout=10
-        )
-        if r.status_code != 200:
-            print(f"[autosync] Figshare failed: HTTP {r.status_code}")
-            return
-        print(f"[autosync] Figshare OK, {len(r.json())} articles.")
-    except Exception as e:
-        print(f"[autosync] Figshare connection error: {e}")
+    print("\n📄 Git status (endringer funnet):")
+    print(status)
 
-fetch_figshare()
+    configure_git_user()
 
+    # Viktig: ikke referer til 'output/' eksplisitt → .gitignore håndterer det
+    run(["git", "add", "-A"], cwd=REPO_ROOT, check=True)
 
-# ------------------------------------------------------------
-# 2. AUTO-CLEAN + AUTO-GENERATE JSON-LD
-# ------------------------------------------------------------
+    timestamp = datetime.utcnow().strftime("%Y-%m-%d %H:%M:%S UTC")
+    message = f"Autosync: system updated [{timestamp}] [skip ci]"
+    run(["git", "commit", "-m", message], cwd=REPO_ROOT, check=True)
 
-print("[autosync] Auto-clean + auto-generate JSON-LD startet...")
-
-IGNORED_PREFIX = ("./.", "./.git", "./.github", "./venv", "./.venv")
-IGNORED_DOCS = {"readme.md", "index.md"}
-
-AUTHOR = {
-    "@type": "Person",
-    "name": "Morten Magnusson",
-    "identifier": "https://orcid.org/0009-0002-4860-5095"
-}
+    # Bruk standard remote (GitHub Actions har allerede token via checkout)
+    run(["git", "push"], cwd=REPO_ROOT, check=True)
+    print("\n🚀 Autosync: endringer pushet til origin.")
 
 
-def generate_jsonld(dirpath, docs):
-    node_id = slug_from_dirpath(dirpath)
-    layer = layer_from_dirpath(dirpath)
+def main():
+    print("=== EFC Autosync v2.0 — start ===")
 
-    md_docs = [d for d in docs if d.lower().endswith(".md")]
-    pdf_docs = [d for d in docs if d.lower().endswith(".pdf")]
+    for name, cmd in STEPS:
+        run_step(name, cmd)
 
-    doc = md_docs[0] if md_docs else (pdf_docs[0] if pdf_docs else docs[0])
+    git_commit_and_push()
 
-    description = ""
-    if doc.lower().endswith(".md"):
-        try:
-            with open(os.path.join(dirpath, doc), "r", encoding="utf-8") as f:
-                description = f.read()[:400].replace("\n", " ")
-        except:
-            pass
-
-    data = {
-        "@context": "https://schema.org",
-        "@type": "CreativeWork",
-        "identifier": node_id,
-        "name": node_id.replace("_", " ").replace("-", " "),
-        "layer": layer,
-        "description": description,
-        "version": "1.0",
-        "author": AUTHOR
-    }
-
-    outfile = os.path.join(dirpath, f"{node_id}.jsonld")
-    with open(outfile, "w", encoding="utf-8") as fp:
-        json.dump(data, fp, indent=2)
-
-    print(f"[autosync] Created JSON-LD: {outfile}")
+    print("\n=== EFC Autosync v2.0 — done ===")
 
 
-# Rydd + generer
-for root, dirs, files in os.walk(".", topdown=True):
-
-    # Rens mappenavn
-    for i, d in enumerate(dirs):
-        full = os.path.join(root, d)
-        new_path = normalize_folder_name(full)
-        if new_path != full:
-            # oppdater i dirs så walk ikke mister path
-            dirs[i] = os.path.basename(new_path)
-
-    if any(root.startswith(p) for p in IGNORED_PREFIX):
-        continue
-    if root == ".":
-        continue
-
-    files_lower = [f.lower() for f in files]
-
-    docs = [
-        f for f in files
-        if (f.lower().endswith(".md") or f.lower().endswith(".pdf"))
-        and f.lower() not in IGNORED_DOCS
-    ]
-
-    jsonlds = [f for f in files if f.lower().endswith(".jsonld")]
-
-    # forventet filnavn
-    expected = slug_from_dirpath(root) + ".jsonld"
-
-    # slett feil/legacy jsonld
-    for js in jsonlds:
-        if js != expected:
-            try:
-                os.remove(os.path.join(root, js))
-                print(f"[autosync] Removed invalid JSON-LD: {root}/{js}")
-            except Exception as e:
-                print(f"[autosync] Could not delete {root}/{js}: {e}")
-
-    # re-scan
-    jsonlds = [f for f in os.listdir(root) if f.endswith(".jsonld")]
-
-    if docs and not jsonlds:
-        generate_jsonld(root, docs)
-
-
-# ------------------------------------------------------------
-# 3. Build meta-index.json
-# ------------------------------------------------------------
-
-print("[autosync] Building meta-index.json...")
-
-nodes = []
-
-for dirpath, _, filenames in os.walk("."):
-    if any(dirpath.startswith(p) for p in IGNORED_PREFIX):
-        continue
-    for f in filenames:
-        if not f.lower().endswith(".jsonld"):
-            continue
-
-        path = os.path.join(dirpath, f).replace("./", "")
-
-        try:
-            data = json.load(open(os.path.join(dirpath, f), "r", encoding="utf-8"))
-            identifier = data.get("identifier", os.path.splitext(f)[0])
-            node_type = data.get("@type", "CreativeWork")
-        except:
-            identifier = os.path.splitext(f)[0]
-            node_type = "CreativeWork"
-
-        nodes.append({
-            "id": identifier,
-            "path": path,
-            "type": node_type
-        })
-
-with open("meta-index.json", "w", encoding="utf-8") as fp:
-    json.dump({"version": "1.0", "nodes": nodes}, fp, indent=2)
-
-print(f"[autosync] meta-index.json built with {len(nodes)} nodes.")
-for n in nodes:
-    print(f"  → {n['id']} : {n['path']}")
-
-print("[autosync] Full autosync completed successfully.")
+if __name__ == "__main__":
+    main()
