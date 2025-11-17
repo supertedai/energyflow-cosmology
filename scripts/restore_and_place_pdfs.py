@@ -9,10 +9,10 @@ import subprocess
 def restore_all_pdfs():
     print("🔄 Restoring all PDFs from history...")
     cmds = [
-        "git checkout HEAD~25 -- docs/*.pdf",
-        "git checkout HEAD~25 -- docs/**/*.pdf",
-        "git checkout HEAD~25 -- theory/**/*.pdf",
-        "git checkout HEAD~25 -- methodology/**/*.pdf",
+        "git checkout HEAD~50 -- docs/*.pdf",
+        "git checkout HEAD~50 -- docs/**/*.pdf",
+        "git checkout HEAD~50 -- theory/**/*.pdf",
+        "git checkout HEAD~50 -- methodology/**/*.pdf",
     ]
     for cmd in cmds:
         subprocess.run(cmd, shell=True, check=False)
@@ -24,22 +24,20 @@ def restore_all_pdfs():
 
 def ensure(path):
     if not os.path.exists(path):
-        os.makedirs(path)
+        os.makedirs(path, exist_ok=True)
 
 def slugify(name):
     return (
         name.lower()
-            .replace("efc-", "")
-            .replace("cem-", "")
             .replace(".pdf", "")
             .replace(" ", "-")
             .replace("_", "-")
     )
 
-
 def detect_slug_from_filename(filename):
     """
-    Converts EFC-Grid-Higgs-Framework.pdf -> efc-grid-higgs-framework
+    Example:
+    EFC-Grid-Higgs-Framework.pdf → efc-grid-higgs-framework
     """
     name = filename.lower().replace(".pdf", "")
     name = name.replace(" ", "-").replace("_", "-")
@@ -47,7 +45,7 @@ def detect_slug_from_filename(filename):
 
 
 # --------------------------------------
-# 2. Move PDFs into unified structure
+# 2. Move PDFs into unified folder structure
 # --------------------------------------
 
 def place_pdfs():
@@ -61,7 +59,7 @@ def place_pdfs():
             src = os.path.join(root, f)
             fname = f.lower()
 
-            # MASTER
+            # MASTER DOCUMENT
             if "master" in fname and "efc" in fname:
                 dst = "docs/master/index/efc-master.pdf"
                 ensure(os.path.dirname(dst))
@@ -69,7 +67,7 @@ def place_pdfs():
                 print("→ MASTER:", dst)
                 continue
 
-            # FORMAL SPEC
+            # FORMAL SPECIFICATION
             if "formal" in fname or "spec" in fname:
                 dst = "theory/formal/efc-formal-spec/index/efc-formal-spec.pdf"
                 ensure(os.path.dirname(dst))
@@ -77,7 +75,7 @@ def place_pdfs():
                 print("→ FORMAL SPEC:", dst)
                 continue
 
-            # GENERAL ARTICLE
+            # GENERAL ARTICLE PDFs
             slug = detect_slug_from_filename(f)
             article_dir = f"docs/articles/{slug}/index"
 
