@@ -1,18 +1,16 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-INSTANCE SYNC — Production Version
-==================================
+INSTANCE SYNC — Production Version (with Git push)
+==================================================
 
-Funksjoner:
-- Rydder bort feilplasserte JSON-LD
+Gjør:
+- Fjerner feilplasserte JSON-LD
 - Genererer manglende JSON-LD i whitelisted nodedirs
 - Rebuilder meta-index.json
 - Commit + push hvis noe er endret
 
-Dette er "light maintenance"-laget i EFC.
-Kjører ofte. Lager aldri kaos. Gir rene noder.
-
+Kjøres typisk via .github/workflows/instance_sync.yml
 """
 
 import os
@@ -22,9 +20,9 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 
-
 # --------------------------- Konfig ---------------------------
 
+# Mapper som kan inneholde kunnskapsnoder (JSON-LD)
 NODE_DIR_PREFIXES = [
     "schema",
     "meta",
@@ -37,6 +35,7 @@ NODE_DIR_PREFIXES = [
     "data/processed",
 ]
 
+# Mapper vi aldri vil behandle som noder
 HARD_IGNORES = [
     ".git", ".github", ".venv", "venv",
     "__pycache__", ".idea", ".vscode",
@@ -51,13 +50,23 @@ AUTHOR = {
 }
 
 
-# ---------------------- Utility Functions ----------------------
+# ---------------------- Utility ----------------------
 
 def safe_print(msg: str):
     try:
         print(msg)
     except Exception:
         pass
+
+
+def run(cmd, cwd=None, check=True):
+    """Kjør kommando med enkel feilhåndtering."""
+    safe_print(f"[instance_sync] $ {' '.join(cmd)}")
+    result = subprocess.run(cmd, cwd=cwd or ROOT, text=True)
+    if check and result.returncode != 0:
+        safe_print(f"[instance_sync] Command failed with code {result.returncode}")
+        raise SystemExit(result.returncode)
+    return result
 
 
 def is_under_prefix(rel_path: str, prefixes) -> bool:
@@ -79,6 +88,7 @@ def cleanup_stray_jsonld():
     for root, dirs, files in os.walk(ROOT):
         rel = os.path.relpath(root, ROOT)
 
+        # Fjern JSON-LD i root
         if rel == ".":
             for f in files:
                 if f.endswith(".jsonld"):
@@ -87,10 +97,12 @@ def cleanup_stray_jsonld():
                     safe_print(f"[instance_sync] Removed root JSON-LD: {path}")
             continue
 
+        # Ignorer hard-ignores
         parts = rel.split(os.sep)
         if any(x in HARD_IGNORES for x in parts):
             continue
 
+        # Hvis ikke under whitelisted node-prefix → slett JSON-LD
         if not is_under_prefix(rel, NODE_DIR_PREFIXES):
             for f in files:
                 if f.endswith(".jsonld"):
@@ -121,9 +133,8 @@ def generate_jsonld_for_missing_nodes():
             continue
 
         expected = f"{slug}.jsonld"
-
         if expected in files:
-            continue
+            continue  # allerede JSON-LD her
 
         jsonld_path = Path(root) / expected
         data = {
@@ -192,32 +203,42 @@ def git_status():
         ["git", "status", "--porcelain"],
         cwd=ROOT,
         capture_output=True,
-        text=True
+        text=True,
     )
     return result.stdout.strip()
 
 
+def configure_git_user():
+    """Konfigurer git-bruker for Actions og lokal kjøring."""
+    run(["git", "config", "user.name", "github-actions"], check=False)
+    run(["git", "config", "user.email", "github-actions@users.noreply.github.com"], check=False)
+
+
 def commit_and_push():
     status = git_status()
+
+    safe_print("[instance_sync] Git status (porcelain):")
+    safe_print(status if status else "(clean)")
+
     if not status:
         safe_print("[instance_sync] No changes to commit.")
         return
 
-    safe_print("[instance_sync] Changes detected:")
-    safe_print(status)
+    configure_git_user()
 
-    subprocess.run(["git", "add", "-A"], cwd=ROOT)
+    run(["git", "add", "-A"])
     msg = "Instance sync auto-update [skip ci]"
-    subprocess.run(["git", "commit", "-m", msg], cwd=ROOT)
-    subprocess.run(["git", "push"], cwd=ROOT)
+    run(["git", "commit", "-m", msg])
 
+    # push bruker GITHUB_TOKEN i Actions, eller dine lokale credentials
+    run(["git", "push"])
     safe_print("[instance_sync] Changes pushed successfully.")
 
 
 # ------------------------------ MAIN ------------------------------
 
 def main():
-    safe_print("[instance_sync] Starting instance sync (clean + generate + push)...")
+    safe_print("[instance_sync] Starting instance sync (clean + generate + meta + push)...")
 
     cleanup_stray_jsonld()
     generate_jsonld_for_missing_nodes()
