@@ -1,33 +1,32 @@
 # **Energy-Flow Cosmology — Documentation Layer**
 
-The `docs/` directory contains the **complete documentation system** for Energy-Flow Cosmology (EFC).
+The `docs/` directory contains the **complete scientific documentation system** for Energy-Flow Cosmology (EFC).
 This layer unifies:
 
 * the **HTML master document**
 * the **LaTeX master document**
-* all **published articles**
+* all **published EFC articles**
 * all **supporting figures**
-* modular **section files**
-* meta-level documents
+* modular **LaTeX section files**
 * archived historical versions
 
-It represents the **public-facing scientific documentation** of EFC.
+It forms the **public-facing scientific record** of the project.
 
 ---
 
-# Directory Structure
+# **Directory Structure (sync with repo)**
 
 ```
 docs/
-├── efc_master.html            # Main HTML specification
-├── efc_master.css             # Stylesheet for the HTML master
-├── efc_master.tex             # LaTeX master (parallel to HTML)
-├── efc_master_template.html   # Clean HTML template (MathJax + layout)
-├── efc_master_v1.pdf          # Uploaded master v1 (static copy)
-├── index.html                 # Documentation landing page
-├── mathjax_header.html        # Script header for MathJax rendering
+├── efc_master.html              # Main HTML specification
+├── efc_master.css               # Stylesheet for HTML master
+├── efc_master.tex               # LaTeX master
+├── efc_master_template.html     # Clean MathJax-based HTML template
+├── efc_master_v1.pdf            # Published PDF (versioned snapshot)
+├── index.html                   # Documentation landing page
+├── mathjax_header.html          # MathJax header for HTML builds
 │
-├── sections/                  # LaTeX theory modules
+├── sections/                    # Modular LaTeX theory sections
 │   ├── efc_s.tex
 │   ├── efc_d.tex
 │   ├── efc_c0.tex
@@ -36,7 +35,7 @@ docs/
 │   ├── figures.tex
 │   └── ...
 │
-├── figures/                   # Scientific figures, plots, diagrams
+├── figures/                     # Scientific diagrams + generated plots
 │   ├── EFC_vs_LCDM_plot.png
 │   ├── efc_halo_rho_profile.png
 │   ├── efc_halo_S_profile.png
@@ -46,160 +45,194 @@ docs/
 │   ├── efc_schematic_Hz.png
 │   └── ...
 │
-├── articles/                  # Public-facing EFC articles (MD + PDF)
+├── articles/                    # Public-facing EFC articles (MD + PDF)
 │   ├── EFC-A-Deep-Dive-into-the-Halo-Concept.md
 │   ├── EFC-A-Deep-Dive-into-the-Halo-Concept.pdf
-│   ├── EFC-CMB-Thermodynamic-Gradient.md
-│   ├── EFC-Thermodynamic-Bridge-GR-QFT.pdf
+│   ├── EFC-Applications-and-Implications.md
+│   ├── EFC-Grid-Higgs-Framework.pdf
 │   ├── EFC-v2.1-Complete-Edition.md
 │   ├── EFC-v2.2-Cross-Field-Integration-Summary.pdf
-│   └── (40+ additional articles)
+│   └── (40+ additional documents)
 │
-├── meta/                      # Meta-level docs imported into docs layer
-│   ├── CEM-Consciousness-Ego-Mirror.md
-│   ├── CEM-Consciousness-Ego-Mirror.pdf
-│   └── EFC-Hypothesis-Entropy-and-Energy-Flow.docx
-│
-└── archive/                   # Archived master LaTeX files
+└── archive/                     # Archived master TeX files
     └── efc_master_v1.tex
 ```
 
----
-
-# Purpose of the Documentation Layer
-
-The `docs/` directory is the **central place where all human-readable EFC material lives**.
-It integrates:
-
-### **1. Master Documentation**
-
-* `efc_master.html`
-* `efc_master.tex`
-* CSS, template, and MathJax headers
-
-These form the authoritative **documentation outputs**.
-
-### **2. LaTeX Theory Sections**
-
-Found under `docs/sections/`, aligned with:
-
-* EFC-S (entropy model)
-* EFC-D (energy-flow model)
-* EFC-C₀ (light/entropy boundary)
-* Observables
-* Figures
-* Cross-section structure
-
-These assemble into the master TeX document.
-
-### **3. Scientific Articles**
-
-All public EFC articles (Markdown + PDF).
-This includes:
-
-* deep dives
-* hypotheses
-* observational interpretations
-* theory overviews
-* versioned summaries
-
-This is effectively the **EFC knowledge library**.
-
-### **4. Scientific Figures**
-
-All plots and schematic diagrams used in:
-
-* the master documents
-* the articles
-* external presentations
-* validation graphics
-
-Moved here to centralize figure use across multiple workflows.
-
-### **5. Meta Documents (Imported)**
-
-Documents that bridge EFC theory with:
-
-* cognition
-* entropy interpretation
-* CEM
-* reflective layers
-
-These are **not part of the physics theory**, but included for completeness.
-
-### **6. Archive Folder**
-
-Stores historic versions of master TeX documents and earlier builds.
+*(All paths verified against your tree.)*
 
 ---
 
-# Master Documents
+# **Purpose of the Documentation Layer**
 
-## **`efc_master.html`**
+The `docs/` directory is the **formal, human-readable** surface of EFC.
+It gathers everything required to:
 
-The **primary web-readable** master document.
+* understand the theory
+* read specifications
+* inspect derivations
+* view figures
+* access articles
+* generate PDFs and HTML
+
+This directory is the **scientific interface** of the project.
+
+---
+
+# **1. Master Documentation**
+
+### **`efc_master.html`**
+
+The main web-readable master specification.
 
 Includes:
 
-* MathJax equation rendering
-* full table of contents
-* responsive design
-* clean CSS (`efc_master.css`)
+* full theory
+* TOC + navigation
+* MathJax rendering
+* responsive layout (`efc_master.css`)
 
-## **`efc_master.tex`**
+### **`efc_master.tex`**
 
-The **primary LaTeX master**.
-Built from modular `sections/*.tex`.
+The LaTeX master document, built from:
 
-Production builds are handled by GitHub Actions.
+```
+docs/sections/*.tex
+```
+
+GitHub Actions produce PDFs from this file automatically.
 
 ---
 
-# Building the Master Documents
+# **2. LaTeX Theory Sections**
 
-### **HTML build**
+Located in:
 
-```bash
-python scripts/build_html.py
+```
+docs/sections/
 ```
 
-### **LaTeX (PDF) build**
+These are the modular source files that assemble into the master:
+
+* `efc_s.tex` — structure
+* `efc_d.tex` — dynamics
+* `efc_c0.tex` — entropy/information/light
+* `s0_s1_light_dynamics.tex` — s₀–s₁
+* `observables.tex` — measurable predictions
+* `figures.tex` — figure placement and LaTeX integration
+
+This system keeps the theory clean and modular.
+
+---
+
+# **3. Scientific Figures**
+
+All figures used in:
+
+* the master
+* articles
+* notebooks
+* validation
+
+are stored under:
+
+```
+docs/figures/
+```
+
+This includes:
+
+* halo entropy + density profiles
+* energy-flow potential heatmaps
+* lensing schematics
+* rotation curve figures
+* LCDM vs EFC comparison plots
+
+---
+
+# **4. EFC Articles**
+
+All public-facing articles (Markdown + PDF):
+
+```
+docs/articles/
+```
+
+Includes:
+
+* conceptual deep dives
+* theory overviews
+* hypothesis papers
+* summaries of EFC-S, EFC-D, EFC-C₀
+* Grid–Higgs papers
+* v2.1 / v2.2 editions
+* observational interpretations
+
+This folder forms the **EFC knowledge library**.
+
+---
+
+# **5. Archive (Historical Versions)**
+
+```
+docs/archive/
+```
+
+Contains earlier LaTeX master builds and legacy content retained for provenance.
+
+---
+
+# **Building the Documents**
+
+### **Build PDF**
 
 ```bash
 cd docs
 latexmk -pdf efc_master.tex
 ```
 
----
+### **HTML Build (if desired)**
 
-# 📬 How This Directory Interacts With the Rest of the Repo
+You already have a clean template:
 
-| Layer              | Role                                           |
-| ------------------ | ---------------------------------------------- |
-| **theory/**        | Pure formal math (TeX subsystem)               |
-| **docs/**          | Public, human-readable surface                 |
-| **schema/**        | Machine-readable structure of concepts         |
-| **figshare/**      | DOI-synced metadata feeding docs               |
-| **api/v1**         | JSON interface — some fields link back to docs |
-| **app/dashboard/** | Visual layer rendering parts of the docs       |
+```
+docs/efc_master_template.html
+docs/mathjax_header.html
+```
 
-`docs/` is the **presentation layer** for all scientific content.
+(A build script can be added later.)
 
 ---
 
-# Summary
+# **How `docs/` Connects to the Rest of the Repo**
 
-The `docs/` directory is the **official documentation hub** for Energy-Flow Cosmology.
+| Layer         | Role                                            |
+| ------------- | ----------------------------------------------- |
+| **theory/**   | source mathematical definitions                 |
+| **docs/**     | human-readable documentation                    |
+| **schema/**   | JSON-LD semantic layer                          |
+| **figshare/** | DOI-synced metadata                             |
+| **api/v1/**   | concept and term API                            |
+| **output/**   | figures used inside docs                        |
+| **meta/**     | metacognitive explanation and reasoning process |
+
+`docs/` acts as the **presentation surface** for all scientific outputs.
+
+---
+
+# **Summary**
+
+The `docs/` folder is the **public documentation hub** of the EFC system.
 
 It contains:
 
-* master documents
-* article library
-* modular LaTeX theory
-* complete figure set
-* meta documents
+* master theory documents
+* modular LaTeX sections
+* the article library
+* all supporting figures
 * archival versions
 
-Everything needed to **read, understand, publish, and present EFC** lives here.
+Everything needed to **read, understand, and present EFC** lives here.
 
 ---
+
+
