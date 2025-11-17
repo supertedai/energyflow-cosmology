@@ -101,3 +101,8 @@ __pycache__/
 # External data (raw external inputs)
 data/external/
 downloads/
+
+# Prevent recursive index folders from auto-generators
+**/index/index/
+**/index/index/*
+**/index/index*/**
