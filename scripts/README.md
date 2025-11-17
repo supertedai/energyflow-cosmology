@@ -1,4 +1,4 @@
-# 🛠️ **EFC Scripts — Computational, Semantic & Validation Tools**
+# **EFC Scripts — Computational, Semantic & Validation Tools**
 
 The `scripts/` directory contains all executable tools that support
 **data processing**, **validation**, **semantic generation**,
@@ -16,7 +16,7 @@ Scripts fall into five categories:
 
 ---
 
-# 📁 **Directory Overview**
+# **Directory Overview**
 
 ```
 scripts/
@@ -45,7 +45,7 @@ scripts/
 
 ---
 
-# 🔄 **1. Data Fetching & Preprocessing**
+# **1. Data Fetching & Preprocessing**
 
 ### **`fetch_figshare_auto.py`**
 
@@ -68,7 +68,7 @@ Parses SPARC "Table 1" (galaxy parameters) into machine-friendly format.
 
 ---
 
-# 🧪 **2. Validation & Simulation**
+# **2. Validation & Simulation**
 
 ### **`run_efc_baseline.py`**
 
@@ -101,7 +101,7 @@ Meta-wrapper that runs all validation subsystems in one command.
 
 ---
 
-# 📊 **3. Plotting & Figure Generation**
+# **3. Plotting & Figure Generation**
 
 These scripts generate the plots stored under `/docs/figures/`.
 
@@ -119,7 +119,7 @@ General plotting utility for validation output.
 
 ---
 
-# 🧬 **4. Schema & API Generation**
+# **4. Schema & API Generation**
 
 These scripts maintain the EFC semantic and API layers.
 
@@ -151,7 +151,7 @@ Produces a machine-readable and human-readable map of the repository layout.
 
 ---
 
-# 🧩 **5. Utility & Diagnostics**
+# **5. Utility & Diagnostics**
 
 ### **`import_methodology_to_neo4j.py`**
 
@@ -173,7 +173,7 @@ Unit tests for:
 
 ---
 
-# ⚙️ **Usage**
+# **Usage**
 
 Run any script with Python:
 
@@ -190,7 +190,7 @@ Scripts assume:
 
 ---
 
-# 🧩 **Role of the Script Layer**
+# **Role of the Script Layer**
 
 The `scripts/` directory acts as the automation engine of EFC:
 
@@ -206,7 +206,7 @@ Everything outside of core theory passes through this layer.
 
 ---
 
-# 🧭 **Summary**
+# **Summary**
 
 The `scripts/` folder provides:
 
