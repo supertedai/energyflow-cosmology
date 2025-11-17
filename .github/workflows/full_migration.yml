@@ -14,18 +14,23 @@ jobs:
       with:
         python-version: "3.11"
 
-    - name: Migrate all documents
-      run: python scripts/migrate_all.py
+    # 1 — Flytt ALLE filer til riktig struktur
+    - name: Full file migration (folders + media + rename)
+      run: python scripts/migrate_full_structure.py
 
+    # 2 — Cleanup
     - name: Clean up
       run: python scripts/cleanup_after_migration.py
 
+    # 3 — Fix internal links
     - name: Update links
       run: python scripts/update_internal_links.py
 
+    # 4 — Ensure md structure exists
     - name: Generate missing MD
       run: python scripts/generate_missing_md.py
 
+    # 5 — Semantic refresh
     - name: Update semantic system
       run: |
         python scripts/generate_schema_map.py
@@ -34,10 +39,11 @@ jobs:
         python scripts/update_all_readmes.py
         python scripts/generate_migration_status.py
 
+    # 6 — Commit
     - name: Commit
       run: |
         git config user.email "actions@github.com"
         git config user.name "GitHub Actions"
         git add .
-        git commit -m "Full migration + cleanup + link update + MD generator + semantic update" || echo "No changes"
+        git commit -m "Full repository migration (file structure + semantic update)" || echo "No changes"
         git push
