@@ -1,83 +1,74 @@
 import os
 import shutil
-import re
 from pathlib import Path
+
+EXT_PRIMARY = {".md", ".jsonld", ".tex", ".pdf", ".html", ".docx"}
+EXT_MEDIA = {".png", ".jpg", ".jpeg", ".svg"}
 
 ROOTS = [
     "docs/articles",
+    "docs/sections",
     "meta",
     "theory/formal",
     "methodology"
 ]
 
-EXT_PRIMARY = {".md", ".jsonld", ".tex", ".pdf", ".html", ".docx"}
-EXT_MEDIA = {".png", ".jpg", ".jpeg", ".svg"}
+def is_indexed_dir(path: Path):
+    return (path / "index.md").exists() or (path / "index.tex").exists()
 
-def slugify(name):
-    return re.sub(r"[^a-zA-Z0-9\-]+", "-", name).strip("-")
+def migrate_file(f: Path, target_dir: Path):
+    target_dir.mkdir(parents=True, exist_ok=True)
 
-def ensure_dir(path):
-    os.makedirs(path, exist_ok=True)
+    ext = f.suffix.lower()
+    if ext in EXT_PRIMARY:
+        # primary -> index.ext
+        dst = target_dir / f"index{ext}"
+    elif ext in EXT_MEDIA:
+        # images -> media/
+        media_dir = target_dir / "media"
+        media_dir.mkdir(parents=True, exist_ok=True)
+        dst = media_dir / f.name
+    else:
+        # unknown -> aux/
+        aux_dir = target_dir / "aux"
+        aux_dir.mkdir(parents=True, exist_ok=True)
+        dst = aux_dir / f.name
 
-def move_file(src, dst):
-    ensure_dir(os.path.dirname(dst))
-    shutil.move(src, dst)
-    print(f"Moved: {src} -> {dst}")
+    shutil.move(str(f), str(dst))
+    print(f"Moved: {f} -> {dst}")
 
-def migrate_folder(base):
-    files = list(Path(base).glob("*"))
-
-    for f in files:
+def process_path(base: Path):
+    for f in base.glob("*"):
+        # skip already structured dirs
         if f.is_dir():
-            # Skip already migrated structure
-            if (f / "index.md").exists() or (f / "index.jsonld").exists():
+            if is_indexed_dir(f):
                 continue
+            process_path(f)
             continue
 
-        # Original filename slug
-        stem = f.stem
-        slug = slugify(stem)
+        # file belongs to its own folder
+        slug = f.stem
+        target_dir = base / slug
+        migrate_file(f, target_dir)
 
-        # Target folder
-        target = Path(base) / slug
-        ensure_dir(target)
-
-        # Determine type of file
-        ext = f.suffix.lower()
-
-        if ext in EXT_PRIMARY:
-            dst = target / f"index{ext}"
-            move_file(str(f), str(dst))
-
-        elif ext in EXT_MEDIA:
-            media_dir = target / "media"
-            ensure_dir(media_dir)
-            dst = media_dir / f.name
-            move_file(str(f), str(dst))
-
-        else:
-            # Unknown extension → treat as auxiliary
-            aux_dir = target / "aux"
-            ensure_dir(aux_dir)
-            dst = aux_dir / f.name
-            move_file(str(f), str(dst))
-
-def cleanup_empty(path):
+def cleanup_empty(path: Path):
     for root, dirs, files in os.walk(path, topdown=False):
         for d in dirs:
-            full = os.path.join(root, d)
-            if not os.listdir(full):
-                os.rmdir(full)
-                print(f"Removed empty folder: {full}")
+            full = Path(root) / d
+            try:
+                if not any(full.iterdir()):
+                    full.rmdir()
+                    print(f"Removed empty: {full}")
+            except:
+                pass
 
 def main():
-    print("=== Full Structure Migration ===")
+    print("=== FULL STRUCTURE MIGRATION ===")
     for root in ROOTS:
-        if os.path.exists(root):
-            print(f"-- Migrating: {root}")
-            migrate_folder(root)
-            cleanup_empty(root)
-
+        base = Path(root)
+        if base.exists():
+            process_path(base)
+            cleanup_empty(base)
     print("=== DONE ===")
 
 if __name__ == "__main__":
