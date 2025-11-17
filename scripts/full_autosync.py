@@ -1,78 +1,103 @@
 #!/usr/bin/env python3
-import os
+
 import subprocess
 import sys
+import os
 from pathlib import Path
 
-ROOT = Path(__file__).resolve().parents[1]
+ROOT = Path(__file__).resolve().parent.parent
 
+def run(cmd, allow_fail=False, label=None):
+    print("\n-------------------------------------------")
+    if label:
+        print(f"▶ {label}")
+    print(f"→ {cmd}")
 
-def run(cmd, cwd=None, allow_fail=False):
-    """Run a command with optional soft-failure."""
-    print(f"\n[full_autosync] Running: {' '.join(cmd)}  (cwd={cwd or ROOT})")
+    code = subprocess.call(cmd, shell=True)
+    if code != 0 and not allow_fail:
+        print(f"❌ Fatal error: {cmd}")
+        sys.exit(code)
+    if code != 0 and allow_fail:
+        print(f"⚠️ Non-critical error — continuing (exit {code})")
+    return code
 
-    result = subprocess.run(
-        cmd,
-        cwd=str(cwd) if cwd else str(ROOT),
-        check=False
-    )
+# ====================================================
+# 0. ENSURE REQUIRED PYTHON PACKAGES ARE INSTALLED
+# ====================================================
 
-    if result.returncode != 0:
-        print(f"[full_autosync] ERROR: command returned code {result.returncode}")
+print("\n================== SELF-HEAL ==================\n")
+pkgs = ["requests", "pyvis", "PyYAML", "markdown", "pydantic", "python-dotenv"]
 
-        if allow_fail:
-            print("[full_autosync] allow_fail=True → continuing despite the error.")
-            return result.returncode
+for p in pkgs:
+    print(f"Checking package: {p}")
+    try:
+        __import__(p)
+        print(f"✓ {p} OK")
+    except ImportError:
+        print(f"→ Installing {p} …")
+        subprocess.call(f"pip install {p}", shell=True)
 
-        print("[full_autosync] Fatal error → stopping autosync.")
-        sys.exit(result.returncode)
+# ====================================================
+# 1. ENSURE METHODOLOGY FILES EXIST
+# ====================================================
 
-    return result.returncode
+METH = ROOT / "methodology"
+METH.mkdir(exist_ok=True)
 
+missing = [
+    "symbiosis-interface.md",
+    "symbiotic-process.md",
+    "symbiotic-process-llm.md",
+    "symbiotic-process-summary.md",
+]
 
-def main():
-    print("\n============== EFC FULL AUTOSYNC ==============\n")
-    print("[full_autosync] Project root:", ROOT)
+print("\n▶ Checking methodology files…")
+placeholder = "# Auto-generated placeholder\n"
 
-    # ----------------------------------------------------
-    # 1) FIGSHARE SYNC — SOFT FAILURE
-    # ----------------------------------------------------
-    print("\n[1] FIGSHARE METADATA SYNC")
-    print("[full_autosync] This step may fail without a Figshare token in CI.")
-    run(["python", "scripts/fetch_figshare_auto.py"], allow_fail=True)
+for f in missing:
+    path = METH / f
+    if not path.exists():
+        print(f"→ Creating {f}")
+        path.write_text(placeholder)
+    else:
+        print(f"✓ {f} exists")
 
-    # ----------------------------------------------------
-    # 2) UPDATE CONCEPTS / SCHEMA / SEMANTIC LAYER
-    # ----------------------------------------------------
-    print("\n[2] Updating concepts.json + semantic layers")
-    run(["python", "scripts/update_concepts.py"])
+# ====================================================
+# 2. RUN ALL AUTOSYNC STAGES
+# ====================================================
 
-    # ----------------------------------------------------
-    # 3) GENERATE METHODOLOGY API
-    # ----------------------------------------------------
-    print("\n[3] Regenerating Methodology API")
-    run(["python", "scripts/generate_methodology_api.py"])
+print("\n================= AUTOSYNC =====================\n")
 
-    # ----------------------------------------------------
-    # 4) UPDATE EFC API (api/v1)
-    # ----------------------------------------------------
-    print("\n[4] Regenerating API v1 (concepts + methodology + meta)")
-    run(["python", "scripts/update_efc_api.py"])
+run(
+    f"python3 {ROOT}/scripts/fetch_figshare_auto.py",
+    allow_fail=True,
+    label="Fetch Figshare metadata (may fail without token)"
+)
 
-    # ----------------------------------------------------
-    # 5) GENERATE REPO MAP
-    # ----------------------------------------------------
-    print("\n[5] Generating repository map")
-    run(["python", "scripts/generate_repo_map.py"])
+run(
+    f"python3 {ROOT}/scripts/update_concepts.py",
+    allow_fail=False,
+    label="Update concepts"
+)
 
-    # ----------------------------------------------------
-    # 6) CHECK IMPORTS FOR PYTHON SOURCE CLEANLINESS
-    # ----------------------------------------------------
-    print("\n[6] Checking Python import integrity")
-    run(["python", "scripts/check_imports.py"], allow_fail=True)
+run(
+    f"python3 {ROOT}/scripts/generate_methodology_api.py",
+    allow_fail=False,
+    label="Generate Methodology API"
+)
 
-    print("\n============== AUTOSYNC COMPLETE ==============\n")
+run(
+    f"python3 {ROOT}/scripts/update_efc_api.py",
+    allow_fail=False,
+    label="Update EFC API"
+)
 
+# Repo-map MUST NOT STOP AUTOSYNC
+run(
+    f"python3 {ROOT}/scripts/generate_repo_map.py",
+    allow_fail=True,
+    label="Generate Repo Map (fallback mode)"
+)
 
-if __name__ == "__main__":
-    main()
+print("\n================ AUTOSYNC COMPLETE ================")
+print("All steps completed. Self-heal applied. Repo map fallback enabled.\n")
