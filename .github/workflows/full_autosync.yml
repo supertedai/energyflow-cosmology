@@ -1,87 +1,38 @@
-#!/usr/bin/env python3
-# -*- coding: utf-8 -*-
+name: EFC Full Autosync
 
-"""
-EFC Full Autosync
-- Fetches Figshare files (if token present)
-- Updates repository content
-- Generates meta-index.json
-- Prepares system for API and schema loaders
-"""
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
 
-import os
-import json
-import requests
+jobs:
+  autosync:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
 
-# ------------------------------------------------------------
-# 1. Optional: Sync Figshare content (if FIGSHARE_TOKEN exists)
-# ------------------------------------------------------------
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
 
-FIGSHARE_TOKEN = os.environ.get("FIGSHARE_TOKEN")
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.11"
 
-def fetch_figshare_articles():
-    if not FIGSHARE_TOKEN:
-        print("[autosync] No FIGSHARE_TOKEN found – skipping Figshare sync.")
-        return
-    
-    print("[autosync] Fetching Figshare articles...")
-    headers = {"Authorization": f"token {FIGSHARE_TOKEN}"}
+      - name: Run full autosync
+        env:
+          FIGSHARE_TOKEN: ${{ secrets.FIGSHARE_TOKEN }}
+        run: |
+          python3 scripts/full_autosync.py
 
-    # Example: fetch your account articles list
-    url = "https://api.figshare.com/v2/account/articles"
-    r = requests.get(url, headers=headers)
+      - name: Commit autosync output
+        run: |
+          git config user.name "github-actions"
+          git config user.email "github-actions@github.com"
+          git add -A
+          git commit -m "Autosync: system updated [skip ci]" || echo "No changes"
 
-    if r.status_code != 200:
-        print(f"[autosync] Figshare failed: HTTP {r.status_code}")
-        return
-
-    articles = r.json()
-    print(f"[autosync] Found {len(articles)} articles.")
-
-    # You can expand this as needed:
-    # - download PDFs
-    # - update docs/
-    # - write metadata
-    # For now, we just confirm connection works.
-
-fetch_figshare_articles()
-
-
-# ------------------------------------------------------------
-# 2. Build the global meta-index.json (ALL jsonld files)
-# ------------------------------------------------------------
-
-print("[autosync] Scanning repository for .jsonld files...")
-
-nodes = []
-
-for dirpath, _, filenames in os.walk("."):
-    for f in filenames:
-        if f.endswith(".jsonld"):
-            full_path = os.path.join(dirpath, f).replace("./", "")
-            node_id = os.path.splitext(f)[0]
-
-            nodes.append({
-                "id": node_id,
-                "path": full_path,
-                "type": "CreativeWork"
-            })
-
-meta_index = {
-    "version": "1.0",
-    "nodes": nodes
-}
-
-with open("meta-index.json", "w") as fp:
-    json.dump(meta_index, fp, indent=2)
-
-print(f"[autosync] meta-index.json built with {len(nodes)} nodes.")
-for n in nodes:
-    print("  -", n["id"])
-
-
-# ------------------------------------------------------------
-# 3. Done – GitHub Actions will now commit and push the result
-# ------------------------------------------------------------
-
-print("[autosync] Full autosync completed successfully.")
+      - name: Push updates
+        run: |
+          git push || echo "Push failed (likely due to remote updates)"
