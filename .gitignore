@@ -80,7 +80,6 @@ output/
 *.fls
 *.fdb_latexmk
 *.synctex.gz
-*.pdf
 
 # Temporary validation images
 validation/*.png
