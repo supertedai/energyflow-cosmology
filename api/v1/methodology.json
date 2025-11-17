@@ -19,22 +19,22 @@
     {
       "name": "symbiosis-interface.md",
       "url": "https://github.com/supertedai/energyflow-cosmology/blob/main/methodology/symbiosis-interface.md",
-      "exists": false
+      "exists": true
     },
     {
       "name": "symbiotic-process.md",
       "url": "https://github.com/supertedai/energyflow-cosmology/blob/main/methodology/symbiotic-process.md",
-      "exists": false
+      "exists": true
     },
     {
       "name": "symbiotic-process-llm.md",
       "url": "https://github.com/supertedai/energyflow-cosmology/blob/main/methodology/symbiotic-process-llm.md",
-      "exists": false
+      "exists": true
     },
     {
       "name": "symbiotic-process-summary.md",
       "url": "https://github.com/supertedai/energyflow-cosmology/blob/main/methodology/symbiotic-process-summary.md",
-      "exists": false
+      "exists": true
     }
   ]
 }
