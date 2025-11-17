@@ -1,0 +1,33 @@
+name: Full Repository Migration
+
+on:
+  workflow_dispatch:
+
+jobs:
+  mig:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: "3.11"
+
+    - name: Run full migration
+      run: python scripts/migrate_all.py
+
+    - name: Regenerate semantic structure
+      run: |
+        python scripts/generate_schema_map.py
+        python scripts/generate_node_index.py
+        python scripts/generate_semantic_graph.py
+        python scripts/generate_readmes.py
+
+    - name: Commit changes
+      run: |
+        git config user.email "actions@github.com"
+        git config user.name "GitHub Actions"
+        git add .
+        git commit -m "Full repository migration to object-based structure" || echo "No changes"
+        git push
