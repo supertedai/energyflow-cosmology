@@ -2,8 +2,8 @@
 
 import subprocess
 import sys
-import os
 from pathlib import Path
+import datetime
 
 ROOT = Path(__file__).resolve().parent.parent
 
@@ -14,90 +14,93 @@ def run(cmd, allow_fail=False, label=None):
     print(f"→ {cmd}")
 
     code = subprocess.call(cmd, shell=True)
+
     if code != 0 and not allow_fail:
-        print(f"❌ Fatal error: {cmd}")
+        print(f"❌ Fatal error → stopping\nCommand: {cmd}")
         sys.exit(code)
+
     if code != 0 and allow_fail:
-        print(f"⚠️ Non-critical error — continuing (exit {code})")
+        print(f"⚠️ Non-critical error → continuing (exit {code})")
+
     return code
 
-# ====================================================
-# 0. ENSURE REQUIRED PYTHON PACKAGES ARE INSTALLED
-# ====================================================
 
-print("\n================== SELF-HEAL ==================\n")
-pkgs = ["requests", "pyvis", "PyYAML", "markdown", "pydantic", "python-dotenv"]
+print("\n================== EFC FULL AUTOSYNC ==================")
+print(f"Timestamp: {datetime.datetime.now().isoformat()}")
+print("========================================================\n")
 
-for p in pkgs:
-    print(f"Checking package: {p}")
-    try:
-        __import__(p)
-        print(f"✓ {p} OK")
-    except ImportError:
-        print(f"→ Installing {p} …")
-        subprocess.call(f"pip install {p}", shell=True)
 
-# ====================================================
-# 1. ENSURE METHODOLOGY FILES EXIST
-# ====================================================
+# -------------------------------------------------------
+# 0. SELF-HEAL
+# -------------------------------------------------------
+run(
+    f"python3 {ROOT}/scripts/efc_self_heal.py",
+    allow_fail=False,
+    label="Self-Heal: pakker, metodologi, fallback-kart"
+)
 
-METH = ROOT / "methodology"
-METH.mkdir(exist_ok=True)
-
-missing = [
-    "symbiosis-interface.md",
-    "symbiotic-process.md",
-    "symbiotic-process-llm.md",
-    "symbiotic-process-summary.md",
-]
-
-print("\n▶ Checking methodology files…")
-placeholder = "# Auto-generated placeholder\n"
-
-for f in missing:
-    path = METH / f
-    if not path.exists():
-        print(f"→ Creating {f}")
-        path.write_text(placeholder)
-    else:
-        print(f"✓ {f} exists")
-
-# ====================================================
-# 2. RUN ALL AUTOSYNC STAGES
-# ====================================================
-
-print("\n================= AUTOSYNC =====================\n")
-
+# -------------------------------------------------------
+# 1. FIGSHARE SYNC
+# -------------------------------------------------------
 run(
     f"python3 {ROOT}/scripts/fetch_figshare_auto.py",
     allow_fail=True,
-    label="Fetch Figshare metadata (may fail without token)"
+    label="Figshare metadata sync (may fail without token)"
 )
 
+# -------------------------------------------------------
+# 2. UPDATE CONCEPTS
+# -------------------------------------------------------
 run(
     f"python3 {ROOT}/scripts/update_concepts.py",
     allow_fail=False,
-    label="Update concepts"
+    label="Oppdaterer konsepter"
 )
 
+# -------------------------------------------------------
+# 3. GENERATE METHODOLOGY API
+# -------------------------------------------------------
 run(
     f"python3 {ROOT}/scripts/generate_methodology_api.py",
     allow_fail=False,
-    label="Generate Methodology API"
+    label="Genererer Methodology API"
 )
 
+# -------------------------------------------------------
+# 4. UPDATE EFC API
+# -------------------------------------------------------
 run(
     f"python3 {ROOT}/scripts/update_efc_api.py",
     allow_fail=False,
-    label="Update EFC API"
+    label="Oppdaterer EFC API"
 )
 
-# Repo-map MUST NOT STOP AUTOSYNC
+# -------------------------------------------------------
+# 5. GENERATE REPO MAP
+# -------------------------------------------------------
 run(
     f"python3 {ROOT}/scripts/generate_repo_map.py",
     allow_fail=True,
-    label="Generate Repo Map (fallback mode)"
+    label="Genererer repo-kart"
 )
 
-print("\n================ AUTOSYNC COMPLETE ================")
-print("All steps completed. Self-heal applied. Repo map fallback enabled.\n")
+# -------------------------------------------------------
+# 6. UPDATE **ALL** READMEs REKURSIVT ← HER MANGLET DET
+# -------------------------------------------------------
+run(
+    f"python3 {ROOT}/scripts/update_all_readmes.py",
+    allow_fail=False,
+    label="Oppdaterer alle README-filer (rekursivt)"
+)
+
+print("\n========================================================")
+print("EFC FULL AUTOSYNC FULLFØRT")
+print("--------------------------------------------------------")
+print("✓ Miljø reparert")
+print("✓ Semantikk og API oppdatert")
+print("✓ Figshare synkronisert (hvis token var aktivt)")
+print("✓ Repo-kart generert")
+print("✓ Alle README.md opprettet og oppdatert")
+print("--------------------------------------------------------")
+print("Systemet er nå i synk og selvreparerende.")
+print("========================================================\n")
