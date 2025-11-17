@@ -1,137 +1,190 @@
-
-
 # **Start Here — Orientation Guide**
 
-This repository contains three interconnected layers:
+This repository contains three integrated layers:
 
 1. **EFC (Energy-Flow Cosmology)** — the scientific theory
-2. **Validation Layer** — data, figures, comparisons
-3. **Meta / Cognition / Symbiosis** — the documented reflective process behind the theory
+2. **Validation Layer** — data, comparisons, figures
+3. **Meta / Cognition / Symbiosis** — the documented reflective process
 
-The purpose of this page is to give you a fast orientation so you can navigate the project correctly from the beginning.
+This guide gives you a clear path into the project.
 
 ---
 
-## **1. What EFC Is (Short Overview)**
+# **1. What EFC Is**
 
-Energy-Flow Cosmology describes the universe as a thermodynamic flow system.
-Cosmic structure, expansion, and observables emerge from:
+Energy-Flow Cosmology describes the universe as a thermodynamic flow system where:
 
-* energy rate density
+* energy distribution
 * entropy gradients
+* information capacity
 * local–global flow fields
-* s₀–s₁ transitions in light and information
 
-Full formal definition →
-**`/theory/formal/efc_master.tex`**
-(And generated PDF: `efc_formal_spec.pdf`)
+drive cosmic structure and dynamics.
 
----
+The formal definition is here:
 
-## **2. Where to Begin**
-
-Read these first to understand the system, the process, and the person behind it.
-
-### **A. Start with these (3–5 min each)**
-
-* **`personal/Personal-Note.md`**
-  Context, cognitive style, and why the process is documented.
-
-* **`meta/README.md`**
-  High-level meta-architecture and why the reflective layer exists.
-
-* **`meta-index.json`**
-  Machine-readable index of the meta structure.
-
-* **`schema/site-graph.json`**
-  The semantic overview of the entire project.
-
-### **B. Then move here**
-
-* **`theory/formal/efc_formal_spec.pdf`** — core theory
-* **`output/`** — validation plots, figures, and data
+```
+theory/formal/efc_formal_spec.tex
+theory/formal/efc_formal_spec.pdf
+```
 
 ---
 
-## **3. Three Main Tracks in the Repo**
+# **2. If You’re New — Start With These**
 
-### **(1) The Theory Track**
+Read these four items first (3–5 minutes each):
 
-All formal models:
-EFC-D, EFC-S, entropy fields, potentials, s₀–s₁ light dynamics.
+### **1. `meta/personal/Personal-Note.md`**
+
+Context, cognitive style, and why the process is documented.
+
+### **2. `meta/README.md`**
+
+Top-level explanation of the meta layer.
+
+### **3. `meta-index.json`**
+
+Machine-readable map of the meta architecture.
+
+### **4. `schema/site-graph.json`**
+
+Semantic mapping of the entire repository.
+
+These give you:
+
+* the author
+* the process
+* the structure
+* the semantics
+
+Before you look at the science.
 
 ---
 
-### **(2) Validation Track**
+# **3. Three Main Tracks**
 
-SPARC rotation curves, JWST early formation, DESI BAO, lensing, etc.
+## **Track A — Theory**
+
+Scientific content:
+
+* EFC-S (structure)
+* EFC-D (dynamics)
+* EFC-C₀ (entropy ↔ information)
+* potentials
+* s₀–s₁ light dynamics
+
+Located under:
+
+```
+theory/
+theory/formal/
+docs/efc_master.*
+```
 
 ---
 
-### **(3) Meta / Cognitive / Symbiosis Track**
+## **Track B — Validation**
 
-How the theory was generated through the interaction between:
+Empirical results based on:
 
-* human cognitive field
-* model structural engine
-* the co-field
-* the meta-reflective loop
-* the metascope
+* SPARC rotation curves
+* JWST early galaxy formation
+* DESI BAO + H(z)
+* lensing profiles
+
+Located under:
+
+```
+output/
+data/
+notebooks/
+```
 
 ---
 
-## **4. Recommended Reading Order**
+## **Track C — Meta / Cognition / Symbiosis**
 
-A good path through the project looks like this:
+Documents the reflective engine behind EFC:
 
-1. `personal/Personal-Note.md`
+* cognitive-field
+* resonance and alignment
+* co-field dynamics
+* meta-process
+* meta-reflection
+* symbiosis mechanisms
+* topology of insight
+
+Located under:
+
+```
+meta/
+meta/cognition/
+meta/reflection/
+meta/symbiosis/
+meta/meta-process/
+meta-graph/
+```
+
+This does **not** alter the physics — it documents the process that produced it.
+
+---
+
+# **4. Recommended Reading Order**
+
+Follow this path for a coherent understanding:
+
+1. `meta/personal/Personal-Note.md`
 2. `meta-index.json`
 3. `meta/README.md`
-4. `symbiosis/README.md`
-5. `cognition/README.md`
+4. `meta/symbiosis/README.md`
+5. `meta/cognition/README.md`
 6. `theory/formal/efc_formal_spec.pdf`
-7. `output/` (validation)
+7. `output/` (validation figures and results)
 8. `meta-graph/` (knowledge graph)
 
-This order gives:
+This gives you:
 
-* **who**
-* **how**
-* **what**
-* **does it work?**
-
----
-
-## **5. Why the Repo Is Structured This Way**
-
-The documentation includes both:
-
-* the scientific theory
-* the cognitive and structural process
-* the symbiotic mechanism
-* the meta-architecture
-* all validation data
-* semantic graphs and machine-readable layers
-
-This is deliberate:
-
-* insight emerges across s₀–s₁ transitions
-* structure stabilises through externalisation
-* transparency makes the work inspectable
-* future researchers will need *both* the theory and the process
-* open science benefits from fully visible reasoning
+* **who** (context)
+* **how** (process)
+* **what** (theory)
+* **does it work** (validation)
 
 ---
 
-## **6. Next Steps**
+# **5. Why The Repo Contains More Than Theory**
 
-Once you finish this page:
+The repository includes:
 
-* **Read the EFC Master Specification**
-* **Explore the validation outputs**
-* **Inspect the meta-graph**
-* **Run the dashboard** (`meta_dashboard.py`)
+* scientific models
+* validation
+* meta-architecture
+* cognitive and reflective layers
+* semantic descriptions
+* a machine-readable knowledge graph
 
-Everything is open, documented, and reproducible.
+This is intentional:
+
+* insight stabilizes through externalization
+* the reflective process is part of how EFC was developed
+* future researchers benefit from full transparency
+* semantic layers enable search engines and AI systems to read the project
+* validation ensures reproducibility
+
+---
+
+# **6. Next Steps After This Page**
+
+Once you finish this guide:
+
+* Read the **EFC formal specification**
+* Explore **validation output**
+* Inspect the **meta-graph** (structural overview)
+* Run the **dashboard**:
+
+```
+python3 meta_dashboard.py
+```
+
+Everything in the system is open, documented, and reproducible.
 
 ---
