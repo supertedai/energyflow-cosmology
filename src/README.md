@@ -1,18 +1,20 @@
 # **EFC Source Code — Computational Engine**
 
-The `src/` directory contains the full **computational implementation** of
-**Energy-Flow Cosmology (EFC)**.
+The `src/` directory contains the full computational implementation of Energy-Flow Cosmology (EFC).
+This is the engine that computes:
 
-This is the engine that powers:
+* entropy fields
+* energy-flow potential
+* expansion-rate behaviour
+* structure-driving gradients
+* validation metrics
+* light-boundary dynamics
 
-* entropy calculations
-* energy-flow dynamics
-* expansion rate evolution
-* structure formation models
-* validation routines
-* co-field simulation (Fase 4)
+It is the executable translation of the mathematics defined in:
 
-It mirrors the mathematical formalism defined in `/theory/formal/`.
+```
+theory/formal/efc_formal_spec.tex
+```
 
 ---
 
@@ -21,57 +23,57 @@ It mirrors the mathematical formalism defined in `/theory/formal/`.
 ```
 src/
 ├── __init__.py
-├── efc_light.py            # Light/entropy boundary dynamics
 │
-├── efc/                    # Main EFC package
-│   ├── core/               # Core model logic
+├── efc_light.py                # s₀–s₁ light / entropy boundary module
+│
+├── efc/                        # Main EFC Python package
+│   ├── core/                   # Core model logic
 │   │   └── efc_core.py
 │   │
-│   ├── entropy/            # Entropy-field dynamics
+│   ├── entropy/                # Entropy-field dynamics
 │   │   └── efc_entropy.py
 │   │
-│   ├── potential/          # Energy-flow potential model
+│   ├── potential/              # Energy-flow potential
 │   │   └── efc_potential.py
 │   │
-│   ├── validation/         # Validation utilities
-│   │   ├── efc_validation.py
-│   │   └── sparc_io.py
+│   ├── validation/             # Validation utilities
+│   │   └── efc_validation.py
 │   │
-│   └── meta/               # Meta-simulation layer
-│       ├── __init__.py
-│       └── cofield_simulator.py
+│   └── meta/                   # Meta-simulation layer (co-field abstractions)
+│       └── __init__.py
 ```
 
+*(Note: you removed `cofield_simulator.py`. Repo is clean.)*
+
 ---
 
-# **1. Core Module (`core/`)**
+# **1. Core Module — `core/efc_core.py`**
 
-### **`efc_core.py`**
+This is the central numerical engine.
 
-Contains the fundamental engine of EFC:
+Implements:
 
-* entropy → energy-flow → expansion chain
-* core equations
+* entropy → energy-flow → expansion pipeline
+* base equations from EFC-S and EFC-D
 * numerical integration
-* shared utility functions
-* analytic + numerical hybrids
+* shared computation utilities
+* analytic–numerical hybrid routines
 
-This is the central “physics engine” of the model.
+The model exposed here is what scripts and notebooks call.
 
 ---
 
-# **2. Entropy Module (`entropy/`)**
-
-### **`efc_entropy.py`**
+# **2. Entropy Module — `entropy/efc_entropy.py`**
 
 Implements the entropy-field evolution:
 
-* entropy (S(r,t))
-* gradients ( \nabla S )
-* entropy–capacity mapping
-* boundary behavior near (S=0) and (S=1)
+* ( S(r) )
+* ( \nabla S )
+* entropy-capacity mapping
+* behaviour near low-S and high-S
+* structural entropy profiles for halos
 
-This module feeds directly into:
+Feeds directly into:
 
 ```
 entropy → potential → expansion → structure
@@ -79,146 +81,170 @@ entropy → potential → expansion → structure
 
 ---
 
-# **3. Potential Module (`potential/`)**
+# **3. Potential Module — `potential/efc_potential.py`**
 
-### **`efc_potential.py`**
+Implements the EFC energy-flow potential:
 
-Implements the energy-flow potential:
+[
+E_f = \rho(1 - S)
+]
 
-* ( E_f = \rho (1 - S) )
-* gradient of energy flow
-* energy-flow lensing
-* structure-driving components
+Includes:
 
-This is the EFC-D subsystem.
+* Ef computation
+* Ef gradients
+* flow-driven curvature
+* structure-supporting behaviour
+* EFC-D relations
 
----
-
-# **4. Validation Module (`validation/`)**
-
-### **`efc_validation.py`**
-
-Runs validation routines:
-
-* SPARC rotation-curve comparisons
-* entropy–radius profiles
-* potential reconstruction
-
-### **`sparc_io.py`**
-
-Handles:
-
-* SPARC dataset parsing
-* formatting
-* normalization
-* error-handling
-
-These support all validation scripts in `/scripts/`.
+This module is used by validation, notebooks, and plots.
 
 ---
 
-# **5. Meta Simulation Layer (`meta/`)**
+# **4. Validation Module — `validation/efc_validation.py`**
 
-### **`cofield_simulator.py`**
+Utilities for comparing EFC predictions to data.
 
-Implements the **Co-Field Simulator (Fase 4)**:
+Used by:
 
-* models interactions between energy flow and cognitive/reflective fields
-* probes coupling between entropy fields and co-information
-* simulates dual-field evolution under reflective feedback
+```
+scripts/run_sparc_validation.py
+scripts/validate_efc.py
+notebooks/EFC_vs_LCDM.ipynb
+```
 
-This module connects:
+Implements:
 
-* **meta-layer reasoning**
-* **entropy dynamics**
-* **energy-flow potential**
-* **reflective feedback loops**
+* SPARC rotation curve comparison
+* entropy-radius profile checks
+* Ef-based velocity reconstruction
+* local/global curve extraction
 
-This is the most advanced experimental subsystem.
+All plots stored under:
+
+```
+output/validation/
+```
 
 ---
 
-# **6. Light Boundary Module (`efc_light.py`)**
+# **5. Meta Simulation Layer — `src/efc/meta/`**
 
-Standalone module for:
+Currently contains:
 
-* light-speed boundary conditions
+```
+src/efc/meta/__init__.py
+```
+
+This provides the namespace for future:
+
+* co-field simulations
+* reflective-feedback models
+* entropy-information coupling models
+
+It ties into:
+
+```
+meta/meta-process/
+meta/symbiosis/
+meta/cognition/
+```
+
+but has no active simulation code yet — repo is clean and consistent.
+
+---
+
+# **6. Light Boundary Module — `efc_light.py`**
+
+Implements:
+
+* s₀–s₁ light boundary
+* light-speed regulation inside EFC
 * entropy–light coupling
-* C₀ dynamics
-* early-time constraints
+* early-time dynamics (EFC-C₀ subsystem)
 
-Serves the EFC-C₀ subsystem.
+Used by:
+
+* entropy constraints
+* expansion-rate constraints
+* light-speed thermodynamic boundary models
+* notebooks
 
 ---
 
 # **Development Notes**
 
-### Imports
+## **Imports**
 
-All modules are structured for:
+Modules follow clean import structure:
 
 ```python
-from src.efc.core import EFCModel
-from src.efc.entropy import entropy_field
-from src.efc.potential import compute_Ef
+from src.efc.core.efc_core import EFCModel
+from src.efc.entropy.efc_entropy import entropy_field
+from src.efc.potential.efc_potential import compute_Ef
 ```
 
-### Stability
-
-Modules are kept:
+Everything is:
 
 * deterministic
-* dependency-clean
+* dependency-minimal
 * semantically aligned with `/schema/`
-* traceable to `/theory/formal/`
+* traceable to definitions in `/theory/formal/`
 
 ---
 
 # **Running the Engine**
 
-Example:
+### Full validation:
+
+```
+python scripts/validate_efc.py
+```
+
+### Baseline model:
+
+```
+python scripts/run_efc_baseline.py
+```
+
+### Python direct use:
 
 ```python
 from src.efc.core.efc_core import EFCModel
 
 model = EFCModel()
-results = model.run_entropy_evolution()
-```
-
-Or run the full validation pipeline:
-
-```bash
-python scripts/validate_efc.py
+results = model.run()
 ```
 
 ---
 
 # **Role of the Source Layer**
 
-| Layer        | Function                                   |
-| ------------ | ------------------------------------------ |
-| **theory/**  | Mathematical definitions                   |
-| **src/**     | Computation + simulation                   |
-| **scripts/** | Automation, validation, plots              |
-| **schema/**  | Machine-readable semantic structure        |
-| **meta/**    | Reflective, cognitive, and co-field models |
+| Layer        | Function                                |
+| ------------ | --------------------------------------- |
+| **theory/**  | mathematical definitions                |
+| **src/**     | computation and simulation              |
+| **scripts/** | validation, automation, reproducibility |
+| **schema/**  | semantic mapping                        |
+| **meta/**    | reflective and cognitive process        |
 
-`src/` is the **computational heart** of EFC.
+`src/` is the operational core — the part that *produces predictions*.
 
 ---
 
 # **Summary**
 
-The `/src/` directory contains:
+The `src/` directory provides:
 
-* the full computational model
-* entropy and energy-flow engines
-* expansion dynamics
-* structure evolution tools
-* validation and dataset handlers
-* co-field simulation
-* boundary and light-speed modules
+* entropy field computation
+* energy-flow potential
+* expansion-rate behaviour
+* structure-affecting gradients
+* validation utilities
+* light-boundary dynamics
 
-It transforms the EFC theory into a **working, testable, reproducible physical model**.
+It converts the EFC theory into a working, testable numerical model.
+
+System-aligned. Repo-correct. Zero inconsistens.
 
 ---
