@@ -1,0 +1,24 @@
+{
+  "@context": "https://schema.org",
+  "@type": "CreativeWork",
+  "identifier": "docs/efc-master-template/index",
+  "name": "Efc Master Template",
+  "author": {
+    "@type": "Person",
+    "name": "Morten Magnusson",
+    "identifier": "https://orcid.org/0009-0002-4860-5095"
+  },
+  "version": "1.0",
+  "isPartOf": {
+    "@type": "CreativeWorkSeries",
+    "name": "docs"
+  },
+  "layer": "docs",
+  "encodingFormat": "md",
+  "url": "docs/efc-master-template/index.md",
+  "description": "Auto-generated Markdown wrapper.",
+  "keywords": [
+    "master",
+    "template"
+  ]
+}
