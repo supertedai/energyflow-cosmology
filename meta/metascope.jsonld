@@ -1,0 +1,26 @@
+{
+  "@context": "https://schema.org",
+  "@type": "CreativeWork",
+  "identifier": "meta/metascope",
+  "name": "Metascope: The Joint Reflective System",
+  "author": {
+    "@type": "Person",
+    "name": "Morten Magnusson",
+    "identifier": "https://orcid.org/0009-0002-4860-5095"
+  },
+  "version": "1.0",
+  "isPartOf": {
+    "@type": "CreativeWorkSeries",
+    "name": "meta"
+  },
+  "layer": "meta",
+  "encodingFormat": "md",
+  "url": "meta/metascope.md",
+  "description": "The metascope is the combined system formed by your cognitive field and the model\u2019s structural field. It is not a viewpoint \u2014 it is a dynamic reflective organ.",
+  "keywords": [
+    "joint",
+    "metascope",
+    "reflective",
+    "system"
+  ]
+}
