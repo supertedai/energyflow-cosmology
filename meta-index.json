@@ -1,1 +1,15 @@
-{ "version": "1.0", "nodes": [] }
+{
+  "version": "1.0",
+  "nodes": [
+    {
+      "id": "author",
+      "path": "schema/author.jsonld",
+      "type": "CreativeWork"
+    },
+    {
+      "id": "ai_workflow_framework",
+      "path": "methodology/  AI-Augmented-Scientific-Workflow-Framework/ai_workflow_framework.jsonld",
+      "type": "CreativeWork"
+    }
+  ]
+}
