@@ -1,107 +1,38 @@
-#!/usr/bin/env python3
-"""
-EFC FULL AUTOSYNC (INTEGRATED SELF-HEAL SYSTEM)
-------------------------------------------------
+name: EFC Full Autosync
 
-Dette scriptet:
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
 
-1) Kjør selvreparasjon (efc_self_heal)
-2) Sync Figshare-metadata
-3) Oppdater konsepter
-4) Generer metodologi-API
-5) Oppdater EFC API
-6) Generer repo-map (fallback hvis pyvis mangler)
-7) Fullfører autosync uansett hva som feiler
+jobs:
+  autosync:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
 
-Resultat: Hele systemet er selvreparerende og robust.
-"""
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
 
-import subprocess
-import os
-from pathlib import Path
-import datetime
-import sys
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.11"
 
-ROOT = Path(__file__).resolve().parent.parent
+      - name: Run autosync (self-healing)
+        env:
+          FIGSHARE_TOKEN: ${{ secrets.FIGSHARE_TOKEN }}
+        run: |
+          python3 scripts/full_autosync.py
 
-def run(cmd, allow_fail=False, label=None):
-    print("\n---------------------------------------------")
-    if label:
-        print(f"▶ {label}")
-    print(f"→ {cmd}")
+      - name: Commit autosync output
+        run: |
+          git config user.name "github-actions"
+          git config user.email "github-actions@github.com"
+          git add -A
+          git commit -m "Autosync: system updated [skip ci]" || echo "No changes"
 
-    result = subprocess.run(cmd, shell=True)
-    code = result.returncode
-
-    if code != 0 and not allow_fail:
-        print(f"❌ Fatal error: {cmd}")
-        sys.exit(code)
-    elif code != 0 and allow_fail:
-        print(f"⚠️ Ikke-kritisk feil, fortsetter… (exit {code})")
-    else:
-        print("✓ OK")
-
-    return code
-
-
-print("\n================= EFC FULL AUTOSYNC =================")
-print(f"[{datetime.datetime.now().isoformat()}] Starter autosync…\n")
-
-# -------------------------------------------------
-# 1. SELF-HEAL SYSTEM
-# -------------------------------------------------
-run(
-    f"python3 {ROOT}/scripts/efc_self_heal.py",
-    allow_fail=False,
-    label="Self-Heal: fikser manglende pakker, metodologifiler, repo-map-fallback"
-)
-
-# -------------------------------------------------
-# 2. FETCH FIGSHARE METADATA (allow fail)
-# -------------------------------------------------
-run(
-    f"python3 {ROOT}/scripts/fetch_figshare_auto.py",
-    allow_fail=True,
-    label="Fetch Figshare metadata (fortsetter ved feil)"
-)
-
-# -------------------------------------------------
-# 3. UPDATE CONCEPTS
-# -------------------------------------------------
-run(
-    f"python3 {ROOT}/scripts/update_concepts.py",
-    allow_fail=False,
-    label="Oppdaterer konsepter"
-)
-
-# -------------------------------------------------
-# 4. GENERATE METHODOLOGY API
-# -------------------------------------------------
-run(
-    f"python3 {ROOT}/scripts/generate_methodology_api.py",
-    allow_fail=False,
-    label="Regenererer Methodology API"
-)
-
-# -------------------------------------------------
-# 5. UPDATE EFC API
-# -------------------------------------------------
-run(
-    f"python3 {ROOT}/scripts/update_efc_api.py",
-    allow_fail=False,
-    label="Oppdaterer EFC API (konsepter + meta)"
-)
-
-# -------------------------------------------------
-# 6. GENERATE REPO MAP (selfheal handles pyvis)
-# -------------------------------------------------
-run(
-    f"python3 {ROOT}/scripts/generate_repo_map.py",
-    allow_fail=True,
-    label="Genererer repo map (fortsetter ved feil)"
-)
-
-print("\n================= AUTOSYNC FULLFØRT =================")
-print("Systemet er ferdig oppdatert og selvreparert.")
-print("Alle API-lag er regenerert. Repo-map generert med fallback.")
-print("=====================================================\n")
+      - name: Push updates
+        run: |
+          git push || echo "Push failed (likely due to remote updates)"
