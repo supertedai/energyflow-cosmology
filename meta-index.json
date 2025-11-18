@@ -27,6 +27,36 @@
       "type": "CreativeWork"
     },
     {
+      "id": "meta/reflection/reflection-index/reflection-map",
+      "path": "meta/reflection/reflection-index/reflection-map.jsonld",
+      "type": "CreativeWork"
+    },
+    {
+      "id": "meta/reflection/reflection-index/reflection-surfaces",
+      "path": "meta/reflection/reflection-index/reflection-surfaces.jsonld",
+      "type": "CreativeWork"
+    },
+    {
+      "id": "meta/reflection/reflection-index/reflection-types",
+      "path": "meta/reflection/reflection-index/reflection-types.jsonld",
+      "type": "CreativeWork"
+    },
+    {
+      "id": "efc:reflection-index",
+      "path": "meta/reflection/reflection-index/index.jsonld",
+      "type": "CreativeWork"
+    },
+    {
+      "id": "meta/reflection/reflection-index/reflection-levels",
+      "path": "meta/reflection/reflection-index/reflection-levels.jsonld",
+      "type": "CreativeWork"
+    },
+    {
+      "id": "meta/reflection/reflection-index/examples",
+      "path": "meta/reflection/reflection-index/examples.jsonld",
+      "type": "CreativeWork"
+    },
+    {
       "id": "meta/cognition/cognitive-fingerprint/index",
       "path": "meta/cognition/cognitive-fingerprint/index.jsonld",
       "type": "CreativeWork"
@@ -76,8 +106,38 @@
       "type": "CreativeWork"
     },
     {
-      "id": "meta/meta-process/process-of-process",
+      "id": "meta/meta-process/meta-process-manifest",
+      "path": "meta/meta-process/meta-process-manifest.jsonld",
+      "type": "CreativeWork"
+    },
+    {
+      "id": "meta/meta-process/process-of-process/meta-transition-rules",
+      "path": "meta/meta-process/process-of-process/meta-transition-rules.jsonld",
+      "type": "CreativeWork"
+    },
+    {
+      "id": "meta/meta-process/process-of-process/control-loops",
+      "path": "meta/meta-process/process-of-process/control-loops.jsonld",
+      "type": "CreativeWork"
+    },
+    {
+      "id": "efc:process-of-process",
       "path": "meta/meta-process/process-of-process/index.jsonld",
+      "type": "CreativeWork"
+    },
+    {
+      "id": "meta/meta-process/process-of-process/recursion-map",
+      "path": "meta/meta-process/process-of-process/recursion-map.jsonld",
+      "type": "CreativeWork"
+    },
+    {
+      "id": "meta/meta-process/process-of-process/process-spec",
+      "path": "meta/meta-process/process-of-process/process-spec.jsonld",
+      "type": "CreativeWork"
+    },
+    {
+      "id": "meta/meta-process/process-of-process/examples",
+      "path": "meta/meta-process/process-of-process/examples.jsonld",
       "type": "CreativeWork"
     },
     {
@@ -111,58 +171,193 @@
       "type": "CreativeWork"
     },
     {
-      "id": "meta/meta-process/global-dynamics",
+      "id": "meta/meta-process/global-dynamics/transition-rules",
+      "path": "meta/meta-process/global-dynamics/transition-rules.jsonld",
+      "type": "CreativeWork"
+    },
+    {
+      "id": "meta/meta-process/global-dynamics/global-state-spec",
+      "path": "meta/meta-process/global-dynamics/global-state-spec.jsonld",
+      "type": "CreativeWork"
+    },
+    {
+      "id": "efc:global-dynamics",
       "path": "meta/meta-process/global-dynamics/index.jsonld",
       "type": "CreativeWork"
     },
     {
-      "id": "meta/meta-process/workflows",
+      "id": "meta/meta-process/global-dynamics/resonance-map",
+      "path": "meta/meta-process/global-dynamics/resonance-map.jsonld",
+      "type": "CreativeWork"
+    },
+    {
+      "id": "meta/meta-process/global-dynamics/examples",
+      "path": "meta/meta-process/global-dynamics/examples.jsonld",
+      "type": "CreativeWork"
+    },
+    {
+      "id": "meta/meta-process/workflows/transition-workflows",
+      "path": "meta/meta-process/workflows/transition-workflows.jsonld",
+      "type": "CreativeWork"
+    },
+    {
+      "id": "meta/meta-process/workflows/core-workflows",
+      "path": "meta/meta-process/workflows/core-workflows.jsonld",
+      "type": "CreativeWork"
+    },
+    {
+      "id": "meta/meta-process/workflows/diagnostic-workflows",
+      "path": "meta/meta-process/workflows/diagnostic-workflows.jsonld",
+      "type": "CreativeWork"
+    },
+    {
+      "id": "efc:meta-process-workflows",
       "path": "meta/meta-process/workflows/index.jsonld",
       "type": "CreativeWork"
     },
     {
-      "id": "meta/meta-process/tasks",
+      "id": "meta/meta-process/workflows/examples",
+      "path": "meta/meta-process/workflows/examples.jsonld",
+      "type": "CreativeWork"
+    },
+    {
+      "id": "meta/meta-process/workflows/stability-workflows",
+      "path": "meta/meta-process/workflows/stability-workflows.jsonld",
+      "type": "CreativeWork"
+    },
+    {
+      "id": "meta/meta-process/tasks/task-definitions",
+      "path": "meta/meta-process/tasks/task-definitions.jsonld",
+      "type": "CreativeWork"
+    },
+    {
+      "id": "meta/meta-process/tasks/task-categories",
+      "path": "meta/meta-process/tasks/task-categories.jsonld",
+      "type": "CreativeWork"
+    },
+    {
+      "id": "efc:meta-process-tasks",
       "path": "meta/meta-process/tasks/index.jsonld",
       "type": "CreativeWork"
     },
     {
-      "id": "meta/meta-process/roadmap",
+      "id": "meta/meta-process/tasks/examples",
+      "path": "meta/meta-process/tasks/examples.jsonld",
+      "type": "CreativeWork"
+    },
+    {
+      "id": "meta/meta-process/tasks/task-flow",
+      "path": "meta/meta-process/tasks/task-flow.jsonld",
+      "type": "CreativeWork"
+    },
+    {
+      "id": "efc:meta-process-roadmap",
       "path": "meta/meta-process/roadmap/index.jsonld",
       "type": "CreativeWork"
     },
     {
-      "id": "meta/meta-process/validation-plan",
+      "id": "meta/meta-process/roadmap/roadmap-items",
+      "path": "meta/meta-process/roadmap/roadmap-items.jsonld",
+      "type": "CreativeWork"
+    },
+    {
+      "id": "meta/meta-process/roadmap/timeline",
+      "path": "meta/meta-process/roadmap/timeline.jsonld",
+      "type": "CreativeWork"
+    },
+    {
+      "id": "meta/meta-process/validation-plan/cross-layer-checks",
+      "path": "meta/meta-process/validation-plan/cross-layer-checks.jsonld",
+      "type": "CreativeWork"
+    },
+    {
+      "id": "efc:validation-plan",
       "path": "meta/meta-process/validation-plan/index.jsonld",
       "type": "CreativeWork"
     },
     {
-      "id": "meta/meta-process/milestones",
+      "id": "meta/meta-process/validation-plan/validation-phases",
+      "path": "meta/meta-process/validation-plan/validation-phases.jsonld",
+      "type": "CreativeWork"
+    },
+    {
+      "id": "meta/meta-process/validation-plan/validation-criteria",
+      "path": "meta/meta-process/validation-plan/validation-criteria.jsonld",
+      "type": "CreativeWork"
+    },
+    {
+      "id": "meta/meta-process/validation-plan/examples",
+      "path": "meta/meta-process/validation-plan/examples.jsonld",
+      "type": "CreativeWork"
+    },
+    {
+      "id": "meta/meta-process/validation-plan/test-methods",
+      "path": "meta/meta-process/validation-plan/test-methods.jsonld",
+      "type": "CreativeWork"
+    },
+    {
+      "id": "meta/meta-process/milestones/milestones",
+      "path": "meta/meta-process/milestones/milestones.jsonld",
+      "type": "CreativeWork"
+    },
+    {
+      "id": "efc:meta-process-milestones",
       "path": "meta/meta-process/milestones/index.jsonld",
       "type": "CreativeWork"
     },
     {
-      "id": "meta/meta-process/self-evaluation",
+      "id": "meta/meta-process/self-evaluation/diagnostic-rules",
+      "path": "meta/meta-process/self-evaluation/diagnostic-rules.jsonld",
+      "type": "CreativeWork"
+    },
+    {
+      "id": "meta/meta-process/self-evaluation/evaluation-metrics",
+      "path": "meta/meta-process/self-evaluation/evaluation-metrics.jsonld",
+      "type": "CreativeWork"
+    },
+    {
+      "id": "efc:self-evaluation",
       "path": "meta/meta-process/self-evaluation/index.jsonld",
       "type": "CreativeWork"
     },
     {
-      "id": "meta-process",
-      "path": "meta/meta-process/meta-process/index.jsonld",
+      "id": "meta/meta-process/self-evaluation/consistency-tests",
+      "path": "meta/meta-process/self-evaluation/consistency-tests.jsonld",
       "type": "CreativeWork"
     },
     {
-      "id": "meta/meta-process/readme/index",
-      "path": "meta/meta-process/readme/index.jsonld",
+      "id": "meta/meta-process/self-evaluation/examples",
+      "path": "meta/meta-process/self-evaluation/examples.jsonld",
       "type": "CreativeWork"
     },
     {
-      "id": "meta/metascope",
-      "path": "meta/metascope/index.jsonld",
+      "id": "meta/meta-reflective-protocol/protocol-spec",
+      "path": "meta/meta-reflective-protocol/protocol-spec.jsonld",
       "type": "CreativeWork"
     },
     {
-      "id": "meta/meta-reflective-protocol",
+      "id": "meta/meta-reflective-protocol/reflective-boundaries",
+      "path": "meta/meta-reflective-protocol/reflective-boundaries.jsonld",
+      "type": "CreativeWork"
+    },
+    {
+      "id": "efc:meta-reflective-protocol",
       "path": "meta/meta-reflective-protocol/index.jsonld",
+      "type": "CreativeWork"
+    },
+    {
+      "id": "meta/meta-reflective-protocol/reflective-steps",
+      "path": "meta/meta-reflective-protocol/reflective-steps.jsonld",
+      "type": "CreativeWork"
+    },
+    {
+      "id": "meta/meta-reflective-protocol/examples",
+      "path": "meta/meta-reflective-protocol/examples.jsonld",
+      "type": "CreativeWork"
+    },
+    {
+      "id": "meta/meta-reflective-protocol/consistency-rules",
+      "path": "meta/meta-reflective-protocol/consistency-rules.jsonld",
       "type": "CreativeWork"
     },
     {
