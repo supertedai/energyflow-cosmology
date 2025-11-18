@@ -205,5 +205,11 @@ When adding new content:
 
 ## **8. License**
 
-See `LICENSE` (if applicable).
+# License
+
+All content in this repository is released under the
+Creative Commons Attribution 4.0 International (CC BY 4.0) License.
+
+© Morten Magnusson.
+
 
