@@ -1,124 +1,81 @@
-# 🧠 Energy-Flow Cosmology — Unified Module Architecture
-**Folder:** `/theory/architecture.md`  
-**Last updated:** 2025-11-13  
+# EFC Theory Architecture
 
-This document provides a complete overview of the internal module system powering the Energy-Flow Cosmology (EFC) codebase.  
-The architecture follows a thermodynamic logic:
+This directory documents the internal architecture of the Energy-Flow Cosmology (EFC) theory.
 
-- Core definitions (parameters & model)
-- Entropy field
-- Energy-flow potential
-- Validation layer
-
-Everything emerges from first-principles relations between **entropy gradients**, **energy flow**, and **observables**.
+The focus is not on detailed equations, but on how the theory is structured as a system of coupled layers, fields and mappings that can be implemented, extended and audited.
 
 ---
 
-# 🔷 1. Top-Level Structure
-src/
-└── efc/
-├── core/
-│ └── efc_core.py
-├── entropy/
-│ └── efc_entropy.py
-├── potential/
-│ └── efc_potential.py
-├── validation/
-│ └── efc_validation.py
-└── init.py
+## 1. Purpose
 
-Each folder corresponds to one conceptual EFC layer:
-
-| Layer | Purpose | Mathematical role |
-|-------|---------|--------------------|
-| `core` | Model definition | EFCParameters, state vector, Ef, v(r) |
-| `entropy` | Entropy field | ∇S, S(x) |
-| `potential` | Energy-flow potential | Ef = ρ (1 − S) |
-| `validation` | Observational comparison | SPARC, DESI, JWST |
-| `__init__` | Public API | Stable import surface |
+- Describe the structural layout of the EFC theory.
+- Show how core fields, layers and modules connect.
+- Provide a stable reference for simulations, papers and meta-documents.
+- Make the theory navigable for both humans and machines.
 
 ---
 
-# 🔷 2. Core Layer
+## 2. Position in the repository
 
-Implements the general EFC model, with:
+This directory belongs to the **theory** layer of the project.
 
-- `EFCModel`
-- `EFCParameters`
-- `compute_state`
-- `rotation_velocity`
+- `/theory/` — formal theory content.
+- `/theory/architecture/` — how the theory is organised as an architecture.
+- `/meta/` — meta-level descriptions (reflection, cognition, process).
+- `/methodology/` — how the work is done (workflow, SRM, reproducibility).
 
-Logical role:  
-Combine entropy + energy flow → observable predictions.
-
----
-
-# 🔷 3. Entropy Layer
-
-Provides:
-
-- `entropy_field(x)`
-- `entropy_gradient(x)`
-
-Defines the thermodynamic geometry of the system.
+The goal here is to keep a clean map of **what the theory is made of**, not how it was developed.
 
 ---
 
-# 🔷 4. Potential Layer
+## 3. Core architectural elements
 
-Implements:
+The EFC theory is organised around a small set of core elements:
 
-Ef = ρ (1 − S)
+- **Fields**
+  - Entropy field \(S\)
+  - Energy-flow field \(E_f\)
+  - Grid / resistance structure (effective medium)
 
-Functions:
+- **Base layers**
+  - **EFC-S** — structural / halo-level description.
+  - **EFC-D** — energy-flow dynamics on top of these structures.
+  - **EFC-C₀** — mapping between entropy, information capacity and signal propagation.
 
-- `compute_energy_flow(rho, S)`
-- `energy_density(mass, volume)`
-- `energy_flow_rate(Ef, t)`
+- **Extended frames**
+  - **Grid–Higgs Framework** — relation between grid properties and effective mass/interaction.
+  - **IMX / informational metastructure** — how information layers sit on top of the physical fields.
 
-This is the driving energy-flow potential in EFC-D.
-
----
-
-# 🔷 5. Validation Layer
-
-Tools for benchmarking EFC:
-
-- `rotation_curve_efc`
-- `validate_rotation_curve`
-- `compare_with_sparc`
-- `load_parameters`
-
-Outputs plots + JSON for empirical comparison.
+This directory should describe **how these elements fit together**, which files define them, and how new components should be attached.
 
 ---
 
-# 🔷 6. Public API
+## 4. What belongs here
 
-`src/__init__.py` exposes a clean import interface:
+Typical content for this directory:
 
-```python
-from src import (
-    EFCModel,
-    EFCParameters,
-    compute_energy_flow,
-    entropy_gradient,
-    entropy_field,
-)
+- High-level architecture diagrams of the theory.
+- Textual descriptions of:
+  - Field hierarchy and dependencies.
+  - Layered structure (S, D, C₀, extensions).
+  - Interfaces between theory modules and simulations.
+- Tables that map:
+  - Symbols → meaning → file / equation location.
+  - Layers → responsible phenomena (e.g. halos, flows, signals).
 
-🔷 7. Design Principles
+Equation details and full derivations belong in the relevant theory subdirectories; here you only give enough information to navigate the structure.
 
-Thermodynamic hierarchy
+---
 
-Clear separation of concerns
+## 5. Usage
 
-Stable API exposure
+You can use this directory to:
 
-Validation-first architecture
+- Quickly understand **how the theory is put together**.
+- Align new LaTeX papers, Figshare articles and code modules with the same architecture.
+- Keep a single source of truth for:
+  - Names of layers and fields.
+  - Their roles.
+  - How they connect to observables and simulations.
 
-🔷 8. Planned Modules
-Module	Role
-efc/cosmology	H(z), E(z), Ef(z)
-efc/lensing	Weak lensing predictions
-efc/jwst	Early galaxies
-efc/synthesis	Unified pipelines
+When you add or change major theoretical components, update this directory first so that the architecture stays coherent over time.
