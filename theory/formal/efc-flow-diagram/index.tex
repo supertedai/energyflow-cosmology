@@ -1,0 +1,56 @@
+% ============================================================
+% EFC Flow Diagram — Structural Overview
+% ============================================================
+
+\documentclass[tikz,border=10pt]{standalone}
+\usetikzlibrary{arrows.meta, positioning, shapes.misc}
+
+\begin{document}
+
+\begin{tikzpicture}[
+    box/.style={rectangle, draw, rounded corners, minimum width=4cm, minimum height=1.2cm, align=center},
+    arrow/.style={-{Latex[length=3mm]}, thick},
+    >=latex
+]
+
+% ------------------------------------------------------------
+% Nodes
+% ------------------------------------------------------------
+
+\node[box] (grid) {Grid State\\\small (Local energy density + resistance)};
+\node[box, below=1.2cm of grid] (entropy) {Entropy Profile $S(r)$\\\small (Local + radial gradient)};
+\node[box, below=1.2cm of entropy] (eflow) {Energy-Flow Field $E_f$\\\small $E_f = \rho (1 - S)$};
+\node[box, below=1.2cm of eflow] (structure) {Structure Formation\\\small (halos, profiles, lensing)};
+
+% Feedback loops
+\node[box, right=3.5cm of entropy] (feedback1) {Feedback:\\Grid $\leftrightarrow S$};
+\node[box, right=3.5cm of eflow] (feedback2) {Feedback:\\$S \leftrightarrow E_f$};
+\node[box, right=3.5cm of structure] (feedback3) {Feedback:\\$E_f \leftrightarrow$ Structure};
+
+% ------------------------------------------------------------
+% Arrows (main chain)
+% ------------------------------------------------------------
+
+\draw[arrow] (grid) -- (entropy);
+\draw[arrow] (entropy) -- (eflow);
+\draw[arrow] (eflow) -- (structure);
+
+% ------------------------------------------------------------
+% Feedback arrows
+% ------------------------------------------------------------
+
+\draw[arrow] (entropy.east) -- (feedback1.west);
+\draw[arrow] (feedback1.south) -- ([xshift=1.7cm]entropy.south);
+\draw[arrow] ([xshift=-1.7cm]entropy.north) -- (grid.east);
+
+\draw[arrow] (eflow.east) -- (feedback2.west);
+\draw[arrow] (feedback2.south) -- ([xshift=1.7cm]eflow.south);
+\draw[arrow] ([xshift=-1.7cm]eflow.north) -- (entropy.east);
+
+\draw[arrow] (structure.east) -- (feedback3.west);
+\draw[arrow] (feedback3.north) -- ([xshift=1.7cm]structure.north);
+\draw[arrow] ([xshift=-1.7cm]structure.south) -- (eflow.east);
+
+\end{tikzpicture}
+
+\end{document}
