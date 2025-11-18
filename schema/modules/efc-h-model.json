@@ -1,0 +1,58 @@
+{
+  "id": "efc-h-model",
+  "name": "EFC-H Model: Halo-Level Structure",
+  "path": "theory/formal/efc-h-model",
+  "layer": "EFC-H",
+  "summary": "\\section*{EFC-H Model: Halo-Level Structure}",
+  "keywords": [
+    "entropy",
+    "rho",
+    "subsection",
+    "e_f",
+    "is",
+    "energy",
+    "halo",
+    "item",
+    "density",
+    "flow",
+    "lensing",
+    "profile",
+    "by",
+    "efc",
+    "equilibrium",
+    "f_",
+    "frac",
+    "model",
+    "nabla",
+    "r_s",
+    "rotation",
+    "alpha",
+    "attenuation",
+    "curves",
+    "defines"
+  ],
+  "dependencies": [
+    "EFC-S",
+    "EFC-D",
+    "EFC-C0"
+  ],
+  "raw": {
+    "has_readme": false,
+    "has_index_md": false,
+    "has_index_tex": true,
+    "has_index_json": true
+  },
+  "index_json": {
+    "model": "EFC-H",
+    "description": "Halo-level structural model of Energy-Flow Cosmology.",
+    "profiles": {
+      "rho(r)": "rho0 * (1 + r/rs)^(-alpha)",
+      "S(r)": "S0 + 1 - exp(-r/rs)"
+    },
+    "dynamics": {
+      "Ef(r)": "rho(r) * (1 - S(r))",
+      "v2(r)": "r * dEf/dr",
+      "lensing": "integral(Ef(sqrt(R^2 + z^2))) dz"
+    }
+  }
+}

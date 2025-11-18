@@ -1,0 +1,45 @@
+{
+  "id": "efc-header",
+  "name": "**EFC Header \u2014 Core Definitions**",
+  "path": "theory/formal/efc-header",
+  "layer": "EFC-H",
+  "summary": "# **EFC Header \u2014 Core Definitions**",
+  "keywords": [
+    "newcommand",
+    "efc",
+    "field",
+    "header",
+    "core",
+    "e_f",
+    "energy",
+    "flow",
+    "formal",
+    "information",
+    "rho",
+    "symbols",
+    "all",
+    "capacity",
+    "definitions",
+    "entropy",
+    "frac",
+    "partial",
+    "propagation",
+    "sfield",
+    "across",
+    "c0",
+    "ccap",
+    "ceff",
+    "defines"
+  ],
+  "dependencies": [
+    "EFC-S",
+    "EFC-D",
+    "EFC-C0"
+  ],
+  "raw": {
+    "has_readme": true,
+    "has_index_md": false,
+    "has_index_tex": true,
+    "has_index_json": false
+  }
+}
