@@ -67,7 +67,11 @@
       "type": "CreativeWork"
     },
     {
-      "id": "meta/architecture",
+      "id": {
+        "@type": "PropertyValue",
+        "propertyID": "GitHub",
+        "value": "meta/architecture"
+      },
       "path": "meta/architecture/index.jsonld",
       "type": "CreativeWork"
     },
