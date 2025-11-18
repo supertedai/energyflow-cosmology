@@ -1,17 +1,20 @@
 #!/usr/bin/env python3
 """
-generate_full_readmes.py
+EFC — FULL TREE README GENERATOR
+--------------------------------
+This script generates README.md files for *all* folders in the repository.
 
-Universal README Generator for EFC Repository
----------------------------------------------
-Features:
-1. Scans entire main tree recursively.
-2. Generates README.md for every folder (except root).
-3. Updates existing README.md.
-4. Detects project type (paper, schema, meta, api, theory, docs, code, misc).
-5. Extracts abstract from JSON-LD if available.
-6. Lists all files and subfolders.
-7. Runs cleanly in GitHub Actions and locally.
+Special behaviour:
+- ROOT README is protected.
+- All paper folders under docs/papers/efc/** receive a rich, structured README:
+  * Title
+  * Abstract (from JSON-LD if present)
+  * Purpose
+  * Folder contents
+  * Metadata
+  * Machine-readability notice
+
+All other folders receive a standard, clean auto-generated README.
 """
 
 import os
@@ -21,79 +24,116 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 ROOT_README = ROOT / "README.md"
 
-# -------------------------------------------------------------
-# Category inference
-# -------------------------------------------------------------
-def detect_category(path: Path):
+# =====================================================================
+# CATEGORY → LABEL for standard folders
+# =====================================================================
+
+def folder_category(path: Path):
     name = path.name.lower()
 
-    if "papers" in path.parts:
-        return "Scientific Paper — archived version with PDF + JSON-LD metadata."
-    if "schema" in path.parts:
-        return "Schema Layer — JSON-LD concepts, ontology, and semantic graph."
-    if "meta" in path.parts:
-        return "Meta Layer — cognition, reflection, methodology, symbiosis."
-    if "api" in path.parts:
-        return "API Layer — machine-readable endpoints and structured output."
-    if "theory" in path.parts:
-        return "Theory Layer — equations, definitions, and model foundations."
-    if "figures" in path.parts:
-        return "Figures and Visual Material."
-    if "scripts" in path.parts:
-        return "Automation Scripts — maintenance and system logic."
-    if "docs" in path.parts:
-        return "Documentation — rendered HTML, assets, and public-facing docs."
+    if "papers" in str(path):
+        return "Archived scientific papers."
 
-    return "Repository Folder"
+    if name in ["theory", "formal"]:
+        return "Theory Layer — equations and formal definitions."
+    if name == "data":
+        return "Data Layer — observational datasets."
+    if name == "output":
+        return "Validation Layer — figures and results."
+    if name in ["meta", "cognition", "symbiosis", "reflection", "meta-process"]:
+        return "Meta-Cognitive Layer — methodology and process structure."
+    if "schema" in str(path):
+        return "Schema Layer — ontology + JSON-LD."
+    if name == "api":
+        return "API Layer — machine-readable model endpoints."
+    if name == "app":
+        return "Applications and dashboards."
+    if name == "scripts":
+        return "Automation scripts."
+    if name == "docs":
+        return "Documentation layer."
 
-# -------------------------------------------------------------
-# Abstract extraction
-# -------------------------------------------------------------
-def extract_abstract(path: Path):
-    """
-    Extracts abstract from any .jsonld file inside the folder.
-    Returns None if absent.
-    """
-    for jsonld in path.glob("*.jsonld"):
-        try:
-            data = json.loads(jsonld.read_text())
-            abstract = data.get("abstract") or data.get("description")
-            if abstract:
-                return abstract.strip()
-        except:
-            continue
-    return None
+    return "Repository folder."
 
-# -------------------------------------------------------------
-# Directory scanning
-# -------------------------------------------------------------
-def scan_folder(path: Path):
-    dirs = []
-    files = []
+# =====================================================================
+# Utility: Scan folder
+# =====================================================================
 
+def scan_directory(path: Path):
+    dirs, files = [], []
     for p in sorted(path.iterdir()):
         if p.is_dir() and not p.name.startswith(".") and p.name not in ["__pycache__", ".git", ".github"]:
             dirs.append(p)
-        elif p.is_file():
+        elif p.is_file() and p.name != "README.md":
             files.append(p)
-
     return dirs, files
 
-# -------------------------------------------------------------
-# README generator
-# -------------------------------------------------------------
-def generate_readme(path: Path):
-    category = detect_category(path)
-    abstract = extract_abstract(path)
-    dirs, files = scan_folder(path)
+# =====================================================================
+# 1. PAPER README (rich version)
+# =====================================================================
 
-    text = f"# {path.name}\n\n"
-    text += f"**{category}**\n\n"
+def generate_paper_readme(folder: Path):
+    """Generate detailed README for a scientific paper folder."""
+    title = folder.name.replace("-", " ")
 
-    if abstract:
-        text += "### Abstract\n"
-        text += f"{abstract}\n\n"
+    jsonld_file = next(folder.glob("*.jsonld"), None)
+    pdf_file = next(folder.glob("*.pdf"), None)
 
+    # ---- Try extracting abstract from JSON-LD ----
+    abstract = ""
+    if jsonld_file:
+        try:
+            data = json.loads(jsonld_file.read_text())
+            abstract = data.get("abstract", "")
+        except Exception:
+            abstract = ""
+
+    if not abstract:
+        abstract = (
+            "This paper is part of the Energy-Flow Cosmology corpus. "
+            "It is archived here with structured metadata for scientific and machine-readable use."
+        )
+
+    text = f"# {title}\n\n"
+
+    text += f"## Abstract\n{abstract}\n\n"
+
+    text += "## Purpose\n"
+    text += (
+        "This folder contains the archived version of this scientific paper, "
+        "including metadata and citation structure.\n\n"
+    )
+
+    text += "## Contents\n"
+    text += "- PDF document\n"
+    text += "- JSON-LD schema metadata\n"
+    text += "- Auto-generated README\n\n"
+
+    text += "## Why this exists\n"
+    text += (
+        "To ensure all Energy-Flow Cosmology papers are preserved in a stable, "
+        "machine-readable, and human-readable structure.\n\n"
+    )
+
+    text += "## Files\n"
+    if jsonld_file:
+        text += f"- `{jsonld_file.name}` — metadata\n"
+    if pdf_file:
+        text += f"- `{pdf_file.name}` — PDF\n"
+    text += "- `README.md` — this file\n\n"
+
+    text += "_Automatically generated by the EFC semantic system._\n"
+    return text
+
+# =====================================================================
+# 2. STANDARD README (fallback)
+# =====================================================================
+
+def generate_standard_readme(folder: Path):
+    dirs, files = scan_directory(folder)
+
+    text = f"# {folder.name}\n\n"
+    text += f"**{folder_category(folder)}**\n\n"
     text += "This README was auto-generated by the EFC semantic system.\n\n"
 
     if dirs:
@@ -108,33 +148,43 @@ def generate_readme(path: Path):
             text += f"- `{f.name}`\n"
         text += "\n"
 
+    text += "_Automatically maintained._\n"
     return text
 
-# -------------------------------------------------------------
-# Main routine
-# -------------------------------------------------------------
-def main():
+# =====================================================================
+# 3. MAIN ROUTINE
+# =====================================================================
+
+def update_all_readmes():
     print("\n=== FULL TREE README GENERATION ===\n")
     print(f"Root README protected: {ROOT_README}\n")
 
     for current, dirs, files in os.walk(ROOT):
-        path = Path(current)
 
-        # Skip system folders
-        if any(skip in path.parts for skip in [".git", ".github"]):
+        current_path = Path(current)
+
+        # Skip git internals
+        if any(skip in current_path.parts for skip in [".git", ".github"]):
             continue
 
-        # Skip root
-        if path == ROOT:
+        # Skip root README
+        if current_path == ROOT:
             continue
 
-        readme = path / "README.md"
-        content = generate_readme(path)
-        readme.write_text(content)
+        readme_path = current_path / "README.md"
 
-        print(f"✓ Updated README: {readme}")
+        # PAPER RULE:
+        if "docs/papers/efc" in str(current_path) and current_path != ROOT:
+            content = generate_paper_readme(current_path)
+        else:
+            content = generate_standard_readme(current_path)
+
+        readme_path.write_text(content)
+        print(f"✓ Updated README: {readme_path}")
 
     print("\nDONE — All READMEs updated.\n")
 
+# =====================================================================
+
 if __name__ == "__main__":
-    main()
+    update_all_readmes()
