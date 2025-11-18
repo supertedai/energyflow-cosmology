@@ -1,0 +1,27 @@
+name: Auto Semantic Index Refresh
+
+on:
+  push:
+    branches: ["main"]
+  workflow_dispatch: {}
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3
+
+      - name: Regenerate semantic index (if needed)
+        run: |
+          echo "Regeneration step placeholder"
+          # If you later want full regeneration script, add here.
+
+      - name: Commit & push updates
+        run: |
+          git config user.name "AutoIndexer"
+          git config user.email "auto@index"
+          git add semantic-search-index.json
+          git commit -m "Auto-refresh semantic index" || echo "No changes"
+          git push
