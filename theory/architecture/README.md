@@ -1,4 +1,4 @@
-Her er en **ren, kort, konsis `README.md`** for `theory/architecture/`, skrevet i samme stil som resten av repoet.
+Her er samme `README.md` på **engelsk**, kort og direkte.
 
 ---
 
@@ -7,14 +7,14 @@ Her er en **ren, kort, konsis `README.md`** for `theory/architecture/`, skrevet 
 ```markdown
 # Theory Architecture
 
-This directory defines the architecture of the Energy-Flow Cosmology (EFC) theory.  
-The focus her is on structure: how the fields, layers and modules fit together.
+This directory defines the architectural structure of the Energy-Flow Cosmology (EFC) theory.  
+The focus is on how fields, layers and modules fit together as a coherent system.
 
 ---
 
 ## Overview
 
-EFC er organisert som et system av koblede lag:
+EFC is organised into a small set of core components:
 
 - **Fields**
   - Entropy field (S)
@@ -30,31 +30,31 @@ EFC er organisert som et system av koblede lag:
   - Grid–Higgs Framework  
   - IMX informational metastructure  
 
-Dette kataloget beskriver selve arkitekturen: hva komponentene er, hvor de ligger, og hvordan de kobles.
+This directory documents the structure and relationships between these components.
 
 ---
 
 ## Purpose
 
-- Gi en konsistent oversikt over teoriens lagdeling.  
-- Dokumentere avhengigheter mellom felt, profiler og dynamikk.  
-- Være navigasjonskart for LaTeX-artikler, Figshare-DOIer og simulasjonskode.  
+- Provide a stable overview of the theory’s architecture.  
+- Show dependencies between fields, profiles and dynamics.  
+- Serve as a navigation map for LaTeX papers, Figshare DOIs and simulation code.  
 
 ---
 
 ## Files
 
-- `index.md` — menneskelesbar arkitekturforklaring  
-- `index.jsonld` — maskinlesbar semantisk struktur  
+- `index.md` — human-readable architecture description  
+- `index.jsonld` — machine-readable semantic structure  
 
 ---
 
-## Placement in the repository
+## Repository placement
 
 ```
 
 /theory/
-architecture/   ← denne mappen
+architecture/   ← this directory
 structure/
 dynamics/
 c0-mapping/
@@ -66,7 +66,8 @@ extensions/
 
 ## Use
 
-Oppdater denne mappen når nye teorielementer, lag eller rammeverk legges til.  
-Dette holder hele EFC sammen som en konsistent, maskin- og menneskelesbar struktur.
+Update this directory when new theory components, layers or frameworks are added.  
+This keeps the entire EFC theory consistent, traceable and well-structured.
 ```
 
+---
