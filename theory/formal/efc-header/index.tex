@@ -1,0 +1,33 @@
+% ============================================================
+% EFC Header — Shared Macros and Notation
+% ============================================================
+
+% Core math packages
+\usepackage{amsmath, amssymb, bm}
+
+% ------------------------------------------------------------
+% Fields and base quantities
+% ------------------------------------------------------------
+\newcommand{\Sfield}{S}            % Entropy field
+\newcommand{\Ef}{E_f}              % Energy–flow field
+\newcommand{\rhoField}{\rho}       % Density field
+\newcommand{\Icap}{\mathcal{I}}    % Information capacity
+
+% ------------------------------------------------------------
+% Operators
+% ------------------------------------------------------------
+\newcommand{\grad}{\nabla}
+\newcommand{\dpart}[2]{\frac{\partial #1}{\partial #2}}
+\newcommand{\dtime}[1]{\frac{d#1}{dt}}
+
+% ------------------------------------------------------------
+% Core functional relations
+% ------------------------------------------------------------
+\newcommand{\EfDef}{\Ef = \rhoField \,(1 - \Sfield)}
+\newcommand{\IcapDef}{\Icap = \frac{1}{1 + \Sfield}}
+
+% ------------------------------------------------------------
+% Notes
+% This file defines the shared mathematical language used by all
+% formal EFC documents. No document should redefine these symbols.
+% ============================================================
