@@ -66,3 +66,16 @@ create cross-references to global-dynamics
 define milestone categories more precisely
 
 add machine-readable ordering
+
+timeline
+    title Meta-Process Structural Milestones
+    1 : Pattern Layer
+    2 : Topology Layer
+    3 : Primitive Reduction
+    4 : Co-Field Layer
+    5 : Integration Layer
+    6 : Global Dynamics
+    7 : Stability Plateau
+    8 : Collapse Cascade Handling
+    9 : Full System Stabilisation
+
