@@ -1,124 +1,78 @@
-# Energy-Flow Cosmology (EFC)
+# Methodology Layer
 
-Energy-Flow Cosmology is a thermodynamic framework in which structure, dynamics, and observable behaviour emerge from the interaction between:
-- energy distribution (ρ),
-- entropy field (S),
-- energy-flow potential \(E_f = \rho(1 - S)\).
+The methodology layer defines how research in Energy-Flow Cosmology (EFC) is structured, documented, and maintained.  
+It provides the cognitive, procedural and reproducibility framework that supports the theoretical and computational layers.
 
-The repository provides the complete open-science structure for the theory:
-- formal specification,
-- methodology,
-- semantic schema,
-- code modules,
-- validation tools,
-- documentation.
+Each methodology module contains:
+- `index.md` — human-readable specification  
+- `index.jsonld` — machine-readable semantic node  
 
-All content is versioned, indexed and reproducible.
+All modules are integrated into the EFC semantic system.
 
 ---
 
-## Directory Overview
+## Contents
 
-### **/theory/**
-Formal theoretical layers:
-- EFC-S (structure)
-- EFC-D (dynamics)
-- EFC-C₀ (entropy–information mapping)
+### **AI-Augmented-Scientific-Workflow-Framework/**
+Defines the overall AI-assisted workflow used in EFC research:
+- separation of human insight and AI structure
+- transparent, reproducible workflow design
 
-### **/core/**
-Foundational computational components:
-- `EFCParameters`
-- `EFCModel`
-- entropy and energy-flow interfaces
+### **EFC-epistemology/**
+Epistemic foundations of EFC:
+- how knowledge is justified
+- constraints on assumptions
+- first-principles reasoning rules
 
-### **/schema/**
-Machine-readable semantic layer:
-- JSON-LD nodes
-- site graph
-- node index
-- methodology index
-- semantic graph
+### **author-method-note/**
+The author’s methodological stance:
+- decision logic
+- revision rules
+- approach to theory construction
 
-Automatically maintained by GitHub workflows.
+### **open-method/**
+Rules for transparent reasoning:
+- explicit assumptions
+- traceable transformations
+- structured revisions
 
-### **/methodology/**
-Research methodology used in EFC:
-- AI-Augmented Scientific Workflow Framework
-- EFC Epistemology
-- Author’s Method Note
-- Open-Method
-- Open-Process
-- Reproducibility Guide
-- Symbiosis Interface
-- Symbiotic Process (LLM)
-- Symbiotic Process — Summary
+### **open-process/**
+Formal scientific process for EFC:
+- input layer
+- derivation layer
+- validation layer
+- revision layer
 
-Each submodule includes:
-- `index.md`
-- `index.jsonld`
+### **reproducibility-guide/**
+Standards for repeatability:
+- deterministic computation
+- parameter control
+- documentation and schema requirements
 
-### **/validation/**
-Rotation curve comparison, SPARC analysis, and diagnostic tools.
+### **symbiosis-interface/**
+Defines how human and AI collaborate:
+- role separation
+- transparency rules
+- boundaries of responsibility
 
-### **/src/**
-Implementation of the EFC computational model.
+### **symbiotic-process-llm/**
+Structured human–LLM reasoning loop:
+- intent → structuring → validation → consolidation
 
-### **/docs/**
-Static HTML, figures, and user-facing documents.
-
----
-
-## Scientific Scope
-
-EFC provides:
-- halo-level structure from entropy profiles,
-- rotation curves without dark matter,
-- lensing profiles from Ef–S gradients,
-- thermodynamic interpretation of CMB features,
-- early galaxy formation behaviour,
-- scalable field definitions across domains.
-
-All equations and assumptions trace back to measurable or inferable thermodynamic quantities.
+### **symbiotic-process-summary/**
+Short operational summary of the symbiotic loop:
+- quick reference for interaction control
 
 ---
 
-## Methodological Foundations
+## Role in the EFC System
 
-The repository includes a full open-science workflow:
+The methodology layer ensures:
+- transparent scientific progression  
+- reproducible updates  
+- structured human–AI collaboration  
+- stable reasoning across versions  
+- consistent semantic mapping  
 
-- **Transparent Methodology**  
-  (Open-Method, Open-Process, Epistemology)
-
-- **Human–AI Symbiosis Layer**  
-  (Symbiosis Interface, Symbiotic Process)
-
-- **Reproducibility Standards**  
-  deterministic code, explicit parameters, semantic indexing
-
-- **Semantic Knowledge Graph**  
-  fully JSON-LD integrated, auto-generated
-
----
-
-## Automation
-
-GitHub Actions maintain:
-- semantic extraction  
-- schema regeneration  
-- README consistency  
-- Figshare sync  
-- validation routines  
-
-No manual workflow manipulation needed.
-
----
-
-## License
-Creative Commons Attribution 4.0 (CC BY 4.0)
-
----
-
-## Contact
-**Author:** Morten Magnusson  
-**ORCID:** https://orcid.org/0009-0002-4860-5095  
+It anchors the entire EFC project in a clear and inspectable research process.
 
