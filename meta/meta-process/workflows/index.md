@@ -1,25 +1,53 @@
-# GitHub Workflows Overview
+# Meta-Process Workflows
 
-## 1. update-schema.yml
-- Validates schema files
-- Fetches sitemap.xml
-- Updates site-graph.json
+The Workflows layer defines the standard operational flows used by the meta-process.  
+It describes how tasks, transitions, diagnostics, and stabilisation procedures are combined into predictable, repeatable sequences.
 
-## 2. update_efc_system.yml
-- Fetch Figshare metadata
-- Merge with concepts.json
-- Rebuild API under api/v1/
+Workflows describe **how the system runs**, not how it changes (Process-of-Process) or how it is validated (Validation Plan).
 
-## 3. run-validation.yml
-- Runs JWST / DESI / SPARC validation
-- Generates figures
-- Does not commit output/
+---
 
-## 4. export_figshare.yml
-- Uploads updated results to DOI 30478916
-- Requires secrets:
-  - FIGSHARE_API_TOKEN
-  - FIGSHARE_ARTICLE_ID
+## 1. Purpose
+- define canonical procedures for meta-process operation  
+- ensure consistent execution across layers  
+- standardise task sequences  
+- provide stable flows for transitions, stabilisation, diagnostics, and load regulation  
+- give downstream layers predictable behaviour  
 
-## 5. update-readme-date.yml
-- Auto-updates timestamp in README.md
+---
+
+## 2. Scope
+Workflows cover:
+
+- coherence workflows  
+- transition workflows  
+- stability workflows  
+- diagnostic workflows  
+- collapse-handling workflows  
+- integration-support workflows  
+
+Workflows do not modify architecture — they orchestrate existing tasks.
+
+---
+
+## 3. Included Files
+- `index.jsonld`  
+- `core-workflows.md`  
+- `transition-workflows.md`  
+- `stability-workflows.md`  
+- `diagnostic-workflows.md`  
+- `examples.md`  
+
+---
+
+## 4. Mermaid Overview
+
+```mermaid
+flowchart TD
+
+A[Trigger] --> B[Workflow Start]
+B --> C[Task Sequence]
+C --> D[Decision Node]
+D -->|OK| E[Continue Workflow]
+D -->|Fail| F[Diagnostic Workflow]
+E --> G[Workflow Output]
