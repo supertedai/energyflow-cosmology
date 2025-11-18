@@ -15,10 +15,10 @@ from ..core.efc_core import EFCModel, EFCParameters
 # Parameter loader
 # -------------------------
 def load_parameters(path: Path) -> EFCParameters:
-    """Load parameters.json and return an EFCParameters object."""
+    """Load parameters.json → EFCParameters."""
     with open(path, "r") as f:
         cfg = json.load(f)
-    return EFCParameters(**cfg)
+    return EFCParameters(**cfg["efc_parameters"])
 
 
 # -------------------------
