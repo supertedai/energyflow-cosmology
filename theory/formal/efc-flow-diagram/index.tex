@@ -1,55 +1,59 @@
-% ============================================================
-% EFC Flow Diagram — Structural Overview
-% ============================================================
+% ======================================================================
+% EFC Flow Diagram — Formal Specification
+% ======================================================================
 
 \documentclass[tikz,border=10pt]{standalone}
-\usetikzlibrary{arrows.meta, positioning, shapes.misc}
+
+\usetikzlibrary{arrows.meta, positioning, shapes.geometric}
 
 \begin{document}
 
-\begin{tikzpicture}[
-    box/.style={rectangle, draw, rounded corners, minimum width=4cm, minimum height=1.2cm, align=center},
-    arrow/.style={-{Latex[length=3mm]}, thick},
-    >=latex
-]
+% ----------------------------------------------------------------------
+% Style
+% ----------------------------------------------------------------------
+\tikzset{
+    box/.style={
+        rectangle,
+        rounded corners,
+        draw=black,
+        thick,
+        align=center,
+        minimum width=4cm,
+        minimum height=1.2cm
+    },
+    arrow/.style={
+        -{Latex[length=3mm]},
+        thick
+    }
+}
 
-% ------------------------------------------------------------
-% Nodes
-% ------------------------------------------------------------
+% ----------------------------------------------------------------------
+% Diagram
+% ----------------------------------------------------------------------
+\begin{tikzpicture}[node distance=1.6cm]
 
-\node[box] (grid) {Grid State\\\small (Local energy density + resistance)};
-\node[box, below=1.2cm of grid] (entropy) {Entropy Profile $S(r)$\\\small (Local + radial gradient)};
-\node[box, below=1.2cm of entropy] (eflow) {Energy-Flow Field $E_f$\\\small $E_f = \rho (1 - S)$};
-\node[box, below=1.2cm of eflow] (structure) {Structure Formation\\\small (halos, profiles, lensing)};
+% --- Nodes -------------------------------------------------------------
 
-% Feedback loops
-\node[box, right=3.5cm of entropy] (feedback1) {Feedback:\\Grid $\leftrightarrow S$};
-\node[box, right=3.5cm of eflow] (feedback2) {Feedback:\\$S \leftrightarrow E_f$};
-\node[box, right=3.5cm of structure] (feedback3) {Feedback:\\$E_f \leftrightarrow$ Structure};
+\node[box] (grid) {Grid State \\ $G$};
+\node[box, below=of grid] (entropy) {Entropy Field \\ $S(G)$};
+\node[box, below=of entropy] (efield) {Energy--Flow Field \\ $E_f = \rho(1 - S)$};
+\node[box, below=of efield] (structure) {Structure Formation \\ $\rho(r),\, v(r)$ profiles};
 
-% ------------------------------------------------------------
-% Arrows (main chain)
-% ------------------------------------------------------------
+\node[box, right=3.5cm of entropy] (feedback_s) {Feedback to $S$};
+\node[box, right=3.5cm of efield] (feedback_g) {Feedback to Grid};
+
+% --- Arrows ------------------------------------------------------------
 
 \draw[arrow] (grid) -- (entropy);
-\draw[arrow] (entropy) -- (eflow);
-\draw[arrow] (eflow) -- (structure);
+\draw[arrow] (entropy) -- (efield);
+\draw[arrow] (efield) -- (structure);
 
-% ------------------------------------------------------------
-% Feedback arrows
-% ------------------------------------------------------------
+% Feedback loops
+\draw[arrow] (structure.east) -| (feedback_s.south);
+\draw[arrow] (feedback_s.north) |- (entropy.east);
 
-\draw[arrow] (entropy.east) -- (feedback1.west);
-\draw[arrow] (feedback1.south) -- ([xshift=1.7cm]entropy.south);
-\draw[arrow] ([xshift=-1.7cm]entropy.north) -- (grid.east);
-
-\draw[arrow] (eflow.east) -- (feedback2.west);
-\draw[arrow] (feedback2.south) -- ([xshift=1.7cm]eflow.south);
-\draw[arrow] ([xshift=-1.7cm]eflow.north) -- (entropy.east);
-
-\draw[arrow] (structure.east) -- (feedback3.west);
-\draw[arrow] (feedback3.north) -- ([xshift=1.7cm]structure.north);
-\draw[arrow] ([xshift=-1.7cm]structure.south) -- (eflow.east);
+\draw[arrow] (structure.east) -| (feedback_g.south);
+\draw[arrow] (feedback_g.north) |- (grid.east);
 
 \end{tikzpicture}
 
