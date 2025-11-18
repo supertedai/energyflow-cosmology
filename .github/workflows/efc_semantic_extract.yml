@@ -1,0 +1,40 @@
+name: EFC Semantic Extractor
+
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - "theory/formal/**"
+      - "scripts/efc_semantic_extract.py"
+      - ".github/workflows/efc_semantic_extract.yml"
+  workflow_dispatch:
+
+jobs:
+  build-semantic-schema:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Run EFC semantic extractor
+        run: |
+          mkdir -p schema/modules
+          python scripts/efc_semantic_extract.py
+
+      - name: Commit and push changes (if any)
+        run: |
+          if [[ -n "$(git status --porcelain schema)" ]]; then
+            git config user.name "github-actions[bot]"
+            git config user.email "github-actions[bot]@users.noreply.github.com"
+            git add schema
+            git commit -m "Update EFC semantic schema [auto]"
+            git push
+          else
+            echo "No schema changes to commit."
+          fi
