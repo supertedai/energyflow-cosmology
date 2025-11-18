@@ -1,0 +1,97 @@
+\section*{EFC-H Model: Halo-Level Structure}
+
+\subsection*{1. Radial Density Profile}
+
+The baseline density profile in EFC is defined as a smooth, monotonic
+distribution shaped by the grid-level entropy resistance:
+
+\[
+\rho(r) = \rho_0 \, f_\rho(r)
+\]
+
+where \( f_\rho(r) \) is a model-dependent attenuation function determined by
+local entropy.
+
+A minimal analytic prototype is:
+
+\[
+f_\rho(r) = \frac{1}{\left(1 + \frac{r}{r_s}\right)^\alpha}
+\]
+
+with scale radius \( r_s \) and slope parameter \( \alpha \).
+
+\subsection*{2. Entropy Profile}
+
+Entropy increases radially due to reduced structural coherence:
+
+\[
+S(r) = S_0 + \Delta S(r)
+\]
+
+A typical form is:
+
+\[
+\Delta S(r) = 1 - e^{-r/r_s}
+\]
+
+so the outer halo approaches maximal entropy.
+
+\subsection*{3. Energy-Flow Potential}
+
+The core dynamical quantity is the energy-flow potential:
+
+\[
+E_f(r) = \rho(r)\,[1 - S(r)].
+\]
+
+Low-entropy regions keep \(E_f\) high; high-entropy regions suppress it.
+
+This defines the effective gravitational-like behaviour.
+
+\subsection*{4. Rotation Curve}
+
+The circular velocity is derived from the radial gradient of
+\(E_f(r)\):
+
+\[
+v^2(r) = r\, \frac{dE_f}{dr}.
+\]
+
+This reproduces flat rotation curves when entropy grows slowly and suppresses
+the inner decline.
+
+\subsection*{5. Lensing Profile}
+
+The lensing mass follows from the projected integral of the effective density:
+
+\[
+\Sigma_{\mathrm{eff}}(R) =
+\int_{-\infty}^{\infty} E_f\!\left(\sqrt{R^2 + z^2}\right) dz.
+\]
+
+This defines the observable lensing signature without dark matter.
+
+\subsection*{6. Halo Equilibrium}
+
+Equilibrium occurs when the entropic expansion pressure balances the inward
+gradient of \( \rho \):
+
+\[
+\nabla \rho(r) + \nabla S(r) = 0.
+\]
+
+This provides a self-consistent halo solution driven entirely by
+energy–entropy coupling.
+
+\subsection*{7. Summary}
+
+The EFC-H model formalizes:
+\begin{itemize}
+\item density attenuation via entropy,
+\item entropy-driven suppression of energy flow,
+\item rotation curves from \( \nabla E_f \),
+\item lensing profiles from projected \( E_f \),
+\item thermodynamic equilibrium of halo structure.
+\end{itemize}
+
+This section forms the structural pillar of Energy-Flow Cosmology.
