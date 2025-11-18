@@ -1,87 +1,157 @@
-## 🛠️ Reproducibility Guide: Running the EFC System
+# Reproducibility Guide  
+### Standards for Transparent and Repeatable EFC Research  
+**Version 1.0 — M. Magnusson**
 
-### **1. Purpose**
+---
 
-This guide provides the necessary steps to clone the **Energy-Flow Cosmology (EFC) Computational System** and execute its core validation and build workflows locally. The goal is to ensure **full reproducibility** of published results and to demonstrate the functionality of the system's automated pipelines (GitHub Actions).
+## 1. Purpose
+This guide defines how reproducibility is maintained across all stages of Energy-Flow Cosmology (EFC).  
+It ensures that any independent researcher can recreate:
+- the dataset  
+- the assumptions  
+- the transformations  
+- the model outputs  
+- the validation results  
 
-### **2. Prerequisites**
+without requiring undocumented knowledge.
 
-To run the full EFC system locally, you need the following software installed:
+---
 
-  * **Git:** For cloning the repository.
-  * **Python:** Version **3.8+** (recommended for scientific dependencies).
-  * **Docker** (or Podman): Required to run the automated GitHub Actions locally via a tool like `act` (recommended) or similar CI/CD emulation tools, as the workflows are containerized.
+## 2. Core Requirements
 
-### **3. Setup: Cloning and Environment**
+### 2.1 Complete Input Transparency
+All inputs must be accessible:
+- raw observational data  
+- processed datasets  
+- parameter files  
+- transformation scripts  
+- JSON-LD concept nodes  
 
-1.  **Clone the repository:**
+No hidden preprocessing is allowed.
 
-    ```bash
-    git clone https://github.com/supertedai/energyflow-cosmology.git
-    cd energyflow-cosmology
-    ```
+---
 
-2.  **Install Python Dependencies:**
-    All Python libraries required for the computational core (`/src/`) and the scripts (`/scripts/`) are listed in the `requirements.txt` file (location assumed).
+### 2.2 Deterministic Computation
+EFC code must be:
+- deterministic  
+- seed-controlled  
+- free from implicit randomness  
 
-    ```bash
-    # Create a virtual environment (recommended)
-    python3 -m venv venv
-    source venv/bin/activate 
+All modules define explicit seeds and reproducible operations.
 
-    # Install dependencies
-    pip install -r requirements.txt
-    ```
+---
 
------
+### 2.3 Traceable Model Definitions
+Every equation, relation, and parameter must map to:
+- a file  
+- a version  
+- a documented reasoning step  
 
-## ⚙️ Execution: Running Core Workflows Locally
+If an equation changes, the cause must be visible in version history.
 
-The most critical part of the EFC system is its validation and build pipeline, defined in the `.github/workflows/` directory.
+---
 
-### **A. Running Validation Pipelines**
+## 3. Code Structure Requirements
 
-This workflow runs the EFC model against empirical data (e.g., SPARC, JWST) and generates the data and plots found in the `/output/validation/` directory.
+### 3.1 Modular organization
+Core functions must remain isolated:
+- `/core/`  
+- `/entropy/`  
+- `/potential/`  
+- `/validation/`  
+- `/simulator/`  
 
-| Workflow File | Purpose | Corresponding Script |
-| :--- | :--- | :--- |
-| `run-validation.yml` | Executes the core validation suite. | `scripts/run_sparc_validation.py` |
+This prevents silent propagation of changes.
 
-**To run the main validation suite:**
+---
 
-1.  **Install/Use `act`:** We recommend using the tool `act` to emulate the GitHub Actions environment locally.
-2.  **Execute the workflow:**
-    ```bash
-    # Assuming 'act' is installed and Docker is running
-    act -W .github/workflows/run-validation.yml -j run-validation --container-architecture linux/amd64
-    ```
-3.  **Check Output:** After successful execution, the generated plots and data files will appear (or be updated) in the `/output/validation/` folder.
+### 3.2 Verified outputs
+Each module must output:
+- figures  
+- JSON arrays  
+- intermediate states  
+- validation results  
 
-### **B. Running the Full System Build (Semantic + API)**
+so the entire chain can be inspected.
 
-This workflow validates the project's internal structure and updates the machine-readable API.
+---
 
-| Workflow File | Purpose | Key Python Scripts |
-| :--- | :--- | :--- |
-| `update_efc_system.yml` | Full pipeline: fetches external DOIs, validates schemas, and rebuilds the semantic API. | `scripts/fetch_figshare.py`, `scripts/update_efc_api.py` |
+## 4. Documentation Requirements
 
-**To run the full build pipeline:**
+### 4.1 Minimum required documentation
+Each theoretical or computational module needs:
+- a README  
+- an `index.md`  
+- a JSON-LD node  
 
-```bash
-act -W .github/workflows/update_efc_system.yml -j update_efc_system --container-architecture linux/amd64
-```
+### 4.2 Machine-readable records
+Reproducibility demands:
+- schema nodes  
+- semantic maps  
+- site-graphs  
+- methodology indices  
 
-  * Upon completion, the API files in `/api/` and the schema files in `/schema/` should be consistent and updated, demonstrating the **Semantic Synchronization** of the project.
+These allow automated systems to reconstruct the pipeline.
 
------
+---
 
-## 4\. Verifying Symbiosis & Transparency
+## 5. Validation Requirements
 
-The efficacy of the **Human–AI evaluation** (Symbiotic Process) can be verified by inspecting the repository's history and the protocol files:
+### 5.1 Internal validation
+Before results are accepted:
+- gradients must be correct  
+- array shapes must match  
+- Ef/S relationships must hold  
+- rotation curves must be deterministic  
 
-  * **Review Commit History:** Check the `git log` for commits explicitly referencing **`symbiotic-process`** or **`methodology`**. These commits will show the user introducing structural elements proposed or refined during interaction with the AI co-agent.
-  * **Protocol Files:** Read the files in `/methodology/`:
-      * `symbiotic-process.md`: Describes the operational concept of the symbiotic loop.
-      * `symbiotic-process-llm.md`: Defines the operational constraints and role of the AI, allowing external parties to understand the machine's contribution boundary.
+### 5.2 External validation
+Model outputs must be comparable to:
+- SPARC rotation curves  
+- lensing datasets  
+- profile slopes  
+- entropy distributions  
 
------
+Consistency is mandatory.
+
+---
+
+## 6. Revision and Versioning
+
+### 6.1 Version increments
+A revision must trigger:
+- version bump  
+- semantic update  
+- schema regeneration  
+- new validation run  
+
+### 6.2 Change logs
+Every update must document:
+- what changed  
+- why it changed  
+- which layer it affects  
+
+---
+
+## 7. Reproducibility Checklist
+A result is reproducible when:
+
+- [ ] all inputs are accessible  
+- [ ] all dependencies are versioned  
+- [ ] parameters are explicit  
+- [ ] code paths are deterministic  
+- [ ] validation steps are provided  
+- [ ] no hidden transformations exist  
+- [ ] semantic nodes reference all major components  
+
+If a single item fails, the result is not considered reproducible.
+
+---
+
+## 8. Outcome
+The reproducibility guide ensures:
+- transparent research  
+- external verifiability  
+- stable results across versions  
+- trust in the entire EFC pipeline  
+
+It formalizes how the EFC system remains open, structured, and repeatable.
