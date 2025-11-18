@@ -1,0 +1,104 @@
+@prefix schema: <https://schema.org/> .
+@prefix efc: <https://supertedai.github.io/energyflow-cosmology/> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
+#################################################################
+# Root ontology description
+#################################################################
+
+efc:Ontology a schema:CreativeWork ;
+    schema:name "Energy-Flow Cosmology Ontology" ;
+    schema:description "Core ontology defining entities, relations and structural layers in the Energy-Flow Cosmology project." ;
+    schema:license <https://creativecommons.org/licenses/by/4.0/> ;
+    dct:creator "Morten Magnusson" .
+
+#################################################################
+# Core conceptual classes
+#################################################################
+
+efc:EnergyFlowField a rdfs:Class ;
+    rdfs:label "Energy Flow Field" ;
+    rdfs:comment "Primary scalar field Ef governing energy distribution and motion." .
+
+efc:EntropyField a rdfs:Class ;
+    rdfs:label "Entropy Field" ;
+    rdfs:comment "Scalar entropy field S defining directionality, gradient structure and boundary states." .
+
+efc:GridResistance a rdfs:Class ;
+    rdfs:label "Grid Resistance" ;
+    rdfs:comment "Structural resistance shaping propagation of energy and light." .
+
+efc:IntegrationLayer a rdfs:Class ;
+    rdfs:label "Integration Layer" ;
+    rdfs:comment "High-order structural layer merging patterns into global conceptual topology." .
+
+efc:PatternLayer a rdfs:Class ;
+    rdfs:label "Pattern Layer" ;
+    rdfs:comment "Layer describing detection and stabilization of cross-domain patterns." .
+
+efc:TopologyLayer a rdfs:Class ;
+    rdfs:label "Topology Layer" ;
+    rdfs:comment "Layer defining large-scale conceptual structures." .
+
+efc:MethodologyNode a rdfs:Class ;
+    rdfs:label "Methodology Node" ;
+    rdfs:comment "Formal method components across open-method, open-process and symbiosis-interface." .
+
+efc:MetaProcessNode a rdfs:Class ;
+    rdfs:label "Meta-Process Node" ;
+    rdfs:comment "Structural unit representing meta-cognitive or reflective components." .
+
+efc:SymbiosisNode a rdfs:Class ;
+    rdfs:label "Symbiosis Node" ;
+    rdfs:comment "Elements describing the human–AI co-reflection framework." .
+
+efc:TheoryNode a rdfs:Class ;
+    rdfs:label "Theory Node" ;
+    rdfs:comment "Any conceptual or mathematical component of EFC theory." .
+
+#################################################################
+# Key relations
+#################################################################
+
+efc:interactsWith a rdf:Property ;
+    rdfs:label "interacts with" ;
+    rdfs:comment "General interaction relation between EFC entities." ;
+    rdfs:domain efc:TheoryNode ;
+    rdfs:range efc:TheoryNode .
+
+efc:emergesFrom a rdf:Property ;
+    rdfs:label "emerges from" ;
+    rdfs:comment "Describes emergence from one field or layer to another." ;
+    rdfs:domain efc:TheoryNode ;
+    rdfs:range efc:TheoryNode .
+
+efc:hasLayer a rdf:Property ;
+    rdfs:label "has layer" ;
+    rdfs:comment "Links meta-architecture to its structural layers." ;
+    rdfs:domain efc:MetaProcessNode ;
+    rdfs:range efc:IntegrationLayer, efc:PatternLayer, efc:TopologyLayer .
+
+efc:defines a rdf:Property ;
+    rdfs:label "defines" ;
+    rdfs:comment "Links specification nodes to their conceptual entities." ;
+    rdfs:domain efc:TheoryNode ;
+    rdfs:range efc:Concept .
+
+efc:partOf a rdf:Property ;
+    rdfs:label "part of" ;
+    rdfs:comment "Part-whole relation for structural hierarchy." ;
+    rdfs:domain efc:TheoryNode ;
+    rdfs:range efc:TheoryNode .
+
+#################################################################
+# Example high-level mapping to schema.org
+#################################################################
+
+efc:MetaArchitecture a schema:CreativeWork ;
+    schema:name "Meta-Architecture" ;
+    schema:about efc:IntegrationLayer, efc:PatternLayer, efc:TopologyLayer .
+
+efc:EFCTheory a schema:CreativeWork ;
+    schema:name "Energy-Flow Cosmology Theory" ;
+    schema:about efc:EnergyFlowField, efc:EntropyField, efc:GridResistance .
