@@ -1,8 +1,8 @@
 {
   "version": "1.0",
-  "generated_at": "2025-11-17T21:02:04.416506Z",
-  "node_count": 128,
-  "doc_node_count": 126,
+  "generated_at": "2025-11-18T05:27:54.506382Z",
+  "node_count": 204,
+  "doc_node_count": 202,
   "keyword_count": 93,
   "nodes": [
     {
@@ -53,10 +53,45 @@
       "related": []
     },
     {
+      "id": "docs/archive/EFC-v1.2-Foundational-Framework",
+      "path": "docs/archive/EFC-v1.2-Foundational-Framework.jsonld",
+      "layer": "docs",
+      "parent": "docs/archive",
+      "related": []
+    },
+    {
+      "id": "docs/archive/EFC-v2.1-Complete-Edition",
+      "path": "docs/archive/EFC-v2.1-Complete-Edition.jsonld",
+      "layer": "docs",
+      "parent": "docs/archive",
+      "related": []
+    },
+    {
+      "id": "docs/archive/EFC-v2.1-Modular-Synthesis",
+      "path": "docs/archive/EFC-v2.1-Modular-Synthesis.jsonld",
+      "layer": "docs",
+      "parent": "docs/archive",
+      "related": []
+    },
+    {
+      "id": "docs/archive/EFC-v2.2-Cross-Field-Integration-Summary",
+      "path": "docs/archive/EFC-v2.2-Cross-Field-Integration-Summary.jsonld",
+      "layer": "docs",
+      "parent": "docs/archive",
+      "related": []
+    },
+    {
       "id": "docs/archive/readme/index",
       "path": "docs/archive/readme/index.jsonld",
       "layer": "docs",
       "parent": "docs/archive/readme",
+      "related": []
+    },
+    {
+      "id": "docs/articles/EFC-A-Deep-Dive-into-the-Halo-Concept",
+      "path": "docs/articles/EFC-A-Deep-Dive-into-the-Halo-Concept.jsonld",
+      "layer": "docs",
+      "parent": "docs/articles",
       "related": []
     },
     {
@@ -85,6 +120,13 @@
     },
     {
       "id": "docs/articles/EFC-Applications-and-Implications",
+      "path": "docs/articles/EFC-Applications-and-Implications.jsonld",
+      "layer": "docs",
+      "parent": "docs/articles",
+      "related": []
+    },
+    {
+      "id": "docs/articles/EFC-Applications-and-Implications",
       "path": "docs/articles/efc-applications-and-implications/index.jsonld",
       "layer": "docs",
       "parent": "docs/articles/efc-applications-and-implications",
@@ -106,6 +148,13 @@
         "docs/articles/EFC-Why-is-Light-Speed-a-Cosmic-Limit",
         "meta/cognition/CEM-Consciousness-Ego-Mirror"
       ]
+    },
+    {
+      "id": "docs/articles/EFC-CMB-Thermodynamic-Gradient",
+      "path": "docs/articles/EFC-CMB-Thermodynamic-Gradient.jsonld",
+      "layer": "docs",
+      "parent": "docs/articles",
+      "related": []
     },
     {
       "id": "docs/articles/EFC-CMB-Thermodynamic-Gradient",
@@ -133,9 +182,23 @@
     },
     {
       "id": "docs/articles/EFC-Can-Energy-Flow-Be-Observed-in-Galactic-Clusters",
+      "path": "docs/articles/EFC-Can-Energy-Flow-Be-Observed-in-Galactic-Clusters.jsonld",
+      "layer": "docs",
+      "parent": "docs/articles",
+      "related": []
+    },
+    {
+      "id": "docs/articles/EFC-Can-Energy-Flow-Be-Observed-in-Galactic-Clusters",
       "path": "docs/articles/efc-can-energy-flow-be-observed-in-galactic-clusters/index.jsonld",
       "layer": "docs",
       "parent": "docs/articles/efc-can-energy-flow-be-observed-in-galactic-clusters",
+      "related": []
+    },
+    {
+      "id": "docs/articles/EFC-Can-Entropy-Drive-Cosmic-Evolution",
+      "path": "docs/articles/EFC-Can-Entropy-Drive-Cosmic-Evolution.jsonld",
+      "layer": "docs",
+      "parent": "docs/articles",
       "related": []
     },
     {
@@ -164,9 +227,23 @@
     },
     {
       "id": "docs/articles/EFC-Dynamic-Balance-Entropy-Order-and-Chaos",
+      "path": "docs/articles/EFC-Dynamic-Balance-Entropy-Order-and-Chaos.jsonld",
+      "layer": "docs",
+      "parent": "docs/articles",
+      "related": []
+    },
+    {
+      "id": "docs/articles/EFC-Dynamic-Balance-Entropy-Order-and-Chaos",
       "path": "docs/articles/efc-dynamic-balance-entropy-order-and-chaos/index.jsonld",
       "layer": "docs",
       "parent": "docs/articles/efc-dynamic-balance-entropy-order-and-chaos",
+      "related": []
+    },
+    {
+      "id": "docs/articles/EFC-Energy-Flow-as-the-Fundamental-Dynamic-of-the-Universe",
+      "path": "docs/articles/EFC-Energy-Flow-as-the-Fundamental-Dynamic-of-the-Universe.jsonld",
+      "layer": "docs",
+      "parent": "docs/articles",
       "related": []
     },
     {
@@ -185,6 +262,13 @@
         "docs/articles/EFC-The-Energy-Flow-Interface",
         "meta/symbiosis/symbiotic-process-summary"
       ]
+    },
+    {
+      "id": "docs/articles/EFC-Flow-Entropy-and-Spacetime-Distortion-in-Cosmological-Clusters",
+      "path": "docs/articles/EFC-Flow-Entropy-and-Spacetime-Distortion-in-Cosmological-Clusters.jsonld",
+      "layer": "docs",
+      "parent": "docs/articles",
+      "related": []
     },
     {
       "id": "docs/articles/EFC-Flow-Entropy-and-Spacetime-Distortion-in-Cosmological-Clusters",
@@ -212,9 +296,23 @@
     },
     {
       "id": "docs/articles/EFC-Grid-Higgs-Framework",
+      "path": "docs/articles/EFC-Grid-Higgs-Framework.jsonld",
+      "layer": "docs",
+      "parent": "docs/articles",
+      "related": []
+    },
+    {
+      "id": "docs/articles/EFC-Grid-Higgs-Framework",
       "path": "docs/articles/efc-grid-higgs-framework/index.jsonld",
       "layer": "docs",
       "parent": "docs/articles/efc-grid-higgs-framework",
+      "related": []
+    },
+    {
+      "id": "docs/articles/EFC-Grid-Higgs-Paradigm-Shift",
+      "path": "docs/articles/EFC-Grid-Higgs-Paradigm-Shift.jsonld",
+      "layer": "docs",
+      "parent": "docs/articles",
       "related": []
     },
     {
@@ -249,10 +347,31 @@
       ]
     },
     {
+      "id": "docs/articles/EFC-Grid-Model-Entropic-Dynamics.",
+      "path": "docs/articles/EFC-Grid-Model-Entropic-Dynamics..jsonld",
+      "layer": "docs",
+      "parent": "docs/articles",
+      "related": []
+    },
+    {
+      "id": "docs/articles/EFC-How-Does-Balance-Shape-Universal-Structures",
+      "path": "docs/articles/EFC-How-Does-Balance-Shape-Universal-Structures.jsonld",
+      "layer": "docs",
+      "parent": "docs/articles",
+      "related": []
+    },
+    {
       "id": "docs/articles/EFC-How-Does-Balance-Shape-Universal-Structures",
       "path": "docs/articles/efc-how-does-balance-shape-universal-structures/index.jsonld",
       "layer": "docs",
       "parent": "docs/articles/efc-how-does-balance-shape-universal-structures",
+      "related": []
+    },
+    {
+      "id": "docs/articles/EFC-How-Energy-Flow-Sustain-Spacetime",
+      "path": "docs/articles/EFC-How-Energy-Flow-Sustain-Spacetime.jsonld",
+      "layer": "docs",
+      "parent": "docs/articles",
       "related": []
     },
     {
@@ -305,9 +424,23 @@
     },
     {
       "id": "docs/articles/EFC-Hypothesis-Interrelation-Energy-Entropy",
+      "path": "docs/articles/EFC-Hypothesis-Interrelation-Energy-Entropy.jsonld",
+      "layer": "docs",
+      "parent": "docs/articles",
+      "related": []
+    },
+    {
+      "id": "docs/articles/EFC-Hypothesis-Interrelation-Energy-Entropy",
       "path": "docs/articles/efc-hypothesis-interrelation-energy-entropy/index.jsonld",
       "layer": "docs",
       "parent": "docs/articles/efc-hypothesis-interrelation-energy-entropy",
+      "related": []
+    },
+    {
+      "id": "docs/articles/EFC-Hypothesis-Universe-as-Energy-Driven-System",
+      "path": "docs/articles/EFC-Hypothesis-Universe-as-Energy-Driven-System.jsonld",
+      "layer": "docs",
+      "parent": "docs/articles",
       "related": []
     },
     {
@@ -319,9 +452,23 @@
     },
     {
       "id": "docs/articles/EFC-Integrated-Hypothesis-Time-Entropy",
+      "path": "docs/articles/EFC-Integrated-Hypothesis-Time-Entropy.jsonld",
+      "layer": "docs",
+      "parent": "docs/articles",
+      "related": []
+    },
+    {
+      "id": "docs/articles/EFC-Integrated-Hypothesis-Time-Entropy",
       "path": "docs/articles/efc-integrated-hypothesis-time-entropy/index.jsonld",
       "layer": "docs",
       "parent": "docs/articles/efc-integrated-hypothesis-time-entropy",
+      "related": []
+    },
+    {
+      "id": "docs/articles/EFC-Introduction-to-Energy-Flow-in-Space-Time",
+      "path": "docs/articles/EFC-Introduction-to-Energy-Flow-in-Space-Time.jsonld",
+      "layer": "docs",
+      "parent": "docs/articles",
       "related": []
     },
     {
@@ -350,6 +497,13 @@
     },
     {
       "id": "docs/articles/EFC-Introduction-to-Entropy-in-Cosmic-Evolution",
+      "path": "docs/articles/EFC-Introduction-to-Entropy-in-Cosmic-Evolution.jsonld",
+      "layer": "docs",
+      "parent": "docs/articles",
+      "related": []
+    },
+    {
+      "id": "docs/articles/EFC-Introduction-to-Entropy-in-Cosmic-Evolution",
       "path": "docs/articles/efc-introduction-to-entropy-in-cosmic-evolution/index.jsonld",
       "layer": "docs",
       "parent": "docs/articles/efc-introduction-to-entropy-in-cosmic-evolution",
@@ -357,9 +511,23 @@
     },
     {
       "id": "docs/articles/EFC-Is-Consciousness-Linked-to-Entropy",
+      "path": "docs/articles/EFC-Is-Consciousness-Linked-to-Entropy.jsonld",
+      "layer": "docs",
+      "parent": "docs/articles",
+      "related": []
+    },
+    {
+      "id": "docs/articles/EFC-Is-Consciousness-Linked-to-Entropy",
       "path": "docs/articles/efc-is-consciousness-linked-to-entropy/index.jsonld",
       "layer": "docs",
       "parent": "docs/articles/efc-is-consciousness-linked-to-entropy",
+      "related": []
+    },
+    {
+      "id": "docs/articles/EFC-Light-Speed-as-a-Regulator-of-Energy-Flow-in-the-Universe",
+      "path": "docs/articles/EFC-Light-Speed-as-a-Regulator-of-Energy-Flow-in-the-Universe.jsonld",
+      "layer": "docs",
+      "parent": "docs/articles",
       "related": []
     },
     {
@@ -395,9 +563,23 @@
     },
     {
       "id": "docs/articles/EFC-Observational-Evidence-Entropy-Cosmic-Evolution",
+      "path": "docs/articles/EFC-Observational-Evidence-Entropy-Cosmic-Evolution.jsonld",
+      "layer": "docs",
+      "parent": "docs/articles",
+      "related": []
+    },
+    {
+      "id": "docs/articles/EFC-Observational-Evidence-Entropy-Cosmic-Evolution",
       "path": "docs/articles/efc-observational-evidence-entropy-cosmic-evolution/index.jsonld",
       "layer": "docs",
       "parent": "docs/articles/efc-observational-evidence-entropy-cosmic-evolution",
+      "related": []
+    },
+    {
+      "id": "docs/articles/EFC-Observational-Evidence-for-Energy-Flow",
+      "path": "docs/articles/EFC-Observational-Evidence-for-Energy-Flow.jsonld",
+      "layer": "docs",
+      "parent": "docs/articles",
       "related": []
     },
     {
@@ -423,6 +605,13 @@
         "docs/articles/EFC-Why-is-Light-Speed-a-Cosmic-Limit",
         "meta/cognition/CEM-Consciousness-Ego-Mirror"
       ]
+    },
+    {
+      "id": "docs/articles/EFC-Subhypothesis-Light-Speed-Limit",
+      "path": "docs/articles/EFC-Subhypothesis-Light-Speed-Limit.jsonld",
+      "layer": "docs",
+      "parent": "docs/articles",
+      "related": []
     },
     {
       "id": "docs/articles/EFC-Subhypothesis-Light-Speed-Limit",
@@ -474,6 +663,13 @@
     },
     {
       "id": "docs/articles/EFC-The-Energy-Flow-Interface",
+      "path": "docs/articles/EFC-The-Energy-Flow-Interface.jsonld",
+      "layer": "docs",
+      "parent": "docs/articles",
+      "related": []
+    },
+    {
+      "id": "docs/articles/EFC-The-Energy-Flow-Interface",
       "path": "docs/articles/efc-the-energy-flow-interface/index.jsonld",
       "layer": "docs",
       "parent": "docs/articles/efc-the-energy-flow-interface",
@@ -491,9 +687,23 @@
     },
     {
       "id": "docs/articles/EFC-Unresolved-Questions-and-Challenges-Entropy",
+      "path": "docs/articles/EFC-Unresolved-Questions-and-Challenges-Entropy.jsonld",
+      "layer": "docs",
+      "parent": "docs/articles",
+      "related": []
+    },
+    {
+      "id": "docs/articles/EFC-Unresolved-Questions-and-Challenges-Entropy",
       "path": "docs/articles/efc-unresolved-questions-and-challenges-entropy/index.jsonld",
       "layer": "docs",
       "parent": "docs/articles/efc-unresolved-questions-and-challenges-entropy",
+      "related": []
+    },
+    {
+      "id": "docs/articles/EFC-What-Happens-at-the-Universes-Extremes",
+      "path": "docs/articles/EFC-What-Happens-at-the-Universes-Extremes.jsonld",
+      "layer": "docs",
+      "parent": "docs/articles",
       "related": []
     },
     {
@@ -522,6 +732,13 @@
     },
     {
       "id": "docs/articles/EFC-What-is-the-Connection-Between-Energy-Flow-and-the-Now",
+      "path": "docs/articles/EFC-What-is-the-Connection-Between-Energy-Flow-and-the-Now.jsonld",
+      "layer": "docs",
+      "parent": "docs/articles",
+      "related": []
+    },
+    {
+      "id": "docs/articles/EFC-What-is-the-Connection-Between-Energy-Flow-and-the-Now",
       "path": "docs/articles/efc-what-is-the-connection-between-energy-flow-and-the-now/index.jsonld",
       "layer": "docs",
       "parent": "docs/articles/efc-what-is-the-connection-between-energy-flow-and-the-now",
@@ -543,6 +760,13 @@
         "docs/articles/EFC-Why-is-Light-Speed-a-Cosmic-Limit",
         "meta/cognition/CEM-Consciousness-Ego-Mirror"
       ]
+    },
+    {
+      "id": "docs/articles/EFC-Why-is-Light-Speed-a-Cosmic-Limit",
+      "path": "docs/articles/EFC-Why-is-Light-Speed-a-Cosmic-Limit.jsonld",
+      "layer": "docs",
+      "parent": "docs/articles",
+      "related": []
     },
     {
       "id": "docs/articles/EFC-Why-is-Light-Speed-a-Cosmic-Limit",
@@ -618,6 +842,13 @@
       "related": [
         "docs/articles/README/index"
       ]
+    },
+    {
+      "id": "docs/cognition/CEM-Consciousness-Ego-Mirror",
+      "path": "docs/cognition/CEM-Consciousness-Ego-Mirror.jsonld",
+      "layer": "docs",
+      "parent": "docs/cognition",
+      "related": []
     },
     {
       "id": "docs/efc-master-template/index",
@@ -697,6 +928,300 @@
       "related": [
         "docs/index"
       ]
+    },
+    {
+      "id": "docs/restored_pdfs/CEM-Consciousness-Ego-Mirror",
+      "path": "docs/restored_pdfs/CEM-Consciousness-Ego-Mirror.jsonld",
+      "layer": "docs",
+      "parent": "docs/restored_pdfs",
+      "related": []
+    },
+    {
+      "id": "docs/restored_pdfs/EFC-A-Deep-Dive-into-the-Halo-Concept",
+      "path": "docs/restored_pdfs/EFC-A-Deep-Dive-into-the-Halo-Concept.jsonld",
+      "layer": "docs",
+      "parent": "docs/restored_pdfs",
+      "related": []
+    },
+    {
+      "id": "docs/restored_pdfs/EFC-AI-Augmented-Scientific-Workflow-Framework",
+      "path": "docs/restored_pdfs/EFC-AI-Augmented-Scientific-Workflow-Framework.jsonld",
+      "layer": "docs",
+      "parent": "docs/restored_pdfs",
+      "related": []
+    },
+    {
+      "id": "docs/restored_pdfs/EFC-Applications-and-Implications",
+      "path": "docs/restored_pdfs/EFC-Applications-and-Implications.jsonld",
+      "layer": "docs",
+      "parent": "docs/restored_pdfs",
+      "related": []
+    },
+    {
+      "id": "docs/restored_pdfs/EFC-CMB-Thermodynamic-Gradient",
+      "path": "docs/restored_pdfs/EFC-CMB-Thermodynamic-Gradient.jsonld",
+      "layer": "docs",
+      "parent": "docs/restored_pdfs",
+      "related": []
+    },
+    {
+      "id": "docs/restored_pdfs/EFC-Can-Energy-Flow-Be-Observed-in-Galactic-Clusters",
+      "path": "docs/restored_pdfs/EFC-Can-Energy-Flow-Be-Observed-in-Galactic-Clusters.jsonld",
+      "layer": "docs",
+      "parent": "docs/restored_pdfs",
+      "related": []
+    },
+    {
+      "id": "docs/restored_pdfs/EFC-Can-Entropy-Drive-Cosmic-Evolution",
+      "path": "docs/restored_pdfs/EFC-Can-Entropy-Drive-Cosmic-Evolution.jsonld",
+      "layer": "docs",
+      "parent": "docs/restored_pdfs",
+      "related": []
+    },
+    {
+      "id": "docs/restored_pdfs/EFC-Dynamic-Balance-Entropy-Order-and-Chaos",
+      "path": "docs/restored_pdfs/EFC-Dynamic-Balance-Entropy-Order-and-Chaos.jsonld",
+      "layer": "docs",
+      "parent": "docs/restored_pdfs",
+      "related": []
+    },
+    {
+      "id": "docs/restored_pdfs/EFC-Energy-Flow-as-the-Fundamental-Dynamic-of-the-Universe",
+      "path": "docs/restored_pdfs/EFC-Energy-Flow-as-the-Fundamental-Dynamic-of-the-Universe.jsonld",
+      "layer": "docs",
+      "parent": "docs/restored_pdfs",
+      "related": []
+    },
+    {
+      "id": "docs/restored_pdfs/EFC-Field-Equations-for-Entropy-Driven-Spacetime",
+      "path": "docs/restored_pdfs/EFC-Field-Equations-for-Entropy-Driven-Spacetime.jsonld",
+      "layer": "docs",
+      "parent": "docs/restored_pdfs",
+      "related": []
+    },
+    {
+      "id": "docs/restored_pdfs/EFC-Flow-Entropy-and-Spacetime-Distortion-in-Cosmological-Clusters",
+      "path": "docs/restored_pdfs/EFC-Flow-Entropy-and-Spacetime-Distortion-in-Cosmological-Clusters.jsonld",
+      "layer": "docs",
+      "parent": "docs/restored_pdfs",
+      "related": []
+    },
+    {
+      "id": "docs/restored_pdfs/EFC-Grid-Higgs-Framework",
+      "path": "docs/restored_pdfs/EFC-Grid-Higgs-Framework.jsonld",
+      "layer": "docs",
+      "parent": "docs/restored_pdfs",
+      "related": []
+    },
+    {
+      "id": "docs/restored_pdfs/EFC-Grid-Higgs-Paradigm-Shift",
+      "path": "docs/restored_pdfs/EFC-Grid-Higgs-Paradigm-Shift.jsonld",
+      "layer": "docs",
+      "parent": "docs/restored_pdfs",
+      "related": []
+    },
+    {
+      "id": "docs/restored_pdfs/EFC-Grid-Model-Entropic-Dynamics.",
+      "path": "docs/restored_pdfs/EFC-Grid-Model-Entropic-Dynamics..jsonld",
+      "layer": "docs",
+      "parent": "docs/restored_pdfs",
+      "related": []
+    },
+    {
+      "id": "docs/restored_pdfs/EFC-How-Does-Balance-Shape-Universal-Structures",
+      "path": "docs/restored_pdfs/EFC-How-Does-Balance-Shape-Universal-Structures.jsonld",
+      "layer": "docs",
+      "parent": "docs/restored_pdfs",
+      "related": []
+    },
+    {
+      "id": "docs/restored_pdfs/EFC-How-Energy-Flow-Sustain-Spacetime",
+      "path": "docs/restored_pdfs/EFC-How-Energy-Flow-Sustain-Spacetime.jsonld",
+      "layer": "docs",
+      "parent": "docs/restored_pdfs",
+      "related": []
+    },
+    {
+      "id": "docs/restored_pdfs/EFC-Hypothesis-Interrelation-Energy-Entropy",
+      "path": "docs/restored_pdfs/EFC-Hypothesis-Interrelation-Energy-Entropy.jsonld",
+      "layer": "docs",
+      "parent": "docs/restored_pdfs",
+      "related": []
+    },
+    {
+      "id": "docs/restored_pdfs/EFC-Hypothesis-Universe-as-Energy-Driven-System",
+      "path": "docs/restored_pdfs/EFC-Hypothesis-Universe-as-Energy-Driven-System.jsonld",
+      "layer": "docs",
+      "parent": "docs/restored_pdfs",
+      "related": []
+    },
+    {
+      "id": "docs/restored_pdfs/EFC-Integrated-Hypothesis-Time-Entropy",
+      "path": "docs/restored_pdfs/EFC-Integrated-Hypothesis-Time-Entropy.jsonld",
+      "layer": "docs",
+      "parent": "docs/restored_pdfs",
+      "related": []
+    },
+    {
+      "id": "docs/restored_pdfs/EFC-Introduction-to-Energy-Flow-in-Space-Time",
+      "path": "docs/restored_pdfs/EFC-Introduction-to-Energy-Flow-in-Space-Time.jsonld",
+      "layer": "docs",
+      "parent": "docs/restored_pdfs",
+      "related": []
+    },
+    {
+      "id": "docs/restored_pdfs/EFC-Introduction-to-Entropy-in-Cosmic-Evolution",
+      "path": "docs/restored_pdfs/EFC-Introduction-to-Entropy-in-Cosmic-Evolution.jsonld",
+      "layer": "docs",
+      "parent": "docs/restored_pdfs",
+      "related": []
+    },
+    {
+      "id": "docs/restored_pdfs/EFC-Is-Consciousness-Linked-to-Entropy",
+      "path": "docs/restored_pdfs/EFC-Is-Consciousness-Linked-to-Entropy.jsonld",
+      "layer": "docs",
+      "parent": "docs/restored_pdfs",
+      "related": []
+    },
+    {
+      "id": "docs/restored_pdfs/EFC-Light-Speed-as-a-Regulator-of-Energy-Flow-in-the-Universe",
+      "path": "docs/restored_pdfs/EFC-Light-Speed-as-a-Regulator-of-Energy-Flow-in-the-Universe.jsonld",
+      "layer": "docs",
+      "parent": "docs/restored_pdfs",
+      "related": []
+    },
+    {
+      "id": "docs/restored_pdfs/EFC-Mathematical-Framework-for-Energy-Flow-in-Space-Time",
+      "path": "docs/restored_pdfs/EFC-Mathematical-Framework-for-Energy-Flow-in-Space-Time.jsonld",
+      "layer": "docs",
+      "parent": "docs/restored_pdfs",
+      "related": []
+    },
+    {
+      "id": "docs/restored_pdfs/EFC-Observational-Evidence-Entropy-Cosmic-Evolution",
+      "path": "docs/restored_pdfs/EFC-Observational-Evidence-Entropy-Cosmic-Evolution.jsonld",
+      "layer": "docs",
+      "parent": "docs/restored_pdfs",
+      "related": []
+    },
+    {
+      "id": "docs/restored_pdfs/EFC-Observational-Evidence-for-Energy-Flow",
+      "path": "docs/restored_pdfs/EFC-Observational-Evidence-for-Energy-Flow.jsonld",
+      "layer": "docs",
+      "parent": "docs/restored_pdfs",
+      "related": []
+    },
+    {
+      "id": "docs/restored_pdfs/EFC-Subhypothesis-Light-Speed-Limit",
+      "path": "docs/restored_pdfs/EFC-Subhypothesis-Light-Speed-Limit.jsonld",
+      "layer": "docs",
+      "parent": "docs/restored_pdfs",
+      "related": []
+    },
+    {
+      "id": "docs/restored_pdfs/EFC-Technical-Documentation-Energy-Flow-in-Space-Time",
+      "path": "docs/restored_pdfs/EFC-Technical-Documentation-Energy-Flow-in-Space-Time.jsonld",
+      "layer": "docs",
+      "parent": "docs/restored_pdfs",
+      "related": []
+    },
+    {
+      "id": "docs/restored_pdfs/EFC-The-Energy-Flow-Interface",
+      "path": "docs/restored_pdfs/EFC-The-Energy-Flow-Interface.jsonld",
+      "layer": "docs",
+      "parent": "docs/restored_pdfs",
+      "related": []
+    },
+    {
+      "id": "docs/restored_pdfs/EFC-Thermodynamic-Bridge-GR-QFT",
+      "path": "docs/restored_pdfs/EFC-Thermodynamic-Bridge-GR-QFT.jsonld",
+      "layer": "docs",
+      "parent": "docs/restored_pdfs",
+      "related": []
+    },
+    {
+      "id": "docs/restored_pdfs/EFC-Unresolved-Questions-and-Challenges-Entropy",
+      "path": "docs/restored_pdfs/EFC-Unresolved-Questions-and-Challenges-Entropy.jsonld",
+      "layer": "docs",
+      "parent": "docs/restored_pdfs",
+      "related": []
+    },
+    {
+      "id": "docs/restored_pdfs/EFC-What-Happens-at-the-Universes-Extremes",
+      "path": "docs/restored_pdfs/EFC-What-Happens-at-the-Universes-Extremes.jsonld",
+      "layer": "docs",
+      "parent": "docs/restored_pdfs",
+      "related": []
+    },
+    {
+      "id": "docs/restored_pdfs/EFC-What-is-the-Connection-Between-Energy-Flow-and-the-Now",
+      "path": "docs/restored_pdfs/EFC-What-is-the-Connection-Between-Energy-Flow-and-the-Now.jsonld",
+      "layer": "docs",
+      "parent": "docs/restored_pdfs",
+      "related": []
+    },
+    {
+      "id": "docs/restored_pdfs/EFC-Why-is-Light-Speed-a-Cosmic-Limit",
+      "path": "docs/restored_pdfs/EFC-Why-is-Light-Speed-a-Cosmic-Limit.jsonld",
+      "layer": "docs",
+      "parent": "docs/restored_pdfs",
+      "related": []
+    },
+    {
+      "id": "docs/restored_pdfs/EFC-v1.2-Foundational-Framework",
+      "path": "docs/restored_pdfs/EFC-v1.2-Foundational-Framework.jsonld",
+      "layer": "docs",
+      "parent": "docs/restored_pdfs",
+      "related": []
+    },
+    {
+      "id": "docs/restored_pdfs/EFC-v2.1-Complete-Edition",
+      "path": "docs/restored_pdfs/EFC-v2.1-Complete-Edition.jsonld",
+      "layer": "docs",
+      "parent": "docs/restored_pdfs",
+      "related": []
+    },
+    {
+      "id": "docs/restored_pdfs/EFC-v2.1-Modular-Synthesis",
+      "path": "docs/restored_pdfs/EFC-v2.1-Modular-Synthesis.jsonld",
+      "layer": "docs",
+      "parent": "docs/restored_pdfs",
+      "related": []
+    },
+    {
+      "id": "docs/restored_pdfs/EFC-v2.2-Cross-Field-Integration-Summary",
+      "path": "docs/restored_pdfs/EFC-v2.2-Cross-Field-Integration-Summary.jsonld",
+      "layer": "docs",
+      "parent": "docs/restored_pdfs",
+      "related": []
+    },
+    {
+      "id": "docs/restored_pdfs/ai_workflow_framework",
+      "path": "docs/restored_pdfs/ai_workflow_framework.jsonld",
+      "layer": "docs",
+      "parent": "docs/restored_pdfs",
+      "related": []
+    },
+    {
+      "id": "docs/restored_pdfs/efc_formal_spec",
+      "path": "docs/restored_pdfs/efc_formal_spec.jsonld",
+      "layer": "docs",
+      "parent": "docs/restored_pdfs",
+      "related": []
+    },
+    {
+      "id": "docs/restored_pdfs/efc_master",
+      "path": "docs/restored_pdfs/efc_master.jsonld",
+      "layer": "docs",
+      "parent": "docs/restored_pdfs",
+      "related": []
+    },
+    {
+      "id": "docs/restored_pdfs/efc_master_v1",
+      "path": "docs/restored_pdfs/efc_master_v1.jsonld",
+      "layer": "docs",
+      "parent": "docs/restored_pdfs",
+      "related": []
     },
     {
       "id": "docs/sections/README/index",
@@ -796,13 +1321,6 @@
       "path": "meta/cognition/efc-hypothesis-entropy-and-energy-flow/index.jsonld",
       "layer": "meta",
       "parent": "meta/cognition/efc-hypothesis-entropy-and-energy-flow",
-      "related": []
-    },
-    {
-      "id": "meta/cognition/EFC-Hypothesis-Entropy-and-Energy-Flow/index/index/index",
-      "path": "meta/cognition/EFC-Hypothesis-Entropy-and-Energy-Flow/index/index/index.jsonld",
-      "layer": null,
-      "parent": "meta/cognition/EFC-Hypothesis-Entropy-and-Energy-Flow/index/index",
       "related": []
     },
     {
@@ -1334,6 +1852,13 @@
       ]
     },
     {
+      "id": "methodology/EFC-AI-Augmented-Scientific-Workflow-Framework",
+      "path": "methodology/EFC-AI-Augmented-Scientific-Workflow-Framework.jsonld",
+      "layer": "methodology",
+      "parent": "methodology",
+      "related": []
+    },
+    {
       "id": "methodology/EFC-epistemology",
       "path": "methodology/EFC-epistemology/index.jsonld",
       "layer": "methodology",
@@ -1349,6 +1874,13 @@
         "methodology/methodology/README/index",
         "methodology/open-method"
       ]
+    },
+    {
+      "id": "methodology/ai_workflow_framework",
+      "path": "methodology/ai_workflow_framework.jsonld",
+      "layer": "methodology",
+      "parent": "methodology",
+      "related": []
     },
     {
       "id": "methodology/author-method-note",
