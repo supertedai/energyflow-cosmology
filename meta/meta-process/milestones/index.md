@@ -67,6 +67,7 @@ define milestone categories more precisely
 
 add machine-readable ordering
 
+```mermaid
 timeline
     title Meta-Process Structural Milestones
     1 : Pattern Layer
