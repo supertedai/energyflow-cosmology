@@ -229,7 +229,5 @@ This file provides one unified view of:
 * the human–AI co-processing loop
 * semantic and schema layers
 
-Every diagram has been fixed to work in GitHub's Mermaid renderer.
-
 ```
 
