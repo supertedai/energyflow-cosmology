@@ -12,23 +12,8 @@
       "type": "CreativeWork"
     },
     {
-      "id": "personal",
-      "path": "meta/personal/personal/index.jsonld",
-      "type": "CreativeWork"
-    },
-    {
-      "id": "meta/personal/Personal-Note",
+      "id": "index",
       "path": "meta/personal/personal-note/index.jsonld",
-      "type": "CreativeWork"
-    },
-    {
-      "id": "meta/personal/readme/index",
-      "path": "meta/personal/readme/index.jsonld",
-      "type": "CreativeWork"
-    },
-    {
-      "id": "meta/personal/README/index",
-      "path": "meta/personal/README/index.jsonld",
       "type": "CreativeWork"
     },
     {
@@ -77,18 +62,8 @@
       "type": "CreativeWork"
     },
     {
-      "id": "meta/cognition/readme/index",
-      "path": "meta/cognition/readme/index.jsonld",
-      "type": "CreativeWork"
-    },
-    {
       "id": "meta/cognition/you",
       "path": "meta/cognition/you/index.jsonld",
-      "type": "CreativeWork"
-    },
-    {
-      "id": "meta/cognition/README/index",
-      "path": "meta/cognition/README/index.jsonld",
       "type": "CreativeWork"
     },
     {
@@ -257,9 +232,12 @@
       "type": "CreativeWork"
     },
     {
-      "id": "methodology/author-method-note",
+      "id": "author-method-note",
       "path": "methodology/author-method-note/index.jsonld",
-      "type": "CreativeWork"
+      "type": [
+        "CreativeWork",
+        "EFC:Node"
+      ]
     },
     {
       "id": "methodology/reproducibility-guide",
@@ -267,14 +245,12 @@
       "type": "CreativeWork"
     },
     {
-      "id": "methodology/symbiotic-process",
-      "path": "methodology/symbiotic-process/index.jsonld",
-      "type": "CreativeWork"
-    },
-    {
-      "id": "index",
+      "id": "efc-epistemology",
       "path": "methodology/EFC-epistemology/index.jsonld",
-      "type": "CreativeWork"
+      "type": [
+        "CreativeWork",
+        "EFC:Node"
+      ]
     },
     {
       "id": "methodology/open-method",
@@ -282,34 +258,44 @@
       "type": "CreativeWork"
     },
     {
-      "id": "index",
+      "id": "efc-core",
       "path": "methodology/core/index.jsonld",
-      "type": "CreativeWork"
+      "type": [
+        "CreativeWork",
+        "EFC:Node"
+      ]
     },
     {
-      "id": "methodology/symbiotic-process-summary",
+      "id": "symbiotic-process-summary",
       "path": "methodology/symbiotic-process-summary/index.jsonld",
-      "type": "CreativeWork"
+      "type": [
+        "CreativeWork",
+        "EFC:Node"
+      ]
     },
     {
-      "id": "methodology/symbiosis-interface",
+      "id": "symbiosis-interface",
       "path": "methodology/symbiosis-interface/index.jsonld",
-      "type": "CreativeWork"
+      "type": [
+        "CreativeWork",
+        "EFC:Node"
+      ]
     },
     {
-      "id": "methodology/symbiotic-process-llm",
+      "id": "symbiotic-process-llm",
       "path": "methodology/symbiotic-process-llm/index.jsonld",
-      "type": "CreativeWork"
+      "type": [
+        "CreativeWork",
+        "EFC:Node"
+      ]
     },
     {
-      "id": "index",
-      "path": "methodology/epistemology/index.jsonld",
-      "type": "CreativeWork"
-    },
-    {
-      "id": "index",
+      "id": "open-process",
       "path": "methodology/open-process/index.jsonld",
-      "type": "CreativeWork"
+      "type": [
+        "CreativeWork",
+        "EFC:Node"
+      ]
     },
     {
       "id": "docs/index",
