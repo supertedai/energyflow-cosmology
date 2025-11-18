@@ -1,0 +1,38 @@
+\section*{EFC Formal Specification}
+
+\subsection*{Fields}
+\begin{align}
+S(\mathbf{x}) &: \text{entropy field}, \\
+\rho(\mathbf{x}) &: \text{mass density}, \\
+E_f(\mathbf{x}) &: \text{energy--flow potential}, \\
+c(S) &: \text{information capacity}, \\
+\eta(S) &: \text{grid--resistance coefficient}.
+\end{align}
+
+\subsection*{Core Relations}
+
+\paragraph{Energy--flow potential}
+\begin{equation}
+E_f(\mathbf{x}) = \rho(\mathbf{x})\,[1 - S(\mathbf{x})].
+\end{equation}
+
+\paragraph{Energy--flow gradient}
+\begin{equation}
+\mathbf{F}_E = -\nabla E_f.
+\end{equation}
+
+\paragraph{Information capacity}
+\begin{equation}
+c = c(S),
+\qquad
+\frac{dc}{dS} < 0.
+\end{equation}
+
+\paragraph{Grid resistance}
+\begin{equation}
+\eta = \eta(S),
+\qquad
+\frac{d\eta}{dS} > 0.
+\end{equation}
+
+These relations define the minimal mathematical core used by all EFC layers.
