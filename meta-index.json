@@ -452,11 +452,6 @@
       "type": "CreativeWork"
     },
     {
-      "id": "docs/meta/readme/index",
-      "path": "docs/meta/readme/index.jsonld",
-      "type": "CreativeWork"
-    },
-    {
       "id": "docs/figures/readme/index",
       "path": "docs/figures/readme/index.jsonld",
       "type": "CreativeWork"
