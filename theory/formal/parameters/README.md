@@ -1,34 +1,20 @@
-% ============================================
-% EFC — Notation
-% ============================================
+# Parameters
 
-\section*{Notation}
+These are the core parameters in Energy-Flow Cosmology.  
+They define physical scaling, entropy transitions, and structural thresholds.
 
-The following symbols are used across all formal components of
-Energy–Flow Cosmology (EFC).  
-They provide a unified vocabulary for EFC–S, EFC–D and EFC–C₀.
+## Static Parameters
+- \( S_0 \): low-entropy reference level  
+- \( S_1 \): high-entropy reference level  
+- \( \rho_0 \): reference mass density  
 
-\begin{table}[h!]
-\centering
-\begin{tabular}{ll}
-\textbf{Symbol} & \textbf{Meaning} \\
-\hline
-$S$ & Entropy field (scalar) \\
-$\rho$ & Mass–energy density \\
-$E_f$ & Energy–flow potential \\
-$c(S)$ & Effective propagation speed as a function of entropy \\
-$n(S)$ & Entropy–derived refractive index analogue \\
-$\Phi$ & Structural potential in EFC–S \\
-$\nabla S$ & Spatial entropy gradient \\
-$H_z$ & Local expansion–resistance profile \\
-$\dot{X}$ & Temporal derivative of any field $X$ \\
-\end{tabular}
-\end{table}
+## Dynamic Parameters
+- \( k_E \): energy-flow scaling  
+- \( k_S \): entropy-gradient scaling  
+- \( k_\eta \): grid-resistance scaling  
 
-\subsection*{Notes}
+## Structural Thresholds
+- \( S_{\mathrm{crit}} \): transition to structure formation  
+- \( S_{\mathrm{sat}} \): entropy saturation limit  
 
-\begin{itemize}
-    \item $E_f = \rho (1 - S)$ is the base expression unless otherwise stated.
-    \item $c(S)$ and $n(S)$ appear in light-speed variation work (S₀/S₁ model).
-    \item All potentials are defined relative to the entropy field.
-\end{itemize}
+All parameters are manually maintained.
