@@ -1,0 +1,45 @@
+{
+  "@context": {
+    "dcat": "http://www.w3.org/ns/dcat#",
+    "dct": "http://purl.org/dc/terms/",
+    "schema": "https://schema.org/",
+    "foaf": "http://xmlns.com/foaf/0.1/"
+  },
+  "@type": "dcat:Dataset",
+
+  "dct:title": "Energy-Flow Cosmology — Semantic Knowledge Repository",
+  "dct:description": "A structured, machine-readable dataset containing the theoretical specification, meta-architecture, methodology, cognition layers and semantic interfaces for the Energy-Flow Cosmology framework.",
+
+  "dct:identifier": "https://supertedai.github.io/energyflow-cosmology/",
+  "dcat:landingPage": "https://supertedai.github.io/energyflow-cosmology/",
+
+  "dct:creator": {
+    "@type": "foaf:Person",
+    "foaf:name": "Morten Magnusson",
+    "foaf:page": "https://orcid.org/0009-0002-4860-5095"
+  },
+
+  "dct:license": "https://creativecommons.org/licenses/by/4.0/",
+  "dct:publisher": "Energy-Flow Cosmology Project",
+
+  "dcat:distribution": [
+    {
+      "@type": "dcat:Distribution",
+      "dct:format": "application/ld+json",
+      "dcat:accessURL": "https://supertedai.github.io/energyflow-cosmology/index.jsonld",
+      "dct:title": "Root JSON-LD index"
+    },
+    {
+      "@type": "dcat:Distribution",
+      "dct:format": "text/turtle",
+      "dcat:accessURL": "https://supertedai.github.io/energyflow-cosmology/ontology.ttl",
+      "dct:title": "EFC Ontology"
+    },
+    {
+      "@type": "dcat:Distribution",
+      "dct:format": "application/ld+json",
+      "dcat:accessURL": "https://supertedai.github.io/energyflow-cosmology/semantic-search-index.json",
+      "dct:title": "Semantic Search Index"
+    }
+  ]
+}
