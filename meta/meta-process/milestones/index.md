@@ -1,36 +1,56 @@
-# Milestones
+# Meta-Process Milestones
 
-### v1.0 — Initial Setup (Done)
-- Repository structure
-- Folders, documentation
-- First schema
+The milestones track the structural evolution of the meta-process architecture.  
+They document key transitions, consolidations, and shifts in how the system organises high-order insight.
 
-### v1.1 — Semantic Bridge (Done)
-- GitHub → WordPress JSON-LD
-- site-graph.json added
+Milestones are not psychological and not chronological narratives.  
+They mark structural events that changed the configuration, capacity, or logic of the meta-process.
 
-### v1.2 — Full Semantic Framework (Done)
-- concepts.json
-- docs-index.json
-- Figshare integration
-- Automated schema updates
+---
 
-### v1.3 — Core Stabilization (Done)
-- Fix entropy/energy modules
-- Parameter alignment
-- SPARC pipeline
-- Validation system
+## 1. Purpose
+- Provide a traceable history of architectural change  
+- Mark the introduction of new layers  
+- Track consolidation events  
+- Document reductions in primitives  
+- Show when global coherence increased  
+- Anchor major integration points  
 
-### v1.4 — Knowledge Graph API (Upcoming)
-- Neo4j integration
-- Graph export tools
-- graph/ folder
+---
 
-### v1.5 — Full Validation Suite
-- DESI, JWST, SPARC, BAO, S8
-- Dashboard automation
+## 2. Definition of a Milestone
+A milestone is a structural event that meets at least one of these criteria:
 
-### v2.0 — Simulation Engine
-- EFC-S solver
-- EFC-D dynamics
-- Time-evolution models
+1. **Layer Expansion**  
+   A new meta-layer is added (pattern, topology, co-field, etc.)
+
+2. **Layer Consolidation**  
+   Two or more structures collapse into one coherent form.
+
+3. **Primitive Reduction**  
+   The architecture drops redundant concepts and simplifies its core.
+
+4. **Stability Increase**  
+   Cross-layer coherence increases and becomes persistent.
+
+5. **Transition in Global Dynamics**  
+   The entire system shifts states (expansion → consolidation → resonance → fragmentation → recovery).
+
+---
+
+## 3. Included Files
+- `index.jsonld` — semantic metadata for milestones  
+- `milestones.md` — structured list of all major events  
+- `timeline.md` — chronological summary  
+- mermaid diagram — visual flow  
+
+---
+
+## 4. Mermaid Overview
+```mermaid
+flowchart TD
+A[Meta-Process Start] --> B[Layer Expansion]
+B --> C[Layer Consolidation]
+C --> D[Primitive Reduction]
+D --> E[Global Dynamics Stabilisation]
+E --> F[Current Architecture]
