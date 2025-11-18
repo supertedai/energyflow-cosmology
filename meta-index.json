@@ -81,8 +81,28 @@
       "type": "CreativeWork"
     },
     {
-      "id": "meta/meta-process/co-field",
+      "id": "efc:co-field",
       "path": "meta/meta-process/co-field/index.jsonld",
+      "type": "CreativeWork"
+    },
+    {
+      "id": "meta/meta-process/co-field/mermaid",
+      "path": "meta/meta-process/co-field/mermaid.jsonld",
+      "type": "CreativeWork"
+    },
+    {
+      "id": "meta/meta-process/co-field/interaction-rules",
+      "path": "meta/meta-process/co-field/interaction-rules.jsonld",
+      "type": "CreativeWork"
+    },
+    {
+      "id": "meta/meta-process/co-field/examples",
+      "path": "meta/meta-process/co-field/examples.jsonld",
+      "type": "CreativeWork"
+    },
+    {
+      "id": "meta/meta-process/co-field/co-field-spec",
+      "path": "meta/meta-process/co-field/co-field-spec.jsonld",
       "type": "CreativeWork"
     },
     {
@@ -133,11 +153,6 @@
     {
       "id": "meta/meta-process/readme/index",
       "path": "meta/meta-process/readme/index.jsonld",
-      "type": "CreativeWork"
-    },
-    {
-      "id": "meta/meta-process/README/index",
-      "path": "meta/meta-process/README/index.jsonld",
       "type": "CreativeWork"
     },
     {
