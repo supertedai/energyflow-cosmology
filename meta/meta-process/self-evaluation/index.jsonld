@@ -1,25 +1,30 @@
 {
-  "@context": "https://schema.org",
+  "@context": {
+    "@vocab": "https://schema.org/",
+    "efc": "https://energyflow-cosmology.com/schema/"
+  },
   "@type": "CreativeWork",
-  "identifier": "meta/meta-process/self-evaluation",
-  "name": "Self-Evaluation Loop",
-  "author": {
-    "@type": "Person",
-    "name": "Morten Magnusson",
-    "identifier": "https://orcid.org/0009-0002-4860-5095"
-  },
-  "version": "1.0",
-  "isPartOf": {
-    "@type": "CreativeWorkSeries",
-    "name": "meta"
-  },
-  "layer": "meta",
-  "encodingFormat": "md",
-  "url": "meta/meta-process/self-evaluation.md",
-  "description": "This describes how the system evaluates its own behaviour.",
-  "keywords": [
-    "evaluation",
-    "loop",
-    "self"
+  "name": "Self-Evaluation Layer",
+  "description": "Defines how the meta-process evaluates its own structure, coherence, transitions and global behaviour. Provides metrics, diagnostic rules, and consistency tests.",
+  "identifier": "efc:self-evaluation",
+  "about": [
+    {
+      "@type": "DefinedTerm",
+      "name": "Self-Evaluation",
+      "identifier": "efc:term/self-evaluation",
+      "description": "A structural process for evaluating the correctness and stability of the meta-architecture."
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "Drift Detection",
+      "identifier": "efc:term/drift-detection",
+      "description": "Metrics and rules used to detect deviation from intended architecture."
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "Evaluation Metric",
+      "identifier": "efc:term/evaluation-metric",
+      "description": "Quantitative or qualitative measure of architectural performance."
+    }
   ]
 }
