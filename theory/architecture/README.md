@@ -1,6 +1,3 @@
-### `theory/architecture/README.md`
-
-```markdown
 # Theory Architecture
 
 This directory defines the architectural structure of the Energy-Flow Cosmology (EFC) theory.  
@@ -42,28 +39,3 @@ This directory documents the structure and relationships between these component
 
 - `index.md` — human-readable architecture description  
 - `index.jsonld` — machine-readable semantic structure  
-
----
-
-## Repository placement
-
-```
-
-/theory/
-architecture/   ← this directory
-structure/
-dynamics/
-c0-mapping/
-extensions/
-
-```
-
----
-
-## Use
-
-Update this directory when new theory components, layers or frameworks are added.  
-This keeps the entire EFC theory consistent, traceable and well-structured.
-```
-
----
