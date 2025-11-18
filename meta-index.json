@@ -27,13 +27,8 @@
       "type": "CreativeWork"
     },
     {
-      "id": "meta/reflection/readme/index",
-      "path": "meta/reflection/readme/index.jsonld",
-      "type": "CreativeWork"
-    },
-    {
-      "id": "meta/reflection/README/index",
-      "path": "meta/reflection/README/index.jsonld",
+      "id": "meta/cognition/cognitive-fingerprint/index",
+      "path": "meta/cognition/cognitive-fingerprint/index.jsonld",
       "type": "CreativeWork"
     },
     {
