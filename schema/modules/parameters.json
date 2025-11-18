@@ -1,0 +1,59 @@
+{
+  "id": "parameters",
+  "name": "Parameters",
+  "path": "theory/formal/parameters",
+  "layer": "parameters",
+  "summary": "# Parameters",
+  "keywords": [
+    "entropy",
+    "parameters",
+    "text",
+    "scaling",
+    "align",
+    "reference",
+    "mathrm",
+    "s_",
+    "begin",
+    "end",
+    "energy",
+    "flow",
+    "structural",
+    "subsection",
+    "thresholds",
+    "are",
+    "crit",
+    "density",
+    "dynamic",
+    "eta",
+    "formation",
+    "gradient",
+    "grid",
+    "high",
+    "k_"
+  ],
+  "dependencies": [],
+  "raw": {
+    "has_readme": true,
+    "has_index_md": false,
+    "has_index_tex": true,
+    "has_index_json": true
+  },
+  "index_json": {
+    "parameters": {
+      "static": {
+        "S0": "Low-entropy reference",
+        "S1": "High-entropy reference",
+        "rho0": "Reference density"
+      },
+      "dynamic": {
+        "kE": "Energy-flow scaling",
+        "kS": "Entropy-gradient scaling",
+        "kEta": "Grid-resistance scaling"
+      },
+      "structural_thresholds": {
+        "Scrit": "Onset of structure formation",
+        "Ssat": "Entropy saturation"
+      }
+    }
+  }
+}

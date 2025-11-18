@@ -1,0 +1,54 @@
+{
+  "id": "efc-d-model",
+  "name": "EFC-D Model \u2014 Energy-Flow Dynamics",
+  "path": "theory/formal/efc-d-model",
+  "layer": "EFC-D",
+  "summary": "# EFC-D Model \u2014 Energy-Flow Dynamics",
+  "keywords": [
+    "flow",
+    "rho",
+    "e_f",
+    "frac",
+    "efc",
+    "energy",
+    "is",
+    "entropy",
+    "nabla",
+    "partial",
+    "item",
+    "subsection",
+    "density",
+    "dynamic",
+    "dynamics",
+    "field",
+    "itemize",
+    "potential",
+    "_f",
+    "dr",
+    "dt",
+    "in",
+    "layer",
+    "model",
+    "time"
+  ],
+  "dependencies": [
+    "EFC-S",
+    "EFC-C0"
+  ],
+  "raw": {
+    "has_readme": true,
+    "has_index_md": false,
+    "has_index_tex": true,
+    "has_index_json": true
+  },
+  "index_json": {
+    "model": "EFC-D",
+    "description": "Dynamic layer of Energy-Flow Cosmology.",
+    "equations": {
+      "Ef": "rho * (1 - S)",
+      "dEf_dt": "(1 - S) * drho_dt - rho * dS_dt",
+      "grad_Ef": "(1 - S) * grad(rho) - rho * grad(S)",
+      "flow_velocity": "-grad(Ef)"
+    }
+  }
+}

@@ -1,0 +1,41 @@
+{
+  "id": "efc-flow-diagram",
+  "name": "EFC Flow Diagram \u2014 Structural Overview",
+  "path": "theory/formal/efc-flow-diagram",
+  "layer": "EFC-S",
+  "summary": "# EFC Flow Diagram \u2014 Structural Overview",
+  "keywords": [
+    "entropy",
+    "arrow",
+    "draw",
+    "box",
+    "grid",
+    "node",
+    "structure",
+    "diagram",
+    "flow",
+    "efield",
+    "east",
+    "feedback",
+    "arrows",
+    "below",
+    "e_f",
+    "efc",
+    "energy",
+    "feedback_g",
+    "feedback_s",
+    "formal",
+    "specification",
+    "style",
+    "5cm",
+    "begin",
+    "document"
+  ],
+  "dependencies": [],
+  "raw": {
+    "has_readme": true,
+    "has_index_md": false,
+    "has_index_tex": true,
+    "has_index_json": false
+  }
+}
