@@ -1,0 +1,23 @@
+{
+  "@context": "https://schema.org",
+  "@type": "CreativeWork",
+  "identifier": "docs/figures/readme/index",
+  "name": "figures",
+  "author": {
+    "@type": "Person",
+    "name": "Morten Magnusson",
+    "identifier": "https://orcid.org/0009-0002-4860-5095"
+  },
+  "version": "1.0",
+  "isPartOf": {
+    "@type": "CreativeWorkSeries",
+    "name": "docs"
+  },
+  "layer": "docs",
+  "encodingFormat": "md",
+  "url": "docs/figures/readme/index.md",
+  "description": "**Abstract:** This folder contains files and substructures related to 'figures', automatically analyzed. It includes the following file types: .png.",
+  "keywords": [
+    "figures"
+  ]
+}
