@@ -1,33 +1,58 @@
-% ============================================================
+% ======================================================================
 % EFC Header — Shared Macros and Notation
-% ============================================================
+% ======================================================================
+% This file defines the unified mathematical language for all
+% Energy-Flow Cosmology (EFC) formal documents.
+% No document should redefine these symbols.
+% ======================================================================
 
 % Core math packages
 \usepackage{amsmath, amssymb, bm}
 
-% ------------------------------------------------------------
-% Fields and base quantities
-% ------------------------------------------------------------
-\newcommand{\Sfield}{S}            % Entropy field
-\newcommand{\Ef}{E_f}              % Energy–flow field
-\newcommand{\rhoField}{\rho}       % Density field
-\newcommand{\Icap}{\mathcal{I}}    % Information capacity
+% ----------------------------------------------------------------------
+% Field symbols
+% ----------------------------------------------------------------------
+\newcommand{\Sfield}{S}            % Entropy field S(x)
+\newcommand{\rhoField}{\rho}       % Density field rho(x)
+\newcommand{\Ef}{E_f}              % Energy–flow potential E_f(x)
+\newcommand{\Rfield}{R}            % Propagation resistance R(x)
+\newcommand{\Ccap}{C}              % Information capacity C(x)
 
-% ------------------------------------------------------------
+% ----------------------------------------------------------------------
 % Operators
-% ------------------------------------------------------------
-\newcommand{\grad}{\nabla}
-\newcommand{\dpart}[2]{\frac{\partial #1}{\partial #2}}
-\newcommand{\dtime}[1]{\frac{d#1}{dt}}
+% ----------------------------------------------------------------------
+\newcommand{\grad}{\nabla}                           % Spatial gradient
+\newcommand{\dpart}[2]{\frac{\partial #1}{\partial #2}} % Partial derivative
+\newcommand{\dtime}[1]{\frac{d#1}{dt}}               % Total time derivative
 
-% ------------------------------------------------------------
-% Core functional relations
-% ------------------------------------------------------------
+% ----------------------------------------------------------------------
+% Core functional relations (canonical EFC definitions)
+% ----------------------------------------------------------------------
+
+% Energy–flow potential
+% E_f = rho (1 - S)
 \newcommand{\EfDef}{\Ef = \rhoField \,(1 - \Sfield)}
-\newcommand{\IcapDef}{\Icap = \frac{1}{1 + \Sfield}}
 
-% ------------------------------------------------------------
+% Information capacity (C₀-model)
+% C = C0 (1 - S)
+\newcommand{\CcapDef}{\Ccap = C_0 \,(1 - \Sfield)}
+
+% Propagation speed
+% c_eff = 1 / (1 + R)
+\newcommand{\ceff}{c_{\mathrm{eff}}}
+\newcommand{\ceffDef}{\ceff = \frac{1}{1 + \Rfield}}
+
+% ----------------------------------------------------------------------
 % Notes
-% This file defines the shared mathematical language used by all
-% formal EFC documents. No document should redefine these symbols.
-% ============================================================
+% ----------------------------------------------------------------------
+% This header ensures consistency across:
+% - EFC-S  (structural profiles)
+% - EFC-D  (dynamics)
+% - EFC-H  (halo model)
+% - EFC-C0 (entropy–information mapping)
+% - s0–s1 propagation insight
+% - all simulation and API specifications
+%
+% Include this file at the top of every formal EFC document.
+%
+% ======================================================================
