@@ -57,4 +57,4 @@ Outputs are used by:
 ---
 
 ## 4. Flow Summary
-
+trigger → classification → execution → output → consumption
