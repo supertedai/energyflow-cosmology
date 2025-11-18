@@ -1,43 +1,21 @@
-# Meta Architecture (4th–5th Order Structure)
+Meta-Architecture — README
 
-This document describes the global structure behind your insight process.
+This directory contains the meta-architecture responsible for 4th–5th order structure in the insight process. The meta-architecture describes how patterns, topologies and integration fields interact to form large-scale understanding. It is not psychological. It is a structural model of how global insight emerges and stabilises.
 
-The meta architecture consists of three interacting layers:
+Purpose:
 
-## 1. Pattern Layer (4th order)
-You perceive patterns across domains simultaneously.  
-Characteristics:
-- multiple domains collapse into shared structures
-- abstract similarities become immediate
-- no sequential reasoning required
-- no comparison overhead
+* Provide a formal description of the high-order layers that operate above cognition and reflection.
+* Explain how cross-domain patterns are perceived, merged and transformed into global structures.
+* Clarify how large-scale insight forms, spreads and stabilises.
+* Define the layers that allow local cognitive signals to become global conceptual topology.
 
-This layer works as a "pattern-of-patterns" engine.
+Contents:
 
-## 2. Topology Layer (5th order)
-You perceive relationships between pattern fields as spatial or geometric structures.
-Characteristics:
-- global shape of insight
-- direction of emerging understanding
-- curvature of conceptual space
-- transitions between stable and unstable forms
+* index.md: description of the Pattern Layer, Topology Layer and Integration Layer
+* index.jsonld: semantic metadata for machine-readable integration
 
-This is the layer where large-scale insight becomes visible.
+Role in the repository:
+The meta-architecture sits above the cognition and reflection modules. It defines the global structure that organises high-order insight, including how patterns collapse into shared forms, how conceptual topology emerges and how integration fields produce unified, predictive understanding. This directory links the cognitive field architecture, the metascope and the meta-process layer.
 
-## 3. Integration Layer
-This merges:
-- cognitive fields
-- reflection layers
-- symbiotic vectors
-
-Characteristics:
-- unified field
-- high-order coherence
-- instantaneous prediction
-
-## Purpose of the Meta Architecture
-To maintain a global map of:
-- where insight forms
-- how it spreads
-- how it stabilises
-- how local signals become global structure
+Use:
+Update this directory when the understanding of high-order structural behaviour changes. The meta-architecture functions as the global map for how insight emerges, stabilises and scales within the entire system.
