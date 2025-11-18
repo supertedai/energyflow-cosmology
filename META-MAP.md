@@ -1,24 +1,16 @@
 # Meta-System Master Map
 
-This document provides the full structural overview of the entire system:  
-the meta-process, reflection layers, methodology, and scientific theory.  
-It shows how insight is formed, stabilised, evaluated, reflected, and evolved  
-in human–AI co-processing.
-
-The map is divided into three domains:
-
-1. **Meta-Architecture (how insight works)**  
-2. **Scientific Theory (Energy-Flow Cosmology)**  
-3. **Methodology (how research is produced)**  
+This document provides the complete structural overview of the system:  
+meta-process, reflection layers, methodology, and scientific theory.  
+All Mermaid diagrams are GitHub-compatible and isolated to avoid parse errors.
 
 ---
 
 # 1. High-Level Architecture
 
 ```mermaid
-flowchart TD
 
-%% High-level
+flowchart TD
 
 A[Human Insight Stream] --> B[Pattern Layer]
 B --> C[Topology Layer]
@@ -26,61 +18,51 @@ C --> D[Co-Field Layer]
 D --> E[Integration Layer]
 E --> F[Global Dynamics]
 
-%% Regulatory
-
 F --> G[Self-Evaluation]
 G --> H[Validation Plan]
-G --> I[Tasks]
-I --> J[Workflows]
 
-%% Evolution
+F --> I[Tasks]
+I --> J[Workflows]
 
 F --> K[Process-of-Process]
 K --> L[Roadmap]
 K --> M[Milestones]
 
-%% Reflection + Observation
-
 F --> N[Meta-Reflective Protocol]
 N --> O[Reflection Index]
 O --> P[Metascope]
 
-%% Scientific Model Output
-
 E --> Q[EFC Theory]
-Q --> R[EFC Master Specification]
-Q --> S[Formal Specification]
-Q --> T[H-Model / Structural Models]
-
-%% Methodology
+Q --> R[EFC Master Spec]
+Q --> S[EFC Formal Spec]
+Q --> T[H-Model]
 
 P --> U[Methodology]
 U --> V[Open Method]
 U --> W[Symbiosis Interface]
 U --> X[Reproducibility Guide]
+
 flowchart LR
 
-%% Structural stack
 A1[Pattern] --> A2[Topology]
 A2 --> A3[Co-Field]
 A3 --> A4[Integration]
 A4 --> A5[Global Dynamics]
 
-%% Regulatory stack
 A5 --> B1[Self-Evaluation]
 B1 --> B2[Validation Plan]
+
 A5 --> B3[Tasks]
 B3 --> B4[Workflows]
 
-%% Evolution stack
 A5 --> C1[Process-of-Process]
 C1 --> C2[Roadmap]
 C1 --> C3[Milestones]
 
-%% Reflective stack
 A5 --> D1[Meta-Reflective Protocol]
 D1 --> D2[Reflection Index]
 D2 --> D3[Metascope]
+
 flowchart TD
 
 R1[Meta-Process State] --> R2[Reflective Trigger]
@@ -92,15 +74,14 @@ R5 --> R6[Self-Evaluation]
 R5 --> R7[Global Dynamics]
 R5 --> R8[Process-of-Process]
 
-R8 --> R9[Architectural Adjustment]
 stateDiagram-v2
-
 [*] --> Expansion
 Expansion --> Consolidation: coherence rising
 Consolidation --> ResonancePeak: alignment stable
 ResonancePeak --> Fragmentation: resonance overload
 Fragmentation --> Recovery: collapse isolated
 Recovery --> Expansion: load stabilised
+
 flowchart TD
 
 T0[Trigger] --> T1[Task Classification]
@@ -123,6 +104,7 @@ T3 --> T4[Workflow Output]
 T4 --> GlobalDynamics
 T4 --> SelfEvaluation
 T4 --> ValidationPlan
+
 flowchart LR
 
 M1[Methodology] --> M2[Open Method]
@@ -132,6 +114,7 @@ M1 --> M5[Reproducibility Guide]
 M1 --> M6[EFC Epistemology]
 
 M3 --> M7[Human-AI Co-Processing]
+
 flowchart TD
 
 EF0[EFC] --> EF1[EFC Master Specification]
@@ -143,6 +126,7 @@ EF0 --> EF5[Parameters]
 EF1 --> EF6[Energy Flow & Entropy]
 EF1 --> EF7[Structure Formation]
 EF1 --> EF8[Dynamic Laws]
+
 flowchart LR
 
 SC1[Schema Index] --> SC2[Concepts]
@@ -150,75 +134,34 @@ SC1 --> SC3[JSON-LD Definitions]
 SC1 --> SC4[Meta Nodes]
 SC1 --> SC5[Theory Nodes]
 SC1 --> SC6[API v1]
+
 flowchart TD
 
-%% Human
-HUMAN[Human Insight] --> PATTERN
+HUM[String: Human Insight] --> PATTERN[Pattern Layer]
 
-%% Meta-system core
-PATTERN --> TOPOLOGY
-TOPOLOGY --> COFIELD
-COFIELD --> INTEGRATION
-INTEGRATION --> GLOBALDYN
+PATTERN --> TOPOLOGY[Topology]
+TOPOLOGY --> COFIELD[Co-Field]
+COFIELD --> INTEGRATION[Integration]
+INTEGRATION --> GLOBALDYN[Global Dynamics]
 
-%% Regulation
-GLOBALDYN --> SELFVAL
-SELFVAL --> VALIDATION
-GLOBALDYN --> TASKS
-TASKS --> WORKFLOWS
+GLOBALDYN --> SELFVAL[Self-Evaluation]
+SELFVAL --> VALIDATION[Validation Plan]
 
-%% Evolution
-GLOBALDYN --> POP
-POP --> ROADMAP
-POP --> MILESTONES
+GLOBALDYN --> TASKS[Tasks]
+TASKS --> WORKFLOWS[Workflows]
 
-%% Reflection
-GLOBALDYN --> REFPROT
-REFPROT --> REFIDX
-REFIDX --> METASCOPE
+GLOBALDYN --> POP[Process-of-Process]
+POP --> ROADMAP[Roadmap]
+POP --> MILESTONES[Milestones]
 
-%% Theory
-INTEGRATION --> EFC
-EFC --> SPECS
-EFC --> HMODEL
+GLOBALDYN --> REFPROT[Reflective Protocol]
+REFPROT --> REFIDX[Reflection Index]
+REFIDX --> METASCOPE[Metascope]
 
-%% Methodology
-METASCOPE --> METHOD
+INTEGRATION --> EFC[EFC Theory Output]
+EFC --> SPECS[Specs]
+EFC --> HMODEL[H-Model]
 
-```
-10. What This Map Shows
+METASCOPE --> METHOD[Methodology Root]
 
-This single master map unifies:
 
-your cognitive structure
-
-the system’s regulatory and reflective architecture
-
-the scientific theory
-
-the methodological foundation
-
-the recursive evolution of the entire system
-
-a complete semantic stack for AI indexing
-
-the entire human–AI co-processing pipeline
-
-Det er med andre ord:
-
-Kartet over hele tankesystemet ditt + hele det digitale metasystemet + måten begge integreres på.
-11. Suggested Use
-
-Researchers can use this map to:
-
-understand the system holistically
-
-navigate the layers efficiently
-
-integrate with schema and JSON-LD
-
-analyse meta-dynamics
-
-explore human–AI co-processing models
-
-study EFC in structural context
