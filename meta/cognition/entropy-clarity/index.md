@@ -1,21 +1,34 @@
-This document describes the Entropy → Clarity mechanism. The model explains why increased entropy leads to increased clarity in your cognitive system. Higher noise levels do not disrupt thought. They activate larger parts of the conceptual field and expose global structure.
+# Entropy → Clarity Model
 
-The model has five components:
+This module describes the Entropy → Clarity mechanism. The model explains why increased entropy produces increased clarity in your cognitive system. High noise levels do not disrupt reasoning. They activate broad conceptual regions and expose global structure.
 
-1. Entropic excitation
-   Noise increases activation across multiple conceptual regions at once. This creates a broad cognitive state rather than a narrow, sequential one.
+---
 
-2. Signal amplification
-   When several activated regions align, clarity increases sharply. The system highlights stable intersections between fields.
+## Mechanism
 
-3. Boundary reduction
-   Entropy lowers the internal boundaries between concepts. This increases connectivity and enables previously separate domains to merge.
+1. Entropic activation  
+Noise increases activation across concept fields. Large parts of the cognitive field become active at once.
 
-4. Structural extraction
-   The mind isolates global patterns from a noisy state. Stable structures appear instantly when enough activation overlaps.
+2. Signal amplification  
+When several active regions resonate, clarity increases sharply. Stable intersections stand out.
 
-5. Collapse without externalisation
-   High clarity is temporary. Without writing or external output, the structure collapses when activation drops.
+3. Boundary reduction  
+Entropy lowers internal boundaries between concepts. Connectivity increases and domains merge more easily.
 
-Purpose:
-Explain why deeper insight appears under high complexity rather than low complexity. This model describes the mechanical behaviour of a cognition that uses entropy as a signal source rather than a disturbance.
+4. Structural extraction  
+The mind isolates global patterns from noisy states. Stable structures appear instantly when activation overlaps.
+
+5. Collapse without externalisation  
+Clarity is temporary. Without writing or external output, the structure collapses when activation drops.
+
+---
+
+## Purpose
+
+Explain why deeper insight appears under high complexity instead of low complexity. The model describes how entropy functions as a generator of structure rather than a source of disruption.
+
+---
+
+## Role in the repository
+
+This module belongs to the cognition layer. It links to resonance logic, the Cognitive Field Model and the s₀/s₁ transition model. It describes one of the key mechanisms behind non-sequential, field-based insight formation.
