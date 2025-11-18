@@ -54,3 +54,15 @@ B --> C[Layer Consolidation]
 C --> D[Primitive Reduction]
 D --> E[Global Dynamics Stabilisation]
 E --> F[Current Architecture]
+```
+## 5. Backlog
+
+add semantic tags to all milestones
+
+link each milestone to affected layers
+
+create cross-references to global-dynamics
+
+define milestone categories more precisely
+
+add machine-readable ordering
