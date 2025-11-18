@@ -1,0 +1,72 @@
+% ============================================================
+% EFC Formal Specification
+% ============================================================
+
+\section*{EFC Formal Specification}
+
+This document defines the core mathematical structure of
+Energy–Flow Cosmology (EFC). All higher-level models, diagrams
+and simulation modules reference the definitions given here.
+
+% ------------------------------------------------------------
+\subsection*{1. Fields}
+
+\paragraph{Entropy field}
+\[
+S = S(\mathbf{x})
+\]
+
+\paragraph{Density field}
+\[
+\rho = \rho(\mathbf{x})
+\]
+
+\paragraph{Grid resistance}
+\[
+R = R(\mathbf{x})
+\]
+
+\paragraph{Energy–flow potential}
+\[
+E_f = \rho \, (1 - S)
+\]
+
+% ------------------------------------------------------------
+\subsection*{2. Derived Quantities}
+
+\paragraph{Local gradient of entropy}
+\[
+\nabla S
+\]
+
+\paragraph{Temporal change of energy–flow}
+\[
+\frac{dE_f}{dt} = - \nabla S \cdot \nabla E_f
+\]
+
+\paragraph{Grid-induced propagation resistance}
+\[
+c_\mathrm{eff} = c_0 \, (1 - S)
+\]
+
+% ------------------------------------------------------------
+\subsection*{3. Structural Relationships}
+
+\begin{itemize}
+  \item Low entropy increases \(E_f\)
+  \item High density increases \(E_f\)
+  \item Grid resistance modulates propagation speed
+  \item Feedback loops: \(S \leftrightarrow E_f \leftrightarrow \rho\)
+\end{itemize}
+
+% ------------------------------------------------------------
+\subsection*{4. Role in EFC}
+
+This formal specification provides:
+\begin{itemize}
+  \item A single coherent mathematical baseline
+  \item Compatibility across EFC-S, EFC-D and EFC-C
+  \item A stable foundation for numerical simulations
+\end{itemize}
+
+\end{document}
