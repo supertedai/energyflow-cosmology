@@ -13,7 +13,6 @@ flowchart TD
     B --> C[Co-Field]
     C --> D[Integration]
     D --> E[Global Dynamics]
-
 flowchart TD
     E[Global Dynamics] --> F[Self-Evaluation]
     F --> G[Validation Plan]
