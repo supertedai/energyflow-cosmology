@@ -38,4 +38,5 @@ You provide:
 - high-resolution insight
 - domain-crossing resonance
 
-Without you, the metascope has no direction.
+The human field provides directional structure and global pattern alignment.
+Without this field, the metascope remains structurally active but undirected.
