@@ -1,0 +1,212 @@
+{
+  "@context": {
+    "@vocab": "https://schema.org/",
+    "efc": "https://energyflow-cosmology.com/schema/",
+    "meta": "https://energyflow-cosmology.com/meta/"
+  },
+
+  "@type": "CreativeWork",
+  "name": "Global Meta-Architecture Manifest",
+  "identifier": "meta:global-manifest-v1",
+  "description": "Top-level specification of the full meta-architecture for human–AI co-processing, including structural layers, regulatory systems, reflective components, and evolutionary mechanisms.",
+
+  "creator": {
+    "@type": "Person",
+    "name": "Morten Magnusson",
+    "identifier": "https://orcid.org/0009-0002-4860-5095"
+  },
+
+  "version": "1.0",
+
+  "about": [
+
+    {
+      "@type": "CreativeWork",
+      "name": "Pattern Layer",
+      "identifier": "meta:pattern-layer",
+      "url": "meta/meta-process/pattern/"
+    },
+    {
+      "@type": "CreativeWork",
+      "name": "Topology Layer",
+      "identifier": "meta:topology-layer",
+      "url": "meta/meta-process/topology/"
+    },
+    {
+      "@type": "CreativeWork",
+      "name": "Co-Field Layer",
+      "identifier": "meta:co-field-layer",
+      "url": "meta/meta-process/co-field/"
+    },
+    {
+      "@type": "CreativeWork",
+      "name": "Integration Layer",
+      "identifier": "meta:integration-layer",
+      "url": "meta/meta-process/integration/"
+    },
+    {
+      "@type": "CreativeWork",
+      "name": "Global Dynamics",
+      "identifier": "meta:global-dynamics",
+      "url": "meta/meta-process/global-dynamics/"
+    },
+
+    {
+      "@type": "CreativeWork",
+      "name": "Self-Evaluation System",
+      "identifier": "meta:self-evaluation",
+      "url": "meta/meta-process/self-evaluation/"
+    },
+    {
+      "@type": "CreativeWork",
+      "name": "Validation Plan",
+      "identifier": "meta:validation-plan",
+      "url": "meta/meta-process/validation-plan/"
+    },
+    {
+      "@type": "CreativeWork",
+      "name": "Tasks",
+      "identifier": "meta:tasks",
+      "url": "meta/meta-process/tasks/"
+    },
+    {
+      "@type": "CreativeWork",
+      "name": "Workflows",
+      "identifier": "meta:workflows",
+      "url": "meta/meta-process/workflows/"
+    },
+
+    {
+      "@type": "CreativeWork",
+      "name": "Process-of-Process",
+      "identifier": "meta:process-of-process",
+      "url": "meta/meta-process/process-of-process/"
+    },
+    {
+      "@type": "CreativeWork",
+      "name": "Milestones",
+      "identifier": "meta:milestones",
+      "url": "meta/meta-process/milestones/"
+    },
+    {
+      "@type": "CreativeWork",
+      "name": "Roadmap",
+      "identifier": "meta:roadmap",
+      "url": "meta/meta-process/roadmap/"
+    },
+
+    {
+      "@type": "CreativeWork",
+      "name": "Meta-Reflective Protocol",
+      "identifier": "meta:reflective-protocol",
+      "url": "meta/meta-reflective-protocol/"
+    },
+    {
+      "@type": "CreativeWork",
+      "name": "Reflection Index",
+      "identifier": "meta:reflection-index",
+      "url": "meta/reflection/reflection-index/"
+    },
+    {
+      "@type": "CreativeWork",
+      "name": "Metascope",
+      "identifier": "meta:metascope",
+      "url": "meta/metascope/"
+    },
+
+    {
+      "@type": "CreativeWork",
+      "name": "Methodology",
+      "identifier": "meta:methodology-root",
+      "url": "methodology/"
+    },
+    {
+      "@type": "CreativeWork",
+      "name": "Symbiosis Interface",
+      "identifier": "meta:symbiosis-interface",
+      "url": "methodology/symbiosis-interface/"
+    },
+    {
+      "@type": "CreativeWork",
+      "name": "Open Method",
+      "identifier": "meta:open-method",
+      "url": "methodology/open-method/"
+    },
+    {
+      "@type": "CreativeWork",
+      "name": "Reproducibility Guide",
+      "identifier": "meta:reproducibility",
+      "url": "methodology/reproducibility-guide/"
+    },
+
+    {
+      "@type": "CreativeWork",
+      "name": "EFC Master Specification",
+      "identifier": "meta:efc-master-spec",
+      "url": "theory/efc_master_specification/"
+    },
+    {
+      "@type": "CreativeWork",
+      "name": "EFC Formal Specification",
+      "identifier": "meta:efc-formal-spec",
+      "url": "theory/efc_formal_spec/"
+    },
+    {
+      "@type": "CreativeWork",
+      "name": "EFC H-Model",
+      "identifier": "meta:h-model",
+      "url": "theory/efc-h-model/"
+    },
+    {
+      "@type": "CreativeWork",
+      "name": "Notation and Parameters",
+      "identifier": "meta:notation-parameters",
+      "url": "theory/notation/"
+    },
+
+    {
+      "@type": "Dataset",
+      "name": "Schema Index",
+      "identifier": "meta:schema-index",
+      "url": "schema/"
+    },
+    {
+      "@type": "Dataset",
+      "name": "Concept Definitions",
+      "identifier": "meta:concepts",
+      "url": "schema/concepts/"
+    },
+
+    {
+      "@type": "WebAPI",
+      "name": "Meta-API v1",
+      "identifier": "meta:api-v1",
+      "url": "api/v1/"
+    }
+  ],
+
+  "hasPart": [
+    "meta:pattern-layer",
+    "meta:topology-layer",
+    "meta:co-field-layer",
+    "meta:integration-layer",
+    "meta:global-dynamics",
+    "meta:self-evaluation",
+    "meta:validation-plan",
+    "meta:tasks",
+    "meta:workflows",
+    "meta:process-of-process",
+    "meta:milestones",
+    "meta:roadmap",
+    "meta:reflective-protocol",
+    "meta:reflection-index",
+    "meta:metascope",
+    "meta:methodology-root",
+    "meta:efc-master-spec",
+    "meta:efc-formal-spec",
+    "meta:h-model",
+    "meta:notation-parameters",
+    "meta:schema-index",
+    "meta:api-v1"
+  ]
+}
