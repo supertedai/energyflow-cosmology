@@ -1,3 +1,10 @@
+Her er en **ren, kort, konsis `README.md`** for `theory/architecture/`, skrevet i samme stil som resten av repoet.
+
+---
+
+### `theory/architecture/README.md`
+
+```markdown
 # Theory Architecture
 
 This directory defines the architecture of the Energy-Flow Cosmology (EFC) theory.  
@@ -43,4 +50,23 @@ Dette kataloget beskriver selve arkitekturen: hva komponentene er, hvor de ligge
 ---
 
 ## Placement in the repository
+
+```
+
+/theory/
+architecture/   ← denne mappen
+structure/
+dynamics/
+c0-mapping/
+extensions/
+
+```
+
+---
+
+## Use
+
+Oppdater denne mappen når nye teorielementer, lag eller rammeverk legges til.  
+Dette holder hele EFC sammen som en konsistent, maskin- og menneskelesbar struktur.
+```
 
