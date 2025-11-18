@@ -1,37 +1,3 @@
-Ingen problem — dette er en **klassisk Mermaid-feil**:
-GitHub sin renderer tåler **ikke flere Mermaid-diagrammer rett etter hverandre uten tom linje**,
-og **ikke kodeblokk som inneholder mermaid inni mermaid**,
-og **ikke flytsammensettinger uten en ren newline før ```mermaid**.
-
-Du får parse error fordi GitHub tror dette:
-
-```
-]flowchart LR
-```
-
-…er en del av *forrige diagram*, ikke starten på et nytt.
-
-Jeg gir deg nå:
-
-### ✔ En **fullt kompatibel, GitHub-safe versjon**
-
-### ✔ Alle diagrammer riktig separert
-
-### ✔ Ingen tolkingskollisjoner
-
-### ✔ Ingen “rich display” errors
-
-### ✔ Ingen overlapp mellom tekst og diagram-begynnelser
-
-### ✔ Optimal for rendering i GitHub
-
----
-
-# ⭐ **FIXED META-MAP.md (GitHub-safe)**
-
-Dette kan du lime rett inn i `/META-MAP.md`.
-
----
 
 ````markdown
 # Meta-System Master Map
