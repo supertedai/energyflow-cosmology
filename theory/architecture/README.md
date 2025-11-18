@@ -1,7 +1,3 @@
-Her er samme `README.md` på **engelsk**, kort og direkte.
-
----
-
 ### `theory/architecture/README.md`
 
 ```markdown
