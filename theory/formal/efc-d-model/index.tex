@@ -1,0 +1,86 @@
+\section{EFC-D: Energy-Flow Dynamics}
+
+The dynamic layer describes how the energy–flow field $E_f$ evolves in space and time.
+It connects structural quantities from EFC-S with entropy-driven suppression from EFC-C₀.
+
+\subsection{Energy–Flow Potential}
+
+The local potential is defined as:
+\[
+E_f = \rho (1 - S).
+\]
+
+Density:
+\[
+\rho = \frac{m}{V}.
+\]
+
+Interpretation:
+\begin{itemize}
+    \item High density and low entropy $\Rightarrow$ strong energy–flow.
+    \item Increasing entropy reduces the local flow capacity.
+\end{itemize}
+
+\subsection{Temporal Evolution}
+
+The time derivative of the flow potential is:
+\[
+\frac{dE_f}{dt} = \nabla_t E_f
+                 = (1-S)\frac{d\rho}{dt}
+                   - \rho \frac{dS}{dt}.
+\]
+
+\subsection{Spatial Flow}
+
+The spatial gradient is:
+\[
+\nabla E_f = (1 - S)\nabla\rho - \rho \nabla S.
+\]
+
+The direction of energy flow is determined by:
+\[
+\vec{v}_f = -\nabla E_f.
+\]
+
+\subsection{Radial Dynamics Around a Halo}
+
+Given a spherically symmetric profile:
+
+\[
+E_f(r) = \rho(r)\,\big(1 - S(r)\big),
+\]
+
+the radial acceleration is:
+
+\[
+a(r) = -\frac{dE_f}{dr}
+     = -\left[(1-S)\frac{d\rho}{dr} - \rho \frac{dS}{dr}\right].
+\]
+
+This predicts:
+\begin{itemize}
+    \item flat rotation curves when $\rho'(r)$ and $S'(r)$ balance,
+    \item lensing proportional to $E_f(r)$,
+    \item structural stability from the entropy-gradient term.
+\end{itemize}
+
+\subsection{Dynamic Update Rule}
+
+The evolution equation is:
+
+\[
+\boxed{
+\frac{\partial E_f}{\partial t}
+= (1-S)\,\frac{\partial \rho}{\partial t}
+  - \rho\,\frac{\partial S}{\partial t}
+  - \vec{v}_f \cdot \nabla E_f
+}
+\]
+
+with the flow field:
+
+\[
+\vec{v}_f = -\nabla E_f.
+\]
+
+This completes the formal dynamic layer of EFC.
