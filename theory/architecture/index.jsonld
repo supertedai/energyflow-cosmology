@@ -1,0 +1,68 @@
+{
+  "@context": "https://schema.org",
+  "@type": "CreativeWork",
+  "name": "Energy-Flow Cosmology — Theory Architecture",
+  "description": "Architectural overview of the Energy-Flow Cosmology (EFC) theory, describing how core fields, layers and extensions are organised as a coherent theoretical system.",
+  "identifier": [
+    {
+      "@type": "PropertyValue",
+      "propertyID": "GitHub",
+      "value": "theory/architecture"
+    }
+  ],
+  "author": {
+    "@type": "Person",
+    "name": "Morten Magnusson",
+    "identifier": "https://orcid.org/0009-0002-4860-5095"
+  },
+  "license": "https://creativecommons.org/licenses/by/4.0/",
+  "inLanguage": "en",
+  "url": "https://github.com/supertedai/energyflow-cosmology/tree/main/theory/architecture",
+  "isPartOf": {
+    "@type": "CreativeWork",
+    "name": "Energy-Flow Cosmology Repository",
+    "url": "https://github.com/supertedai/energyflow-cosmology"
+  },
+  "about": [
+    {
+      "@type": "Thing",
+      "name": "Energy-Flow Cosmology",
+      "identifier": "EFC"
+    },
+    {
+      "@type": "Thing",
+      "name": "EFC-S",
+      "description": "Structural and halo-level layer of Energy-Flow Cosmology."
+    },
+    {
+      "@type": "Thing",
+      "name": "EFC-D",
+      "description": "Energy-flow dynamics layer of Energy-Flow Cosmology."
+    },
+    {
+      "@type": "Thing",
+      "name": "EFC-C0",
+      "description": "Base entropy–information mapping layer of Energy-Flow Cosmology."
+    },
+    {
+      "@type": "Thing",
+      "name": "Grid–Higgs Framework"
+    },
+    {
+      "@type": "Thing",
+      "name": "Informational Metastructure Extension (IMX)"
+    }
+  ],
+  "keywords": [
+    "Energy-Flow Cosmology",
+    "EFC",
+    "theory architecture",
+    "EFC-S",
+    "EFC-D",
+    "EFC-C0",
+    "Grid–Higgs Framework",
+    "IMX",
+    "thermodynamic cosmology"
+  ],
+  "creativeWorkStatus": "Draft"
+}
