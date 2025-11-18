@@ -1,22 +1,18 @@
-# EFC Header — Core Definitions
+# **EFC Header — Core Definitions**
 
-This folder contains the **top-level header block** used across all
-formal EFC LaTeX documents. It defines the shared macros,
-notation, and formatting required to keep the entire formal
-specification consistent.
+This folder contains the top-level header used across all formal EFC LaTeX documents.
+It defines the shared macros, symbols, and notation needed to keep the entire formal specification consistent.
 
-## Contents
-- `index.tex` — LaTeX header with core macros and definitions.
-- Shared symbols:
-  - Entropy field \(S\)
-  - Energy–flow field \(E_f\)
-  - Density \(\rho\)
-  - Grid resistance functions
-  - Information–capacity functions
+---
 
-## Purpose
-The header centralizes all notation so every formal EFC document uses
-the same mathematical language.
+## **Contents**
 
-## Status
-Stable. Manual only. No auto-scripts interact with this folder.
+**index.tex** — LaTeX header with the core definitions.
+
+Included symbols and relations:
+
+* entropy field (S)
+* energy–flow field (E_f)
+* density (\rho)
+* grid-resistance functions (R)
+* information-capacity functions (C)
