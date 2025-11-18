@@ -1,24 +1,30 @@
 {
-  "@context": "https://schema.org",
+  "@context": {
+    "@vocab": "https://schema.org/",
+    "efc": "https://energyflow-cosmology.com/schema/"
+  },
   "@type": "CreativeWork",
-  "identifier": "meta/meta-process/validation-plan",
-  "name": "EFC Validation Plan",
-  "author": {
-    "@type": "Person",
-    "name": "Morten Magnusson",
-    "identifier": "https://orcid.org/0009-0002-4860-5095"
-  },
-  "version": "1.0",
-  "isPartOf": {
-    "@type": "CreativeWorkSeries",
-    "name": "meta"
-  },
-  "layer": "meta",
-  "encodingFormat": "md",
-  "url": "meta/meta-process/validation-plan.md",
-  "description": "- Rotation curves - Radial energy-flow profiles - Entropy gradient scaling",
-  "keywords": [
-    "plan",
-    "validation"
+  "name": "Validation Plan",
+  "description": "Defines the structural validation methods for the meta-process architecture, including criteria, phases, test methods, and cross-layer checks.",
+  "identifier": "efc:validation-plan",
+  "about": [
+    {
+      "@type": "DefinedTerm",
+      "name": "Validation Criteria",
+      "identifier": "efc:term/validation-criteria",
+      "description": "A set of structural requirements that must be met for the architecture to be considered valid."
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "Validation Phase",
+      "identifier": "efc:term/validation-phase",
+      "description": "A step in the validation procedure used to evaluate architectural correctness."
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "Cross-Layer Check",
+      "identifier": "efc:term/cross-layer-check",
+      "description": "A validation step that verifies coherence between two or more layers."
+    }
   ]
 }
