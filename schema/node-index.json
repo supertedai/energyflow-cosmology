@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "generated_at": "2025-11-18T05:27:54.506382Z",
+  "generated_at": "2025-11-18T05:30:46.243249Z",
   "nodes": [
     {
       "id": "AI-Augmented-Scientific-Workflow-Framework",
@@ -35,10 +35,7 @@
     {
       "id": "articles",
       "path": "docs/articles/articles/index.jsonld",
-      "type": "CreativeWork",
-      "name": "articles",
-      "layer": "docs",
-      "description": "--- title: Hypothesis on Cosmic Microwave Background as a Thermodynamic Temperature Gradient doi: 10.6084/m9.figshare.28570088 published: 2025-03-10 type: Preprint tags: [Energy-Flow Cosmology, CMB, Thermodynamics, Grid-Higgs Framework, Quantum Vacuum, Entropy, Energy Flow] ---  ## Abstract This hypothesis proposes that the **Cosmic Microwave Background (CMB)**, observed at 2.725 K, represents a *"
+      "type": "CreativeWork"
     },
     {
       "id": "cognition",
@@ -51,1025 +48,637 @@
     {
       "id": "docs",
       "path": "docs/docs/index.jsonld",
-      "type": "CreativeWork",
-      "name": "docs",
-      "layer": "docs"
+      "type": "CreativeWork"
     },
     {
       "id": "docs/archive/EFC-v1.2-Foundational-Framework",
       "path": "docs/archive/EFC-v1.2-Foundational-Framework.jsonld",
-      "type": "CreativeWork",
-      "name": "Efc V1.2 Foundational Framework",
-      "layer": "docs"
+      "type": "CreativeWork"
     },
     {
       "id": "docs/archive/EFC-v2.1-Complete-Edition",
       "path": "docs/archive/EFC-v2.1-Complete-Edition.jsonld",
-      "type": "CreativeWork",
-      "name": "Efc V2.1 Complete Edition",
-      "layer": "docs"
+      "type": "CreativeWork"
     },
     {
       "id": "docs/archive/EFC-v2.1-Modular-Synthesis",
       "path": "docs/archive/EFC-v2.1-Modular-Synthesis.jsonld",
-      "type": "CreativeWork",
-      "name": "Efc V2.1 Modular Synthesis",
-      "layer": "docs"
+      "type": "CreativeWork"
     },
     {
       "id": "docs/archive/EFC-v2.2-Cross-Field-Integration-Summary",
       "path": "docs/archive/EFC-v2.2-Cross-Field-Integration-Summary.jsonld",
-      "type": "CreativeWork",
-      "name": "Efc V2.2 Cross Field Integration Summary",
-      "layer": "docs"
+      "type": "CreativeWork"
     },
     {
       "id": "docs/archive/readme/index",
       "path": "docs/archive/readme/index.jsonld",
-      "type": "CreativeWork",
-      "name": "archive",
-      "layer": "docs",
-      "keywords": [
-        "archive"
-      ],
-      "description": "**Abstract:** This folder contains files and substructures related to 'archive', automatically analyzed. It includes the following file types: .tex."
+      "type": "CreativeWork"
     },
     {
       "id": "docs/articles/EFC-A-Deep-Dive-into-the-Halo-Concept",
       "path": "docs/articles/EFC-A-Deep-Dive-into-the-Halo-Concept.jsonld",
-      "type": "CreativeWork",
-      "name": "Efc A Deep Dive Into The Halo Concept",
-      "layer": "docs"
+      "type": "CreativeWork"
     },
     {
       "id": "docs/articles/EFC-A-Deep-Dive-into-the-Halo-Concept",
       "path": "docs/articles/efc-a-deep-dive-into-the-halo-concept/index.jsonld",
-      "type": "CreativeWork",
-      "name": "Abstract",
-      "layer": "docs",
-      "keywords": [
-        "abstract"
-      ],
-      "description": "--- title: A Deep Dive into the Halo Concept doi: 10.6084/m9.figshare.28114370 published: 2024-12-31"
+      "type": "CreativeWork"
     },
     {
       "id": "docs/articles/EFC-Applications-and-Implications",
       "path": "docs/articles/EFC-Applications-and-Implications.jsonld",
-      "type": "CreativeWork",
-      "name": "Efc Applications And Implications",
-      "layer": "docs"
+      "type": "CreativeWork"
     },
     {
       "id": "docs/articles/EFC-Applications-and-Implications",
       "path": "docs/articles/efc-applications-and-implications/index.jsonld",
-      "type": "CreativeWork",
-      "name": "Abstract",
-      "layer": "docs",
-      "keywords": [
-        "abstract"
-      ],
-      "description": "--- title: Applications and Implications \u2013 Entropy as a Driving Force in Cosmic Expansion doi: 10.6084/m9.figshare.28098308 published: 2024-12-26"
+      "type": "CreativeWork"
     },
     {
       "id": "docs/articles/EFC-CMB-Thermodynamic-Gradient",
       "path": "docs/articles/EFC-CMB-Thermodynamic-Gradient.jsonld",
-      "type": "CreativeWork",
-      "name": "Efc Cmb Thermodynamic Gradient",
-      "layer": "docs"
+      "type": "CreativeWork"
     },
     {
       "id": "docs/articles/EFC-CMB-Thermodynamic-Gradient",
       "path": "docs/articles/efc-cmb-thermodynamic-gradient/index.jsonld",
-      "type": "CreativeWork",
-      "name": "Abstract",
-      "layer": "docs",
-      "keywords": [
-        "abstract"
-      ],
-      "description": "--- title: Hypothesis on Cosmic Microwave Background as a Thermodynamic Temperature Gradient doi: 10.6084/m9.figshare.28570088 published: 2025-03-10"
+      "type": "CreativeWork"
     },
     {
       "id": "docs/articles/EFC-Can-Energy-Flow-Be-Observed-in-Galactic-Clusters",
       "path": "docs/articles/EFC-Can-Energy-Flow-Be-Observed-in-Galactic-Clusters.jsonld",
-      "type": "CreativeWork",
-      "name": "Efc Can Energy Flow Be Observed In Galactic Clusters",
-      "layer": "docs"
+      "type": "CreativeWork"
     },
     {
       "id": "docs/articles/EFC-Can-Energy-Flow-Be-Observed-in-Galactic-Clusters",
       "path": "docs/articles/efc-can-energy-flow-be-observed-in-galactic-clusters/index.jsonld",
-      "type": "CreativeWork",
-      "name": "Efc Can Energy Flow Be Observed In Galactic Clusters",
-      "layer": "docs"
+      "type": "CreativeWork"
     },
     {
       "id": "docs/articles/EFC-Can-Entropy-Drive-Cosmic-Evolution",
       "path": "docs/articles/EFC-Can-Entropy-Drive-Cosmic-Evolution.jsonld",
-      "type": "CreativeWork",
-      "name": "Efc Can Entropy Drive Cosmic Evolution",
-      "layer": "docs"
+      "type": "CreativeWork"
     },
     {
       "id": "docs/articles/EFC-Can-Entropy-Drive-Cosmic-Evolution",
       "path": "docs/articles/efc-can-entropy-drive-cosmic-evolution/index.jsonld",
-      "type": "CreativeWork",
-      "name": "Abstract",
-      "layer": "docs",
-      "keywords": [
-        "abstract"
-      ],
-      "description": "--- title: Can Entropy Drive Cosmic Evolution? doi: 10.6084/m9.figshare.28098353 published: 2024-12-25"
+      "type": "CreativeWork"
     },
     {
       "id": "docs/articles/EFC-Dynamic-Balance-Entropy-Order-and-Chaos",
       "path": "docs/articles/EFC-Dynamic-Balance-Entropy-Order-and-Chaos.jsonld",
-      "type": "CreativeWork",
-      "name": "Efc Dynamic Balance Entropy Order And Chaos",
-      "layer": "docs"
+      "type": "CreativeWork"
     },
     {
       "id": "docs/articles/EFC-Dynamic-Balance-Entropy-Order-and-Chaos",
       "path": "docs/articles/efc-dynamic-balance-entropy-order-and-chaos/index.jsonld",
-      "type": "CreativeWork",
-      "name": "Efc Dynamic Balance Entropy Order And Chaos",
-      "layer": "docs"
+      "type": "CreativeWork"
     },
     {
       "id": "docs/articles/EFC-Energy-Flow-as-the-Fundamental-Dynamic-of-the-Universe",
       "path": "docs/articles/EFC-Energy-Flow-as-the-Fundamental-Dynamic-of-the-Universe.jsonld",
-      "type": "CreativeWork",
-      "name": "Efc Energy Flow As The Fundamental Dynamic Of The Universe",
-      "layer": "docs"
+      "type": "CreativeWork"
     },
     {
       "id": "docs/articles/EFC-Energy-Flow-as-the-Fundamental-Dynamic-of-the-Universe",
       "path": "docs/articles/efc-energy-flow-as-the-fundamental-dynamic-of-the-universe/index.jsonld",
-      "type": "CreativeWork",
-      "name": "Efc Energy Flow As The Fundamental Dynamic Of The Universe",
-      "layer": "docs"
+      "type": "CreativeWork"
     },
     {
       "id": "docs/articles/EFC-Field-Equations-for-Entropy-Driven-Spacetime",
       "path": "docs/articles/efc-field-equations-for-entropy-driven-spacetime/index.jsonld",
-      "type": "CreativeWork",
-      "name": "Summary",
-      "layer": "docs",
-      "keywords": [
-        "summary"
-      ],
-      "description": "--- title: Energy-Flow Cosmology \u2013 Field Equations for Entropy-Driven Spacetime doi: 10.6084/m9.figshare.30421807 published: 2025-10-22"
+      "type": "CreativeWork"
     },
     {
       "id": "docs/articles/EFC-Flow-Entropy-and-Spacetime-Distortion-in-Cosmological-Clusters",
       "path": "docs/articles/EFC-Flow-Entropy-and-Spacetime-Distortion-in-Cosmological-Clusters.jsonld",
-      "type": "CreativeWork",
-      "name": "Efc Flow Entropy And Spacetime Distortion In Cosmological Clusters",
-      "layer": "docs"
+      "type": "CreativeWork"
     },
     {
       "id": "docs/articles/EFC-Flow-Entropy-and-Spacetime-Distortion-in-Cosmological-Clusters",
       "path": "docs/articles/efc-flow-entropy-and-spacetime-distortion-in-cosmological-clusters/index.jsonld",
-      "type": "CreativeWork",
-      "name": "Abstract",
-      "layer": "docs",
-      "keywords": [
-        "abstract"
-      ],
-      "description": "--- title: Flow, Entropy, and Spacetime Distortion in Cosmological Clusters doi: 10.6084/m9.figshare.28112096 published: 2024-12-30"
+      "type": "CreativeWork"
     },
     {
       "id": "docs/articles/EFC-Grid-Higgs-Framework",
       "path": "docs/articles/EFC-Grid-Higgs-Framework.jsonld",
-      "type": "CreativeWork",
-      "name": "Efc Grid Higgs Framework",
-      "layer": "docs"
+      "type": "CreativeWork"
     },
     {
       "id": "docs/articles/EFC-Grid-Higgs-Framework",
       "path": "docs/articles/efc-grid-higgs-framework/index.jsonld",
-      "type": "CreativeWork",
-      "name": "Efc Grid Higgs Framework",
-      "layer": "docs"
+      "type": "CreativeWork"
     },
     {
       "id": "docs/articles/EFC-Grid-Higgs-Paradigm-Shift",
       "path": "docs/articles/EFC-Grid-Higgs-Paradigm-Shift.jsonld",
-      "type": "CreativeWork",
-      "name": "Efc Grid Higgs Paradigm Shift",
-      "layer": "docs"
+      "type": "CreativeWork"
     },
     {
       "id": "docs/articles/EFC-Grid-Higgs-Paradigm-Shift",
       "path": "docs/articles/efc-grid-higgs-paradigm-shift/index.jsonld",
-      "type": "CreativeWork",
-      "name": "Efc Grid Higgs Paradigm Shift",
-      "layer": "docs"
+      "type": "CreativeWork"
     },
     {
       "id": "docs/articles/EFC-Grid-Model-Entropic-Dynamics",
       "path": "docs/articles/efc-grid-model-entropic-dynamics/index.jsonld",
-      "type": "CreativeWork",
-      "name": "Abstract",
-      "layer": "docs",
-      "keywords": [
-        "abstract"
-      ],
-      "description": "--- title: Grid Model \u2013 An Entropic and Dynamic Theory for Emergent Gravity in Cosmology doi: 10.6084/m9.figshare.28559423 published: 2025-03-08"
+      "type": "CreativeWork"
     },
     {
       "id": "docs/articles/EFC-Grid-Model-Entropic-Dynamics.",
       "path": "docs/articles/EFC-Grid-Model-Entropic-Dynamics..jsonld",
-      "type": "CreativeWork",
-      "name": "Efc Grid Model Entropic Dynamics.",
-      "layer": "docs"
+      "type": "CreativeWork"
     },
     {
       "id": "docs/articles/EFC-How-Does-Balance-Shape-Universal-Structures",
       "path": "docs/articles/EFC-How-Does-Balance-Shape-Universal-Structures.jsonld",
-      "type": "CreativeWork",
-      "name": "Efc How Does Balance Shape Universal Structures",
-      "layer": "docs"
+      "type": "CreativeWork"
     },
     {
       "id": "docs/articles/EFC-How-Does-Balance-Shape-Universal-Structures",
       "path": "docs/articles/efc-how-does-balance-shape-universal-structures/index.jsonld",
-      "type": "CreativeWork",
-      "name": "Efc How Does Balance Shape Universal Structures",
-      "layer": "docs"
+      "type": "CreativeWork"
     },
     {
       "id": "docs/articles/EFC-How-Energy-Flow-Sustain-Spacetime",
       "path": "docs/articles/EFC-How-Energy-Flow-Sustain-Spacetime.jsonld",
-      "type": "CreativeWork",
-      "name": "Efc How Energy Flow Sustain Spacetime",
-      "layer": "docs"
+      "type": "CreativeWork"
     },
     {
       "id": "docs/articles/EFC-How-Energy-Flow-Sustain-Spacetime",
       "path": "docs/articles/efc-how-energy-flow-sustain-spacetime/index.jsonld",
-      "type": "CreativeWork",
-      "name": "Abstract",
-      "layer": "docs",
-      "keywords": [
-        "abstract"
-      ],
-      "description": "--- title: How Does Energy Flow Sustain Space-Time? doi: 10.6084/m9.figshare.28098371 published: 2024-12-25"
+      "type": "CreativeWork"
     },
     {
       "id": "docs/articles/EFC-Hypothesis-Entropy-and-Energy-Flow",
       "path": "docs/articles/efc-hypothesis-entropy-and-energy-flow/index.jsonld",
-      "type": "CreativeWork",
-      "name": "Abstract",
-      "layer": "docs",
-      "keywords": [
-        "abstract"
-      ],
-      "description": "--- title: Hypothesis \u2013 Entropy and Energy Flow doi: 10.6084/m9.figshare.28102772 published: 2024-12-27"
+      "type": "CreativeWork"
     },
     {
       "id": "docs/articles/EFC-Hypothesis-Interrelation-Energy-Entropy",
       "path": "docs/articles/EFC-Hypothesis-Interrelation-Energy-Entropy.jsonld",
-      "type": "CreativeWork",
-      "name": "Efc Hypothesis Interrelation Energy Entropy",
-      "layer": "docs"
+      "type": "CreativeWork"
     },
     {
       "id": "docs/articles/EFC-Hypothesis-Interrelation-Energy-Entropy",
       "path": "docs/articles/efc-hypothesis-interrelation-energy-entropy/index.jsonld",
-      "type": "CreativeWork",
-      "name": "Efc Hypothesis Interrelation Energy Entropy",
-      "layer": "docs"
+      "type": "CreativeWork"
     },
     {
       "id": "docs/articles/EFC-Hypothesis-Universe-as-Energy-Driven-System",
       "path": "docs/articles/EFC-Hypothesis-Universe-as-Energy-Driven-System.jsonld",
-      "type": "CreativeWork",
-      "name": "Efc Hypothesis Universe As Energy Driven System",
-      "layer": "docs"
+      "type": "CreativeWork"
     },
     {
       "id": "docs/articles/EFC-Hypothesis-Universe-as-Energy-Driven-System",
       "path": "docs/articles/efc-hypothesis-universe-as-energy-driven-system/index.jsonld",
-      "type": "CreativeWork",
-      "name": "Efc Hypothesis Universe As Energy Driven System",
-      "layer": "docs"
+      "type": "CreativeWork"
     },
     {
       "id": "docs/articles/EFC-Integrated-Hypothesis-Time-Entropy",
       "path": "docs/articles/EFC-Integrated-Hypothesis-Time-Entropy.jsonld",
-      "type": "CreativeWork",
-      "name": "Efc Integrated Hypothesis Time Entropy",
-      "layer": "docs"
+      "type": "CreativeWork"
     },
     {
       "id": "docs/articles/EFC-Integrated-Hypothesis-Time-Entropy",
       "path": "docs/articles/efc-integrated-hypothesis-time-entropy/index.jsonld",
-      "type": "CreativeWork",
-      "name": "Efc Integrated Hypothesis Time Entropy",
-      "layer": "docs"
+      "type": "CreativeWork"
     },
     {
       "id": "docs/articles/EFC-Introduction-to-Energy-Flow-in-Space-Time",
       "path": "docs/articles/EFC-Introduction-to-Energy-Flow-in-Space-Time.jsonld",
-      "type": "CreativeWork",
-      "name": "Efc Introduction To Energy Flow In Space Time",
-      "layer": "docs"
+      "type": "CreativeWork"
     },
     {
       "id": "docs/articles/EFC-Introduction-to-Energy-Flow-in-Space-Time",
       "path": "docs/articles/efc-introduction-to-energy-flow-in-space-time/index.jsonld",
-      "type": "CreativeWork",
-      "name": "Abstract",
-      "layer": "docs",
-      "keywords": [
-        "abstract"
-      ],
-      "description": "--- title: Introduction to Energy Flow in Space-Time doi: 10.6084/m9.figshare.28098341 published: 2024-12-25"
+      "type": "CreativeWork"
     },
     {
       "id": "docs/articles/EFC-Introduction-to-Entropy-in-Cosmic-Evolution",
       "path": "docs/articles/EFC-Introduction-to-Entropy-in-Cosmic-Evolution.jsonld",
-      "type": "CreativeWork",
-      "name": "Efc Introduction To Entropy In Cosmic Evolution",
-      "layer": "docs"
+      "type": "CreativeWork"
     },
     {
       "id": "docs/articles/EFC-Introduction-to-Entropy-in-Cosmic-Evolution",
       "path": "docs/articles/efc-introduction-to-entropy-in-cosmic-evolution/index.jsonld",
-      "type": "CreativeWork",
-      "name": "Efc Introduction To Entropy In Cosmic Evolution",
-      "layer": "docs"
+      "type": "CreativeWork"
     },
     {
       "id": "docs/articles/EFC-Is-Consciousness-Linked-to-Entropy",
       "path": "docs/articles/EFC-Is-Consciousness-Linked-to-Entropy.jsonld",
-      "type": "CreativeWork",
-      "name": "Efc Is Consciousness Linked To Entropy",
-      "layer": "docs"
+      "type": "CreativeWork"
     },
     {
       "id": "docs/articles/EFC-Is-Consciousness-Linked-to-Entropy",
       "path": "docs/articles/efc-is-consciousness-linked-to-entropy/index.jsonld",
-      "type": "CreativeWork",
-      "name": "Efc Is Consciousness Linked To Entropy",
-      "layer": "docs"
+      "type": "CreativeWork"
     },
     {
       "id": "docs/articles/EFC-Light-Speed-as-a-Regulator-of-Energy-Flow-in-the-Universe",
       "path": "docs/articles/EFC-Light-Speed-as-a-Regulator-of-Energy-Flow-in-the-Universe.jsonld",
-      "type": "CreativeWork",
-      "name": "Efc Light Speed As A Regulator Of Energy Flow In The Universe",
-      "layer": "docs"
+      "type": "CreativeWork"
     },
     {
       "id": "docs/articles/EFC-Light-Speed-as-a-Regulator-of-Energy-Flow-in-the-Universe",
       "path": "docs/articles/efc-light-speed-as-a-regulator-of-energy-flow-in-the-universe/index.jsonld",
-      "type": "CreativeWork",
-      "name": "Abstract",
-      "layer": "docs",
-      "keywords": [
-        "abstract"
-      ],
-      "description": "--- title: Subhypothesis \u2013 Light-Speed as a Regulator of Energy Flow in the Universe doi: 10.6084/m9.figshare.28111925 published: 2024-12-30"
+      "type": "CreativeWork"
     },
     {
       "id": "docs/articles/EFC-Mathematical-Framework-for-Energy-Flow-in-Space-Time",
       "path": "docs/articles/efc-mathematical-framework-for-energy-flow-in-space-time/index.jsonld",
-      "type": "CreativeWork",
-      "name": "Efc Mathematical Framework For Energy Flow In Space Time",
-      "layer": "docs"
+      "type": "CreativeWork"
     },
     {
       "id": "docs/articles/EFC-Observational-Evidence-Entropy-Cosmic-Evolution",
       "path": "docs/articles/EFC-Observational-Evidence-Entropy-Cosmic-Evolution.jsonld",
-      "type": "CreativeWork",
-      "name": "Efc Observational Evidence Entropy Cosmic Evolution",
-      "layer": "docs"
+      "type": "CreativeWork"
     },
     {
       "id": "docs/articles/EFC-Observational-Evidence-Entropy-Cosmic-Evolution",
       "path": "docs/articles/efc-observational-evidence-entropy-cosmic-evolution/index.jsonld",
-      "type": "CreativeWork",
-      "name": "Efc Observational Evidence Entropy Cosmic Evolution",
-      "layer": "docs"
+      "type": "CreativeWork"
     },
     {
       "id": "docs/articles/EFC-Observational-Evidence-for-Energy-Flow",
       "path": "docs/articles/EFC-Observational-Evidence-for-Energy-Flow.jsonld",
-      "type": "CreativeWork",
-      "name": "Efc Observational Evidence For Energy Flow",
-      "layer": "docs"
+      "type": "CreativeWork"
     },
     {
       "id": "docs/articles/EFC-Observational-Evidence-for-Energy-Flow",
       "path": "docs/articles/efc-observational-evidence-for-energy-flow/index.jsonld",
-      "type": "CreativeWork",
-      "name": "Abstract",
-      "layer": "docs",
-      "keywords": [
-        "abstract"
-      ],
-      "description": "--- title: Observational Evidence for Energy Flow doi: 10.6084/m9.figshare.28098365 published: 2024-12-25"
+      "type": "CreativeWork"
     },
     {
       "id": "docs/articles/EFC-Subhypothesis-Light-Speed-Limit",
       "path": "docs/articles/EFC-Subhypothesis-Light-Speed-Limit.jsonld",
-      "type": "CreativeWork",
-      "name": "Efc Subhypothesis Light Speed Limit",
-      "layer": "docs"
+      "type": "CreativeWork"
     },
     {
       "id": "docs/articles/EFC-Subhypothesis-Light-Speed-Limit",
       "path": "docs/articles/efc-subhypothesis-light-speed-limit/index.jsonld",
-      "type": "CreativeWork",
-      "name": "Abstract",
-      "layer": "docs",
-      "keywords": [
-        "abstract"
-      ],
-      "description": "--- title: Subhypothesis \u2013 The Light-Speed Limit doi: 10.6084/m9.figshare.28112036 published: 2024-12-30"
+      "type": "CreativeWork"
     },
     {
       "id": "docs/articles/EFC-Technical-Documentation-Energy-Flow-in-Space-Time",
       "path": "docs/articles/efc-technical-documentation-energy-flow-in-space-time/index.jsonld",
-      "type": "CreativeWork",
-      "name": "Abstract",
-      "layer": "docs",
-      "keywords": [
-        "abstract"
-      ],
-      "description": "--- title: Technical Documentation \u2013 Energy Flow in Space-Time doi: 10.6084/m9.figshare.28098332 published: 2024-12-27"
+      "type": "CreativeWork"
     },
     {
       "id": "docs/articles/EFC-The-Energy-Flow-Interface",
       "path": "docs/articles/EFC-The-Energy-Flow-Interface.jsonld",
-      "type": "CreativeWork",
-      "name": "Efc The Energy Flow Interface",
-      "layer": "docs"
+      "type": "CreativeWork"
     },
     {
       "id": "docs/articles/EFC-The-Energy-Flow-Interface",
       "path": "docs/articles/efc-the-energy-flow-interface/index.jsonld",
-      "type": "CreativeWork",
-      "name": "Summary",
-      "layer": "docs",
-      "keywords": [
-        "summary"
-      ],
-      "description": "--- title: The Energy\u2013Flow Interface \u2013 A Unified Thermodynamic Interpretation of Dark Matter, Dark Energy, and the CMB doi: 10.6084/m9.figshare.30468737 published: 2025-10-28"
+      "type": "CreativeWork"
     },
     {
       "id": "docs/articles/EFC-Thermodynamic-Bridge-GR-QFT",
       "path": "docs/articles/efc-thermodynamic-bridge-gr-qft/index.jsonld",
-      "type": "CreativeWork",
-      "name": "Efc Thermodynamic Bridge Gr Qft",
-      "layer": "docs"
+      "type": "CreativeWork"
     },
     {
       "id": "docs/articles/EFC-Unresolved-Questions-and-Challenges-Entropy",
       "path": "docs/articles/EFC-Unresolved-Questions-and-Challenges-Entropy.jsonld",
-      "type": "CreativeWork",
-      "name": "Efc Unresolved Questions And Challenges Entropy",
-      "layer": "docs"
+      "type": "CreativeWork"
     },
     {
       "id": "docs/articles/EFC-Unresolved-Questions-and-Challenges-Entropy",
       "path": "docs/articles/efc-unresolved-questions-and-challenges-entropy/index.jsonld",
-      "type": "CreativeWork",
-      "name": "Efc Unresolved Questions And Challenges Entropy",
-      "layer": "docs"
+      "type": "CreativeWork"
     },
     {
       "id": "docs/articles/EFC-What-Happens-at-the-Universes-Extremes",
       "path": "docs/articles/EFC-What-Happens-at-the-Universes-Extremes.jsonld",
-      "type": "CreativeWork",
-      "name": "Efc What Happens At The Universes Extremes",
-      "layer": "docs"
+      "type": "CreativeWork"
     },
     {
       "id": "docs/articles/EFC-What-Happens-at-the-Universes-Extremes",
       "path": "docs/articles/efc-what-happens-at-the-universes-extremes/index.jsonld",
-      "type": "CreativeWork",
-      "name": "Abstract",
-      "layer": "docs",
-      "keywords": [
-        "abstract"
-      ],
-      "description": "--- title: What Happens at the Universe\u2019s Extremes? doi: 10.6084/m9.figshare.28098380 published: 2024-12-25"
+      "type": "CreativeWork"
     },
     {
       "id": "docs/articles/EFC-What-is-the-Connection-Between-Energy-Flow-and-the-Now",
       "path": "docs/articles/EFC-What-is-the-Connection-Between-Energy-Flow-and-the-Now.jsonld",
-      "type": "CreativeWork",
-      "name": "Efc What Is The Connection Between Energy Flow And The Now",
-      "layer": "docs"
+      "type": "CreativeWork"
     },
     {
       "id": "docs/articles/EFC-What-is-the-Connection-Between-Energy-Flow-and-the-Now",
       "path": "docs/articles/efc-what-is-the-connection-between-energy-flow-and-the-now/index.jsonld",
-      "type": "CreativeWork",
-      "name": "Abstract",
-      "layer": "docs",
-      "keywords": [
-        "abstract"
-      ],
-      "description": "--- title: What is the Connection Between Energy Flow and the Now? doi: 10.6084/m9.figshare.28098311 published: 2024-12-27"
+      "type": "CreativeWork"
     },
     {
       "id": "docs/articles/EFC-Why-is-Light-Speed-a-Cosmic-Limit",
       "path": "docs/articles/EFC-Why-is-Light-Speed-a-Cosmic-Limit.jsonld",
-      "type": "CreativeWork",
-      "name": "Efc Why Is Light Speed A Cosmic Limit",
-      "layer": "docs"
+      "type": "CreativeWork"
     },
     {
       "id": "docs/articles/EFC-Why-is-Light-Speed-a-Cosmic-Limit",
       "path": "docs/articles/efc-why-is-light-speed-a-cosmic-limit/index.jsonld",
-      "type": "CreativeWork",
-      "name": "Abstract",
-      "layer": "docs",
-      "keywords": [
-        "abstract"
-      ],
-      "description": "--- title: Why is Light-Speed a Cosmic Limit? doi: 10.6084/m9.figshare.28098305 published: 2024-12-27"
+      "type": "CreativeWork"
     },
     {
       "id": "docs/articles/EFC-v1.2-Foundational-Framework",
       "path": "docs/articles/efc-v12-foundational-framework/index.jsonld",
-      "type": "CreativeWork",
-      "name": "Efc V1.2 Foundational Framework",
-      "layer": "docs"
+      "type": "CreativeWork"
     },
     {
       "id": "docs/articles/EFC-v2.1-Complete-Edition",
       "path": "docs/articles/efc-v21-complete-edition/index.jsonld",
-      "type": "CreativeWork",
-      "name": "Efc V2.1 Complete Edition",
-      "layer": "docs"
+      "type": "CreativeWork"
     },
     {
       "id": "docs/articles/EFC-v2.1-Modular-Synthesis",
       "path": "docs/articles/efc-v21-modular-synthesis/index.jsonld",
-      "type": "CreativeWork",
-      "name": "Efc V2.1 Modular Synthesis",
-      "layer": "docs"
+      "type": "CreativeWork"
     },
     {
       "id": "docs/articles/EFC-v2.2-Cross-Field-Integration-Summary",
       "path": "docs/articles/efc-v22-cross-field-integration-summary/index.jsonld",
-      "type": "CreativeWork",
-      "name": "Applied Energy-Flow Cosmology v2.2",
-      "layer": "docs",
-      "keywords": [
-        "applied",
-        "cosmology",
-        "energy",
-        "flow",
-        "v2.2"
-      ],
-      "description": "--- title: \"Applied Energy-Flow Cosmology v2.2 \u2013 Cross-Field Integration Summary (2025)\" author: \"Morten Magnusson\" source: \"https://energyflow-cosmology.com/concepts/applied-energy-flow-cosmology-v2-2/\""
+      "type": "CreativeWork"
     },
     {
       "id": "docs/articles/README/index",
       "path": "docs/articles/README/index.jsonld",
-      "type": "CreativeWork",
-      "name": "articles",
-      "layer": "docs",
-      "keywords": [
-        "articles"
-      ],
-      "description": "**Repository folder.**"
+      "type": "CreativeWork"
     },
     {
       "id": "docs/articles/readme/index",
       "path": "docs/articles/readme/index.jsonld",
-      "type": "CreativeWork",
-      "name": "articles",
-      "layer": "docs",
-      "keywords": [
-        "articles"
-      ],
-      "description": "**Abstract:** This folder contains files and substructures related to 'articles', automatically analyzed. It includes the following file types: .md, .pdf. A representative file begins with: \"---\"."
+      "type": "CreativeWork"
     },
     {
       "id": "docs/cognition/CEM-Consciousness-Ego-Mirror",
       "path": "docs/cognition/CEM-Consciousness-Ego-Mirror.jsonld",
-      "type": "CreativeWork",
-      "name": "Cem Consciousness Ego Mirror",
-      "layer": "docs"
+      "type": "CreativeWork"
     },
     {
       "id": "docs/efc-master-template/index",
       "path": "docs/efc-master-template/index.jsonld",
-      "type": "CreativeWork",
-      "name": "Efc Master Template",
-      "layer": "docs",
-      "keywords": [
-        "master",
-        "template"
-      ],
-      "description": "Auto-generated Markdown wrapper."
+      "type": "CreativeWork"
     },
     {
       "id": "docs/efc-master/index",
       "path": "docs/efc-master/index.jsonld",
-      "type": "CreativeWork",
-      "name": "Efc Master",
-      "layer": "docs",
-      "keywords": [
-        "master"
-      ],
-      "description": "Auto-generated Markdown wrapper."
+      "type": "CreativeWork"
     },
     {
       "id": "docs/efc_master_v1",
       "path": "docs/efc-master-v1/index.jsonld",
-      "type": "CreativeWork",
-      "name": "Efc Master V1",
-      "layer": "docs"
+      "type": "CreativeWork"
     },
     {
       "id": "docs/figures/readme/index",
       "path": "docs/figures/readme/index.jsonld",
-      "type": "CreativeWork",
-      "name": "figures",
-      "layer": "docs",
-      "keywords": [
-        "figures"
-      ],
-      "description": "**Abstract:** This folder contains files and substructures related to 'figures', automatically analyzed. It includes the following file types: .png."
+      "type": "CreativeWork"
     },
     {
       "id": "docs/index",
       "path": "docs/index.jsonld",
-      "type": "CreativeWork",
-      "name": "Docs",
-      "layer": "docs",
-      "keywords": [
-        "docs"
-      ],
-      "description": "Auto-generated Markdown wrapper."
+      "type": "CreativeWork"
     },
     {
       "id": "docs/mathjax-header/index",
       "path": "docs/mathjax-header/index.jsonld",
-      "type": "CreativeWork",
-      "name": "Mathjax Header",
-      "layer": "docs",
-      "keywords": [
-        "header",
-        "mathjax"
-      ],
-      "description": "Auto-generated Markdown wrapper."
+      "type": "CreativeWork"
     },
     {
       "id": "docs/meta/readme/index",
       "path": "docs/meta/readme/index.jsonld",
-      "type": "CreativeWork",
-      "name": "meta",
-      "layer": "docs",
-      "keywords": [
-        "meta"
-      ],
-      "description": "**Abstract:** This folder contains meta-level documents, conceptual structures, epistemology, and research reflections."
+      "type": "CreativeWork"
     },
     {
       "id": "docs/preprints/readme/index",
       "path": "docs/preprints/readme/index.jsonld",
-      "type": "CreativeWork",
-      "name": "preprints",
-      "layer": "docs",
-      "keywords": [
-        "preprints"
-      ],
-      "description": "**Abstract:** This folder contains files and substructures related to 'preprints', automatically analyzed."
+      "type": "CreativeWork"
     },
     {
       "id": "docs/readme/index",
       "path": "docs/readme/index.jsonld",
-      "type": "CreativeWork",
-      "name": "docs",
-      "layer": "docs",
-      "keywords": [
-        "docs"
-      ],
-      "description": "**Abstract:** This folder contains generated documentation, repo maps, visual outputs, and supporting reference files. It includes the following file types: , .css, .html, .json, .pdf, .tex. A representative file begins with: \"{\"."
+      "type": "CreativeWork"
     },
     {
       "id": "docs/restored_pdfs/CEM-Consciousness-Ego-Mirror",
       "path": "docs/restored_pdfs/CEM-Consciousness-Ego-Mirror.jsonld",
-      "type": "CreativeWork",
-      "name": "Cem Consciousness Ego Mirror",
-      "layer": "docs"
+      "type": "CreativeWork"
     },
     {
       "id": "docs/restored_pdfs/EFC-A-Deep-Dive-into-the-Halo-Concept",
       "path": "docs/restored_pdfs/EFC-A-Deep-Dive-into-the-Halo-Concept.jsonld",
-      "type": "CreativeWork",
-      "name": "Efc A Deep Dive Into The Halo Concept",
-      "layer": "docs"
+      "type": "CreativeWork"
     },
     {
       "id": "docs/restored_pdfs/EFC-AI-Augmented-Scientific-Workflow-Framework",
       "path": "docs/restored_pdfs/EFC-AI-Augmented-Scientific-Workflow-Framework.jsonld",
-      "type": "CreativeWork",
-      "name": "Efc Ai Augmented Scientific Workflow Framework",
-      "layer": "docs"
+      "type": "CreativeWork"
     },
     {
       "id": "docs/restored_pdfs/EFC-Applications-and-Implications",
       "path": "docs/restored_pdfs/EFC-Applications-and-Implications.jsonld",
-      "type": "CreativeWork",
-      "name": "Efc Applications And Implications",
-      "layer": "docs"
+      "type": "CreativeWork"
     },
     {
       "id": "docs/restored_pdfs/EFC-CMB-Thermodynamic-Gradient",
       "path": "docs/restored_pdfs/EFC-CMB-Thermodynamic-Gradient.jsonld",
-      "type": "CreativeWork",
-      "name": "Efc Cmb Thermodynamic Gradient",
-      "layer": "docs"
+      "type": "CreativeWork"
     },
     {
       "id": "docs/restored_pdfs/EFC-Can-Energy-Flow-Be-Observed-in-Galactic-Clusters",
       "path": "docs/restored_pdfs/EFC-Can-Energy-Flow-Be-Observed-in-Galactic-Clusters.jsonld",
-      "type": "CreativeWork",
-      "name": "Efc Can Energy Flow Be Observed In Galactic Clusters",
-      "layer": "docs"
+      "type": "CreativeWork"
     },
     {
       "id": "docs/restored_pdfs/EFC-Can-Entropy-Drive-Cosmic-Evolution",
       "path": "docs/restored_pdfs/EFC-Can-Entropy-Drive-Cosmic-Evolution.jsonld",
-      "type": "CreativeWork",
-      "name": "Efc Can Entropy Drive Cosmic Evolution",
-      "layer": "docs"
+      "type": "CreativeWork"
     },
     {
       "id": "docs/restored_pdfs/EFC-Dynamic-Balance-Entropy-Order-and-Chaos",
       "path": "docs/restored_pdfs/EFC-Dynamic-Balance-Entropy-Order-and-Chaos.jsonld",
-      "type": "CreativeWork",
-      "name": "Efc Dynamic Balance Entropy Order And Chaos",
-      "layer": "docs"
+      "type": "CreativeWork"
     },
     {
       "id": "docs/restored_pdfs/EFC-Energy-Flow-as-the-Fundamental-Dynamic-of-the-Universe",
       "path": "docs/restored_pdfs/EFC-Energy-Flow-as-the-Fundamental-Dynamic-of-the-Universe.jsonld",
-      "type": "CreativeWork",
-      "name": "Efc Energy Flow As The Fundamental Dynamic Of The Universe",
-      "layer": "docs"
+      "type": "CreativeWork"
     },
     {
       "id": "docs/restored_pdfs/EFC-Field-Equations-for-Entropy-Driven-Spacetime",
       "path": "docs/restored_pdfs/EFC-Field-Equations-for-Entropy-Driven-Spacetime.jsonld",
-      "type": "CreativeWork",
-      "name": "Efc Field Equations For Entropy Driven Spacetime",
-      "layer": "docs"
+      "type": "CreativeWork"
     },
     {
       "id": "docs/restored_pdfs/EFC-Flow-Entropy-and-Spacetime-Distortion-in-Cosmological-Clusters",
       "path": "docs/restored_pdfs/EFC-Flow-Entropy-and-Spacetime-Distortion-in-Cosmological-Clusters.jsonld",
-      "type": "CreativeWork",
-      "name": "Efc Flow Entropy And Spacetime Distortion In Cosmological Clusters",
-      "layer": "docs"
+      "type": "CreativeWork"
     },
     {
       "id": "docs/restored_pdfs/EFC-Grid-Higgs-Framework",
       "path": "docs/restored_pdfs/EFC-Grid-Higgs-Framework.jsonld",
-      "type": "CreativeWork",
-      "name": "Efc Grid Higgs Framework",
-      "layer": "docs"
+      "type": "CreativeWork"
     },
     {
       "id": "docs/restored_pdfs/EFC-Grid-Higgs-Paradigm-Shift",
       "path": "docs/restored_pdfs/EFC-Grid-Higgs-Paradigm-Shift.jsonld",
-      "type": "CreativeWork",
-      "name": "Efc Grid Higgs Paradigm Shift",
-      "layer": "docs"
+      "type": "CreativeWork"
     },
     {
       "id": "docs/restored_pdfs/EFC-Grid-Model-Entropic-Dynamics.",
       "path": "docs/restored_pdfs/EFC-Grid-Model-Entropic-Dynamics..jsonld",
-      "type": "CreativeWork",
-      "name": "Efc Grid Model Entropic Dynamics.",
-      "layer": "docs"
+      "type": "CreativeWork"
     },
     {
       "id": "docs/restored_pdfs/EFC-How-Does-Balance-Shape-Universal-Structures",
       "path": "docs/restored_pdfs/EFC-How-Does-Balance-Shape-Universal-Structures.jsonld",
-      "type": "CreativeWork",
-      "name": "Efc How Does Balance Shape Universal Structures",
-      "layer": "docs"
+      "type": "CreativeWork"
     },
     {
       "id": "docs/restored_pdfs/EFC-How-Energy-Flow-Sustain-Spacetime",
       "path": "docs/restored_pdfs/EFC-How-Energy-Flow-Sustain-Spacetime.jsonld",
-      "type": "CreativeWork",
-      "name": "Efc How Energy Flow Sustain Spacetime",
-      "layer": "docs"
+      "type": "CreativeWork"
     },
     {
       "id": "docs/restored_pdfs/EFC-Hypothesis-Interrelation-Energy-Entropy",
       "path": "docs/restored_pdfs/EFC-Hypothesis-Interrelation-Energy-Entropy.jsonld",
-      "type": "CreativeWork",
-      "name": "Efc Hypothesis Interrelation Energy Entropy",
-      "layer": "docs"
+      "type": "CreativeWork"
     },
     {
       "id": "docs/restored_pdfs/EFC-Hypothesis-Universe-as-Energy-Driven-System",
       "path": "docs/restored_pdfs/EFC-Hypothesis-Universe-as-Energy-Driven-System.jsonld",
-      "type": "CreativeWork",
-      "name": "Efc Hypothesis Universe As Energy Driven System",
-      "layer": "docs"
+      "type": "CreativeWork"
     },
     {
       "id": "docs/restored_pdfs/EFC-Integrated-Hypothesis-Time-Entropy",
       "path": "docs/restored_pdfs/EFC-Integrated-Hypothesis-Time-Entropy.jsonld",
-      "type": "CreativeWork",
-      "name": "Efc Integrated Hypothesis Time Entropy",
-      "layer": "docs"
+      "type": "CreativeWork"
     },
     {
       "id": "docs/restored_pdfs/EFC-Introduction-to-Energy-Flow-in-Space-Time",
       "path": "docs/restored_pdfs/EFC-Introduction-to-Energy-Flow-in-Space-Time.jsonld",
-      "type": "CreativeWork",
-      "name": "Efc Introduction To Energy Flow In Space Time",
-      "layer": "docs"
+      "type": "CreativeWork"
     },
     {
       "id": "docs/restored_pdfs/EFC-Introduction-to-Entropy-in-Cosmic-Evolution",
       "path": "docs/restored_pdfs/EFC-Introduction-to-Entropy-in-Cosmic-Evolution.jsonld",
-      "type": "CreativeWork",
-      "name": "Efc Introduction To Entropy In Cosmic Evolution",
-      "layer": "docs"
+      "type": "CreativeWork"
     },
     {
       "id": "docs/restored_pdfs/EFC-Is-Consciousness-Linked-to-Entropy",
       "path": "docs/restored_pdfs/EFC-Is-Consciousness-Linked-to-Entropy.jsonld",
-      "type": "CreativeWork",
-      "name": "Efc Is Consciousness Linked To Entropy",
-      "layer": "docs"
+      "type": "CreativeWork"
     },
     {
       "id": "docs/restored_pdfs/EFC-Light-Speed-as-a-Regulator-of-Energy-Flow-in-the-Universe",
       "path": "docs/restored_pdfs/EFC-Light-Speed-as-a-Regulator-of-Energy-Flow-in-the-Universe.jsonld",
-      "type": "CreativeWork",
-      "name": "Efc Light Speed As A Regulator Of Energy Flow In The Universe",
-      "layer": "docs"
+      "type": "CreativeWork"
     },
     {
       "id": "docs/restored_pdfs/EFC-Mathematical-Framework-for-Energy-Flow-in-Space-Time",
       "path": "docs/restored_pdfs/EFC-Mathematical-Framework-for-Energy-Flow-in-Space-Time.jsonld",
-      "type": "CreativeWork",
-      "name": "Efc Mathematical Framework For Energy Flow In Space Time",
-      "layer": "docs"
+      "type": "CreativeWork"
     },
     {
       "id": "docs/restored_pdfs/EFC-Observational-Evidence-Entropy-Cosmic-Evolution",
       "path": "docs/restored_pdfs/EFC-Observational-Evidence-Entropy-Cosmic-Evolution.jsonld",
-      "type": "CreativeWork",
-      "name": "Efc Observational Evidence Entropy Cosmic Evolution",
-      "layer": "docs"
+      "type": "CreativeWork"
     },
     {
       "id": "docs/restored_pdfs/EFC-Observational-Evidence-for-Energy-Flow",
       "path": "docs/restored_pdfs/EFC-Observational-Evidence-for-Energy-Flow.jsonld",
-      "type": "CreativeWork",
-      "name": "Efc Observational Evidence For Energy Flow",
-      "layer": "docs"
+      "type": "CreativeWork"
     },
     {
       "id": "docs/restored_pdfs/EFC-Subhypothesis-Light-Speed-Limit",
       "path": "docs/restored_pdfs/EFC-Subhypothesis-Light-Speed-Limit.jsonld",
-      "type": "CreativeWork",
-      "name": "Efc Subhypothesis Light Speed Limit",
-      "layer": "docs"
+      "type": "CreativeWork"
     },
     {
       "id": "docs/restored_pdfs/EFC-Technical-Documentation-Energy-Flow-in-Space-Time",
       "path": "docs/restored_pdfs/EFC-Technical-Documentation-Energy-Flow-in-Space-Time.jsonld",
-      "type": "CreativeWork",
-      "name": "Efc Technical Documentation Energy Flow In Space Time",
-      "layer": "docs"
+      "type": "CreativeWork"
     },
     {
       "id": "docs/restored_pdfs/EFC-The-Energy-Flow-Interface",
       "path": "docs/restored_pdfs/EFC-The-Energy-Flow-Interface.jsonld",
-      "type": "CreativeWork",
-      "name": "Efc The Energy Flow Interface",
-      "layer": "docs"
+      "type": "CreativeWork"
     },
     {
       "id": "docs/restored_pdfs/EFC-Thermodynamic-Bridge-GR-QFT",
       "path": "docs/restored_pdfs/EFC-Thermodynamic-Bridge-GR-QFT.jsonld",
-      "type": "CreativeWork",
-      "name": "Efc Thermodynamic Bridge Gr Qft",
-      "layer": "docs"
+      "type": "CreativeWork"
     },
     {
       "id": "docs/restored_pdfs/EFC-Unresolved-Questions-and-Challenges-Entropy",
       "path": "docs/restored_pdfs/EFC-Unresolved-Questions-and-Challenges-Entropy.jsonld",
-      "type": "CreativeWork",
-      "name": "Efc Unresolved Questions And Challenges Entropy",
-      "layer": "docs"
+      "type": "CreativeWork"
     },
     {
       "id": "docs/restored_pdfs/EFC-What-Happens-at-the-Universes-Extremes",
       "path": "docs/restored_pdfs/EFC-What-Happens-at-the-Universes-Extremes.jsonld",
-      "type": "CreativeWork",
-      "name": "Efc What Happens At The Universes Extremes",
-      "layer": "docs"
+      "type": "CreativeWork"
     },
     {
       "id": "docs/restored_pdfs/EFC-What-is-the-Connection-Between-Energy-Flow-and-the-Now",
       "path": "docs/restored_pdfs/EFC-What-is-the-Connection-Between-Energy-Flow-and-the-Now.jsonld",
-      "type": "CreativeWork",
-      "name": "Efc What Is The Connection Between Energy Flow And The Now",
-      "layer": "docs"
+      "type": "CreativeWork"
     },
     {
       "id": "docs/restored_pdfs/EFC-Why-is-Light-Speed-a-Cosmic-Limit",
       "path": "docs/restored_pdfs/EFC-Why-is-Light-Speed-a-Cosmic-Limit.jsonld",
-      "type": "CreativeWork",
-      "name": "Efc Why Is Light Speed A Cosmic Limit",
-      "layer": "docs"
+      "type": "CreativeWork"
     },
     {
       "id": "docs/restored_pdfs/EFC-v1.2-Foundational-Framework",
       "path": "docs/restored_pdfs/EFC-v1.2-Foundational-Framework.jsonld",
-      "type": "CreativeWork",
-      "name": "Efc V1.2 Foundational Framework",
-      "layer": "docs"
+      "type": "CreativeWork"
     },
     {
       "id": "docs/restored_pdfs/EFC-v2.1-Complete-Edition",
       "path": "docs/restored_pdfs/EFC-v2.1-Complete-Edition.jsonld",
-      "type": "CreativeWork",
-      "name": "Efc V2.1 Complete Edition",
-      "layer": "docs"
+      "type": "CreativeWork"
     },
     {
       "id": "docs/restored_pdfs/EFC-v2.1-Modular-Synthesis",
       "path": "docs/restored_pdfs/EFC-v2.1-Modular-Synthesis.jsonld",
-      "type": "CreativeWork",
-      "name": "Efc V2.1 Modular Synthesis",
-      "layer": "docs"
+      "type": "CreativeWork"
     },
     {
       "id": "docs/restored_pdfs/EFC-v2.2-Cross-Field-Integration-Summary",
       "path": "docs/restored_pdfs/EFC-v2.2-Cross-Field-Integration-Summary.jsonld",
-      "type": "CreativeWork",
-      "name": "Efc V2.2 Cross Field Integration Summary",
-      "layer": "docs"
+      "type": "CreativeWork"
     },
     {
       "id": "docs/restored_pdfs/ai_workflow_framework",
       "path": "docs/restored_pdfs/ai_workflow_framework.jsonld",
-      "type": "CreativeWork",
-      "name": "Ai Workflow Framework",
-      "layer": "docs"
+      "type": "CreativeWork"
     },
     {
       "id": "docs/restored_pdfs/efc_formal_spec",
       "path": "docs/restored_pdfs/efc_formal_spec.jsonld",
-      "type": "CreativeWork",
-      "name": "Efc Formal Spec",
-      "layer": "docs"
+      "type": "CreativeWork"
     },
     {
       "id": "docs/restored_pdfs/efc_master",
       "path": "docs/restored_pdfs/efc_master.jsonld",
-      "type": "CreativeWork",
-      "name": "Efc Master",
-      "layer": "docs"
+      "type": "CreativeWork"
     },
     {
       "id": "docs/restored_pdfs/efc_master_v1",
       "path": "docs/restored_pdfs/efc_master_v1.jsonld",
-      "type": "CreativeWork",
-      "name": "Efc Master V1",
-      "layer": "docs"
+      "type": "CreativeWork"
     },
     {
       "id": "docs/sections/README/index",
       "path": "docs/sections/README/index.jsonld",
-      "type": "CreativeWork",
-      "name": "sections",
-      "layer": "docs",
-      "keywords": [
-        "sections"
-      ],
-      "description": "**Repository folder.**"
+      "type": "CreativeWork"
     },
     {
       "id": "docs/sections/readme/index",
       "path": "docs/sections/readme/index.jsonld",
-      "type": "CreativeWork",
-      "name": "sections",
-      "layer": "docs",
-      "keywords": [
-        "sections"
-      ],
-      "description": "**Abstract:** This folder contains files and substructures related to 'sections', automatically analyzed. It includes the following file types: .tex."
+      "type": "CreativeWork"
     },
     {
       "id": "meta",
