@@ -37,11 +37,6 @@
       "type": "CreativeWork"
     },
     {
-      "id": "cognition",
-      "path": "meta/cognition/cognition/index.jsonld",
-      "type": "CreativeWork"
-    },
-    {
       "id": "meta/cognition/cognitive-signature",
       "path": "meta/cognition/cognitive-signature/index.jsonld",
       "type": "CreativeWork"
@@ -67,11 +62,6 @@
       "type": "CreativeWork"
     },
     {
-      "id": "meta/cognition/EFC-Hypothesis-Entropy-and-Energy-Flow",
-      "path": "meta/cognition/efc-hypothesis-entropy-and-energy-flow/index.jsonld",
-      "type": "CreativeWork"
-    },
-    {
       "id": "meta/cognition/cognitive-field",
       "path": "meta/cognition/cognitive-field/index.jsonld",
       "type": "CreativeWork"
@@ -79,61 +69,6 @@
     {
       "id": "meta/architecture",
       "path": "meta/architecture/index.jsonld",
-      "type": "CreativeWork"
-    },
-    {
-      "id": "meta/symbiosis/symbiotic-process",
-      "path": "meta/symbiosis/symbiotic-process/index.jsonld",
-      "type": "CreativeWork"
-    },
-    {
-      "id": "meta/symbiosis/system-coherence",
-      "path": "meta/symbiosis/system-coherence/index.jsonld",
-      "type": "CreativeWork"
-    },
-    {
-      "id": "symbiosis",
-      "path": "meta/symbiosis/symbiosis/index.jsonld",
-      "type": "CreativeWork"
-    },
-    {
-      "id": "meta/symbiosis/resonance-mechanism",
-      "path": "meta/symbiosis/resonance-mechanism/index.jsonld",
-      "type": "CreativeWork"
-    },
-    {
-      "id": "meta/symbiosis/symbiotic-process-summary",
-      "path": "meta/symbiosis/symbiotic-process-summary/index.jsonld",
-      "type": "CreativeWork"
-    },
-    {
-      "id": "meta/symbiosis/symbiosis-interface",
-      "path": "meta/symbiosis/symbiosis-interface/index.jsonld",
-      "type": "CreativeWork"
-    },
-    {
-      "id": "meta/symbiosis/symbiotic-process-llm",
-      "path": "meta/symbiosis/symbiotic-process-llm/index.jsonld",
-      "type": "CreativeWork"
-    },
-    {
-      "id": "meta/symbiosis/readme/index",
-      "path": "meta/symbiosis/readme/index.jsonld",
-      "type": "CreativeWork"
-    },
-    {
-      "id": "meta/symbiosis/system",
-      "path": "meta/symbiosis/system/index.jsonld",
-      "type": "CreativeWork"
-    },
-    {
-      "id": "meta/symbiosis/README/index",
-      "path": "meta/symbiosis/README/index.jsonld",
-      "type": "CreativeWork"
-    },
-    {
-      "id": "meta/symbiosis/vector-alignment",
-      "path": "meta/symbiosis/vector-alignment/index.jsonld",
       "type": "CreativeWork"
     },
     {
@@ -315,11 +250,6 @@
     {
       "id": "docs/figures/readme/index",
       "path": "docs/figures/readme/index.jsonld",
-      "type": "CreativeWork"
-    },
-    {
-      "id": "docs/docs/index",
-      "path": "docs/docs/index.jsonld",
       "type": "CreativeWork"
     },
     {
