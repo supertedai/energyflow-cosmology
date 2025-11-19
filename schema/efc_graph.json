@@ -50,7 +50,7 @@
     },
     {
       "id": "parameters",
-      "label": "Parameters",
+      "label": "EFC Global Parameters",
       "layer": "parameters",
       "path": "theory/formal/parameters"
     }
