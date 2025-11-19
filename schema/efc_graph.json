@@ -44,7 +44,7 @@
     },
     {
       "id": "notation",
-      "label": "EFC \u2014 Notation",
+      "label": "EFC Global Notation",
       "layer": "notation",
       "path": "theory/formal/notation"
     },
