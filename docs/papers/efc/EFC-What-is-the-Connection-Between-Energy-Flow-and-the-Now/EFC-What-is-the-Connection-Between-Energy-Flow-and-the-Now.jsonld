@@ -1,19 +1,38 @@
 {
   "@context": "https://schema.org",
   "@type": "CreativeWork",
-  "identifier": "docs/restored_pdfs/EFC-What-is-the-Connection-Between-Energy-Flow-and-the-Now",
-  "name": "Efc What Is The Connection Between Energy Flow And The Now",
+  "@id": "https://github.com/supertedai/energyflow-cosmology/docs/papers/efc/EFC-What-is-the-Connection-Between-Energy-Flow-and-the-Now",
+  "identifier": "EFC-What-is-the-Connection-Between-Energy-Flow-and-the-Now",
+  "name": "EFC — What is the Connection Between Energy Flow and the Now?",
   "author": {
     "@type": "Person",
     "name": "Morten Magnusson",
     "identifier": "https://orcid.org/0009-0002-4860-5095"
   },
   "version": "1.0",
+  "encodingFormat": "application/pdf",
+  "url": "EFC-What-is-the-Connection-Between-Energy-Flow-and-the-Now.pdf",
   "isPartOf": {
     "@type": "CreativeWorkSeries",
-    "name": "docs"
+    "name": "EFC Papers",
+    "identifier": "efc-papers"
   },
-  "layer": "docs",
-  "encodingFormat": "pdf",
-  "url": "docs/restored_pdfs/EFC-What-is-the-Connection-Between-Energy-Flow-and-the-Now.pdf"
+  "keywords": [
+    "EFC",
+    "Now",
+    "Present Moment",
+    "Temporal Dynamics",
+    "Energy Flow",
+    "Entropy Gradient",
+    "Time",
+    "State Transitions",
+    "Information Flow"
+  ],
+  "about": [
+    "Energy-Flow Cosmology",
+    "Temporal Structure",
+    "Entropy and Time",
+    "Causality",
+    "Thermodynamic Processes"
+  ]
 }
