@@ -1,0 +1,8 @@
+{
+  "@context": "https://schema.org",
+  "@type": "{TYPE}",
+  "identifier": "{ID}",
+  "name": "{TITLE}",
+  "description": "Semantic placeholder node for the {TITLE} domain in EFC.",
+  "version": "0.1"
+}
