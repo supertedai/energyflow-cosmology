@@ -1,0 +1,44 @@
+{
+  "@context": "https://schema.org",
+  "@type": "CreativeWork",
+  "@id": "https://github.com/supertedai/energyflow-cosmology/auth/index.jsonld",
+  "name": "AUTH — Origin & Authorship Layer for Energy-Flow Cosmology",
+  "description": "Origin, authorship, and provenance layer for Energy-Flow Cosmology (EFC), linking human insight, meta-architecture, and the formal scientific specification.",
+  "url": "https://github.com/supertedai/energyflow-cosmology/tree/main/auth",
+  "isPartOf": {
+    "@type": "Dataset",
+    "@id": "https://github.com/supertedai/energyflow-cosmology",
+    "name": "Energy-Flow Cosmology — Repository"
+  },
+  "creator": {
+    "@type": "Person",
+    "name": "Morten Magnusson",
+    "identifier": "https://orcid.org/0009-0002-4860-5095"
+  },
+  "about": [
+    {
+      "@type": "DefinedTerm",
+      "name": "Energy-Flow Cosmology (EFC)",
+      "termCode": "EFC",
+      "inDefinedTermSet": "https://energyflow-cosmology.com/"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "AUTH Layer",
+      "description": "Provenance and origin layer describing how EFC emerged and how it should be interpreted and used."
+    }
+  ],
+  "keywords": [
+    "Energy-Flow Cosmology",
+    "EFC",
+    "AUTH layer",
+    "authorship",
+    "provenance",
+    "meta-architecture",
+    "symbiosis",
+    "cognitive signature"
+  ],
+  "additionalType": "EFCAuthorLayer",
+  "dateCreated": "2025-11-19",
+  "license": "https://creativecommons.org/licenses/by/4.0/"
+}
