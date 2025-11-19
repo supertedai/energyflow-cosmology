@@ -1,17 +1,15 @@
-# EFC-D Model — Energy-Flow Dynamics
+# EFC–D Dynamics Model
 
-This folder defines the dynamical layer of Energy-Flow Cosmology (EFC-D).  
-The model describes how the energy-flow field **Eₚ**, the entropy field **S**, and mass density **ρ** interact over space and time.
-
-The focus is on first-principles dynamics:
-- definition of the energy-flow potential  
-- differential behaviour of Eₚ  
-- relationship between density, entropy and flow  
-- dynamic profiles used in rotational curves, lensing and structure formation  
-- links between EFC-S (structures) and EFC-C₀ (entropy–information mapping)
+This directory contains the formal specification and minimal variant of
+the EFC–D dynamics model. The D layer defines the temporal evolution of
+entropy, structural density, energy flow, and propagation resistance in
+Energy-Flow Cosmology.
 
 ## Files
-- **index.tex** — mathematical specification of the EFC-D model  
-- **README.md** — this file
 
-The LaTeX file provides the formal equations and is used in the master documents and compiled PDFs.
+- `index.tex` — Master formal dynamics specification  
+- `minimal_spec.tex` — Minimal reference version  
+- `index.jsonld` — Machine metadata  
+- `schema.json` — Validation schema  
+
+Version: 1.0
