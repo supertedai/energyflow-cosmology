@@ -1,19 +1,36 @@
 {
   "@context": "https://schema.org",
   "@type": "CreativeWork",
-  "identifier": "docs/restored_pdfs/EFC-Applications-and-Implications",
-  "name": "Efc Applications And Implications",
+  "@id": "https://github.com/supertedai/energyflow-cosmology/docs/papers/efc/EFC-Applications-and-Implications",
+  "identifier": "EFC-Applications-and-Implications",
+  "name": "EFC — Applications and Implications",
   "author": {
     "@type": "Person",
     "name": "Morten Magnusson",
     "identifier": "https://orcid.org/0009-0002-4860-5095"
   },
   "version": "1.0",
+  "encodingFormat": "application/pdf",
+  "url": "EFC-Applications-and-Implications.pdf",
   "isPartOf": {
     "@type": "CreativeWorkSeries",
-    "name": "docs"
+    "name": "EFC Papers",
+    "identifier": "efc-papers"
   },
-  "layer": "docs",
-  "encodingFormat": "pdf",
-  "url": "docs/restored_pdfs/EFC-Applications-and-Implications.pdf"
+  "keywords": [
+    "EFC",
+    "Applications",
+    "Implications",
+    "Cross-Domain",
+    "Systems",
+    "Modelling",
+    "Cosmology"
+  ],
+  "about": [
+    "Energy-Flow Cosmology",
+    "Systems Theory",
+    "Physics",
+    "Cognition",
+    "Emergent Structures"
+  ]
 }
