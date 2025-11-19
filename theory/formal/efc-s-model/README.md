@@ -1,22 +1,14 @@
-# EFC-S Model — Structural Layer
+# EFC–S Structural Model
 
-This folder defines the structural layer of Energy-Flow Cosmology (EFC-S).  
-The model describes how grid-level entropy, density and resistance create the
-base structural environment that governs dynamics in EFC-D.
+This directory contains the master and minimal specifications for the
+EFC–S structural model. It defines the static spatial structure of
+entropy, density and energy-flow profiles in Energy-Flow Cosmology.
 
-## Contents
-- `index.tex` — Formal LaTeX specification of the S-model.
-- Structural definitions for:
-  - Grid state \(G(x)\)
-  - Entropy field \(S(x)\)
-  - Density field \(\rho(x)\)
-  - Resistance profile \(R(x)\)
-  - Baseline structural equation set
+## Files
 
-## Purpose
-Provides the mathematical baseline used by the dynamics layer (EFC-D).  
-Establishes fixed notation and structural relations used across all higher-level
-EFC documents.
+- `index.tex` — Master formal S-model specification  
+- `minimal_spec.tex` — Minimal reference  
+- `index.jsonld` — Semantic metadata  
+- `schema.json` — Validation schema  
 
-## Status
-Stable. Fully manual. No scripts modify this folder.
+Version: 1.0
