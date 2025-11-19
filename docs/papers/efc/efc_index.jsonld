@@ -6,6 +6,9 @@
   "version": "1.0",
   "hasPart": [
     {
+      "@id": "AUTH-Layer-Origin-Provenance-and-Structural-Signature-of-Energy-Flow-Cosmology"
+    },
+    {
       "@id": "CEM-Consciousness-Ego-Mirror"
     },
     {
