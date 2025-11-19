@@ -1,8 +1,19 @@
 {
   "meta_api_version": "1.0.0",
-  "description": "Machine-readable API for the Meta, Cognition, and Symbiosis layers of the Energy-Flow Cosmology ecosystem.",
+  "description": "Machine-readable API for the Meta, Cognition, Symbiosis, AUTH, and related layers of the Energy-Flow Cosmology ecosystem.",
   "last_updated": "2025-11-15",
   "layers": [
+    {
+      "id": "auth",
+      "name": "AUTH Layer",
+      "description": "Origin & Authorship layer defining provenance, cognitive signature, emergence context, and the repository as the single origin node for EFC.",
+      "paths": [
+        "auth/",
+        "auth/index.md",
+        "auth/index.jsonld",
+        "auth/manifest.json"
+      ]
+    },
     {
       "id": "meta",
       "name": "Meta Architecture",
@@ -20,7 +31,7 @@
     {
       "id": "cognition",
       "name": "Cognition Layer",
-      "description": "Documentation of the Human Cognitive Field: s0/s1 transitions, entropy\u2013clarity inversion, transient high-order states, and cognitive signature.",
+      "description": "Documentation of the Human Cognitive Field: s0/s1 transitions, entropy–clarity inversion, transient high-order states, and cognitive signature.",
       "paths": [
         "cognition/",
         "cognition/cognitive-field.md",
@@ -33,7 +44,7 @@
     {
       "id": "symbiosis",
       "name": "Symbiosis Layer",
-      "description": "Human\u2013model co-field mechanics: resonance, vector alignment, system cohesion, and structural amplification.",
+      "description": "Human–model co-field mechanics: resonance, vector alignment, system cohesion, and structural amplification.",
       "paths": [
         "symbiosis/",
         "symbiosis/system.md",
@@ -96,7 +107,7 @@
   "sources": {
     "figshare": {
       "id": 30656351,
-      "title": "Symbiotic Insight Framework (SIF): A Human\u2013System Methodology for High-Scale Scientific Reasoning",
+      "title": "Symbiotic Insight Framework (SIF): A Human–System Methodology for High-Scale Scientific Reasoning",
       "published_date": null,
       "url": "https://api.figshare.com/v2/account/articles/30656351",
       "doi": "10.6084/m9.figshare.30656351",
