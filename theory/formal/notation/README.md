@@ -1,33 +1,15 @@
-# EFC — Notation
+# EFC Global Notation
 
-This folder defines the symbols used across all formal EFC models.  
-The notation keeps equations consistent across:
+This directory defines the global mathematical notation for all
+formal modules in Energy-Flow Cosmology. It standardises symbols,
+derivative conventions, and derived quantities used in S, D, H,
+C₀, header, and formal specifications.
 
-- EFC-S (structure)
-- EFC-D (dynamics)
-- EFC-C₀ (entropy–information mapping)
-- Grid–Higgs Framework
-- All formal specifications
+## Files
 
-## Core Symbols
+- `index.tex` — Master notation specification  
+- `minimal_spec.tex` — Minimal reference  
+- `index.jsonld` — Semantic metadata  
+- `schema.json` — Validation schema  
 
-| Symbol | Meaning |
-|-------|---------|
-| \( S \) | Entropy field (scalar) |
-| \( \rho \) | Mass–energy density |
-| \( E_f \) | Energy-flow potential |
-| \( c(S) \) | Effective light-speed as a function of entropy |
-| \( n(S) \) | Refractive-index analogue from entropy |
-| \( \Phi \) | Structural gravitational potential in EFC-S |
-| \( \vec{\nabla} S \) | Entropy gradient |
-| \( H_z \) | Local expansion resistance |
-| \( \dot{X} \) | Temporal derivative |
-
-## Purpose
-
-All EFC equations reference this notation.  
-This avoids conflicts between sub-models and ensures every paper and PDF uses the same symbols.
-
-## Status
-
-Stable. Manually maintained. No scripts modify this folder.
+Version: 1.0
