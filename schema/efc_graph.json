@@ -20,7 +20,7 @@
     },
     {
       "id": "efc-formal-spec",
-      "label": "EFC Formal Specification \u2014 Core Equations",
+      "label": "EFC Formal Specification",
       "layer": "formal-master",
       "path": "theory/formal/efc-formal-spec"
     },
