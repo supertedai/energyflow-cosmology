@@ -1,0 +1,11 @@
+{
+  "required": ["@context", "@type", "identifier", "name", "version"],
+  "properties": {
+    "@context": { "type": "string" },
+    "@type": { "type": "string" },
+    "identifier": { "type": "string" },
+    "name": { "type": "string" },
+    "description": { "type": "string" },
+    "version": { "type": "string" }
+  }
+}
