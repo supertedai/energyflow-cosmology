@@ -1,0 +1,8 @@
+{
+  "@context": "https://schema.org",
+  "@type": "Dataset",
+  "name": "EFC Meta-Graph",
+  "description": "Graph-level metadata connecting all semantic and structural layers in the Energy-Flow Cosmology repository.",
+  "identifier": "efc-meta-graph",
+  "url": "https://github.com/supertedai/energyflow-cosmology/tree/main/meta-graph"
+}
