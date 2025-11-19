@@ -1,23 +1,27 @@
-# EFC Formal Specification — Core Equations
+# EFC Formal Specification
 
-This folder contains the **canonical mathematical specification** of
-Energy-Flow Cosmology (EFC). It defines the variables, fields, and
-relationships that form the backbone of the theory.
+This directory contains the formal mathematical specification of the
+Energy-Flow Cosmology (EFC) framework.
 
-## Contents
-- `index.tex` — Primary LaTeX document with the formal specification.
-- Base definitions for:
-  - Entropy field \(S(\mathbf{x})\)
-  - Energy–flow potential \(E_f\)
-  - Density field \(\rho\)
-  - Grid resistance profile \(R\)
-- Dynamical relationships linking these quantities.
+Two complementary specifications are included:
 
-## Purpose
-Provides the **authoritative mathematical core** used in:
-- EFC Master Specification
-- Derived models (EFC-S, EFC-D, EFC-C)
-- Simulation modules in `/src/efc/`
+## 1. Master Formal Specification (`index.tex`)
+The complete and extended formal definition of the EFC theory, including:
+- entropy field
+- energy–flow field
+- structural model (EFC–S)
+- dynamical model (EFC–D)
+- information model (EFC–C0)
+- grid–Higgs interaction (EFC–H)
+- parameter summary
+- notation references
 
-## Status
-Manually maintained. No automatic scripts modify this folder.
+## 2. Minimal Specification (`minimal_spec.tex`)
+A compact baseline formulation containing:
+- core fields
+- minimum coupled system
+- propagation resistance
+- information capacity
+- local approximations
+
+Version: 1.0
