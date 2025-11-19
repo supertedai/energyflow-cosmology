@@ -1,10 +1,16 @@
 {
   "id": "AUTH-Layer-Origin-Provenance-and-Structural-Signature-of-Energy-Flow-Cosmology",
-  "title": "AUTH Layer Origin Provenance and Structural Signature of Energy Flow Cosmology",
-  "path": "docs/papers/efc/AUTH-Layer-Origin-Provenance-and-Structural-Signature-of-Energy-Flow-Cosmology",
-  "pdf": "AUTH-Layer-Origin-Provenance-and-Structural-Signature-of-Energy-Flow-Cosmology.pdf",
-  "md": "AUTH-Layer-Origin-Provenance-and-Structural-Signature-of-Energy-Flow-Cosmology.md",
-  "layer": "docs",
+  "name": "AUTH Layer — Origin, Provenance and Structural Signature of Energy-Flow Cosmology",
+  "path": "docs/papers/efc/AUTH-Layer-Origin-Provenance-and-Structural-Signature-of-Energy-Flow-Cosmology/AUTH-Layer-Origin-Provenance-and-Structural-Signature-of-Energy-Flow-Cosmology.pdf",
   "type": "paper",
-  "version": "1.0"
+  "keywords": [
+    "EFC",
+    "AUTH Layer",
+    "provenance",
+    "origin",
+    "entropy",
+    "energy flow",
+    "structural signature"
+  ],
+  "domain": "efc"
 }
