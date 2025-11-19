@@ -380,6 +380,13 @@
       "jsonld_type": "CreativeWork"
     },
     {
+      "id": "meta/symbiosis",
+      "path": "meta/symbiosis",
+      "domain": "meta",
+      "type": "meta",
+      "jsonld_type": "CreativeWork"
+    },
+    {
       "id": "methodology/AI-Augmented-Scientific-Workflow-Framework",
       "path": "methodology/AI-Augmented-Scientific-Workflow-Framework",
       "domain": "methodology",
