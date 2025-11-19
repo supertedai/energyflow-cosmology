@@ -1,22 +1,22 @@
+% =====================================================================
+% ENERGY–FLOW COSMOLOGY (EFC)
+% FORMAL SPECIFICATION — MASTER DOCUMENT
+% =====================================================================
+
 \documentclass[a4paper,11pt]{article}
 
-% -------------------------------------------------------
-% Packages
-% -------------------------------------------------------
-\usepackage{amsmath,amssymb}
-\usepackage{bm}
+\usepackage{amsmath,amssymb,bm}
 \usepackage{geometry}
 \usepackage{hyperref}
-\usepackage{physics}
-\usepackage{graphicx}
-\geometry{margin=2.5cm}
+\geometry{margin=2.4cm}
 
-% -------------------------------------------------------
-% Document
-% -------------------------------------------------------
+% Optional macros from header:
+\newcommand{\Ef}{E_f}
+\newcommand{\ceff}{c_{\text{eff}}}
+
 \begin{document}
 
-\title{\textbf{Energy-Flow Cosmology (EFC)\\Formal Specification}}
+\title{Energy–Flow Cosmology \\ \large Master Formal Specification}
 \author{Morten Magnusson}
 \date{\today}
 \maketitle
@@ -24,157 +24,266 @@
 \tableofcontents
 \newpage
 
-% -------------------------------------------------------
-\section{Introduction}
 
-This document defines the formal mathematical structure of
-Energy-Flow Cosmology (EFC). The formal specification provides the
-core definitions, relationships, and functional laws that govern the
-entropy field $S(\mathbf{x},t)$, the energy–flow field $E_f(\mathbf{x},t)$,
-and the grid-level resistance functions that shape the behaviour of
-spacetime and all emergent structures.
+% ======================================================
+\section{Purpose of This Document}
+% ======================================================
 
-The formal specification consists of five components:
+This document provides the unified formal specification for the full
+Energy–Flow Cosmology (EFC) framework. It integrates the structural,
+dynamical, informational, and resistance–propagation models into a
+coherent mathematical system.
+
+The models included:
+
 \begin{itemize}
-    \item The EFC--S structural model
-    \item The EFC--D dynamical model
-    \item The EFC--C0 information model
-    \item The EFC--H grid--Higgs interaction model
-    \item Shared notation and parameter definitions
+    \item EFC–S: Spatial Structure Model
+    \item EFC–D: Dynamical Evolution Model
+    \item EFC–H: Structural / Halo Model
+    \item EFC–C$_0$: Information and Resonance Model
+    \item Flow Diagram: Canonical Dependency Ordering
+    \item Global Parameters
+    \item Global Notation
 \end{itemize}
 
-Each component has its own source definitions within the repository, but
-this master specification functions as the structural anchor.
+Together, they define the complete formal base for EFC theory,
+simulations, and analytical predictions.
 
-% -------------------------------------------------------
-\section{Field Definitions}
 
-\subsection{Entropy Field $S$}
+% ======================================================
+\section{Global Notation and Definitions}
+% ======================================================
 
-The entropy field $S(\mathbf{x},t)$ is defined as a scalar field taking
-values in the interval $[0,1]$.
+The core scalar fields:
 
-\begin{equation}
-    S : \mathbb{R}^3 \times \mathbb{R} \rightarrow [0,1]
-\end{equation}
-
-Two limiting boundary states are defined:
 \[
-S = 0 \quad \text{(minimum entropy state)}
+\begin{aligned}
+S(\mathbf{x},t) &: \text{entropy field, } 0\le S \le 1,\\[4pt]
+\rho(\mathbf{x},t) &: \text{structural density},\\[4pt]
+E_f(\mathbf{x},t) &: \text{energy–flow potential},\\[4pt]
+R(\mathbf{x},t) &: \text{grid resistance},\\[4pt]
+C(\mathbf{x},t) &: \text{information capacity},\\[4pt]
+I_0(\mathbf{x},t) &: \text{information resonance scalar}.
+\end{aligned}
 \]
+
+Energy–flow potential:
 \[
-S = 1 \quad \text{(maximum entropy state)}
+E_f = \rho(1 - S)
 \]
 
-The gradient of $S$ defines the entropic directionality:
+Effective propagation velocity:
+\[
+c_{\text{eff}} = (1 + R)^{-1}
+\]
 
-\begin{equation}
-    \nabla S(\mathbf{x},t) = 
-    \left(
-    \frac{\partial S}{\partial x},
-    \frac{\partial S}{\partial y},
-    \frac{\partial S}{\partial z}
-    \right)
-\end{equation}
+Information capacity:
+\[
+C = C_0 (1 - S)
+\]
 
-\subsection{Energy-Flow Field $E_f$}
+Information resonance:
+\[
+I_0 = \gamma |E_f \cdot \nabla S|
+\]
 
-Energy flow is represented by the vector field:
 
-\begin{equation}
-    E_f : \mathbb{R}^3 \times \mathbb{R} \rightarrow \mathbb{R}^3
-\end{equation}
+% ======================================================
+\section{Global Parameters}
+% ======================================================
 
-The fundamental relationship between the fields is:
+Entropy normalization:
+\[
+0 \le S \le 1
+\]
 
-\begin{equation}
-    E_f = -\kappa \, \nabla S
-\end{equation}
+Energy–flow equilibrium constant:
+\[
+E_0 = \rho(1-S)
+\]
 
-where $\kappa$ is the grid-level resistance coefficient.
+Coupling coefficients:
+\[
+\frac{dR}{dt} = \alpha\frac{dS}{dt} - \beta \frac{d\rho}{dt},
+\quad \alpha>0,\; \beta>0
+\]
 
-% -------------------------------------------------------
-\section{EFC--S Structural Model}
+Gradient constraints:
+\[
+0 < \left|\frac{dS}{dr}\right| \ll 1
+\]
 
-The spatial distribution of $S$ determines the emergent structural
-patterns. The EFC--S model defines the scalar curvature analogue
-$C_S$:
+Simulation parameters:
+\[
+\Delta t>0,\quad \Delta x>0
+\]
 
-\begin{equation}
-    C_S = \nabla \cdot (\nabla S)
-\end{equation}
 
-Regions where $C_S < 0$ correspond to convergent entropic basins;
-regions with $C_S > 0$ correspond to divergent entropic regions.
+% ======================================================
+\section{EFC–S: Spatial Structural Model}
+% ======================================================
 
-% -------------------------------------------------------
-\section{EFC--D Dynamical Model}
+Structural equilibrium is defined by:
+\[
+\nabla E_f = 0
+\]
 
-The dynamical behaviour of $S$ evolves according to:
+Given:
+\[
+E_f = \rho(1-S)
+\]
 
-\begin{equation}
-    \frac{\partial S}{\partial t}
-    = -\alpha \, \nabla \cdot E_f
-    + \beta \, \Delta S
-\end{equation}
+Equilibrium condition:
+\[
+\rho(1-S) = E_0
+\]
 
-where:
-\begin{itemize}
-    \item $\alpha$ controls flow–driven change
-    \item $\beta$ controls diffusive smoothing
-\end{itemize}
+Spatial density profile:
+\[
+\rho(r) = \frac{E_0}{1 - S(r)}
+\]
 
-This is the primary governing equation for large-scale EFC dynamics.
+Resistance as a function of entropy:
+\[
+R = R(S)
+\]
 
-% -------------------------------------------------------
-\section{EFC--C0 Information Model}
+Propagation:
+\[
+c_{\text{eff}} = (1+R)^{-1}
+\]
 
-The C0 model defines the informational resonance functional:
 
-\begin{equation}
-    I_0 = \gamma \, \left| E_f \cdot \nabla S \right|
-\end{equation}
+% ======================================================
+\section{EFC–D: Dynamical Evolution Model}
+% ======================================================
 
-$ I_0 $ is interpreted as the local information flux density.
+Dynamics of energy flow:
+\[
+\frac{dE_f}{dt} = \nabla_t E_f
+\]
 
-% -------------------------------------------------------
-\section{EFC--H Grid-Higgs Interaction}
+Structural evolution:
+\[
+\frac{d\rho}{dt} = F(E_f, \nabla E_f)
+\]
+minimal closure:
+\[
+\frac{d\rho}{dt} \propto E_f - R
+\]
 
-Mass–like behaviour emerges from resistance to energy flow:
+Entropy evolution:
+\[
+\frac{dS}{dt} \propto -\rho + |\nabla E_f|
+\]
 
-\begin{equation}
-    m_{\mathrm{eff}} = \lambda \, \| E_f \|
-\end{equation}
+Resistance evolution:
+\[
+\frac{dR}{dt} = \alpha \frac{dS}{dt} - \beta\frac{d\rho}{dt}
+\]
 
-where $\lambda$ is the effective coupling parameter.
+Velocity:
+\[
+\mathbf{v} = c_{\text{eff}} \hat{\mathbf{u}}
+\]
 
-This replaces particle–Higgs mass generation with a flow-resistance model.
 
-% -------------------------------------------------------
-\section{Parameter Summary}
+% ======================================================
+\section{EFC–H: Structural / Halo Model}
+% ======================================================
 
-\begin{itemize}
-    \item $\kappa$ – grid resistance coefficient
-    \item $\alpha$ – flow amplification coefficient
-    \item $\beta$ – entropic diffusion coefficient
-    \item $\gamma$ – information coupling coefficient
-    \item $\lambda$ – grid–Higgs effective coupling
-\end{itemize}
+Structure formation threshold:
+\[
+E_f > R
+\]
 
-These parameters are defined in more detail in
-\texttt{theory/formal/parameters/index.tex}.
+Halo equilibrium:
+\[
+\nabla E_f = 0
+\]
 
-% -------------------------------------------------------
-\section{Notation}
+Density profile identical to equilibrium S-model:
+\[
+\rho(r) = \frac{E_0}{1 - S(r)}
+\]
 
-Notation conventions are centralised in
-\texttt{theory/formal/notation/index.tex}.
+Resistance gradient defines halo limb:
+\[
+\frac{\partial R}{\partial S} > 0 ,\quad 
+\frac{\partial R}{\partial \rho} < 0
+\]
 
-% -------------------------------------------------------
-\section{Conclusion}
 
-This master formal specification defines the core mathematical
-foundation of the Energy-Flow Cosmology framework. All model-specific
-definitions extend from the structures defined in this document.
+% ======================================================
+\section{EFC–C$_0$: Information Model}
+% ======================================================
+
+Information capacity:
+\[
+C = C_0(1-S)
+\]
+
+Information flux:
+\[
+\Phi_I = E_f \cdot \nabla S
+\]
+
+Information resonance:
+\[
+I_0 = \gamma |E_f \cdot \nabla S|
+\]
+
+Propagation:
+\[
+c_{\text{eff}} = (1 + R)^{-1}
+\]
+
+
+% ======================================================
+\section{Canonical Flow Diagram}
+% ======================================================
+
+Primary causal chain:
+\[
+S \rightarrow \rho \rightarrow E_f \rightarrow R \rightarrow c_{\text{eff}}
+\]
+
+Information chain:
+\[
+S \rightarrow (C,\nabla S) \rightarrow I_0
+\]
+
+Together these form the complete update ordering for all simulations and
+analytical models.
+
+
+% ======================================================
+\section{Unified System}
+% ======================================================
+
+The full EFC master system:
+
+\[
+\begin{aligned}
+E_f &= \rho(1-S), \\[6pt]
+\frac{dE_f}{dt} &= \nabla_t E_f, \\[6pt]
+\frac{d\rho}{dt} &= F(E_f,\nabla E_f), \\[6pt]
+\frac{dS}{dt} &= G(E_f,\rho,\nabla\rho), \\[6pt]
+R &= R(S,\rho), \\[6pt]
+\frac{dR}{dt} &= \alpha\frac{dS}{dt} - \beta\frac{d\rho}{dt}, \\[6pt]
+c_{\text{eff}} &= (1+R)^{-1}, \\[6pt]
+C &= C_0(1-S), \\[6pt]
+I_0 &= \gamma |E_f\cdot\nabla S|.
+\end{aligned}
+\]
+
+
+% ======================================================
+\section*{Conclusion}
+
+This document defines the complete mathematical structure of
+Energy–Flow Cosmology. All higher-level documents, simulations, and
+interpretations rely on the formal definitions and dependencies
+established here.
 
 \end{document}
