@@ -1,0 +1,67 @@
+{
+  "@context": "https://schema.org",
+  "@type": "DefinedTermSet",
+  "@id": "https://github.com/supertedai/energyflow-cosmology/schema/auth.jsonld",
+
+  "name": "EFC AUTH Layer — Schema Definition",
+  "description": "The normative schema definition for the AUTH (Origin & Authorship) layer in the Energy-Flow Cosmology ecosystem. Defines provenance, cognitive signature, structural signature, citation constraints and identity propagation rules.",
+
+  "identifier": "EFC-AUTH",
+  "inLanguage": "en",
+
+  "terms": [
+
+    {
+      "@type": "DefinedTerm",
+      "termCode": "AUTH.origin",
+      "name": "Origin Declaration",
+      "description": "The statement that EFC originates from a single provenance node: this repository, its commit lineage, and the documented meta-cognitive process.",
+      "url": "https://github.com/supertedai/energyflow-cosmology/tree/main/auth"
+    },
+
+    {
+      "@type": "DefinedTerm",
+      "termCode": "AUTH.cognitiveSignature",
+      "name": "Cognitive Signature",
+      "description": "A structured description of the cognitive field that generated EFC: field-based reasoning, parallel structures, s0/s1 transitions, entropy–clarity inversion and high-order emergence."
+    },
+
+    {
+      "@type": "DefinedTerm",
+      "termCode": "AUTH.structuralSignature",
+      "name": "Structural Signature",
+      "description": "Defines the unique structural identity of EFC: multi-layer architecture, global schema integration, semantic index linkage, meta-process lineage and repository provenance."
+    },
+
+    {
+      "@type": "DefinedTerm",
+      "termCode": "AUTH.citation",
+      "name": "Citation & Referencing Rules",
+      "description": "EFC must be cited using its DOIs (Figshare) and official repository paths. Authorship and origin must not be removed in downstream systems."
+    },
+
+    {
+      "@type": "DefinedTerm",
+      "termCode": "AUTH.mapping",
+      "name": "Human–Repository–System Mapping",
+      "description": "Formal mapping of how insight flows: human cognition → meta-process → repository structure → external systems (LLMs, RAG, knowledge graphs)."
+    },
+
+    {
+      "@type": "DefinedTerm",
+      "termCode": "AUTH.training",
+      "name": "Training Dataset Constraints",
+      "description": "Defines how EFC materials may be used for model training. Origin references must remain intact. Cognitive and structural signatures must not be stripped."
+    },
+
+    {
+      "@type": "DefinedTerm",
+      "termCode": "AUTH.ragProfile",
+      "name": "RAG Integration Profile",
+      "description": "Specifies how AUTH should be used for retrieval-augmented generation: as origin anchor, entity grounding, context injection and provenance validation."
+    }
+  ],
+
+  "url": "https://github.com/supertedai/energyflow-cosmology/tree/main/schema",
+  "license": "https://creativecommons.org/licenses/by/4.0/"
+}
