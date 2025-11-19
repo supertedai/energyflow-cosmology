@@ -17,8 +17,11 @@ on:
 jobs:
   metadata:
     runs-on: ubuntu-latest
+
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - name: Setup Python
         uses: actions/setup-python@v5
@@ -35,10 +38,16 @@ jobs:
       - name: Validate structure
         run: python scripts/validate_repo_structure.py
 
-      - name: Commit updated indexes
+      - name: Commit updated metadata
         run: |
           git config user.name "EFC-Auto"
           git config user.email "auto@efc"
-          git add meta-index.json node-index.json schema-map.json docs/papers/efc/efc_index.json docs/papers/efc/efc_index.jsonld
-          git commit -m "Auto-update repo metadata [skip ci]" || true
-          git push || true
+
+          # Add ALL generated/untracked metadata
+          git add .
+
+          # Create commit if changes exist
+          git commit -m "Auto-generate metadata [skip ci]" || echo "No changes"
+
+          # Push safely, even if branch is unchanged
+          git push || echo "No push needed"
