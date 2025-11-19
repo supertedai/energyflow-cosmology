@@ -1,16 +1,23 @@
-name: Fix Citations
+name: Auto-Fix Citations for EFC Papers
 
 on:
-  workflow_dispatch:  # run manually in GitHub UI
+  workflow_dispatch:  # run manually from GitHub UI
+  # uncomment this if you want auto-run on push:
+  # push:
+  #   branches: ["main"]
 
 jobs:
   fix-citations:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
 
-      - uses: actions/setup-python@v5
+      - name: Set up Python
+        uses: actions/setup-python@v5
         with:
           python-version: "3.11"
 
@@ -18,8 +25,10 @@ jobs:
         run: |
           python scripts/fix_citations.py
 
-      - name: Commit and push fixes
+      - name: Commit and push updates
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
-          commit_message: "Fix citations.bib via auto-script"
+          commit_message: "Auto-fix citations for all EFC papers"
           commit_options: "--no-verify"
+          push_options: "--force"
+          skip_dirty_check: false
