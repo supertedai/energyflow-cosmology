@@ -5,6 +5,8 @@ It acts as the **single source of truth** for scientific content, metadata, work
 
 **Keywords:** energy–entropy field, grid-level dynamics, formal specification, open-science architecture, semantic graph, meta-process, reproducibility, JSON-LD.
 
+If new - Please start here https://github.com/supertedai/energyflow-cosmology/blob/main/START-HERE.md
+
 ---
 
 ## **1. Purpose of the Repository**
