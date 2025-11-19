@@ -1,127 +1,53 @@
 {
-  "meta_api_version": "1.0.0",
-  "description": "Machine-readable API for the Meta, Cognition, Symbiosis, AUTH, and related layers of the Energy-Flow Cosmology ecosystem.",
-  "last_updated": "2025-11-15",
-  "layers": [
+  "meta_api_version": "1.1.1",
+  "description": "API index for EFC theory, meta, cognition, symbiosis and AUTH layers.",
+  "last_updated": "2025-11-19",
+
+  "nodes": [
     {
-      "id": "auth",
+      "id": "global_schema",
+      "name": "Global Schema",
+      "type": "Dataset",
+      "path": "schema/global_schema.json"
+    },
+    {
+      "id": "schema_map",
+      "name": "Schema Map",
+      "type": "Dataset",
+      "path": "schema/schema-map.json"
+    },
+    {
+      "id": "site_graph",
+      "name": "Site Graph",
+      "type": "Dataset",
+      "path": "schema/site-graph.json"
+    },
+    {
+      "id": "semantic_index",
+      "name": "Semantic Search Index",
+      "type": "Dataset",
+      "path": "semantic-search-index.json"
+    },
+    {
+      "id": "auth_layer",
       "name": "AUTH Layer",
-      "description": "Origin & Authorship layer defining provenance, cognitive signature, emergence context, and the repository as the single origin node for EFC.",
-      "paths": [
-        "auth/",
-        "auth/index.md",
-        "auth/index.jsonld",
-        "auth/manifest.json"
-      ]
+      "type": "CreativeWork",
+      "path": "auth/index.jsonld",
+      "doi": "10.6084/m9.figshare.30656828"
     },
     {
-      "id": "meta",
-      "name": "Meta Architecture",
-      "description": "High-level metastructure including metascope, meta-reflective protocol, topology of insight, and meta-architecture.",
-      "paths": [
-        "meta/",
-        "meta-index.json",
-        "meta/meta-architecture-spec.md",
-        "meta/meta-architecture.json",
-        "meta/meta-reflective-protocol.md",
-        "meta/metascope.md",
-        "meta/topology-of-insight.md"
-      ]
-    },
-    {
-      "id": "cognition",
-      "name": "Cognition Layer",
-      "description": "Documentation of the Human Cognitive Field: s0/s1 transitions, entropy\u2013clarity inversion, transient high-order states, and cognitive signature.",
-      "paths": [
-        "cognition/",
-        "cognition/cognitive-field.md",
-        "cognition/entropy-clarity.md",
-        "cognition/transient-representations.md",
-        "cognition/cognitive-signature.md",
-        "cognition/you.md"
-      ]
-    },
-    {
-      "id": "symbiosis",
-      "name": "Symbiosis Layer",
-      "description": "Human\u2013model co-field mechanics: resonance, vector alignment, system cohesion, and structural amplification.",
-      "paths": [
-        "symbiosis/",
-        "symbiosis/system.md",
-        "symbiosis/system-coherence.md",
-        "symbiosis/resonance-mechanism.md",
-        "symbiosis/vector-alignment.md",
-        "symbiosis/symbiotic-process.md",
-        "symbiosis/symbiotic-process-summary.md",
-        "symbiosis/symbiotic-process-llm.md",
-        "symbiosis/symbiosis-interface.md"
-      ]
-    },
-    {
-      "id": "reflection",
-      "name": "Reflection Layer",
-      "description": "State-map, resonance-links, reflection schema and logs documenting the evolution of both theory and process.",
-      "paths": [
-        "reflection/",
-        "reflection/state-map.json",
-        "reflection/reflection-log.md",
-        "reflection/resonance-links.json",
-        "reflection/reflection-schema.json",
-        "reflection/reflection-index.json"
-      ]
-    },
-    {
-      "id": "meta_graph",
-      "name": "Meta Knowledge Graph",
-      "description": "Unified JSON-LD graph linking human cognitive field, model structural engine, co-field, metascope, co-field simulator, and repository map.",
-      "paths": [
-        "meta-graph/meta-graph.jsonld",
-        "meta-graph/meta-graph-schema.json",
-        "meta-graph/meta_graph.cypher",
-        "meta-graph/meta_graph_vis.html"
-      ]
-    },
-    {
-      "id": "dashboard",
-      "name": "Interactive Meta Dashboard",
-      "description": "Streamlit dashboard for exploring the meta/cognition/symbiosis structure and the meta-knowledge graph.",
-      "paths": [
-        "meta_dashboard.py"
-      ]
-    },
-    {
-      "id": "personal",
-      "name": "Personal Context",
-      "description": "The personal cognitive and reflective context behind the EFC project, providing interpretive clarity for the meta-layer.",
-      "paths": [
-        "personal/Personal-Note.md"
-      ]
+      "id": "metagraph",
+      "name": "Meta Graph",
+      "type": "Dataset",
+      "path": "meta-graph/meta-graph.jsonld"
     }
   ],
+
   "entrypoints": {
-    "meta_index": "meta-index.json",
-    "site_graph": "schema/site-graph.json",
-    "meta_graph": "meta-graph/meta-graph.jsonld",
-    "dashboard": "meta_dashboard.py"
-  },
-  "sources": {
-    "figshare": {
-      "id": 30656828,
-      "title": "AUTH Layer: Origin, Provenance and Structural Signature of Energy-Flow Cosmology",
-      "published_date": "2025-11-19T14:02:09Z",
-      "url": "https://api.figshare.com/v2/account/articles/30656828",
-      "doi": "10.6084/m9.figshare.30656828",
-      "resource_id": null,
-      "resource_doi": null
-    }
-  },
-  "doi": {
-    "master_spec": {
-      "doi": "10.6084/m9.figshare.30656828",
-      "figshare_id": 30656828,
-      "url": "https://api.figshare.com/v2/account/articles/30656828",
-      "published_date": "2025-11-19T14:02:09Z",
-      "source": "figshare"
-    }
+    "schema": "schema/global_schema.json",
+    "schema_map": "schema/schema-map.json",
+    "semantic_index": "semantic-search-index.json",
+    "auth": "auth/index.jsonld",
+    "meta_graph": "meta-graph/meta-graph.jsonld"
   }
 }
