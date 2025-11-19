@@ -31,6 +31,4 @@ year={2025},
 doi={10.6084/m9.figshare.30656828},
 url={https://doi.org/10.6084/m9.figshare.30656828}
 
-}
-
 The AUTH layer defines the origin, provenance, cognitive signature and structural identity of Energy-Flow Cosmology.
