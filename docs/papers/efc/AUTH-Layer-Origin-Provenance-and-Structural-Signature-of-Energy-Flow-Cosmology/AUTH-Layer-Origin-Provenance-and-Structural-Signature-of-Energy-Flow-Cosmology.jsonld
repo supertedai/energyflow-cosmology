@@ -1,8 +1,26 @@
 {
   "@context": "https://schema.org",
-  "@type": "CreativeWork",
-  "@id": "https://github.com/supertedai/energyflow-cosmology/docs/papers/efc/AUTH-Layer-Origin-Provenance-and-Structural-Signature-of-Energy-Flow-Cosmology",
+  "@type": "ScholarlyArticle",
+  "name": "AUTH Layer — Origin, Provenance and Structural Signature of Energy-Flow Cosmology",
   "identifier": "AUTH-Layer-Origin-Provenance-and-Structural-Signature-of-Energy-Flow-Cosmology",
-  "name": "AUTH Layer Origin Provenance and Structural Signature of Energy Flow Cosmology",
-  "version": "1.0"
+  "author": {
+    "@type": "Person",
+    "name": "Morten Magnusson",
+    "identifier": "https://orcid.org/0009-0002-4860-5095"
+  },
+  "encodingFormat": "application/pdf",
+  "url": "AUTH-Layer-Origin-Provenance-and-Structural-Signature-of-Energy-Flow-Cosmology.pdf",
+  "keywords": [
+    "energy flow",
+    "entropy",
+    "EFC",
+    "provenance",
+    "origin",
+    "insight structures",
+    "meta-layer"
+  ],
+  "isPartOf": {
+    "@type": "CreativeWorkSeries",
+    "name": "EFC Papers"
+  }
 }
