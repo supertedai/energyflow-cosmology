@@ -3,7 +3,7 @@
   "@type": "CreativeWork",
   "@id": "https://github.com/supertedai/energyflow-cosmology/docs/papers/efc/EFC-Applications-and-Implications",
   "identifier": "EFC-Applications-and-Implications",
-  "name": "EFC — Applications and Implications",
+  "name": "EFC – Applications and Implications",
   "author": {
     "@type": "Person",
     "name": "Morten Magnusson",
@@ -17,20 +17,6 @@
     "name": "EFC Papers",
     "identifier": "efc-papers"
   },
-  "keywords": [
-    "EFC",
-    "Applications",
-    "Implications",
-    "Cross-Domain",
-    "Systems",
-    "Modelling",
-    "Cosmology"
-  ],
-  "about": [
-    "Energy-Flow Cosmology",
-    "Systems Theory",
-    "Physics",
-    "Cognition",
-    "Emergent Structures"
-  ]
+  "keywords": ["EFC", "Applications", "Implications"],
+  "about": ["Energy-Flow Cosmology", "Entropy", "Flow Fields"]
 }
