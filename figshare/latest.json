@@ -5,7 +5,7 @@
   "handle": "",
   "url": "https://api.figshare.com/v2/account/articles/30656828",
   "published_date": "2025-11-19T14:02:09Z",
-  "thumb": "",
+  "thumb": "https://s3-eu-west-1.amazonaws.com/pfigshare-u-previews/59694422/thumb.png",
   "defined_type": 12,
   "defined_type_name": "preprint",
   "group_id": null,
