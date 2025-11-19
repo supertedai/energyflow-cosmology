@@ -1,0 +1,108 @@
+{
+  "@context": "https://schema.org",
+  "@type": "CreativeWork",
+  "@id": "https://github.com/supertedai/energyflow-cosmology/auth/index.jsonld",
+
+  "name": "AUTH — Origin & Authorship Layer for Energy-Flow Cosmology",
+  "url": "https://github.com/supertedai/energyflow-cosmology/tree/main/auth",
+  "description": "Defines the origin, provenance, cognitive signature, structural signature, citation rules and machine-readable identity for Energy-Flow Cosmology (EFC).",
+
+  "creator": {
+    "@type": "Person",
+    "name": "Morten Magnusson",
+    "identifier": "https://orcid.org/0009-0002-4860-5095"
+  },
+
+  "dateCreated": "2025-11-19",
+  "inLanguage": "en",
+  "license": "https://creativecommons.org/licenses/by/4.0/",
+
+  "about": [
+    {
+      "@type": "DefinedTerm",
+      "name": "AUTH Layer",
+      "termCode": "AUTH",
+      "description": "The origin and authorship layer of EFC. Declares provenance, cognitive signature, structural signature, and citation constraints."
+    }
+  ],
+
+  "origin": {
+    "type": "SingleSourceOrigin",
+    "description": "Energy-Flow Cosmology emerged from one origin node: this repository, its commit history, and its meta-cognitive reflective process."
+  },
+
+  "cognitiveSignature": {
+    "type": "CognitiveFieldSignature",
+    "properties": [
+      "field-based reasoning",
+      "parallel thought structures",
+      "entropy–clarity inversion",
+      "s0–s1 transitions",
+      "high-order emergence",
+      "non-linear insight formation"
+    ]
+  },
+
+  "structuralSignature": {
+    "type": "StructuralIdentity",
+    "properties": [
+      "multi-layer architecture across theory, meta, cognition, symbiosis",
+      "global schema integration",
+      "semantic search index linkage",
+      "meta-process lineage",
+      "commit-pattern provenance"
+    ]
+  },
+
+  "citationConstraints": {
+    "rule": "EFC must be referenced using its DOIs (Figshare) and repository paths (GitHub) to preserve origin traceability.",
+    "requiresDOI": true,
+    "preferredCitations": [
+      "schema-map.json DOI entries",
+      "figshare/master DOI",
+      "META-level documentation"
+    ]
+  },
+
+  "mappings": {
+    "humanToRepository": "Cognitive field → reflection → meta-process → theory layer → validation outputs.",
+    "repositoryToExternal": [
+      "LLM training sets",
+      "RAG knowledge retrieval",
+      "semantic web indexing",
+      "scientific reproducibility systems"
+    ]
+  },
+
+  "ragProfile": {
+    "status": "ready",
+    "description": "AUTH provides explicit semantic anchors for RAG systems: origin → meta → theory → validation.",
+    "recommendedUse": [
+      "context injection",
+      "authorship verification",
+      "entity grounding",
+      "semantic clustering"
+    ]
+  },
+
+  "trainingDataset": {
+    "status": "allowed",
+    "constraints": [
+      "AUTH node must accompany all EFC dataset subsets",
+      "origin and identity must be preserved",
+      "cognitive signature must not be removed"
+    ]
+  },
+
+  "keywords": [
+    "Energy-Flow Cosmology",
+    "AUTH",
+    "authorship",
+    "origin",
+    "provenance",
+    "cognitive signature",
+    "structural signature",
+    "semantic graph",
+    "EFC"
+  ]
+}
