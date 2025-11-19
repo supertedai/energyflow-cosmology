@@ -1,23 +1,15 @@
-# EFC Flow Diagram — Structural Overview
+# EFC Flow Diagram
 
-This folder contains the **formal diagram specification** of the Energy-Flow
-Cosmology process: how structure, energy-flow and entropy interact at each stage.
+This directory contains the formal and minimal specifications of the
+EFC Flow Diagram. It defines the causal and computational update order
+linking entropy, structure, energy flow, resistance, information capacity
+and propagation speed in Energy-Flow Cosmology.
 
-## Contents
-- `index.tex` — LaTeX definition of the flow diagram (boxes, arrows, dependencies).
-- Diagram logic for:
-  - Grid state → entropy profile
-  - Entropy profile → \(E_f\)
-  - \(E_f\) → structure formation
-  - Cross-feedback loops
+## Files
 
-## Purpose
-Provides the **visual logic layer** of EFC, suitable for:
-- Publications
-- Formal specification documents
-- High-level system diagrams
-- Integration into `efc_master.pdf`
+- `index.tex` — Master formal flow diagram specification  
+- `minimal_spec.tex` — Minimal reference version  
+- `index.jsonld` — Semantic metadata  
+- `schema.json` — Validation schema  
 
-## Status
-Stable. Fully manual. No auto-generation scripts interact with this folder.
-
+Version: 1.0
