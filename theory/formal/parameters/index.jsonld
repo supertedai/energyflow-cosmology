@@ -1,0 +1,34 @@
+{
+  "@context": "https://schema.org",
+  "@type": "CreativeWork",
+  "identifier": "parameters",
+  "name": "EFC Global Parameters",
+  "version": "1.0",
+  "author": {
+    "@type": "Person",
+    "name": "Morten Magnusson",
+    "identifier": "https://orcid.org/0009-0002-4860-5095"
+  },
+  "about": [
+    "Energy-Flow Cosmology",
+    "Parameters",
+    "Normalization",
+    "Constants",
+    "Coupling Coefficients",
+    "Simulation Parameters",
+    "Dynamics",
+    "Structural Profiles"
+  ],
+  "hasPart": [
+    {
+      "@type": "CreativeWork",
+      "identifier": "parameters-master",
+      "name": "Master Specification"
+    },
+    {
+      "@type": "CreativeWork",
+      "identifier": "parameters-minimal",
+      "name": "Minimal Specification"
+    }
+  ]
+}
