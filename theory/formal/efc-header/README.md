@@ -1,18 +1,16 @@
-# **EFC Header — Core Definitions**
+# EFC Formal Header
 
-This folder contains the top-level header used across all formal EFC LaTeX documents.
-It defines the shared macros, symbols, and notation needed to keep the entire formal specification consistent.
+This directory contains the shared notation, constants, normalizations,
+and LaTeX macro definitions used across all formal specifications in the
+Energy-Flow Cosmology project.
 
----
+It functions as the global symbolic header for the entire formal layer.
 
-## **Contents**
+## Files
 
-**index.tex** — LaTeX header with the core definitions.
+- `index.tex` — Master header specification  
+- `minimal_spec.tex` — Compact reference  
+- `index.jsonld` — Semantic metadata  
+- `schema.json` — Validation schema  
 
-Included symbols and relations:
-
-* entropy field (S)
-* energy–flow field (E_f)
-* density (\rho)
-* grid-resistance functions (R)
-* information-capacity functions (C)
+Version: 1.0
