@@ -32,7 +32,7 @@
     },
     {
       "id": "efc-header",
-      "label": "**EFC Header \u2014 Core Definitions**",
+      "label": "EFC Formal Header",
       "layer": "EFC-H",
       "path": "theory/formal/efc-header"
     },
