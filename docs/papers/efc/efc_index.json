@@ -1,0 +1,54 @@
+{
+  "version": "1.0",
+  "root": "docs/papers/efc",
+  "papers": [
+    {
+      "id": "efc_master",
+      "path": "efc_master",
+      "type": "master",
+      "version": "1.0"
+    },
+    {
+      "id": "efc_master_v1",
+      "path": "efc_master_v1",
+      "type": "archive",
+      "version": "1.0"
+    },
+    {
+      "id": "efc_formal_spec",
+      "path": "efc_formal_spec",
+      "type": "formal",
+      "version": "1.0"
+    },
+
+    { "id": "EFC-v1.2-Foundational-Framework", "path": "EFC-v1.2-Foundational-Framework", "version": "1.2" },
+    { "id": "EFC-v2.1-Complete-Edition", "path": "EFC-v2.1-Complete-Edition", "version": "2.1" },
+    { "id": "EFC-v2.1-Modular-Synthesis", "path": "EFC-v2.1-Modular-Synthesis", "version": "2.1" },
+    { "id": "EFC-v2.2-Cross-Field-Integration-Summary", "path": "EFC-v2.2-Cross-Field-Integration-Summary", "version": "2.2" },
+
+    { "id": "EFC-Grid-Higgs-Paradigm-Shift", "path": "EFC-Grid-Higgs-Paradigm-Shift" },
+    { "id": "EFC-Grid-Model-Entropic-Dynamics", "path": "EFC-Grid-Model-Entropic-Dynamics" },
+    { "id": "EFC-The-Energy-Flow-Interface", "path": "EFC-The-Energy-Flow-Interface" },
+    { "id": "EFC-Thermodynamic-Bridge-GR-QFT", "path": "EFC-Thermodynamic-Bridge-GR-QFT" },
+
+    { "id": "EFC-Introduction-to-Energy-Flow-in-Space-Time", "path": "EFC-Introduction-to-Energy-Flow-in-Space-Time" },
+    { "id": "EFC-Introduction-to-Entropy-in-Cosmic-Evolution", "path": "EFC-Introduction-to-Entropy-in-Cosmic-Evolution" },
+    { "id": "EFC-Hypothesis-Interrelation-Energy-Entropy", "path": "EFC-Hypothesis-Interrelation-Energy-Entropy" },
+    { "id": "EFC-Hypothesis-Universe-as-Energy-Driven-System", "path": "EFC-Hypothesis-Universe-as-Energy-Driven-System" },
+    { "id": "EFC-Integrated-Hypothesis-Time-Entropy", "path": "EFC-Integrated-Hypothesis-Time-Entropy" },
+
+    { "id": "EFC-Light-Speed-as-a-Regulator-of-Energy-Flow-in-the-Universe", "path": "EFC-Light-Speed-as-a-Regulator-of-Energy-Flow-in-the-Universe" },
+    { "id": "EFC-Subhypothesis-Light-Speed-Limit", "path": "EFC-Subhypothesis-Light-Speed-Limit" },
+    { "id": "EFC-Why-is-Light-Speed-a-Cosmic-Limit", "path": "EFC-Why-is-Light-Speed-a-Cosmic-Limit" },
+
+    { "id": "EFC-Observational-Evidence-for-Energy-Flow", "path": "EFC-Observational-Evidence-for-Energy-Flow" },
+    { "id": "EFC-Observational-Evidence-Entropy-Cosmic-Evolution", "path": "EFC-Observational-Evidence-Entropy-Cosmic-Evolution" },
+
+    { "id": "EFC-What-Happens-at-the-Universes-Extremes", "path": "EFC-What-Happens-at-the-Universes-Extremes" },
+    { "id": "EFC-What-is-the-Connection-Between-Energy-Flow-and-the-Now", "path": "EFC-What-is-the-Connection-Between-Energy-Flow-and-the-Now" },
+    { "id": "EFC-Unresolved-Questions-and-Challenges-Entropy", "path": "EFC-Unresolved-Questions-and-Challenges-Entropy" },
+
+    { "id": "ai_workflow_framework", "path": "ai_workflow_framework" },
+    { "id": "EFC-Technical-Documentation-Energy-Flow-in-Space-Time", "path": "EFC-Technical-Documentation-Energy-Flow-in-Space-Time" }
+  ]
+}
