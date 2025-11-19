@@ -1,19 +1,37 @@
 {
   "@context": "https://schema.org",
   "@type": "CreativeWork",
-  "identifier": "docs/restored_pdfs/EFC-Why-is-Light-Speed-a-Cosmic-Limit",
-  "name": "Efc Why Is Light Speed A Cosmic Limit",
+  "@id": "https://github.com/supertedai/energyflow-cosmology/docs/papers/efc/EFC-Why-is-Light-Speed-a-Cosmic-Limit",
+  "identifier": "EFC-Why-is-Light-Speed-a-Cosmic-Limit",
+  "name": "EFC — Why is Light Speed a Cosmic Limit?",
   "author": {
     "@type": "Person",
     "name": "Morten Magnusson",
     "identifier": "https://orcid.org/0009-0002-4860-5095"
   },
   "version": "1.0",
+  "encodingFormat": "application/pdf",
+  "url": "EFC-Why-is-Light-Speed-a-Cosmic-Limit.pdf",
   "isPartOf": {
     "@type": "CreativeWorkSeries",
-    "name": "docs"
+    "name": "EFC Papers",
+    "identifier": "efc-papers"
   },
-  "layer": "docs",
-  "encodingFormat": "pdf",
-  "url": "docs/restored_pdfs/EFC-Why-is-Light-Speed-a-Cosmic-Limit.pdf"
+  "keywords": [
+    "EFC",
+    "Speed of Light",
+    "Cosmic Limit",
+    "Entropy Field",
+    "Energy Flow",
+    "Grid Resistance",
+    "Propagation Limit",
+    "Thermodynamic Boundaries"
+  ],
+  "about": [
+    "Energy-Flow Cosmology",
+    "Light Speed",
+    "Thermodynamic Limits",
+    "Propagation Physics",
+    "Entropy-Driven Dynamics"
+  ]
 }
