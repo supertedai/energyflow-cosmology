@@ -1,0 +1,17 @@
+{
+  "version": "1.0",
+  "items": [
+    {
+      "id": "efc_master",
+      "role": "master_spec",
+      "doi": "10.6084/m9.figshare.30656351",
+      "path": "figshare/master.json"
+    },
+    {
+      "id": "auth",
+      "role": "auth_layer",
+      "doi": "10.6084/m9.figshare.30656828",
+      "path": "figshare/auth.json"
+    }
+  ]
+}
