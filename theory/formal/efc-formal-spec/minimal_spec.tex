@@ -1,8 +1,8 @@
 % =====================================================================
-% Energy-Flow Cosmology — Formal Specification
+% Energy-Flow Cosmology — Minimal Formal Specification
 % =====================================================================
 
-\section*{Energy-Flow Cosmology: Formal Specification}
+\section*{Energy-Flow Cosmology: Minimal Formal Specification}
 
 \subsection*{1. Fields and Core Quantities}
 
@@ -12,7 +12,7 @@ Let the spatial domain be described by coordinates $\mathbf{x}$.
     \item Entropy field: $S(\mathbf{x})$
     \item Structural density: $\rho(\mathbf{x})$
     \item Energy–flow potential: $E_f(\mathbf{x})$
-    \item Grid resistance (propagation resistance): $R(\mathbf{x})$
+    \item Grid resistance: $R(\mathbf{x})$
     \item Information capacity: $C(\mathbf{x})$
 \end{itemize}
 
@@ -21,62 +21,43 @@ Entropy is normalized:
 0 \leq S(\mathbf{x}) \leq 1.
 \]
 
-The local density is:
+The local density:
 \[
 \rho(\mathbf{x}) = \frac{m}{V}.
 \]
 
 \subsection*{2. Energy–Flow Potential}
 
-The core energy–flow potential is defined as:
 \[
-E_f = \rho\, (1 - S).
+E_f = \rho \, (1 - S).
 \]
 
-High density and low entropy increase $E_f$; high entropy suppresses it.
-
-The temporal change of energy–flow is:
+The temporal change:
 \[
 \frac{dE_f}{dt} = \nabla_t E_f.
 \]
 
 \subsection*{3. Entropy Gradient and Flow}
 
-The entropy gradient drives changes in energy distribution:
-
 \[
 \nabla S(\mathbf{x}) \rightarrow \text{redistribution of } E_f.
 \]
 
-Regions with steep entropy gradients produce strong modulations in $E_f$.
-
 \subsection*{4. Structural Response}
-
-Structure arises where energy–flow stabilizes:
 
 \[
 \frac{d\rho}{dt} = F(E_f, \nabla E_f).
 \]
 
-A simplified local approximation:
-
 \[
-\frac{d\rho}{dt} \propto E_f - R(\mathbf{x}),
+\frac{d\rho}{dt} \propto E_f - R(\mathbf{x}).
 \]
 
-where $R(\mathbf{x})$ encodes resistance from the grid state.
-
 \subsection*{5. Propagation Resistance}
-
-Propagation resistance affects how energy and information move:
 
 \[
 R = R(S, \rho).
 \]
-
-Higher entropy increases resistance; higher structure decreases it.
-
-The effective propagation speed (e.g., of light or information) follows:
 
 \[
 c_{\text{eff}} = \frac{1}{1 + R}.
@@ -84,17 +65,11 @@ c_{\text{eff}} = \frac{1}{1 + R}.
 
 \subsection*{6. Information Capacity}
 
-Information capacity maps entropy to local representational bandwidth:
-
 \[
 C(\mathbf{x}) = C_0 \, (1 - S(\mathbf{x})).
 \]
 
-Low entropy increases representational capacity; high entropy reduces it.
-
 \subsection*{7. Coupled System}
-
-The EFC base system is:
 
 \[
 \begin{aligned}
@@ -107,20 +82,12 @@ C &= C_0\,(1-S).
 \end{aligned}
 \]
 
-This forms the minimal closed specification connecting entropy, energy–flow,
-structure, resistance and information capacity.
+\subsection*{8. Purpose}
 
-\subsection*{8. Purpose of the Specification}
-
-This formal specification is the reference for all higher-level EFC models,
-including:
-
+Reference foundation for:
 \begin{itemize}
-    \item EFC-S (structural halo profiles)
-    \item EFC-D (global and local dynamics)
-    \item EFC-C$_0$ (entropy–information mapping)
-    \item Simulation modules (CLASS, RAMSES, GADGET-4 adaptations)
+    \item EFC-S structural model
+    \item EFC-D dynamical model
+    \item EFC-C$_0$ information model
+    \item Simulation implementations
 \end{itemize}
-
-It provides a mathematically explicit baseline that ensures internal consistency
-across the theory.
