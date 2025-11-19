@@ -38,7 +38,7 @@
     },
     {
       "id": "efc-s-model",
-      "label": "EFC-S Model \u2014 Structural Layer",
+      "label": "EFC\u2013S Structural Model",
       "layer": "EFC-S",
       "path": "theory/formal/efc-s-model"
     },
