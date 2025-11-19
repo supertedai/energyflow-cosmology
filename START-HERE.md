@@ -1,54 +1,55 @@
 # **Start Here — Orientation Guide**
 
-This repository contains three integrated layers:
+This repository contains four integrated layers:
 
-1. **EFC (Energy-Flow Cosmology)** — the scientific theory
-2. **Validation Layer** — data, comparisons, figures
-3. **Meta / Cognition / Symbiosis** — the documented reflective process
+1. **EFC Theory** — the scientific framework
+2. **Papers & Formal Specifications** — DOI-linked publications
+3. **Validation Layer** — data, comparisons, figures
+4. **Meta / Cognition / Symbiosis** — the documented reflective process
 
-This guide gives you a clear path into the project.
+This guide gives you a clear path into the system.
 
 ---
 
 # **1. What EFC Is**
 
-Energy-Flow Cosmology describes the universe as a thermodynamic flow system where:
+Energy-Flow Cosmology models the universe as a thermodynamic flow field shaped by:
 
 * energy distribution
 * entropy gradients
 * information capacity
-* local–global flow fields
+* local–global resistance fields
 
-drive cosmic structure and dynamics.
+Structure, dynamics, and propagation emerge from these fields.
 
 The formal definition is here:
 
 ```
-theory/formal/efc_formal_spec.tex
-theory/formal/efc_formal_spec.pdf
+theory/formal/efc_master.tex
+theory/formal/efc_master.pdf
 ```
 
 ---
 
 # **2. If You’re New — Start With These**
 
-Read these four items first (3–5 minutes each):
+Read these four items first (2–4 minutes each):
 
 ### **1. `meta/personal/Personal-Note.md`**
 
-Context, cognitive style, and why the process is documented.
+Context, cognitive style, and why the full process is documented.
 
 ### **2. `meta/README.md`**
 
-Top-level explanation of the meta layer.
+Overview of the meta layer.
 
-### **3. `meta-index.json`**
+### **3. `meta-graph/index.jsonld`**
 
-Machine-readable map of the meta architecture.
+Machine-readable map of the global structure.
 
-### **4. `schema/site-graph.json`**
+### **4. `schema/global_schema.json`**
 
-Semantic mapping of the entire repository.
+The master semantic schema of the entire repository.
 
 These give you:
 
@@ -57,62 +58,60 @@ These give you:
 * the structure
 * the semantics
 
-Before you look at the science.
+Before you enter the theory.
 
 ---
 
-# **3. Three Main Tracks**
+# **3. The Four Main Tracks**
 
 ## **Track A — Theory**
 
-Scientific content:
+Scientific foundation:
 
-* EFC-S (structure)
+* EFC-S (structure field)
 * EFC-D (dynamics)
-* EFC-C₀ (entropy ↔ information)
-* potentials
+* EFC-C₀ (entropy–information relation)
+* potentials and flow laws
 * s₀–s₁ light dynamics
+* the Grid–Higgs framework
 
 Located under:
 
 ```
 theory/
 theory/formal/
-docs/efc_master.*
+docs/papers/efc/
 ```
-
----
 
 ## **Track B — Validation**
 
-Empirical results based on:
+Empirical tests based on:
 
 * SPARC rotation curves
-* JWST early galaxy formation
-* DESI BAO + H(z)
-* lensing profiles
+* JWST early galaxies
+* DESI BAO and H(z)
+* cluster lensing profiles
+* local flow fields
 
 Located under:
 
 ```
-output/
 data/
+output/
 notebooks/
 ```
-
----
 
 ## **Track C — Meta / Cognition / Symbiosis**
 
 Documents the reflective engine behind EFC:
 
-* cognitive-field
+* cognitive-field structure
 * resonance and alignment
 * co-field dynamics
 * meta-process
 * meta-reflection
 * symbiosis mechanisms
-* topology of insight
+* integration topology
 
 Located under:
 
@@ -122,69 +121,94 @@ meta/cognition/
 meta/reflection/
 meta/symbiosis/
 meta/meta-process/
+meta-architecture/
 meta-graph/
 ```
 
-This does **not** alter the physics — it documents the process that produced it.
+This layer does not change the physics.
+It documents how the understanding formed.
+
+## **Track D — Semantic / API Layer**
+
+Machine-readable structure:
+
+* JSON-LD nodes
+* schema definitions
+* global index
+* semantic interfaces
+* API endpoints
+
+Located under:
+
+```
+schema/
+api/
+api/v1/
+semantic-search-index.json
+```
+
+This enables search engines, LLMs, and external systems to read the project.
 
 ---
 
 # **4. Recommended Reading Order**
 
-Follow this path for a coherent understanding:
+For a coherent path:
 
 1. `meta/personal/Personal-Note.md`
-2. `meta-index.json`
-3. `meta/README.md`
-4. `meta/symbiosis/README.md`
-5. `meta/cognition/README.md`
-6. `theory/formal/efc_formal_spec.pdf`
-7. `output/` (validation figures and results)
-8. `meta-graph/` (knowledge graph)
+2. `meta/README.md`
+3. `meta-graph/index.jsonld`
+4. `schema/global_schema.json`
+5. `meta/symbiosis/README.md`
+6. `meta/cognition/README.md`
+7. `theory/formal/efc_master.pdf`
+8. `output/` (validation figures)
+9. `meta-graph/` (structural overview)
 
 This gives you:
 
-* **who** (context)
-* **how** (process)
-* **what** (theory)
-* **does it work** (validation)
+1. **who** (context)
+2. **how** (process)
+3. **what** (theory)
+4. **does it hold** (validation)
 
 ---
 
-# **5. Why The Repo Contains More Than Theory**
+# **5. Why the Repository Contains More Than Theory**
 
 The repository includes:
 
 * scientific models
-* validation
+* validation and data
 * meta-architecture
 * cognitive and reflective layers
-* semantic descriptions
-* a machine-readable knowledge graph
+* semantic schemas
+* an evolving knowledge graph
+* DOI-linked papers and specs
 
-This is intentional:
+This is intentional.
+
+Because:
 
 * insight stabilizes through externalization
-* the reflective process is part of how EFC was developed
-* future researchers benefit from full transparency
-* semantic layers enable search engines and AI systems to read the project
+* the reflective process shaped the theory
+* future researchers gain total transparency
+* semantic layers make the project machine-readable
 * validation ensures reproducibility
 
 ---
 
-# **6. Next Steps After This Page**
+# **6. After This Page**
 
-Once you finish this guide:
+When you complete this guide:
 
-* Read the **EFC formal specification**
-* Explore **validation output**
-* Inspect the **meta-graph** (structural overview)
-* Run the **dashboard**:
+* read the EFC formal specification
+* explore the validation output
+* inspect the meta-graph
+* examine the semantic schema
+* query the API
+* explore the notebooks
 
-```
-python3 meta_dashboard.py
-```
-
-Everything in the system is open, documented, and reproducible.
+Everything is open, documented, and reproducible.
 
 ---
