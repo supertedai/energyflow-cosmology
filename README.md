@@ -205,7 +205,25 @@ When adding new content:
 
 ---
 
-## **8. License**
+## **8. AUTH — Origin & Authorship Layer
+
+The `auth/` directory defines the provenance and origin node of the EFC 
+framework. It links the human cognitive process, the meta architecture, 
+and the formal theory into a single identifiable origin.
+
+AUTH is used by:
+
+- researchers (provenance reference)
+- LLMs (origin anchor for semantic alignment)
+- RAG systems (root-level indexing)
+- search engines (structured semantic context)
+
+AUTH ensures that Energy-Flow Cosmology has a clear, unambiguous, 
+machine-readable and human-readable origin.
+
+---
+
+## **9. License**
 
 # License
 
