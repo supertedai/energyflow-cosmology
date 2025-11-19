@@ -205,7 +205,7 @@ When adding new content:
 
 ---
 
-## **8. AUTH — Origin & Authorship Layer
+## **8. AUTH — Origin & Authorship Layer**
 
 The `auth/` directory defines the provenance and origin node of the EFC 
 framework. It links the human cognitive process, the meta architecture, 
