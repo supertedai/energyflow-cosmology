@@ -56,9 +56,9 @@
           "name": "latest.json",
           "path": "figshare/latest.json",
           "type": "latest_metadata",
-          "figshare_id": 30642497,
-          "doi": "10.6084/m9.figshare.30642497",
-          "url": "https://api.figshare.com/v2/account/articles/30642497",
+          "figshare_id": 30656351,
+          "doi": "10.6084/m9.figshare.30656351",
+          "url": "https://api.figshare.com/v2/account/articles/30656351",
           "published_date": null
         }
       ],
@@ -133,6 +133,13 @@
       "doi": "10.6084/m9.figshare.30642497",
       "figshare_id": 30642497,
       "url": "https://api.figshare.com/v2/account/articles/30642497",
+      "role": "master_spec",
+      "node": "FigshareNode"
+    },
+    {
+      "doi": "10.6084/m9.figshare.30656351",
+      "figshare_id": 30656351,
+      "url": "https://api.figshare.com/v2/account/articles/30656351",
       "role": "master_spec",
       "node": "FigshareNode"
     }
