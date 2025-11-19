@@ -1,35 +1,24 @@
 {
-  "version": "1.0",
-  "description": "Semantic search index for the Energy-Flow Cosmology repository. Designed for LLMs, RAG systems and meta-process aware agents.",
+  "version": "1.2",
+  "description": "Semantic search index for the Energy-Flow Cosmology repository.",
   "nodes": [
-
     {
       "id": "auth-root",
       "path": "auth/",
       "type": "Directory",
       "domain": "auth",
       "layer": "origin",
-      "tags": ["auth", "origin", "provenance", "identity", "efc"],
-      "summary": "AUTH — the origin and authorship layer defining the provenance, cognitive signature and single-source emergence of the EFC framework."
+      "tags": ["auth", "origin", "provenance", "identity"],
+      "summary": "AUTH layer: origin, provenance, identity and citation rules for EFC."
     },
-
     {
       "id": "overview",
       "path": "OVERVIEW.md",
       "type": "Document",
       "domain": "system",
       "layer": "root",
-      "tags": ["overview", "system", "meta-architecture", "efc"],
-      "summary": "One-page description of the full system: meta-architecture, theory, methodology, and human–AI co-processing."
-    },
-    {
-      "id": "manifest",
-      "path": "manifest.jsonld",
-      "type": "JSONLD",
-      "domain": "system",
-      "layer": "root",
-      "tags": ["manifest", "schema", "global", "meta"],
-      "summary": "Global manifest describing all major components as a unified semantic graph."
+      "tags": ["overview", "system", "efc"],
+      "summary": "One-page description of the full system."
     },
     {
       "id": "meta-map",
@@ -37,45 +26,18 @@
       "type": "Document",
       "domain": "system",
       "layer": "root",
-      "tags": ["diagram", "mermaid", "meta-map", "architecture"],
-      "summary": "Master architecture diagrams for the entire meta-system and its relation to theory and methodology."
+      "tags": ["diagram", "architecture"],
+      "summary": "Architectural map of the entire EFC meta-system."
     },
 
     {
-      "id": "theory-efc-master",
-      "path": "theory/efc_master_specification/",
+      "id": "theory-core",
+      "path": "theory/formal/",
       "type": "Directory",
       "domain": "theory",
-      "layer": "efc-core",
-      "tags": ["efc", "master-spec", "cosmology", "thermodynamics"],
-      "summary": "Energy-Flow Cosmology Master Specification: core structure of EFC, including S, Ef and layered submodels."
-    },
-    {
-      "id": "theory-efc-formal",
-      "path": "theory/efc_formal_spec/",
-      "type": "Directory",
-      "domain": "theory",
-      "layer": "efc-formal",
-      "tags": ["efc", "formal", "math", "equations"],
-      "summary": "Formal mathematical specification of Energy-Flow Cosmology, including notation and field equations."
-    },
-    {
-      "id": "theory-h-model",
-      "path": "theory/efc-h-model/",
-      "type": "Directory",
-      "domain": "theory",
-      "layer": "structure",
-      "tags": ["halo", "structure", "entropy", "efc-s"],
-      "summary": "Halo / H-model: structural description of entropy-based halo formation and EFC-S structural layer."
-    },
-    {
-      "id": "theory-notation",
-      "path": "theory/notation/",
-      "type": "Directory",
-      "domain": "theory",
-      "layer": "notation",
-      "tags": ["notation", "symbols", "parameters"],
-      "summary": "Notation and parameter definitions used across all EFC theory documents."
+      "layer": "formal",
+      "tags": ["efc", "formal", "math"],
+      "summary": "Formal layer containing master specification and field definitions."
     },
 
     {
@@ -84,17 +46,26 @@
       "type": "Directory",
       "domain": "schema",
       "layer": "root",
-      "tags": ["schema", "jsonld", "concepts", "meta"],
-      "summary": "Root of all schema and JSON-LD definitions for concepts, meta-nodes and APIs."
+      "tags": ["schema", "jsonld"],
+      "summary": "Root of all JSON-LD schemas."
     },
     {
       "id": "schema-concepts",
-      "path": "schema/concepts/",
-      "type": "Directory",
+      "path": "schema/concepts.json",
+      "type": "JSON",
       "domain": "schema",
       "layer": "concepts",
-      "tags": ["concepts", "efc", "ontology"],
-      "summary": "Concept-level JSON-LD definitions for Energy-Flow Cosmology and related structures."
+      "tags": ["concepts", "definitions"],
+      "summary": "Concept definitions for EFC."
+    },
+    {
+      "id": "schema-global",
+      "path": "schema/global_schema.json",
+      "type": "JSON",
+      "domain": "schema",
+      "layer": "registry",
+      "tags": ["global-schema", "registry"],
+      "summary": "Global schema listing all domains and DOI nodes."
     },
 
     {
@@ -102,9 +73,9 @@
       "path": "meta/meta-process/",
       "type": "Directory",
       "domain": "meta",
-      "layer": "meta-process",
-      "tags": ["meta-process", "insight", "architecture"],
-      "summary": "Top-level directory for the meta-process architecture that models high-order insight formation."
+      "layer": "process",
+      "tags": ["meta-process"],
+      "summary": "Meta-process architecture."
     },
     {
       "id": "meta-pattern",
@@ -112,8 +83,8 @@
       "type": "Directory",
       "domain": "meta",
       "layer": "pattern",
-      "tags": ["pattern", "primitives", "meta"],
-      "summary": "Pattern layer: primitive structural units used by the meta-process to form higher-order insight."
+      "tags": ["pattern"],
+      "summary": "Pattern layer."
     },
     {
       "id": "meta-topology",
@@ -121,17 +92,8 @@
       "type": "Directory",
       "domain": "meta",
       "layer": "topology",
-      "tags": ["topology", "shapes", "structure"],
-      "summary": "Topology layer: organisation of patterns into shapes and stable structural configurations."
-    },
-    {
-      "id": "meta-co-field",
-      "path": "meta/meta-process/co-field/",
-      "type": "Directory",
-      "domain": "meta",
-      "layer": "co-field",
-      "tags": ["co-field", "interaction", "cross-layer"],
-      "summary": "Co-field layer: interaction fields between structures, resolving tensions and amplifying stable configurations."
+      "tags": ["topology"],
+      "summary": "Topology layer."
     },
     {
       "id": "meta-integration",
@@ -139,8 +101,8 @@
       "type": "Directory",
       "domain": "meta",
       "layer": "integration",
-      "tags": ["integration", "stabilisation", "selection"],
-      "summary": "Integration layer: selection and stabilisation of mature structures before they impact global dynamics."
+      "tags": ["integration"],
+      "summary": "Integration layer."
     },
     {
       "id": "meta-global-dynamics",
@@ -148,101 +110,27 @@
       "type": "Directory",
       "domain": "meta",
       "layer": "global-dynamics",
-      "tags": ["global", "states", "dynamics"],
-      "summary": "Global Dynamics: describes system-wide states, transitions and high-level behaviour of the meta-process."
-    },
-
-    {
-      "id": "meta-tasks",
-      "path": "meta/meta-process/tasks/",
-      "type": "Directory",
-      "domain": "meta",
-      "layer": "regulation",
-      "tags": ["tasks", "operations", "maintenance"],
-      "summary": "Definition of operational structural tasks executed by the meta-process (coherence, transitions, load, boundaries)."
+      "tags": ["global"],
+      "summary": "Global system dynamics."
     },
     {
-      "id": "meta-workflows",
-      "path": "meta/meta-process/workflows/",
-      "type": "Directory",
-      "domain": "meta",
-      "layer": "regulation",
-      "tags": ["workflows", "sequences", "procedures"],
-      "summary": "Standardised sequences of tasks (workflows) that run meta-process procedures such as stabilisation and transitions."
-    },
-    {
-      "id": "meta-self-eval",
-      "path": "meta/meta-process/self-evaluation/",
-      "type": "Directory",
-      "domain": "meta",
-      "layer": "regulation",
-      "tags": ["self-evaluation", "metrics", "diagnostics"],
-      "summary": "Self-evaluation layer: metrics, diagnostics and structural performance evaluation of the meta-architecture."
-    },
-    {
-      "id": "meta-validation-plan",
-      "path": "meta/meta-process/validation-plan/",
-      "type": "Directory",
-      "domain": "meta",
-      "layer": "regulation",
-      "tags": ["validation", "criteria", "testing"],
-      "summary": "Validation plan: structural criteria, test phases and methods to validate that the meta-architecture behaves as intended."
-    },
-
-    {
-      "id": "meta-process-of-process",
+      "id": "meta-metacontrol",
       "path": "meta/meta-process/process-of-process/",
       "type": "Directory",
       "domain": "meta",
       "layer": "evolution",
-      "tags": ["process-of-process", "evolution", "meta-control"],
-      "summary": "Process-of-Process: mechanisms for modifying, simplifying and evolving the meta-architecture itself."
-    },
-    {
-      "id": "meta-roadmap",
-      "path": "meta/meta-process/roadmap/",
-      "type": "Directory",
-      "domain": "meta",
-      "layer": "evolution",
-      "tags": ["roadmap", "future", "planning"],
-      "summary": "Roadmap: forward-looking plan for future developments and structural changes in the meta-architecture."
-    },
-    {
-      "id": "meta-milestones",
-      "path": "meta/meta-process/milestones/",
-      "type": "Directory",
-      "domain": "meta",
-      "layer": "evolution",
-      "tags": ["milestones", "history", "timeline"],
-      "summary": "Milestones: documented past structural events and key changes in the evolution of the meta-architecture."
+      "tags": ["evolution"],
+      "summary": "Evolution and modification of the meta-process."
     },
 
-    {
-      "id": "meta-reflective-protocol",
-      "path": "meta/meta-reflective-protocol/",
-      "type": "Directory",
-      "domain": "meta",
-      "layer": "reflection",
-      "tags": ["reflection", "protocol", "introspection"],
-      "summary": "Meta-Reflective Protocol: formal rules for how reflection is performed in a bounded, non-psychological way."
-    },
-    {
-      "id": "reflection-index",
-      "path": "meta/reflection/reflection-index/",
-      "type": "Directory",
-      "domain": "meta",
-      "layer": "reflection",
-      "tags": ["reflection-index", "surfaces", "domains", "levels"],
-      "summary": "Reflection Index: registry of reflection domains, surfaces, types and levels within the architecture."
-    },
     {
       "id": "metascope",
       "path": "meta/metascope/",
       "type": "Directory",
       "domain": "meta",
-      "layer": "observation",
-      "tags": ["metascope", "viewpoint", "perspective"],
-      "summary": "Metascope: defines the structural viewpoint used to observe the full architecture as a single system."
+      "layer": "scope",
+      "tags": ["metascope"],
+      "summary": "Metascope perspective layer."
     },
 
     {
@@ -251,8 +139,8 @@
       "type": "Directory",
       "domain": "methodology",
       "layer": "root",
-      "tags": ["methodology", "workflow", "open-science"],
-      "summary": "Root of methodology documents: open method, symbiosis, reproducibility and epistemology."
+      "tags": ["methodology"],
+      "summary": "Methodology and workflow documentation."
     },
     {
       "id": "methodology-open-method",
@@ -260,8 +148,8 @@
       "type": "Directory",
       "domain": "methodology",
       "layer": "core-method",
-      "tags": ["open-method", "research-process", "ai-assisted"],
-      "summary": "Open Method: definition of the research workflow, including AI assistance, versioning and transparency."
+      "tags": ["open-method"],
+      "summary": "Open Method definition."
     },
     {
       "id": "methodology-symbiosis-interface",
@@ -269,8 +157,8 @@
       "type": "Directory",
       "domain": "methodology",
       "layer": "symbiosis",
-      "tags": ["symbiosis", "human-ai", "interface"],
-      "summary": "Symbiosis Interface: description of the human–AI co-processing model and its structural constraints."
+      "tags": ["symbiosis"],
+      "summary": "Symbiosis interface layer."
     },
     {
       "id": "methodology-reproducibility",
@@ -278,8 +166,18 @@
       "type": "Directory",
       "domain": "methodology",
       "layer": "reproducibility",
-      "tags": ["reproducibility", "open-science", "protocol"],
-      "summary": "Reproducibility Guide: instructions and structure for reproducing analyses, models and meta-process behaviour."
+      "tags": ["repro"],
+      "summary": "Reproducibility guide."
+    },
+
+    {
+      "id": "auth-index",
+      "path": "auth/index.md",
+      "type": "Document",
+      "domain": "auth",
+      "layer": "origin-doc",
+      "tags": ["auth", "origin", "citation"],
+      "summary": "AUTH documentation."
     }
   ]
 }
