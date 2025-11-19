@@ -1,19 +1,38 @@
 {
   "@context": "https://schema.org",
   "@type": "CreativeWork",
-  "identifier": "docs/restored_pdfs/EFC-v2.1-Modular-Synthesis",
-  "name": "Efc V2.1 Modular Synthesis",
+  "@id": "https://github.com/supertedai/energyflow-cosmology/docs/papers/efc/EFC-v2.1-Modular-Synthesis",
+  "identifier": "EFC-v2.1-Modular-Synthesis",
+  "name": "EFC — v2.1 Modular Synthesis",
   "author": {
     "@type": "Person",
     "name": "Morten Magnusson",
     "identifier": "https://orcid.org/0009-0002-4860-5095"
   },
-  "version": "1.0",
+  "version": "2.1",
+  "encodingFormat": "application/pdf",
+  "url": "EFC-v2.1-Modular-Synthesis.pdf",
   "isPartOf": {
     "@type": "CreativeWorkSeries",
-    "name": "docs"
+    "name": "EFC Papers",
+    "identifier": "efc-papers"
   },
-  "layer": "docs",
-  "encodingFormat": "pdf",
-  "url": "docs/restored_pdfs/EFC-v2.1-Modular-Synthesis.pdf"
+  "keywords": [
+    "EFC",
+    "Modular Synthesis",
+    "Version 2.1",
+    "Energy Flow",
+    "Entropy",
+    "Grid Field",
+    "Thermodynamic Architecture",
+    "Structural Modules",
+    "Dynamic Modules"
+  ],
+  "about": [
+    "Energy-Flow Cosmology",
+    "Modular Architecture",
+    "System Decomposition",
+    "Entropy-Driven Dynamics",
+    "Thermodynamic Framework"
+  ]
 }
