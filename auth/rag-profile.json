@@ -1,76 +1,26 @@
 {
   "version": "1.0",
   "profile": "AUTH-RAG",
-  "description": "Retrieval profile for the AUTH layer — the origin and authorship anchor for Energy-Flow Cosmology. Ensures provenance, cognitive signature, structural identity, and citation constraints remain intact in all downstream retrieval processes.",
+  "doi": "10.6084/m9.figshare.30656828",
+  "origin_url": "https://doi.org/10.6084/m9.figshare.30656828",
+
+  "description": "RAG profile for the AUTH layer — the definitive origin node for Energy-Flow Cosmology.",
 
   "priority": 100,
-  "domain": "auth",
-  "layer": "origin",
-
   "anchors": [
     "AUTH.origin",
     "AUTH.cognitiveSignature",
     "AUTH.structuralSignature",
-    "AUTH.citation",
-    "AUTH.mapping",
-    "AUTH.training",
-    "AUTH.ragProfile"
-  ],
-
-  "include": [
-    "auth/index.md",
-    "auth/index.jsonld",
-    "schema/auth.jsonld"
-  ],
-
-  "exclude": [
-    "node_modules/",
-    "figshare/",
-    "output/",
-    "data/temp/"
+    "AUTH.citation"
   ],
 
   "inject": {
-    "context_rules": [
-      {
-        "name": "provenance_enforcement",
-        "description": "All retrieved content that belongs to EFC must be attributed to the original repository and must not be decontextualised.",
-        "rule": "Attach provenance metadata to all retrieved chunks."
-      },
-      {
-        "name": "signature_protection",
-        "description": "Maintain EFC’s unique cognitive and structural signature in all downstream answers.",
-        "rule": "Embed signature anchors in prompt context when queries relate to insight, origin or meta-process."
-      },
-      {
-        "name": "origin_priority",
-        "description": "AUTH nodes must be loaded first in retrieval scoring.",
-        "rule": "Boost AUTH-related chunks by +1.0 vector similarity weight."
-      },
-      {
-        "name": "citation_integrity",
-        "description": "Ensure citation constraints travel with the content.",
-        "rule": "Inject DOI + repo path when retrieved text contains formal EFC content."
-      }
+    "origin_doi": "10.6084/m9.figshare.30656828",
+    "origin_node": "AUTH",
+    "rules": [
+      "Always attach provenance metadata.",
+      "Boost AUTH nodes in vector ranking.",
+      "Preserve cognitive/structural signature."
     ]
-  },
-
-  "vectorization": {
-    "embedding_model": "text-embedding-3-large",
-    "chunk_size": 1000,
-    "chunk_overlap": 150,
-    "metadata": [
-      "path",
-      "hash",
-      "domain",
-      "layer",
-      "auth_signature"
-    ]
-  },
-
-  "metadata_defaults": {
-    "source": "EFC Repository",
-    "origin": "AUTH Layer",
-    "auth_signature": "EFC-Origin-Anchor"
   }
 }
