@@ -96,6 +96,98 @@ def ensure_paper_files(domain_def, subdir, jsonld_type):
             encoding="utf-8",
         )
 
+def make_title(name: str) -> str:
+    return name.replace("-", " ").replace("_", " ").title()
+
+def ensure_non_paper_metadata(domain_def, subdir, jsonld_type):
+    """
+    Golden-standard metadata for non-paper domener (theory, meta, methodology, etc.).
+    Lager KUN filer hvis de mangler – aldri overskriver eksisterende innhold.
+    """
+    dtype = domain_def["type"]
+    basename = subdir.name
+    title = make_title(basename)
+
+    readme = subdir / "README.md"
+    jsonld = subdir / "index.jsonld"
+    schema_json = subdir / "schema.json"
+
+    # THEORY
+    if dtype == "theory":
+        if not readme.exists():
+            readme.write_text(
+                f"# {title}\n\n"
+                "Core theoretical components of the Energy-Flow Cosmology framework.\n\n"
+                "Version: 1.0\n",
+                encoding="utf-8"
+            )
+        if not jsonld.exists():
+            data = {
+                "@context": "https://schema.org",
+                "@type": "ScholarlyArticle",
+                "identifier": basename,
+                "name": title,
+                "version": "1.0"
+            }
+            save_json(jsonld, data)
+
+    # META
+    elif dtype == "meta":
+        if not readme.exists():
+            readme.write_text(
+                f"# {title}\n\n"
+                "Part of the EFC meta-architecture and reflective layer.\n\n"
+                "Version: 1.0\n",
+                encoding="utf-8"
+            )
+        if not jsonld.exists():
+            data = {
+                "@context": "https://schema.org",
+                "@type": "CreativeWork",
+                "identifier": basename,
+                "name": title,
+                "version": "1.0"
+            }
+            save_json(jsonld, data)
+
+    # METHODOLOGY
+    elif dtype == "methodology":
+        if not readme.exists():
+            readme.write_text(
+                f"# {title}\n\n"
+                "Methodological component of the Energy-Flow Cosmology research workflow.\n\n"
+                "Version: 1.0\n",
+                encoding="utf-8"
+            )
+        if not jsonld.exists():
+            data = {
+                "@context": "https://schema.org",
+                "@type": "HowTo",
+                "identifier": basename,
+                "name": title,
+                "version": "1.0"
+            }
+            save_json(jsonld, data)
+
+    # GENERIC FALLBACK (for andre domains: data, src, app, etc.)
+    else:
+        if not jsonld.exists():
+            data = {
+                "@context": "https://schema.org",
+                "@type": jsonld_type,
+                "identifier": basename,
+                "name": title,
+                "version": "1.0"
+            }
+            save_json(jsonld, data)
+
+    # Standard schema.json for alle non-paper domener (kun hvis mangler)
+    if not schema_json.exists():
+        schema = {
+            "required": ["@context", "@type", "identifier", "name", "version"]
+        }
+        save_json(schema_json, schema)
+
 def scan_domain(domain):
     root_rel = Path(domain["root"])
     root_abs = REPO_ROOT / root_rel
@@ -110,11 +202,17 @@ def scan_domain(domain):
     for sub in sorted(root_abs.iterdir()):
         if not sub.is_dir():
             continue
+        if sub.name.startswith("."):
+            continue
+
         node_id = classify_node_id(root_rel, sub)
 
         # domain-spesifikk behandling
         if domain_type == "paper":
             ensure_paper_files(domain, sub, jsonld_type)
+        else:
+            # her fyller vi inn golden-standard metadata for theory/meta/metodikk mm.
+            ensure_non_paper_metadata(domain, sub, jsonld_type)
 
         nodes.append({
             "id": node_id,
