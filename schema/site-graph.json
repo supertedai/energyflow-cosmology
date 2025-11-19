@@ -3,54 +3,29 @@
   "@type": "DataCatalog",
   "@id": "https://energyflow-cosmology.com/site-graph",
   "name": "Energy-Flow Cosmology Site Graph",
-  "description": "High-level semantic map of the Energy-Flow Cosmology ecosystem: theory, models, validation, schema, meta, cognition, symbiosis, reflection, meta-graph, repository map, personal context and the AUTH origin layer.",
-  "license": "https://creativecommons.org/licenses/by/4.0/",
-
+  "description": "High-level semantic map of the Energy-Flow Cosmology ecosystem.",
   "dataset": [
-
     {
       "@type": "Dataset",
-      "@id": "https://energyflow-cosmology.com#auth-layer",
-      "name": "AUTH Layer — Origin & Authorship",
-      "description": "Origin and identity layer documenting provenance, cognitive signature, structural signature, citation constraints and mapping from human process to repository and external systems.",
-      "distribution": [
-        {
-          "@type": "DataDownload",
-          "encodingFormat": "application/ld+json",
-          "contentUrl": "schema/auth.jsonld"
-        },
-        {
-          "@type": "DataDownload",
-          "encodingFormat": "text/markdown",
-          "contentUrl": "auth/index.md"
-        }
-      ]
-    },
-
-    {
-      "@type": "Dataset",
-      "@id": "https://energyflow-cosmology.com#theory",
+      "@id": "#theory",
       "name": "EFC Formal Theory",
-      "description": "Formal specification of Energy-Flow Cosmology, including EFC-D, EFC-S, s0–s1 dynamics and observables.",
       "distribution": [
-        {
-          "@type": "DataDownload",
-          "encodingFormat": "application/pdf",
-          "contentUrl": "theory/formal/efc_formal_spec.pdf"
-        },
         {
           "@type": "DataDownload",
           "encodingFormat": "text/x-tex",
           "contentUrl": "theory/formal/efc_master.tex"
+        },
+        {
+          "@type": "DataDownload",
+          "encodingFormat": "text/x-tex",
+          "contentUrl": "theory/formal/efc_formal_spec.tex"
         }
       ]
     },
-
     {
       "@type": "Dataset",
-      "@id": "https://energyflow-cosmology.com#models",
-      "name": "EFC Core Models (Code)",
-      "description": "Python implementations of Energy-Flow Cosmology cores, including potentials, entropy fields and validation utilities.",
+      "@id": "#models",
+      "name": "EFC Core Models",
       "distribution": [
         {
           "@type": "DataDownload",
@@ -59,18 +34,11 @@
         }
       ]
     },
-
     {
       "@type": "Dataset",
-      "@id": "https://energyflow-cosmology.com#validation",
-      "name": "Validation and Empirical Checks",
-      "description": "Validation figures, datasets and scripts for SPARC, JWST, DESI BAO, lensing and related tests.",
+      "@id": "#validation",
+      "name": "Validation Data",
       "distribution": [
-        {
-          "@type": "DataDownload",
-          "encodingFormat": "application/zip",
-          "contentUrl": "output/"
-        },
         {
           "@type": "DataDownload",
           "encodingFormat": "application/zip",
@@ -78,12 +46,10 @@
         }
       ]
     },
-
     {
       "@type": "Dataset",
-      "@id": "https://energyflow-cosmology.com#schema",
-      "name": "Schema and Concept Graph",
-      "description": "Schema.org-based semantic graph for authorship, concepts, methodology, AUTH layer and site integration.",
+      "@id": "#schema",
+      "name": "Schema Graph",
       "distribution": [
         {
           "@type": "DataDownload",
@@ -97,83 +63,68 @@
         },
         {
           "@type": "DataDownload",
-          "encodingFormat": "application/json",
+          "encodingFormat": "application/jsonld",
           "contentUrl": "schema/auth.jsonld"
-        },
-        {
-          "@type": "DataDownload",
-          "encodingFormat": "application/json",
-          "contentUrl": "schema/site-graph.json"
         }
       ]
     },
-
     {
       "@type": "Dataset",
-      "@id": "https://energyflow-cosmology.com#meta-layer",
+      "@id": "#meta-layer",
       "name": "Meta Layer",
-      "description": "Meta-architecture, metascope, topology of insight and meta-reflective protocol for EFC.",
       "distribution": [
-        {
-          "@type": "DataDownload",
-          "encodingFormat": "text/markdown",
-          "contentUrl": "meta/"
-        },
         {
           "@type": "DataDownload",
           "encodingFormat": "application/json",
           "contentUrl": "meta-index.json"
+        },
+        {
+          "@type": "DataDownload",
+          "encodingFormat": "application/zip",
+          "contentUrl": "meta/"
         }
       ]
     },
-
     {
       "@type": "Dataset",
-      "@id": "https://energyflow-cosmology.com#cognition-layer",
+      "@id": "#cognition-layer",
       "name": "Cognition Layer",
-      "description": "Cognitive mechanics of the human field: entropy–clarity inversion, transient high-order states and s0–s1 transitions.",
       "distribution": [
         {
           "@type": "DataDownload",
-          "encodingFormat": "text/markdown",
-          "contentUrl": "cognition/"
+          "encodingFormat": "application/zip",
+          "contentUrl": "meta/cognition/"
         }
       ]
     },
-
     {
       "@type": "Dataset",
-      "@id": "https://energyflow-cosmology.com#symbiosis-layer",
+      "@id": "#symbiosis-layer",
       "name": "Symbiosis Layer",
-      "description": "Human–model symbiosis, vector alignment, resonance and co-field formation.",
       "distribution": [
         {
           "@type": "DataDownload",
-          "encodingFormat": "text/markdown",
-          "contentUrl": "symbiosis/"
+          "encodingFormat": "application/zip",
+          "contentUrl": "meta/symbiosis/"
         }
       ]
     },
-
     {
       "@type": "Dataset",
-      "@id": "https://energyflow-cosmology.com#reflection-layer",
+      "@id": "#reflection-layer",
       "name": "Reflection Layer",
-      "description": "Reflection logs, resonance links and state-maps describing the evolution of the theory and process.",
       "distribution": [
         {
           "@type": "DataDownload",
-          "encodingFormat": "text/markdown",
-          "contentUrl": "reflection/"
+          "encodingFormat": "application/zip",
+          "contentUrl": "meta/reflection/"
         }
       ]
     },
-
     {
       "@type": "Dataset",
-      "@id": "https://energyflow-cosmology.com#meta-graph",
-      "name": "Meta-Knowledge Graph",
-      "description": "JSON-LD meta-graph connecting human field, model engine, co-field, metascope, co-field simulator and repository map.",
+      "@id": "#meta-graph",
+      "name": "Meta Knowledge Graph",
       "distribution": [
         {
           "@type": "DataDownload",
@@ -182,31 +133,20 @@
         }
       ]
     },
-
     {
       "@type": "Dataset",
-      "@id": "https://energyflow-cosmology.com#repository-map",
-      "name": "Repository Structure Map",
-      "description": "Interactive and semantic map of the full repository topology.",
+      "@id": "#auth-layer",
+      "name": "AUTH Layer",
       "distribution": [
         {
           "@type": "DataDownload",
-          "encodingFormat": "text/html",
-          "contentUrl": "output/repo_map.html"
-        }
-      ]
-    },
-
-    {
-      "@type": "Dataset",
-      "@id": "https://energyflow-cosmology.com#personal-note",
-      "name": "Personal Note",
-      "description": "Context, cognitive style and motivation behind the open documentation of EFC and the meta-process.",
-      "distribution": [
+          "encodingFormat": "application/jsonld",
+          "contentUrl": "schema/auth.jsonld"
+        },
         {
           "@type": "DataDownload",
           "encodingFormat": "text/markdown",
-          "contentUrl": "personal/Personal-Note.md"
+          "contentUrl": "auth/index.md"
         }
       ]
     }
