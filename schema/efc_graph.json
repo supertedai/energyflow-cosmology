@@ -14,8 +14,8 @@
     },
     {
       "id": "efc-flow-diagram",
-      "label": "EFC Flow Diagram \u2014 Structural Overview",
-      "layer": "EFC-S",
+      "label": "EFC Flow Diagram",
+      "layer": "diagram",
       "path": "theory/formal/efc-flow-diagram"
     },
     {
@@ -58,17 +58,7 @@
   "edges": [
     {
       "from": "efc-c0-model",
-      "to": "efc-flow-diagram",
-      "type": "depends_on_layer"
-    },
-    {
-      "from": "efc-c0-model",
       "to": "efc-s-model",
-      "type": "depends_on_layer"
-    },
-    {
-      "from": "efc-d-model",
-      "to": "efc-flow-diagram",
       "type": "depends_on_layer"
     },
     {
@@ -79,11 +69,6 @@
     {
       "from": "efc-d-model",
       "to": "efc-c0-model",
-      "type": "depends_on_layer"
-    },
-    {
-      "from": "efc-formal-spec",
-      "to": "efc-flow-diagram",
       "type": "depends_on_layer"
     },
     {
@@ -123,11 +108,6 @@
     },
     {
       "from": "efc-h-model",
-      "to": "efc-flow-diagram",
-      "type": "depends_on_layer"
-    },
-    {
-      "from": "efc-h-model",
       "to": "efc-s-model",
       "type": "depends_on_layer"
     },
@@ -139,11 +119,6 @@
     {
       "from": "efc-h-model",
       "to": "efc-c0-model",
-      "type": "depends_on_layer"
-    },
-    {
-      "from": "efc-header",
-      "to": "efc-flow-diagram",
       "type": "depends_on_layer"
     },
     {
