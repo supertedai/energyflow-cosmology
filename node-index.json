@@ -1,764 +1,488 @@
-[
-  {
-    "id": null,
-    "name": "api",
-    "type": "CreativeWork",
-    "path": "./api/api.jsonld"
-  },
-  {
-    "id": null,
-    "name": "\ud83d\udce1 **Energy-Flow Cosmology \u2014 API v1**",
-    "type": "CreativeWork",
-    "path": "./api/README_API.jsonld"
-  },
-  {
-    "id": null,
-    "name": "personal",
-    "type": "CreativeWork",
-    "path": "./meta/personal/personal/index.jsonld"
-  },
-  {
-    "id": null,
-    "name": "Personal Note",
-    "type": "CreativeWork",
-    "path": "./meta/personal/personal-note/index.jsonld"
-  },
-  {
-    "id": null,
-    "name": "personal",
-    "type": "CreativeWork",
-    "path": "./meta/personal/readme/index.jsonld"
-  },
-  {
-    "id": null,
-    "name": "personal",
-    "type": "CreativeWork",
-    "path": "./meta/personal/README/index.jsonld"
-  },
-  {
-    "id": null,
-    "name": "reflection",
-    "type": "CreativeWork",
-    "path": "./meta/reflection/reflection/index.jsonld"
-  },
-  {
-    "id": null,
-    "name": "Reflection Log \u2014 Energy-Flow Cosmology",
-    "type": "CreativeWork",
-    "path": "./meta/reflection/reflection-log/index.jsonld"
-  },
-  {
-    "id": null,
-    "name": "reflection",
-    "type": "CreativeWork",
-    "path": "./meta/reflection/readme/index.jsonld"
-  },
-  {
-    "id": null,
-    "name": "reflection",
-    "type": "CreativeWork",
-    "path": "./meta/reflection/README/index.jsonld"
-  },
-  {
-    "id": null,
-    "name": "cognition",
-    "type": "CreativeWork",
-    "path": "./meta/cognition/cognition/index.jsonld"
-  },
-  {
-    "id": null,
-    "name": "Cognitive Signature Specification (CSS)",
-    "type": "CreativeWork",
-    "path": "./meta/cognition/cognitive-signature/index.jsonld"
-  },
-  {
-    "id": null,
-    "name": "Abstract",
-    "type": "CreativeWork",
-    "path": "./meta/cognition/cem-consciousness-ego-mirror/index.jsonld"
-  },
-  {
-    "id": null,
-    "name": "Entropy \u2192 Clarity Model",
-    "type": "CreativeWork",
-    "path": "./meta/cognition/entropy-clarity/index.jsonld"
-  },
-  {
-    "id": null,
-    "name": "Transient Representations",
-    "type": "CreativeWork",
-    "path": "./meta/cognition/transient-representations/index.jsonld"
-  },
-  {
-    "id": null,
-    "name": "cognition",
-    "type": "CreativeWork",
-    "path": "./meta/cognition/readme/index.jsonld"
-  },
-  {
-    "id": null,
-    "name": "You: Cognitive Architecture",
-    "type": "CreativeWork",
-    "path": "./meta/cognition/you/index.jsonld"
-  },
-  {
-    "id": null,
-    "name": "cognition",
-    "type": "CreativeWork",
-    "path": "./meta/cognition/README/index.jsonld"
-  },
-  {
-    "id": null,
-    "name": "Efc Hypothesis Entropy And Energy Flow",
-    "type": "CreativeWork",
-    "path": "./meta/cognition/efc-hypothesis-entropy-and-energy-flow/index.jsonld"
-  },
-  {
-    "id": null,
-    "name": "Cognitive Field Model",
-    "type": "CreativeWork",
-    "path": "./meta/cognition/cognitive-field/index.jsonld"
-  },
-  {
-    "id": null,
-    "name": "meta",
-    "type": "CreativeWork",
-    "path": "./meta/meta/index.jsonld"
-  },
-  {
-    "id": null,
-    "name": "**Energy-Flow Cosmology \u2014 Architecture v2**",
-    "type": "CreativeWork",
-    "path": "./meta/architecture/index.jsonld"
-  },
-  {
-    "id": null,
-    "name": "resources",
-    "type": "CreativeWork",
-    "path": "./meta/resources/readme/index.jsonld"
-  },
-  {
-    "id": null,
-    "name": "resources",
-    "type": "CreativeWork",
-    "path": "./meta/resources/README/index.jsonld"
-  },
-  {
-    "id": null,
-    "name": "Symbiotic Process Documentation",
-    "type": "CreativeWork",
-    "path": "./meta/symbiosis/symbiotic-process/index.jsonld"
-  },
-  {
-    "id": null,
-    "name": "System Coherence",
-    "type": "CreativeWork",
-    "path": "./meta/symbiosis/system-coherence/index.jsonld"
-  },
-  {
-    "id": null,
-    "name": "symbiosis",
-    "type": "CreativeWork",
-    "path": "./meta/symbiosis/symbiosis/index.jsonld"
-  },
-  {
-    "id": null,
-    "name": "Resonance Mechanism (Human + System Field)",
-    "type": "CreativeWork",
-    "path": "./meta/symbiosis/resonance-mechanism/index.jsonld"
-  },
-  {
-    "id": null,
-    "name": "Symbiotic Process \u2013 One-Page Summary",
-    "type": "CreativeWork",
-    "path": "./meta/symbiosis/symbiotic-process-summary/index.jsonld"
-  },
-  {
-    "id": null,
-    "name": "Symbiosis Interface and Reflective Collaboration",
-    "type": "CreativeWork",
-    "path": "./meta/symbiosis/symbiosis-interface/index.jsonld"
-  },
-  {
-    "id": null,
-    "name": "Symbiotic Interaction Specification",
-    "type": "CreativeWork",
-    "path": "./meta/symbiosis/symbiotic-process-llm/index.jsonld"
-  },
-  {
-    "id": null,
-    "name": "symbiosis",
-    "type": "CreativeWork",
-    "path": "./meta/symbiosis/readme/index.jsonld"
-  },
-  {
-    "id": null,
-    "name": "The System: Structural Engine",
-    "type": "CreativeWork",
-    "path": "./meta/symbiosis/system/index.jsonld"
-  },
-  {
-    "id": null,
-    "name": "symbiosis",
-    "type": "CreativeWork",
-    "path": "./meta/symbiosis/README/index.jsonld"
-  },
-  {
-    "id": null,
-    "name": "Vector Alignment Model",
-    "type": "CreativeWork",
-    "path": "./meta/symbiosis/vector-alignment/index.jsonld"
-  },
-  {
-    "id": null,
-    "name": "`project/WORKFLOW_MAP.md`",
-    "type": "CreativeWork",
-    "path": "./meta/workflow-map/index.jsonld"
-  },
-  {
-    "id": null,
-    "name": "Meta Architecture (4th\u20135th Order Structure)",
-    "type": "CreativeWork",
-    "path": "./meta/meta-architecture/index.jsonld"
-  },
-  {
-    "id": null,
-    "name": "aux",
-    "type": "CreativeWork",
-    "path": "./meta/topology/aux/README/index.jsonld"
-  },
-  {
-    "id": null,
-    "name": "topology",
-    "type": "CreativeWork",
-    "path": "./meta/topology/README/index.jsonld"
-  },
-  {
-    "id": null,
-    "name": "Topology of Insight",
-    "type": "CreativeWork",
-    "path": "./meta/topology-of-insight/index.jsonld"
-  },
-  {
-    "id": null,
-    "name": "Process of the Process",
-    "type": "CreativeWork",
-    "path": "./meta/meta-process/process-of-process/index.jsonld"
-  },
-  {
-    "id": null,
-    "name": "Co-Field: The Shared Reflective Space",
-    "type": "CreativeWork",
-    "path": "./meta/meta-process/co-field/index.jsonld"
-  },
-  {
-    "id": null,
-    "name": "Backlog",
-    "type": "CreativeWork",
-    "path": "./meta/meta-process/backlog/index.jsonld"
-  },
-  {
-    "id": null,
-    "name": "Global Dynamics",
-    "type": "CreativeWork",
-    "path": "./meta/meta-process/global-dynamics/index.jsonld"
-  },
-  {
-    "id": null,
-    "name": "GitHub Workflows Overview",
-    "type": "CreativeWork",
-    "path": "./meta/meta-process/workflows/index.jsonld"
-  },
-  {
-    "id": null,
-    "name": "EFC Tasks",
-    "type": "CreativeWork",
-    "path": "./meta/meta-process/tasks/index.jsonld"
-  },
-  {
-    "id": null,
-    "name": "EFC Roadmap",
-    "type": "CreativeWork",
-    "path": "./meta/meta-process/roadmap/index.jsonld"
-  },
-  {
-    "id": null,
-    "name": "EFC Validation Plan",
-    "type": "CreativeWork",
-    "path": "./meta/meta-process/validation-plan/index.jsonld"
-  },
-  {
-    "id": null,
-    "name": "Milestones",
-    "type": "CreativeWork",
-    "path": "./meta/meta-process/milestones/index.jsonld"
-  },
-  {
-    "id": null,
-    "name": "Self-Evaluation Loop",
-    "type": "CreativeWork",
-    "path": "./meta/meta-process/self-evaluation/index.jsonld"
-  },
-  {
-    "id": null,
-    "name": "meta process",
-    "type": "CreativeWork",
-    "path": "./meta/meta-process/meta-process/index.jsonld"
-  },
-  {
-    "id": null,
-    "name": "meta-process",
-    "type": "CreativeWork",
-    "path": "./meta/meta-process/readme/index.jsonld"
-  },
-  {
-    "id": null,
-    "name": "meta-process",
-    "type": "CreativeWork",
-    "path": "./meta/meta-process/README/index.jsonld"
-  },
-  {
-    "id": null,
-    "name": "meta",
-    "type": "CreativeWork",
-    "path": "./meta/readme/index.jsonld"
-  },
-  {
-    "id": null,
-    "name": "Metascope: The Joint Reflective System",
-    "type": "CreativeWork",
-    "path": "./meta/metascope/index.jsonld"
-  },
-  {
-    "id": null,
-    "name": "Meta-Reflective Protocol (MRP)",
-    "type": "CreativeWork",
-    "path": "./meta/meta-reflective-protocol/index.jsonld"
-  },
-  {
-    "id": null,
-    "name": "Meta-Architecture Specification (MAS)",
-    "type": "CreativeWork",
-    "path": "./meta/meta-architecture-spec/index.jsonld"
-  },
-  {
-    "id": null,
-    "name": "meta",
-    "type": "CreativeWork",
-    "path": "./meta/README/index.jsonld"
-  },
-  {
-    "id": null,
-    "name": "AI Augmented Scientific Workflow Framework",
-    "type": "CreativeWork",
-    "path": "./methodology/AI-Augmented-Scientific-Workflow-Framework/AI-Augmented-Scientific-Workflow-Framework/index.jsonld"
-  },
-  {
-    "id": null,
-    "name": "AI-Augmented Scientific Workflow Framework",
-    "type": "CreativeWork",
-    "path": "./methodology/AI-Augmented-Scientific-Workflow-Framework/ai_workflow_framework/index.jsonld"
-  },
-  {
-    "id": null,
-    "name": "AI-Augmented-Scientific-Workflow-Framework",
-    "type": "CreativeWork",
-    "path": "./methodology/AI-Augmented-Scientific-Workflow-Framework/README/index.jsonld"
-  },
-  {
-    "id": null,
-    "name": "Author\u2019s Method Note",
-    "type": "CreativeWork",
-    "path": "./methodology/author-method-note/index.jsonld"
-  },
-  {
-    "id": null,
-    "name": "\ud83d\udee0\ufe0f Reproducibility Guide: Running the EFC System",
-    "type": "CreativeWork",
-    "path": "./methodology/reproducibility-guide/index.jsonld"
-  },
-  {
-    "id": null,
-    "name": "Auto-generated placeholder",
-    "type": "CreativeWork",
-    "path": "./methodology/symbiotic-process/index.jsonld"
-  },
-  {
-    "id": null,
-    "name": "EFC Epistemology",
-    "type": "CreativeWork",
-    "path": "./methodology/EFC-epistemology/index.jsonld"
-  },
-  {
-    "id": null,
-    "name": "methodology",
-    "type": "CreativeWork",
-    "path": "./methodology/methodology/index/index.jsonld"
-  },
-  {
-    "id": null,
-    "name": "methodology",
-    "type": "CreativeWork",
-    "path": "./methodology/methodology/README/index.jsonld"
-  },
-  {
-    "id": null,
-    "name": "Open Methodology of Energy-Flow Cosmology (EFC)",
-    "type": "CreativeWork",
-    "path": "./methodology/open-method/index.jsonld"
-  },
-  {
-    "id": null,
-    "name": "Auto-generated placeholder",
-    "type": "CreativeWork",
-    "path": "./methodology/symbiotic-process-summary/index.jsonld"
-  },
-  {
-    "id": null,
-    "name": "Auto-generated placeholder",
-    "type": "CreativeWork",
-    "path": "./methodology/symbiosis-interface/index.jsonld"
-  },
-  {
-    "id": null,
-    "name": "Auto-generated placeholder",
-    "type": "CreativeWork",
-    "path": "./methodology/symbiotic-process-llm/index.jsonld"
-  },
-  {
-    "id": null,
-    "name": "aux",
-    "type": "CreativeWork",
-    "path": "./methodology/open-process/aux/README/index.jsonld"
-  },
-  {
-    "id": null,
-    "name": "open-process",
-    "type": "CreativeWork",
-    "path": "./methodology/open-process/README/index.jsonld"
-  },
-  {
-    "id": null,
-    "name": "methodology",
-    "type": "CreativeWork",
-    "path": "./methodology/README/index.jsonld"
-  },
-  {
-    "id": null,
-    "name": "Docs",
-    "type": "CreativeWork",
-    "path": "./docs/index.jsonld"
-  },
-  {
-    "id": null,
-    "name": "archive",
-    "type": "CreativeWork",
-    "path": "./docs/archive/readme/index.jsonld"
-  },
-  {
-    "id": null,
-    "name": "Mathjax Header",
-    "type": "CreativeWork",
-    "path": "./docs/mathjax-header/index.jsonld"
-  },
-  {
-    "id": null,
-    "name": "meta",
-    "type": "CreativeWork",
-    "path": "./docs/meta/readme/index.jsonld"
-  },
-  {
-    "id": null,
-    "name": "figures",
-    "type": "CreativeWork",
-    "path": "./docs/figures/readme/index.jsonld"
-  },
-  {
-    "id": null,
-    "name": "Efc Master Template",
-    "type": "CreativeWork",
-    "path": "./docs/efc-master-template/index.jsonld"
-  },
-  {
-    "id": null,
-    "name": "docs",
-    "type": "CreativeWork",
-    "path": "./docs/docs/index.jsonld"
-  },
-  {
-    "id": null,
-    "name": "preprints",
-    "type": "CreativeWork",
-    "path": "./docs/preprints/readme/index.jsonld"
-  },
-  {
-    "id": null,
-    "name": "Efc Master",
-    "type": "CreativeWork",
-    "path": "./docs/efc-master/index.jsonld"
-  },
-  {
-    "id": null,
-    "name": "docs",
-    "type": "CreativeWork",
-    "path": "./docs/readme/index.jsonld"
-  },
-  {
-    "id": null,
-    "name": "Abstract",
-    "type": "CreativeWork",
-    "path": "./docs/articles/efc-what-is-the-connection-between-energy-flow-and-the-now/index.jsonld"
-  },
-  {
-    "id": null,
-    "name": "Efc V1.2 Foundational Framework",
-    "type": "CreativeWork",
-    "path": "./docs/articles/efc-v12-foundational-framework/index.jsonld"
-  },
-  {
-    "id": null,
-    "name": "Abstract",
-    "type": "CreativeWork",
-    "path": "./docs/articles/efc-observational-evidence-for-energy-flow/index.jsonld"
-  },
-  {
-    "id": null,
-    "name": "Efc Energy Flow As The Fundamental Dynamic Of The Universe",
-    "type": "CreativeWork",
-    "path": "./docs/articles/efc-energy-flow-as-the-fundamental-dynamic-of-the-universe/index.jsonld"
-  },
-  {
-    "id": null,
-    "name": "Efc V2.1 Modular Synthesis",
-    "type": "CreativeWork",
-    "path": "./docs/articles/efc-v21-modular-synthesis/index.jsonld"
-  },
-  {
-    "id": null,
-    "name": "Abstract",
-    "type": "CreativeWork",
-    "path": "./docs/articles/efc-grid-model-entropic-dynamics/index.jsonld"
-  },
-  {
-    "id": null,
-    "name": "Efc Unresolved Questions And Challenges Entropy",
-    "type": "CreativeWork",
-    "path": "./docs/articles/efc-unresolved-questions-and-challenges-entropy/index.jsonld"
-  },
-  {
-    "id": null,
-    "name": "Abstract",
-    "type": "CreativeWork",
-    "path": "./docs/articles/efc-cmb-thermodynamic-gradient/index.jsonld"
-  },
-  {
-    "id": null,
-    "name": "Applied Energy-Flow Cosmology v2.2",
-    "type": "CreativeWork",
-    "path": "./docs/articles/efc-v22-cross-field-integration-summary/index.jsonld"
-  },
-  {
-    "id": null,
-    "name": "Abstract",
-    "type": "CreativeWork",
-    "path": "./docs/articles/efc-introduction-to-energy-flow-in-space-time/index.jsonld"
-  },
-  {
-    "id": null,
-    "name": "Abstract",
-    "type": "CreativeWork",
-    "path": "./docs/articles/efc-can-entropy-drive-cosmic-evolution/index.jsonld"
-  },
-  {
-    "id": null,
-    "name": "Abstract",
-    "type": "CreativeWork",
-    "path": "./docs/articles/efc-why-is-light-speed-a-cosmic-limit/index.jsonld"
-  },
-  {
-    "id": null,
-    "name": "Efc V2.1 Complete Edition",
-    "type": "CreativeWork",
-    "path": "./docs/articles/efc-v21-complete-edition/index.jsonld"
-  },
-  {
-    "id": null,
-    "name": "Efc Introduction To Entropy In Cosmic Evolution",
-    "type": "CreativeWork",
-    "path": "./docs/articles/efc-introduction-to-entropy-in-cosmic-evolution/index.jsonld"
-  },
-  {
-    "id": null,
-    "name": "Abstract",
-    "type": "CreativeWork",
-    "path": "./docs/articles/efc-how-energy-flow-sustain-spacetime/index.jsonld"
-  },
-  {
-    "id": null,
-    "name": "Abstract",
-    "type": "CreativeWork",
-    "path": "./docs/articles/efc-what-happens-at-the-universes-extremes/index.jsonld"
-  },
-  {
-    "id": null,
-    "name": "Efc Mathematical Framework For Energy Flow In Space Time",
-    "type": "CreativeWork",
-    "path": "./docs/articles/efc-mathematical-framework-for-energy-flow-in-space-time/index.jsonld"
-  },
-  {
-    "id": null,
-    "name": "Efc How Does Balance Shape Universal Structures",
-    "type": "CreativeWork",
-    "path": "./docs/articles/efc-how-does-balance-shape-universal-structures/index.jsonld"
-  },
-  {
-    "id": null,
-    "name": "Summary",
-    "type": "CreativeWork",
-    "path": "./docs/articles/efc-the-energy-flow-interface/index.jsonld"
-  },
-  {
-    "id": null,
-    "name": "Abstract",
-    "type": "CreativeWork",
-    "path": "./docs/articles/efc-applications-and-implications/index.jsonld"
-  },
-  {
-    "id": null,
-    "name": "Abstract",
-    "type": "CreativeWork",
-    "path": "./docs/articles/efc-a-deep-dive-into-the-halo-concept/index.jsonld"
-  },
-  {
-    "id": null,
-    "name": "Abstract",
-    "type": "CreativeWork",
-    "path": "./docs/articles/efc-subhypothesis-light-speed-limit/index.jsonld"
-  },
-  {
-    "id": null,
-    "name": "Efc Integrated Hypothesis Time Entropy",
-    "type": "CreativeWork",
-    "path": "./docs/articles/efc-integrated-hypothesis-time-entropy/index.jsonld"
-  },
-  {
-    "id": null,
-    "name": "articles",
-    "type": "CreativeWork",
-    "path": "./docs/articles/readme/index.jsonld"
-  },
-  {
-    "id": null,
-    "name": "Efc Hypothesis Universe As Energy Driven System",
-    "type": "CreativeWork",
-    "path": "./docs/articles/efc-hypothesis-universe-as-energy-driven-system/index.jsonld"
-  },
-  {
-    "id": null,
-    "name": "articles",
-    "type": "CreativeWork",
-    "path": "./docs/articles/articles/index.jsonld"
-  },
-  {
-    "id": null,
-    "name": "Efc Dynamic Balance Entropy Order And Chaos",
-    "type": "CreativeWork",
-    "path": "./docs/articles/efc-dynamic-balance-entropy-order-and-chaos/index.jsonld"
-  },
-  {
-    "id": null,
-    "name": "Efc Can Energy Flow Be Observed In Galactic Clusters",
-    "type": "CreativeWork",
-    "path": "./docs/articles/efc-can-energy-flow-be-observed-in-galactic-clusters/index.jsonld"
-  },
-  {
-    "id": null,
-    "name": "Summary",
-    "type": "CreativeWork",
-    "path": "./docs/articles/efc-field-equations-for-entropy-driven-spacetime/index.jsonld"
-  },
-  {
-    "id": null,
-    "name": "Efc Grid Higgs Framework",
-    "type": "CreativeWork",
-    "path": "./docs/articles/efc-grid-higgs-framework/index.jsonld"
-  },
-  {
-    "id": null,
-    "name": "Efc Grid Higgs Paradigm Shift",
-    "type": "CreativeWork",
-    "path": "./docs/articles/efc-grid-higgs-paradigm-shift/index.jsonld"
-  },
-  {
-    "id": null,
-    "name": "Efc Thermodynamic Bridge Gr Qft",
-    "type": "CreativeWork",
-    "path": "./docs/articles/efc-thermodynamic-bridge-gr-qft/index.jsonld"
-  },
-  {
-    "id": null,
-    "name": "Abstract",
-    "type": "CreativeWork",
-    "path": "./docs/articles/efc-light-speed-as-a-regulator-of-energy-flow-in-the-universe/index.jsonld"
-  },
-  {
-    "id": null,
-    "name": "Abstract",
-    "type": "CreativeWork",
-    "path": "./docs/articles/efc-technical-documentation-energy-flow-in-space-time/index.jsonld"
-  },
-  {
-    "id": null,
-    "name": "articles",
-    "type": "CreativeWork",
-    "path": "./docs/articles/README/index.jsonld"
-  },
-  {
-    "id": null,
-    "name": "Efc Observational Evidence Entropy Cosmic Evolution",
-    "type": "CreativeWork",
-    "path": "./docs/articles/efc-observational-evidence-entropy-cosmic-evolution/index.jsonld"
-  },
-  {
-    "id": null,
-    "name": "Abstract",
-    "type": "CreativeWork",
-    "path": "./docs/articles/efc-flow-entropy-and-spacetime-distortion-in-cosmological-clusters/index.jsonld"
-  },
-  {
-    "id": null,
-    "name": "Abstract",
-    "type": "CreativeWork",
-    "path": "./docs/articles/efc-hypothesis-entropy-and-energy-flow/index.jsonld"
-  },
-  {
-    "id": null,
-    "name": "Efc Is Consciousness Linked To Entropy",
-    "type": "CreativeWork",
-    "path": "./docs/articles/efc-is-consciousness-linked-to-entropy/index.jsonld"
-  },
-  {
-    "id": null,
-    "name": "Efc Hypothesis Interrelation Energy Entropy",
-    "type": "CreativeWork",
-    "path": "./docs/articles/efc-hypothesis-interrelation-energy-entropy/index.jsonld"
-  },
-  {
-    "id": null,
-    "name": "sections",
-    "type": "CreativeWork",
-    "path": "./docs/sections/readme/index.jsonld"
-  },
-  {
-    "id": null,
-    "name": "sections",
-    "type": "CreativeWork",
-    "path": "./docs/sections/README/index.jsonld"
-  },
-  {
-    "id": null,
-    "name": "Efc Master V1",
-    "type": "CreativeWork",
-    "path": "./docs/efc-master-v1/index.jsonld"
-  }
-]
+{
+  "version": "1.0",
+  "nodes": [
+    {
+      "id": "CEM-Consciousness-Ego-Mirror",
+      "path": "docs/papers/efc/CEM-Consciousness-Ego-Mirror",
+      "domain": "papers_efc",
+      "type": "paper",
+      "jsonld_type": "CreativeWork"
+    },
+    {
+      "id": "EFC-A-Deep-Dive-into-the-Halo-Concept",
+      "path": "docs/papers/efc/EFC-A-Deep-Dive-into-the-Halo-Concept",
+      "domain": "papers_efc",
+      "type": "paper",
+      "jsonld_type": "CreativeWork"
+    },
+    {
+      "id": "EFC-AI-Augmented-Scientific-Workflow-Framework",
+      "path": "docs/papers/efc/EFC-AI-Augmented-Scientific-Workflow-Framework",
+      "domain": "papers_efc",
+      "type": "paper",
+      "jsonld_type": "CreativeWork"
+    },
+    {
+      "id": "EFC-Applications-and-Implications",
+      "path": "docs/papers/efc/EFC-Applications-and-Implications",
+      "domain": "papers_efc",
+      "type": "paper",
+      "jsonld_type": "CreativeWork"
+    },
+    {
+      "id": "EFC-CMB-Thermodynamic-Gradient",
+      "path": "docs/papers/efc/EFC-CMB-Thermodynamic-Gradient",
+      "domain": "papers_efc",
+      "type": "paper",
+      "jsonld_type": "CreativeWork"
+    },
+    {
+      "id": "EFC-Can-Energy-Flow-Be-Observed-in-Galactic-Clusters",
+      "path": "docs/papers/efc/EFC-Can-Energy-Flow-Be-Observed-in-Galactic-Clusters",
+      "domain": "papers_efc",
+      "type": "paper",
+      "jsonld_type": "CreativeWork"
+    },
+    {
+      "id": "EFC-Can-Entropy-Drive-Cosmic-Evolution",
+      "path": "docs/papers/efc/EFC-Can-Entropy-Drive-Cosmic-Evolution",
+      "domain": "papers_efc",
+      "type": "paper",
+      "jsonld_type": "CreativeWork"
+    },
+    {
+      "id": "EFC-Dynamic-Balance-Entropy-Order-and-Chaos",
+      "path": "docs/papers/efc/EFC-Dynamic-Balance-Entropy-Order-and-Chaos",
+      "domain": "papers_efc",
+      "type": "paper",
+      "jsonld_type": "CreativeWork"
+    },
+    {
+      "id": "EFC-Energy-Flow-as-the-Fundamental-Dynamic-of-the-Universe",
+      "path": "docs/papers/efc/EFC-Energy-Flow-as-the-Fundamental-Dynamic-of-the-Universe",
+      "domain": "papers_efc",
+      "type": "paper",
+      "jsonld_type": "CreativeWork"
+    },
+    {
+      "id": "EFC-Field-Equations-for-Entropy-Driven-Spacetime",
+      "path": "docs/papers/efc/EFC-Field-Equations-for-Entropy-Driven-Spacetime",
+      "domain": "papers_efc",
+      "type": "paper",
+      "jsonld_type": "CreativeWork"
+    },
+    {
+      "id": "EFC-Flow-Entropy-and-Spacetime-Distortion-in-Cosmological-Clusters",
+      "path": "docs/papers/efc/EFC-Flow-Entropy-and-Spacetime-Distortion-in-Cosmological-Clusters",
+      "domain": "papers_efc",
+      "type": "paper",
+      "jsonld_type": "CreativeWork"
+    },
+    {
+      "id": "EFC-Grid-Higgs-Framework",
+      "path": "docs/papers/efc/EFC-Grid-Higgs-Framework",
+      "domain": "papers_efc",
+      "type": "paper",
+      "jsonld_type": "CreativeWork"
+    },
+    {
+      "id": "EFC-Grid-Higgs-Paradigm-Shift",
+      "path": "docs/papers/efc/EFC-Grid-Higgs-Paradigm-Shift",
+      "domain": "papers_efc",
+      "type": "paper",
+      "jsonld_type": "CreativeWork"
+    },
+    {
+      "id": "EFC-Grid-Model-Entropic-Dynamics.",
+      "path": "docs/papers/efc/EFC-Grid-Model-Entropic-Dynamics.",
+      "domain": "papers_efc",
+      "type": "paper",
+      "jsonld_type": "CreativeWork"
+    },
+    {
+      "id": "EFC-How-Does-Balance-Shape-Universal-Structures",
+      "path": "docs/papers/efc/EFC-How-Does-Balance-Shape-Universal-Structures",
+      "domain": "papers_efc",
+      "type": "paper",
+      "jsonld_type": "CreativeWork"
+    },
+    {
+      "id": "EFC-How-Energy-Flow-Sustain-Spacetime",
+      "path": "docs/papers/efc/EFC-How-Energy-Flow-Sustain-Spacetime",
+      "domain": "papers_efc",
+      "type": "paper",
+      "jsonld_type": "CreativeWork"
+    },
+    {
+      "id": "EFC-Hypothesis-Interrelation-Energy-Entropy",
+      "path": "docs/papers/efc/EFC-Hypothesis-Interrelation-Energy-Entropy",
+      "domain": "papers_efc",
+      "type": "paper",
+      "jsonld_type": "CreativeWork"
+    },
+    {
+      "id": "EFC-Hypothesis-Universe-as-Energy-Driven-System",
+      "path": "docs/papers/efc/EFC-Hypothesis-Universe-as-Energy-Driven-System",
+      "domain": "papers_efc",
+      "type": "paper",
+      "jsonld_type": "CreativeWork"
+    },
+    {
+      "id": "EFC-Integrated-Hypothesis-Time-Entropy",
+      "path": "docs/papers/efc/EFC-Integrated-Hypothesis-Time-Entropy",
+      "domain": "papers_efc",
+      "type": "paper",
+      "jsonld_type": "CreativeWork"
+    },
+    {
+      "id": "EFC-Introduction-to-Energy-Flow-in-Space-Time",
+      "path": "docs/papers/efc/EFC-Introduction-to-Energy-Flow-in-Space-Time",
+      "domain": "papers_efc",
+      "type": "paper",
+      "jsonld_type": "CreativeWork"
+    },
+    {
+      "id": "EFC-Introduction-to-Entropy-in-Cosmic-Evolution",
+      "path": "docs/papers/efc/EFC-Introduction-to-Entropy-in-Cosmic-Evolution",
+      "domain": "papers_efc",
+      "type": "paper",
+      "jsonld_type": "CreativeWork"
+    },
+    {
+      "id": "EFC-Is-Consciousness-Linked-to-Entropy",
+      "path": "docs/papers/efc/EFC-Is-Consciousness-Linked-to-Entropy",
+      "domain": "papers_efc",
+      "type": "paper",
+      "jsonld_type": "CreativeWork"
+    },
+    {
+      "id": "EFC-Light-Speed-as-a-Regulator-of-Energy-Flow-in-the-Universe",
+      "path": "docs/papers/efc/EFC-Light-Speed-as-a-Regulator-of-Energy-Flow-in-the-Universe",
+      "domain": "papers_efc",
+      "type": "paper",
+      "jsonld_type": "CreativeWork"
+    },
+    {
+      "id": "EFC-Mathematical-Framework-for-Energy-Flow-in-Space-Time",
+      "path": "docs/papers/efc/EFC-Mathematical-Framework-for-Energy-Flow-in-Space-Time",
+      "domain": "papers_efc",
+      "type": "paper",
+      "jsonld_type": "CreativeWork"
+    },
+    {
+      "id": "EFC-Observational-Evidence-Entropy-Cosmic-Evolution",
+      "path": "docs/papers/efc/EFC-Observational-Evidence-Entropy-Cosmic-Evolution",
+      "domain": "papers_efc",
+      "type": "paper",
+      "jsonld_type": "CreativeWork"
+    },
+    {
+      "id": "EFC-Observational-Evidence-for-Energy-Flow",
+      "path": "docs/papers/efc/EFC-Observational-Evidence-for-Energy-Flow",
+      "domain": "papers_efc",
+      "type": "paper",
+      "jsonld_type": "CreativeWork"
+    },
+    {
+      "id": "EFC-Subhypothesis-Light-Speed-Limit",
+      "path": "docs/papers/efc/EFC-Subhypothesis-Light-Speed-Limit",
+      "domain": "papers_efc",
+      "type": "paper",
+      "jsonld_type": "CreativeWork"
+    },
+    {
+      "id": "EFC-Technical-Documentation-Energy-Flow-in-Space-Time",
+      "path": "docs/papers/efc/EFC-Technical-Documentation-Energy-Flow-in-Space-Time",
+      "domain": "papers_efc",
+      "type": "paper",
+      "jsonld_type": "CreativeWork"
+    },
+    {
+      "id": "EFC-The-Energy-Flow-Interface",
+      "path": "docs/papers/efc/EFC-The-Energy-Flow-Interface",
+      "domain": "papers_efc",
+      "type": "paper",
+      "jsonld_type": "CreativeWork"
+    },
+    {
+      "id": "EFC-Thermodynamic-Bridge-GR-QFT",
+      "path": "docs/papers/efc/EFC-Thermodynamic-Bridge-GR-QFT",
+      "domain": "papers_efc",
+      "type": "paper",
+      "jsonld_type": "CreativeWork"
+    },
+    {
+      "id": "EFC-Unresolved-Questions-and-Challenges-Entropy",
+      "path": "docs/papers/efc/EFC-Unresolved-Questions-and-Challenges-Entropy",
+      "domain": "papers_efc",
+      "type": "paper",
+      "jsonld_type": "CreativeWork"
+    },
+    {
+      "id": "EFC-What-Happens-at-the-Universes-Extremes",
+      "path": "docs/papers/efc/EFC-What-Happens-at-the-Universes-Extremes",
+      "domain": "papers_efc",
+      "type": "paper",
+      "jsonld_type": "CreativeWork"
+    },
+    {
+      "id": "EFC-What-is-the-Connection-Between-Energy-Flow-and-the-Now",
+      "path": "docs/papers/efc/EFC-What-is-the-Connection-Between-Energy-Flow-and-the-Now",
+      "domain": "papers_efc",
+      "type": "paper",
+      "jsonld_type": "CreativeWork"
+    },
+    {
+      "id": "EFC-Why-is-Light-Speed-a-Cosmic-Limit",
+      "path": "docs/papers/efc/EFC-Why-is-Light-Speed-a-Cosmic-Limit",
+      "domain": "papers_efc",
+      "type": "paper",
+      "jsonld_type": "CreativeWork"
+    },
+    {
+      "id": "EFC-v1.2-Foundational-Framework",
+      "path": "docs/papers/efc/EFC-v1.2-Foundational-Framework",
+      "domain": "papers_efc",
+      "type": "paper",
+      "jsonld_type": "CreativeWork"
+    },
+    {
+      "id": "EFC-v2.1-Complete-Edition",
+      "path": "docs/papers/efc/EFC-v2.1-Complete-Edition",
+      "domain": "papers_efc",
+      "type": "paper",
+      "jsonld_type": "CreativeWork"
+    },
+    {
+      "id": "EFC-v2.1-Modular-Synthesis",
+      "path": "docs/papers/efc/EFC-v2.1-Modular-Synthesis",
+      "domain": "papers_efc",
+      "type": "paper",
+      "jsonld_type": "CreativeWork"
+    },
+    {
+      "id": "EFC-v2.2-Cross-Field-Integration-Summary",
+      "path": "docs/papers/efc/EFC-v2.2-Cross-Field-Integration-Summary",
+      "domain": "papers_efc",
+      "type": "paper",
+      "jsonld_type": "CreativeWork"
+    },
+    {
+      "id": "ai_workflow_framework",
+      "path": "docs/papers/efc/ai_workflow_framework",
+      "domain": "papers_efc",
+      "type": "paper",
+      "jsonld_type": "CreativeWork"
+    },
+    {
+      "id": "efc_formal_spec",
+      "path": "docs/papers/efc/efc_formal_spec",
+      "domain": "papers_efc",
+      "type": "paper",
+      "jsonld_type": "CreativeWork"
+    },
+    {
+      "id": "efc_master",
+      "path": "docs/papers/efc/efc_master",
+      "domain": "papers_efc",
+      "type": "paper",
+      "jsonld_type": "CreativeWork"
+    },
+    {
+      "id": "efc_master_v1",
+      "path": "docs/papers/efc/efc_master_v1",
+      "domain": "papers_efc",
+      "type": "paper",
+      "jsonld_type": "CreativeWork"
+    },
+    {
+      "id": "theory/architecture",
+      "path": "theory/architecture",
+      "domain": "theory",
+      "type": "theory",
+      "jsonld_type": "ScholarlyArticle"
+    },
+    {
+      "id": "theory/formal",
+      "path": "theory/formal",
+      "domain": "theory",
+      "type": "theory",
+      "jsonld_type": "ScholarlyArticle"
+    },
+    {
+      "id": "meta/architecture",
+      "path": "meta/architecture",
+      "domain": "meta",
+      "type": "meta",
+      "jsonld_type": "CreativeWork"
+    },
+    {
+      "id": "meta/cognition",
+      "path": "meta/cognition",
+      "domain": "meta",
+      "type": "meta",
+      "jsonld_type": "CreativeWork"
+    },
+    {
+      "id": "meta/meta-architecture",
+      "path": "meta/meta-architecture",
+      "domain": "meta",
+      "type": "meta",
+      "jsonld_type": "CreativeWork"
+    },
+    {
+      "id": "meta/meta-architecture-spec",
+      "path": "meta/meta-architecture-spec",
+      "domain": "meta",
+      "type": "meta",
+      "jsonld_type": "CreativeWork"
+    },
+    {
+      "id": "meta/meta-process",
+      "path": "meta/meta-process",
+      "domain": "meta",
+      "type": "meta",
+      "jsonld_type": "CreativeWork"
+    },
+    {
+      "id": "meta/meta-reflective-protocol",
+      "path": "meta/meta-reflective-protocol",
+      "domain": "meta",
+      "type": "meta",
+      "jsonld_type": "CreativeWork"
+    },
+    {
+      "id": "meta/personal",
+      "path": "meta/personal",
+      "domain": "meta",
+      "type": "meta",
+      "jsonld_type": "CreativeWork"
+    },
+    {
+      "id": "meta/reflection",
+      "path": "meta/reflection",
+      "domain": "meta",
+      "type": "meta",
+      "jsonld_type": "CreativeWork"
+    },
+    {
+      "id": "methodology/AI-Augmented-Scientific-Workflow-Framework",
+      "path": "methodology/AI-Augmented-Scientific-Workflow-Framework",
+      "domain": "methodology",
+      "type": "methodology",
+      "jsonld_type": "HowTo"
+    },
+    {
+      "id": "methodology/EFC-epistemology",
+      "path": "methodology/EFC-epistemology",
+      "domain": "methodology",
+      "type": "methodology",
+      "jsonld_type": "HowTo"
+    },
+    {
+      "id": "methodology/author-method-note",
+      "path": "methodology/author-method-note",
+      "domain": "methodology",
+      "type": "methodology",
+      "jsonld_type": "HowTo"
+    },
+    {
+      "id": "methodology/core",
+      "path": "methodology/core",
+      "domain": "methodology",
+      "type": "methodology",
+      "jsonld_type": "HowTo"
+    },
+    {
+      "id": "methodology/open-method",
+      "path": "methodology/open-method",
+      "domain": "methodology",
+      "type": "methodology",
+      "jsonld_type": "HowTo"
+    },
+    {
+      "id": "methodology/open-process",
+      "path": "methodology/open-process",
+      "domain": "methodology",
+      "type": "methodology",
+      "jsonld_type": "HowTo"
+    },
+    {
+      "id": "methodology/reproducibility-guide",
+      "path": "methodology/reproducibility-guide",
+      "domain": "methodology",
+      "type": "methodology",
+      "jsonld_type": "HowTo"
+    },
+    {
+      "id": "methodology/symbiosis-interface",
+      "path": "methodology/symbiosis-interface",
+      "domain": "methodology",
+      "type": "methodology",
+      "jsonld_type": "HowTo"
+    },
+    {
+      "id": "methodology/symbiotic-process-llm",
+      "path": "methodology/symbiotic-process-llm",
+      "domain": "methodology",
+      "type": "methodology",
+      "jsonld_type": "HowTo"
+    },
+    {
+      "id": "methodology/symbiotic-process-summary",
+      "path": "methodology/symbiotic-process-summary",
+      "domain": "methodology",
+      "type": "methodology",
+      "jsonld_type": "HowTo"
+    },
+    {
+      "id": "api/v1",
+      "path": "api/v1",
+      "domain": "api",
+      "type": "api",
+      "jsonld_type": "TechArticle"
+    },
+    {
+      "id": "src/efc",
+      "path": "src/efc",
+      "domain": "src",
+      "type": "code",
+      "jsonld_type": "SoftwareSourceCode"
+    },
+    {
+      "id": "data/archive",
+      "path": "data/archive",
+      "domain": "data",
+      "type": "dataset",
+      "jsonld_type": "Dataset"
+    },
+    {
+      "id": "data/processed",
+      "path": "data/processed",
+      "domain": "data",
+      "type": "dataset",
+      "jsonld_type": "Dataset"
+    },
+    {
+      "id": "data/raw",
+      "path": "data/raw",
+      "domain": "data",
+      "type": "dataset",
+      "jsonld_type": "Dataset"
+    },
+    {
+      "id": "data/sparc",
+      "path": "data/sparc",
+      "domain": "data",
+      "type": "dataset",
+      "jsonld_type": "Dataset"
+    },
+    {
+      "id": "app/dashboard",
+      "path": "app/dashboard",
+      "domain": "app",
+      "type": "app",
+      "jsonld_type": "SoftwareApplication"
+    }
+  ]
+}
