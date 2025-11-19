@@ -1,7 +1,7 @@
 {
   "project": "Energy-Flow Cosmology (EFC)",
   "version": "2.0",
-  "last_updated": "2025-11-18",
+  "last_updated": "2025-11-19",
   "layers": {
     "theory": {
       "description": "Formal scientific components of EFC",
