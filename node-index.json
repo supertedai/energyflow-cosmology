@@ -100,13 +100,6 @@
       "jsonld_type": "CreativeWork"
     },
     {
-      "id": "EFC-Grid-Model-Entropic-Dynamics.",
-      "path": "docs/papers/efc/EFC-Grid-Model-Entropic-Dynamics.",
-      "domain": "papers_efc",
-      "type": "paper",
-      "jsonld_type": "CreativeWork"
-    },
-    {
       "id": "EFC-How-Does-Balance-Shape-Universal-Structures",
       "path": "docs/papers/efc/EFC-How-Does-Balance-Shape-Universal-Structures",
       "domain": "papers_efc",
