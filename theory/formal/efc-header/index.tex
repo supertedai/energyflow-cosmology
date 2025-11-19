@@ -1,58 +1,94 @@
-% ======================================================================
-% EFC Header — Shared Macros and Notation
-% ======================================================================
-% This file defines the unified mathematical language for all
-% Energy-Flow Cosmology (EFC) formal documents.
-% No document should redefine these symbols.
-% ======================================================================
+% =========================================================================
+% Energy-Flow Cosmology — Formal Header Specification
+% =========================================================================
 
-% Core math packages
-\usepackage{amsmath, amssymb, bm}
+\section*{EFC Formal Header}
 
-% ----------------------------------------------------------------------
-% Field symbols
-% ----------------------------------------------------------------------
-\newcommand{\Sfield}{S}            % Entropy field S(x)
-\newcommand{\rhoField}{\rho}       % Density field rho(x)
-\newcommand{\Ef}{E_f}              % Energy–flow potential E_f(x)
-\newcommand{\Rfield}{R}            % Propagation resistance R(x)
-\newcommand{\Ccap}{C}              % Information capacity C(x)
+\subsection*{1. Purpose}
 
-% ----------------------------------------------------------------------
-% Operators
-% ----------------------------------------------------------------------
-\newcommand{\grad}{\nabla}                           % Spatial gradient
-\newcommand{\dpart}[2]{\frac{\partial #1}{\partial #2}} % Partial derivative
-\newcommand{\dtime}[1]{\frac{d#1}{dt}}               % Total time derivative
+The EFC Formal Header defines the shared notation, global constants,
+normalizations, and macro definitions used across all formal modules
+(EFC–S, EFC–D, EFC–H, EFC–C$_0$, parameters, diagrams, and specifications).
 
-% ----------------------------------------------------------------------
-% Core functional relations (canonical EFC definitions)
-% ----------------------------------------------------------------------
+It provides a consistent symbolic base and ensures uniform mathematical
+presentation across the entire EFC theory.
 
-% Energy–flow potential
-% E_f = rho (1 - S)
-\newcommand{\EfDef}{\Ef = \rhoField \,(1 - \Sfield)}
+\subsection*{2. Global Normalization}
 
-% Information capacity (C₀-model)
-% C = C0 (1 - S)
-\newcommand{\CcapDef}{\Ccap = C_0 \,(1 - \Sfield)}
+Entropy is defined over a normalized domain:
 
-% Propagation speed
-% c_eff = 1 / (1 + R)
-\newcommand{\ceff}{c_{\mathrm{eff}}}
-\newcommand{\ceffDef}{\ceff = \frac{1}{1 + \Rfield}}
+\[
+0 \leq S(\mathbf{x}, t) \leq 1.
+\]
 
-% ----------------------------------------------------------------------
-% Notes
-% ----------------------------------------------------------------------
-% This header ensures consistency across:
-% - EFC-S  (structural profiles)
-% - EFC-D  (dynamics)
-% - EFC-H  (halo model)
-% - EFC-C0 (entropy–information mapping)
-% - s0–s1 propagation insight
-% - all simulation and API specifications
-%
-% Include this file at the top of every formal EFC document.
-%
-% ======================================================================
+Energy–flow potential:
+
+\[
+E_f = \rho(1-S).
+\]
+
+Propagation speed normalization:
+
+\[
+c_{\text{eff}} = (1 + R)^{-1}.
+\]
+
+\subsection*{3. Shared Symbols}
+
+\begin{itemize}
+    \item $S$ — entropy field  
+    \item $\rho$ — structural density  
+    \item $E_f$ — energy–flow field  
+    \item $R$ — grid resistance  
+    \item $C$ — information capacity  
+    \item $I_0$ — information resonance scalar  
+    \item $c_{\text{eff}}$ — effective propagation speed  
+\end{itemize}
+
+\subsection*{4. Standard LaTeX Macros}
+
+\begin{verbatim}
+\newcommand{\Ef}{E_f}
+\newcommand{\dS}{\frac{dS}{dt}}
+\newcommand{\drho}{\frac{d\rho}{dt}}
+\newcommand{\dEf}{\frac{dE_f}{dt}}
+\newcommand{\dR}{\frac{dR}{dt}}
+\newcommand{\ceff}{c_{\text{eff}}}
+\end{verbatim}
+
+\subsection*{5. Spatial Notation}
+
+\[
+\nabla S, \quad \nabla E_f, \quad \nabla \rho
+\]
+
+represent local spatial gradients.
+
+Temporal derivatives:
+
+\[
+\frac{d}{dt} = \frac{\partial}{\partial t} + \mathbf{v}\cdot\nabla.
+\]
+
+\subsection*{6. Diagrams and Flow Ordering}
+
+The canonical EFC dependency chain:
+
+\[
+S \rightarrow \rho \rightarrow E_f \rightarrow R \rightarrow c_{\text{eff}}
+\]
+
+is defined here as a global convention.
+
+\subsection*{7. Purpose in the EFC Framework}
+
+The header:
+
+\begin{itemize}
+    \item harmonizes notation across all formal modules
+    \item ensures model compatibility
+    \item simplifies LaTeX compilation
+    \item supports machine-readable mapping of symbols and meaning
+\end{itemize}
+
+It is included or referenced by all higher-level specifications.
