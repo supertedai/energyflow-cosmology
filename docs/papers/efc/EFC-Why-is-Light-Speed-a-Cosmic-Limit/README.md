@@ -1,17 +1,12 @@
-# EFC — Why is Light Speed a Cosmic Limit?
+# EFC – Why Is Light Speed a Cosmic Limit?
 
-This directory contains the paper explaining why the speed of light
-appears as a universal limit within the Energy-Flow Cosmology framework.
-The paper outlines how entropy gradients, grid resistance, and the
-thermodynamic structure of spacetime collectively impose an upper bound
-on propagation speed and dynamic transitions.
+This directory contains the paper exploring the relationship between entropy, flow fields and the observed speed-of-light limit.
 
-**Included files**
+**Files:**
 - PDF (authoritative)
-- Markdown (readable)
+- Markdown version (if present)
 - JSON-LD metadata
-- Local schema
-- Machine index
-- Citations file
+- Index metadata
+- BibTeX citations
 
 Version: 1.0
