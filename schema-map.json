@@ -1,20 +1,68 @@
 {
-  "api.jsonld": {
-    "path": "./api/api.jsonld",
-    "type": "CreativeWork",
-    "id": null,
-    "name": "api"
-  },
-  "README_API.jsonld": {
-    "path": "./api/README_API.jsonld",
-    "type": "CreativeWork",
-    "id": null,
-    "name": "\ud83d\udce1 **Energy-Flow Cosmology \u2014 API v1**"
-  },
-  "index.jsonld": {
-    "path": "./docs/efc-master-v1/index.jsonld",
-    "type": "CreativeWork",
-    "id": null,
-    "name": "Efc Master V1"
+  "version": "1.0",
+  "types": {
+    "paper": {
+      "schema_source": "schema/global_schema.json",
+      "required_files": [
+        "README.md",
+        "{basename}.pdf",
+        "{basename}.jsonld",
+        "schema.json",
+        "index.json",
+        "citations.bib"
+      ]
+    },
+    "theory": {
+      "schema_source": "schema/global_schema.json",
+      "required_files": [
+        "README.md",
+        "index.jsonld"
+      ]
+    },
+    "meta": {
+      "schema_source": "schema/global_schema.json",
+      "required_files": [
+        "README.md",
+        "index.jsonld"
+      ]
+    },
+    "meta_graph": {
+      "schema_source": "schema/global_schema.json",
+      "required_files": [
+        "graph-schema.md",
+        "semantic-graph.json"
+      ]
+    },
+    "methodology": {
+      "schema_source": "schema/global_schema.json",
+      "required_files": [
+        "README.md",
+        "index.jsonld"
+      ]
+    },
+    "api": {
+      "schema_source": "schema/global_schema.json",
+      "required_files": []
+    },
+    "notebook": {
+      "schema_source": "schema/global_schema.json",
+      "required_files": []
+    },
+    "code": {
+      "schema_source": "schema/global_schema.json",
+      "required_files": []
+    },
+    "dataset": {
+      "schema_source": "schema/global_schema.json",
+      "required_files": []
+    },
+    "app": {
+      "schema_source": "schema/global_schema.json",
+      "required_files": []
+    },
+    "figshare": {
+      "schema_source": "schema/global_schema.json",
+      "required_files": []
+    }
   }
 }
