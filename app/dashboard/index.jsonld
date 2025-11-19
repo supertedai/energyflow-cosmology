@@ -1,0 +1,7 @@
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "identifier": "dashboard",
+  "name": "Dashboard",
+  "version": "1.0"
+}
