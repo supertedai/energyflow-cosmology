@@ -18,3 +18,19 @@ Core files:
 
 The goal is to make **provenance and identity explicit**, for humans,
 LLMs, search engines, and future training pipelines.
+
+# AUTH Layer — Citation
+
+This directory contains the official citation entry for the AUTH layer of Energy-Flow Cosmology.
+
+To cite AUTH:
+@misc{efc_auth_2025,
+title={AUTH Layer: Origin, Provenance and Structural Signature of Energy-Flow Cosmology},
+author={Magnusson, Morten},
+year={2025},
+doi={10.6084/m9.figshare.30656828},
+url={https://doi.org/10.6084/m9.figshare.30656828}
+
+}
+
+The AUTH layer defines the origin, provenance, cognitive signature and structural identity of Energy-Flow Cosmology.
