@@ -1,1 +1,7 @@
-[]
+{
+  "version": "1.0",
+  "nodes_source": "node-index.json",
+  "edges_sources": [
+    "docs/papers/efc/efc_graph_edges.json"
+  ]
+}
