@@ -359,6 +359,13 @@
       "jsonld_type": "CreativeWork"
     },
     {
+      "id": "meta/metascope",
+      "path": "meta/metascope",
+      "domain": "meta",
+      "type": "meta",
+      "jsonld_type": "CreativeWork"
+    },
+    {
       "id": "meta/personal",
       "path": "meta/personal",
       "domain": "meta",
