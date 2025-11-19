@@ -2,26 +2,24 @@
 from pathlib import Path
 
 def main():
-    repo_root = Path(__file__).resolve().parent.parent
-    papers_root = repo_root / "docs" / "papers" / "efc"
+    repo = Path(".").resolve()
+    papers = repo / "docs" / "papers" / "efc"
 
-    if not papers_root.exists():
-        print("[ERROR] Papers directory not found.")
+    if not papers.exists():
+        print("[ERROR] papers directory not found")
         return
 
-    for paper_dir in papers_root.iterdir():
+    for paper_dir in papers.iterdir():
         if not paper_dir.is_dir():
             continue
 
         paper_id = paper_dir.name
         bib_file = paper_dir / "citations.bib"
 
-        # Build BibTex key
         bibkey = paper_id.lower().replace(" ", "-").replace("–", "-").replace("—", "-")
 
-        # Generate content
-        bib_content = f"""@article{{{bibkey}_2025,
-  title={{{{ {paper_id} }}}},
+        content = f"""@article{{{bibkey}_2025,
+  title={{{{{ {paper_id} }}}}},
   author={{Magnusson, Morten}},
   year={{2025}},
   note={{Energy-Flow Cosmology Project}},
@@ -29,11 +27,10 @@ def main():
 }}
 """
 
-        # Write / overwrite
-        bib_file.write_text(bib_content, encoding="utf-8")
-        print(f"[FIXED] {bib_file}")
+        bib_file.write_text(content, encoding="utf-8")
+        print(f"[OK] Fixed {bib_file}")
 
-    print("\n[DONE] All citations.bib regenerated.")
+    print("\n[DONE] All citations regenerated.")
 
 if __name__ == "__main__":
     main()
