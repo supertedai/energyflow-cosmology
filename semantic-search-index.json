@@ -2,6 +2,17 @@
   "version": "1.0",
   "description": "Semantic search index for the Energy-Flow Cosmology repository. Designed for LLMs, RAG systems and meta-process aware agents.",
   "nodes": [
+
+    {
+      "id": "auth-root",
+      "path": "auth/",
+      "type": "Directory",
+      "domain": "auth",
+      "layer": "origin",
+      "tags": ["auth", "origin", "provenance", "identity", "efc"],
+      "summary": "AUTH — the origin and authorship layer defining the provenance, cognitive signature and single-source emergence of the EFC framework."
+    },
+
     {
       "id": "overview",
       "path": "OVERVIEW.md",
