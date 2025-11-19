@@ -8,7 +8,7 @@
     },
     {
       "id": "efc-d-model",
-      "label": "EFC-D Model \u2014 Energy-Flow Dynamics",
+      "label": "EFC\u2013D Dynamics Model",
       "layer": "EFC-D",
       "path": "theory/formal/efc-d-model"
     },
