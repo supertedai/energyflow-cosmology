@@ -3,7 +3,7 @@
   "@type": "CreativeWork",
   "@id": "https://github.com/supertedai/energyflow-cosmology/docs/papers/efc/EFC-v2.1-Complete-Edition",
   "identifier": "EFC-v2.1-Complete-Edition",
-  "name": "EFC — v2.1 Complete Edition",
+  "name": "EFC v2.1 – Complete Edition",
   "author": {
     "@type": "Person",
     "name": "Morten Magnusson",
@@ -16,22 +16,5 @@
     "@type": "CreativeWorkSeries",
     "name": "EFC Papers",
     "identifier": "efc-papers"
-  },
-  "keywords": [
-    "EFC",
-    "Complete Edition",
-    "Energy Flow",
-    "Entropy",
-    "Grid Field",
-    "Thermodynamic Cosmology",
-    "Field Architecture",
-    "Unified Framework"
-  ],
-  "about": [
-    "Energy-Flow Cosmology",
-    "Unified Theory",
-    "Entropy-Driven Dynamics",
-    "Thermodynamic Structure",
-    "Cosmic Architecture"
-  ]
+  }
 }
