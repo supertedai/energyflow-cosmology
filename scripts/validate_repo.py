@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
+import os
 import json
-from pathlib import Path
 import sys
+from pathlib import Path
 
 def validate_json(path: Path, errors: list):
     try:
@@ -32,7 +33,7 @@ def main():
         "meta-graph",
         "auth",
         "schema",
-        "theory/formal",
+        "theory/formal"
     ]
 
     for d in DOMAINS:
