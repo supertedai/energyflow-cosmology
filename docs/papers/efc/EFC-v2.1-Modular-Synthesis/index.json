@@ -1,0 +1,18 @@
+{
+  "id": "EFC-v2.1-Modular-Synthesis",
+  "title": "EFC — v2.1 Modular Synthesis",
+  "path": "docs/papers/efc/EFC-v2.1-Modular-Synthesis",
+  "pdf": "EFC-v2.1-Modular-Synthesis.pdf",
+  "md": "EFC-v2.1-Modular-Synthesis.md",
+  "keywords": [
+    "EFC",
+    "Modular Architecture",
+    "Modular Synthesis",
+    "Version 2.1",
+    "Energy Flow",
+    "Entropy"
+  ],
+  "layer": "docs",
+  "type": "paper",
+  "version": "2.1"
+}
