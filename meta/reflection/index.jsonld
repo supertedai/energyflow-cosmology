@@ -1,0 +1,7 @@
+{
+  "@context": "https://schema.org",
+  "@type": "CreativeWork",
+  "identifier": "reflection",
+  "name": "Reflection",
+  "version": "1.0"
+}
