@@ -26,8 +26,8 @@
     },
     {
       "id": "efc-h-model",
-      "label": "EFC-H Model: Halo-Level Structure",
-      "layer": "EFC-H",
+      "label": "EFC\u2013H Structural Model: Formal Specification",
+      "layer": "EFC-S",
       "path": "theory/formal/efc-h-model"
     },
     {
@@ -58,7 +58,17 @@
   "edges": [
     {
       "from": "efc-c0-model",
+      "to": "efc-h-model",
+      "type": "depends_on_layer"
+    },
+    {
+      "from": "efc-c0-model",
       "to": "efc-s-model",
+      "type": "depends_on_layer"
+    },
+    {
+      "from": "efc-d-model",
+      "to": "efc-h-model",
       "type": "depends_on_layer"
     },
     {
@@ -73,17 +83,17 @@
     },
     {
       "from": "efc-formal-spec",
+      "to": "efc-h-model",
+      "type": "depends_on_layer"
+    },
+    {
+      "from": "efc-formal-spec",
       "to": "efc-s-model",
       "type": "depends_on_layer"
     },
     {
       "from": "efc-formal-spec",
       "to": "efc-d-model",
-      "type": "depends_on_layer"
-    },
-    {
-      "from": "efc-formal-spec",
-      "to": "efc-h-model",
       "type": "depends_on_layer"
     },
     {
@@ -107,18 +117,8 @@
       "type": "depends_on_layer"
     },
     {
-      "from": "efc-h-model",
-      "to": "efc-s-model",
-      "type": "depends_on_layer"
-    },
-    {
-      "from": "efc-h-model",
-      "to": "efc-d-model",
-      "type": "depends_on_layer"
-    },
-    {
-      "from": "efc-h-model",
-      "to": "efc-c0-model",
+      "from": "efc-header",
+      "to": "efc-h-model",
       "type": "depends_on_layer"
     },
     {
