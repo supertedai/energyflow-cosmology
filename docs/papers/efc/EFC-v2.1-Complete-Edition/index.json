@@ -1,0 +1,18 @@
+{
+  "id": "EFC-v2.1-Complete-Edition",
+  "title": "EFC — v2.1 Complete Edition",
+  "path": "docs/papers/efc/EFC-v2.1-Complete-Edition",
+  "pdf": "EFC-v2.1-Complete-Edition.pdf",
+  "md": "EFC-v2.1-Complete-Edition.md",
+  "keywords": [
+    "EFC",
+    "Complete Edition",
+    "Unified Framework",
+    "Energy Flow",
+    "Entropy",
+    "Grid"
+  ],
+  "layer": "docs",
+  "type": "paper",
+  "version": "2.1"
+}
