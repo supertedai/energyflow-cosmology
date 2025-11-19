@@ -1,0 +1,7 @@
+{
+  "@context": "https://schema.org",
+  "@type": "Dataset",
+  "identifier": "meta-graph",
+  "name": "EFC Semantic Meta Graph",
+  "description": "Placeholder meta-graph dataset."
+}
