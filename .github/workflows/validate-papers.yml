@@ -1,0 +1,38 @@
+name: Validate EFC Papers
+
+on:
+  push:
+    branches: ["main", "*"]
+  pull_request:
+    branches: ["main", "*"]
+  workflow_dispatch:
+
+jobs:
+  validate-efc-papers:
+    name: Run Paper Validator
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Run validator
+        run: |
+          echo "Running EFC paper validator..."
+          python scripts/validate_papers.py
+
+      - name: Report success
+        if: success()
+        run: echo "All EFC papers validated successfully."
+
+      - name: Report failure
+        if: failure()
+        run: |
+          echo "Paper validation failed."
+          echo "Fix the reported errors before merging."
+          exit 1
