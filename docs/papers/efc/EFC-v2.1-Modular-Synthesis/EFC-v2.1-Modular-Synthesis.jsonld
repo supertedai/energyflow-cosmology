@@ -3,7 +3,7 @@
   "@type": "CreativeWork",
   "@id": "https://github.com/supertedai/energyflow-cosmology/docs/papers/efc/EFC-v2.1-Modular-Synthesis",
   "identifier": "EFC-v2.1-Modular-Synthesis",
-  "name": "EFC — v2.1 Modular Synthesis",
+  "name": "EFC v2.1 – Modular Synthesis",
   "author": {
     "@type": "Person",
     "name": "Morten Magnusson",
@@ -16,23 +16,5 @@
     "@type": "CreativeWorkSeries",
     "name": "EFC Papers",
     "identifier": "efc-papers"
-  },
-  "keywords": [
-    "EFC",
-    "Modular Synthesis",
-    "Version 2.1",
-    "Energy Flow",
-    "Entropy",
-    "Grid Field",
-    "Thermodynamic Architecture",
-    "Structural Modules",
-    "Dynamic Modules"
-  ],
-  "about": [
-    "Energy-Flow Cosmology",
-    "Modular Architecture",
-    "System Decomposition",
-    "Entropy-Driven Dynamics",
-    "Thermodynamic Framework"
-  ]
+  }
 }
