@@ -107,8 +107,8 @@
   "sources": {
     "figshare": {
       "id": 30656828,
-      "title": "AUTH",
-      "published_date": null,
+      "title": "AUTH Layer: Origin, Provenance and Structural Signature of Energy-Flow Cosmology",
+      "published_date": "2025-11-19T14:02:09Z",
       "url": "https://api.figshare.com/v2/account/articles/30656828",
       "doi": "10.6084/m9.figshare.30656828",
       "resource_id": null,
@@ -120,7 +120,7 @@
       "doi": "10.6084/m9.figshare.30656828",
       "figshare_id": 30656828,
       "url": "https://api.figshare.com/v2/account/articles/30656828",
-      "published_date": null,
+      "published_date": "2025-11-19T14:02:09Z",
       "source": "figshare"
     }
   }
