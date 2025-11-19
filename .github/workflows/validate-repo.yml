@@ -1,0 +1,26 @@
+name: Validate Full EFC Repository
+
+on:
+  push:
+    branches: ["main", "*"]
+  pull_request:
+    branches: ["main", "*"]
+  workflow_dispatch:
+
+jobs:
+  repo-validation:
+    name: Global Repository Validation
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Generate missing domain nodes
+        run: python scripts/generate_domain_nodes.py
+
+      - name: Validate repository
+        run: python scripts/validate_repo.py
