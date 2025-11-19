@@ -1,18 +1,10 @@
 {
   "id": "EFC-Why-is-Light-Speed-a-Cosmic-Limit",
-  "title": "EFC — Why is Light Speed a Cosmic Limit?",
+  "title": "EFC – Why Is Light Speed a Cosmic Limit?",
   "path": "docs/papers/efc/EFC-Why-is-Light-Speed-a-Cosmic-Limit",
   "pdf": "EFC-Why-is-Light-Speed-a-Cosmic-Limit.pdf",
   "md": "EFC-Why-is-Light-Speed-a-Cosmic-Limit.md",
-  "keywords": [
-    "EFC",
-    "Light Speed",
-    "Cosmic Limit",
-    "Thermodynamics",
-    "Entropy Gradient",
-    "Energy Flow",
-    "Grid Field"
-  ],
+  "keywords": ["EFC", "Light Speed", "Entropy", "Limits"],
   "layer": "docs",
   "type": "paper",
   "version": "1.0"
