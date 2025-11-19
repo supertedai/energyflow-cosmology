@@ -2,7 +2,7 @@
   "nodes": [
     {
       "id": "efc-c0-model",
-      "label": "**EFC\u2013C0: Entropy\u2013Information Base Layer**",
+      "label": "EFC\u2013C\u2080 Information Model",
       "layer": "EFC-C0",
       "path": "theory/formal/efc-c0-model"
     },
