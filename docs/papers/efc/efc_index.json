@@ -3,6 +3,11 @@
   "root": "docs/papers/efc",
   "papers": [
     {
+      "id": "AUTH-Layer-Origin-Provenance-and-Structural-Signature-of-Energy-Flow-Cosmology",
+      "path": "AUTH-Layer-Origin-Provenance-and-Structural-Signature-of-Energy-Flow-Cosmology",
+      "type": "paper"
+    },
+    {
       "id": "CEM-Consciousness-Ego-Mirror",
       "path": "CEM-Consciousness-Ego-Mirror",
       "type": "paper"

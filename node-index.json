@@ -2,6 +2,13 @@
   "version": "1.0",
   "nodes": [
     {
+      "id": "AUTH-Layer-Origin-Provenance-and-Structural-Signature-of-Energy-Flow-Cosmology",
+      "path": "docs/papers/efc/AUTH-Layer-Origin-Provenance-and-Structural-Signature-of-Energy-Flow-Cosmology",
+      "domain": "papers_efc",
+      "type": "paper",
+      "jsonld_type": "CreativeWork"
+    },
+    {
       "id": "CEM-Consciousness-Ego-Mirror",
       "path": "docs/papers/efc/CEM-Consciousness-Ego-Mirror",
       "domain": "papers_efc",
