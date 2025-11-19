@@ -1,60 +1,126 @@
-% ======================================================================
-% EFC Flow Diagram — Formal Specification
-% ======================================================================
+% =====================================================================
+% Energy-Flow Cosmology — Flow Diagram (Master Specification)
+% =====================================================================
 
-\documentclass[tikz,border=10pt]{standalone}
+\section*{EFC Flow Diagram: Formal Specification}
 
-\usetikzlibrary{arrows.meta, positioning, shapes.geometric}
+\subsection*{1. Purpose}
 
-\begin{document}
+The EFC Flow Diagram describes the causally ordered relationships between
+the core fields of Energy-Flow Cosmology (EFC): entropy $S$, structural
+density $\rho$, energy flow $E_f$, grid resistance $R$, information
+capacity $C$, and effective propagation speed $c_{\text{eff}}$.
 
-% ----------------------------------------------------------------------
-% Style
-% ----------------------------------------------------------------------
-\tikzset{
-    box/.style={
-        rectangle,
-        rounded corners,
-        draw=black,
-        thick,
-        align=center,
-        minimum width=4cm,
-        minimum height=1.2cm
-    },
-    arrow/.style={
-        -{Latex[length=3mm]},
-        thick
-    }
+This diagram defines the canonical dependency and update ordering used
+throughout the entire EFC formal system, simulations, and analytical
+derivations.
+
+\subsection*{2. Core Dependency Structure}
+
+The causal structure of EFC is:
+
+\[
+S \rightarrow \rho \rightarrow E_f \rightarrow R \rightarrow c_{\text{eff}}
+\]
+
+Information capacity and informational resonance arise from:
+
+\[
+S \rightarrow C, \quad (E_f, \nabla S) \rightarrow I_0
+\]
+
+\subsection*{3. Field Definitions}
+
+\begin{itemize}
+    \item Entropy field: $S(\mathbf{x}, t)$
+    \item Structural density: $\rho(\mathbf{x}, t)$
+    \item Energy–flow field: $E_f(\mathbf{x}, t)$
+    \item Grid resistance: $R(\mathbf{x}, t)$
+    \item Effective propagation speed: $c_{\text{eff}}(\mathbf{x}, t)$
+    \item Information capacity: $C(\mathbf{x}, t)$
+    \item Information resonance scalar: $I_0(\mathbf{x}, t)$
+\end{itemize}
+
+\subsection*{4. Diagram Equations}
+
+Entropy influences density:
+
+\[
+\frac{d\rho}{dt} \propto E_f - R
+\]
+
+Density and entropy determine energy flow:
+
+\[
+E_f = \rho(1 - S)
+\]
+
+Energy flow and entropy gradients influence the informational layer:
+
+\[
+I_0 = \gamma |E_f \cdot \nabla S|
+\]
+
+Resistance couples back:
+
+\[
+R = R(S, \rho)
+\]
+
+Propagation speed:
+
+\[
+c_{\text{eff}} = (1 + R)^{-1}
+\]
+
+Information capacity:
+
+\[
+C = C_0 (1 - S)
+\]
+
+\subsection*{5. Canonical Update Ordering}
+
+The EFC Flow Diagram imposes this update order in simulations:
+
+\[
+S \longrightarrow \rho \longrightarrow E_f \longrightarrow R \longrightarrow c_{\text{eff}}
+\]
+
+And for the informational layer:
+
+\[
+S \longrightarrow (C, \nabla S) \longrightarrow (I_0, \Phi_I)
+\]
+
+\subsection*{6. Unified Diagram}
+
+\[
+\boxed{
+S \Rightarrow
+\begin{cases}
+\, C \\
+\, \rho
+\end{cases}
+\Rightarrow E_f
+\Rightarrow
+\begin{cases}
+\, I_0 \\
+\, R
+\end{cases}
+\Rightarrow c_{\text{eff}}
 }
+\]
 
-% ----------------------------------------------------------------------
-% Diagram
-% ----------------------------------------------------------------------
-\begin{tikzpicture}[node distance=1.6cm]
+\subsection*{7. Role in the EFC Framework}
 
-% --- Nodes -------------------------------------------------------------
+The diagram defines:
 
-\node[box] (grid) {Grid State \\ $G$};
-\node[box, below=of grid] (entropy) {Entropy Field \\ $S(G)$};
-\node[box, below=of entropy] (efield) {Energy--Flow Field \\ $E_f = \rho(1 - S)$};
-\node[box, below=of efield] (structure) {Structure Formation \\ $\rho(r),\, v(r)$ profiles};
+\begin{itemize}
+    \item update sequence for numerical solvers
+    \item conceptual map for all formal models (S, D, H, C$_0$)
+    \item integration rule between information and structural layers
+    \item foundations for EFC visualization and explanation
+\end{itemize}
 
-\node[box, right=3.5cm of entropy] (feedback_s) {Feedback to $S$};
-\node[box, right=3.5cm of efield] (feedback_g) {Feedback to Grid};
-
-% --- Arrows ------------------------------------------------------------
-
-\draw[arrow] (grid) -- (entropy);
-\draw[arrow] (entropy) -- (efield);
-\draw[arrow] (efield) -- (structure);
-
-% Feedback loops
-\draw[arrow] (structure.east) -| (feedback_s.south);
-\draw[arrow] (feedback_s.north) |- (entropy.east);
-
-\draw[arrow] (structure.east) -| (feedback_g.south);
-\draw[arrow] (feedback_g.north) |- (grid.east);
-
-\end{tikzpicture}
-
-\end{document}
+It functions as the operational backbone of the EFC formal architecture.
