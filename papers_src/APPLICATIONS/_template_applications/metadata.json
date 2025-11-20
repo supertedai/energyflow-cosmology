@@ -1,1 +1,15 @@
+{
+  "title": "Untitled Paper",
+  "slug": "untitled-paper",
+  "domain": "AUTH",
+  "authors": [
+    {
+      "name": "Morten Magnusson",
+      "orcid": "https://orcid.org/0009-0002-4860-5095"
+    }
+  ],
+  "description": "Short description of the paper.",
+  "keywords": ["EFC", "Energy-Flow Cosmology"],
+  "version": "1.0.0"
+}
 
