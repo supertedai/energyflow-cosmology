@@ -1,117 +1,125 @@
 #!/usr/bin/env python3
-import json
-import os
-from pathlib import Path
+"""
+Figshare integration for EFC Full Sync
+Oppdatert: må inkludere filstørrelse ("size") i file-init for Figshare API.
+"""
 
+import os
 import requests
 
-
-THIS_ROOT = Path(__file__).resolve().parents[1]  # efc_full_sync/
-REPO_ROOT = THIS_ROOT.parents[0]
-
-# Token må alltid komme fra miljøvariabel
-FIGSHARE_TOKEN = os.getenv("FIGSHARE_TOKEN", "")
+FIGSHARE_TOKEN = os.getenv("FIGSHARE_TOKEN", "").strip()
 
 
-class FigshareError(RuntimeError):
+class FigshareError(Exception):
     pass
 
 
-def publish_pdf_to_figshare(title: str, description: str, keywords: list[str], pdf_path: Path) -> dict | None:
+def publish_pdf_to_figshare(title, description, keywords, pdf_path):
     """
-    Publiser PDF til Figshare og returner DOI-info.
-    
-    Returnerer:
-        {
-          "doi": "...",
-          "version_doi": "...",
-          "figshare_id": 12345
-        }
-
-    Hvis FIGSHARE_TOKEN ikke finnes -> returnerer None og pipeline går videre uten feil.
+    Publiser PDF til Figshare som draft.
+    Returnerer DOI-informasjon hvis FIGSHARE_TOKEN finnes, ellers None.
     """
 
-    # Ingen token = ingen Figshare-publisering
     if not FIGSHARE_TOKEN:
+        print("[efc_full_sync] FIGSHARE_TOKEN mangler – hopper over Figshare.")
         return None
+
+    print("[efc_full_sync] Publiserer til Figshare…")
 
     headers = {
         "Authorization": f"token {FIGSHARE_TOKEN}",
-        "Content-Type": "application/json",
+        "Content-Type": "application/json"
     }
 
-    # === 1. Opprett Figshare artikkel (draft)
-    payload = {
+    # ---------------------------------------------------------------
+    # 1. Opprett artikkel (draft)
+    # ---------------------------------------------------------------
+    article_data = {
         "title": title,
         "description": description,
-        "tags": keywords or [],
+        "keywords": keywords,
         "defined_type": "preprint",
+        "categories": [],
+        "references": [],
+        "funding": []
     }
 
     r = requests.post(
         "https://api.figshare.com/v2/account/articles",
         headers=headers,
-        data=json.dumps(payload),
-        timeout=60,
+        json=article_data
     )
-    if r.status_code >= 300:
-        raise FigshareError(f"Figshare artikkel-opprett feilet: {r.status_code} {r.text}")
 
-    article_id = r.json().get("entity_id")
-    if not article_id:
-        raise FigshareError("Figshare ga ikke entity_id tilbake.")
+    if r.status_code not in (201, 202):
+        raise FigshareError(f"Figshare artikkel-init feilet: {r.status_code} {r.text}")
 
-    # === 2. Initier filopplasting
-    init_payload = {"name": pdf_path.name}
+    article_id = r.json()["location"].split("/")[-1]
+    print(f"[efc_full_sync] Figshare artikkel opprettet: {article_id}")
+
+    # ---------------------------------------------------------------
+    # 2. Last opp PDF
+    # ---------------------------------------------------------------
+    pdf_size = os.path.getsize(pdf_path)
+
+    file_init = {
+        "name": os.path.basename(pdf_path),
+        "size": pdf_size
+    }
+
     r = requests.post(
         f"https://api.figshare.com/v2/account/articles/{article_id}/files",
         headers=headers,
-        data=json.dumps(init_payload),
-        timeout=60,
+        json=file_init
     )
-    if r.status_code >= 300:
+
+    if r.status_code not in (201, 202):
         raise FigshareError(f"Figshare file-init feilet: {r.status_code} {r.text}")
 
     file_info = r.json()
-    upload_url = file_info.get("upload_url")
-    file_id = file_info.get("id")
-    if not upload_url or not file_id:
-        raise FigshareError("Figshare ga ikke upload_url eller file id.")
+    file_id = file_info["id"]
+    upload_url = file_info["upload_url"]
 
-    # === 3. Last opp fil med PUT
-    with pdf_path.open("rb") as f:
-        put_r = requests.put(upload_url, data=f, timeout=300)
-    if put_r.status_code >= 300:
-        raise FigshareError(f"Figshare fil-upload feilet: {put_r.status_code} {put_r.text}")
+    print(f"[efc_full_sync] Fil-init OK. file_id={file_id}, size={pdf_size}")
 
-    # === 4. Fullfør opplasting
+    # ---------------------------------------------------------------
+    # 3. Last opp selve filen (multipart upload)
+    # ---------------------------------------------------------------
+    with open(pdf_path, "rb") as f:
+        r = requests.put(upload_url, data=f)
+
+    if r.status_code not in (200, 201, 202):
+        raise FigshareError(f"Figshare upload feilet: {r.status_code} {r.text}")
+
+    print("[efc_full_sync] PDF upload fullført.")
+
+    # ---------------------------------------------------------------
+    # 4. Ferdigstill file
+    # ---------------------------------------------------------------
     r = requests.post(
         f"https://api.figshare.com/v2/account/articles/{article_id}/files/{file_id}",
-        headers=headers,
-        timeout=60,
+        headers=headers
     )
-    if r.status_code >= 300:
+
+    if r.status_code not in (200, 202):
         raise FigshareError(f"Figshare file-complete feilet: {r.status_code} {r.text}")
 
-    # === 5. Hent info om artikkel (DOI + version DOI)
+    print("[efc_full_sync] File complete OK.")
+
+    # ---------------------------------------------------------------
+    # 5. Hent DOI
+    # ---------------------------------------------------------------
     r = requests.get(
         f"https://api.figshare.com/v2/account/articles/{article_id}",
-        headers=headers,
-        timeout=60,
+        headers=headers
     )
-    if r.status_code >= 300:
-        raise FigshareError(f"Figshare get-article feilet: {r.status_code} {r.text}")
 
-    article = r.json()
+    if r.status_code != 200:
+        raise FigshareError(f"Figshare DOI-fetch feilet: {r.status_code} {r.text}")
 
-    doi = article.get("doi")
-    version_doi = article.get("doi_url")
-
-    if not doi:
-        raise FigshareError("Figshare returnerte ikke DOI.")
+    data = r.json()
 
     return {
-        "doi": doi,
-        "version_doi": version_doi,
         "figshare_id": article_id,
+        "doi": data.get("doi"),
+        "version_doi": data.get("doi_url")
     }
