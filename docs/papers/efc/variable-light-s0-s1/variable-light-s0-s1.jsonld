@@ -1,29 +1,22 @@
 {
-  "@context": "https://schema.org",
-  "@type": "ScholarlyArticle",
-  "@id": "https://github.com/supertedai/energyflow-cosmology/docs/papers/efc/variable-light-s0-s1",
-  "name": "Variable Light Speed and the s₀ / s₁ Entropic States",
-  "author": {
-    "@type": "Person",
-    "name": "Morten Magnusson",
-    "identifier": "https://orcid.org/0009-0002-4860-5095"
-  },
-  "description": "A theoretical exploration of how the effective speed of light emerges from the entropic transition between s₀ and s₁ within the Energy-Flow Cosmology (EFC) framework.",
+  "title": "Variable Light Speed and the s\u2080 / s\u2081 Entropic States",
+  "slug": "variable-light-s0-s1",
+  "domain": "META",
+  "description": "A theoretical exploration of how the speed of light emerges from the entropic transition between s\u2080 and s\u2081, within the Energy-Flow Cosmology (EFC) framework.",
   "keywords": [
-    "Energy-Flow Cosmology",
     "EFC",
     "entropy",
-    "variable light speed",
+    "variable light",
     "s0",
     "s1",
     "thermodynamics",
     "cosmology"
   ],
-  "encodingFormat": "application/pdf",
-  "url": "variable-light-s0-s1.pdf",
-  "isPartOf": {
-    "@type": "CreativeWorkSeries",
-    "name": "EFC Papers"
-  },
-  "version": "1.0.0"
+  "version": "1.0.0",
+  "authors": [
+    {
+      "name": "Morten Magnusson",
+      "orcid": "https://orcid.org/0009-0002-4860-5095"
+    }
+  ]
 }
