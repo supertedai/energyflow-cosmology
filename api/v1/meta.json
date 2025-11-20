@@ -50,21 +50,21 @@
   },
   "sources": {
     "figshare": {
-      "id": 30656828,
-      "title": "AUTH Layer: Origin, Provenance and Structural Signature of Energy-Flow Cosmology",
-      "published_date": "2025-11-19T14:02:09Z",
-      "url": "https://api.figshare.com/v2/account/articles/30656828",
-      "doi": "10.6084/m9.figshare.30656828",
+      "id": 30666506,
+      "title": "EFC \u2014 Entropy-Dependent Speed of Light Through the s\u2080/s\u2081 Phase Thresholds",
+      "published_date": null,
+      "url": "https://api.figshare.com/v2/account/articles/30666506",
+      "doi": "",
       "resource_id": null,
       "resource_doi": null
     }
   },
   "doi": {
     "master_spec": {
-      "doi": "10.6084/m9.figshare.30656828",
-      "figshare_id": 30656828,
-      "url": "https://api.figshare.com/v2/account/articles/30656828",
-      "published_date": "2025-11-19T14:02:09Z",
+      "doi": "",
+      "figshare_id": 30666506,
+      "url": "https://api.figshare.com/v2/account/articles/30666506",
+      "published_date": null,
       "source": "figshare"
     }
   }
