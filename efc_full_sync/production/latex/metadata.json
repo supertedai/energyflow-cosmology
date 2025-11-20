@@ -1,6 +1,6 @@
 {
-  "slug": "EFC-Replace-With-Your-Slug",
-  "title": "Replace With Title",
+  "slug": "EFC-Entropy-Dependent-Speed-of-Light",
+  "title": "EFC — Entropy-Dependent Speed of Light Through the s₀/s₁ Phase Thresholds",
   "version": "1.0",
   "authors": [
     {
@@ -8,14 +8,16 @@
       "orcid": "https://orcid.org/0009-0002-4860-5095"
     }
   ],
-  "description": "Short abstract text describing the aim of the paper.",
+  "description": "In the Energy-Flow Cosmology (EFC) framework, the speed of light is not a fixed universal constant but an emergent response to local entropy-rate density. This paper explains how the s₀/s₁ phase boundary creates measurable acceleration effects in c through gradients in the underlying thermodynamic flow field.",
   "keywords": [
     "Energy-Flow Cosmology",
-    "keyword1",
-    "keyword2",
-    "keyword3"
+    "entropy",
+    "speed of light",
+    "s0",
+    "s1",
+    "phase transitions"
   ],
   "figures": [
-    "figures/example-diagram.mmd"
+    "figures/s0s1-diagram.mmd"
   ]
 }
