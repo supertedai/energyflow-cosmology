@@ -1,34 +1,33 @@
 #!/usr/bin/env python3
-import json
-import os
 from pathlib import Path
-from mcp import Server, tool, Message
+from mcp.server import Server
+from mcp.types import ToolOutput
 
 server = Server("efc-mcp")
-
 ROOT = Path(".").resolve()
 
-@tool
-def list_files(path: str = ""):
+@server.tool()
+def list_files(path: str = "") -> ToolOutput:
     p = (ROOT / path).resolve()
-    files = []
+    items = []
     for item in p.iterdir():
-        files.append({
+        items.append({
             "name": item.name,
             "is_dir": item.is_dir()
         })
-    return files
+    return ToolOutput(content=items)
 
-@tool
-def read_file(path: str):
+@server.tool()
+def read_file(path: str) -> ToolOutput:
     p = (ROOT / path).resolve()
-    return p.read_text()
+    text = p.read_text()
+    return ToolOutput(content=text)
 
-@tool
-def write_file(path: str, content: str):
+@server.tool()
+def write_file(path: str, content: str) -> ToolOutput:
     p = (ROOT / path).resolve()
     p.write_text(content)
-    return {"written": path}
+    return ToolOutput(content=f"Wrote: {path}")
 
 if __name__ == "__main__":
     server.run()
