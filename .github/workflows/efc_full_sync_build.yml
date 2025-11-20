@@ -1,0 +1,49 @@
+name: EFC Full Sync Build
+
+on:
+  workflow_dispatch: {}
+
+jobs:
+  build-paper:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install system deps (TeX + node)
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y texlive-full latexmk
+          curl -fsSL https://deb.nodesource.com/setup_20.x | sudo -E bash -
+          sudo apt-get install -y nodejs
+
+      - name: Install Mermaid CLI
+        run: |
+          sudo npm install -g @mermaid-js/mermaid-cli
+
+      - name: Install Python deps
+        run: |
+          pip install jinja2 requests fastapi pydantic
+
+      - name: Build paper with efc_full_sync
+        env:
+          FIGSHARE_TOKEN: ${{ secrets.FIGSHARE_TOKEN }}
+          DOI_SYNC_URL: ${{ secrets.DOI_SYNC_URL }}
+        run: |
+          cd efc_full_sync/tools
+          python efc_full_sync_builder.py
+
+      # Valgfritt: auto-commit
+      # - name: Commit changes
+      #   run: |
+      #     git config user.name "efc-full-sync-bot"
+      #     git config user.email "bot@example.com"
+      #     git add docs/ efc_full_sync/meta/ efc_full_sync/schema/ efc_full_sync/production/latex/metadata.json
+      #     git commit -m "efc_full_sync: auto-build paper"
+      #     git push
