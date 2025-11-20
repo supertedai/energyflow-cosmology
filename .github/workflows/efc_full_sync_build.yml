@@ -31,19 +31,10 @@ jobs:
         run: |
           pip install jinja2 requests fastapi pydantic
 
-      - name: Build paper with efc_full_sync
+      - name: Run efc full-sync builder
         env:
           FIGSHARE_TOKEN: ${{ secrets.FIGSHARE_TOKEN }}
           DOI_SYNC_URL: ${{ secrets.DOI_SYNC_URL }}
         run: |
           cd efc_full_sync/tools
           python efc_full_sync_builder.py
-
-      # Valgfritt: auto-commit
-      # - name: Commit changes
-      #   run: |
-      #     git config user.name "efc-full-sync-bot"
-      #     git config user.email "bot@example.com"
-      #     git add docs/ efc_full_sync/meta/ efc_full_sync/schema/ efc_full_sync/production/latex/metadata.json
-      #     git commit -m "efc_full_sync: auto-build paper"
-      #     git push
