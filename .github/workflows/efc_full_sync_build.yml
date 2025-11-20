@@ -21,19 +21,34 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y texlive-full latexmk
 
-      - name: Install Node.js
-        run: |
-          curl -fsSL https://deb.nodesource.com/setup_20.x | sudo -E bash -
-          sudo apt-get install -y nodejs
-
-      - name: Install Mermaid CLI + Chrome Headless Shell
-        run: |
-          sudo npm install -g @mermaid-js/mermaid-cli
-          sudo npx puppeteer browsers install chrome-headless-shell
-
       - name: Install Python dependencies
         run: |
           pip install jinja2 requests fastapi pydantic
+
+      - name: Render Mermaid diagrams (Docker)
+        run: |
+          # Hent alle .mmd filer i figures/
+          for file in efc_full_sync/production/latex/figures/*.mmd; do
+            svg="${file%.mmd}.svg"
+            png="${file%.mmd}.png"
+
+            echo "Rendrer Mermaid: $file"
+
+            # SVG-render
+            docker run --rm \
+              -v ${{ github.workspace }}/efc_full_sync/production/latex/figures:/data \
+              minlag/mermaid-cli \
+              -i "/data/$(basename $file)" \
+              -o "/data/$(basename $svg)"
+
+            # PNG-render
+            docker run --rm \
+              -v ${{ github.workspace }}/efc_full_sync/production/latex/figures:/data \
+              minlag/mermaid-cli \
+              -i "/data/$(basename $file)" \
+              -o "/data/$(basename $png)" \
+              -b transparent
+          done
 
       - name: Run EFC Full Sync Builder
         env:
