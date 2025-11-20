@@ -1,7 +1,0 @@
-@misc{{{{ slug }} }},
-  title        = { {{ title }} },
-  author       = { {% for a in authors %}{{ a.name }}{% if not loop.last %} and {% endif %}{% endfor %} },
-  year         = { {{ timestamp[:4] }} },
-  note         = { EFC full-sync pipeline }{% if doi %},
-  doi          = { {{ doi }} }{% endif %}
-}
