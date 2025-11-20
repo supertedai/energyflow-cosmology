@@ -1,125 +1,178 @@
 #!/usr/bin/env python3
 """
-Figshare integration for EFC Full Sync
-Oppdatert: må inkludere filstørrelse ("size") i file-init for Figshare API.
+Figshare publishing module for EFC Full Sync Pipeline.
+Handles:
+- Article creation
+- Metadata upload
+- File upload (multipart)
+- Final publish
+- Error validation
 """
 
-import os
+import json
+import time
 import requests
+from pathlib import Path
 
-FIGSHARE_TOKEN = os.getenv("FIGSHARE_TOKEN", "").strip()
+FIGSHARE_API = "https://api.figshare.com/v2"
 
+
+# -------------------------------
+# Exceptions
+# -------------------------------
 
 class FigshareError(Exception):
     pass
 
 
-def publish_pdf_to_figshare(title, description, keywords, pdf_path):
+# -------------------------------
+# Utility functions
+# -------------------------------
+
+def _check_response(r, context=""):
+    if not r.ok:
+        raise FigshareError(
+            f"{context} feilet: {r.status_code} {r.text}"
+        )
+    return r.json() if r.text else {}
+
+
+# -------------------------------
+# Article creation
+# -------------------------------
+
+def create_article(token: str, metadata: dict):
     """
-    Publiser PDF til Figshare som draft.
-    Returnerer DOI-informasjon hvis FIGSHARE_TOKEN finnes, ellers None.
+    Creates a new Figshare article.
+    Makes sure metadata obeys Figshare schema.
     """
 
-    if not FIGSHARE_TOKEN:
-        print("[efc_full_sync] FIGSHARE_TOKEN mangler – hopper over Figshare.")
-        return None
+    # --- Fix schema fields ---
+    # funding must be a STRING, not a list
+    if "funding" not in metadata or metadata["funding"] in (None, [], {}):
+        metadata["funding"] = ""  # Empty string is valid
 
-    print("[efc_full_sync] Publiserer til Figshare…")
+    # Convert list fields → valid format
+    list_fields = ["tags", "keywords", "categories"]
 
-    headers = {
-        "Authorization": f"token {FIGSHARE_TOKEN}",
-        "Content-Type": "application/json"
+    for field in list_fields:
+        if field in metadata and isinstance(metadata[field], list):
+            metadata[field] = [str(x) for x in metadata[field]]
+
+    # Construct minimal required metadata
+    article_payload = {
+        "title": metadata.get("title", "EFC Paper"),
+        "description": metadata.get("description", ""),
+        "keywords": metadata.get("keywords", []),
+        "categories": metadata.get("categories", []),
+        "funding": metadata.get("funding", ""),
+        "defined_type": metadata.get("defined_type", "preprint"),
+        "is_metadata_record": False
     }
 
-    # ---------------------------------------------------------------
-    # 1. Opprett artikkel (draft)
-    # ---------------------------------------------------------------
-    article_data = {
-        "title": title,
-        "description": description,
-        "keywords": keywords,
-        "defined_type": "preprint",
-        "categories": [],
-        "references": [],
-        "funding": []
-    }
+    headers = {"Authorization": f"token {token}"}
+    r = requests.post(f"{FIGSHARE_API}/account/articles", json=article_payload, headers=headers)
 
+    data = _check_response(r, "Artikkel-init")
+    article_id = data["location"].split("/")[-1]
+
+    return article_id
+
+
+# -------------------------------
+# File upload (multipart)
+# -------------------------------
+
+def upload_file(token: str, article_id: str, filepath: Path):
+    """
+    Uploads PDF to Figshare using multipart upload.
+    """
+
+    headers = {"Authorization": f"token {token}"}
+
+    # 1. Initiate file upload
+    init_payload = {"name": filepath.name}
     r = requests.post(
-        "https://api.figshare.com/v2/account/articles",
-        headers=headers,
-        json=article_data
-    )
-
-    if r.status_code not in (201, 202):
-        raise FigshareError(f"Figshare artikkel-init feilet: {r.status_code} {r.text}")
-
-    article_id = r.json()["location"].split("/")[-1]
-    print(f"[efc_full_sync] Figshare artikkel opprettet: {article_id}")
-
-    # ---------------------------------------------------------------
-    # 2. Last opp PDF
-    # ---------------------------------------------------------------
-    pdf_size = os.path.getsize(pdf_path)
-
-    file_init = {
-        "name": os.path.basename(pdf_path),
-        "size": pdf_size
-    }
-
-    r = requests.post(
-        f"https://api.figshare.com/v2/account/articles/{article_id}/files",
-        headers=headers,
-        json=file_init
-    )
-
-    if r.status_code not in (201, 202):
-        raise FigshareError(f"Figshare file-init feilet: {r.status_code} {r.text}")
-
-    file_info = r.json()
-    file_id = file_info["id"]
-    upload_url = file_info["upload_url"]
-
-    print(f"[efc_full_sync] Fil-init OK. file_id={file_id}, size={pdf_size}")
-
-    # ---------------------------------------------------------------
-    # 3. Last opp selve filen (multipart upload)
-    # ---------------------------------------------------------------
-    with open(pdf_path, "rb") as f:
-        r = requests.put(upload_url, data=f)
-
-    if r.status_code not in (200, 201, 202):
-        raise FigshareError(f"Figshare upload feilet: {r.status_code} {r.text}")
-
-    print("[efc_full_sync] PDF upload fullført.")
-
-    # ---------------------------------------------------------------
-    # 4. Ferdigstill file
-    # ---------------------------------------------------------------
-    r = requests.post(
-        f"https://api.figshare.com/v2/account/articles/{article_id}/files/{file_id}",
+        f"{FIGSHARE_API}/account/articles/{article_id}/files",
+        json=init_payload,
         headers=headers
     )
+    file_info = _check_response(r, "File-init")
+    file_id = file_info["location"].split("/")[-1]
 
-    if r.status_code not in (200, 202):
-        raise FigshareError(f"Figshare file-complete feilet: {r.status_code} {r.text}")
-
-    print("[efc_full_sync] File complete OK.")
-
-    # ---------------------------------------------------------------
-    # 5. Hent DOI
-    # ---------------------------------------------------------------
+    # 2. Get upload parts
     r = requests.get(
-        f"https://api.figshare.com/v2/account/articles/{article_id}",
+        f"{FIGSHARE_API}/account/articles/{article_id}/files/{file_id}",
         headers=headers
     )
+    parts = _check_response(r, "Hent file parts")["upload_url"]
 
-    if r.status_code != 200:
-        raise FigshareError(f"Figshare DOI-fetch feilet: {r.status_code} {r.text}")
+    # 3. Upload single-part file directly
+    with open(filepath, "rb") as f:
+        r = requests.put(parts, data=f)
+        if not r.ok:
+            raise FigshareError(f"File upload feilet: {r.status_code} {r.text}")
 
-    data = r.json()
+    # 4. Mark file as complete
+    r = requests.post(
+        f"{FIGSHARE_API}/account/articles/{article_id}/files/{file_id}",
+        headers=headers
+    )
+    _check_response(r, "File-complete")
+
+    return file_id
+
+
+# -------------------------------
+# Final publish
+# -------------------------------
+
+def publish_article(token: str, article_id: str):
+    headers = {"Authorization": f"token {token}"}
+    r = requests.post(
+        f"{FIGSHARE_API}/account/articles/{article_id}/publish",
+        headers=headers
+    )
+    _check_response(r, "Publish")
+
+
+# -------------------------------
+# Public function called by pipeline
+# -------------------------------
+
+def publish_pdf_to_figshare(pdf_path: str, metadata_path: str, figshare_token: str):
+    """
+    Main entrypoint used by efc_full_sync_builder.py.
+    Handles:
+    - Read metadata
+    - Create article
+    - Upload PDF
+    - Publish
+    Returns article ID and metadata for logging.
+    """
+
+    pdf_path = Path(pdf_path)
+    metadata_path = Path(metadata_path)
+
+    if not pdf_path.exists():
+        raise FigshareError(f"PDF ikke funnet: {pdf_path}")
+
+    if not metadata_path.exists():
+        raise FigshareError(f"Metadata ikke funnet: {metadata_path}")
+
+    with metadata_path.open() as f:
+        metadata = json.load(f)
+
+    # 1. Create article
+    article_id = create_article(figshare_token, metadata)
+
+    # 2. Upload file
+    upload_file(figshare_token, article_id, pdf_path)
+
+    # 3. Publish
+    publish_article(figshare_token, article_id)
 
     return {
-        "figshare_id": article_id,
-        "doi": data.get("doi"),
-        "version_doi": data.get("doi_url")
+        "article_id": article_id,
+        "url": f"https://figshare.com/account/articles/{article_id}"
     }
