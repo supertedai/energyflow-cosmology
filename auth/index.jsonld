@@ -1,0 +1,25 @@
+{
+  "@context": "https://schema.org",
+  "@type": "CreativeWork",
+  "@id": "https://github.com/supertedai/energyflow-cosmology/auth/index.jsonld",
+  "identifier": "efc-auth-layer",
+  "version": "1.0",
+  "name": "EFC Authorship & Provenance Index",
+  "description": "Authorship, provenance, and identity mapping for the Energy-Flow Cosmology repository. Documents the author, origin structure, and links to provenance-specific papers.",
+  "author": {
+    "@type": "Person",
+    "name": "Morten Magnusson",
+    "identifier": "https://orcid.org/0009-0002-4860-5095"
+  },
+  "about": [
+    {
+      "@type": "CreativeWork",
+      "name": "AUTH Layer — Origin, Provenance and Structural Signature of Energy-Flow Cosmology",
+      "url": "../docs/papers/efc/AUTH-Layer-Origin-Provenance-and-Structural-Signature-of-Energy-Flow-Cosmology/"
+    }
+  ],
+  "isPartOf": {
+    "@type": "CreativeWorkSeries",
+    "name": "EFC Meta-Layers"
+  }
+}
