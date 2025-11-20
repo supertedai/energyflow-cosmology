@@ -1,49 +1,80 @@
-name: Fetch Full Figshare Metadata (Auto)
+name: Validate and Sync Figshare Token
 
 on:
-  schedule:
-    - cron: "*/15 * * * *"
   workflow_dispatch:
 
 jobs:
-  fetch:
+  figshare-test:
     runs-on: ubuntu-latest
-    permissions:
-      contents: write
 
     steps:
-      - name: Checkout repository
+      - name: Checkout repo
         uses: actions/checkout@v4
-        with:
-          fetch-depth: 0   # viktig: gjør at push ikke trigger workspace-wipe
 
-      - name: Set up Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: '3.12'
-
-      - name: Install dependencies
-        run: pip install requests
-
-      - name: Fetch latest Figshare metadata
+      # ---------------------------------------------------------
+      # TEST: Figshare Token Validation Step
+      # ---------------------------------------------------------
+      - name: Validate Figshare Token
         env:
           FIGSHARE_TOKEN: ${{ secrets.FIGSHARE_TOKEN }}
-        run: python scripts/fetch_figshare_auto.py
-
-      - name: Commit and push changes safely
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          git config user.name "github-actions"
-          git config user.email "actions@github.com"
+          python3 - << 'EOF'
+import requests, os, sys
 
-          git add figshare/ || true
-          git add schema/ || true
-          git add api/v1/meta.json || true
+print("=== Figshare Token Self-Test ===")
 
-          # commit only when there are changes
-          git diff --cached --quiet || git commit -m "🔄 Auto-sync Figshare [skip ci]"
+token = os.environ.get("FIGSHARE_TOKEN")
 
-          # FIX: safe push that avoids wiping workspace
-          git pull --rebase origin main || true
-          git push origin HEAD:main
+# --- 1. Check token present ---
+if not token:
+    print("ERROR: FIGSHARE_TOKEN is not set in environment.")
+    sys.exit(1)
+
+if len(token.strip()) < 20:
+    print("ERROR: FIGSHARE_TOKEN appears too short or corrupted.")
+    print("Length:", len(token.strip()))
+    sys.exit(1)
+
+print("Token length (sanitized):", len(token.strip()))
+
+# --- 2. Send test request ---
+headers = {
+    "Authorization": f"token {token.strip()}",
+    "Content-Type": "application/json"
+}
+
+try:
+    r = requests.get("https://api.figshare.com/v2/account/articles", headers=headers, timeout=10)
+except Exception as e:
+    print("ERROR: Connection to Figshare failed:", e)
+    sys.exit(1)
+
+print("HTTP Status:", r.status_code)
+
+# --- 3. Diagnose common issues ---
+if r.status_code == 200:
+    print("SUCCESS: Token is valid and Figshare API is reachable.")
+    print("Response preview:", r.text[:200], "...")
+    sys.exit(0)
+
+elif r.status_code == 403:
+    print("ERROR: Figshare returned 403 Forbidden.")
+    print("This means:")
+    print(" - Token is invalid OR")
+    print(" - Token has incorrect format OR")
+    print(" - Token has whitespace/newlines OR")
+    print(" - Header is corrupted OR")
+    print(" - Figshare rejected the request signature.")
+    print("Full body:", r.text)
+    sys.exit(1)
+
+elif r.status_code == 401:
+    print("ERROR: 401 Unauthorized — token structure is wrong.")
+    print("Check for whitespace or newline in GitHub Secret.")
+    sys.exit(1)
+
+else:
+    print("ERROR: Unexpected response:", r.status_code)
+    print("Body:", r.text)
+    sys.exit(1)
+EOF
