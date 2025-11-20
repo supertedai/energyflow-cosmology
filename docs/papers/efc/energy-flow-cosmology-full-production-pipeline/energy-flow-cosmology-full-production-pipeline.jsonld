@@ -1,0 +1,20 @@
+{
+  "@context": "https://schema.org",
+  "@type": "ScholarlyArticle",
+  "name": "Energy-Flow Cosmology \u2014 Full Production Pipeline",
+  "description": "Automated build and publication of the Energy-Flow Cosmology paper, including Mermaid rendering, LaTeX compilation, and Zenodo export.",
+  "keywords": [
+    "Energy-Flow Cosmology",
+    "EFC",
+    "entropy",
+    "thermodynamics",
+    "cosmology"
+  ],
+  "author": {
+    "@type": "Person",
+    "name": "Morten Magnusson",
+    "identifier": "https://orcid.org/0009-0002-4860-5095"
+  },
+  "encodingFormat": "application/pdf",
+  "dateModified": "2025-11-20T17:40:24.415637Z"
+}
