@@ -10,9 +10,6 @@ jobs:
   build-paper:
     runs-on: ubuntu-latest
 
-    env:
-      ZENODO_TOKEN: ${{ secrets.ZENODO_TOKEN }}
-
     steps:
       - name: Checkout repo
         uses: actions/checkout@v3
@@ -27,7 +24,7 @@ jobs:
           python3 -m pip install --upgrade pip
           pip install requests
 
-      - name: Build and publish
+      - name: Build EFC paper (no publishing)
         run: |
           cd efc_full_sync/tools
           python3 efc_full_sync_builder.py
