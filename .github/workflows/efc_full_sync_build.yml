@@ -11,25 +11,27 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # ---------------------------
-      # 1. CHECKOUT
-      # ---------------------------
       - name: Checkout repo
         uses: actions/checkout@v3
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           persist-credentials: true
 
-      # ---------------------------
-      # 2. PYTHON DEPS
-      # ---------------------------
       - name: Install Python deps
         run: |
           python3 -m pip install --upgrade pip
           pip install requests python-slugify
 
       # ---------------------------
-      # 3. BUILD FORMAL PDF
+      # INSTALL LATEX (TeX Live)
+      # ---------------------------
+      - name: Install TeX Live
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y texlive-latex-base texlive-latex-recommended texlive-latex-extra texlive-fonts-recommended texlive-fonts-extra texlive-science
+
+      # ---------------------------
+      # BUILD FORMAL PACKAGE
       # ---------------------------
       - name: Build FORMAL (efc_full_sync_builder.py)
         run: |
@@ -37,14 +39,14 @@ jobs:
           python3 efc_full_sync_builder.py
 
       # ---------------------------
-      # 4. BUILD ALL PAPERS (papers_src/**)
+      # BUILD ALL PAPERS
       # ---------------------------
       - name: Build all papers (papers_src)
         run: |
           python3 efc_full_sync/tools/efc_full_sync_multibuilder.py
 
       # ---------------------------
-      # 5. COMMITTING CHANGES
+      # COMMIT CHANGES
       # ---------------------------
       - name: Commit changes
         run: |
