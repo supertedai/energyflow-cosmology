@@ -1,4 +1,4 @@
-name: EFC Full Sync Build
+name: EFC Full Production sync Build
 
 on:
   workflow_dispatch: {}
@@ -8,30 +8,34 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout
+      - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Setup Python
+      - name: Set up Python
         uses: actions/setup-python@v5
         with:
           python-version: "3.11"
 
-      - name: Install system deps (TeX + node)
+      - name: Install LaTeX (full)
         run: |
           sudo apt-get update
           sudo apt-get install -y texlive-full latexmk
+
+      - name: Install Node.js
+        run: |
           curl -fsSL https://deb.nodesource.com/setup_20.x | sudo -E bash -
           sudo apt-get install -y nodejs
 
-      - name: Install Mermaid CLI
+      - name: Install Mermaid CLI + Chrome Headless Shell
         run: |
           sudo npm install -g @mermaid-js/mermaid-cli
+          sudo npx puppeteer browsers install chrome-headless-shell
 
-      - name: Install Python deps
+      - name: Install Python dependencies
         run: |
           pip install jinja2 requests fastapi pydantic
 
-      - name: Run efc full-sync builder
+      - name: Run EFC Full Sync Builder
         env:
           FIGSHARE_TOKEN: ${{ secrets.FIGSHARE_TOKEN }}
           DOI_SYNC_URL: ${{ secrets.DOI_SYNC_URL }}
