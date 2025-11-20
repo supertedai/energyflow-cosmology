@@ -1,6 +1,6 @@
 # -------------------------------------------------------------
 # EFC Full Sync — Figshare Upload Helper
-# Version: 2.0
+# Version: 2.1 (Keywords + Tags Support)
 # -------------------------------------------------------------
 
 import requests
@@ -23,9 +23,15 @@ def _auth_headers():
     }
 
 # -------------------------------------------------------------
-# Create a new Figshare article (draft)
+# Create a new Figshare draft article
 # -------------------------------------------------------------
-def create_article(title, description, categories=None, tags=None, doi=None):
+def create_article(title, description, categories=None, tags=None, keywords=None, doi=None):
+
+    # Merge tags + keywords
+    merged_tags = []
+    if tags: merged_tags.extend(tags)
+    if keywords: merged_tags.extend(keywords)
+
     payload = {
         "title": title,
         "description": description,
@@ -35,11 +41,19 @@ def create_article(title, description, categories=None, tags=None, doi=None):
     if categories:
         payload["categories"] = categories
 
-    if tags:
-        payload["tags"] = tags
+    if merged_tags:
+        payload["tags"] = merged_tags
+
+    custom_fields = {}
 
     if doi:
-        payload["custom_fields"] = {"doi": doi}
+        custom_fields["doi"] = doi
+
+    if keywords:
+        custom_fields["keywords"] = keywords
+
+    if custom_fields:
+        payload["custom_fields"] = custom_fields
 
     r = requests.post(
         f"{FIGSHARE_API}/account/articles",
@@ -58,7 +72,7 @@ def create_article(title, description, categories=None, tags=None, doi=None):
 def upload_file(article_id, file_path):
     file_name = Path(file_path).name
 
-    # 1. Init upload
+    # Init upload
     r = requests.post(
         f"{FIGSHARE_API}/account/articles/{article_id}/files",
         headers=_auth_headers(),
@@ -71,7 +85,7 @@ def upload_file(article_id, file_path):
     file_id = file_info["id"]
     upload_url = file_info["upload_url"]
 
-    # 2. Upload actual bytes
+    # Upload bytes
     with open(file_path, "rb") as f:
         r2 = requests.put(
             upload_url,
@@ -82,7 +96,7 @@ def upload_file(article_id, file_path):
     if r2.status_code not in (200, 201):
         raise FigshareError(f"Upload failed: {r2.status_code} {r2.text}")
 
-    # 3. Mark upload complete
+    # Mark complete
     r3 = requests.post(
         f"{FIGSHARE_API}/account/articles/{article_id}/files/{file_id}",
         headers=_auth_headers()
@@ -91,7 +105,7 @@ def upload_file(article_id, file_path):
         raise FigshareError(f"Completion failed: {r3.status_code} {r3.text}")
 
 # -------------------------------------------------------------
-# Publish the article and return metadata
+# Publish the article
 # -------------------------------------------------------------
 def publish_article(article_id):
     r = requests.post(
@@ -101,7 +115,6 @@ def publish_article(article_id):
     if r.status_code not in (200, 201):
         raise FigshareError(f"Publish failed: {r.status_code} {r.text}")
 
-    # Fetch final metadata
     meta = requests.get(
         f"{FIGSHARE_API}/account/articles/{article_id}",
         headers=_auth_headers()
@@ -115,9 +128,11 @@ def publish_article(article_id):
     }
 
 # -------------------------------------------------------------
-# Main wrapper used by builder
+# Main wrapper
 # -------------------------------------------------------------
-def publish_pdf_to_figshare(pdf_path, title, description, categories=None, tags=None, doi=None):
+def publish_pdf_to_figshare(pdf_path, title, description,
+                            categories=None, tags=None,
+                            keywords=None, doi=None):
 
     if not Path(pdf_path).exists():
         raise FigshareError(f"PDF not found: {pdf_path}")
@@ -128,16 +143,17 @@ def publish_pdf_to_figshare(pdf_path, title, description, categories=None, tags=
         description=description,
         categories=categories,
         tags=tags,
+        keywords=keywords,
         doi=doi
     )
 
     # Upload PDF
     upload_file(article_id, pdf_path)
 
-    # Publish and return metadata
+    # Publish
     meta = publish_article(article_id)
 
-    # Store latest metadata for autosync
+    # Save metadata locally
     out = Path("figshare/latest.json")
     out.parent.mkdir(exist_ok=True)
 
