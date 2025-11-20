@@ -13,18 +13,24 @@ jobs:
     steps:
       - name: Checkout repo
         uses: actions/checkout@v3
-
-      - name: Set up Python
-        uses: actions/setup-python@v4
         with:
-          python-version: "3.11"
+          token: ${{ secrets.GITHUB_TOKEN }}
+          persist-credentials: true
 
-      - name: Install dependencies
+      - name: Install Python deps
         run: |
           python3 -m pip install --upgrade pip
-          pip install requests
+          pip install requests python-slugify
 
-      - name: Build EFC paper (no publishing)
+      - name: Build + generate package
         run: |
           cd efc_full_sync/tools
           python3 efc_full_sync_builder.py
+
+      - name: Commit changes
+        run: |
+          git config --local user.email "actions@github.com"
+          git config --local user.name  "GitHub Actions"
+          git add .
+          git commit -m "Auto: update EFC paper package" || echo "No changes"
+          git push
