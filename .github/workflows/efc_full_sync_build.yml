@@ -1,59 +1,33 @@
 name: EFC Full Production sync Build
 
 on:
-  workflow_dispatch: {}
+  workflow_dispatch:
+  push:
+    branches:
+      - main
 
 jobs:
   build-paper:
     runs-on: ubuntu-latest
 
+    env:
+      ZENODO_TOKEN: ${{ secrets.ZENODO_TOKEN }}
+
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
+      - name: Checkout repo
+        uses: actions/checkout@v3
 
       - name: Set up Python
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v4
         with:
           python-version: "3.11"
 
-      - name: Install LaTeX (full)
+      - name: Install dependencies
         run: |
-          sudo apt-get update
-          sudo apt-get install -y texlive-full latexmk
+          python3 -m pip install --upgrade pip
+          pip install requests
 
-      - name: Install Python dependencies
-        run: |
-          pip install jinja2 requests fastapi pydantic
-
-      - name: Render Mermaid diagrams (Docker)
-        run: |
-          # Hent alle .mmd filer i figures/
-          for file in efc_full_sync/production/latex/figures/*.mmd; do
-            svg="${file%.mmd}.svg"
-            png="${file%.mmd}.png"
-
-            echo "Rendrer Mermaid: $file"
-
-            # SVG-render
-            docker run --rm \
-              -v ${{ github.workspace }}/efc_full_sync/production/latex/figures:/data \
-              minlag/mermaid-cli \
-              -i "/data/$(basename $file)" \
-              -o "/data/$(basename $svg)"
-
-            # PNG-render
-            docker run --rm \
-              -v ${{ github.workspace }}/efc_full_sync/production/latex/figures:/data \
-              minlag/mermaid-cli \
-              -i "/data/$(basename $file)" \
-              -o "/data/$(basename $png)" \
-              -b transparent
-          done
-
-      - name: Run EFC Full Sync Builder
-        env:
-          FIGSHARE_TOKEN: ${{ secrets.FIGSHARE_TOKEN }}
-          DOI_SYNC_URL: ${{ secrets.DOI_SYNC_URL }}
+      - name: Build and publish
         run: |
           cd efc_full_sync/tools
-          python efc_full_sync_builder.py
+          python3 efc_full_sync_builder.py
