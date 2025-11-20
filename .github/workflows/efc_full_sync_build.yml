@@ -31,25 +31,17 @@ jobs:
         run: |
           python3 efc_full_sync/tools/efc_full_sync_multibuilder.py
 
-      - name: Upload all PDFs as artifacts
-        uses: actions/upload-artifact@v3
-        with:
-          name: efc-papers
-          path: |
-            docs/papers/efc/**/*.pdf
-            papers_src/**/*.pdf
-          if-no-files-found: ignore
-
-      - name: Commit metadata only (NO PDFs)
+      - name: Commit package (including PDF)
         run: |
           git config --local user.email "actions@github.com"
           git config --local user.name  "GitHub Actions"
 
-          # Add all metadata, but exclude PDFs explicitly
-          git add docs/papers/efc/*/*.json || true
-          git add docs/papers/efc/*/*.jsonld || true
+          git add docs/papers/efc/*/* || true
+          git add papers_src/*/* || true
 
-          git commit -m "Auto: update EFC metadata" || echo "No changes"
+          git commit -m "Auto: update all EFC papers and formal package" || echo "No changes"
 
-          git pull --rebase origin main || true
-          git push || true
+          # Resolve binary merge conflicts automatically
+          git pull --strategy=ours --no-edit origin main || true
+
+          git push
