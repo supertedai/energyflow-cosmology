@@ -1,0 +1,24 @@
+{
+  "@context": "https://schema.org",
+  "@type": "ScholarlyArticle",
+  "identifier": [
+    "{{ slug }}"{% if doi %},
+    "{{ doi }}"{% endif %}
+  ],
+  "name": "{{ title }}",
+  "version": "{{ version }}",
+  "author": [
+    {% for a in authors %}
+    {
+      "@type": "Person",
+      "name": "{{ a.name }}"{% if a.orcid %},
+      "identifier": "{{ a.orcid }}"{% endif %}
+    }{% if not loop.last %},{% endif %}
+    {% endfor %}
+  ],
+  "description": "{{ description | replace('\n',' ') }}",
+  "keywords": [{% for k in keywords %}"{{ k }}"{% if not loop.last %}, {% endif %}{% endfor %}],
+  "encodingFormat": "application/pdf",
+  "dateModified": "{{ timestamp }}"{% if version_doi %},
+  "url": "{{ version_doi }}"{% endif %}
+}
