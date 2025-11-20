@@ -1,0 +1,46 @@
+name: Build all papers
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-paper:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          persist-credentials: true
+          fetch-depth: 0
+
+      - name: Install LaTeX
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y texlive-full
+
+      - name: Build all .tex in docs/papers/efc
+        run: |
+          find docs/papers/efc -name "*.tex" | while read -r texfile; do
+            echo "Building $texfile"
+            dir=$(dirname "$texfile")
+            file=$(basename "$texfile")
+            cd "$dir"
+            pdflatex -interaction=nonstopmode "$file" || true
+            pdflatex -interaction=nonstopmode "$file" || true
+            cd - >/dev/null
+          done
+
+      - name: Commit and force-push updates (including PDFs)
+        run: |
+          git config --local user.email "actions@github.com"
+          git config --local user.name  "GitHub Actions"
+
+          git add -A
+          git commit -m "Auto: rebuild all EFC papers" || echo "No changes"
+
+          git push --force
