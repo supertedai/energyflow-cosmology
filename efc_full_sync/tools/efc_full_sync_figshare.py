@@ -11,6 +11,11 @@ REPO_ROOT = THIS_ROOT.parents[0]
 
 FIGSHARE_TOKEN = os.getenv("FIGSHARE_TOKEN", "")
 
+if not FIGSHARE_TOKEN:
+    # ingen feil – bare ingen Figshare-publisering
+    return None
+
+
 
 class FigshareError(RuntimeError):
     pass
