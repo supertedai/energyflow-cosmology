@@ -1,7 +1,7 @@
 {
   "project": "Energy-Flow Cosmology (EFC)",
   "version": "2.1",
-  "last_updated": "2025-11-19",
+  "last_updated": "2025-11-20",
   "layers": {
     "theory": {
       "description": "Formal scientific foundation of Energy-Flow Cosmology (EFC): field definitions, entropy dynamics, potentials and mathematical specification.",
