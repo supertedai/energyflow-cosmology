@@ -577,6 +577,11 @@
       "type": "CreativeWork"
     },
     {
+      "id": "energy-flow-cosmology-full-production-pipeline",
+      "path": "docs/papers/efc/energy-flow-cosmology-full-production-pipeline/energy-flow-cosmology-full-production-pipeline.jsonld",
+      "type": "ScholarlyArticle"
+    },
+    {
       "id": "EFC-Grid-Model-Entropic-Dynamics",
       "path": "docs/papers/efc/EFC-Grid-Model-Entropic-Dynamics/EFC-Grid-Model-Entropic-Dynamics.jsonld",
       "type": "CreativeWork"
