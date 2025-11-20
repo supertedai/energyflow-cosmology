@@ -1,0 +1,39 @@
+# {{ title }}
+
+**Version:** {{ version }}  
+**Slug:** {{ slug }}{% if doi %}  
+**DOI:** {{ doi }}{% endif %}
+
+---
+
+## Overview
+
+{{ description }}
+
+This document is part of the Energy-Flow Cosmology full-sync pipeline  
+(`efc_full_sync`), generated automatically from `/efc_full_sync/production/latex`.
+
+---
+
+## Authors
+{% for a in authors %}
+- **{{ a.name }}**{% if a.orcid %} — ORCID: {{ a.orcid }}{% endif %}
+{% endfor %}
+
+---
+
+## Figures
+{% if figures %}
+{% for f in figures %}
+- {{ f }}
+{% endfor %}
+{% else %}
+No figures declared.
+{% endif %}
+
+---
+
+## Metadata
+Generated: {{ timestamp }}  
+Path: docs/papers/efc/{{ slug }}/
+
