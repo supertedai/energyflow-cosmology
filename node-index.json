@@ -303,20 +303,6 @@
       "jsonld_type": "CreativeWork"
     },
     {
-      "id": "energy-flow-cosmology-full-production-pipeline",
-      "path": "docs/papers/efc/energy-flow-cosmology-full-production-pipeline",
-      "domain": "papers_efc",
-      "type": "paper",
-      "jsonld_type": "CreativeWork"
-    },
-    {
-      "id": "untitled-paper",
-      "path": "docs/papers/efc/untitled-paper",
-      "domain": "papers_efc",
-      "type": "paper",
-      "jsonld_type": "CreativeWork"
-    },
-    {
       "id": "variable-light-s0-s1",
       "path": "docs/papers/efc/variable-light-s0-s1",
       "domain": "papers_efc",
