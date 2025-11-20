@@ -1,0 +1,44 @@
+name: Build all papers
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-paper:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo (full history)
+        uses: actions/checkout@v3
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          persist-credentials: true
+          fetch-depth: 0
+
+      - name: Install LaTeX
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y texlive-full
+
+      - name: Install Python deps
+        run: |
+          python3 -m pip install --upgrade pip
+          pip install python-slugify
+
+      - name: Build all EFC papers from .tex
+        run: |
+          python3 tools/build_all_papers.py
+
+      - name: Commit and force-push updates (PDFs included)
+        run: |
+          git config --local user.email "actions@github.com"
+          git config --local user.name  "GitHub Actions"
+
+          git add -A
+          git commit -m "Auto: rebuild all EFC papers" || echo "No changes"
+
+          # FORCE PUSH – unngår PDF-konflikter
+          git push --force
