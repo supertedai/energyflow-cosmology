@@ -11,11 +11,12 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repo
+      - name: Checkout repo (no rebase, no pull later)
         uses: actions/checkout@v3
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           persist-credentials: true
+          fetch-depth: 0
 
       - name: Install LaTeX
         run: |
@@ -31,17 +32,13 @@ jobs:
         run: |
           python3 efc_full_sync/tools/efc_full_sync_multibuilder.py
 
-      - name: Commit package (including PDF)
+      - name: Commit and force-push updates (PDFs included)
         run: |
           git config --local user.email "actions@github.com"
           git config --local user.name  "GitHub Actions"
 
-          git add docs/papers/efc/*/* || true
-          git add papers_src/*/* || true
-
+          git add -A
           git commit -m "Auto: update all EFC papers and formal package" || echo "No changes"
 
-          # Resolve binary merge conflicts automatically
-          git pull --strategy=ours --no-edit origin main || true
-
-          git push
+          # FORCE PUSH so PDFs never cause conflicts
+          git push --force
