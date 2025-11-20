@@ -1,0 +1,13 @@
+{
+  "slug": "{{ slug }}",
+  "title": "{{ title }}",
+  "version": "{{ version }}",
+  "pdf": "{{ slug }}.pdf",
+  "jsonld": "{{ slug }}.jsonld",
+  "path": "docs/papers/efc/{{ slug }}/",
+  "keywords": [{% for k in keywords %}"{{ k }}"{% if not loop.last %}, {% endif %}{% endfor %}],
+  "updated": "{{ timestamp }}"{% if doi %},
+  "doi": "{{ doi }}"{% endif %}{% if version_doi %},
+  "version_doi": "{{ version_doi }}"{% endif %}{% if figshare_id %},
+  "figshare_id": {{ figshare_id }}{% endif %}
+}
