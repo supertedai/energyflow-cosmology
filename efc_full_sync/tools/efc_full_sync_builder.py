@@ -1,226 +1,222 @@
 #!/usr/bin/env python3
+"""
+EFC Full Sync Builder — komplett versjon
+Oppdatert for Docker-basert Mermaid-rendering.
+Ingen lokal mmdc. Workflow genererer SVG/PNG.
+"""
+
 import json
-import os
 import shutil
 import subprocess
-from datetime import datetime
 from pathlib import Path
+from datetime import datetime
 
-from jinja2 import Environment, FileSystemLoader
+# -----------------------------------------------------
+# PATHS
+# -----------------------------------------------------
 
-# Importer validator og Figshare-modul
-from efc_full_sync_validator import validate_basic
-from efc_full_sync_figshare import publish_pdf_to_figshare
+THIS_ROOT = Path(__file__).resolve().parents[1]       # efc_full_sync/
+REPO_ROOT = THIS_ROOT.parents[0]                     # repo/
+PROD_LATEX = THIS_ROOT / "production" / "latex"      # produksjonsflate
+SCHEMA_GLOBAL = THIS_ROOT / "schema" / "efc_full_sync_global_schema.json"
+SCHEMA_MAP = THIS_ROOT / "schema" / "efc_full_sync_schema_map.json"
+META_MAP = THIS_ROOT / "meta" / "EFC_FULL_SYNC_META_MAP.json"
 
+DOCS_ROOT = REPO_ROOT / "docs" / "papers" / "efc"    # der ferdig artikkel havner
+TEMPLATES = THIS_ROOT / "templates"
 
-THIS_ROOT = Path(__file__).resolve().parents[1]  # efc_full_sync/
-REPO_ROOT = THIS_ROOT.parents[0]
+# -----------------------------------------------------
+# UTILITY
+# -----------------------------------------------------
 
-PROD_LATEX = THIS_ROOT / "production" / "latex"
-TEMPLATE_ROOT = THIS_ROOT / "templates"
-
-DOCS_EFC_ROOT = REPO_ROOT / "docs" / "papers" / "efc"
-META_MAP_PATH = THIS_ROOT / "meta" / "EFC_FULL_SYNC_META_MAP.json"
-SCHEMA_MAP_PATH = THIS_ROOT / "schema" / "efc_full_sync_schema_map.json"
-
-DOI_SYNC_URL = os.getenv("DOI_SYNC_URL", "")
-
-
-def load_json(path: Path, default):
+def load_json(path, default=None):
     if not path.exists():
         return default
-    with path.open("r", encoding="utf-8") as f:
-        return json.load(f)
+    return json.loads(path.read_text(encoding="utf-8"))
 
+def save_json(path, data):
+    path.write_text(json.dumps(data, indent=2, ensure_ascii=False), encoding="utf-8")
 
-def save_json(path: Path, data):
-    path.parent.mkdir(parents=True, exist_ok=True)
-    with path.open("w", encoding="utf-8") as f:
-        json.dump(data, f, indent=2, ensure_ascii=False)
-
-
-def run_subprocess(cmd, cwd=None):
-    result = subprocess.run(
-        cmd,
-        cwd=cwd,
-        shell=isinstance(cmd, str),
-        capture_output=True,
-        text=True,
-    )
-    if result.returncode != 0:
+def run(cmd):
+    """Brukes kun for LaTeX / systemkall — IKKE for mermaid."""
+    proc = subprocess.run(cmd, shell=True, capture_output=True, text=True)
+    if proc.returncode != 0:
         raise RuntimeError(
             f"[efc_full_sync] Kommando feilet: {cmd}\n"
-            f"STDOUT:\n{result.stdout}\n\nSTDERR:\n{result.stderr}"
+            f"STDOUT:\n{proc.stdout}\n\nSTDERR:\n{proc.stderr}"
         )
-    return result.stdout
+    return proc.stdout
 
+# -----------------------------------------------------
+# VALIDATOR — henter inn ekstern fil
+# -----------------------------------------------------
+
+from efc_full_sync_validator import validate_basic
+
+# -----------------------------------------------------
+# MERMAID — Docker-rendering
+# -----------------------------------------------------
 
 def build_mermaid_figures():
-    fig_dir = PROD_LATEX / "figures"
-    if not fig_dir.exists():
+    """
+    Workflow (GitHub Actions) rendrer alle .mmd → .svg/.png via Docker.
+    Her sjekker vi bare at workflowen har produsert filene.
+    """
+    figdir = PROD_LATEX / "figures"
+    if not figdir.exists():
+        print("[efc_full_sync] Ingen figures/ mappe — hopper over mermaid.")
         return
-    for mmd in fig_dir.glob("*.mmd"):
+
+    for mmd in figdir.glob("*.mmd"):
         svg = mmd.with_suffix(".svg")
         png = mmd.with_suffix(".png")
-        run_subprocess(f"mmdc -i {mmd} -o {svg}")
-        run_subprocess(f"mmdc -i {mmd} -o {png}")
 
+        if not svg.exists() or not png.exists():
+            raise FileNotFoundError(
+                f"[efc_full_sync] Mermaid-render mangler for {mmd.name}. "
+                f"SVG eller PNG ikke funnet. Workflow må generere disse."
+            )
 
-def build_pdf(slug: str, out_dir: Path) -> Path:
-    cmd = "latexmk -pdf -interaction=nonstopmode -halt-on-error paper.tex"
-    run_subprocess(cmd, cwd=PROD_LATEX)
+    print("[efc_full_sync] Mermaid-figurer OK (docker-render).")
 
-    pdf_source = PROD_LATEX / "paper.pdf"
-    if not pdf_source.exists():
-        pdfs = list(PROD_LATEX.glob("*.pdf"))
-        if not pdfs:
-            raise FileNotFoundError("[efc_full_sync] Fant ingen PDF etter bygg.")
-        pdf_source = pdfs[0]
+# -----------------------------------------------------
+# LATEX → PDF
+# -----------------------------------------------------
 
-    out_dir.mkdir(parents=True, exist_ok=True)
-    target = out_dir / f"{slug}.pdf"
-    shutil.copy2(pdf_source, target)
+def build_pdf(slug):
+    tex = PROD_LATEX / "paper.tex"
+    if not tex.exists():
+        raise FileNotFoundError(f"[efc_full_sync] paper.tex mangler: {tex}")
 
-    if target.stat().st_size == 0:
-        raise RuntimeError("[efc_full_sync] Generert PDF er tom.")
+    # bygg i produksjonsmappen
+    run(f"cd {PROD_LATEX} && latexmk -pdf -halt-on-error paper.tex")
 
-    return target
+    pdf = PROD_LATEX / "paper.pdf"
+    if not pdf.exists():
+        raise RuntimeError("[efc_full_sync] PDF ble ikke generert.")
 
+    print("[efc_full_sync] PDF OK:", pdf)
+    return pdf
 
-def copy_figures(out_dir: Path):
-    src = PROD_LATEX / "figures"
-    if not src.exists():
-        return
-    dst = out_dir / "figures"
-    dst.mkdir(parents=True, exist_ok=True)
-    for f in src.iterdir():
-        if f.is_file():
-            shutil.copy2(f, dst / f.name)
+# -----------------------------------------------------
+# TEMPLATE RENDERING
+# -----------------------------------------------------
 
+def render_template(path, context):
+    from jinja2 import Template
+    tmpl = Template(path.read_text(encoding="utf-8"))
+    return tmpl.render(context)
 
-def render_templates(meta: dict, doi_info: dict | None, out_dir: Path):
-    env = Environment(loader=FileSystemLoader(str(TEMPLATE_ROOT)))
-    now_iso = datetime.utcnow().isoformat() + "Z"
+def generate_outputs(meta):
+    slug = meta["slug"]
+    outdir = DOCS_ROOT / slug
+    outdir.mkdir(parents=True, exist_ok=True)
+
+    context = {
+        "meta": meta,
+        "created": datetime.utcnow().isoformat() + "Z"
+    }
+
+    # Markdown (paper)
+    md_tmpl = TEMPLATES / "efc_full_sync_paper.md.j2"
+    (outdir / f"{slug}.md").write_text(render_template(md_tmpl, context), encoding="utf-8")
+
+    # README
+    readme_tmpl = TEMPLATES / "efc_full_sync_readme.md.j2"
+    (outdir / "README.md").write_text(render_template(readme_tmpl, context), encoding="utf-8")
+
+    # JSON-LD
+    jsonld_tmpl = TEMPLATES / "efc_full_sync_jsonld.json.j2"
+    jsonld = render_template(jsonld_tmpl, context)
+    (outdir / f"{slug}.jsonld").write_text(jsonld, encoding="utf-8")
+
+    # index.json
+    index_tmpl = TEMPLATES / "efc_full_sync_index.json.j2"
+    (outdir / "index.json").write_text(render_template(index_tmpl, context), encoding="utf-8")
+
+    # schema.json
+    schema_tmpl = TEMPLATES / "efc_full_sync_schema.json.j2"
+    (outdir / "schema.json").write_text(render_template(schema_tmpl, context), encoding="utf-8")
+
+    # citations.bib
+    bib_tmpl = TEMPLATES / "efc_full_sync_citations.bib.j2"
+    (outdir / "citations.bib").write_text(render_template(bib_tmpl, context), encoding="utf-8")
+
+    # kopier figurer
+    figout = outdir / "figures"
+    figout.mkdir(exist_ok=True)
+
+    for f in (PROD_LATEX / "figures").glob("*.*"):
+        shutil.copy(f, figout / f.name)
+
+    print("[efc_full_sync] Templates, metadata og figurer generert i:", outdir)
+
+# -----------------------------------------------------
+# FIGSHARE
+# -----------------------------------------------------
+
+from efc_full_sync_figshare import publish_pdf_to_figshare
+
+# -----------------------------------------------------
+# GLOBAL MAPS
+# -----------------------------------------------------
+
+def update_global_maps(meta):
     slug = meta["slug"]
 
-    ctx = {
-        "slug": slug,
-        "title": meta["title"],
-        "version": meta["version"],
-        "authors": meta["authors"],
-        "description": meta["description"],
-        "keywords": meta["keywords"],
-        "figures": meta.get("figures", []),
-        "timestamp": now_iso,
-        "doi": (doi_info or {}).get("doi"),
-        "version_doi": (doi_info or {}).get("version_doi"),
-        "figshare_id": (doi_info or {}).get("figshare_id"),
-    }
+    # schema map
+    schema_map = load_json(SCHEMA_MAP, {"items": []})
+    if slug not in [i.get("slug") for i in schema_map["items"]]:
+        schema_map["items"].append({"slug": slug})
+        save_json(SCHEMA_MAP, schema_map)
 
-    def write(name_j2: str, file_name: str):
-        tmpl = env.get_template(name_j2)
-        text = tmpl.render(**ctx)
-        target = out_dir / file_name
-        with target.open("w", encoding="utf-8") as f:
-            f.write(text)
+    # meta map
+    meta_map = load_json(META_MAP, {"items": []})
+    if slug not in [i.get("slug") for i in meta_map["items"]]:
+        meta_map["items"].append({"slug": slug})
+        save_json(META_MAP, meta_map)
 
-    write("efc_full_sync_readme.md.j2", "README.md")
-    write("efc_full_sync_paper.md.j2", f"{slug}.md")
-    write("efc_full_sync_jsonld.json.j2", f"{slug}.jsonld")
-    write("efc_full_sync_index.json.j2", "index.json")
-    write("efc_full_sync_schema.json.j2", "schema.json")
-    write("efc_full_sync_citations.bib.j2", "citations.bib")
+    print("[efc_full_sync] Global maps oppdatert.")
 
-
-def update_global_maps(meta: dict, doi_info: dict | None):
-    slug = meta["slug"]
-    now_iso = datetime.utcnow().isoformat() + "Z"
-
-    entry = {
-        "slug": slug,
-        "title": meta["title"],
-        "version": meta["version"],
-        "path": f"docs/papers/efc/{slug}/",
-        "pdf": f"{slug}.pdf",
-        "jsonld": f"{slug}.jsonld",
-        "updated": now_iso,
-    }
-
-    if doi_info:
-        entry["doi"] = doi_info["doi"]
-        entry["version_doi"] = doi_info["version_doi"]
-        entry["figshare_id"] = doi_info["figshare_id"]
-
-    # META MAP
-    meta_map = load_json(META_MAP_PATH, [])
-    meta_map = [e for e in meta_map if e.get("slug") != slug]
-    meta_map.append(entry)
-    save_json(META_MAP_PATH, meta_map)
-
-    # SCHEMA MAP
-    schema_map = load_json(SCHEMA_MAP_PATH, [])
-    schema_map = [e for e in schema_map if e.get("slug") != slug]
-    schema_map.append(entry)
-    save_json(SCHEMA_MAP_PATH, schema_map)
-
-
-def send_doi_to_sync_api(meta: dict, doi_info: dict | None):
-    if not DOI_SYNC_URL or not doi_info:
-        return
-    import requests
-
-    payload = {
-        "slug": meta["slug"],
-        "doi": doi_info["doi"],
-        "version_doi": doi_info["version_doi"],
-        "figshare_id": doi_info["figshare_id"],
-    }
-    r = requests.post(DOI_SYNC_URL, json=payload, timeout=20)
-    r.raise_for_status()
-
+# -----------------------------------------------------
+# MAIN
+# -----------------------------------------------------
 
 def main():
-    # 1. Valider og last metadata
-    meta = validate_basic()
-    slug = meta["slug"]
+    print("[efc_full_sync] Starter full pipeline…")
 
-    # 2. Mermaid → PNG/SVG
+    # 1) Valider alt
+    meta = validate_basic()
+
+    # 2) Sjekk mermaid (svg/png generert av workflow)
     build_mermaid_figures()
 
-    # 3. Bygg PDF
-    out_dir = DOCS_EFC_ROOT / slug
-    pdf_path = build_pdf(slug, out_dir)
+    # 3) Lag PDF
+    pdf_path = build_pdf(meta["slug"])
 
-    # 4. Kopier figurer
-    copy_figures(out_dir)
-
-    # 5. Figshare-upload (kan returnere None)
+    # 4) Last opp til Figshare (dersom token)
     doi_info = publish_pdf_to_figshare(
         title=meta["title"],
         description=meta["description"],
-        keywords=meta.get("keywords", []),
-        pdf_path=pdf_path,
+        keywords=meta["keywords"],
+        pdf_path=pdf_path
     )
 
-    # 6. Render templates (inkl. DOI hvis tilgjengelig)
-    render_templates(meta, doi_info, out_dir)
-
-    # 7. Oppdater globale maps
-    update_global_maps(meta, doi_info)
-
-    # 8. Oppdater metadata med DOI
     if doi_info:
-        meta.update({
-            "doi": doi_info["doi"],
-            "version_doi": doi_info["version_doi"],
-            "figshare_id": doi_info["figshare_id"],
-        })
+        meta["doi"] = doi_info.get("doi")
+        meta["version_doi"] = doi_info.get("version_doi")
+        meta["figshare_id"] = doi_info.get("figshare_id")
+
+        # skriv tilbake metadata.json → oppdatert
         save_json(PROD_LATEX / "metadata.json", meta)
 
-        # 9. Send DOI til DOI-sync API (valgfritt)
-        send_doi_to_sync_api(meta, doi_info)
+    # 5) Generer alt
+    generate_outputs(meta)
 
-    print(f"[efc_full_sync] Ferdig bygget: {slug}")
+    # 6) Oppdater globale kart
+    update_global_maps(meta)
+
+    print("[efc_full_sync] ✔ Ferdig.")
 
 
 if __name__ == "__main__":
