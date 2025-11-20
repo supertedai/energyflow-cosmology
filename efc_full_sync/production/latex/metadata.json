@@ -1,0 +1,21 @@
+{
+  "slug": "EFC-Replace-With-Your-Slug",
+  "title": "Replace With Title",
+  "version": "1.0",
+  "authors": [
+    {
+      "name": "Morten Magnusson",
+      "orcid": "https://orcid.org/0009-0002-4860-5095"
+    }
+  ],
+  "description": "Short abstract text describing the aim of the paper.",
+  "keywords": [
+    "Energy-Flow Cosmology",
+    "keyword1",
+    "keyword2",
+    "keyword3"
+  ],
+  "figures": [
+    "figures/example-diagram.mmd"
+  ]
+}
