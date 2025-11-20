@@ -1,0 +1,10 @@
+{
+  "type": "efc_full_sync_paper",
+  "slug": "{{ slug }}",
+  "title": "{{ title }}",
+  "version": "{{ version }}",
+  "keywords": [{% for k in keywords %}"{{ k }}"{% if not loop.last %},{% endif %}{% endfor %}],
+  "authors": [{% for a in authors %}"{{ a.name }}"{% if not loop.last %},{% endif %}{% endfor %}],
+  "has_figures": {% if figures %}true{% else %}false{% endif %}{% if doi %},
+  "doi": "{{ doi }}"{% endif %}
+}
