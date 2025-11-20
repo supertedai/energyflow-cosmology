@@ -1,4 +1,4 @@
-name: EFC Full Production sync Build
+name: Build all papers
 
 on:
   workflow_dispatch:
@@ -17,41 +17,39 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
           persist-credentials: true
 
+      - name: Install LaTeX
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y texlive-full
+
       - name: Install Python deps
         run: |
           python3 -m pip install --upgrade pip
           pip install requests python-slugify
 
-      # ---------------------------
-      # INSTALL LATEX (TeX Live)
-      # ---------------------------
-      - name: Install TeX Live
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y texlive-latex-base texlive-latex-recommended texlive-latex-extra texlive-fonts-recommended texlive-fonts-extra texlive-science
-
-      # ---------------------------
-      # BUILD FORMAL PACKAGE
-      # ---------------------------
-      - name: Build FORMAL (efc_full_sync_builder.py)
-        run: |
-          cd efc_full_sync/tools
-          python3 efc_full_sync_builder.py
-
-      # ---------------------------
-      # BUILD ALL PAPERS
-      # ---------------------------
-      - name: Build all papers (papers_src)
+      - name: Build all papers
         run: |
           python3 efc_full_sync/tools/efc_full_sync_multibuilder.py
 
-      # ---------------------------
-      # COMMIT CHANGES
-      # ---------------------------
-      - name: Commit changes
+      - name: Upload all PDFs as artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: efc-papers
+          path: |
+            docs/papers/efc/**/*.pdf
+            papers_src/**/*.pdf
+          if-no-files-found: ignore
+
+      - name: Commit metadata only (NO PDFs)
         run: |
           git config --local user.email "actions@github.com"
           git config --local user.name  "GitHub Actions"
-          git add .
-          git commit -m "Auto: update all EFC papers and formal package" || echo "No changes"
-          git push
+
+          # Add all metadata, but exclude PDFs explicitly
+          git add docs/papers/efc/*/*.json || true
+          git add docs/papers/efc/*/*.jsonld || true
+
+          git commit -m "Auto: update EFC metadata" || echo "No changes"
+
+          git pull --rebase origin main || true
+          git push || true
