@@ -303,6 +303,13 @@
       "jsonld_type": "CreativeWork"
     },
     {
+      "id": "symbiotic-insight-framework",
+      "path": "docs/papers/efc/symbiotic-insight-framework",
+      "domain": "papers_efc",
+      "type": "paper",
+      "jsonld_type": "CreativeWork"
+    },
+    {
       "id": "variable-light-s0-s1",
       "path": "docs/papers/efc/variable-light-s0-s1",
       "domain": "papers_efc",
@@ -511,6 +518,13 @@
       "domain": "app",
       "type": "app",
       "jsonld_type": "SoftwareApplication"
+    },
+    {
+      "id": "figshare/files",
+      "path": "figshare/files",
+      "domain": "figshare",
+      "type": "figshare",
+      "jsonld_type": "CreativeWork"
     }
   ]
 }
