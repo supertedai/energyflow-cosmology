@@ -2,11 +2,10 @@
 """
 Auto-generert Paper → MetaNode-relasjoner.
 
-Systemet identifiserer meta-lag automatisk via patterns:
-- slug-ord
-- title-ord
+Systemet identifiserer meta-lag automatisk via patterns i:
+- slug
+- title
 - keywords
-- tematiske grupper
 
 Output:
 (:EFCPaper)-[:ADDRESSES {confidence:float, rules:list}]->(:MetaNode)
@@ -21,24 +20,22 @@ from neo4j import GraphDatabase
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
 
-
 # ------------------------------------------------------------
-# 1. Definer meta-lagene (autoritative labels)
+# 1. Meta-category patterns
 # ------------------------------------------------------------
 META_CATEGORIES = {
     "s0s1": ["s0", "s1", "collapse", "bell", "drag", "entropy", "flow"],
     "entropy_clarity": ["entropy", "clarity", "gradient", "information"],
-    "grid": ["grid", "higgs", "field", "entropic", "geometry", "spacetime"],
-    "cosmic": ["galactic", "clusters", "cosmic", "cmb", "redshift"],
+    "grid": ["grid", "higgs", "entropic", "geometry", "spacetime"],
+    "cosmic": ["galactic", "cluster", "cosmic", "cmb", "redshift"],
     "meta_process": ["workflow", "process", "framework", "method"],
-    "reflection": ["ego", "mirror", "insight", "reflection", "signature"],
+    "reflection": ["ego", "mirror", "insight", "signature"],
     "architecture": ["architecture", "pattern", "topology", "integration"],
     "global": ["applications", "implications", "complete", "v2.1", "v2.2"]
 }
 
-
 # ------------------------------------------------------------
-# 2. Hent EFCPapers fra Neo4j
+# 2. Neo4j driver
 # ------------------------------------------------------------
 def get_driver():
     return GraphDatabase.driver(
@@ -46,7 +43,9 @@ def get_driver():
         auth=(os.environ["NEO4J_USER"], os.environ["NEO4J_PASSWORD"])
     )
 
-
+# ------------------------------------------------------------
+# 3. Query to get all papers
+# ------------------------------------------------------------
 def fetch_papers(tx):
     q = """
     MATCH (p:EFCPaper)
@@ -54,9 +53,8 @@ def fetch_papers(tx):
     """
     return list(tx.run(q))
 
-
 # ------------------------------------------------------------
-# 3. Pattern-matching funksjon
+# 4. Auto-classify paper into meta-categories
 # ------------------------------------------------------------
 def classify_paper(paper):
     slug = paper["slug"].lower()
@@ -65,32 +63,30 @@ def classify_paper(paper):
 
     text = " ".join([slug, title] + keywords)
 
+    matches = {}
     matched_categories = []
-    match_rules = {}
 
     for meta, patterns in META_CATEGORIES.items():
         hits = [p for p in patterns if p in text]
         if hits:
             matched_categories.append(meta)
-            match_rules[meta] = hits
+            matches[meta] = hits
 
-    # hvis ingen treff: fallback
     if not matched_categories:
         matched_categories = ["global"]
-        match_rules = {"fallback": ["no match"]}
+        matches = {"fallback": ["no-match"]}
 
-    # confidence basert på hvor mange regler som trigget
-    total_patterns = sum(len(p) for p in META_CATEGORIES.values())
-    activated = sum(len(v) for v in match_rules.values())
+    # confidence based on how many patterns triggered
+    total_patterns = sum(len(v) for v in META_CATEGORIES.values())
+    activated = sum(len(v) for v in matches.values())
     confidence = round(activated / total_patterns, 3)
 
-    return matched_categories, confidence, match_rules
-
+    return matched_categories, confidence, matches
 
 # ------------------------------------------------------------
-# 4. Opprett relasjoner i Neo4j
+# 5. Create relation
 # ------------------------------------------------------------
-def create_rel(tx, pid, meta_id, confidence, rules):
+def create_rel(tx, pid, mid, confidence, rules):
     tx.run(
         """
         MATCH (p:EFCPaper {id: $pid})
@@ -100,40 +96,43 @@ def create_rel(tx, pid, meta_id, confidence, rules):
             r.rules = $rules
         """,
         pid=pid,
-        mid=meta_id,
+        mid=mid,
         confidence=confidence,
         rules=rules
     )
 
-
 # ------------------------------------------------------------
-# 5. MAIN
+# 6. MAIN
 # ------------------------------------------------------------
 def main():
     driver = get_driver()
     with driver.session() as session:
 
-        papers = session.read_transaction(fetch_papers)
+        # -- Neo4j 5.x AURA FIX --
+        papers = session.execute_read(fetch_papers)
 
-        print(f"[PaperRelations] Fant {len(papers)} papers i grafen.")
+        print(f"[PaperRelations] Fant {len(papers)} papers.")
 
         for p in papers:
             pid = p["id"]
-            categories, confidence, rules = classify_paper(p)
 
-            for cat in categories:
-                mid = cat  # MetaNode {id: "s0s1"} etc.
-                session.write_transaction(
+            categories, confidence, rulemap = classify_paper(p)
+
+            for meta in categories:
+                mid = meta
+                rules = rulemap.get(meta, [])
+
+                session.execute_write(
                     create_rel,
                     pid,
                     mid,
                     confidence,
-                    list(rules.get(cat, []))
+                    rules
                 )
 
-            print(f"[PaperRelations] {pid}: {categories} (conf={confidence})")
+            print(f"[PaperRelations] {pid} → {categories} (conf={confidence})")
 
-    print("[PaperRelations] FULLFØRT: Auto-relasjoner generert.")
+    print("[PaperRelations] FULLFØRT — Auto-relasjoner generert.")
 
 
 if __name__ == "__main__":
