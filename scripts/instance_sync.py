@@ -16,7 +16,8 @@ Gjør:
 
 Viktig:
 - Rører IKKE figshare/ (beskyttet)
-- Rører IKKE .github/ (fra før)
+- Rører IKKE integration/ (beskyttet)
+- Rører IKKE .github/ (via HARD_IGNORES)
 """
 
 import os
@@ -46,12 +47,14 @@ HARD_IGNORES = [
     "__pycache__", ".idea", ".vscode",
     "output", "notebooks", "scripts",
     "data/raw", "data/archive",
-    "figshare",  # EFC: figshare håndteres av egen pipeline, ikke instance_sync
+    "figshare",     # figshare håndteres av egen pipeline
+    "integration",  # integrasjoner (figshare, wp, osv.) røres ikke
 ]
 
 # Top-level mapper som er eksplisitt beskyttet mot JSON-LD-cleanup
 PROTECTED_DIRS = [
-    "figshare",  # ikke rør jsonld/metadata under figshare/
+    "figshare",     # ikke rør jsonld/metadata under figshare/
+    "integration",  # ikke rør noe under integration/
 ]
 
 # Filtyper som regnes som "dokument"
@@ -157,7 +160,7 @@ def cleanup_stray_jsonld():
     - i mapper som ikke ligger under NODE_DIR_PREFIXES
     MEN:
     - Rører ikke mapper som er i HARD_IGNORES
-    - Rører ikke mapper under PROTECTED_DIRS (som figshare/)
+    - Rører ikke mapper under PROTECTED_DIRS (som figshare/ og integration/)
     """
     safe_print("[instance_sync] Cleanup: removing stray JSON-LD...")
 
@@ -165,7 +168,7 @@ def cleanup_stray_jsonld():
         rel = os.path.relpath(root, ROOT)
 
         # root-mappe
-        if rel == ".":
+        if rel == ".":  # kun root
             for f in files:
                 if f.endswith(".jsonld") and f != "meta-index.json":
                     path = Path(root) / f
@@ -179,7 +182,7 @@ def cleanup_stray_jsonld():
         if any(x in HARD_IGNORES for x in parts):
             continue
 
-        # beskytt top-level PROTECTED_DIRS (f.eks. figshare/)
+        # beskytt top-level PROTECTED_DIRS (f.eks. figshare/, integration/)
         top = parts[0]
         if top in PROTECTED_DIRS:
             continue
