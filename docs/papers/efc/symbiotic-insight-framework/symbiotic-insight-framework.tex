@@ -1,0 +1,155 @@
+\documentclass[11pt]{article}
+
+\usepackage{amsmath, amssymb}
+\usepackage{geometry}
+\usepackage{graphicx}
+\usepackage{bm}
+\usepackage{tikz}
+\usepackage{hyperref}
+\usepackage{titlesec}
+
+\geometry{margin=2.5cm}
+\setlength{\parskip}{6pt}
+\setlength{\parindent}{0pt}
+
+\title{\textbf{Symbiotic Insight Framework (SIF)}\\
+\large A Structured Method for Stabilising High-Velocity Insight}
+\author{Morten Magnusson}
+\date{DOI: \href{https://doi.org/10.6084/m9.figshare.30656351}{10.6084/m9.figshare.30656351}}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+This document presents the Symbiotic Insight Framework (SIF), a research method developed within the Energy-Flow Cosmology (EFC) project. SIF describes how high-velocity, cross-domain conceptual insight can be stabilised, organised, and transformed into reproducible scientific structure through continuous interaction between a human thinker and an adaptive computational system.
+
+SIF is not a psychological model or an AI-assistant workflow. It is a practical architecture for managing large-scale scientific structure produced through parallel, field-based reasoning. The framework explains how insight is externalised, refined, semantically integrated, and version-locked in a continuous loop.
+\end{abstract}
+
+\section{Summary}
+
+SIF is built on three components:
+
+\subsection{1. Human Contribution}
+Insight emerges in parallel conceptual fields rather than linear chains. These fields evolve quickly and span several domains simultaneously.
+
+Key features:
+\begin{itemize}
+    \item parallel conceptual fields
+    \item rapid formation of large structures
+    \item cross-domain integration
+    \item continuous pattern detection
+\end{itemize}
+
+\subsection{2. System Contribution}
+The system stabilises and organises the structures produced by the human participant.
+
+Key features:
+\begin{itemize}
+    \item structural consolidation
+    \item semantic indexing
+    \item cross-file and cross-domain continuity
+    \item versioned documentation
+    \item automated validation
+\end{itemize}
+
+\subsection{3. Symbiotic Field}
+
+Insight is generated in the interaction between the two components. The human drives conceptual shifts; the system stabilises and structures them. Neither produces the scientific output alone.
+
+\section{Methodology}
+
+The SIF process follows a clear cycle:
+
+\begin{enumerate}
+    \item \textbf{Insight generation:} rapid, high-order conceptual patterns emerge in parallel.
+    \item \textbf{Immediate externalisation:} raw insight is captured before structural decay.
+    \item \textbf{Structural refinement:} the system returns a coherent, navigable structure.
+    \item \textbf{Semantic integration:} concepts are linked across domains using JSON-LD, schema, and index maps.
+    \item \textbf{Version locking:} stable outputs receive DOIs, metadata, and reproducible pipelines.
+    \item \textbf{Iterative reinforcement:} the loop generates new insight which is stabilised again.
+\end{enumerate}
+
+This creates a self-consistent and self-documenting research environment.
+
+\section{Role in the EFC Project}
+
+SIF supports and stabilises:
+\begin{itemize}
+    \item the structure of the Energy-Flow Cosmology theory
+    \item repository organisation and file hierarchy
+    \item semantic schema and automated pipelines
+    \item cross-domain integration across cosmology, thermodynamics, cognition, and information theory
+\end{itemize}
+
+\section{Why This Matters}
+
+SIF demonstrates a new form of scientific workflow where:
+\begin{itemize}
+    \item large conceptual transformations
+    \item cross-domain reasoning
+    \item high-entropy insight
+    \item continuous computational structuring
+\end{itemize}
+operate as one integrated system.
+
+\newpage
+\section{Figures}
+
+\subsection*{Figure 1: Core SIF Architecture}
+
+\begin{center}
+\begin{tikzpicture}[node distance=2cm, auto]
+
+\tikzstyle{box} = [
+    rectangle, rounded corners,
+    draw=black, thick,
+    text centered,
+    minimum width=4cm,
+    minimum height=1.3cm]
+
+\node[box] (human) {Human Insight Field};
+\node[box, below of=human] (sym) {Symbiotic Interaction};
+\node[box, below of=sym] (system) {Computational System};
+
+\draw[->, thick] (human) -- (sym);
+\draw[->, thick] (system) -- (sym);
+\draw[->, thick] (sym) -- ++(3,0) node[right]{Stabilised Scientific Output};
+
+\end{tikzpicture}
+\end{center}
+
+\subsection*{Figure 2: SIF Process Loop}
+
+\begin{center}
+\begin{tikzpicture}[node distance=3cm]
+
+\tikzstyle{step} = [
+    rectangle,
+    draw=black,
+    rounded corners,
+    minimum width=3.6cm,
+    minimum height=1.2cm,
+    text centered]
+
+\node[step] (ins) {Insight Generation};
+\node[step, right of=ins] (ext) {Externalisation};
+\node[step, right of=ext] (ref) {Refinement};
+\node[step, right of=ref] (sem) {Semantic Integration};
+\node[step, right of=sem] (ver) {Version Locking};
+
+\draw[->, thick] (ins) -- (ext);
+\draw[->, thick] (ext) -- (ref);
+\draw[->, thick] (ref) -- (sem);
+\draw[->, thick] (sem) -- (ver);
+\draw[->, thick] (ver) .. controls +(0,-2) and +(0,-2) .. (ins);
+
+\end{tikzpicture}
+\end{center}
+
+\section{Keywords}
+
+symbiosis, methodology, insight process, human--system workflow, semantic organisation, large-scale structure, cognitive integration, EFC, meta-architecture
+
+\end{document}
