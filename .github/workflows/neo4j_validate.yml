@@ -1,0 +1,19 @@
+name: Validate Neo4j Cypher
+
+on:
+  push:
+    paths:
+      - "neo4j/*.cypher"
+  pull_request:
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install cypher-lint
+        run: npm install -g @neo4j/cypher-lint
+
+      - name: Validate Cypher files
+        run: cypher-lint neo4j/*.cypher
