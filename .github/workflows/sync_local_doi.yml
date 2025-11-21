@@ -13,7 +13,8 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout repo
+        uses: actions/checkout@v4
 
       - name: Set up Python
         uses: actions/setup-python@v5
@@ -25,10 +26,14 @@ jobs:
 
       - name: Commit changes (if any)
         run: |
-          if git status --porcelain | grep .; then
+          CHANGES=$(git status --porcelain)
+          if [ -n "$CHANGES" ]; then
+            echo "Endringer funnet – committer."
             git config user.name "github-actions[bot]"
             git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-            git commit -am "Sync local DOIs [skip ci]"
+            git add -A
+            git commit -m "Sync local DOIs [skip ci]"
             git push
           else
             echo "Ingen endringer å committe."
+          fi
