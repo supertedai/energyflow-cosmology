@@ -1,16 +1,10 @@
 {
   "id": "variable-light-s0-s1",
   "slug": "variable-light-s0-s1",
-  "title": "Variable Effective Light Speed in Entropic Transition States: A Formal Treatment of the s₀ / s₁ Structure in Energy-Flow Cosmology (EFC)",
-  "description": "In Energy-Flow Cosmology (EFC), the effective speed of light is not a primitive constant but an emergent propagation limit determined by the entropic state of the grid. Two fundamental entropic phases---a low-entropy constraining state (s₀) and a high-entropy dissipative state (s₁)---govern the information capacity, local curvature, and energy-flow geometry. This paper provides a formal description of variable light speed as a function of the entropic gradient, derives a minimal model for c_eff(",
+  "title": "\\textbf{Variable Effective Light Speed in Entropic Transition States:\\\\\nA Formal Treatment of the $s_0$ / $s_1$ Structure in Energy-Flow Cosmology (EFC)",
+  "description": "In Energy-Flow Cosmology (EFC), the effective speed of light is not a primitive\nconstant but an emergent propagation limit determined by the entropic state of\nthe grid. Two fundamental entropic phases---a low-entropy constraining state\n($s_0$) and a high-entropy dissipative state ($s_1$)---govern the information\ncapacity, local curvature, and energy-flow geometry. This paper provides a\nformal description of variable light speed as a function of the entropic\ngradient, derives a minimal model for ",
   "domain": "META-systems",
-  "keywords": [
-    "Energy-Flow Cosmology",
-    "entropy",
-    "energy flow",
-    "thermodynamics",
-    "cosmology"
-  ],
+  "keywords": [],
   "version": "1.0.0",
   "authors": [
     {
