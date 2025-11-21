@@ -4,10 +4,12 @@ on:
   workflow_dispatch:
   push:
     paths:
-      - "tools/build_neo4j_graph.py"
-      - "tools/build_paper_graph.py"
       - "meta-graph/**"
       - "docs/papers/efc/**"
+      - "tools/build_neo4j_graph.py"
+      - "tools/build_paper_graph.py"
+      - "tools/build_paper_relations.py"
+      - "paper_meta_map.json"
       - ".github/workflows/build_neo4j_graph.yml"
 
 jobs:
@@ -27,7 +29,10 @@ jobs:
         run: |
           pip install neo4j requests pydantic
 
-      - name: Build Meta Graph (MetaNodes)
+      ###################################################################
+      # 1. Bygg Meta-Graph (nodes.md + edges.md → (:MetaNode))
+      ###################################################################
+      - name: Build Meta Graph
         env:
           NEO4J_URI: ${{ secrets.NEO4J_URI }}
           NEO4J_USER: ${{ secrets.NEO4J_USER }}
@@ -35,10 +40,25 @@ jobs:
         run: |
           python tools/build_neo4j_graph.py
 
-      - name: Build Paper Graph (EFCPaper)
+      ###################################################################
+      # 2. Bygg Paper Graph (metadata.jsonld → (:EFCPaper))
+      ###################################################################
+      - name: Build Paper Graph
         env:
           NEO4J_URI: ${{ secrets.NEO4J_URI }}
           NEO4J_USER: ${{ secrets.NEO4J_USER }}
           NEO4J_PASSWORD: ${{ secrets.NEO4J_PASSWORD }}
         run: |
           python tools/build_paper_graph.py
+
+      ###################################################################
+      # 3. Koble Paper → MetaNode relasjoner
+      #    (mapping via paper_meta_map.json)
+      ###################################################################
+      - name: Build Paper → Meta Relations
+        env:
+          NEO4J_URI: ${{ secrets.NEO4J_URI }}
+          NEO4J_USER: ${{ secrets.NEO4J_USER }}
+          NEO4J_PASSWORD: ${{ secrets.NEO4J_PASSWORD }}
+        run: |
+          python tools/build_paper_relations.py
