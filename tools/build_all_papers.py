@@ -1,26 +1,27 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-EFC PAPER BUILDER v2.4
+EFC PAPER BUILDER v3.0
 ======================
 
-For hver .tex:
+Komplett pipeline:
 
-- Bygger PDF
-- Leser tittel/abstract/keywords
-- Stripper LaTeX
-- Henter DOI fra:
+- Bygg PDF (dobbel pdflatex)
+- Ekstraher tittel/abstract/keywords
+- Robust LaTeX-stripper
+- Hent DOI:
     1. metadata.json
     2. jsonld
-    3. Figshare API (automatisk lookup via tittel)
-- Oppdaterer:
+    3. Figshare API
+- Injiser DOI inn i PDF-metadata (LaTeX preamble)
+- Oppdater:
     README.md
     metadata.json
     index.json
     <slug>.jsonld
     citations.bib
 
-Filen er idempotent – trygg å kjøre mange ganger.
+Idempotent. Trygg å kjøre hver gang.
 """
 
 import os
@@ -30,11 +31,15 @@ import subprocess
 import requests
 from datetime import date
 
-ROOT = os.path.dirname(os.path.dirname(__file__))          # repo-root
+
+# --------------------------------------------------------------
+# Konfig
+# --------------------------------------------------------------
+
+ROOT = os.path.dirname(os.path.dirname(__file__))
 DOCS_ROOT = os.path.join(ROOT, "docs", "papers", "efc")
 
-GITHUB_REPO_RAW_BASE = os.environ.get(
-    "EFC_GITHUB_RAW_BASE",
+GITHUB_REPO_RAW_BASE = (
     "https://raw.githubusercontent.com/supertedai/energyflow-cosmology/main"
 )
 
@@ -44,62 +49,65 @@ DOMAIN_BY_SUBDIR = {}
 FIGSHARE_API = "https://api.figshare.com/v2"
 
 
-# ------------------------------------------------------------
-# SYSTEM HELPERS
-# ------------------------------------------------------------
+# --------------------------------------------------------------
+# Helper-funksjoner
+# --------------------------------------------------------------
 
 def run(cmd, cwd=None):
-    print(f"[builder] Running: {cmd} (cwd={cwd or os.getcwd()})")
     res = subprocess.run(
-        cmd, shell=True, cwd=cwd,
+        cmd,
+        cwd=cwd,
+        shell=True,
         stdout=subprocess.PIPE,
         stderr=subprocess.STDOUT,
         text=True
     )
     print(res.stdout)
     if res.returncode != 0:
-        raise RuntimeError(f"[builder] Failed: {cmd}")
+        raise RuntimeError(f"Command failed: {cmd}")
 
 
 def latex_build(tex_path):
     tex_dir = os.path.dirname(tex_path)
     tex_file = os.path.basename(tex_path)
-    base = os.path.splitext(tex_file)[0]
 
-    print(f"[builder] Building PDF for {tex_file}")
     run(f"pdflatex -interaction=nonstopmode {tex_file}", cwd=tex_dir)
     run(f"pdflatex -interaction=nonstopmode {tex_file}", cwd=tex_dir)
 
-    pdf_path = os.path.join(tex_dir, base + ".pdf")
+    pdf_path = tex_path.replace(".tex", ".pdf")
     if not os.path.exists(pdf_path):
-        raise RuntimeError(f"[builder] PDF missing: {pdf_path}")
+        raise RuntimeError(f"PDF not produced: {pdf_path}")
 
     return pdf_path
 
 
-# ------------------------------------------------------------
-# LATEX STRIPPER
-# ------------------------------------------------------------
+# --------------------------------------------------------------
+# LaTeX-stripper
+# --------------------------------------------------------------
 
 def strip_latex(text):
     if not text:
         return text
 
+    # enkel styling
     text = re.sub(r"\\textbf\{(.*?)\}", r"\1", text)
     text = re.sub(r"\\emph\{(.*?)\}", r"\1", text)
     text = re.sub(r"\\textit\{(.*?)\}", r"\1", text)
+
+    # generelle kommandoer
     text = re.sub(r"\\[A-Za-z]+\{(.*?)\}", r"\1", text)
+
+    # fjern \
     text = text.replace("\\", "")
     text = re.sub(r"\s+", " ", text)
-
     return text.strip()
 
 
-# ------------------------------------------------------------
-# EXTRACT META FROM LATEX
-# ------------------------------------------------------------
+# --------------------------------------------------------------
+# Ekstraher meta
+# --------------------------------------------------------------
 
-def extract_meta_from_tex(tex_path):
+def extract_meta(tex_path):
     with open(tex_path, "r", encoding="utf-8") as f:
         content = f.read()
 
@@ -107,57 +115,56 @@ def extract_meta_from_tex(tex_path):
         m = re.search(rf"\\{cmd}\{{(.*?)\}}", content, re.DOTALL)
         return m.group(1).strip() if m else ""
 
-    title = match("title")
-    author = match("author") or "Morten Magnusson"
-    kw_raw = match("keywords")
+    title = strip_latex(match("title"))
+    if not title:
+        title = os.path.splitext(os.path.basename(tex_path))[0]
 
+    author = match("author") or "Morten Magnusson"
+
+    kw_raw = match("keywords")
     keywords = []
     if kw_raw:
         for k in re.split(r"[;,]", kw_raw):
             if k.strip():
                 keywords.append(strip_latex(k.strip()))
 
-    m_abs = re.search(r"\\begin\{abstract\}(.*?)\\end\{abstract\}", content, re.DOTALL)
-    abstract = m_abs.group(1).strip() if m_abs else ""
-
-    # strip LaTeX
-    title = strip_latex(title)
-    abstract = strip_latex(abstract)
+    m_abs = re.search(
+        r"\\begin\{abstract\}(.*?)\\end\{abstract\}", content, re.DOTALL
+    )
+    abstract = strip_latex(m_abs.group(1)) if m_abs else ""
 
     return {
-        "title": title or os.path.splitext(os.path.basename(tex_path))[0],
+        "title": title,
         "author": author,
-        "abstract": abstract,
-        "keywords": keywords
+        "keywords": keywords,
+        "abstract": abstract
     }
 
 
-# ------------------------------------------------------------
-# DOI-LOADERS
-# ------------------------------------------------------------
+# --------------------------------------------------------------
+# DOI-henting
+# --------------------------------------------------------------
 
-def load_existing_doi(paper_dir, slug):
+def load_existing_doi(dir, slug):
     # metadata.json
-    meta = os.path.join(paper_dir, "metadata.json")
-    if os.path.exists(meta):
+    m = os.path.join(dir, "metadata.json")
+    if os.path.exists(m):
         try:
-            with open(meta, "r", encoding="utf-8") as f:
-                data = json.load(f)
-            if "doi" in data:
-                print(f"[builder] DOI found in metadata.json: {data['doi']}")
-                return data["doi"]
+            with open(m, "r", encoding="utf-8") as f:
+                d = json.load(f)
+            if "doi" in d:
+                return d["doi"]
         except:
             pass
 
     # jsonld
-    jsonld = os.path.join(paper_dir, f"{slug}.jsonld")
-    if os.path.exists(jsonld):
+    j = os.path.join(dir, f"{slug}.jsonld")
+    if os.path.exists(j):
         try:
-            with open(jsonld, "r", encoding="utf-8") as f:
-                data = json.load(f)
-            doi = data.get("identifier")
-            if doi and ("10." in doi or doi.startswith("https://doi.org")):
-                print(f"[builder] DOI found in jsonld: {doi}")
+            with open(j, "r", encoding="utf-8") as f:
+                d = json.load(f)
+            doi = d.get("identifier")
+            if doi and ("10." in doi or doi.startswith("https://doi.org/")):
                 return doi
         except:
             pass
@@ -166,73 +173,100 @@ def load_existing_doi(paper_dir, slug):
 
 
 def fetch_doi_from_figshare(title):
-    """Henter DOI fra Figshare ved tittelmatch."""
     try:
-        params = {"search_for": title}
-        r = requests.get(f"{FIGSHARE_API}/articles/search", params=params, timeout=5)
+        r = requests.get(
+            f"{FIGSHARE_API}/articles/search",
+            params={"search_for": title},
+            timeout=6
+        )
         r.raise_for_status()
-        results = r.json()
 
-        for item in results:
-            if "title" in item and item["title"].strip().lower() == title.lower().strip():
-                doi = item.get("doi")
-                if doi:
-                    print(f"[builder] DOI found on Figshare: {doi}")
-                    return doi
+        for item in r.json():
+            if item.get("title", "").strip().lower() == title.lower().strip():
+                if item.get("doi"):
+                    return item["doi"]
+
     except Exception as e:
-        print(f"[builder] Figshare lookup failed: {e}")
+        print("[builder] Figshare DOI lookup failed:", e)
 
     return None
 
 
-# ------------------------------------------------------------
-# DOMAIN + PDF-URL
-# ------------------------------------------------------------
+# --------------------------------------------------------------
+# DOI-injeksjon i LaTeX → PDF metadata
+# --------------------------------------------------------------
 
-def detect_domain(paper_dir, meta):
-    last = os.path.basename(paper_dir)
+def inject_doi_into_tex(tex_path, doi):
+    if not doi:
+        return
+
+    with open(tex_path, "r", encoding="utf-8") as f:
+        lines = f.readlines()
+
+    new_lines = []
+    injected = False
+
+    for line in lines:
+        # injiser etter \documentclass
+        new_lines.append(line)
+        if not injected and line.strip().startswith("\\documentclass"):
+            new_lines.append(f"\\newcommand{{\\paperdoi}}{{{doi}}}\n")
+            new_lines.append("\\usepackage{hyperref}\n")
+            new_lines.append(
+                "\\hypersetup{pdfinfo={DOI={\\paperdoi}}}\n"
+            )
+            injected = True
+
+    with open(tex_path, "w", encoding="utf-8") as f:
+        f.writelines(new_lines)
+
+
+# --------------------------------------------------------------
+# Domain
+# --------------------------------------------------------------
+
+def detect_domain(dir, meta):
+    last = os.path.basename(dir)
     for key, domain in DOMAIN_BY_SUBDIR.items():
         if key in last or key in meta["title"]:
             return domain
     return DOMAIN_DEFAULT
 
 
-def build_pdf_url(slug):
-    rel = f"docs/papers/efc/{slug}/{slug}.pdf"
-    return f"{GITHUB_REPO_RAW_BASE.rstrip('/')}/{rel}"
+def pdf_url(slug):
+    return f"{GITHUB_REPO_RAW_BASE}/docs/papers/efc/{slug}/{slug}.pdf"
 
 
-# ------------------------------------------------------------
-# FILE WRITERS
-# ------------------------------------------------------------
+# --------------------------------------------------------------
+# File writers
+# --------------------------------------------------------------
 
 def write_readme(dir, slug, meta, domain, doi):
     year = date.today().year
-    abstract = meta["abstract"] or "_No abstract found._"
-    kw = ", ".join(meta["keywords"]) if meta["keywords"] else "Energy-Flow Cosmology, entropy"
-
     doi_line = f"DOI: {doi}" if doi else "DOI: pending"
+
+    kw = ", ".join(meta["keywords"]) if meta["keywords"] else "Energy-Flow Cosmology"
 
     out = f"""# {meta["title"]}
 
 This directory contains the paper **“{meta["title"]}”**, part of the EFC series.
 
-{abstract.split("\n")[0]}
+{meta["abstract"].split("\n")[0]}
 
 ---
 
 ## Context in the EFC framework
 
-- **Framework:** Energy-Flow Cosmology (EFC)
-- **Domain:** {domain}
-- **Role:** Links entropic structure, information flow and observable cosmological behaviour.
-- **{doi_line}**
+- Framework: Energy-Flow Cosmology (EFC)
+- Domain: {domain}
+- Role: Links entropic structure, information flow and observable cosmological behaviour.
+- {doi_line}
 
 ---
 
 ## Abstract
 
-{abstract}
+{meta["abstract"]}
 
 ---
 
@@ -242,21 +276,20 @@ This directory contains the paper **“{meta["title"]}”**, part of the EFC ser
 ---
 
 ## Files
-- `{slug}.tex`
-- `{slug}.pdf`
-- `{slug}.jsonld`
-- `metadata.json`
-- `index.json`
-- `citations.bib`
+- {slug}.tex
+- {slug}.pdf
+- {slug}.jsonld
+- metadata.json
+- index.json
+- citations.bib
 
 ---
 
 ## Citation
 
-> Magnusson, M. ({year}). *{meta["title"]}.*  
-> {doi_line}  
-> GitHub: docs/papers/efc/{slug}/{slug}.pdf
-
+Magnusson, M. ({year}). *{meta["title"]}*.  
+{doi_line}  
+GitHub: docs/papers/efc/{slug}/{slug}.pdf
 """
     with open(os.path.join(dir, "README.md"), "w", encoding="utf-8") as f:
         f.write(out)
@@ -264,7 +297,8 @@ This directory contains the paper **“{meta["title"]}”**, part of the EFC ser
 
 def write_metadata(dir, slug, meta, domain, doi):
     now = str(date.today())
-    data = {
+
+    d = {
         "id": slug,
         "slug": slug,
         "title": meta["title"],
@@ -285,16 +319,17 @@ def write_metadata(dir, slug, meta, domain, doi):
         "created": now,
         "updated": now
     }
+
     if doi:
-        data["doi"] = doi
+        d["doi"] = doi
 
     with open(os.path.join(dir, "metadata.json"), "w", encoding="utf-8") as f:
-        json.dump(data, f, indent=2, ensure_ascii=False)
+        json.dump(d, f, indent=2, ensure_ascii=False)
 
 
 def write_index(dir, slug, meta, domain, doi):
     now = str(date.today())
-    data = {
+    d = {
         "id": slug,
         "slug": slug,
         "title": meta["title"],
@@ -311,16 +346,16 @@ def write_index(dir, slug, meta, domain, doi):
         "created": now,
         "updated": now
     }
+
     if doi:
-        data["doi"] = doi
+        d["doi"] = doi
 
     with open(os.path.join(dir, "index.json"), "w", encoding="utf-8") as f:
-        json.dump(data, f, indent=2, ensure_ascii=False)
+        json.dump(d, f, indent=2, ensure_ascii=False)
 
 
 def write_jsonld(dir, slug, meta, domain, doi):
-    pdf_url = build_pdf_url(slug)
-    data = {
+    d = {
         "@context": "https://schema.org",
         "@type": "CreativeWork",
         "identifier": doi or slug,
@@ -333,54 +368,61 @@ def write_jsonld(dir, slug, meta, domain, doi):
             "identifier": "https://orcid.org/0009-0002-4860-5095"
         }],
         "keywords": meta["keywords"],
-        "url": pdf_url,
+        "url": pdf_url(slug),
         "isPartOf": {
             "@type": "CreativeWorkSeries",
             "name": "Energy-Flow Cosmology (EFC) Papers"
         },
-        "about": {
-            "@type": "Thing",
-            "name": domain
-        }
+        "about": {"@type": "Thing", "name": domain}
     }
+
     with open(os.path.join(dir, f"{slug}.jsonld"), "w", encoding="utf-8") as f:
-        json.dump(data, f, indent=2, ensure_ascii=False)
+        json.dump(d, f, indent=2, ensure_ascii=False)
 
 
 def ensure_citations(dir):
-    bib = os.path.join(dir, "citations.bib")
-    if not os.path.exists(bib):
-        with open(bib, "w", encoding="utf-8") as f:
-            f.write("% Bibliography for this EFC paper\n")
+    p = os.path.join(dir, "citations.bib")
+    if not os.path.exists(p):
+        with open(p, "w", encoding="utf-8") as f:
+            f.write("% bibliography\n")
 
 
-# ------------------------------------------------------------
-# MAIN PROCESS
-# ------------------------------------------------------------
+# --------------------------------------------------------------
+# Hovedprosess
+# --------------------------------------------------------------
 
-def process_tex_file(tex_path):
+def process_file(tex_path):
     tex_path = os.path.abspath(tex_path)
     dir = os.path.dirname(tex_path)
     slug = os.path.splitext(os.path.basename(tex_path))[0]
 
-    print(f"[builder] Processing {slug}")
+    print(f"\n[builder] Processing: {slug}\n")
 
-    latex_build(tex_path)
-    meta = extract_meta_from_tex(tex_path)
+    # 1. Ekstraher metadata (før injeksjon)
+    meta = extract_meta(tex_path)
     domain = detect_domain(dir, meta)
 
-    # DOI → metadata → jsonld → Figshare
+    # 2. DOI fra lokale filer
     doi = load_existing_doi(dir, slug)
+
+    # 3. DOI fra Figshare hvis nødvendig
     if not doi:
         doi = fetch_doi_from_figshare(meta["title"])
 
+    # 4. Injiser DOI i .tex → for å få DOI inn i PDF metadata
+    inject_doi_into_tex(tex_path, doi)
+
+    # 5. Bygg PDF
+    latex_build(tex_path)
+
+    # 6. Skriv metadatafiler
     write_readme(dir, slug, meta, domain, doi)
     write_metadata(dir, slug, meta, domain, doi)
     write_index(dir, slug, meta, domain, doi)
     write_jsonld(dir, slug, meta, domain, doi)
     ensure_citations(dir)
 
-    print(f"[builder] DONE {slug} (doi={doi or 'pending'})")
+    print(f"[builder] DONE — {slug} (DOI={doi or 'pending'})")
 
 
 def main():
@@ -388,7 +430,7 @@ def main():
     for root, dirs, files in os.walk(DOCS_ROOT):
         for f in files:
             if f.endswith(".tex"):
-                process_tex_file(os.path.join(root, f))
+                process_file(os.path.join(root, f))
 
 
 if __name__ == "__main__":
