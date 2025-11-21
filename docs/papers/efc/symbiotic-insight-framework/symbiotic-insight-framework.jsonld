@@ -1,8 +1,0 @@
-{
-  "@context": "https://schema.org",
-  "@type": "CreativeWork",
-  "@id": "https://github.com/supertedai/energyflow-cosmology/docs/papers/efc/symbiotic-insight-framework",
-  "identifier": "symbiotic-insight-framework",
-  "name": "symbiotic insight framework",
-  "version": "1.0"
-}
