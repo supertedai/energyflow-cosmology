@@ -1,8 +1,0 @@
-{
-  "@context": "https://schema.org",
-  "@type": "CreativeWork",
-  "name": "AUTH Layer",
-  "identifier": "auth-layer",
-  "description": "Authentication, provenance and identity layer for EFC.",
-  "url": "auth/"
-}
