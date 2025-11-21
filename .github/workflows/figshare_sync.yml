@@ -13,6 +13,8 @@ jobs:
     steps:
       - name: Checkout repo
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - name: Setup Python
         uses: actions/setup-python@v4
@@ -26,7 +28,7 @@ jobs:
       - name: Run Figshare Sync
         env:
           FIGSHARE_TOKEN: ${{ secrets.FIGSHARE_TOKEN }}
-        run: python integration/figshare/efc_figshare_sync_v3.py
+        run: python tools/efc_figshare_sync_v3.py
 
       - name: Upload Sync Report
         uses: actions/upload-artifact@v4
