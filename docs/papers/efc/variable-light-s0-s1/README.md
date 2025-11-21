@@ -1,4 +1,4 @@
-# Effective Light Speed in Entropic Transition States: A Formal Treatment of the s₀ / s₁ Structure in Energy-Flow Cosmology (EFC)
+# textbfVariable Effective Light Speed in Entropic Transition States: A Formal Treatment of the s₀ / s₁ Structure in Energy-Flow Cosmology (EFC)
 
 This directory contains the paper **“textbfVariable Effective Light Speed in Entropic Transition States: A Formal Treatment of the s₀ / s₁ Structure in Energy-Flow Cosmology (EFC)”**, part of the Energy-Flow Cosmology (EFC) series.
 
