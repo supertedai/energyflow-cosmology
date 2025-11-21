@@ -1,0 +1,37 @@
+name: Figshare Sync (EFC v3)
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "0 */6 * * *"
+
+jobs:
+  figshare-sync:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: |
+          pip install requests python-slugify
+
+      - name: Run Figshare Sync
+        env:
+          FIGSHARE_TOKEN: ${{ secrets.FIGSHARE_TOKEN }}
+        run: python integrations/figshare/efc_figshare_sync_v3.py
+
+      - name: Upload Sync Report
+        uses: actions/upload-artifact@v4
+        with:
+          name: figshare-sync-report
+          path: figshare_sync_report.txt
