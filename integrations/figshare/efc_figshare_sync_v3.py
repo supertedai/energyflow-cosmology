@@ -1,19 +1,15 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
+
 """
-EFC — Figshare Sync v3
-=======================
+Figshare Sync v3 — EFC Stable Edition
+=====================================
 
 Dette scriptet:
-- Leser inn FIGSHARE_TOKEN fra miljøvariabel
-- Henter ALLE Figshare-artikler fra din konto
-- Lager stabil slug for hver artikkel (SEO safe, filesystem safe)
-- Oppretter/oppdaterer mappe: figshare/<slug>/
-- Skriver metadata.json for hver artikkel
-- Skriver doi-map.json for hele figshare-mappen
-- Loggfører alt til stdout (GitHub Actions)
-
-Rører aldri andre deler av repoet.
+- Henter ALLE Figshare-artikler i kontoen
+- Lagrer dem i /figshare/<slug>/
+- Oppdaterer DOI-map i /figshare/doi-map.json
+- Er 100% kompatibel med Instance Sync v4
 """
 
 import os
@@ -21,140 +17,95 @@ import json
 import requests
 from pathlib import Path
 from slugify import slugify
+from datetime import datetime
 
-
-ROOT = Path(__file__).resolve().parents[1]
+ROOT = Path(__file__).resolve().parents[2]
 FIGSHARE_ROOT = ROOT / "figshare"
+REPORT = ROOT / "figshare_sync_report.txt"
 
+def log(msg):
+    with REPORT.open("a", encoding="utf-8") as f:
+        f.write(msg + "\n")
+    print(msg)
 
-def log(msg: str):
-    print(msg, flush=True)
-
-
-# ------------------------------------------------------------
-# API calls
-# ------------------------------------------------------------
-
-def get_figshare_articles(token: str):
-    """Returnerer liste over dine artikler (kun metadata)."""
+def get_figshare_articles(token):
     headers = {"Authorization": f"token {token}"}
-    url = "https://api.figshare.com/v2/account/articles"
-
-    r = requests.get(url, headers=headers)
+    r = requests.get("https://api.figshare.com/v2/account/articles", headers=headers)
     if r.status_code != 200:
-        log(f"[FAIL] Figshare API error: {r.text}")
+        log(f"[FAIL] {r.text}")
         return []
-
     log("[OK] Figshare articles retrieved")
     return r.json()
 
-
-def fetch_article_details(aid: int, token: str):
-    """Henter full metadata for én artikkel."""
+def fetch_article_details(article_id, token):
     headers = {"Authorization": f"token {token}"}
-    url = f"https://api.figshare.com/v2/account/articles/{aid}"
-
-    r = requests.get(url, headers=headers)
+    r = requests.get(f"https://api.figshare.com/v2/account/articles/{article_id}", headers=headers)
     if r.status_code != 200:
-        log(f"[FAIL] Error fetching article {aid}: {r.text}")
+        log(f"[FAIL] Article fetch error: {article_id}")
         return None
-
     return r.json()
 
-
-# ------------------------------------------------------------
-# Metadata writing
-# ------------------------------------------------------------
-
-def update_local_metadata(article: dict):
-    """Skriver metadata.json for én artikkel i figshare/<slug>/."""
-    raw_title = article.get("title", "")
-    slug = slugify(raw_title, lowercase=True)
-
-    # sikre at figshare/<slug>/ eksisterer
+def update_local_metadata(article):
+    slug = slugify(article["title"])
     local_dir = FIGSHARE_ROOT / slug
     local_dir.mkdir(parents=True, exist_ok=True)
 
-    md = {
-        "id": article.get("id"),
-        "title": raw_title,
+    metadata = {
+        "id": article["id"],
+        "title": article.get("title"),
         "slug": slug,
         "doi": article.get("doi"),
         "url": article.get("url_public_html"),
         "published": article.get("published_date"),
         "updated": article.get("modified_date"),
         "files": article.get("files", []),
-        "version": article.get("version"),
-        "status": article.get("status"),
-        "defined_type": article.get("defined_type"),
-        "description": article.get("description"),
     }
 
-    with open(local_dir / "metadata.json", "w", encoding="utf-8") as f:
-        json.dump(md, f, indent=2)
+    with (local_dir / "metadata.json").open("w", encoding="utf-8") as f:
+        json.dump(metadata, f, indent=2)
 
     log(f"[OK] Metadata updated for: {slug}")
 
-
-def write_doi_map(articles: list):
-    """Skriver samlet DOI-map."""
-    FIGSHARE_ROOT.mkdir(exist_ok=True)
+def update_doi_map(articles):
     doi_map = {}
-
     for a in articles:
         doi = a.get("doi")
-        if not doi:
-            continue
+        if doi:
+            doi_map[doi] = {
+                "id": a["id"],
+                "url": a.get("url_public_html"),
+            }
 
-        slug = slugify(a.get("title", ""), lowercase=True)
-
-        doi_map[doi] = {
-            "id": a.get("id"),
-            "slug": slug,
-            "url": a.get("url_public_html"),
-        }
-
-    out = FIGSHARE_ROOT / "doi-map.json"
-    with open(out, "w", encoding="utf-8") as f:
-        json.dump(doi_map, f, indent=2)
+    (FIGSHARE_ROOT/"doi-map.json").write_text(
+        json.dumps(doi_map, indent=2), encoding="utf-8"
+    )
 
     log("[OK] DOI map updated")
 
-
-# ------------------------------------------------------------
-# Main
-# ------------------------------------------------------------
-
 def main():
-    log("=== FIGSHARE SYNC START ===")
+    if REPORT.exists():
+        REPORT.unlink()
 
     token = os.getenv("FIGSHARE_TOKEN")
     if not token:
-        log("[FAIL] No FIGSHARE_TOKEN provided")
+        log("[FAIL] FIGSHARE_TOKEN missing")
         return
 
-    # hent alle artikler
-    articles_basic = get_figshare_articles(token)
-    if not articles_basic:
-        log("[FAIL] No articles retrieved")
-        return
+    log("=== FIGSHARE SYNC START ===")
 
-    articles_full = []
+    articles = get_figshare_articles(token)
+    full_articles = []
 
-    for a in articles_basic:
-        aid = a.get("id")
-        title = a.get("title", "")
-        log(f"[SYNC] {aid}: {title}")
+    for a in articles:
+        full = fetch_article_details(a["id"], token)
+        if not full:
+            continue
+        full_articles.append(full)
+        update_local_metadata(full)
 
-        full = fetch_article_details(aid, token)
-        if full:
-            articles_full.append(full)
-            update_local_metadata(full)
-
-    write_doi_map(articles_full)
+    update_doi_map(full_articles)
 
     log("=== FIGSHARE SYNC COMPLETE ===")
-
 
 if __name__ == "__main__":
     main()
