@@ -3,9 +3,7 @@ name: Neo4j Sync
 on:
   push:
     paths:
-      - 'neo4j/**'
-      - 'api/**'
-      - 'meta-graph/**'
+      - 'tools/neo/**'
       - '.github/workflows/neo4j_sync.yml'
   workflow_dispatch:
 
@@ -28,4 +26,4 @@ jobs:
 
       - name: Run Neo4j Sync
         run: |
-          python neo4j/sync.py
+          python tools/neo/neo4j_sync.py
