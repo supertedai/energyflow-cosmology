@@ -1,21 +1,11 @@
-name: Instance Sync
+name: Instance Sync (Disabled)
 
 on:
-  schedule:
-    - cron: "0 * * * *"
-  workflow_dispatch:
+  workflow_dispatch: {}
 
 jobs:
-  instance_sync:
+  noop:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-
-      - uses: actions/setup-python@v5
-        with:
-          python-version: "3.11"
-
-      - name: Run instance sync
-        run: python scripts/instance_sync.py
+      - name: Disabled
+        run: echo "instance_sync.yml disabled to prevent auto-regeneration."
