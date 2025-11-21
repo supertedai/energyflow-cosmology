@@ -1,0 +1,31 @@
+name: EFC Master Validation Suite
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [ main ]
+
+jobs:
+  master-validation:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.11"
+
+      - name: Install deps
+        run: |
+          pip install jsonschema requests python-slugify
+
+      - name: Run Master Validation Suite
+        run: python tools/efc_master_validation.py
+
+      - name: Upload Validation Report
+        uses: actions/upload-artifact@v4
+        with:
+          name: efc-master-validation-report
+          path: efc_master_validation_report.txt
