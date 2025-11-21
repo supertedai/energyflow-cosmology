@@ -3,12 +3,12 @@ name: Figshare Sync (EFC v3)
 on:
   workflow_dispatch:
   schedule:
-    - cron: "0 */6 * * *"   # hver 6. time
+    - cron: "0 */6 * * *"
 
 jobs:
   figshare-sync:
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    timeout-minutes: 20
 
     steps:
       - name: Checkout repo
@@ -28,7 +28,7 @@ jobs:
       - name: Run Figshare Sync
         env:
           FIGSHARE_TOKEN: ${{ secrets.FIGSHARE_TOKEN }}
-        run: python tools/efc_figshare_sync_v3.py
+        run: python integrations/figshare/efc_figshare_sync_v3.py
 
       - name: Upload Sync Report
         uses: actions/upload-artifact@v4
