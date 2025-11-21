@@ -16,7 +16,7 @@
   "url": "https://raw.githubusercontent.com/supertedai/energyflow-cosmology/main/docs/papers/efc/symbiotic-insight-framework/symbiotic-insight-framework.pdf",
   "isPartOf": {
     "@type": "CreativeWorkSeries",
-    "name": "Energy-Flow Cosmology (EFC) Papers"
+    "name": "EFC Papers"
   },
   "about": {
     "@type": "Thing",

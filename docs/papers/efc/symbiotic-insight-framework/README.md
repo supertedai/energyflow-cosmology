@@ -2,7 +2,7 @@
 
 This directory contains the paper **“textbf{Symbiotic Insight Framework (SIF): A Structural Methodology for High-Velocity Scientific Reasoning”**, part of the EFC series.
 
-The Symbiotic Insight Framework (SIF) describes how high-velocity, cross-domain scientific insight can be stabilised through continuous interaction between a human thinker and an adaptive computational system. The framework treats insight production as a coupled process: the human generates parallel conceptual fields at high speed, while the computational system stabilises, structures and preserves these fields into scientific output.
+The
 
 ---
 
@@ -16,13 +16,12 @@ The Symbiotic Insight Framework (SIF) describes how high-velocity, cross-domain 
 ---
 
 ## Abstract
-
 The Symbiotic Insight Framework (SIF) describes how high-velocity, cross-domain scientific insight can be stabilised through continuous interaction between a human thinker and an adaptive computational system. The framework treats insight production as a coupled process: the human generates parallel conceptual fields at high speed, while the computational system stabilises, structures and preserves these fields into scientific output.
 
 ---
 
 ## Keywords
-Energy-Flow Cosmology
+
 
 ---
 
