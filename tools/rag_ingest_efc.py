@@ -1,17 +1,23 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-RAG Ingest EFC (Local, No-API Version)
-======================================
+RAG Ingest EFC (Local Embeddings, Qdrant Cloud)
+===============================================
 
 - Leser alle PDF-er under docs/papers/efc
 - Ekstraherer tekst
 - Chunker tekst
-- Lager deterministiske hashing-embeddings (ingen API)
-- Upserter i Qdrant
+- Lager deterministiske hashing-embeddings (ingen OpenAI)
+- Tester Qdrant-tilkobling eksplisitt
+- Upserter i Qdrant Cloud
 
-Ingen nøkler. Ingen eksterne tjenester.
-Fungerer 100% i GitHub Actions uten secrets.
+Dette er en helt selvstendig ingest-pipeline som fungerer direkte
+i GitHub Actions med kun:
+
+    QDRANT_URL
+    QDRANT_API_KEY
+
+i GitHub Secrets.
 """
 
 import os
@@ -27,23 +33,29 @@ from qdrant_client import models as qm
 from pypdf import PdfReader
 
 
-# ----------------------------- Konfig -----------------------------
+# ------------------------------------------------------------
+# KONFIG
+# ------------------------------------------------------------
 
 ROOT = Path(__file__).resolve().parents[1]
 DOCS_ROOT = ROOT / "docs" / "papers" / "efc"
 
-# Samme dimensjon som OpenAI (for fremtidig kompatibilitet)
-EMBED_DIM = 1536
+EMBED_DIM = 1536  # matcher OpenAI dimensjon, men lokalt generert
 
-# Collection-navn — kan utvides ved behov
-DEFAULT_COLLECTION = "efc_rag_local"
+DEFAULT_COLLECTION = "efc_rag_local"  # kan endres, men OK som er standard
 
 
-# ----------------------------- Utils -----------------------------
+# ------------------------------------------------------------
+# LOGGING
+# ------------------------------------------------------------
 
 def log(msg: str):
     print(f"[rag-ingest] {msg}", flush=True)
 
+
+# ------------------------------------------------------------
+# PDF-HÅNDTERING
+# ------------------------------------------------------------
 
 def iter_pdf_files() -> List[Path]:
     pdfs = sorted(DOCS_ROOT.rglob("*.pdf"))
@@ -54,17 +66,17 @@ def iter_pdf_files() -> List[Path]:
 def extract_text_from_pdf(pdf: Path) -> str:
     try:
         reader = PdfReader(str(pdf))
-        pages = [p.extract_text() or "" for p in reader.pages]
+        pages = [page.extract_text() or "" for page in reader.pages]
         return "\n".join(pages)
     except Exception as e:
-        log(f"Feil ved PDF-lesing {pdf}: {e}")
+        log(f"Feil ved lesing av {pdf}: {e}")
         return ""
 
 
 def chunk_text(text: str, chunk_size=2000, overlap=200) -> List[str]:
     chunks = []
-    start = 0
     n = len(text)
+    start = 0
 
     while start < n:
         end = min(start + chunk_size, n)
@@ -78,15 +90,19 @@ def chunk_text(text: str, chunk_size=2000, overlap=200) -> List[str]:
     return chunks
 
 
+# ------------------------------------------------------------
+# EMBEDDINGS (LOKAL, DETERMINISTISK)
+# ------------------------------------------------------------
+
 def deterministic_embedding(text: str, dim: int = EMBED_DIM) -> List[float]:
-    """
-    Lager en deterministisk pseudo-vektor basert på hashing.
-    Ingen API. Ingen nøkler. Full stabilitet.
-    """
     seed = int(hashlib.sha256(text.encode("utf-8")).hexdigest(), 16)
     rng = random.Random(seed)
     return [rng.random() for _ in range(dim)]
 
+
+# ------------------------------------------------------------
+# METADATA
+# ------------------------------------------------------------
 
 def load_metadata(pdf: Path) -> Dict:
     folder = pdf.parent
@@ -99,6 +115,7 @@ def load_metadata(pdf: Path) -> Dict:
         except:
             pass
 
+    # fallback metadata
     return {
         "title": pdf.stem,
         "slug": folder.name,
@@ -107,89 +124,108 @@ def load_metadata(pdf: Path) -> Dict:
     }
 
 
-def get_qdrant_client() -> QdrantClient:
-    """
-    Bruker direkte URL fra secrets **hvis** den finnes,
-    ellers antas lokal eller intern Qdrant-binding.
-    (Github Actions krever uansett remote URL.)
-    """
-    url = os.environ.get("QDRANT_URL", None)
-    api = os.environ.get("QDRANT_API_KEY", None)
+# ------------------------------------------------------------
+# QDRANT
+# ------------------------------------------------------------
 
-    if url is None:
-        raise RuntimeError("QDRANT_URL mangler. Denne MÅ være satt i Secrets.")
+def get_qdrant_client():
+    url = os.environ.get("QDRANT_URL")
+    api = os.environ.get("QDRANT_API_KEY")
+
+    if not url:
+        raise RuntimeError("QDRANT_URL mangler i miljøvariabler.")
+    if not api:
+        raise RuntimeError("QDRANT_API_KEY mangler i miljøvariabler.")
 
     return QdrantClient(url=url, api_key=api)
 
 
-def ensure_collection(qc: QdrantClient, name: str):
-    existing = {c.name for c in qc.get_collections().collections}
-    if name in existing:
+def test_qdrant_connection(client: QdrantClient):
+    log("Tester Qdrant-tilkobling...")
+    try:
+        _ = client.get_collections()
+        log("Qdrant-tilkobling OK.")
+    except Exception as e:
+        raise RuntimeError(f"Klarte ikke å koble til Qdrant: {e}")
+
+
+def ensure_collection(client: QdrantClient, name: str):
+    collections = {c.name for c in client.get_collections().collections}
+
+    if name in collections:
         log(f"Collection '{name}' finnes allerede.")
         return
 
-    log(f"Lager collection '{name}'...")
-    qc.create_collection(
+    log(f"Lager collection '{name}' (dim={EMBED_DIM})...")
+    client.create_collection(
         collection_name=name,
         vectors_config=qm.VectorParams(size=EMBED_DIM, distance=qm.Distance.COSINE),
     )
+    log("Collection opprettet.")
 
 
-# ----------------------------- Ingest PDF -----------------------------
+# ------------------------------------------------------------
+# INGEST-LOGIKK
+# ------------------------------------------------------------
 
-def ingest_pdf(pdf: Path, qc: QdrantClient, collection: str) -> int:
+def ingest_pdf(pdf: Path, client: QdrantClient, collection: str) -> int:
     rel = pdf.relative_to(ROOT)
     log(f"Ingest: {rel}")
 
     text = extract_text_from_pdf(pdf)
     if not text:
-        log("  Ingen tekst funnet.")
+        log("  Ingen tekst – hopper over.")
         return 0
 
     chunks = chunk_text(text)
-    log(f"  {len(chunks)} chunks")
+    log(f"  {len(chunks)} chunks generert.")
 
     meta = load_metadata(pdf)
 
     points = []
-    for i, chunk in enumerate(chunks):
+    for idx, chunk in enumerate(chunks):
         vec = deterministic_embedding(chunk)
 
         payload = {
             "path": str(rel),
-            "chunk_index": i,
+            "chunk_index": idx,
             "text": chunk,
             "paper_title": meta.get("title"),
             "slug": meta.get("slug"),
             "doi": meta.get("doi"),
             "keywords": meta.get("keywords"),
-            "source": "efc_paper",
+            "source": "efc_paper"
         }
 
         points.append(
             qm.PointStruct(
                 id=uuid.uuid4().hex,
                 vector=vec,
-                payload=payload
+                payload=payload,
             )
         )
 
-    qc.upsert(collection_name=collection, points=points, wait=True)
+    client.upsert(collection_name=collection, points=points, wait=True)
+
     log(f"  Lagret {len(points)} chunks.")
     return len(points)
 
 
-# ----------------------------- Main -----------------------------
+# ------------------------------------------------------------
+# MAIN
+# ------------------------------------------------------------
 
 def main():
-    log("Starter lokal RAG-ingest (uten API)")
+    log("Starter lokal RAG-ingest (uten OpenAI).")
 
     pdfs = iter_pdf_files()
     if not pdfs:
-        log("Ingen PDF-er funnet.")
+        log("Ingen PDF-er funnet. Avslutter.")
         return
 
     qc = get_qdrant_client()
+    test_qdrant_connection(qc)
+
     ensure_collection(qc, DEFAULT_COLLECTION)
 
     total = 0
