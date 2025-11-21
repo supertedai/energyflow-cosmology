@@ -1,7 +1,7 @@
 {
   "id": "symbiotic-insight-framework",
   "slug": "symbiotic-insight-framework",
-  "title": "\\textbf{Symbiotic Insight Framework (SIF):\\\\\nA Structural Methodology for High-Velocity Scientific Reasoning",
+  "title": "textbf{Symbiotic Insight Framework (SIF): A Structural Methodology for High-Velocity Scientific Reasoning",
   "path": "docs/papers/efc/symbiotic-insight-framework",
   "pdf": "symbiotic-insight-framework.pdf",
   "tex": "symbiotic-insight-framework.tex",
@@ -11,7 +11,7 @@
   "type": "paper",
   "version": "1.0.0",
   "keywords": [],
-  "summary": "The Symbiotic Insight Framework (SIF) describes how high-velocity,\ncross-domain scientific insight can be stabilised through continuous\ninteraction between a human thinker and an adaptive computational system.\nThe framework treats insight production as a coupled process: the human\ngenerates parallel",
+  "summary": "The Symbiotic Insight Framework (SIF) describes how high-velocity, cross-domain scientific insight can be stabilised through continuous interaction between a human thinker and an adaptive computational system. The framework treats insight production as a coupled process: the human generates parallel",
   "created": "2025-11-21",
   "updated": "2025-11-21"
 }

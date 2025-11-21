@@ -1,59 +1,43 @@
-# \textbf{Variable Effective Light Speed in Entropic Transition States:\\
-A Formal Treatment of the $s_0$ / $s_1$ Structure in Energy-Flow Cosmology (EFC)
+# textbf{Variable Effective Light Speed in Entropic Transition States: A Formal Treatment of the $s_0$ / $s_1$ Structure in Energy-Flow Cosmology (EFC)
 
-This directory contains the paper **“\textbf{Variable Effective Light Speed in Entropic Transition States:\\
-A Formal Treatment of the $s_0$ / $s_1$ Structure in Energy-Flow Cosmology (EFC)”**, part of the Energy-Flow Cosmology (EFC) series.
+This directory contains the paper **“textbf{Variable Effective Light Speed in Entropic Transition States: A Formal Treatment of the $s_0$ / $s_1$ Structure in Energy-Flow Cosmology (EFC)”**, part of the EFC series.
 
-In Energy-Flow Cosmology (EFC), the effective speed of light is not a primitive
+In Energy-Flow Cosmology (EFC), the effective speed of light is not a primitive constant but an emergent propagation limit determined by the entropic state of the grid. Two fundamental entropic phases---a low-entropy constraining state ($s_0$) and a high-entropy dissipative state ($s_1$)---govern the information capacity, local curvature, and energy-flow geometry. This paper provides a formal description of variable light speed as a function of the entropic gradient, derives a minimal model for $c_{eff}(S)$, and introduces the collapse mechanisms at both ends of the spectrum that shape observational horizons and redshift behaviour.
 
 ---
 
 ## Context in the EFC framework
 
-- **Framework:** Energy-Flow Cosmology (EFC)  
-- **Domain:** META-systems  
-- **Role:** Links entropic structure, information flow and observable cosmological behaviour.  
-- **DOI: _pending_**
+- Framework: Energy-Flow Cosmology (EFC)
+- Domain: META-systems
+- Role: Links entropic structure, information flow and observable cosmological behaviour.
+- DOI: pending
 
 ---
 
 ## Abstract
 
-In Energy-Flow Cosmology (EFC), the effective speed of light is not a primitive
-constant but an emergent propagation limit determined by the entropic state of
-the grid. Two fundamental entropic phases---a low-entropy constraining state
-($s_0$) and a high-entropy dissipative state ($s_1$)---govern the information
-capacity, local curvature, and energy-flow geometry. This paper provides a
-formal description of variable light speed as a function of the entropic
-gradient, derives a minimal model for $c_{\mathrm{eff}}(S)$, and introduces the
-collapse mechanisms at both ends of the spectrum that shape observational
-horizons and redshift behaviour.
+In Energy-Flow Cosmology (EFC), the effective speed of light is not a primitive constant but an emergent propagation limit determined by the entropic state of the grid. Two fundamental entropic phases---a low-entropy constraining state ($s_0$) and a high-entropy dissipative state ($s_1$)---govern the information capacity, local curvature, and energy-flow geometry. This paper provides a formal description of variable light speed as a function of the entropic gradient, derives a minimal model for $c_{eff}(S)$, and introduces the collapse mechanisms at both ends of the spectrum that shape observational horizons and redshift behaviour.
 
 ---
 
 ## Keywords
-
-Energy-Flow Cosmology, entropy, thermodynamics, cosmology
+Energy-Flow Cosmology
 
 ---
 
-## File overview
-
-- `variable-light-s0-s1.tex` – LaTeX source  
-- `variable-light-s0-s1.pdf` – compiled paper  
-- `variable-light-s0-s1.jsonld` – Schema.org / JSON-LD description of the work  
-- `metadata.json` – internal EFC metadata for indexing and automation  
-- `index.json` – entry used by the global EFC semantic index  
-- `citations.bib` – bibliography used in the LaTeX source  
+## Files
+- variable-light-s0-s1.tex
+- variable-light-s0-s1.pdf
+- variable-light-s0-s1.jsonld
+- metadata.json
+- index.json
+- citations.bib
 
 ---
 
 ## Citation
 
-If you reference this work:
-
-> Magnusson, M. (2025). *\textbf{Variable Effective Light Speed in Entropic Transition States:\\
-A Formal Treatment of the $s_0$ / $s_1$ Structure in Energy-Flow Cosmology (EFC).*  
-> Energy-Flow Cosmology (EFC) Series.  
-> DOI: _pending_  
-> Available via GitHub: `docs/papers/efc/variable-light-s0-s1/variable-light-s0-s1.pdf`
+Magnusson, M. (2025). *textbf{Variable Effective Light Speed in Entropic Transition States: A Formal Treatment of the $s_0$ / $s_1$ Structure in Energy-Flow Cosmology (EFC)*.  
+DOI: pending  
+GitHub: docs/papers/efc/variable-light-s0-s1/variable-light-s0-s1.pdf
