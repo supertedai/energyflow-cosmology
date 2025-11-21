@@ -1,10 +1,23 @@
 {
   "id": "symbiotic-insight-framework",
-  "title": "symbiotic insight framework",
+  "slug": "symbiotic-insight-framework",
+  "title": "Symbiotic Insight Framework (SIF)",
   "path": "docs/papers/efc/symbiotic-insight-framework",
   "pdf": "symbiotic-insight-framework.pdf",
-  "md": "symbiotic-insight-framework.md",
+  "tex": "symbiotic-insight-framework.tex",
+  "readme": "README.md",
   "layer": "docs",
+  "domain": "META-systems",
   "type": "paper",
-  "version": "1.0"
+  "version": "1.0.0",
+  "keywords": [
+    "Energy-Flow Cosmology",
+    "entropy",
+    "energy flow",
+    "thermodynamics",
+    "cosmology"
+  ],
+  "summary": "This document presents the Symbiotic Insight Framework (SIF), a research method developed within the Energy-Flow Cosmology (EFC) project. SIF describes how high-velocity, cross-domain conceptual insight can be stabilised, organised, and transformed into reproducible scientific structure through cont",
+  "created": "2025-11-21",
+  "updated": "2025-11-21"
 }
