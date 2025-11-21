@@ -1,23 +1,18 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-EFC PAPER BUILDER v4.0
+EFC PAPER BUILDER v5.0
 ======================
 
-Komplett pipeline:
-
-- Bygg PDF (dobbel pdflatex)
-- Ekstraher tittel/abstract/keywords
-- Robust LaTeX-stripper (både med og uten backslash)
-- Hent DOI fra:
+Stabile fix:
+- Ren LaTeX-stripper (fjerner ALLE \commands og commands)
+- 3-trinns DOI-henting:
     1. metadata.json
     2. jsonld
-    3. Figshare API (automatisk)
-- Injiser DOI i PDF metadata via LaTeX-preamble
-- Oppdater README, metadata.json, index.json, jsonld
-- Lag citations.bib hvis mangler
-
-Trygg å kjøre mange ganger.
+    3. Figshare API
+- DOI-injeksjon i PDF metadata
+- Oppdaterer README, metadata, index, jsonld
+- Idempotent og trygg
 """
 
 import os
@@ -32,21 +27,21 @@ from datetime import date
 # Konfig
 # --------------------------------------------------------------
 
-ROOT = os.path.dirname(os.path.dirname(__file__))   # repo-root
+ROOT = os.path.dirname(os.path.dirname(__file__))
 DOCS_ROOT = os.path.join(ROOT, "docs", "papers", "efc")
 
 GITHUB_REPO_RAW_BASE = (
     "https://raw.githubusercontent.com/supertedai/energyflow-cosmology/main"
 )
 
-DOMAIN_DEFAULT = "META-systems"
-DOMAIN_BY_SUBDIR = {}
-
 FIGSHARE_API = "https://api.figshare.com/v2"
+
+DOMAIN_DEFAULT = "META-systems"
+DOMAIN_BY_SUBDIR = {}   # utvid ved behov
 
 
 # --------------------------------------------------------------
-# Helpers
+# Shell / PDF build
 # --------------------------------------------------------------
 
 def run(cmd, cwd=None):
@@ -56,7 +51,7 @@ def run(cmd, cwd=None):
     )
     print(res.stdout)
     if res.returncode != 0:
-        raise RuntimeError(f"[ERROR] Command failed: {cmd}")
+        raise RuntimeError(f"[ERROR] Failed cmd: {cmd}")
 
 
 def latex_build(tex_path):
@@ -66,42 +61,40 @@ def latex_build(tex_path):
     run(f"pdflatex -interaction=nonstopmode {tex_file}", cwd=tex_dir)
     run(f"pdflatex -interaction=nonstopmode {tex_file}", cwd=tex_dir)
 
-    pdf_path = tex_path.replace(".tex", ".pdf")
-    if not os.path.exists(pdf_path):
-        raise RuntimeError(f"[ERROR] PDF not produced: {pdf_path}")
-    return pdf_path
+    pdf = tex_path.replace(".tex", ".pdf")
+    if not os.path.exists(pdf):
+        raise RuntimeError(f"[ERROR] PDF missing: {pdf}")
+
+    return pdf
 
 
 # --------------------------------------------------------------
-# LaTeX-stripper (full)
+# LaTeX stripper (final cut)
 # --------------------------------------------------------------
 
 def strip_latex(text):
     if not text:
         return text
 
-    # Først LaTeX med backslash
-    text = re.sub(r"\\textbf\{(.*?)\}", r"\1", text)
-    text = re.sub(r"\\emph\{(.*?)\}", r"\1", text)
-    text = re.sub(r"\\textit\{(.*?)\}", r"\1", text)
-    text = re.sub(r"\\[A-Za-z]+\{(.*?)\}", r"\1", text)
+    # Fanger ALLE varianter: \cmd{...} og cmd{...}
+    # Eksempel matcher:
+    #   \textbf{Hello}
+    #   textbf{Hello}
+    #   \Large{Hello}
+    #   Large{Hello}
+    text = re.sub(r"(\\?[A-Za-z]+)\{([^{}]*)\}", r"\2", text)
 
-    # Så versjoner uten backslash (match_cmd fjerner ofte \)
-    text = re.sub(r"textbf\{(.*?)\}", r"\1", text)
-    text = re.sub(r"emph\{(.*?)\}", r"\1", text)
-    text = re.sub(r"textit\{(.*?)\}", r"\1", text)
-
-    # Fjern rester av escape
+    # Fjern backslashes
     text = text.replace("\\", "")
 
-    # Rydd spacing
+    # Rydd whitespace
     text = re.sub(r"\s+", " ", text)
 
     return text.strip()
 
 
 # --------------------------------------------------------------
-# Ekstraher meta fra tex
+# Ekstraher metadata
 # --------------------------------------------------------------
 
 def extract_meta(tex_path):
@@ -112,21 +105,19 @@ def extract_meta(tex_path):
         m = re.search(rf"\\{cmd}\{{(.*?)\}}", content, re.DOTALL)
         return m.group(1).strip() if m else ""
 
-    title = strip_latex(match("title"))
+    title_raw = match("title")
+    title = strip_latex(title_raw)
     if not title:
         title = os.path.splitext(os.path.basename(tex_path))[0]
 
-    keywords_raw = match("keywords")
-
+    kw_raw = match("keywords")
     keywords = []
-    if keywords_raw:
-        for k in re.split(r"[;,]", keywords_raw):
+    if kw_raw:
+        for k in re.split(r"[;,]", kw_raw):
             if k.strip():
                 keywords.append(strip_latex(k.strip()))
 
-    m_abs = re.search(
-        r"\\begin\{abstract\}(.*?)\\end\{abstract\}", content, re.DOTALL
-    )
+    m_abs = re.search(r"\\begin\{abstract\}(.*?)\\end\{abstract\}", content, re.DOTALL)
     abstract = strip_latex(m_abs.group(1)) if m_abs else ""
 
     return {
@@ -137,7 +128,7 @@ def extract_meta(tex_path):
 
 
 # --------------------------------------------------------------
-# DOI-kjede
+# DOI-resolver (tre-trinns)
 # --------------------------------------------------------------
 
 def doi_from_metadata(dir):
@@ -176,41 +167,34 @@ def doi_from_figshare(title):
         r.raise_for_status()
 
         for item in r.json():
-            if item.get("title", "").lower().strip() == title.lower().strip():
+            if item.get("title", "").strip().lower() == title.lower().strip():
                 if item.get("doi"):
                     return item["doi"]
 
     except Exception as e:
-        print(f"[warning] Figshare DOI lookup failed: {e}")
+        print(f"[warning] Figshare lookup failed: {e}")
 
     return None
 
 
 def resolve_doi(dir, slug, title):
-    # 1. metadata.json
     d1 = doi_from_metadata(dir)
     if d1:
-        print("[builder] DOI from metadata.json:", d1)
         return d1
 
-    # 2. jsonld
     d2 = doi_from_jsonld(dir, slug)
     if d2:
-        print("[builder] DOI from jsonld:", d2)
         return d2
 
-    # 3. Figshare
     d3 = doi_from_figshare(title)
     if d3:
-        print("[builder] DOI from Figshare:", d3)
         return d3
 
-    print("[builder] DOI unresolved -> pending")
     return None
 
 
 # --------------------------------------------------------------
-# DOI → PDF-metadata injeksjon
+# DOI → injiseres i PDF (LaTeX preamble)
 # --------------------------------------------------------------
 
 def inject_doi_into_tex(tex_path, doi):
@@ -220,24 +204,23 @@ def inject_doi_into_tex(tex_path, doi):
     with open(tex_path, "r", encoding="utf-8") as f:
         lines = f.readlines()
 
-    new_lines = []
-    done = False
+    new = []
+    injected = False
 
     for line in lines:
-        new_lines.append(line)
-
-        if not done and line.strip().startswith("\\documentclass"):
-            new_lines.append(f"\\usepackage{{hyperref}}\n")
-            new_lines.append(f"\\newcommand{{\\paperdoi}}{{{doi}}}\n")
-            new_lines.append("\\hypersetup{pdfinfo={DOI={\\paperdoi}}}\n")
-            done = True
+        new.append(line)
+        if not injected and line.strip().startswith("\\documentclass"):
+            new.append("\\usepackage{hyperref}\n")
+            new.append(f"\\newcommand{{\\paperdoi}}{{{doi}}}\n")
+            new.append("\\hypersetup{pdfinfo={DOI={\\paperdoi}}}\n")
+            injected = True
 
     with open(tex_path, "w", encoding="utf-8") as f:
-        f.writelines(new_lines)
+        f.writelines(new)
 
 
 # --------------------------------------------------------------
-# Domene & PDF URL
+# Domain
 # --------------------------------------------------------------
 
 def detect_domain(dir, meta):
@@ -261,16 +244,15 @@ def write_readme(dir, slug, meta, domain, doi):
     dline = f"DOI: {doi}" if doi else "DOI: pending"
     kw = ", ".join(meta["keywords"]) if meta["keywords"] else ""
 
-    txt = f"""# {meta["title"]}
+    out = f"""# {meta["title"]}
 
 This directory contains the paper **“{meta["title"]}”**, part of the EFC series.
 
-{meta["abstract"].split()[0] if meta["abstract"] else ""}
+{meta["abstract"][:120]}...
 
 ---
 
 ## Context in the EFC framework
-
 - Framework: Energy-Flow Cosmology (EFC)
 - Domain: {domain}
 - Role: Links entropic structure, information flow and observable cosmological behaviour.
@@ -299,20 +281,18 @@ This directory contains the paper **“{meta["title"]}”**, part of the EFC ser
 ---
 
 ## Citation
-
 Magnusson, M. ({year}). *{meta["title"]}*.  
 {dline}  
 GitHub: docs/papers/efc/{slug}/{slug}.pdf
 """
 
     with open(os.path.join(dir, "README.md"), "w", encoding="utf-8") as f:
-        f.write(txt)
+        f.write(out)
 
 
 def write_metadata(dir, slug, meta, domain, doi):
     now = str(date.today())
-
-    d = {
+    data = {
         "id": slug,
         "slug": slug,
         "title": meta["title"],
@@ -333,18 +313,15 @@ def write_metadata(dir, slug, meta, domain, doi):
         "created": now,
         "updated": now
     }
-
-    if doi:
-        d["doi"] = doi
+    if doi: data["doi"] = doi
 
     with open(os.path.join(dir, "metadata.json"), "w", encoding="utf-8") as f:
-        json.dump(d, f, indent=2, ensure_ascii=False)
+        json.dump(data, f, indent=2, ensure_ascii=False)
 
 
 def write_index(dir, slug, meta, domain, doi):
     now = str(date.today())
-
-    d = {
+    data = {
         "id": slug,
         "slug": slug,
         "title": meta["title"],
@@ -361,15 +338,14 @@ def write_index(dir, slug, meta, domain, doi):
         "created": now,
         "updated": now
     }
-
-    if doi: d["doi"] = doi
+    if doi: data["doi"] = doi
 
     with open(os.path.join(dir, "index.json"), "w", encoding="utf-8") as f:
-        json.dump(d, f, indent=2, ensure_ascii=False)
+        json.dump(data, f, indent=2, ensure_ascii=False)
 
 
 def write_jsonld(dir, slug, meta, domain, doi):
-    d = {
+    data = {
         "@context": "https://schema.org",
         "@type": "CreativeWork",
         "identifier": doi or slug,
@@ -388,18 +364,18 @@ def write_jsonld(dir, slug, meta, domain, doi):
     }
 
     with open(os.path.join(dir, f"{slug}.jsonld"), "w", encoding="utf-8") as f:
-        json.dump(d, f, indent=2, ensure_ascii=False)
+        json.dump(data, f, indent=2, ensure_ascii=False)
 
 
 def ensure_citations(dir):
-    path = os.path.join(dir, "citations.bib")
-    if not os.path.exists(path):
-        with open(path, "w", encoding="utf-8") as f:
+    p = os.path.join(dir, "citations.bib")
+    if not os.path.exists(p):
+        with open(p, "w", encoding="utf-8") as f:
             f.write("% bibliography\n")
 
 
 # --------------------------------------------------------------
-# Prosess
+# Pipeline
 # --------------------------------------------------------------
 
 def process(tex_path):
@@ -407,12 +383,13 @@ def process(tex_path):
     dir = os.path.dirname(tex_path)
     slug = os.path.splitext(os.path.basename(tex_path))[0]
 
-    print(f"\n[builder] Processing {slug}")
+    print(f"[builder] Processing {slug}")
 
     meta = extract_meta(tex_path)
     domain = detect_domain(dir, meta)
 
     doi = resolve_doi(dir, slug, meta["title"])
+
     inject_doi_into_tex(tex_path, doi)
 
     latex_build(tex_path)
@@ -427,7 +404,7 @@ def process(tex_path):
 
 
 def main():
-    print(f"[builder] Scanning: {DOCS_ROOT}")
+    print(f"[builder] Scanning {DOCS_ROOT}")
     for root, dirs, files in os.walk(DOCS_ROOT):
         for f in files:
             if f.endswith(".tex"):
