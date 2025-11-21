@@ -1,0 +1,20 @@
+{
+  "EFC-Grid-Higgs-Framework": ["meta-architecture", "pattern-layer", "topology-layer"],
+  "EFC-Grid-Higgs-Paradigm-Shift": ["meta-architecture"],
+
+  "EFC-AI-Augmented-Scientific-Workflow-Framework": ["meta-process", "reflection"],
+
+  "EFC-A-Deep-Dive-into-the-Halo-Concept": ["co-field", "mse"],
+
+  "EFC-Can-Energy-Flow-Be-Observed-in-Galactic-Clusters": ["s0s1-dynamics"],
+  "EFC-Flow-Entropy-and-Spacetime-Distortion-in-Cosmological-Clusters": ["s0s1-dynamics"],
+  "EFC-Can-Entropy-Drive-Cosmic-Evolution": ["entropy-clarity"],
+  "EFC-Dynamic-Balance-Entropy-Order-and-Chaos": ["s0s1-dynamics"],
+
+  "EFC-CMB-Thermodynamic-Gradient": ["entropy-clarity"],
+
+  "EFC-Energy-Flow-as-the-Fundamental-Dynamic-of-the-Universe": ["theory-core"],
+  "EFC-Field-Equations-for-Entropy-Driven-Spacetime": ["theory-core"],
+
+  "EFC-Applications-and-Implications": ["global-dynamics"]
+}
