@@ -1,51 +1,12 @@
-name: Auto Semantic Index Refresh
+name: Auto Semantic Index Refresh (Disabled)
 
 on:
-  # KUN når semantic-search-index.json endres
-  push:
-    paths:
-      - "semantic-search-index.json"
   workflow_dispatch: {}
 
 jobs:
-  refresh:
+  noop:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repo
-        uses: actions/checkout@v3
-
-      - name: Validate semantic index file exists
-        run: |
-          if [ ! -f semantic-search-index.json ]; then
-            echo "semantic-search-index.json not found. Skipping."
-            exit 0
-          fi
-
-      - name: Format + normalize semantic index
-        run: |
-          python3 - << 'EOF'
-import json
-
-path = "semantic-search-index.json"
-with open(path, "r", encoding="utf-8") as f:
-    data = json.load(f)
-
-# Minimal cleanup if needed (placeholder)
-# Add sorting to ensure stable diffs
-if isinstance(data, dict):
-    data = {k: data[k] for k in sorted(data.keys())}
-
-with open(path, "w", encoding="utf-8") as f:
-    json.dump(data, f, indent=2, ensure_ascii=False)
-
-print("Index normalized.")
-EOF
-
-      - name: Commit & push updates
-        run: |
-          git config user.name "AutoIndexer"
-          git config user.email "auto@index"
-          git add semantic-search-index.json
-          git commit -m "Auto-refresh semantic index" || echo "No changes"
-          git push || echo "No push needed"
+      - name: Workflow disabled
+        run: echo "auto_index.yml is intentionally disabled and performs no actions."
