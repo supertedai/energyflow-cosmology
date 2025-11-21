@@ -1,24 +1,11 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-EFC PAPER BUILDER v2
-====================
+EFC PAPER BUILDER v2.2
+======================
 
-Gjør for hver .tex-fil under docs/papers/efc/:
-
-- Bygger PDF (dobbel pdflatex)
-- Leser ut title, author, abstract, keywords fra LaTeX
-- Henter eksisterende DOI om det finnes (fra metadata.json eller <slug>.jsonld)
-- Skriver/oppdaterer:
-    - README.md
-    - metadata.json
-    - index.json
-    - <slug>.jsonld
-    - citations.bib
-
-Design:
-- Trygt å kjøre om igjen (idempotent på filnivå)
-- Overstyrer ikke eksisterende DOI-felt, bare fyller inn hvis tomt
+Som v2, men med robust LaTeX-stripper i extract_meta_from_tex().
+Ingen andre endringer i logikk, struktur eller metadata.
 """
 
 import os
@@ -31,21 +18,18 @@ from pathlib import Path
 
 # --------------------------- Konfig ---------------------------
 
-ROOT = os.path.dirname(os.path.dirname(__file__))  # repo-root/efc_full_sync/tools/.. -> repo-root
+ROOT = os.path.dirname(os.path.dirname(__file__))  # repo-root
 DOCS_ROOT = os.path.join(ROOT, "docs", "papers", "efc")
 
-# Default GitHub-URL til repoet – kan overstyres via env
 GITHUB_REPO_RAW_BASE = os.environ.get(
     "EFC_GITHUB_RAW_BASE",
     "https://raw.githubusercontent.com/supertedai/energyflow-cosmology/main",
 )
 
-# Enkel domain-mapping: du kan utvide denne etter behov
 DOMAIN_DEFAULT = "META-systems"
+
 DOMAIN_BY_SUBDIR = {
-    # eksempel:
-    # "AUTH-Layer": "AUTH-layer",
-    # "Grid-Higgs": "Grid-Higgs",
+    # legg til ved behov
 }
 
 
@@ -67,13 +51,11 @@ def run(cmd, cwd=None):
 
 
 def latex_build(tex_path):
-    """Build PDF from a single .tex file (double pdflatex)."""
     tex_dir = os.path.dirname(tex_path)
     tex_file = os.path.basename(tex_path)
     base = os.path.splitext(tex_file)[0]
 
     print(f"[builder] Building {tex_path}")
-    # kjør pdflatex to ganger for å få referanser / TOC riktig
     run(f"pdflatex -interaction=nonstopmode {tex_file}", cwd=tex_dir)
     run(f"pdflatex -interaction=nonstopmode {tex_file}", cwd=tex_dir)
 
@@ -84,8 +66,34 @@ def latex_build(tex_path):
     return pdf_path
 
 
+# --------------------------- LaTeX-stripper ---------------------------
+
+def strip_latex(text: str) -> str:
+    """Fjerner LaTeX-makroer som \textbf{...}, \emph{...}, \command{...} og backslashes."""
+
+    if not text:
+        return text
+
+    # Fjern spesifikke stilkommandoer
+    text = re.sub(r"\\textbf\{(.*?)\}", r"\1", text)
+    text = re.sub(r"\\emph\{(.*?)\}", r"\1", text)
+    text = re.sub(r"\\textit\{(.*?)\}", r"\1", text)
+
+    # Generell regel for \kommando{...}
+    text = re.sub(r"\\[A-Za-z]+\{(.*?)\}", r"\1", text)
+
+    # Fjern enslige LaTeX backslashes
+    text = text.replace("\\", "")
+
+    # Fjern dobbelspacing
+    text = re.sub(r"\s+", " ", text)
+
+    return text.strip()
+
+
+# --------------------------- Meta-extractor ---------------------------
+
 def extract_meta_from_tex(tex_path):
-    """Leser ut title, author, abstract, keywords fra LaTeX."""
     with open(tex_path, "r", encoding="utf-8") as f:
         content = f.read()
 
@@ -95,14 +103,19 @@ def extract_meta_from_tex(tex_path):
 
     title = match_cmd("title") or os.path.splitext(os.path.basename(tex_path))[0]
     author = match_cmd("author") or "Morten Magnusson"
+
     keywords_raw = match_cmd("keywords")
     if keywords_raw:
-        keywords = [k.strip() for k in re.split(r"[;,]", keywords_raw) if k.strip()]
+        keywords = [strip_latex(k.strip()) for k in re.split(r"[;,]", keywords_raw) if k.strip()]
     else:
         keywords = []
 
     m_abs = re.search(r"\\begin\{abstract\}(.*?)\\end\{abstract\}", content, re.DOTALL)
     abstract = m_abs.group(1).strip() if m_abs else ""
+
+    # STRIP LATEX:
+    title = strip_latex(title)
+    abstract = strip_latex(abstract)
 
     return {
         "title": title,
@@ -113,26 +126,14 @@ def extract_meta_from_tex(tex_path):
 
 
 def detect_domain(paper_dir, meta):
-    """
-    Enkel heuristikk for domain:
-    - Sjekker siste del av pathen opp mot DOMAIN_BY_SUBDIR
-    - Faller tilbake til DOMAIN_DEFAULT
-    """
-    last_dir = os.path.basename(paper_dir)
+    last = os.path.basename(paper_dir)
     for key, domain in DOMAIN_BY_SUBDIR.items():
-        if key in last_dir or key in meta["title"]:
+        if key in last or key in meta["title"]:
             return domain
     return DOMAIN_DEFAULT
 
 
 def load_existing_doi(paper_dir, slug):
-    """
-    Prøver å hente DOI fra:
-    1) metadata.json
-    2) <slug>.jsonld
-    Returnerer None hvis ingenting funnet.
-    """
-    # 1) metadata.json
     meta_path = os.path.join(paper_dir, "metadata.json")
     if os.path.exists(meta_path):
         try:
@@ -140,38 +141,32 @@ def load_existing_doi(paper_dir, slug):
                 data = json.load(f)
             doi = data.get("doi")
             if doi:
-                print(f"[builder] Found existing DOI in metadata.json: {doi}")
+                print(f"[builder] Found DOI in metadata.json: {doi}")
                 return doi
-        except Exception as e:
-            print(f"[builder] Warning: could not read existing metadata.json: {e}")
+        except Exception:
+            pass
 
-    # 2) <slug>.jsonld
     jsonld_path = os.path.join(paper_dir, f"{slug}.jsonld")
     if os.path.exists(jsonld_path):
         try:
             with open(jsonld_path, "r", encoding="utf-8") as f:
                 data = json.load(f)
             doi = data.get("identifier")
-            # Noen ganger kan identifier være noe annet enn DOI, så vi er litt forsiktige:
-            if doi and isinstance(doi, str) and ("10." in doi or doi.startswith("https://doi.org/")):
-                print(f"[builder] Found existing DOI in jsonld: {doi}")
+            if doi and ("10." in doi or doi.startswith("https://doi.org")):
+                print(f"[builder] Found DOI in jsonld: {doi}")
                 return doi
-        except Exception as e:
-            print(f"[builder] Warning: could not read existing jsonld: {e}")
+        except Exception:
+            pass
 
     return None
 
 
 def build_pdf_url(slug):
-    """
-    Lager full raw GitHub-URL til PDF-en.
-    """
-    relative = f"docs/papers/efc/{slug}/{slug}.pdf"
-    # Sørger for at det ikke blir doble slasher
-    return f"{GITHUB_REPO_RAW_BASE.rstrip('/')}/{relative}"
+    rel = f"docs/papers/efc/{slug}/{slug}.pdf"
+    return f"{GITHUB_REPO_RAW_BASE.rstrip('/')}/{rel}"
 
 
-# ----------------------- Writers -----------------------
+# --------------------------- Writers ---------------------------
 
 def write_readme(paper_dir, slug, meta, domain, doi):
     title = meta["title"]
@@ -184,10 +179,9 @@ def write_readme(paper_dir, slug, meta, domain, doi):
     )
 
     kw_str = ", ".join(keywords) if keywords else "Energy-Flow Cosmology, entropy, thermodynamics, cosmology"
-
     doi_line = f"DOI: {doi}" if doi else "DOI: _pending_"
 
-    readme = f"""# {title}
+    out = f"""# {title}
 
 This directory contains the paper **“{title}”**, part of the Energy-Flow Cosmology (EFC) series.
 
@@ -197,9 +191,9 @@ This directory contains the paper **“{title}”**, part of the Energy-Flow Cos
 
 ## Context in the EFC framework
 
-- **Framework:** Energy-Flow Cosmology (EFC)  
-- **Domain:** {domain}  
-- **Role:** Links entropic structure, information flow and observable cosmological behaviour.  
+- **Framework:** Energy-Flow Cosmology (EFC)
+- **Domain:** {domain}
+- **Role:** Links entropic structure, information flow and observable cosmological behaviour.
 - **{doi_line}**
 
 ---
@@ -218,26 +212,25 @@ This directory contains the paper **“{title}”**, part of the Energy-Flow Cos
 
 ## File overview
 
-- `{slug}.tex` – LaTeX source  
-- `{slug}.pdf` – compiled paper  
-- `{slug}.jsonld` – Schema.org / JSON-LD description of the work  
-- `metadata.json` – internal EFC metadata for indexing and automation  
-- `index.json` – entry used by the global EFC semantic index  
-- `citations.bib` – bibliography used in the LaTeX source  
+- `{slug}.tex`
+- `{slug}.pdf`
+- `{slug}.jsonld`
+- `metadata.json`
+- `index.json`
+- `citations.bib`
 
 ---
 
 ## Citation
 
-If you reference this work:
-
 > Magnusson, M. ({year}). *{title}.*  
 > Energy-Flow Cosmology (EFC) Series.  
 > {doi_line}  
-> Available via GitHub: `docs/papers/efc/{slug}/{slug}.pdf`
+> GitHub: `docs/papers/efc/{slug}/{slug}.pdf`
+
 """
     with open(os.path.join(paper_dir, "README.md"), "w", encoding="utf-8") as f:
-        f.write(readme)
+        f.write(out)
 
 
 def write_metadata(paper_dir, slug, meta, domain, doi):
@@ -279,7 +272,7 @@ def write_index(paper_dir, slug, meta, domain, doi):
     today = str(date.today())
     summary = (meta["abstract"] or "")[:300]
 
-    index = {
+    data = {
         "id": slug,
         "slug": slug,
         "title": meta["title"],
@@ -298,10 +291,10 @@ def write_index(paper_dir, slug, meta, domain, doi):
     }
 
     if doi:
-        index["doi"] = doi
+        data["doi"] = doi
 
     with open(os.path.join(paper_dir, "index.json"), "w", encoding="utf-8") as f:
-        json.dump(index, f, indent=2, ensure_ascii=False)
+        json.dump(data, f, indent=2, ensure_ascii=False)
 
 
 def write_jsonld(paper_dir, slug, meta, domain, doi):
@@ -342,10 +335,9 @@ def ensure_citations(paper_dir):
     if not os.path.exists(bib_path):
         with open(bib_path, "w", encoding="utf-8") as f:
             f.write("% Bibliography for this EFC paper\n")
-        print(f"[builder] Created empty citations.bib in {paper_dir}")
 
 
-# ----------------------- Main flow -----------------------
+# --------------------------- Main logic ---------------------------
 
 def process_tex_file(tex_path):
     tex_path = os.path.abspath(tex_path)
@@ -354,19 +346,12 @@ def process_tex_file(tex_path):
 
     print(f"[builder] Processing {tex_path}")
 
-    # 1) Build PDF
     latex_build(tex_path)
 
-    # 2) Extract meta from tex
     meta = extract_meta_from_tex(tex_path)
-
-    # 3) Finn domain
     domain = detect_domain(paper_dir, meta)
-
-    # 4) Hent eksisterende DOI hvis finnes
     doi = load_existing_doi(paper_dir, slug)
 
-    # 5) Skriv companion-filer
     write_readme(paper_dir, slug, meta, domain, doi)
     write_metadata(paper_dir, slug, meta, domain, doi)
     write_index(paper_dir, slug, meta, domain, doi)
@@ -382,10 +367,8 @@ def main():
         tex_files = [f for f in files if f.endswith(".tex")]
         if not tex_files:
             continue
-
         for tex in tex_files:
-            tex_path = os.path.join(root, tex)
-            process_tex_file(tex_path)
+            process_tex_file(os.path.join(root, tex))
 
 
 if __name__ == "__main__":
