@@ -1,7 +1,0 @@
-{
-  "@context": "https://schema.org",
-  "@type": "Dataset",
-  "identifier": "archive",
-  "name": "Archive",
-  "version": "1.0"
-}
