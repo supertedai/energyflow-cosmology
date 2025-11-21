@@ -25,7 +25,6 @@ def latex_build(tex_path):
     base = os.path.splitext(tex_file)[0]
 
     print(f"[builder] Building {tex_path}")
-    # kjør pdflatex to ganger for å få referanser / TOC riktig
     run(f"pdflatex -interaction=nonstopmode {tex_file}", cwd=tex_dir)
     run(f"pdflatex -interaction=nonstopmode {tex_file}", cwd=tex_dir)
 
@@ -37,33 +36,53 @@ def latex_build(tex_path):
 
 
 # ------------------------------------------------------
-# LATEX-CLEANER
+# LATEX-CLEANER (NY FULLVERSJON)
 # ------------------------------------------------------
 
 def clean_latex(text: str) -> str:
-    """Fjerner LaTeX-markup og normaliserer whitespace."""
+    """Renser LaTeX fra tittel/abstract slik at README blir ren Markdown."""
+
     if not text:
         return ""
 
-    # Fjern \textbf{...}, \emph{...}, etc.
+    # Spesifikke formateringskommandoer
     text = re.sub(r'\\textbf\{([^}]*)\}', r'\1', text)
     text = re.sub(r'\\emph\{([^}]*)\}', r'\1', text)
+    text = re.sub(r'\\textit\{([^}]*)\}', r'\1', text)
 
-    # Fjern math $...$
-    text = re.sub(r'\$([^$]*)\$', r'\1', text)
-
-    # Fjern \\ linjeskift og enkelt backslash
+    # Fjern \\ newline
     text = text.replace('\\\\', ' ')
-    text = text.replace('\\', ' ')
+    text = text.replace('\\newline', ' ')
+    text = text.replace('\\linebreak', ' ')
+    text = text.replace('\\ ', ' ')
 
-    # Komprimer whitespace
+    # Generiske kommandoer: \command{...}
+    text = re.sub(r'\\[A-Za-z]+\{([^}]*)\}', r'\1', text)
+
+    # Math: $...$ (behold innhold)
+    text = re.sub(r'\$([^$]+)\$', r'\1', text)
+
+    # Matematiske symboler / variable
+    text = text.replace("s_0", "s₀")
+    text = text.replace("s_1", "s₁")
+    text = text.replace("S_0", "S₀")
+    text = text.replace("S_1", "S₁")
+    text = text.replace("\\_", "_")
+
+    # Fjern gjenværende \
+    text = re.sub(r'\\', ' ', text)
+
+    # Fjern { } som står igjen
+    text = text.replace("{", "").replace("}", "")
+
+    # Normaliser whitespace
     text = re.sub(r'\s+', ' ', text).strip()
 
     return text
 
 
 # ------------------------------------------------------
-# METADATA-UTTREKK FRA TEX
+# METADATA FRA TEX
 # ------------------------------------------------------
 
 def extract_meta_from_tex(tex_path):
@@ -81,21 +100,17 @@ def extract_meta_from_tex(tex_path):
 
     if keywords_raw:
         kws = [k.strip() for k in re.split(r"[;,]", keywords_raw) if k.strip()]
-        # Rens latex i hvert keyword
         keywords = [clean_latex(k) for k in kws if clean_latex(k)]
     else:
         keywords = []
 
-    # Abstract-blokk
     m_abs = re.search(r"\\begin\{abstract\}(.*?)\\end\{abstract\}", content, re.DOTALL)
     raw_abstract = m_abs.group(1).strip() if m_abs else ""
 
-    # Rens latex
     title = clean_latex(raw_title)
     author = clean_latex(raw_author)
     abstract = clean_latex(raw_abstract)
 
-    # Fallback-keywords hvis tomt
     if not keywords:
         keywords = [
             "Energy-Flow Cosmology",
@@ -114,18 +129,17 @@ def extract_meta_from_tex(tex_path):
 
 
 # ------------------------------------------------------
-# SKRIV README / METADATA / INDEX / JSON-LD
+# WRITE FILES
 # ------------------------------------------------------
 
 def write_readme(paper_dir, slug, meta):
     title = meta["title"]
     abstract = meta["abstract"]
     keywords = meta["keywords"]
-    domain = "META-systems"  # default – du kan endre pr paper senere om du vil
+    domain = "META-systems"
 
     one_line = abstract.split("\n")[0] if abstract else "This paper is part of the Energy-Flow Cosmology (EFC) series."
-
-    kw_str = ", ".join(keywords) if keywords else "Energy-Flow Cosmology, entropy, thermodynamics, cosmology"
+    kw_str = ", ".join(keywords)
 
     readme = f"""# {title}
 
@@ -174,6 +188,7 @@ If you reference this work:
 > Energy-Flow Cosmology (EFC) Series.  
 > Available via GitHub: `docs/papers/efc/{slug}/{slug}.pdf`
 """
+
     with open(os.path.join(paper_dir, "README.md"), "w", encoding="utf-8") as f:
         f.write(readme)
 
@@ -274,13 +289,10 @@ def main():
             tex_path = os.path.join(root, tex)
             slug = os.path.splitext(tex)[0]
 
-            # Build PDF
             latex_build(tex_path)
 
-            # Extract meta from tex (nå med latex-rens + fallback-keywords)
             meta = extract_meta_from_tex(tex_path)
 
-            # Write companion files
             paper_dir = root
             write_readme(paper_dir, slug, meta)
             write_metadata(paper_dir, slug, meta)
