@@ -1,5 +1,5 @@
 {
-  "version": "1.0",
+  "version": "2.0",
   "domains": [
     {
       "id": "papers_efc",
@@ -17,6 +17,12 @@
       "id": "meta",
       "root": "meta",
       "type": "meta",
+      "jsonld_type": "CreativeWork"
+    },
+    {
+      "id": "auth",
+      "root": "auth",
+      "type": "auth",
       "jsonld_type": "CreativeWork"
     },
     {
@@ -68,56 +74,76 @@
       "jsonld_type": "CreativeWork"
     }
   ],
+
   "type_definitions": {
     "paper": {
       "required_files": [
         "README.md",
         "{basename}.pdf",
         "{basename}.jsonld",
-        "schema.json",
         "index.json",
+        "metadata.json",
         "citations.bib"
       ]
     },
+
     "theory": {
       "required_files": [
         "README.md",
         "index.jsonld"
       ]
     },
+
     "meta": {
       "required_files": [
         "README.md",
         "index.jsonld"
       ]
     },
-    "meta_graph": {
+
+    "auth": {
       "required_files": [
-        "graph-schema.md",
-        "semantic-graph.json"
+        "README.md",
+        "index.jsonld",
+        "metadata.json"
       ]
     },
+
+    "meta_graph": {
+      "required_files": [
+        "README.md",
+        "meta-graph.jsonld",
+        "metadata.json"
+      ]
+    },
+
     "methodology": {
       "required_files": [
         "README.md",
         "index.jsonld"
       ]
     },
+
     "api": {
       "required_files": []
     },
+
     "notebook": {
       "required_files": []
     },
+
     "code": {
       "required_files": []
     },
+
     "dataset": {
       "required_files": []
     },
+
     "app": {
       "required_files": []
     },
+
     "figshare": {
       "required_files": []
     }
