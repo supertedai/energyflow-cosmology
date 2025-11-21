@@ -1,11 +1,11 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-INSTANCE SYNC — Semantic Harvest v3
-===================================
+INSTANCE SYNC — Semantic Harvest v3 (EFC-safe)
+=============================================
 
 Gjør:
-- Rydder bort feilplasserte JSON-LD (utenfor whitelista nodedirs)
+- Rydder bort feilplasserte JSON-LD (utenfor whitelista nodedirs, men IKKE i PROTECTED_DIRS)
 - Genererer EN JSON-LD per dokument (.md/.pdf/.docx/.txt) i whitelista mapper
 - Trekker ut enkel semantikk fra .md:
   - tittel (første heading)
@@ -14,7 +14,9 @@ Gjør:
 - Rebuilder meta-index.json med alle noder
 - Commit + push hvis det finnes endringer
 
-Kjører trygt både lokalt og i GitHub Actions.
+Viktig:
+- Rører IKKE figshare/ (beskyttet)
+- Rører IKKE .github/ (fra før)
 """
 
 import os
@@ -33,18 +35,23 @@ NODE_DIR_PREFIXES = [
     "schema",
     "api",
     "docs",
-    "figshare",
     "src/efc",
     "data/sparc",
     "data/processed",
 ]
 
-# Mapper vi aldri rører
+# Mapper vi aldri rører (alt under disse ignoreres fullstendig)
 HARD_IGNORES = [
     ".git", ".github", ".venv", "venv",
     "__pycache__", ".idea", ".vscode",
     "output", "notebooks", "scripts",
     "data/raw", "data/archive",
+    "figshare",  # EFC: figshare håndteres av egen pipeline, ikke instance_sync
+]
+
+# Top-level mapper som er eksplisitt beskyttet mot JSON-LD-cleanup
+PROTECTED_DIRS = [
+    "figshare",  # ikke rør jsonld/metadata under figshare/
 ]
 
 # Filtyper som regnes som "dokument"
@@ -148,7 +155,9 @@ def cleanup_stray_jsonld():
     Fjern JSON-LD:
     - i root (unntatt meta-index.json)
     - i mapper som ikke ligger under NODE_DIR_PREFIXES
-    Vi rører ikke JSON-LD inne i whitelista mapper.
+    MEN:
+    - Rører ikke mapper som er i HARD_IGNORES
+    - Rører ikke mapper under PROTECTED_DIRS (som figshare/)
     """
     safe_print("[instance_sync] Cleanup: removing stray JSON-LD...")
 
@@ -165,7 +174,14 @@ def cleanup_stray_jsonld():
             continue
 
         parts = rel.split(os.sep)
+
+        # hard-ignore alt under disse
         if any(x in HARD_IGNORES for x in parts):
+            continue
+
+        # beskytt top-level PROTECTED_DIRS (f.eks. figshare/)
+        top = parts[0]
+        if top in PROTECTED_DIRS:
             continue
 
         # Alt utenfor whitelist → slett .jsonld
@@ -183,6 +199,7 @@ def generate_jsonld_for_documents():
     """
     Lag EN JSON-LD per dokumentfil i whitelista mapper.
     Overstyrer ikke eksisterende per-fil JSON-LD.
+    Rører ikke HARD_IGNORES eller PROTECTED_DIRS.
     """
     safe_print("[instance_sync] Generating JSON-LD for documents...")
 
@@ -193,6 +210,10 @@ def generate_jsonld_for_documents():
 
         parts = rel.split(os.sep)
         if any(x in HARD_IGNORES for x in parts):
+            continue
+
+        top = parts[0]
+        if top in PROTECTED_DIRS:
             continue
 
         if not is_under_prefix(rel, NODE_DIR_PREFIXES):
@@ -268,6 +289,7 @@ def generate_jsonld_for_documents():
 def rebuild_meta_index():
     """
     Bygg meta-index.json med ALLE .jsonld under whitelista mapper.
+    Rører ikke HARD_IGNORES eller PROTECTED_DIRS.
     """
     safe_print("[instance_sync] Building meta-index.json...")
 
@@ -277,6 +299,10 @@ def rebuild_meta_index():
         rel = os.path.relpath(root, ROOT)
         parts = rel.split(os.sep)
         if any(x in HARD_IGNORES for x in parts):
+            continue
+
+        top = parts[0]
+        if top in PROTECTED_DIRS:
             continue
 
         # tillat root (meta-index.json ligger der), men ellers whitelist
