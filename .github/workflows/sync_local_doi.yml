@@ -1,0 +1,34 @@
+name: Sync Local DOI
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - "tools/sync_local_doi.py"
+      - "docs/papers/efc/**/metadata.json"
+      - ".github/workflows/sync_local_doi.yml"
+
+jobs:
+  sync-local-doi:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Run local DOI sync
+        run: python tools/sync_local_doi.py
+
+      - name: Commit changes (if any)
+        run: |
+          if git status --porcelain | grep .; then
+            git config user.name "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git commit -am "Sync local DOIs [skip ci]"
+            git push
+          else
+            echo "Ingen endringer å committe."
