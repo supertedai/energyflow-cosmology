@@ -4,7 +4,7 @@ import re
 import json
 import subprocess
 from datetime import date
-from slugify import slugify
+from slugify import slugify  # fortsatt importert i tilfelle vi bruker senere
 
 ROOT = os.path.dirname(os.path.dirname(__file__))  # repo-root/efc_full_sync/tools/.. -> repo-root
 DOCS_ROOT = os.path.join(ROOT, "docs", "papers", "efc")
@@ -36,8 +36,38 @@ def latex_build(tex_path):
     return pdf_path
 
 
+# ------------------------------------------------------
+# LATEX-CLEANER
+# ------------------------------------------------------
+
+def clean_latex(text: str) -> str:
+    """Fjerner LaTeX-markup og normaliserer whitespace."""
+    if not text:
+        return ""
+
+    # Fjern \textbf{...}, \emph{...}, etc.
+    text = re.sub(r'\\textbf\{([^}]*)\}', r'\1', text)
+    text = re.sub(r'\\emph\{([^}]*)\}', r'\1', text)
+
+    # Fjern math $...$
+    text = re.sub(r'\$([^$]*)\$', r'\1', text)
+
+    # Fjern \\ linjeskift og enkelt backslash
+    text = text.replace('\\\\', ' ')
+    text = text.replace('\\', ' ')
+
+    # Komprimer whitespace
+    text = re.sub(r'\s+', ' ', text).strip()
+
+    return text
+
+
+# ------------------------------------------------------
+# METADATA-UTTREKK FRA TEX
+# ------------------------------------------------------
+
 def extract_meta_from_tex(tex_path):
-    """Leser ut title, author, abstract, keywords fra LaTeX."""
+    """Leser ut title, author, abstract, keywords fra LaTeX, og renser latex."""
     with open(tex_path, "r", encoding="utf-8") as f:
         content = f.read()
 
@@ -45,16 +75,35 @@ def extract_meta_from_tex(tex_path):
         m = re.search(rf"\\{name}\{{(.*?)\}}", content, re.DOTALL)
         return m.group(1).strip() if m else ""
 
-    title = match_cmd("title") or os.path.splitext(os.path.basename(tex_path))[0]
-    author = match_cmd("author") or "Morten Magnusson"
+    raw_title = match_cmd("title") or os.path.splitext(os.path.basename(tex_path))[0]
+    raw_author = match_cmd("author") or "Morten Magnusson"
     keywords_raw = match_cmd("keywords")
+
     if keywords_raw:
-        keywords = [k.strip() for k in re.split(r"[;,]", keywords_raw) if k.strip()]
+        kws = [k.strip() for k in re.split(r"[;,]", keywords_raw) if k.strip()]
+        # Rens latex i hvert keyword
+        keywords = [clean_latex(k) for k in kws if clean_latex(k)]
     else:
         keywords = []
 
+    # Abstract-blokk
     m_abs = re.search(r"\\begin\{abstract\}(.*?)\\end\{abstract\}", content, re.DOTALL)
-    abstract = m_abs.group(1).strip() if m_abs else ""
+    raw_abstract = m_abs.group(1).strip() if m_abs else ""
+
+    # Rens latex
+    title = clean_latex(raw_title)
+    author = clean_latex(raw_author)
+    abstract = clean_latex(raw_abstract)
+
+    # Fallback-keywords hvis tomt
+    if not keywords:
+        keywords = [
+            "Energy-Flow Cosmology",
+            "entropy",
+            "energy flow",
+            "thermodynamics",
+            "cosmology",
+        ]
 
     return {
         "title": title,
@@ -64,13 +113,17 @@ def extract_meta_from_tex(tex_path):
     }
 
 
+# ------------------------------------------------------
+# SKRIV README / METADATA / INDEX / JSON-LD
+# ------------------------------------------------------
+
 def write_readme(paper_dir, slug, meta):
     title = meta["title"]
     abstract = meta["abstract"]
     keywords = meta["keywords"]
     domain = "META-systems"  # default – du kan endre pr paper senere om du vil
 
-    one_line = abstract.split("\n")[0] if abstract else f"This paper is part of the Energy-Flow Cosmology (EFC) series."
+    one_line = abstract.split("\n")[0] if abstract else "This paper is part of the Energy-Flow Cosmology (EFC) series."
 
     kw_str = ", ".join(keywords) if keywords else "Energy-Flow Cosmology, entropy, thermodynamics, cosmology"
 
@@ -224,7 +277,7 @@ def main():
             # Build PDF
             latex_build(tex_path)
 
-            # Extract meta from tex
+            # Extract meta from tex (nå med latex-rens + fallback-keywords)
             meta = extract_meta_from_tex(tex_path)
 
             # Write companion files
