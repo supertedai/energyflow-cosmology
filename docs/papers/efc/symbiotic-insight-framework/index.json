@@ -1,0 +1,23 @@
+{
+  "id": "symbiotic-insight-framework",
+  "slug": "symbiotic-insight-framework",
+  "title": "Symbiotic Insight Framework (SIF): A Structural Methodology for High-Velocity Scientific Reasoning",
+  "path": "docs/papers/efc/symbiotic-insight-framework",
+  "pdf": "symbiotic-insight-framework.pdf",
+  "tex": "symbiotic-insight-framework.tex",
+  "readme": "README.md",
+  "layer": "docs",
+  "domain": "META-systems",
+  "type": "paper",
+  "version": "1.0.0",
+  "keywords": [
+    "Energy-Flow Cosmology",
+    "entropy",
+    "energy flow",
+    "thermodynamics",
+    "cosmology"
+  ],
+  "summary": "The Symbiotic Insight Framework (SIF) describes how high-velocity, cross-domain scientific insight can be stabilised through continuous interaction between a human thinker and an adaptive computational system. The framework treats insight production as a coupled process: the human generates parallel",
+  "created": "2025-11-21",
+  "updated": "2025-11-21"
+}
