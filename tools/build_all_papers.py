@@ -36,7 +36,7 @@ def latex_build(tex_path):
 
 
 # ------------------------------------------------------
-# LATEX-CLEANER (NY FULLVERSJON)
+# LATEX-CLEANER (NY TOTALVERSJON)
 # ------------------------------------------------------
 
 def clean_latex(text: str) -> str:
@@ -45,37 +45,52 @@ def clean_latex(text: str) -> str:
     if not text:
         return ""
 
-    # Spesifikke formateringskommandoer
+    # ----------------------------------------------------------
+    # 1. Fang både \textbf{X} OG \textbf X
+    # ----------------------------------------------------------
     text = re.sub(r'\\textbf\{([^}]*)\}', r'\1', text)
+    text = re.sub(r'\\textbf\s+([A-Za-z0-9()_\-]+)', r'\1', text)
+
+    # emph
     text = re.sub(r'\\emph\{([^}]*)\}', r'\1', text)
+    text = re.sub(r'\\emph\s+([A-Za-z0-9()_\-]+)', r'\1', text)
+
+    # textit
     text = re.sub(r'\\textit\{([^}]*)\}', r'\1', text)
+    text = re.sub(r'\\textit\s+([A-Za-z0-9()_\-]+)', r'\1', text)
 
-    # Fjern \\ newline
-    text = text.replace('\\\\', ' ')
-    text = text.replace('\\newline', ' ')
-    text = text.replace('\\linebreak', ' ')
-    text = text.replace('\\ ', ' ')
-
-    # Generiske kommandoer: \command{...}
+    # ----------------------------------------------------------
+    # 2. Fjern generelle formateringskommandoer
+    # ----------------------------------------------------------
     text = re.sub(r'\\[A-Za-z]+\{([^}]*)\}', r'\1', text)
 
-    # Math: $...$ (behold innhold)
+    # ----------------------------------------------------------
+    # 3. Math $...$
+    # ----------------------------------------------------------
     text = re.sub(r'\$([^$]+)\$', r'\1', text)
 
-    # Matematiske symboler / variable
+    # ----------------------------------------------------------
+    # 4. Indexfix
+    # ----------------------------------------------------------
     text = text.replace("s_0", "s₀")
     text = text.replace("s_1", "s₁")
     text = text.replace("S_0", "S₀")
     text = text.replace("S_1", "S₁")
     text = text.replace("\\_", "_")
 
-    # Fjern gjenværende \
-    text = re.sub(r'\\', ' ', text)
+    # ----------------------------------------------------------
+    # 5. Fjern alle \-tegn
+    # ----------------------------------------------------------
+    text = re.sub(r'\\+', ' ', text)
 
-    # Fjern { } som står igjen
+    # ----------------------------------------------------------
+    # 6. Fjern enkeltstående { }
+    # ----------------------------------------------------------
     text = text.replace("{", "").replace("}", "")
 
-    # Normaliser whitespace
+    # ----------------------------------------------------------
+    # 7. Normaliser whitespace
+    # ----------------------------------------------------------
     text = re.sub(r'\s+', ' ', text).strip()
 
     return text
