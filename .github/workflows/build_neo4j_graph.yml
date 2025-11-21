@@ -1,10 +1,14 @@
-name: Neo4j Sync
+name: Build Neo4j Graph
 
 on:
   push:
     paths:
-      - 'tools/neo/**'
-      - '.github/workflows/neo4j_sync.yml'
+      - 'tools/build_neo4j_graph.py'
+      - 'scripts/import_methodology_to_neo4j.py'
+      - 'schema/**'
+      - 'meta-graph/**'
+      - 'semantic-search-index.json'
+      - '.github/workflows/build_neo4j_graph.yml'
   workflow_dispatch:
 
 jobs:
@@ -24,6 +28,6 @@ jobs:
         run: |
           pip install neo4j requests pydantic
 
-      - name: Run Neo4j Sync
+      - name: Run Neo4j Graph Builder
         run: |
-          python tools/neo/neo4j_sync.py
+          python tools/build_neo4j_graph.py
