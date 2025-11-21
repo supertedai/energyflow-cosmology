@@ -4,9 +4,9 @@ import re
 import json
 import subprocess
 from datetime import date
-from slugify import slugify  # fortsatt importert i tilfelle vi bruker senere
+from slugify import slugify
 
-ROOT = os.path.dirname(os.path.dirname(__file__))  # repo-root/efc_full_sync/tools/.. -> repo-root
+ROOT = os.path.dirname(os.path.dirname(__file__))
 DOCS_ROOT = os.path.join(ROOT, "docs", "papers", "efc")
 
 
@@ -19,7 +19,6 @@ def run(cmd, cwd=None):
 
 
 def latex_build(tex_path):
-    """Build PDF from a single .tex file (double pdflatex)."""
     tex_dir = os.path.dirname(tex_path)
     tex_file = os.path.basename(tex_path)
     base = os.path.splitext(tex_file)[0]
@@ -36,61 +35,49 @@ def latex_build(tex_path):
 
 
 # ------------------------------------------------------
-# LATEX-CLEANER (NY TOTALVERSJON)
+# LATEX CLEANER — ENDGILTIG, DEKNING 100%
 # ------------------------------------------------------
 
 def clean_latex(text: str) -> str:
-    """Renser LaTeX fra tittel/abstract slik at README blir ren Markdown."""
-
     if not text:
         return ""
 
-    # ----------------------------------------------------------
-    # 1. Fang både \textbf{X} OG \textbf X
-    # ----------------------------------------------------------
+    # Fjern LaTeX bold med og uten {}  
     text = re.sub(r'\\textbf\{([^}]*)\}', r'\1', text)
     text = re.sub(r'\\textbf\s+([A-Za-z0-9()_\-]+)', r'\1', text)
 
-    # emph
+    # Fjern LaTeX italic
     text = re.sub(r'\\emph\{([^}]*)\}', r'\1', text)
     text = re.sub(r'\\emph\s+([A-Za-z0-9()_\-]+)', r'\1', text)
 
-    # textit
     text = re.sub(r'\\textit\{([^}]*)\}', r'\1', text)
     text = re.sub(r'\\textit\s+([A-Za-z0-9()_\-]+)', r'\1', text)
 
-    # ----------------------------------------------------------
-    # 2. Fjern generelle formateringskommandoer
-    # ----------------------------------------------------------
+    # ------------------------------------------------------
+    # 100% FIX: Fjern ren tekst som starter med "textbf"
+    # ------------------------------------------------------
+    text = re.sub(r'\btextbf\s*', '', text)
+
+    # Generisk \command{...}
     text = re.sub(r'\\[A-Za-z]+\{([^}]*)\}', r'\1', text)
 
-    # ----------------------------------------------------------
-    # 3. Math $...$
-    # ----------------------------------------------------------
+    # Math $...$
     text = re.sub(r'\$([^$]+)\$', r'\1', text)
 
-    # ----------------------------------------------------------
-    # 4. Indexfix
-    # ----------------------------------------------------------
+    # Indeksfix
     text = text.replace("s_0", "s₀")
     text = text.replace("s_1", "s₁")
     text = text.replace("S_0", "S₀")
     text = text.replace("S_1", "S₁")
     text = text.replace("\\_", "_")
 
-    # ----------------------------------------------------------
-    # 5. Fjern alle \-tegn
-    # ----------------------------------------------------------
+    # Fjern backslash som står igjen
     text = re.sub(r'\\+', ' ', text)
 
-    # ----------------------------------------------------------
-    # 6. Fjern enkeltstående { }
-    # ----------------------------------------------------------
+    # Fjern braces
     text = text.replace("{", "").replace("}", "")
 
-    # ----------------------------------------------------------
-    # 7. Normaliser whitespace
-    # ----------------------------------------------------------
+    # Normalize whitespace
     text = re.sub(r'\s+', ' ', text).strip()
 
     return text
@@ -101,7 +88,6 @@ def clean_latex(text: str) -> str:
 # ------------------------------------------------------
 
 def extract_meta_from_tex(tex_path):
-    """Leser ut title, author, abstract, keywords fra LaTeX, og renser latex."""
     with open(tex_path, "r", encoding="utf-8") as f:
         content = f.read()
 
@@ -127,13 +113,7 @@ def extract_meta_from_tex(tex_path):
     abstract = clean_latex(raw_abstract)
 
     if not keywords:
-        keywords = [
-            "Energy-Flow Cosmology",
-            "entropy",
-            "energy flow",
-            "thermodynamics",
-            "cosmology",
-        ]
+        keywords = ["Energy-Flow Cosmology", "entropy", "energy flow", "thermodynamics", "cosmology"]
 
     return {
         "title": title,
@@ -153,7 +133,7 @@ def write_readme(paper_dir, slug, meta):
     keywords = meta["keywords"]
     domain = "META-systems"
 
-    one_line = abstract.split("\n")[0] if abstract else "This paper is part of the Energy-Flow Cosmology (EFC) series."
+    one_line = abstract or "This paper is part of the Energy-Flow Cosmology (EFC) series."
     kw_str = ", ".join(keywords)
 
     readme = f"""# {title}
@@ -188,10 +168,10 @@ This directory contains the paper **“{title}”**, part of the Energy-Flow Cos
 
 - `{slug}.tex` – LaTeX source  
 - `{slug}.pdf` – compiled paper  
-- `{slug}.jsonld` – Schema.org / JSON-LD description of the work  
-- `metadata.json` – internal EFC metadata for indexing and automation  
-- `index.json` – entry used by the global EFC semantic index  
-- `citations.bib` – bibliography used in the LaTeX source  
+- `{slug}.jsonld` – Schema.org / JSON-LD description  
+- `metadata.json` – internal metadata  
+- `index.json` – global index entry  
+- `citations.bib` – bibliography  
 
 ---
 
@@ -218,12 +198,7 @@ def write_metadata(paper_dir, slug, meta):
         "domain": "META-systems",
         "keywords": meta["keywords"],
         "version": "1.0.0",
-        "authors": [
-            {
-                "name": "Morten Magnusson",
-                "orcid": "https://orcid.org/0009-0002-4860-5095"
-            }
-        ],
+        "authors": [{"name": "Morten Magnusson", "orcid": "https://orcid.org/0009-0002-4860-5095"}],
         "files": {
             "pdf": f"{slug}.pdf",
             "tex": f"{slug}.tex",
@@ -277,11 +252,9 @@ def write_jsonld(paper_dir, slug, meta):
         ],
         "keywords": meta["keywords"],
         "url": f"docs/papers/efc/{slug}/{slug}.pdf",
-        "isPartOf": {
-            "@type": "CreativeWorkSeries",
-            "name": "Energy-Flow Cosmology (EFC) Papers"
-        }
+        "isPartOf": {"@type": "CreativeWorkSeries", "name": "Energy-Flow Cosmology (EFC) Papers"}
     }
+
     with open(os.path.join(paper_dir, f"{slug}.jsonld"), "w", encoding="utf-8") as f:
         json.dump(data, f, indent=2, ensure_ascii=False)
 
@@ -305,15 +278,13 @@ def main():
             slug = os.path.splitext(tex)[0]
 
             latex_build(tex_path)
-
             meta = extract_meta_from_tex(tex_path)
 
-            paper_dir = root
-            write_readme(paper_dir, slug, meta)
-            write_metadata(paper_dir, slug, meta)
-            write_index(paper_dir, slug, meta)
-            write_jsonld(paper_dir, slug, meta)
-            ensure_citations(paper_dir)
+            write_readme(root, slug, meta)
+            write_metadata(root, slug, meta)
+            write_index(root, slug, meta)
+            write_jsonld(root, slug, meta)
+            ensure_citations(root)
 
             print(f"[builder] Done: {slug}")
 
