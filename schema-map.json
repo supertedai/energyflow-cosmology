@@ -7,8 +7,8 @@
         "README.md",
         "{basename}.pdf",
         "{basename}.jsonld",
-        "schema.json",
         "index.json",
+        "metadata.json",
         "citations.bib"
       ]
     },
@@ -26,11 +26,20 @@
         "index.jsonld"
       ]
     },
+    "auth": {
+      "schema_source": "schema/global_schema.json",
+      "required_files": [
+        "README.md",
+        "index.jsonld",
+        "metadata.json"
+      ]
+    },
     "meta_graph": {
       "schema_source": "schema/global_schema.json",
       "required_files": [
-        "graph-schema.md",
-        "semantic-graph.json"
+        "README.md",
+        "meta-graph.jsonld",
+        "metadata.json"
       ]
     },
     "methodology": {
