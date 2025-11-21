@@ -2,12 +2,11 @@
 
 This directory contains the paper **“textbf{Symbiotic Insight Framework (SIF): A Structural Methodology for High-Velocity Scientific Reasoning”**, part of the EFC series.
 
-The
+The Symbiotic Insight Framework (SIF) describes how high-velocity, cross-domain scientific insight can be stabilised thr...
 
 ---
 
 ## Context in the EFC framework
-
 - Framework: Energy-Flow Cosmology (EFC)
 - Domain: META-systems
 - Role: Links entropic structure, information flow and observable cosmological behaviour.
@@ -36,7 +35,6 @@ The Symbiotic Insight Framework (SIF) describes how high-velocity, cross-domain 
 ---
 
 ## Citation
-
 Magnusson, M. (2025). *textbf{Symbiotic Insight Framework (SIF): A Structural Methodology for High-Velocity Scientific Reasoning*.  
 DOI: pending  
 GitHub: docs/papers/efc/symbiotic-insight-framework/symbiotic-insight-framework.pdf
