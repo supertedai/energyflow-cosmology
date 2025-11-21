@@ -35,56 +35,39 @@ def latex_build(tex_path):
 
 
 # ------------------------------------------------------
-# LATEX CLEANER — ENDGILTIG, DEKNING 100%
+# LATEX CLEANER
 # ------------------------------------------------------
 
 def clean_latex(text: str) -> str:
     if not text:
         return ""
 
-    # Fjern LaTeX bold med og uten {}  
     text = re.sub(r'\\textbf\{([^}]*)\}', r'\1', text)
     text = re.sub(r'\\textbf\s+([A-Za-z0-9()_\-]+)', r'\1', text)
 
-    # Fjern LaTeX italic
     text = re.sub(r'\\emph\{([^}]*)\}', r'\1', text)
     text = re.sub(r'\\emph\s+([A-Za-z0-9()_\-]+)', r'\1', text)
-
     text = re.sub(r'\\textit\{([^}]*)\}', r'\1', text)
     text = re.sub(r'\\textit\s+([A-Za-z0-9()_\-]+)', r'\1', text)
 
-    # ------------------------------------------------------
-    # 100% FIX: Fjern ren tekst som starter med "textbf"
-    # ------------------------------------------------------
     text = re.sub(r'\btextbf\s*', '', text)
-
-    # Generisk \command{...}
     text = re.sub(r'\\[A-Za-z]+\{([^}]*)\}', r'\1', text)
-
-    # Math $...$
     text = re.sub(r'\$([^$]+)\$', r'\1', text)
 
-    # Indeksfix
     text = text.replace("s_0", "s₀")
     text = text.replace("s_1", "s₁")
     text = text.replace("S_0", "S₀")
     text = text.replace("S_1", "S₁")
     text = text.replace("\\_", "_")
 
-    # Fjern backslash som står igjen
     text = re.sub(r'\\+', ' ', text)
-
-    # Fjern braces
     text = text.replace("{", "").replace("}", "")
 
-    # Normalize whitespace
-    text = re.sub(r'\s+', ' ', text).strip()
-
-    return text
+    return re.sub(r'\s+', ' ', text).strip()
 
 
 # ------------------------------------------------------
-# METADATA FRA TEX
+# METADATA EXTRACTION
 # ------------------------------------------------------
 
 def extract_meta_from_tex(tex_path):
@@ -124,6 +107,24 @@ def extract_meta_from_tex(tex_path):
 
 
 # ------------------------------------------------------
+# SKIP LOGIC — NEW
+# ------------------------------------------------------
+
+def paper_is_complete(paper_dir, slug):
+    """Skip paper if PDF + JSONLD + README already exist."""
+    pdf = os.path.join(paper_dir, f"{slug}.pdf")
+    jsonld = os.path.join(paper_dir, f"{slug}.jsonld")
+    readme = os.path.join(paper_dir, "README.md")
+
+    if os.path.exists(pdf) and os.path.exists(jsonld) and os.path.exists(readme):
+        print(f"[SKIP] {slug} — already complete.")
+        return True
+
+    print(f"[BUILD] {slug} — missing outputs.")
+    return False
+
+
+# ------------------------------------------------------
 # WRITE FILES
 # ------------------------------------------------------
 
@@ -138,7 +139,7 @@ def write_readme(paper_dir, slug, meta):
 
     readme = f"""# {title}
 
-This directory contains the paper **“{title}”**, part of the Energy-Flow Cosmology (EFC) series.
+This directory contains the paper “{title}”, part of the Energy-Flow Cosmology (EFC) series.
 
 {one_line}
 
@@ -148,7 +149,7 @@ This directory contains the paper **“{title}”**, part of the Energy-Flow Cos
 
 - **Framework:** Energy-Flow Cosmology (EFC)  
 - **Domain:** {domain}  
-- **Role:** Links entropic structure, information flow and observable cosmological behaviour.  
+- **Role:** Links entropic structure, information flow and observable cosmology behaviour.  
 
 ---
 
@@ -166,24 +167,15 @@ This directory contains the paper **“{title}”**, part of the Energy-Flow Cos
 
 ## File overview
 
-- `{slug}.tex` – LaTeX source  
-- `{slug}.pdf` – compiled paper  
-- `{slug}.jsonld` – Schema.org / JSON-LD description  
-- `metadata.json` – internal metadata  
-- `index.json` – global index entry  
-- `citations.bib` – bibliography  
+- `{slug}.tex`
+- `{slug}.pdf`
+- `{slug}.jsonld`
+- `metadata.json`
+- `index.json`
+- `citations.bib`
 
 ---
-
-## Citation
-
-If you reference this work:
-
-> Magnusson, M. ({date.today().year}). *{title}.*  
-> Energy-Flow Cosmology (EFC) Series.  
-> Available via GitHub: `docs/papers/efc/{slug}/{slug}.pdf`
 """
-
     with open(os.path.join(paper_dir, "README.md"), "w", encoding="utf-8") as f:
         f.write(readme)
 
@@ -251,8 +243,7 @@ def write_jsonld(paper_dir, slug, meta):
             }
         ],
         "keywords": meta["keywords"],
-        "url": f"docs/papers/efc/{slug}/{slug}.pdf",
-        "isPartOf": {"@type": "CreativeWorkSeries", "name": "Energy-Flow Cosmology (EFC) Papers"}
+        "url": f"docs/papers/efc/{slug}/{slug}.pdf"
     }
 
     with open(os.path.join(paper_dir, f"{slug}.jsonld"), "w", encoding="utf-8") as f:
@@ -266,8 +257,13 @@ def ensure_citations(paper_dir):
             f.write("% Bibliography for this EFC paper\n")
 
 
+# ------------------------------------------------------
+# MAIN
+# ------------------------------------------------------
+
 def main():
     print(f"[builder] Scanning {DOCS_ROOT}")
+
     for root, dirs, files in os.walk(DOCS_ROOT):
         tex_files = [f for f in files if f.endswith(".tex")]
         if not tex_files:
@@ -277,6 +273,11 @@ def main():
             tex_path = os.path.join(root, tex)
             slug = os.path.splitext(tex)[0]
 
+            # NEW: skip logic
+            if paper_is_complete(root, slug):
+                continue
+
+            # Build only if not complete
             latex_build(tex_path)
             meta = extract_meta_from_tex(tex_path)
 
