@@ -1,26 +1,34 @@
 #!/usr/bin/env python3
 import json
+import os
 from neo4j import GraphDatabase
 from pathlib import Path
 
-URI = "neo4j+s://<your-instance>"
-AUTH = ("neo4j", "<password>")
+NEO4J_URI = os.getenv("NEO4J_URI")
+NEO4J_USERNAME = os.getenv("NEO4J_USERNAME", "neo4j")
+NEO4J_PASSWORD = os.getenv("NEO4J_PASSWORD")
 
-driver = GraphDatabase.driver(URI, auth=AUTH)
+if not NEO4J_URI or not NEO4J_PASSWORD:
+    raise RuntimeError("NEO4J_URI og NEO4J_PASSWORD må være satt i miljøvariabler")
+
+driver = GraphDatabase.driver(NEO4J_URI, auth=(NEO4J_USERNAME, NEO4J_PASSWORD))
 
 
-def load_jsonld(path):
-    with open(path) as f:
+def load_jsonld(path: Path):
+    with path.open() as f:
         return json.load(f)
 
 
 def upsert_node(tx, label, props):
-    fields = ", ".join([f"{k}: ${k}" for k in props])
+    rel_keys = {"influences", "shapes", "drives"}
+    clean_props = {k: v for k, v in props.items() if k not in rel_keys}
+
+    fields = ", ".join([f"{k}: ${k}" for k in clean_props])
     q = f"""
         MERGE (n:{label} {{id: $id}})
         SET n += {{{fields}}}
     """
-    tx.run(q, **props)
+    tx.run(q, **clean_props)
 
 
 def upsert_rel(tx, start_id, rel, end_id):
@@ -39,12 +47,12 @@ def process_entries(data):
         props = {k: v for k, v in entry.items() if not k.startswith("@")}
 
         with driver.session() as s:
-            s.write_transaction(upsert_node, label, props)
+            s.execute_write(upsert_node, label, props)
 
         for rel in ["influences", "shapes", "drives"]:
             if rel in entry:
                 with driver.session() as s:
-                    s.write_transaction(
+                    s.execute_write(
                         upsert_rel,
                         props["id"],
                         rel,
@@ -52,8 +60,14 @@ def process_entries(data):
                     )
 
 
-if __name__ == "__main__":
+def main():
     jsonld_path = Path("schema/efc_meta_universe.jsonld")
+    if not jsonld_path.exists():
+        raise FileNotFoundError(f"Fant ikke {jsonld_path}")
     data = load_jsonld(jsonld_path)
     process_entries(data)
-    print("EFC metalag + universlag importert.")
+    print("[efc_meta_universe] Importert meta-universlag til Neo4j.")
+
+
+if __name__ == "__main__":
+    main()
