@@ -1,5 +1,5 @@
 // ==========================================
-// EFC — UNIVERSE + METALAG
+// EFC — UNIVERSE + METALAG (IDEMPOTENT)
 // ==========================================
 
 // ---------- Constraints ----------
@@ -15,72 +15,105 @@ CREATE CONSTRAINT IF NOT EXISTS FOR (n:Parameter) REQUIRE n.id IS UNIQUE;
 CREATE CONSTRAINT IF NOT EXISTS FOR (n:Layer_s0) REQUIRE n.id IS UNIQUE;
 CREATE CONSTRAINT IF NOT EXISTS FOR (n:Layer_s1) REQUIRE n.id IS UNIQUE;
 CREATE CONSTRAINT IF NOT EXISTS FOR (n:Layer_s2) REQUIRE n.id IS UNIQUE;
-
 CREATE CONSTRAINT IF NOT EXISTS FOR (n:Insight) REQUIRE n.id IS UNIQUE;
 CREATE CONSTRAINT IF NOT EXISTS FOR (n:MetaPattern) REQUIRE n.id IS UNIQUE;
 CREATE CONSTRAINT IF NOT EXISTS FOR (n:CognitiveMechanism) REQUIRE n.id IS UNIQUE;
 CREATE CONSTRAINT IF NOT EXISTS FOR (n:ResearchStep) REQUIRE n.id IS UNIQUE;
 
 // ---------- Universe nodes ----------
-CREATE (:EnergyFlow {id:"ef_base", description:"Energi beveger seg langs gradienter"});
-CREATE (:EntropyGradient {id:"eg_base", description:"Gradient fra energiflyt"});
-CREATE (:TheoryPoint {id:"tp_expansion", title:"Ekspansjon uten mørk energi"});
-CREATE (:Mechanism {id:"m_expansion", name:"Entropy-Driven Expansion"});
+MERGE (:EnergyFlow {id:"ef_base"})
+      SET  _.description = "Energi beveger seg langs gradienter";
 
-CREATE (:CosmicDynamics {id:"dyn_expansion", type:"Expansion"});
+MERGE (:EntropyGradient {id:"eg_base"})
+      SET _.description = "Gradient fra energiflyt";
 
-CREATE (:Layer_s0 {id:"s0"});
-CREATE (:Layer_s1 {id:"s1"});
-CREATE (:Layer_s2 {id:"s2"});
+MERGE (:TheoryPoint {id:"tp_expansion"})
+      SET _.title = "Ekspansjon uten mørk energi";
 
-// ---------- Observation nodes ----------
-CREATE (:Observation {id:"obs_redshift", type:"Redshift"});
-CREATE (:Dataset {id:"ds_desi", name:"DESI Survey"});
-CREATE (:Instrument {id:"inst_jwst", name:"JWST"});
-CREATE (:Parameter {id:"param_z", name:"Redshift Parameter"});
+MERGE (:Mechanism {id:"m_expansion"})
+      SET _.name = "Entropy-Driven Expansion";
+
+MERGE (:CosmicDynamics {id:"dyn_expansion"})
+      SET _.type = "Expansion";
+
+MERGE (:Layer_s0 {id:"s0"});
+MERGE (:Layer_s1 {id:"s1"});
+MERGE (:Layer_s2 {id:"s2"});
+
+// ---------- Observations ----------
+MERGE (:Observation {id:"obs_redshift"})
+      SET _.type = "Redshift";
+
+MERGE (:Dataset {id:"ds_desi"})
+      SET _.name = "DESI Survey";
+
+MERGE (:Instrument {id:"inst_jwst"})
+      SET _.name = "JWST";
+
+MERGE (:Parameter {id:"param_z"})
+      SET _.name = "Redshift Parameter";
 
 // ---------- Meta nodes ----------
-CREATE (:Insight {id:"i_efc_core", text:"Energi → gradient → dynamikk → struktur"});
-CREATE (:MetaPattern {id:"mp_entropy_clarity", name:"Entropy → Clarity"});
-CREATE (:CognitiveMechanism {id:"cm_parallel_gradient", name:"Parallel Gradient Reading"});
-CREATE (:ResearchStep {id:"rs_unified_model", name:"Samlet EFC-modell"});
+MERGE (:Insight {id:"i_efc_core"})
+      SET _.text = "Energi → gradient → dynamikk → struktur";
 
-// ---------- Universe causal chain ----------
-MATCH (ef:EnergyFlow {id:"ef_base"}), (eg:EntropyGradient {id:"eg_base"})
-CREATE (ef)-[:creates_gradient]->(eg);
+MERGE (:MetaPattern {id:"mp_entropy_clarity"})
+      SET _.name = "Entropy → Clarity";
 
-MATCH (eg:EntropyGradient {id:"eg_base"}), (d:CosmicDynamics {id:"dyn_expansion"})
-CREATE (eg)-[:drives]->(d);
+MERGE (:CognitiveMechanism {id:"cm_parallel_gradient"})
+      SET _.name = "Parallel Gradient Reading";
 
-MATCH (d:CosmicDynamics {id:"dyn_expansion"}), (l:Layer_s1 {id:"s1"})
-CREATE (d)-[:forms]->(l);
+MERGE (:ResearchStep {id:"rs_unified_model"})
+      SET _.name = "Samlet EFC-modell";
 
-MATCH (l:Layer_s1 {id:"s1"}), (ef:EnergyFlow {id:"ef_base"})
-CREATE (l)-[:modulates]->(ef);
+// ---------- Relations ----------
+MERGE (ef:EnergyFlow {id:"ef_base"})
+MERGE (eg:EntropyGradient {id:"eg_base"})
+MERGE (ef)-[:creates_gradient]->(eg);
 
-// ---------- Observational chain ----------
-MATCH (d:CosmicDynamics {id:"dyn_expansion"}), (obs:Observation {id:"obs_redshift"})
-CREATE (d)-[:validated_by]->(obs);
+MERGE (eg:EntropyGradient {id:"eg_base"})
+MERGE (d:CosmicDynamics {id:"dyn_expansion"})
+MERGE (eg)-[:drives]->(d);
 
-MATCH (obs:Observation {id:"obs_redshift"}), (ds:Dataset {id:"ds_desi"})
-CREATE (obs)-[:from_dataset]->(ds);
+MERGE (d:CosmicDynamics {id:"dyn_expansion"})
+MERGE (l:Layer_s1 {id:"s1"})
+MERGE (d)-[:forms]->(l);
 
-MATCH (ds:Dataset {id:"ds_desi"}), (inst:Instrument {id:"inst_jwst"})
-CREATE (ds)-[:from_instrument]->(inst);
+MERGE (l:Layer_s1 {id:"s1"})
+MERGE (ef:EnergyFlow {id:"ef_base"})
+MERGE (l)-[:modulates]->(ef);
 
-MATCH (obs:Observation {id:"obs_redshift"}), (p:Parameter {id:"param_z"})
-CREATE (obs)-[:measures]->(p);
+// ---------- Observational relations ----------
+MERGE (d:CosmicDynamics {id:"dyn_expansion"})
+MERGE (obs:Observation {id:"obs_redshift"})
+MERGE (d)-[:validated_by]->(obs);
 
-// ---------- Metalag ----------
-MATCH (i:Insight {id:"i_efc_core"}), (t:TheoryPoint {id:"tp_expansion"})
-CREATE (i)-[:influences]->(t);
+MERGE (obs:Observation {id:"obs_redshift"})
+MERGE (ds:Dataset {id:"ds_desi"})
+MERGE (obs)-[:from_dataset]->(ds);
 
-MATCH (mp:MetaPattern {id:"mp_entropy_clarity"}), (d:CosmicDynamics {id:"dyn_expansion"})
-CREATE (mp)-[:shapes]->(d);
+MERGE (ds:Dataset {id:"ds_desi"})
+MERGE (inst:Instrument {id:"inst_jwst"})
+MERGE (ds)-[:from_instrument]->(inst);
 
-MATCH (cm:CognitiveMechanism {id:"cm_parallel_gradient"}), (m:Mechanism {id:"m_expansion"})
-CREATE (cm)-[:drives]->(m);
+MERGE (obs:Observation {id:"obs_redshift"})
+MERGE (p:Parameter {id:"param_z"})
+MERGE (obs)-[:measures]->(p);
 
-// ---------- Connect metalag to EFCPaper (existing graph) ----------
-MATCH (rs:ResearchStep {id:"rs_unified_model"}), (p:EFCPaper {slug:"efc_master_spec"})
-CREATE (rs)-[:produces]->(p);
+// ---------- Metalag relations ----------
+MERGE (i:Insight {id:"i_efc_core"})
+MERGE (t:TheoryPoint {id:"tp_expansion"})
+MERGE (i)-[:influences]->(t);
+
+MERGE (mp:MetaPattern {id:"mp_entropy_clarity"})
+MERGE (d:CosmicDynamics {id:"dyn_expansion"})
+MERGE (mp)-[:shapes]->(d);
+
+MERGE (cm:CognitiveMechanism {id:"cm_parallel_gradient"})
+MERGE (m:Mechanism {id:"m_expansion"})
+MERGE (cm)-[:drives]->(m);
+
+// ---------- Connect to existing EFC paper ----------
+MERGE (rs:ResearchStep {id:"rs_unified_model"})
+MERGE (p:EFCPaper {slug:"efc_master_spec"})
+MERGE (rs)-[:produces]->(p);
