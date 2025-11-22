@@ -22,23 +22,41 @@ def get_driver():
     )
 
 
+def flatten_metadata(meta: dict) -> dict:
+    """
+    Neo4j kan ikke lagre nested maps.
+    Derfor serialiserer vi 'files' til en JSON-string
+    og beholder primitive felter slik de er.
+    """
+    meta = meta.copy()
+
+    # Hvis 'files' finnes → serialiser til string
+    if "files" in meta and isinstance(meta["files"], dict):
+        meta["files_json"] = json.dumps(meta["files"])
+        del meta["files"]  # fjern den gamle (ikke tillatt)
+
+    return meta
+
+
 def main():
     driver = get_driver()
-
     entries = PAPER_DIR.glob("*/metadata.json")
 
     with driver.session() as session:
-        for meta in entries:
-            d = json.loads(meta.read_text())
+        for meta_file in entries:
+            raw = json.loads(meta_file.read_text())
+            props = flatten_metadata(raw)
+
             session.run(
                 """
                 MERGE (p:EFCPaper {slug: $slug})
                 SET p += $props
                 """,
-                slug=d["slug"],
-                props=d,
+                slug=raw["slug"],
+                props=props,
             )
-            print(f"[paper] {meta} importert.")
+
+            print(f"[paper] {meta_file} importert.")
 
 
 if __name__ == "__main__":
