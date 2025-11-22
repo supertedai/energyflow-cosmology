@@ -1,7 +1,10 @@
 // ===============================================
-// CORE EFC CONCEPTS (FIXED VERSION)
-// WITH now applies to entire block
+// CORE EFC CONCEPTS (FINAL FIXED VERSION)
 // ===============================================
+
+//////////////////////////////////////////////////
+// STATEMENT 1 — ALL CONCEPT NODES (WITH now)
+//////////////////////////////////////////////////
 
 WITH datetime() AS now
 
@@ -125,6 +128,16 @@ ON CREATE SET
   c10.created_at = now,
   c10.updated_at = now;
 
+//////////////////////////////////////////////////
+// END STATEMENT 1
+//////////////////////////////////////////////////
+
+
+
+//////////////////////////////////////////////////
+// STATEMENT 2 — RELATIONS + SYMBIOSIS LAYER
+//////////////////////////////////////////////////
+
 // ===============================================
 // HIERARKISKE RELASJONER
 // ===============================================
@@ -173,3 +186,54 @@ MERGE (spd)-[:DEPENDS_ON]->(efd);
 MATCH (cem:Concept {slug:'cem-cosmos'})
 MATCH (imx:Concept {slug:'informational-metastructure-imx'})
 MERGE (cem)-[:DEPENDS_ON]->(imx);
+
+
+// ===============================================
+// SYMBIOSE ↔ EFC-kjerne-konsepter
+// ===============================================
+
+MATCH (sym:Symbiosis {id:'symbiosis:core'})
+MATCH (srm:Concept {slug:'symbiotic-reflective-methodology-srm'})
+MERGE (srm)-[:IMPLEMENTED_AS]->(sym);
+
+MATCH (sym:Symbiosis {id:'symbiosis:core'})
+MATCH (cem:Concept {slug:'cem-cosmos'})
+MERGE (sym)-[:EMERGES_IN]->(cem);
+
+MATCH (sym:Symbiosis {id:'symbiosis:core'})
+MATCH (imx:Concept {slug:'informational-metastructure-imx'})
+MERGE (imx)-[:SUPPORTS]->(sym);
+
+MATCH (sym:Symbiosis {id:'symbiosis:core'})
+MATCH (cdvc:Concept {slug:'cross-domain-vector-convergence-cdvc'})
+MERGE (sym)-[:EXPRESSES_AS]->(cdvc);
+
+
+// ===============================================
+// SYMBIOSE ↔ Papers
+// ===============================================
+
+MATCH (sym:Symbiosis {id:'symbiosis:core'})
+MATCH (p:EFCPaper {slug:'symbiotic-reflective-methodology-srm'})
+MERGE (p)-[:DESCRIBES_SYMBIOSIS]->(sym);
+
+MATCH (sym:Symbiosis {id:'symbiosis:core'})
+MATCH (p:EFCPaper {slug:'auth-layer-origin-provenance'})
+MERGE (p)-[:ANCHORS]->(sym);
+
+
+// ===============================================
+// SYMBIOSE ↔ ResearchStep + Insight
+// ===============================================
+
+MATCH (sym:Symbiosis {id:'symbiosis:core'})
+MATCH (rs:ResearchStep {id:'rs_unified_model'})
+MERGE (sym)-[:CONTRIBUTES_TO]->(rs);
+
+MATCH (sym:Symbiosis {id:'symbiosis:core'})
+MATCH (i:Insight {id:'i_efc_core'})
+MERGE (sym)-[:AMPLIFIES]->(i);
+
+//////////////////////////////////////////////////
+// END STATEMENT 2
+//////////////////////////////////////////////////
