@@ -28,7 +28,7 @@ jobs:
       NEO4J_DATABASE: ${{ secrets.NEO4J_DATABASE }}
 
     steps:
-      - name: Checkout repo
+      - name: Checkout repository
         uses: actions/checkout@v4
 
       - name: Set up Python
@@ -36,10 +36,9 @@ jobs:
         with:
           python-version: "3.11"
 
-      - name: Install deps
+      - name: Install dependencies
         run: |
-          pip install neo4j-driver
-          pip install pyyaml
+          pip install neo4j-driver pyyaml
 
       - name: Load EFC Meta-Universe
         run: |
