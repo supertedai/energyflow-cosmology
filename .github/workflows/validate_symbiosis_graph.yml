@@ -28,7 +28,8 @@ jobs:
       - name: Validate Symbiosis Graph
         env:
           NEO4J_URI: ${{ secrets.NEO4J_URI }}
-          NEO4J_USERNAME: ${{ secrets.NEO4J_USERNAME }}
+          NEO4J_USER: ${{ secrets.NEO4J_USER }}
           NEO4J_PASSWORD: ${{ secrets.NEO4J_PASSWORD }}
+          NEO4J_DATABASE: ${{ secrets.NEO4J_DATABASE }}
         run: |
           python tools/inspect_symbiosis_graph.py
