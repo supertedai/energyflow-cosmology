@@ -23,11 +23,19 @@ def upsert_node(tx, label, props):
     rel_keys = {"influences", "shapes", "drives"}
     clean_props = {k: v for k, v in props.items() if k not in rel_keys}
 
-    fields = ", ".join([f"{k}: ${k}" for k in clean_props])
-    q = f"""
-        MERGE (n:{label} {{id: $id}})
-        SET n += {{{fields}}}
-    """
+    if "id" not in clean_props:
+        return
+
+    fields = ", ".join([f"{k}: ${k}" for k in clean_props if k != "id"])
+
+    if fields:
+        q = f"""
+            MERGE (n:{label} {{id: $id}})
+            SET n += {{{fields}}}
+        """
+    else:
+        q = f"MERGE (n:{label} {{id: $id}})"
+
     tx.run(q, **clean_props)
 
 
@@ -64,6 +72,7 @@ def main():
     jsonld_path = Path("schema/efc_meta_universe.jsonld")
     if not jsonld_path.exists():
         raise FileNotFoundError(f"Fant ikke {jsonld_path}")
+
     data = load_jsonld(jsonld_path)
     process_entries(data)
     print("[efc_meta_universe] Importert meta-universlag til Neo4j.")
