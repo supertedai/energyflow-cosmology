@@ -2,10 +2,8 @@ name: Train Symbiose GNN
 
 on:
   workflow_dispatch:
-
   schedule:
-    - cron: "0 */12 * * *"   # kjør hver 12. time
-
+    - cron: "0 */12 * * *"  # hver 12. time
   push:
     branches: [ main ]
     paths:
@@ -33,25 +31,6 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Validate file structure
-        run: |
-          echo "[VALIDATE] Checking symbiose_gnn files..."
-          REQUIRED=(
-            "symbiose_gnn/__init__.py"
-            "symbiose_gnn/config.py"
-            "symbiose_gnn/data_loader.py"
-            "symbiose_gnn/embed.py"
-            "symbiose_gnn/model.py"
-            "symbiose_gnn/train.py"
-          )
-          for f in "${REQUIRED[@]}"; do
-            if [ ! -f "$f" ]; then
-              echo "Error: Missing file: $f"
-              exit 1
-            fi
-          done
-          echo "[VALIDATE] All files OK"
-
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
@@ -75,7 +54,13 @@ jobs:
           export PYTHONPATH=$(pwd)
           python -m symbiose_gnn.embed
 
-      - name: Commit and push embeddings
+      - name: Upload GNN artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: symbiose-gnn-output
+          path: symbiose_gnn_output/
+
+      - name: Commit and push embeddings (optional)
         run: |
           if [ -d "symbiose_gnn_output" ]; then
             git config user.name "github-actions[bot]"
