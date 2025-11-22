@@ -14,6 +14,7 @@ driver = GraphDatabase.driver(NEO4J_URI, auth=(NEO4J_USERNAME, NEO4J_PASSWORD))
 
 
 def load_statements(path: Path):
+    """Les Cypher-fil og del korrekt på statements avsluttet med semikolon."""
     text = path.read_text(encoding="utf-8")
 
     statements = []
@@ -28,7 +29,7 @@ def load_statements(path: Path):
 
         current.append(line)
 
-        # Statement avsluttes på semikolon
+        # Vurder semikolon som slutt på statement
         if stripped.endswith(";"):
             stmt = "\n".join(current).rstrip(";").strip()
             if stmt:
@@ -39,6 +40,7 @@ def load_statements(path: Path):
 
 
 def run_cypher_file(path: Path):
+    """Kjør alle statements i en fil, idempotent."""
     statements = load_statements(path)
 
     with driver.session() as session:
@@ -50,12 +52,14 @@ def run_cypher_file(path: Path):
 
 
 def main():
+    # Riktig rekkefølge for en komplett symbiose-oppbygging
     cypher_files = [
         "neo4j/efc_schema.cypher",
         "neo4j/efc_seed_concepts.cypher",
         "neo4j/efc_papers.cypher",
         "neo4j/efc_universe_and_meta.cypher",
-        "neo4j/efc_metacognition.cypher",  # ← korrekt integrering
+        "neo4j/efc_metacognition.cypher",
+        "neo4j/efc_global_extensions.cypher",  # ← NYTT, MÅ MED
     ]
 
     for file_path in cypher_files:
