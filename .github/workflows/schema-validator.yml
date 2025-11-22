@@ -1,30 +1,60 @@
-name: Schema Path Validator
+from fastapi import FastAPI
+from pydantic import BaseModel
+import datetime
 
-on:
-  push:
-    branches: [ "main" ]
-  pull_request:
-    branches: [ "main" ]
-  workflow_dispatch:
+app = FastAPI()
 
-jobs:
-  validate-schema:
-    runs-on: ubuntu-latest
+# ------------------------
+# MODELS
+# ------------------------
 
-    steps:
-    - name: Checkout repository
-      uses: actions/checkout@v4
+class QueryRequest(BaseModel):
+    text: str
 
-    - name: Set up Python
-      uses: actions/setup-python@v5
-      with:
-        python-version: "3.11"
 
-    - name: Install dependencies
-      run: |
-        pip install --upgrade pip
-        pip install pyyaml
+# ------------------------
+# ENDPOINTS
+# ------------------------
 
-    - name: Run schema validation
-      run: |
-        python tools/validate_schema_paths.py
+@app.get("/health")
+async def health():
+    """Simple health check used by Cloud Run and MSTY."""
+    return {
+        "status": "ok",
+        "api": "symbiose-query-api-v1",
+        "timestamp": datetime.datetime.utcnow().isoformat() + "Z"
+    }
+
+
+@app.get("/context")
+async def context():
+    """
+    Live Context endpoint for MSTY.
+    Expand later with Neo4j snapshot, RAG state, axes, metadata etc.
+    """
+    return {
+        "context_version": "v1",
+        "status": "ok",
+        "symbiose": {
+            "node": "cloud-run",
+            "region": "europe-north1",
+            "mode": "live",
+            "state": "running",
+            "message": "Symbiose live context feed operational."
+        },
+        "efc": {
+            "active": True,
+            "message": "Base context only – Neo4j/RAG integration comes next."
+        }
+    }
+
+
+@app.post("/query")
+async def query(req: QueryRequest):
+    """
+    Basic echo endpoint for now.
+    Later becomes unified Query Engine (EFC + RAG + Graph).
+    """
+    return {
+        "response": f"symbiose-query-api-v1: {req.text}"
+    }
