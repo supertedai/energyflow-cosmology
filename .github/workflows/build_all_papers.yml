@@ -12,11 +12,14 @@ jobs:
 
     steps:
       - name: Checkout repo (full history)
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          persist-credentials: true
           fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
 
       - name: Install LaTeX
         run: |
@@ -25,20 +28,19 @@ jobs:
 
       - name: Install Python deps
         run: |
-          python3 -m pip install --upgrade pip
+          pip install --upgrade pip
           pip install python-slugify
 
       - name: Build all EFC papers from .tex
         run: |
-          python3 tools/build_all_papers.py
+          python tools/build_all_papers.py
 
       - name: Commit and force-push updates (PDFs included)
         run: |
-          git config --local user.email "actions@github.com"
-          git config --local user.name  "GitHub Actions"
+          git config user.email "actions@github.com"
+          git config user.name  "GitHub Actions"
 
           git add -A
           git commit -m "Auto: rebuild all EFC papers" || echo "No changes"
 
-          # FORCE PUSH – unngår PDF-konflikter
           git push --force
