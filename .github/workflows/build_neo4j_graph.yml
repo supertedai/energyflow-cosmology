@@ -9,6 +9,10 @@ on:
       - "tools/build_neo4j_graph.py"
       - "tools/build_paper_graph.py"
       - "tools/build_paper_relations.py"
+      - "neo4j/efc_universe_and_meta.cypher"
+      - "schema/efc_meta_universe.jsonld"
+      - "tools/load_efc_meta_universe.py"
+      - "tools/apply_cypher_file.py"
       - ".github/workflows/build_neo4j_graph.yml"
 
 jobs:
@@ -52,7 +56,6 @@ jobs:
 
       ###############################################################
       # 3. AUTO — Paper → Meta Relations
-      #    (slug/title/keywords → meta-lag)
       ###############################################################
       - name: Build Paper → Meta Relations (Auto)
         env:
@@ -61,3 +64,25 @@ jobs:
           NEO4J_PASSWORD: ${{ secrets.NEO4J_PASSWORD }}
         run: |
           python tools/build_paper_relations.py
+
+      ###############################################################
+      # 4. IMPORT — EFC Universe + Metalag (Cypher-fil)
+      ###############################################################
+      - name: Apply EFC Universe + Metalag (Cypher)
+        env:
+          NEO4J_URI: ${{ secrets.NEO4J_URI }}
+          NEO4J_USER: ${{ secrets.NEO4J_USER }}
+          NEO4J_PASSWORD: ${{ secrets.NEO4J_PASSWORD }}
+        run: |
+          python tools/apply_cypher_file.py
+
+      ###############################################################
+      # 5. IMPORT — JSON-LD Meta Universe (Insight / Patterns)
+      ###############################################################
+      - name: Import JSON-LD Metalag (Meta Universe)
+        env:
+          NEO4J_URI: ${{ secrets.NEO4J_URI }}
+          NEO4J_USER: ${{ secrets.NEO4J_USER }}
+          NEO4J_PASSWORD: ${{ secrets.NEO4J_PASSWORD }}
+        run: |
+          python tools/load_efc_meta_universe.py
