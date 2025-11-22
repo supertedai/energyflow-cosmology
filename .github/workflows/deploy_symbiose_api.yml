@@ -11,22 +11,21 @@ permissions:
 
 env:
   GCP_PROJECT: ${{ secrets.GCP_PROJECT }}
-  GCP_SERVICE_ACCOUNT: ${{ secrets.GCP_SERVICE_ACCOUNT }}
-  GCP_WIF_PROVIDER: ${{ secrets.GCP_WIF_PROVIDER }}
+  GCP_SERVICE_ACCOUNT: ${{ secrets/GCP_SERVICE_ACCOUNT }}
+  GCP_WIF_PROVIDER: ${{ secrets/GCP_WIF_PROVIDER }}
+  REGION: europe-north1
+  REPO_NAME: symbiose-api
+  IMAGE_NAME: symbiose-query-api
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout repo
+    - name: Checkout
       uses: actions/checkout@v4
 
-    - name: Build API Docker image
-      run: |
-        docker build -t symbiose-query-api ./tools/symbiose-query-api
-
-    - name: Authenticate to GCP (OIDC / no keys)
+    - name: Authenticate to GCP
       uses: google-github-actions/auth@v2
       with:
         token_format: "access_token"
@@ -36,12 +35,24 @@ jobs:
     - name: Setup gcloud
       uses: google-github-actions/setup-gcloud@v2
 
+    - name: Configure Docker for Artifact Registry
+      run: |
+        gcloud auth configure-docker ${REGION}-docker.pkg.dev
+
+    - name: Build image
+      run: |
+        docker build -t ${REGION}-docker.pkg.dev/${GCP_PROJECT}/${REPO_NAME}/${IMAGE_NAME}:latest ./tools/symbiose-query-api
+
+    - name: Push image to Artifact Registry
+      run: |
+        docker push ${REGION}-docker.pkg.dev/${GCP_PROJECT}/${REPO_NAME}/${IMAGE_NAME}:latest
+
     - name: Deploy to Cloud Run
       run: |
-        gcloud run deploy symbiose-query-api \
-          --project=$GCP_PROJECT \
-          --image=symbiose-query-api \
-          --region=europe-north1 \
+        gcloud run deploy ${IMAGE_NAME} \
+          --project=${GCP_PROJECT} \
+          --image=${REGION}-docker.pkg.dev/${GCP_PROJECT}/${REPO_NAME}/${IMAGE_NAME}:latest \
+          --region=${REGION} \
           --platform=managed \
           --allow-unauthenticated \
           --port=8082
