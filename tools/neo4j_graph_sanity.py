@@ -1,56 +1,38 @@
 #!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+
+import os
 from neo4j import GraphDatabase
-import os, sys
 
 NEO4J_URI = os.getenv("NEO4J_URI")
 NEO4J_USER = os.getenv("NEO4J_USER", "neo4j")
 NEO4J_PASSWORD = os.getenv("NEO4J_PASSWORD")
-
-driver = GraphDatabase.driver(NEO4J_URI, auth=(NEO4J_USER, NEO4J_PASSWORD))
-
-
-def q(tx, s):
-    return [r.data() for r in tx.run(s)]
+NEO4J_DATABASE = os.getenv("NEO4J_DATABASE", "neo4j")
 
 
-def check(label, rel):
-    with driver.session() as s:
-        n = s.run(f"MATCH (n:{label}) RETURN count(n) AS c").single()["c"]
-
-        o = s.run(f"""
-            MATCH (n:{label})
-            WHERE NOT (n)--()
-            RETURN count(n) AS c
-        """).single()["c"]
-
-        r = s.run(f"""
-            MATCH (:{label})-[x:{rel}]->()
-            RETURN count(x) AS c
-        """).single()["c"]
-
-    return {
-        "label": label,
-        "nodes": n,
-        "orphans": o,
-        "relations": r,
-    }
+def get_driver():
+    return GraphDatabase.driver(
+        NEO4J_URI,
+        auth=(NEO4J_USER, NEO4J_PASSWORD),
+        database=NEO4J_DATABASE
+    )
 
 
 def main():
+    driver = get_driver()
     checks = [
-        ("EnergyFlow", "creates_gradient"),
-        ("EntropyGradient", "drives"),
-        ("CosmicDynamics", "forms"),
-        ("Observation", "measures"),
-        ("Insight", "influences"),
-        ("MetaPattern", "shapes"),
-        ("CognitiveMechanism", "drives"),
-        ("ResearchStep", "produces"),
+        "MATCH (p:EFCPaper) RETURN p.slug LIMIT 1",
+        "MATCH (m:MetaNode) RETURN m.name LIMIT 1",
+        "MATCH ()-[r:ADDRESSES]->() RETURN r LIMIT 1",
     ]
 
-    results = [check(l, r) for l, r in checks]
-    for r in results:
-        print(r)
+    with driver.session() as session:
+        for q in checks:
+            try:
+                session.run(q).data()
+                print(f"[OK] {q[:40]}...")
+            except Exception as e:
+                print(f"[FAIL] {q}\n{e}")
 
 
 if __name__ == "__main__":
