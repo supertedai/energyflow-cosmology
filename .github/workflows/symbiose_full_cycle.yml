@@ -1,0 +1,71 @@
+name: Symbiose Full Cycle
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "0 3 * * *"  # hver natt kl 03 UTC
+
+permissions:
+  contents: write
+
+jobs:
+  symbiose-full-cycle:
+    runs-on: ubuntu-latest
+
+    env:
+      NEO4J_URI: ${{ secrets.NEO4J_URI }}
+      NEO4J_USER: ${{ secrets.NEO4J_USER }}
+      NEO4J_PASSWORD: ${{ secrets.NEO4J_PASSWORD }}
+      NEO4J_DATABASE: ${{ secrets.NEO4J_DATABASE }}
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install deps
+        run: |
+          pip install --upgrade pip
+          pip install neo4j-driver pyyaml python-slugify torch==2.9.1+cpu --index-url https://download.pytorch.org/whl/cpu
+          pip install torch_geometric
+          pip install pyg_lib torch_scatter torch_sparse torch_cluster -f https://data.pyg.org/whl/torch-2.1.0+cpu.html
+
+      - name: 1) Bygg alle EFC-papers (latex)
+        run: |
+          python3 tools/build_all_papers.py || echo "build_all_papers failed"
+
+      - name: 2) Sync Figshare / DOIs
+        run: |
+          python3 tools/figshare_sync.py || echo "figshare_sync failed"
+
+      - name: 3) Oppdater Neo4j-graf
+        run: |
+          python3 tools/load_efc_meta_universe.py
+          python3 tools/build_paper_graph.py
+          python3 tools/build_paper_relations.py
+
+      - name: 4) Tren GNN + generer embeddings
+        run: |
+          export PYTHONPATH=$(pwd)
+          python -m symbiose_gnn.train
+          python -m symbiose_gnn.embed
+
+      - name: 5) Commit og push GNN-output (hvis endret)
+        run: |
+          if [ -d "symbiose_gnn_output" ]; then
+            git config user.name "github-actions[bot]"
+            git config user.email "github-actions[bot]@users.noreply.github.com"
+            git add symbiose_gnn_output/*
+            if git diff --cached --quiet; then
+              echo "No GNN changes, skipping commit."
+            else
+              git commit -m "Auto: update GNN embeddings (full symbiose cycle)"
+              git push
+            fi
+          else
+            echo "symbiose_gnn_output not found, skipping commit."
+          fi
