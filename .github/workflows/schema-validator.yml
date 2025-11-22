@@ -22,9 +22,9 @@ jobs:
 
     - name: Install dependencies
       run: |
-        python -m pip install --upgrade pip
+        pip install --upgrade pip
+        pip install pyyaml
 
     - name: Run schema validation
       run: |
-        chmod +x tools/check_schema_paths.py
-        python tools/check_schema_paths.py
+        python tools/validate_schema_paths.py
