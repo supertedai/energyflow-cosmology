@@ -3,17 +3,14 @@ name: Train Symbiose GNN
 on:
   workflow_dispatch:
   push:
-    branches:
-      - main
+    branches: [ main ]
     paths:
-      - neo4j/**
-      - meta/**
-      - meta-graph/**
-      - docs/**
-      - schema/**
-      - symbiose_gnn/**
-      - '!.github/**'
-      - '!symbiose_gnn_output/**'
+      - "neo4j/**"
+      - "meta/**"
+      - "meta-graph/**"
+      - "docs/**"
+      - "schema/**"
+      - "symbiose_gnn/**"
 
 permissions:
   contents: write
@@ -31,6 +28,8 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+        with:
+          path: "."
 
       - name: Set up Python
         uses: actions/setup-python@v5
