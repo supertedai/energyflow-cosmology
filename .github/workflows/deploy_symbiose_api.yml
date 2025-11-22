@@ -11,8 +11,8 @@ permissions:
 
 env:
   GCP_PROJECT: ${{ secrets.GCP_PROJECT }}
-  GCP_SERVICE_ACCOUNT: ${{ secrets/GCP_SERVICE_ACCOUNT }}
-  GCP_WIF_PROVIDER: ${{ secrets/GCP_WIF_PROVIDER }}
+  GCP_SERVICE_ACCOUNT: ${{ secrets.GCP_SERVICE_ACCOUNT }}
+  GCP_WIF_PROVIDER: ${{ secrets.GCP_WIF_PROVIDER }}
   REGION: europe-north1
   REPO_NAME: symbiose-api
   IMAGE_NAME: symbiose-query-api
