@@ -6,28 +6,25 @@ on:
     branches: [ main ]
     paths:
       - "tools/symbiose_query_api.py"
-      - "tools/Dockerfile.query_api"
-      - "tools/query_api_requirements.txt"
       - "symbiose_gnn_output/**"
+      - "semantic-search-index.json"
+      - "docker/Dockerfile.query_api"
+      - ".github/workflows/build_query_api.yml"
 
 permissions:
   contents: read
   packages: write
+
+env:
+  IMAGE_NAME: ghcr.io/${{ github.repository_owner }}/symbiose-query-api:latest
 
 jobs:
   build-and-push:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repository
+      - name: Checkout repo
         uses: actions/checkout@v4
-
-      - name: Download latest GNN artifact (if exists)
-        uses: actions/download-artifact@v4
-        with:
-          name: symbiose-gnn-output
-          path: symbiose_gnn_output
-        continue-on-error: true
 
       - name: Log in to GitHub Container Registry
         uses: docker/login-action@v3
@@ -36,12 +33,10 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Build and push Query API image
+      - name: Build and push image
         uses: docker/build-push-action@v6
         with:
           context: .
-          file: tools/Dockerfile.query_api
+          file: docker/Dockerfile.query_api
           push: true
-          tags: |
-            ghcr.io/${{ github.repository_owner }}/symbiose-query-api:latest
-            ghcr.io/${{ github.repository_owner }}/symbiose-query-api:${{ github.sha }}
+          tags: ${{ env.IMAGE_NAME }}
