@@ -22,20 +22,28 @@ def get_driver():
     )
 
 
-def flatten_metadata(meta: dict) -> dict:
+def flatten_nested_props(meta: dict) -> dict:
     """
-    Neo4j kan ikke lagre nested maps.
-    Derfor serialiserer vi 'files' til en JSON-string
-    og beholder primitive felter slik de er.
+    Neo4j kan kun lagre primitive typer:
+    - string
+    - number
+    - boolean
+    - list av disse
+
+    Denne funksjonen:
+      * finner alle nested dicts
+      * serialiserer dem til JSON-string
+      * lager nye felt: "<key>_json"
+      * fjerner originalen
     """
-    meta = meta.copy()
+    flat = meta.copy()
 
-    # Hvis 'files' finnes → serialiser til string
-    if "files" in meta and isinstance(meta["files"], dict):
-        meta["files_json"] = json.dumps(meta["files"])
-        del meta["files"]  # fjern den gamle (ikke tillatt)
+    for key, value in list(flat.items()):
+        if isinstance(value, dict):
+            flat[f"{key}_json"] = json.dumps(value)
+            del flat[key]
 
-    return meta
+    return flat
 
 
 def main():
@@ -45,7 +53,7 @@ def main():
     with driver.session() as session:
         for meta_file in entries:
             raw = json.loads(meta_file.read_text())
-            props = flatten_metadata(raw)
+            props = flatten_nested_props(raw)
 
             session.run(
                 """
