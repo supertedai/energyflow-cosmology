@@ -1,21 +1,34 @@
-name: Neo4j Sync & Symbiosis Build
+name: Build Neo4j Graph
 
 on:
   workflow_dispatch:
   push:
+    branches: [ main ]
     paths:
       - "neo4j/**"
       - "schema/**"
+      - "meta/**"
       - "meta-graph/**"
-      - "tools/**"
-      - ".github/workflows/build_neo4j_graph.yml"
+      - "docs/papers/**"
+      - "tools/load_efc_meta_universe.py"
+      - "tools/build_paper_graph.py"
+      - "tools/build_paper_relations.py"
+
+permissions:
+  contents: write
 
 jobs:
   neo4j-sync:
     runs-on: ubuntu-latest
 
+    env:
+      NEO4J_URI: ${{ secrets.NEO4J_URI }}
+      NEO4J_USER: ${{ secrets.NEO4J_USER }}
+      NEO4J_PASSWORD: ${{ secrets.NEO4J_PASSWORD }}
+      NEO4J_DATABASE: ${{ secrets.NEO4J_DATABASE }}
+
     steps:
-      - name: Checkout repository
+      - name: Checkout repo
         uses: actions/checkout@v4
 
       - name: Set up Python
@@ -23,98 +36,19 @@ jobs:
         with:
           python-version: "3.11"
 
-      - name: Install dependencies
+      - name: Install deps
         run: |
-          pip install neo4j fastapi uvicorn requests pydantic
+          pip install neo4j-driver
+          pip install pyyaml
 
-      #########################################################
-      # 1. Build Meta Graph
-      #########################################################
-      - name: Build Meta Graph
-        env:
-          NEO4J_URI: ${{ secrets.NEO4J_URI }}
-          NEO4J_USERNAME: ${{ secrets.NEO4J_USERNAME }}
-          NEO4J_PASSWORD: ${{ secrets.NEO4J_PASSWORD }}
-        run: |
-          python tools/build_neo4j_graph.py
-
-      #########################################################
-      # 2. Build Paper Graph
-      #########################################################
-      - name: Build Paper Graph
-        env:
-          NEO4J_URI: ${{ secrets.NEO4J_URI }}
-          NEO4J_USERNAME: ${{ secrets.NEO4J_USERNAME }}
-          NEO4J_PASSWORD: ${{ secrets.NEO4J_PASSWORD }}
-        run: |
-          python tools/build_paper_graph.py
-
-      #########################################################
-      # 3. Build Paper → Meta Relations
-      #########################################################
-      - name: Build Paper → Meta Relations
-        env:
-          NEO4J_URI: ${{ secrets.NEO4J_URI }}
-          NEO4J_USERNAME: ${{ secrets.NEO4J_USERNAME }}
-          NEO4J_PASSWORD: ${{ secrets.NEO4J_PASSWORD }}
-        run: |
-          python tools/build_paper_relations.py
-
-      #########################################################
-      # 4. Apply all Cypher files (schema + universe + global)
-      #########################################################
-      - name: Apply EFC Universe + Meta Extensions
-        env:
-          NEO4J_URI: ${{ secrets.NEO4J_URI }}
-          NEO4J_USERNAME: ${{ secrets.NEO4J_USERNAME }}
-          NEO4J_PASSWORD: ${{ secrets.NEO4J_PASSWORD }}
-        run: |
-          python tools/apply_cypher_file.py
-
-      #########################################################
-      # 5. Import JSON-LD Meta Universe (IMX + Metalag)
-      #########################################################
-      - name: Import JSON-LD Meta Universe
-        env:
-          NEO4J_URI: ${{ secrets.NEO4J_URI }}
-          NEO4J_USERNAME: ${{ secrets.NEO4J_USERNAME }}
-          NEO4J_PASSWORD: ${{ secrets.NEO4J_PASSWORD }}
+      - name: Load EFC Meta-Universe
         run: |
           python tools/load_efc_meta_universe.py
 
-      #########################################################
-      # 6. **NEW** Run Symbiosis Graph Consistency Check
-      #     → MUST PASS before RAG-export happens!
-      #########################################################
-      - name: Validate Symbiosis Graph Structure
-        env:
-          NEO4J_URI: ${{ secrets.NEO4J_URI }}
-          NEO4J_USERNAME: ${{ secrets.NEO4J_USERNAME }}
-          NEO4J_PASSWORD: ${{ secrets.NEO4J_PASSWORD }}
+      - name: Build Paper Graph
         run: |
-          python tools/inspect_symbiosis_graph.py
+          python tools/build_paper_graph.py
 
-      #########################################################
-      # 7. Export Neo4j → RAG Chunks (only if graph is OK)
-      #########################################################
-      - name: Export Neo4j Graph to RAG Chunks
-        if: success()   # ← only runs if all previous steps passed
-        env:
-          NEO4J_URI: ${{ secrets.NEO4J_URI }}
-          NEO4J_USERNAME: ${{ secrets.NEO4J_USERNAME }}
-          NEO4J_PASSWORD: ${{ secrets.NEO4J_PASSWORD }}
+      - name: Build Paper Relations
         run: |
-          python tools/neo4j_rag_export.py > rag_export.json
-          echo "RAG export complete."
-
-      #########################################################
-      # 8. Final Sanity Check (optional but nice)
-      #########################################################
-      - name: Final Graph Sanity Check
-        if: success()
-        env:
-          NEO4J_URI: ${{ secrets.NEO4J_URI }}
-          NEO4J_USERNAME: ${{ secrets.NEO4J_USERNAME }}
-          NEO4J_PASSWORD: ${{ secrets.NEO4J_PASSWORD }}
-        run: |
-          python tools/neo4j_graph_sanity.py
+          python tools/build_paper_relations.py
