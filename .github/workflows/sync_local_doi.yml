@@ -3,17 +3,23 @@ name: Sync Local DOI
 on:
   workflow_dispatch:
   push:
+    branches: [ main ]
     paths:
-      - "tools/sync_local_doi.py"
-      - "docs/papers/efc/**/metadata.json"
-      - ".github/workflows/sync_local_doi.yml"
+      - "docs/papers/**"
+      - "tools/neo4j_sync_doi_from_metadata.py"
 
 jobs:
-  sync-local-doi:
+  sync-doi:
     runs-on: ubuntu-latest
 
+    env:
+      NEO4J_URI: ${{ secrets.NEO4J_URI }}
+      NEO4J_USER: ${{ secrets.NEO4J_USER }}
+      NEO4J_PASSWORD: ${{ secrets.NEO4J_PASSWORD }}
+      NEO4J_DATABASE: ${{ secrets.NEO4J_DATABASE }}
+
     steps:
-      - name: Checkout repo
+      - name: Checkout repository
         uses: actions/checkout@v4
 
       - name: Set up Python
@@ -21,19 +27,10 @@ jobs:
         with:
           python-version: "3.11"
 
-      - name: Run local DOI sync
-        run: python tools/sync_local_doi.py
-
-      - name: Commit changes (if any)
+      - name: Install dependencies
         run: |
-          CHANGES=$(git status --porcelain)
-          if [ -n "$CHANGES" ]; then
-            echo "Endringer funnet – committer."
-            git config user.name "github-actions[bot]"
-            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-            git add -A
-            git commit -m "Sync local DOIs [skip ci]"
-            git push
-          else
-            echo "Ingen endringer å committe."
-          fi
+          pip install neo4j
+
+      - name: Sync DOI from Metadata → Neo4j
+        run: |
+          python tools/neo4j_sync_doi_from_metadata.py
