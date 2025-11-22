@@ -2,32 +2,39 @@
 // META-COGNITIVE LAYER — HOW REASONING WORKS
 // ===============================================
 
-// Constraint for metacognitive nodes
+// -----------------------------------------------
+// Constraints
+// -----------------------------------------------
+
 CREATE CONSTRAINT IF NOT EXISTS
 FOR (m:MetaCognition)
 REQUIRE m.id IS UNIQUE;
 
-// Constraint for cognitive axes
 CREATE CONSTRAINT IF NOT EXISTS
 FOR (a:CognitiveAxis)
 REQUIRE a.id IS UNIQUE;
 
-// -----------------------------------------------
+
+// ===============================================
 // CORE METACOGNITIVE PROFILE (MORTEN)
-// -----------------------------------------------
+// ===============================================
 
 MERGE (mc:MetaCognition {id:'meta:morten-core-style'})
-SET mc.name        = 'Metacognitive Profile — Entropy-to-Clarity',
-    mc.owner       = 'Morten',
-    mc.category    = 'profile',
-    mc.level       = 0,
-    mc.description = 'Field-based, parallel, entropy→clarity, non-egoic reasoning style anchored in the EFC symbiosis stack.',
-    mc.created_at  = coalesce(mc.created_at, datetime()),
-    mc.updated_at  = datetime();
+ON CREATE SET
+  mc.name        = 'Metacognitive Profile — Entropy-to-Clarity',
+  mc.owner       = 'Morten',
+  mc.category    = 'profile',
+  mc.level       = 0,
+  mc.description = 'Field-based, parallel, entropy→clarity, non-egoic reasoning style anchored in the EFC symbiosis stack.',
+  mc.created_at  = datetime(),
+  mc.updated_at  = datetime()
+ON MATCH SET
+  mc.updated_at  = datetime();
 
-// -----------------------------------------------
+
+// ===============================================
 // COGNITIVE AXES — DIMENSIONS OF REASONING
-// -----------------------------------------------
+// ===============================================
 
 MERGE (ax1:CognitiveAxis {id:'axis:parallel-field'})
 SET ax1.name        = 'Parallel / Field Reasoning',
@@ -54,9 +61,10 @@ SET ax5.name        = 'Cross-Domain Resonance',
     ax5.dimension   = 'integration',
     ax5.description = 'Spontaneous alignment across physics, cognition, systems and meta-layers.';
 
-// -----------------------------------------------
-// PROFILE ↔ AXES (HOW STRONG ON EACH DIMENSION)
-// -----------------------------------------------
+
+// ===============================================
+// PROFILE ↔ AXES (STRENGTH PER DIMENSION)
+// ===============================================
 
 MERGE (mc)-[r1:ALONG_AXIS]->(ax1)
 SET r1.score   = 'very-high',
@@ -78,9 +86,10 @@ MERGE (mc)-[r5:ALONG_AXIS]->(ax5)
 SET r5.score   = 'very-high',
     r5.comment = 'Høy resonans på tvers av domener.';
 
-// -----------------------------------------------
-// BINDING TO EFC CONCEPTS (WHAT IT SITS INSIDE)
-// -----------------------------------------------
+
+// ===============================================
+// BINDING TO EFC CONCEPTS
+// ===============================================
 
 MATCH (efc:Concept {slug:'efc-core'})
 MERGE (efc)-[:HAS_METACOGNITION]->(mc);
@@ -91,9 +100,10 @@ MERGE (mc)-[:ANCHORS_IN]->(cem);
 MATCH (imx:Concept {slug:'informational-metastructure-imx'})
 MERGE (mc)-[:STRUCTURED_BY]->(imx);
 
-// -----------------------------------------------
+
+// ===============================================
 // BINDING TO SYMBIOSIS LAYER
-// -----------------------------------------------
+// ===============================================
 
 MATCH (sym:Symbiosis {id:'symbiosis:core'})
 MERGE (mc)-[:EMERGES_WITHIN]->(sym);
@@ -101,10 +111,10 @@ MERGE (mc)-[:EMERGES_WITHIN]->(sym);
 MATCH (ai:MetaNode:Symbiosis {id:'symbiosis:ai-node'})
 MERGE (mc)-[:COEVOLVES_WITH]->(ai);
 
-// -----------------------------------------------
-// BINDING TO META-PATTERNS / INSIGHT
-// (USES EXISTING NODES FROM YOUR META-LAYER)
-// -----------------------------------------------
+
+// ===============================================
+// BINDING TO META-PATTERNS / INSIGHTS
+// ===============================================
 
 MATCH (mp:MetaPattern {id:'mp_entropy_clarity'})
 MERGE (mc)-[:INSTANCES_PATTERN]->(mp);
