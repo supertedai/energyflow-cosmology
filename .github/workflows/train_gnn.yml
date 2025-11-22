@@ -1,0 +1,71 @@
+name: Train Symbiose GNN
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [ main ]
+    paths:
+      - "neo4j/**"
+      - "meta/**"
+      - "meta-graph/**"
+      - "docs/**"
+      - "schema/**"
+      - "symbiose_gnn/**"
+    paths-ignore:
+      - "symbiose_gnn_output/**"
+
+permissions:
+  contents: write
+
+jobs:
+  train-gnn:
+    runs-on: ubuntu-latest
+
+    env:
+      NEO4J_URI: ${{ secrets.NEO4J_URI }}
+      NEO4J_USER: ${{ secrets.NEO4J_USER }}
+      NEO4J_PASSWORD: ${{ secrets.NEO4J_PASSWORD }}
+      NEO4J_DATABASE: ${{ secrets.NEO4J_DATABASE }}
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install GNN dependencies
+        run: |
+          pip install "numpy<2"
+          pip install torch==2.1.0 --index-url https://download.pytorch.org/whl/cpu
+          pip install torch_geometric
+          pip install pyg_lib torch_scatter torch_sparse torch_cluster -f https://data.pyg.org/whl/torch-2.1.0+cpu.html
+          pip install neo4j-driver
+
+      - name: Train GNN
+        run: |
+          export PYTHONPATH=$(pwd)
+          python -m symbiose_gnn.train
+
+      - name: Generate embeddings
+        run: |
+          export PYTHONPATH=$(pwd)
+          python -m symbiose_gnn.embed
+
+      - name: Commit and push embeddings
+        run: |
+          if [ -d "symbiose_gnn_output" ]; then
+            git config user.name "github-actions[bot]"
+            git config user.email "github-actions[bot]@users.noreply.github.com"
+            git add symbiose_gnn_output/*
+            if git diff --cached --quiet; then
+              echo "No changes in symbiose_gnn_output, skipping commit."
+            else
+              git commit -m "Auto: update GNN embeddings"
+              git push
+            fi
+          else
+            echo "symbiose_gnn_output not found, skipping commit."
+          fi
