@@ -13,13 +13,37 @@ if not NEO4J_URI or not NEO4J_PASSWORD:
 driver = GraphDatabase.driver(NEO4J_URI, auth=(NEO4J_USERNAME, NEO4J_PASSWORD))
 
 
-def run_cypher_file(path: Path):
+def load_statements(path: Path):
     text = path.read_text(encoding="utf-8")
-    statements = [s.strip() for s in text.split(";") if s.strip()]
+
+    statements = []
+    current = []
+
+    for line in text.splitlines():
+        stripped = line.strip()
+
+        # Ignorer kommentarer og tomme linjer
+        if stripped.startswith("//") or stripped == "":
+            continue
+
+        current.append(line)
+
+        # Statement avsluttes på semikolon
+        if stripped.endswith(";"):
+            stmt = "\n".join(current).rstrip(";").strip()
+            if stmt:
+                statements.append(stmt)
+            current = []
+
+    return statements
+
+
+def run_cypher_file(path: Path):
+    statements = load_statements(path)
 
     with driver.session() as session:
         for stmt in statements:
-            print(f"[apply_cypher_file] Kjører statement:\n{stmt[:120]}...")
+            print(f"[apply_cypher_file] Kjører:\n{stmt[:120]}...")
             session.run(stmt)
 
     print(f"[apply_cypher_file] Ferdig: {len(statements)} statements fra {path}")
@@ -30,7 +54,7 @@ def main():
         "neo4j/efc_schema.cypher",
         "neo4j/efc_seed_concepts.cypher",
         "neo4j/efc_papers.cypher",
-        "neo4j/efc_universe_and_meta.cypher"
+        "neo4j/efc_universe_and_meta.cypher",
     ]
 
     for file_path in cypher_files:
