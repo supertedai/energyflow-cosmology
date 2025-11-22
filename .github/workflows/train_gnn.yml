@@ -5,12 +5,12 @@ on:
   push:
     branches: [ main ]
     paths:
+      - "symbiose_gnn/**"
       - "neo4j/**"
       - "meta/**"
       - "meta-graph/**"
-      - "docs/**"
       - "schema/**"
-      - "symbiose_gnn/**"
+      - "docs/**"
 
 permissions:
   contents: write
@@ -29,69 +29,48 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      # --- VALIDATE REQUIRED FILES ---
-      - name: Validate symbiose_gnn structure
+      - name: Validate required files
         run: |
           echo "[VALIDATE] Checking symbiose_gnn files..."
-          REQUIRED_FILES=(
-            "symbiose_gnn/__init__.py"
-            "symbiose_gnn/config.py"
-            "symbiose_gnn/data_loader.py"
-            "symbiose_gnn/model.py"
-            "symbiose_gnn/train.py"
-            "symbiose_gnn/embed.py"
-          )
-          for f in "${REQUIRED_FILES[@]}"; do
-            if [ ! -f "$f" ]; then
-              echo "Error: Missing file: $f"
+          for f in "__init__.py" "config.py" "data_loader.py" "model.py" "train.py" "embed.py"; do
+            if [ ! -f "symbiose_gnn/$f" ]; then
+              echo "Error: Missing file: symbiose_gnn/$f"
               exit 1
             fi
           done
-          echo "[VALIDATE] OK"
 
-      - name: Set up Python
+      - name: Setup Python
         uses: actions/setup-python@v5
         with:
           python-version: "3.11"
 
-      # --- INSTALL TORCH + PYTORCH GEOMETRIC ---
-      - name: Install GNN dependencies
+      - name: Install dependencies
         run: |
           pip install "numpy<2"
-
-          # Pytorch compatible with PyG wheels
-          pip install torch==2.2.0+cpu --index-url https://download.pytorch.org/whl/cpu
-
-          # PyTorch Geometric deps matching 2.2.0
-          pip install pyg_lib torch_scatter torch_sparse torch_cluster -f https://data.pyg.org/whl/torch-2.2.0+cpu.html
-          
+          pip install torch==2.2.0 --index-url https://download.pytorch.org/whl/cpu
           pip install torch_geometric
           pip install neo4j-driver
 
-      # --- TRAIN MODEL ---
       - name: Train GNN
         run: |
           export PYTHONPATH=$(pwd)
           python -m symbiose_gnn.train
 
-      # --- GENERATE EMBEDDINGS ---
       - name: Generate embeddings
         run: |
           export PYTHONPATH=$(pwd)
           python -m symbiose_gnn.embed
 
-      # --- COMMIT OUTPUT ---
-      - name: Commit and push embeddings
+      - name: Commit embeddings
         run: |
           if [ -d "symbiose_gnn_output" ]; then
             git config user.name "github-actions[bot]"
             git config user.email "github-actions[bot]@users.noreply.github.com"
             git add symbiose_gnn_output/*
             if git diff --cached --quiet; then
-              echo "No changes in symbiose_gnn_output, skipping commit."
+              echo "No changes."
             else
-              git commit -m "Auto: update GNN embeddings"
+              git commit -m "Auto: Update GNN embeddings"
               git push
             fi
-          else
-            echo "symbiose_gnn_output not found, skipping commit."
+          fi
