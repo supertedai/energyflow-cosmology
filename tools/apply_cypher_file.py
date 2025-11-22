@@ -55,6 +55,7 @@ def main():
         "neo4j/efc_seed_concepts.cypher",
         "neo4j/efc_papers.cypher",
         "neo4j/efc_universe_and_meta.cypher",
+        "neo4j/efc_metacognition.cypher",  # ← korrekt integrering
     ]
 
     for file_path in cypher_files:
