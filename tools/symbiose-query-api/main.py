@@ -1,46 +1,59 @@
 from fastapi import FastAPI
 from pydantic import BaseModel
-import os
+import datetime
 
 app = FastAPI()
 
-# -------------------------------
-# Models
-# -------------------------------
-
+# ------------------------
+# MODELS
+# ------------------------
 class QueryRequest(BaseModel):
     text: str
 
-class QueryResponse(BaseModel):
-    result: str
-    source: str = "symbiose-query-api-v1"
 
-
-# -------------------------------
-# Health check
-# -------------------------------
+# ------------------------
+# ENDPOINTS
+# ------------------------
 
 @app.get("/health")
-def health():
-    return {"status": "ok", "api": "symbiose-query-api-v1"}
+async def health():
+    return {
+        "status": "ok",
+        "api": "symbiose-query-api-v1",
+        "timestamp": datetime.datetime.utcnow().isoformat() + "Z"
+    }
 
 
-# -------------------------------
-# Basic echo endpoint (v1)
-# -------------------------------
-# Denne gjør at API-en deployer 100% korrekt. 
-# Etter deploy kan vi legge inn:
-#   - Neo4j lookup
-#   - Qdrant RAG
-#   - metadata-søk
-#   - IMX resonans
-# -------------------------------
+@app.get("/context")
+async def context():
+    """
+    Live Context endpoint for MSTY.
+    Returns clean JSON with current symbiose state.
+    Expand this later with graph, rag, axes, metadata flows.
+    """
+    return {
+        "context_version": "v1",
+        "status": "ok",
+        "symbiose": {
+            "node": "cloud-run",
+            "region": "europe-north1",
+            "mode": "live",
+            "state": "running",
+            "message": "Symbiose live context feed operational."
+        },
+        "efc": {
+            "active": True,
+            "note": "Base context only – add Neo4j/RAG integration next."
+        }
+    }
 
-@app.post("/query", response_model=QueryResponse)
-def query(payload: QueryRequest):
-    text = payload.text.strip()
 
-    # Minimal logikk – API fungerer, og kan utvides når Cloud Run er live.
-    response = f"Symbiose API mottok teksten: '{text}'. Systemet kjører og er klart for utvidelser."
-
-    return QueryResponse(result=response)
+@app.post("/query")
+async def query(req: QueryRequest):
+    """
+    Simple echo-like endpoint for now.
+    Later this becomes the unified Query Engine (EFC + Graph + RAG).
+    """
+    return {
+        "response": f"symbiose-query-api-v1: {req.text}"
+    }
