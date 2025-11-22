@@ -29,7 +29,7 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
         with:
-          path: "."
+          fetch-depth: 1
 
       - name: Set up Python
         uses: actions/setup-python@v5
@@ -44,15 +44,16 @@ jobs:
           pip install pyg_lib torch_scatter torch_sparse torch_cluster -f https://data.pyg.org/whl/torch-2.1.0+cpu.html
           pip install neo4j-driver
 
-      - name: Train GNN
+      # 🔥 Critical fix: Actions uses nested checkout paths
+      - name: Fix PYTHONPATH for nested checkout
         run: |
-          export PYTHONPATH=$(pwd)
-          python -m symbiose_gnn.train
+          echo "PYTHONPATH=$GITHUB_WORKSPACE:$GITHUB_WORKSPACE/energyflow-cosmology" >> $GITHUB_ENV
+
+      - name: Train GNN
+        run: python -m symbiose_gnn.train
 
       - name: Generate embeddings
-        run: |
-          export PYTHONPATH=$(pwd)
-          python -m symbiose_gnn.embed
+        run: python -m symbiose_gnn.embed
 
       - name: Commit and push embeddings
         run: |
