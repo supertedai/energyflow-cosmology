@@ -1,0 +1,39 @@
+name: Deploy Query API to Cloud Run
+
+on:
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: read
+      id-token: write  # viktig for GCP deploy
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Google Cloud SDK
+        uses: google-github-actions/setup-gcloud@v2
+        with:
+          version: "latest"
+          project_id: ${{ secrets.GCP_PROJECT }}
+
+      - name: Authenticate
+        id: "auth"
+        uses: google-github-actions/auth@v2
+        with:
+          workload_identity_provider: ${{ secrets.GCP_WIF_PROVIDER }}
+          service_account: ${{ secrets.GCP_SERVICE_ACCOUNT }}
+
+      - name: Deploy to Cloud Run
+        run: |
+          gcloud run deploy symbiose-query-api \
+            --image=ghcr.io/${{ github.repository_owner }}/symbiose-query-api:latest \
+            --region=europe-north1 \
+            --platform=managed \
+            --allow-unauthenticated \
+            --port=8082 \
+            --set-env-vars=NEO4J_URI=${{ secrets.NEO4J_URI }},NEO4J_USER=${{ secrets.NEO4J_USER }},NEO4J_PASSWORD=${{ secrets.NEO4J_PASSWORD }},NEO4J_DATABASE=${{ secrets.NEO4J_DATABASE }}
