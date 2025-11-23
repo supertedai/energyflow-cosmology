@@ -1,0 +1,8 @@
+{
+  "@context": "https://schema.org",
+  "@type": "CreativeWork",
+  "identifier": "meta-process-manifest",
+  "name": "meta-process-manifest",
+  "description": "",
+  "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/meta/meta-process/meta-process-manifest.jsonld"
+}

@@ -1,0 +1,8 @@
+{
+  "@context": "https://schema.org",
+  "@type": "CreativeWork",
+  "identifier": "transition-rules",
+  "name": "Transition Rules",
+  "description": "These rules describe how the system moves between global states.",
+  "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/meta/meta-process/global-dynamics/transition-rules.md"
+}

@@ -1,0 +1,8 @@
+{
+  "@context": "https://schema.org",
+  "@type": "CreativeWork",
+  "identifier": "validation-phases",
+  "name": "validation-phases",
+  "description": "",
+  "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/meta/meta-process/validation-plan/validation-phases.jsonld"
+}

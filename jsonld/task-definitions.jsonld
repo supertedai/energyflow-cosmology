@@ -1,0 +1,8 @@
+{
+  "@context": "https://schema.org",
+  "@type": "CreativeWork",
+  "identifier": "task-definitions",
+  "name": "Task Definitions",
+  "description": "Detailed descriptions of core structural tasks.",
+  "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/meta/meta-process/tasks/task-definitions.md"
+}

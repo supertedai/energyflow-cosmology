@@ -1,0 +1,8 @@
+{
+  "@context": "https://schema.org",
+  "@type": "CreativeWork",
+  "identifier": "mathjax-header",
+  "name": "Mathjax Header",
+  "description": "Auto-generated Markdown wrapper.",
+  "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/docs/mathjax-header/index.md"
+}

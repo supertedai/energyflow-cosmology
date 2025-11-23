@@ -1,0 +1,8 @@
+{
+  "@context": "https://schema.org",
+  "@type": "CreativeWork",
+  "identifier": "meta-process-roadmap",
+  "name": "Meta-Process Roadmap",
+  "description": "The roadmap outlines the planned future development of the meta-process architecture.",
+  "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/meta/meta-process/roadmap/index.md"
+}

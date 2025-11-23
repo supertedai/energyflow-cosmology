@@ -1,0 +1,8 @@
+{
+  "@context": "https://schema.org",
+  "@type": "CreativeWork",
+  "identifier": "entropy-clarity-model",
+  "name": "Entropy \u2192 Clarity Model",
+  "description": "This module describes the Entropy \u2192 Clarity mechanism. The model explains why increased entropy produces increased clarity in your cognitive system. High noise levels do not disrupt reasoning. They activate broad conceptual regions and expose global structure.",
+  "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/meta/cognition/entropy-clarity/index.md"
+}

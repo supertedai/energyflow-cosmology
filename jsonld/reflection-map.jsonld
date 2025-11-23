@@ -1,0 +1,8 @@
+{
+  "@context": "https://schema.org",
+  "@type": "CreativeWork",
+  "identifier": "reflection-map",
+  "name": "Reflection Map",
+  "description": "The Reflection Map provides an overview of all structural domains that can be reflected upon.",
+  "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/meta/reflection/reflection-index/reflection-map.md"
+}

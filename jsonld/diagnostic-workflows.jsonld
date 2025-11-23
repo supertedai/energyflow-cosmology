@@ -1,0 +1,8 @@
+{
+  "@context": "https://schema.org",
+  "@type": "CreativeWork",
+  "identifier": "diagnostic-workflows",
+  "name": "Diagnostic Workflows",
+  "description": "These workflows support self-evaluation and validation.",
+  "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/meta/meta-process/workflows/diagnostic-workflows.md"
+}

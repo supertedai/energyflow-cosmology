@@ -1,0 +1,8 @@
+{
+  "@context": "https://schema.org",
+  "@type": "CreativeWork",
+  "identifier": "auth",
+  "name": "auth",
+  "description": "",
+  "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/schema/auth.jsonld"
+}

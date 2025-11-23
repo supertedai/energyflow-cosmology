@@ -1,0 +1,8 @@
+{
+  "@context": "https://schema.org",
+  "@type": "CreativeWork",
+  "identifier": "structural-milestones",
+  "name": "Structural Milestones",
+  "description": "Below is the structured list of milestones in the meta-process architecture.",
+  "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/meta/meta-process/milestones/milestones.md"
+}

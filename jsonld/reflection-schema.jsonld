@@ -1,0 +1,8 @@
+{
+  "@context": "https://schema.org",
+  "@type": "CreativeWork",
+  "identifier": "reflection-schema",
+  "name": "reflection-schema",
+  "description": "**Schema Layer \u2014 ontology + JSON-LD.**",
+  "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/meta/reflection/reflection-schema/aux/reflection-schema/README.md"
+}

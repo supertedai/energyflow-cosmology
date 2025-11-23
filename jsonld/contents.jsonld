@@ -1,0 +1,8 @@
+{
+  "@context": "https://schema.org",
+  "@type": "CreativeWork",
+  "identifier": "contents",
+  "name": "**Contents**",
+  "description": "The directory includes:",
+  "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/docs/papers/README.md"
+}

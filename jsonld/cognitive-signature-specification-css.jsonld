@@ -1,0 +1,8 @@
+{
+  "@context": "https://schema.org",
+  "@type": "CreativeWork",
+  "identifier": "cognitive-signature-specification-css",
+  "name": "Cognitive Signature Specification (CSS)",
+  "description": "This document defines the cognitive signature of the human field involved in the",
+  "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/meta/cognition/cognitive-signature/index.md"
+}

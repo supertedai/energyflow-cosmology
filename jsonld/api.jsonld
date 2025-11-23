@@ -1,0 +1,8 @@
+{
+  "@context": "https://schema.org",
+  "@type": "CreativeWork",
+  "identifier": "api",
+  "name": "api",
+  "description": "**API Layer \u2014 machine-readable model endpoints.**",
+  "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/api/README.md"
+}

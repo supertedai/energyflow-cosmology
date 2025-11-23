@@ -1,0 +1,8 @@
+{
+  "@context": "https://schema.org",
+  "@type": "CreativeWork",
+  "identifier": "self-evaluation-layer",
+  "name": "Self-Evaluation Layer",
+  "description": "The Self-Evaluation layer defines how the meta-process evaluates its own structural performance.",
+  "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/meta/meta-process/self-evaluation/index.md"
+}

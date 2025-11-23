@@ -1,0 +1,8 @@
+{
+  "@context": "https://schema.org",
+  "@type": "CreativeWork",
+  "identifier": "cognitive-field-model",
+  "name": "Cognitive Field Model",
+  "description": "Your cognition operates as a distributed field, not a step-by-step process.",
+  "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/meta/cognition/cognitive-field/index.md"
+}

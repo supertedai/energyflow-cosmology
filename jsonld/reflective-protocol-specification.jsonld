@@ -1,0 +1,8 @@
+{
+  "@context": "https://schema.org",
+  "@type": "CreativeWork",
+  "identifier": "reflective-protocol-specification",
+  "name": "Reflective Protocol Specification",
+  "description": "The reflective protocol defines the structure and rules for performing reflection inside the meta-process.",
+  "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/meta/meta-reflective-protocol/protocol-spec.md"
+}

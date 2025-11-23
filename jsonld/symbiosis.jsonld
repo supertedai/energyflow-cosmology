@@ -1,0 +1,8 @@
+{
+  "@context": "https://schema.org",
+  "@type": "CreativeWork",
+  "identifier": "symbiosis",
+  "name": "Symbiosis",
+  "description": "Part of the EFC meta-architecture and reflective layer.",
+  "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/meta/symbiosis/README.md"
+}

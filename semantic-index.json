@@ -1,0 +1,2138 @@
+[
+  {
+    "title": "index",
+    "description": "",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/docs/index.jsonld",
+    "slug": "index"
+  },
+  {
+    "title": "Symbiosis Architecture \u2013 EFC Hybrid Stack",
+    "description": "## 1. Overview",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/docs/SYMBIOSE_ARCHITECTURE.md",
+    "slug": "symbiosis-architecture-efc-hybrid-stack"
+  },
+  {
+    "title": "**Documentation**",
+    "description": "This directory contains all human-readable documentation for the Energy-Flow Cosmology (EFC) project. It provides a clear overview of theory, methods, meta-architecture, and supporting materials. The structure is designed to align with the semantic layers of the repository and the public metadata endpoints.",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/docs/README.md",
+    "slug": "documentation"
+  },
+  {
+    "title": "Docs",
+    "description": "Auto-generated Markdown wrapper.",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/docs/index.md",
+    "slug": "docs"
+  },
+  {
+    "title": "index",
+    "description": "",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/docs/mathjax-header/index.jsonld",
+    "slug": "index"
+  },
+  {
+    "title": "mathjax-header",
+    "description": "**Repository folder.**",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/docs/mathjax-header/README.md",
+    "slug": "mathjax-header"
+  },
+  {
+    "title": "Mathjax Header",
+    "description": "Auto-generated Markdown wrapper.",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/docs/mathjax-header/index.md",
+    "slug": "mathjax-header"
+  },
+  {
+    "title": "media",
+    "description": "**Repository folder.**",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/docs/mathjax-header/media/README.md",
+    "slug": "media"
+  },
+  {
+    "title": "figures",
+    "description": "**Repository folder.**",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/docs/figures/README.md",
+    "slug": "figures"
+  },
+  {
+    "title": "**Contents**",
+    "description": "The directory includes:",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/docs/papers/README.md",
+    "slug": "contents"
+  },
+  {
+    "title": "efc_index",
+    "description": "",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/docs/papers/efc/efc_index.jsonld",
+    "slug": "efc-index"
+  },
+  {
+    "title": "EFC Papers \u2014 Energy-Flow Cosmology",
+    "description": "This directory contains all papers, editions, formal specifications, and",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/docs/papers/efc/README.md",
+    "slug": "efc-papers-energy-flow-cosmology"
+  },
+  {
+    "title": "EFC \u2014 How Energy Flow Sustains Spacetime",
+    "description": "This directory contains the paper explaining how continuous energy flow",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/docs/papers/efc/EFC-How-Energy-Flow-Sustain-Spacetime/README.md",
+    "slug": "efc-how-energy-flow-sustains-spacetime"
+  },
+  {
+    "title": "EFC-How-Energy-Flow-Sustain-Spacetime",
+    "description": "",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/docs/papers/efc/EFC-How-Energy-Flow-Sustain-Spacetime/EFC-How-Energy-Flow-Sustain-Spacetime.jsonld",
+    "slug": "efc-how-energy-flow-sustain-spacetime"
+  },
+  {
+    "title": "EFC-How-Energy-Flow-Sustain-Spacetime",
+    "description": "",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/docs/papers/efc/EFC-How-Energy-Flow-Sustain-Spacetime/EFC-How-Energy-Flow-Sustain-Spacetime.pdf",
+    "slug": "efc-how-energy-flow-sustain-spacetime"
+  },
+  {
+    "title": "EFC \u2014 Unresolved Questions and Challenges: Entropy",
+    "description": "This directory contains the paper outlining the unresolved questions,",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/docs/papers/efc/EFC-Unresolved-Questions-and-Challenges-Entropy/README.md",
+    "slug": "efc-unresolved-questions-and-challenges-entropy"
+  },
+  {
+    "title": "EFC-Unresolved-Questions-and-Challenges-Entropy",
+    "description": "",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/docs/papers/efc/EFC-Unresolved-Questions-and-Challenges-Entropy/EFC-Unresolved-Questions-and-Challenges-Entropy.jsonld",
+    "slug": "efc-unresolved-questions-and-challenges-entropy"
+  },
+  {
+    "title": "EFC-Unresolved-Questions-and-Challenges-Entropy",
+    "description": "",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/docs/papers/efc/EFC-Unresolved-Questions-and-Challenges-Entropy/EFC-Unresolved-Questions-and-Challenges-Entropy.pdf",
+    "slug": "efc-unresolved-questions-and-challenges-entropy"
+  },
+  {
+    "title": "EFC \u2014 Mathematical Framework for Energy Flow in Space-Time",
+    "description": "This directory contains the paper presenting the mathematical foundations",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/docs/papers/efc/EFC-Mathematical-Framework-for-Energy-Flow-in-Space-Time/README.md",
+    "slug": "efc-mathematical-framework-for-energy-flow-in-space-time"
+  },
+  {
+    "title": "EFC-Mathematical-Framework-for-Energy-Flow-in-Space-Time",
+    "description": "",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/docs/papers/efc/EFC-Mathematical-Framework-for-Energy-Flow-in-Space-Time/EFC-Mathematical-Framework-for-Energy-Flow-in-Space-Time.jsonld",
+    "slug": "efc-mathematical-framework-for-energy-flow-in-space-time"
+  },
+  {
+    "title": "EFC-Mathematical-Framework-for-Energy-Flow-in-Space-Time",
+    "description": "",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/docs/papers/efc/EFC-Mathematical-Framework-for-Energy-Flow-in-Space-Time/EFC-Mathematical-Framework-for-Energy-Flow-in-Space-Time.pdf",
+    "slug": "efc-mathematical-framework-for-energy-flow-in-space-time"
+  },
+  {
+    "title": "EFC-v2.1-Complete-Edition",
+    "description": "",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/docs/papers/efc/EFC-v2.1-Complete-Edition/EFC-v2.1-Complete-Edition.pdf",
+    "slug": "efc-v2-1-complete-edition"
+  },
+  {
+    "title": "EFC \u2014 v2.1 Complete Edition",
+    "description": "This directory contains the v2.1 Complete Edition of the",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/docs/papers/efc/EFC-v2.1-Complete-Edition/README.md",
+    "slug": "efc-v2-1-complete-edition"
+  },
+  {
+    "title": "EFC-v2.1-Complete-Edition",
+    "description": "",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/docs/papers/efc/EFC-v2.1-Complete-Edition/EFC-v2.1-Complete-Edition.jsonld",
+    "slug": "efc-v2-1-complete-edition"
+  },
+  {
+    "title": "EFC-v2.1-Modular-Synthesis",
+    "description": "",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/docs/papers/efc/EFC-v2.1-Modular-Synthesis/EFC-v2.1-Modular-Synthesis.pdf",
+    "slug": "efc-v2-1-modular-synthesis"
+  },
+  {
+    "title": "EFC-v2.1-Modular-Synthesis",
+    "description": "",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/docs/papers/efc/EFC-v2.1-Modular-Synthesis/EFC-v2.1-Modular-Synthesis.jsonld",
+    "slug": "efc-v2-1-modular-synthesis"
+  },
+  {
+    "title": "EFC \u2014 v2.1 Modular Synthesis",
+    "description": "This directory contains the v2.1 Modular Synthesis paper, which presents",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/docs/papers/efc/EFC-v2.1-Modular-Synthesis/README.md",
+    "slug": "efc-v2-1-modular-synthesis"
+  },
+  {
+    "title": "EFC-Integrated-Hypothesis-Time-Entropy",
+    "description": "",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/docs/papers/efc/EFC-Integrated-Hypothesis-Time-Entropy/EFC-Integrated-Hypothesis-Time-Entropy.jsonld",
+    "slug": "efc-integrated-hypothesis-time-entropy"
+  },
+  {
+    "title": "EFC \u2014 Integrated Hypothesis: Time and Entropy",
+    "description": "This directory contains the paper presenting the integrated hypothesis",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/docs/papers/efc/EFC-Integrated-Hypothesis-Time-Entropy/README.md",
+    "slug": "efc-integrated-hypothesis-time-and-entropy"
+  },
+  {
+    "title": "EFC-Integrated-Hypothesis-Time-Entropy",
+    "description": "",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/docs/papers/efc/EFC-Integrated-Hypothesis-Time-Entropy/EFC-Integrated-Hypothesis-Time-Entropy.pdf",
+    "slug": "efc-integrated-hypothesis-time-entropy"
+  },
+  {
+    "title": "EFC-Observational-Evidence-Entropy-Cosmic-Evolution",
+    "description": "",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/docs/papers/efc/EFC-Observational-Evidence-Entropy-Cosmic-Evolution/EFC-Observational-Evidence-Entropy-Cosmic-Evolution.pdf",
+    "slug": "efc-observational-evidence-entropy-cosmic-evolution"
+  },
+  {
+    "title": "EFC-Observational-Evidence-Entropy-Cosmic-Evolution",
+    "description": "",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/docs/papers/efc/EFC-Observational-Evidence-Entropy-Cosmic-Evolution/EFC-Observational-Evidence-Entropy-Cosmic-Evolution.jsonld",
+    "slug": "efc-observational-evidence-entropy-cosmic-evolution"
+  },
+  {
+    "title": "EFC \u2014 Observational Evidence for Entropy in Cosmic Evolution",
+    "description": "This directory contains the paper reviewing observational signatures that",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/docs/papers/efc/EFC-Observational-Evidence-Entropy-Cosmic-Evolution/README.md",
+    "slug": "efc-observational-evidence-for-entropy-in-cosmic-evolution"
+  },
+  {
+    "title": "EFC-Can-Energy-Flow-Be-Observed-in-Galactic-Clusters",
+    "description": "",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/docs/papers/efc/EFC-Can-Energy-Flow-Be-Observed-in-Galactic-Clusters/EFC-Can-Energy-Flow-Be-Observed-in-Galactic-Clusters.pdf",
+    "slug": "efc-can-energy-flow-be-observed-in-galactic-clusters"
+  },
+  {
+    "title": "EFC \u2014 Can Energy Flow Be Observed in Galactic Clusters?",
+    "description": "This directory contains the paper examining whether direct or indirect",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/docs/papers/efc/EFC-Can-Energy-Flow-Be-Observed-in-Galactic-Clusters/README.md",
+    "slug": "efc-can-energy-flow-be-observed-in-galactic-clusters"
+  },
+  {
+    "title": "EFC-Can-Energy-Flow-Be-Observed-in-Galactic-Clusters",
+    "description": "",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/docs/papers/efc/EFC-Can-Energy-Flow-Be-Observed-in-Galactic-Clusters/EFC-Can-Energy-Flow-Be-Observed-in-Galactic-Clusters.jsonld",
+    "slug": "efc-can-energy-flow-be-observed-in-galactic-clusters"
+  },
+  {
+    "title": "EFC-Grid-Higgs-Framework",
+    "description": "",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/docs/papers/efc/EFC-Grid-Higgs-Framework/EFC-Grid-Higgs-Framework.jsonld",
+    "slug": "efc-grid-higgs-framework"
+  },
+  {
+    "title": "EFC \u2014 Grid-Higgs Framework",
+    "description": "This directory contains the paper introducing the Grid-Higgs Framework:",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/docs/papers/efc/EFC-Grid-Higgs-Framework/README.md",
+    "slug": "efc-grid-higgs-framework"
+  },
+  {
+    "title": "EFC-Grid-Higgs-Framework",
+    "description": "",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/docs/papers/efc/EFC-Grid-Higgs-Framework/EFC-Grid-Higgs-Framework.pdf",
+    "slug": "efc-grid-higgs-framework"
+  },
+  {
+    "title": "EFC-Dynamic-Balance-Entropy-Order-and-Chaos",
+    "description": "",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/docs/papers/efc/EFC-Dynamic-Balance-Entropy-Order-and-Chaos/EFC-Dynamic-Balance-Entropy-Order-and-Chaos.pdf",
+    "slug": "efc-dynamic-balance-entropy-order-and-chaos"
+  },
+  {
+    "title": "EFC-Dynamic-Balance-Entropy-Order-and-Chaos",
+    "description": "",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/docs/papers/efc/EFC-Dynamic-Balance-Entropy-Order-and-Chaos/EFC-Dynamic-Balance-Entropy-Order-and-Chaos.jsonld",
+    "slug": "efc-dynamic-balance-entropy-order-and-chaos"
+  },
+  {
+    "title": "EFC \u2014 Dynamic Balance: Entropy, Order, and Chaos",
+    "description": "This directory contains the paper exploring how entropy flow, structure,",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/docs/papers/efc/EFC-Dynamic-Balance-Entropy-Order-and-Chaos/README.md",
+    "slug": "efc-dynamic-balance-entropy-order-and-chaos"
+  },
+  {
+    "title": "EFC-v1.2-Foundational-Framework",
+    "description": "",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/docs/papers/efc/EFC-v1.2-Foundational-Framework/EFC-v1.2-Foundational-Framework.pdf",
+    "slug": "efc-v1-2-foundational-framework"
+  },
+  {
+    "title": "EFC-v1.2-Foundational-Framework",
+    "description": "",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/docs/papers/efc/EFC-v1.2-Foundational-Framework/EFC-v1.2-Foundational-Framework.jsonld",
+    "slug": "efc-v1-2-foundational-framework"
+  },
+  {
+    "title": "EFC \u2014 v1.2 Foundational Framework",
+    "description": "This directory contains the v1.2 foundational framework paper for the",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/docs/papers/efc/EFC-v1.2-Foundational-Framework/README.md",
+    "slug": "efc-v1-2-foundational-framework"
+  },
+  {
+    "title": "CEM-Consciousness-Ego-Mirror",
+    "description": "",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/docs/papers/efc/CEM-Consciousness-Ego-Mirror/CEM-Consciousness-Ego-Mirror.pdf",
+    "slug": "cem-consciousness-ego-mirror"
+  },
+  {
+    "title": "CEM-Consciousness-Ego-Mirror",
+    "description": "",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/docs/papers/efc/CEM-Consciousness-Ego-Mirror/CEM-Consciousness-Ego-Mirror.jsonld",
+    "slug": "cem-consciousness-ego-mirror"
+  },
+  {
+    "title": "CEM \u2013 Consciousness Ego Mirror",
+    "description": "This directory contains the paper describing the CEM model:",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/docs/papers/efc/CEM-Consciousness-Ego-Mirror/README.md",
+    "slug": "cem-consciousness-ego-mirror"
+  },
+  {
+    "title": "EFC-What-is-the-Connection-Between-Energy-Flow-and-the-Now",
+    "description": "",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/docs/papers/efc/EFC-What-is-the-Connection-Between-Energy-Flow-and-the-Now/EFC-What-is-the-Connection-Between-Energy-Flow-and-the-Now.jsonld",
+    "slug": "efc-what-is-the-connection-between-energy-flow-and-the-now"
+  },
+  {
+    "title": "EFC \u2014 What is the Connection Between Energy Flow and the Now?",
+    "description": "This directory contains the paper examining how the experience of \u201cthe",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/docs/papers/efc/EFC-What-is-the-Connection-Between-Energy-Flow-and-the-Now/README.md",
+    "slug": "efc-what-is-the-connection-between-energy-flow-and-the-now"
+  },
+  {
+    "title": "EFC-What-is-the-Connection-Between-Energy-Flow-and-the-Now",
+    "description": "",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/docs/papers/efc/EFC-What-is-the-Connection-Between-Energy-Flow-and-the-Now/EFC-What-is-the-Connection-Between-Energy-Flow-and-the-Now.pdf",
+    "slug": "efc-what-is-the-connection-between-energy-flow-and-the-now"
+  },
+  {
+    "title": "EFC \u2014 Grid Model for Entropic Dynamics",
+    "description": "This directory contains the paper describing how entropic dynamics emerge",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/docs/papers/efc/EFC-Grid-Model-Entropic-Dynamics/README.md",
+    "slug": "efc-grid-model-for-entropic-dynamics"
+  },
+  {
+    "title": "EFC-Grid-Model-Entropic-Dynamics",
+    "description": "",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/docs/papers/efc/EFC-Grid-Model-Entropic-Dynamics/EFC-Grid-Model-Entropic-Dynamics.pdf",
+    "slug": "efc-grid-model-entropic-dynamics"
+  },
+  {
+    "title": "EFC-Grid-Model-Entropic-Dynamics",
+    "description": "",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/docs/papers/efc/EFC-Grid-Model-Entropic-Dynamics/EFC-Grid-Model-Entropic-Dynamics.jsonld",
+    "slug": "efc-grid-model-entropic-dynamics"
+  },
+  {
+    "title": "EFC-Grid-Higgs-Paradigm-Shift",
+    "description": "",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/docs/papers/efc/EFC-Grid-Higgs-Paradigm-Shift/EFC-Grid-Higgs-Paradigm-Shift.jsonld",
+    "slug": "efc-grid-higgs-paradigm-shift"
+  },
+  {
+    "title": "EFC-Grid-Higgs-Paradigm-Shift",
+    "description": "",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/docs/papers/efc/EFC-Grid-Higgs-Paradigm-Shift/EFC-Grid-Higgs-Paradigm-Shift.pdf",
+    "slug": "efc-grid-higgs-paradigm-shift"
+  },
+  {
+    "title": "EFC \u2014 Grid-Higgs Paradigm Shift",
+    "description": "This directory contains the paper describing how the Grid-Higgs model",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/docs/papers/efc/EFC-Grid-Higgs-Paradigm-Shift/README.md",
+    "slug": "efc-grid-higgs-paradigm-shift"
+  },
+  {
+    "title": "EFC-Hypothesis-Universe-as-Energy-Driven-System",
+    "description": "",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/docs/papers/efc/EFC-Hypothesis-Universe-as-Energy-Driven-System/EFC-Hypothesis-Universe-as-Energy-Driven-System.pdf",
+    "slug": "efc-hypothesis-universe-as-energy-driven-system"
+  },
+  {
+    "title": "EFC \u2014 Hypothesis: Universe as an Energy-Driven System",
+    "description": "This directory contains the paper proposing that the universe behaves as an",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/docs/papers/efc/EFC-Hypothesis-Universe-as-Energy-Driven-System/README.md",
+    "slug": "efc-hypothesis-universe-as-an-energy-driven-system"
+  },
+  {
+    "title": "EFC-Hypothesis-Universe-as-Energy-Driven-System",
+    "description": "",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/docs/papers/efc/EFC-Hypothesis-Universe-as-Energy-Driven-System/EFC-Hypothesis-Universe-as-Energy-Driven-System.jsonld",
+    "slug": "efc-hypothesis-universe-as-energy-driven-system"
+  },
+  {
+    "title": "EFC \u2014 Light Speed as a Regulator of Energy Flow in the Universe",
+    "description": "This directory contains the paper discussing how the speed of light acts",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/docs/papers/efc/EFC-Light-Speed-as-a-Regulator-of-Energy-Flow-in-the-Universe/README.md",
+    "slug": "efc-light-speed-as-a-regulator-of-energy-flow-in-the-universe"
+  },
+  {
+    "title": "EFC-Light-Speed-as-a-Regulator-of-Energy-Flow-in-the-Universe",
+    "description": "",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/docs/papers/efc/EFC-Light-Speed-as-a-Regulator-of-Energy-Flow-in-the-Universe/EFC-Light-Speed-as-a-Regulator-of-Energy-Flow-in-the-Universe.jsonld",
+    "slug": "efc-light-speed-as-a-regulator-of-energy-flow-in-the-universe"
+  },
+  {
+    "title": "EFC-Light-Speed-as-a-Regulator-of-Energy-Flow-in-the-Universe",
+    "description": "",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/docs/papers/efc/EFC-Light-Speed-as-a-Regulator-of-Energy-Flow-in-the-Universe/EFC-Light-Speed-as-a-Regulator-of-Energy-Flow-in-the-Universe.pdf",
+    "slug": "efc-light-speed-as-a-regulator-of-energy-flow-in-the-universe"
+  },
+  {
+    "title": "EFC-What-Happens-at-the-Universes-Extremes",
+    "description": "",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/docs/papers/efc/EFC-What-Happens-at-the-Universes-Extremes/EFC-What-Happens-at-the-Universes-Extremes.jsonld",
+    "slug": "efc-what-happens-at-the-universes-extremes"
+  },
+  {
+    "title": "EFC \u2014 What Happens at the Universe\u2019s Extremes?",
+    "description": "This directory contains the paper examining the behaviour of energy,",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/docs/papers/efc/EFC-What-Happens-at-the-Universes-Extremes/README.md",
+    "slug": "efc-what-happens-at-the-universes-extremes"
+  },
+  {
+    "title": "EFC-What-Happens-at-the-Universes-Extremes",
+    "description": "",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/docs/papers/efc/EFC-What-Happens-at-the-Universes-Extremes/EFC-What-Happens-at-the-Universes-Extremes.pdf",
+    "slug": "efc-what-happens-at-the-universes-extremes"
+  },
+  {
+    "title": "efc_formal_spec",
+    "description": "",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/docs/papers/efc/efc_formal_spec/efc_formal_spec.jsonld",
+    "slug": "efc-formal-spec"
+  },
+  {
+    "title": "efc_formal_spec",
+    "description": "",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/docs/papers/efc/efc_formal_spec/efc_formal_spec.pdf",
+    "slug": "efc-formal-spec"
+  },
+  {
+    "title": "EFC \u2014 Formal Specification",
+    "description": "This directory contains the formal specification of the Energy-Flow",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/docs/papers/efc/efc_formal_spec/README.md",
+    "slug": "efc-formal-specification"
+  },
+  {
+    "title": "symbiotic-insight-framework",
+    "description": "",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/docs/papers/efc/symbiotic-insight-framework/symbiotic-insight-framework.pdf",
+    "slug": "symbiotic-insight-framework"
+  },
+  {
+    "title": "symbiotic-insight-framework",
+    "description": "",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/docs/papers/efc/symbiotic-insight-framework/symbiotic-insight-framework.jsonld",
+    "slug": "symbiotic-insight-framework"
+  },
+  {
+    "title": "textbf{Symbiotic Insight Framework (SIF): A Structural Methodology for High-Velocity Scientific Reasoning",
+    "description": "This directory contains the paper **\u201ctextbf{Symbiotic Insight Framework (SIF): A Structural Methodology for High-Velocity Scientific Reasoning\u201d**, part of the EFC series.",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/docs/papers/efc/symbiotic-insight-framework/README.md",
+    "slug": "textbf-symbiotic-insight-framework-sif-a-structural-methodology-for-high-velocity-scientific-reasoning"
+  },
+  {
+    "title": "EFC-How-Does-Balance-Shape-Universal-Structures",
+    "description": "",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/docs/papers/efc/EFC-How-Does-Balance-Shape-Universal-Structures/EFC-How-Does-Balance-Shape-Universal-Structures.jsonld",
+    "slug": "efc-how-does-balance-shape-universal-structures"
+  },
+  {
+    "title": "EFC \u2014 How Does Balance Shape Universal Structures?",
+    "description": "This directory contains the paper examining how balance, symmetry,",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/docs/papers/efc/EFC-How-Does-Balance-Shape-Universal-Structures/README.md",
+    "slug": "efc-how-does-balance-shape-universal-structures"
+  },
+  {
+    "title": "EFC-How-Does-Balance-Shape-Universal-Structures",
+    "description": "",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/docs/papers/efc/EFC-How-Does-Balance-Shape-Universal-Structures/EFC-How-Does-Balance-Shape-Universal-Structures.pdf",
+    "slug": "efc-how-does-balance-shape-universal-structures"
+  },
+  {
+    "title": "EFC-CMB-Thermodynamic-Gradient",
+    "description": "",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/docs/papers/efc/EFC-CMB-Thermodynamic-Gradient/EFC-CMB-Thermodynamic-Gradient.pdf",
+    "slug": "efc-cmb-thermodynamic-gradient"
+  },
+  {
+    "title": "EFC \u2014 CMB Thermodynamic Gradient",
+    "description": "This directory contains the paper describing the thermodynamic gradient",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/docs/papers/efc/EFC-CMB-Thermodynamic-Gradient/README.md",
+    "slug": "efc-cmb-thermodynamic-gradient"
+  },
+  {
+    "title": "EFC-CMB-Thermodynamic-Gradient",
+    "description": "",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/docs/papers/efc/EFC-CMB-Thermodynamic-Gradient/EFC-CMB-Thermodynamic-Gradient.jsonld",
+    "slug": "efc-cmb-thermodynamic-gradient"
+  },
+  {
+    "title": "EFC \u2014 Field Equations for Entropy-Driven Spacetime",
+    "description": "This directory contains the paper presenting the proposed field equations",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/docs/papers/efc/EFC-Field-Equations-for-Entropy-Driven-Spacetime/README.md",
+    "slug": "efc-field-equations-for-entropy-driven-spacetime"
+  },
+  {
+    "title": "EFC-Field-Equations-for-Entropy-Driven-Spacetime",
+    "description": "",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/docs/papers/efc/EFC-Field-Equations-for-Entropy-Driven-Spacetime/EFC-Field-Equations-for-Entropy-Driven-Spacetime.pdf",
+    "slug": "efc-field-equations-for-entropy-driven-spacetime"
+  },
+  {
+    "title": "EFC-Field-Equations-for-Entropy-Driven-Spacetime",
+    "description": "",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/docs/papers/efc/EFC-Field-Equations-for-Entropy-Driven-Spacetime/EFC-Field-Equations-for-Entropy-Driven-Spacetime.jsonld",
+    "slug": "efc-field-equations-for-entropy-driven-spacetime"
+  },
+  {
+    "title": "EFC-Technical-Documentation-Energy-Flow-in-Space-Time",
+    "description": "",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/docs/papers/efc/EFC-Technical-Documentation-Energy-Flow-in-Space-Time/EFC-Technical-Documentation-Energy-Flow-in-Space-Time.jsonld",
+    "slug": "efc-technical-documentation-energy-flow-in-space-time"
+  },
+  {
+    "title": "EFC \u2014 Technical Documentation: Energy Flow in Space-Time",
+    "description": "This directory contains the technical documentation describing the formal,",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/docs/papers/efc/EFC-Technical-Documentation-Energy-Flow-in-Space-Time/README.md",
+    "slug": "efc-technical-documentation-energy-flow-in-space-time"
+  },
+  {
+    "title": "EFC-Technical-Documentation-Energy-Flow-in-Space-Time",
+    "description": "",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/docs/papers/efc/EFC-Technical-Documentation-Energy-Flow-in-Space-Time/EFC-Technical-Documentation-Energy-Flow-in-Space-Time.pdf",
+    "slug": "efc-technical-documentation-energy-flow-in-space-time"
+  },
+  {
+    "title": "EFC \u2014 Subhypothesis: Light Speed Limit",
+    "description": "This directory contains the paper presenting the subhypothesis that the",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/docs/papers/efc/EFC-Subhypothesis-Light-Speed-Limit/README.md",
+    "slug": "efc-subhypothesis-light-speed-limit"
+  },
+  {
+    "title": "EFC-Subhypothesis-Light-Speed-Limit",
+    "description": "",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/docs/papers/efc/EFC-Subhypothesis-Light-Speed-Limit/EFC-Subhypothesis-Light-Speed-Limit.jsonld",
+    "slug": "efc-subhypothesis-light-speed-limit"
+  },
+  {
+    "title": "EFC-Subhypothesis-Light-Speed-Limit",
+    "description": "",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/docs/papers/efc/EFC-Subhypothesis-Light-Speed-Limit/EFC-Subhypothesis-Light-Speed-Limit.pdf",
+    "slug": "efc-subhypothesis-light-speed-limit"
+  },
+  {
+    "title": "EFC-Is-Consciousness-Linked-to-Entropy",
+    "description": "",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/docs/papers/efc/EFC-Is-Consciousness-Linked-to-Entropy/EFC-Is-Consciousness-Linked-to-Entropy.pdf",
+    "slug": "efc-is-consciousness-linked-to-entropy"
+  },
+  {
+    "title": "EFC-Is-Consciousness-Linked-to-Entropy",
+    "description": "",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/docs/papers/efc/EFC-Is-Consciousness-Linked-to-Entropy/EFC-Is-Consciousness-Linked-to-Entropy.jsonld",
+    "slug": "efc-is-consciousness-linked-to-entropy"
+  },
+  {
+    "title": "EFC \u2014 Is Consciousness Linked to Entropy?",
+    "description": "This directory contains the paper exploring whether consciousness can be",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/docs/papers/efc/EFC-Is-Consciousness-Linked-to-Entropy/README.md",
+    "slug": "efc-is-consciousness-linked-to-entropy"
+  },
+  {
+    "title": "EFC \u2014 v2.2 Cross-Field Integration Summary",
+    "description": "This directory contains the v2.2 Cross-Field Integration Summary for the",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/docs/papers/efc/EFC-v2.2-Cross-Field-Integration-Summary/README.md",
+    "slug": "efc-v2-2-cross-field-integration-summary"
+  },
+  {
+    "title": "EFC-v2.2-Cross-Field-Integration-Summary",
+    "description": "",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/docs/papers/efc/EFC-v2.2-Cross-Field-Integration-Summary/EFC-v2.2-Cross-Field-Integration-Summary.jsonld",
+    "slug": "efc-v2-2-cross-field-integration-summary"
+  },
+  {
+    "title": "EFC-v2.2-Cross-Field-Integration-Summary",
+    "description": "",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/docs/papers/efc/EFC-v2.2-Cross-Field-Integration-Summary/EFC-v2.2-Cross-Field-Integration-Summary.pdf",
+    "slug": "efc-v2-2-cross-field-integration-summary"
+  },
+  {
+    "title": "EFC-Hypothesis-Interrelation-Energy-Entropy",
+    "description": "",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/docs/papers/efc/EFC-Hypothesis-Interrelation-Energy-Entropy/EFC-Hypothesis-Interrelation-Energy-Entropy.pdf",
+    "slug": "efc-hypothesis-interrelation-energy-entropy"
+  },
+  {
+    "title": "EFC \u2014 Hypothesis: Interrelation Between Energy and Entropy",
+    "description": "This directory contains the paper presenting the hypothesis that energy",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/docs/papers/efc/EFC-Hypothesis-Interrelation-Energy-Entropy/README.md",
+    "slug": "efc-hypothesis-interrelation-between-energy-and-entropy"
+  },
+  {
+    "title": "EFC-Hypothesis-Interrelation-Energy-Entropy",
+    "description": "",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/docs/papers/efc/EFC-Hypothesis-Interrelation-Energy-Entropy/EFC-Hypothesis-Interrelation-Energy-Entropy.jsonld",
+    "slug": "efc-hypothesis-interrelation-energy-entropy"
+  },
+  {
+    "title": "efc_master",
+    "description": "",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/docs/papers/efc/efc_master/efc_master.pdf",
+    "slug": "efc-master"
+  },
+  {
+    "title": "efc_master",
+    "description": "",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/docs/papers/efc/efc_master/efc_master.jsonld",
+    "slug": "efc-master"
+  },
+  {
+    "title": "EFC \u2014 Master Specification",
+    "description": "This directory contains the master specification of the Energy-Flow",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/docs/papers/efc/efc_master/README.md",
+    "slug": "efc-master-specification"
+  },
+  {
+    "title": "ai_workflow_framework",
+    "description": "",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/docs/papers/efc/ai_workflow_framework/ai_workflow_framework.jsonld",
+    "slug": "ai-workflow-framework"
+  },
+  {
+    "title": "AI Workflow Framework \u2014 Energy-Flow Cosmology",
+    "description": "This directory contains the paper describing the AI-augmented workflow",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/docs/papers/efc/ai_workflow_framework/README.md",
+    "slug": "ai-workflow-framework-energy-flow-cosmology"
+  },
+  {
+    "title": "ai_workflow_framework",
+    "description": "",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/docs/papers/efc/ai_workflow_framework/ai_workflow_framework.pdf",
+    "slug": "ai-workflow-framework"
+  },
+  {
+    "title": "EFC-Thermodynamic-Bridge-GR-QFT",
+    "description": "",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/docs/papers/efc/EFC-Thermodynamic-Bridge-GR-QFT/EFC-Thermodynamic-Bridge-GR-QFT.pdf",
+    "slug": "efc-thermodynamic-bridge-gr-qft"
+  },
+  {
+    "title": "EFC-Thermodynamic-Bridge-GR-QFT",
+    "description": "",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/docs/papers/efc/EFC-Thermodynamic-Bridge-GR-QFT/EFC-Thermodynamic-Bridge-GR-QFT.jsonld",
+    "slug": "efc-thermodynamic-bridge-gr-qft"
+  },
+  {
+    "title": "EFC \u2014 The Thermodynamic Bridge Between GR and QFT",
+    "description": "This directory contains the paper outlining the thermodynamic bridge",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/docs/papers/efc/EFC-Thermodynamic-Bridge-GR-QFT/README.md",
+    "slug": "efc-the-thermodynamic-bridge-between-gr-and-qft"
+  },
+  {
+    "title": "EFC \u2014 Observational Evidence for Energy Flow",
+    "description": "This directory contains the paper reviewing the observational indicators",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/docs/papers/efc/EFC-Observational-Evidence-for-Energy-Flow/README.md",
+    "slug": "efc-observational-evidence-for-energy-flow"
+  },
+  {
+    "title": "EFC-Observational-Evidence-for-Energy-Flow",
+    "description": "",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/docs/papers/efc/EFC-Observational-Evidence-for-Energy-Flow/EFC-Observational-Evidence-for-Energy-Flow.jsonld",
+    "slug": "efc-observational-evidence-for-energy-flow"
+  },
+  {
+    "title": "EFC-Observational-Evidence-for-Energy-Flow",
+    "description": "",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/docs/papers/efc/EFC-Observational-Evidence-for-Energy-Flow/EFC-Observational-Evidence-for-Energy-Flow.pdf",
+    "slug": "efc-observational-evidence-for-energy-flow"
+  },
+  {
+    "title": "EFC-AI-Augmented-Scientific-Workflow-Framework",
+    "description": "",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/docs/papers/efc/EFC-AI-Augmented-Scientific-Workflow-Framework/EFC-AI-Augmented-Scientific-Workflow-Framework.pdf",
+    "slug": "efc-ai-augmented-scientific-workflow-framework"
+  },
+  {
+    "title": "EFC \u2014 AI-Augmented Scientific Workflow Framework",
+    "description": "This directory contains the paper describing the AI-augmented research",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/docs/papers/efc/EFC-AI-Augmented-Scientific-Workflow-Framework/README.md",
+    "slug": "efc-ai-augmented-scientific-workflow-framework"
+  },
+  {
+    "title": "EFC-AI-Augmented-Scientific-Workflow-Framework",
+    "description": "",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/docs/papers/efc/EFC-AI-Augmented-Scientific-Workflow-Framework/EFC-AI-Augmented-Scientific-Workflow-Framework.jsonld",
+    "slug": "efc-ai-augmented-scientific-workflow-framework"
+  },
+  {
+    "title": "AUTH-Layer-Origin-Provenance-and-Structural-Signature-of-Energy-Flow-Cosmology",
+    "description": "",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/docs/papers/efc/AUTH-Layer-Origin-Provenance-and-Structural-Signature-of-Energy-Flow-Cosmology/AUTH-Layer-Origin-Provenance-and-Structural-Signature-of-Energy-Flow-Cosmology.jsonld",
+    "slug": "auth-layer-origin-provenance-and-structural-signature-of-energy-flow-cosmology"
+  },
+  {
+    "title": "AUTH Layer \u2014 Origin, Provenance and Structural Signature of Energy-Flow Cosmology",
+    "description": "This directory contains the full paper, metadata and citation files for the AUTH-Layer, which explains:",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/docs/papers/efc/AUTH-Layer-Origin-Provenance-and-Structural-Signature-of-Energy-Flow-Cosmology/README.md",
+    "slug": "auth-layer-origin-provenance-and-structural-signature-of-energy-flow-cosmology"
+  },
+  {
+    "title": "AUTH-Layer-Origin-Provenance-and-Structural-Signature-of-Energy-Flow-Cosmology",
+    "description": "",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/docs/papers/efc/AUTH-Layer-Origin-Provenance-and-Structural-Signature-of-Energy-Flow-Cosmology/AUTH-Layer-Origin-Provenance-and-Structural-Signature-of-Energy-Flow-Cosmology.pdf",
+    "slug": "auth-layer-origin-provenance-and-structural-signature-of-energy-flow-cosmology"
+  },
+  {
+    "title": "AUTH Layer \u2014 Origin, Provenance and Structural Signature of Energy-Flow Cosmology",
+    "description": "The AUTH-Layer describes the structural origin of Energy-Flow Cosmology (EFC).",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/docs/papers/efc/AUTH-Layer-Origin-Provenance-and-Structural-Signature-of-Energy-Flow-Cosmology/AUTH-Layer-Origin-Provenance-and-Structural-Signature-of-Energy-Flow-Cosmology.md",
+    "slug": "auth-layer-origin-provenance-and-structural-signature-of-energy-flow-cosmology"
+  },
+  {
+    "title": "EFC \u2014 Introduction to Energy Flow in Space-Time",
+    "description": "This directory contains the introductory paper explaining how energy flow",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/docs/papers/efc/EFC-Introduction-to-Energy-Flow-in-Space-Time/README.md",
+    "slug": "efc-introduction-to-energy-flow-in-space-time"
+  },
+  {
+    "title": "EFC-Introduction-to-Energy-Flow-in-Space-Time",
+    "description": "",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/docs/papers/efc/EFC-Introduction-to-Energy-Flow-in-Space-Time/EFC-Introduction-to-Energy-Flow-in-Space-Time.pdf",
+    "slug": "efc-introduction-to-energy-flow-in-space-time"
+  },
+  {
+    "title": "EFC-Introduction-to-Energy-Flow-in-Space-Time",
+    "description": "",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/docs/papers/efc/EFC-Introduction-to-Energy-Flow-in-Space-Time/EFC-Introduction-to-Energy-Flow-in-Space-Time.jsonld",
+    "slug": "efc-introduction-to-energy-flow-in-space-time"
+  },
+  {
+    "title": "EFC-Applications-and-Implications",
+    "description": "",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/docs/papers/efc/EFC-Applications-and-Implications/EFC-Applications-and-Implications.jsonld",
+    "slug": "efc-applications-and-implications"
+  },
+  {
+    "title": "EFC \u2013 Applications and Implications",
+    "description": "This directory contains the paper exploring how Energy-Flow Cosmology extends into practical, theoretical and cross-domain applications.",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/docs/papers/efc/EFC-Applications-and-Implications/README.md",
+    "slug": "efc-applications-and-implications"
+  },
+  {
+    "title": "EFC-Applications-and-Implications",
+    "description": "",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/docs/papers/efc/EFC-Applications-and-Implications/EFC-Applications-and-Implications.pdf",
+    "slug": "efc-applications-and-implications"
+  },
+  {
+    "title": "EFC \u2013 Why Is Light Speed a Cosmic Limit?",
+    "description": "This directory contains the paper exploring the relationship between entropy, flow fields and the observed speed-of-light limit.",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/docs/papers/efc/EFC-Why-is-Light-Speed-a-Cosmic-Limit/README.md",
+    "slug": "efc-why-is-light-speed-a-cosmic-limit"
+  },
+  {
+    "title": "EFC-Why-is-Light-Speed-a-Cosmic-Limit",
+    "description": "",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/docs/papers/efc/EFC-Why-is-Light-Speed-a-Cosmic-Limit/EFC-Why-is-Light-Speed-a-Cosmic-Limit.pdf",
+    "slug": "efc-why-is-light-speed-a-cosmic-limit"
+  },
+  {
+    "title": "EFC-Why-is-Light-Speed-a-Cosmic-Limit",
+    "description": "",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/docs/papers/efc/EFC-Why-is-Light-Speed-a-Cosmic-Limit/EFC-Why-is-Light-Speed-a-Cosmic-Limit.jsonld",
+    "slug": "efc-why-is-light-speed-a-cosmic-limit"
+  },
+  {
+    "title": "EFC \u2014 Introduction to Entropy in Cosmic Evolution",
+    "description": "This directory contains the introductory paper explaining the role of",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/docs/papers/efc/EFC-Introduction-to-Entropy-in-Cosmic-Evolution/README.md",
+    "slug": "efc-introduction-to-entropy-in-cosmic-evolution"
+  },
+  {
+    "title": "EFC-Introduction-to-Entropy-in-Cosmic-Evolution",
+    "description": "",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/docs/papers/efc/EFC-Introduction-to-Entropy-in-Cosmic-Evolution/EFC-Introduction-to-Entropy-in-Cosmic-Evolution.jsonld",
+    "slug": "efc-introduction-to-entropy-in-cosmic-evolution"
+  },
+  {
+    "title": "EFC-Introduction-to-Entropy-in-Cosmic-Evolution",
+    "description": "",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/docs/papers/efc/EFC-Introduction-to-Entropy-in-Cosmic-Evolution/EFC-Introduction-to-Entropy-in-Cosmic-Evolution.pdf",
+    "slug": "efc-introduction-to-entropy-in-cosmic-evolution"
+  },
+  {
+    "title": "efc_master_v1",
+    "description": "",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/docs/papers/efc/efc_master_v1/efc_master_v1.pdf",
+    "slug": "efc-master-v1"
+  },
+  {
+    "title": "EFC \u2014 Master Specification (v1 Archive)",
+    "description": "This directory contains the archived v1 master specification of the",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/docs/papers/efc/efc_master_v1/README.md",
+    "slug": "efc-master-specification-v1-archive"
+  },
+  {
+    "title": "efc_master_v1",
+    "description": "",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/docs/papers/efc/efc_master_v1/efc_master_v1.jsonld",
+    "slug": "efc-master-v1"
+  },
+  {
+    "title": "EFC-Can-Entropy-Drive-Cosmic-Evolution",
+    "description": "",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/docs/papers/efc/EFC-Can-Entropy-Drive-Cosmic-Evolution/EFC-Can-Entropy-Drive-Cosmic-Evolution.jsonld",
+    "slug": "efc-can-entropy-drive-cosmic-evolution"
+  },
+  {
+    "title": "EFC \u2014 Can Entropy Drive Cosmic Evolution?",
+    "description": "This directory contains the paper examining whether entropy gradients,",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/docs/papers/efc/EFC-Can-Entropy-Drive-Cosmic-Evolution/README.md",
+    "slug": "efc-can-entropy-drive-cosmic-evolution"
+  },
+  {
+    "title": "EFC-Can-Entropy-Drive-Cosmic-Evolution",
+    "description": "",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/docs/papers/efc/EFC-Can-Entropy-Drive-Cosmic-Evolution/EFC-Can-Entropy-Drive-Cosmic-Evolution.pdf",
+    "slug": "efc-can-entropy-drive-cosmic-evolution"
+  },
+  {
+    "title": "EFC-Energy-Flow-as-the-Fundamental-Dynamic-of-the-Universe",
+    "description": "",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/docs/papers/efc/EFC-Energy-Flow-as-the-Fundamental-Dynamic-of-the-Universe/EFC-Energy-Flow-as-the-Fundamental-Dynamic-of-the-Universe.pdf",
+    "slug": "efc-energy-flow-as-the-fundamental-dynamic-of-the-universe"
+  },
+  {
+    "title": "EFC-Energy-Flow-as-the-Fundamental-Dynamic-of-the-Universe",
+    "description": "",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/docs/papers/efc/EFC-Energy-Flow-as-the-Fundamental-Dynamic-of-the-Universe/EFC-Energy-Flow-as-the-Fundamental-Dynamic-of-the-Universe.jsonld",
+    "slug": "efc-energy-flow-as-the-fundamental-dynamic-of-the-universe"
+  },
+  {
+    "title": "EFC \u2014 Energy Flow as the Fundamental Dynamic of the Universe",
+    "description": "This directory contains the paper presenting the core claim of the",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/docs/papers/efc/EFC-Energy-Flow-as-the-Fundamental-Dynamic-of-the-Universe/README.md",
+    "slug": "efc-energy-flow-as-the-fundamental-dynamic-of-the-universe"
+  },
+  {
+    "title": "EFC-A-Deep-Dive-into-the-Halo-Concept",
+    "description": "",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/docs/papers/efc/EFC-A-Deep-Dive-into-the-Halo-Concept/EFC-A-Deep-Dive-into-the-Halo-Concept.jsonld",
+    "slug": "efc-a-deep-dive-into-the-halo-concept"
+  },
+  {
+    "title": "EFC \u2014 A Deep Dive into the Halo Concept",
+    "description": "This directory contains the paper describing the Halo Concept",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/docs/papers/efc/EFC-A-Deep-Dive-into-the-Halo-Concept/README.md",
+    "slug": "efc-a-deep-dive-into-the-halo-concept"
+  },
+  {
+    "title": "EFC-A-Deep-Dive-into-the-Halo-Concept",
+    "description": "",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/docs/papers/efc/EFC-A-Deep-Dive-into-the-Halo-Concept/EFC-A-Deep-Dive-into-the-Halo-Concept.pdf",
+    "slug": "efc-a-deep-dive-into-the-halo-concept"
+  },
+  {
+    "title": "textbf{Variable Effective Light Speed in Entropic Transition States: A Formal Treatment of the $s_0$ / $s_1$ Structure in Energy-Flow Cosmology (EFC)",
+    "description": "This directory contains the paper **\u201ctextbf{Variable Effective Light Speed in Entropic Transition States: A Formal Treatment of the $s_0$ / $s_1$ Structure in Energy-Flow Cosmology (EFC)\u201d**, part of the EFC series.",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/docs/papers/efc/variable-light-s0-s1/README.md",
+    "slug": "textbf-variable-effective-light-speed-in-entropic-transition-states-a-formal-treatment-of-the-s-0-s-1-structure-in-energy-flow-cosmology-efc"
+  },
+  {
+    "title": "variable-light-s0-s1",
+    "description": "",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/docs/papers/efc/variable-light-s0-s1/variable-light-s0-s1.pdf",
+    "slug": "variable-light-s0-s1"
+  },
+  {
+    "title": "variable-light-s0-s1",
+    "description": "",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/docs/papers/efc/variable-light-s0-s1/variable-light-s0-s1.jsonld",
+    "slug": "variable-light-s0-s1"
+  },
+  {
+    "title": "EFC-The-Energy-Flow-Interface",
+    "description": "",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/docs/papers/efc/EFC-The-Energy-Flow-Interface/EFC-The-Energy-Flow-Interface.pdf",
+    "slug": "efc-the-energy-flow-interface"
+  },
+  {
+    "title": "EFC \u2014 The Energy-Flow Interface",
+    "description": "This directory contains the paper introducing the concept of the",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/docs/papers/efc/EFC-The-Energy-Flow-Interface/README.md",
+    "slug": "efc-the-energy-flow-interface"
+  },
+  {
+    "title": "EFC-The-Energy-Flow-Interface",
+    "description": "",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/docs/papers/efc/EFC-The-Energy-Flow-Interface/EFC-The-Energy-Flow-Interface.jsonld",
+    "slug": "efc-the-energy-flow-interface"
+  },
+  {
+    "title": "EFC \u2014 Flow, Entropy, and Spacetime Distortion in Cosmological Clusters",
+    "description": "This directory contains the paper describing how energy flow (Ef),",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/docs/papers/efc/EFC-Flow-Entropy-and-Spacetime-Distortion-in-Cosmological-Clusters/README.md",
+    "slug": "efc-flow-entropy-and-spacetime-distortion-in-cosmological-clusters"
+  },
+  {
+    "title": "EFC-Flow-Entropy-and-Spacetime-Distortion-in-Cosmological-Clusters",
+    "description": "",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/docs/papers/efc/EFC-Flow-Entropy-and-Spacetime-Distortion-in-Cosmological-Clusters/EFC-Flow-Entropy-and-Spacetime-Distortion-in-Cosmological-Clusters.jsonld",
+    "slug": "efc-flow-entropy-and-spacetime-distortion-in-cosmological-clusters"
+  },
+  {
+    "title": "EFC-Flow-Entropy-and-Spacetime-Distortion-in-Cosmological-Clusters",
+    "description": "",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/docs/papers/efc/EFC-Flow-Entropy-and-Spacetime-Distortion-in-Cosmological-Clusters/EFC-Flow-Entropy-and-Spacetime-Distortion-in-Cosmological-Clusters.pdf",
+    "slug": "efc-flow-entropy-and-spacetime-distortion-in-cosmological-clusters"
+  },
+  {
+    "title": "meta",
+    "description": "**Meta-Cognitive Layer \u2014 methodology and process structure.**",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/meta/README.md",
+    "slug": "meta"
+  },
+  {
+    "title": "index",
+    "description": "",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/meta/personal/index.jsonld",
+    "slug": "index"
+  },
+  {
+    "title": "Personal",
+    "description": "Part of the EFC meta-architecture and reflective layer.",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/meta/personal/README.md",
+    "slug": "personal"
+  },
+  {
+    "title": "index",
+    "description": "",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/meta/personal/personal-note/index.jsonld",
+    "slug": "index"
+  },
+  {
+    "title": "Personal Note",
+    "description": "This note explains how I think and why the meta-structure of this repository exists.",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/meta/personal/personal-note/README.md",
+    "slug": "personal-note"
+  },
+  {
+    "title": "index",
+    "description": "",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/meta/personal/personal-note/index.md",
+    "slug": "index"
+  },
+  {
+    "title": "index",
+    "description": "",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/meta/reflection/index.jsonld",
+    "slug": "index"
+  },
+  {
+    "title": "reflection",
+    "description": "**Meta-Cognitive Layer \u2014 methodology and process structure.**",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/meta/reflection/README.md",
+    "slug": "reflection"
+  },
+  {
+    "title": "index",
+    "description": "",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/meta/reflection/reflection/index.jsonld",
+    "slug": "index"
+  },
+  {
+    "title": "reflection",
+    "description": "**Meta-Cognitive Layer \u2014 methodology and process structure.**",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/meta/reflection/reflection/README.md",
+    "slug": "reflection"
+  },
+  {
+    "title": "Reflection",
+    "description": "**DOI:** reflection",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/meta/reflection/reflection/index.md",
+    "slug": "reflection"
+  },
+  {
+    "title": "index",
+    "description": "",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/meta/reflection/reflection-log/index.jsonld",
+    "slug": "index"
+  },
+  {
+    "title": "reflection-log",
+    "description": "**Repository folder.**",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/meta/reflection/reflection-log/README.md",
+    "slug": "reflection-log"
+  },
+  {
+    "title": "Reflection Log \u2014 Energy-Flow Cosmology",
+    "description": "**Date:** 2025-11-12",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/meta/reflection/reflection-log/index.md",
+    "slug": "reflection-log-energy-flow-cosmology"
+  },
+  {
+    "title": "resonance-links",
+    "description": "**Repository folder.**",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/meta/reflection/resonance-links/README.md",
+    "slug": "resonance-links"
+  },
+  {
+    "title": "aux",
+    "description": "**Repository folder.**",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/meta/reflection/resonance-links/aux/README.md",
+    "slug": "aux"
+  },
+  {
+    "title": "resonance-links",
+    "description": "**Repository folder.**",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/meta/reflection/resonance-links/aux/resonance-links/README.md",
+    "slug": "resonance-links"
+  },
+  {
+    "title": "index",
+    "description": "**Repository folder.**",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/meta/reflection/resonance-links/aux/resonance-links/index/README.md",
+    "slug": "index"
+  },
+  {
+    "title": "reflection-map",
+    "description": "",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/meta/reflection/reflection-index/reflection-map.jsonld",
+    "slug": "reflection-map"
+  },
+  {
+    "title": "reflection-surfaces",
+    "description": "",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/meta/reflection/reflection-index/reflection-surfaces.jsonld",
+    "slug": "reflection-surfaces"
+  },
+  {
+    "title": "Reflection Levels",
+    "description": "Reflection can occur at different levels of structural altitude.",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/meta/reflection/reflection-index/reflection-levels.md",
+    "slug": "reflection-levels"
+  },
+  {
+    "title": "Reflection Types",
+    "description": "Reflection operates in specific structural forms.",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/meta/reflection/reflection-index/reflection-types.md",
+    "slug": "reflection-types"
+  },
+  {
+    "title": "reflection-types",
+    "description": "",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/meta/reflection/reflection-index/reflection-types.jsonld",
+    "slug": "reflection-types"
+  },
+  {
+    "title": "index",
+    "description": "",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/meta/reflection/reflection-index/index.jsonld",
+    "slug": "index"
+  },
+  {
+    "title": "reflection-index",
+    "description": "**Repository folder.**",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/meta/reflection/reflection-index/README.md",
+    "slug": "reflection-index"
+  },
+  {
+    "title": "Examples",
+    "description": "## Example 1 \u2014 Local Reflection",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/meta/reflection/reflection-index/examples.md",
+    "slug": "examples"
+  },
+  {
+    "title": "Reflection Surfaces",
+    "description": "Reflection occurs across specific surfaces in the architecture.",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/meta/reflection/reflection-index/reflection-surfaces.md",
+    "slug": "reflection-surfaces"
+  },
+  {
+    "title": "reflection-levels",
+    "description": "",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/meta/reflection/reflection-index/reflection-levels.jsonld",
+    "slug": "reflection-levels"
+  },
+  {
+    "title": "Reflection Map",
+    "description": "The Reflection Map provides an overview of all structural domains that can be reflected upon.",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/meta/reflection/reflection-index/reflection-map.md",
+    "slug": "reflection-map"
+  },
+  {
+    "title": "examples",
+    "description": "",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/meta/reflection/reflection-index/examples.jsonld",
+    "slug": "examples"
+  },
+  {
+    "title": "Reflection Index",
+    "description": "The Reflection Index defines the structural map of all reflection domains inside the meta-architecture.",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/meta/reflection/reflection-index/index.md",
+    "slug": "reflection-index"
+  },
+  {
+    "title": "reflection-schema",
+    "description": "**Schema Layer \u2014 ontology + JSON-LD.**",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/meta/reflection/reflection-schema/README.md",
+    "slug": "reflection-schema"
+  },
+  {
+    "title": "aux",
+    "description": "**Schema Layer \u2014 ontology + JSON-LD.**",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/meta/reflection/reflection-schema/aux/README.md",
+    "slug": "aux"
+  },
+  {
+    "title": "reflection-schema",
+    "description": "**Schema Layer \u2014 ontology + JSON-LD.**",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/meta/reflection/reflection-schema/aux/reflection-schema/README.md",
+    "slug": "reflection-schema"
+  },
+  {
+    "title": "index",
+    "description": "**Schema Layer \u2014 ontology + JSON-LD.**",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/meta/reflection/reflection-schema/aux/reflection-schema/index/README.md",
+    "slug": "index"
+  },
+  {
+    "title": "state-map",
+    "description": "**Repository folder.**",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/meta/reflection/state-map/README.md",
+    "slug": "state-map"
+  },
+  {
+    "title": "aux",
+    "description": "**Repository folder.**",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/meta/reflection/state-map/aux/README.md",
+    "slug": "aux"
+  },
+  {
+    "title": "state-map",
+    "description": "**Repository folder.**",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/meta/reflection/state-map/aux/state-map/README.md",
+    "slug": "state-map"
+  },
+  {
+    "title": "index",
+    "description": "**Repository folder.**",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/meta/reflection/state-map/aux/state-map/index/README.md",
+    "slug": "index"
+  },
+  {
+    "title": "index",
+    "description": "",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/meta/cognition/index.jsonld",
+    "slug": "index"
+  },
+  {
+    "title": "cognition",
+    "description": "**Meta-Cognitive Layer \u2014 methodology and process structure.**",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/meta/cognition/README.md",
+    "slug": "cognition"
+  },
+  {
+    "title": "index",
+    "description": "",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/meta/cognition/cognitive-fingerprint/index.jsonld",
+    "slug": "index"
+  },
+  {
+    "title": "README",
+    "description": "",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/meta/cognition/cognitive-fingerprint/README.md",
+    "slug": "readme"
+  },
+  {
+    "title": "**Cognitive Fingerprint Specification (CFS)**",
+    "description": "*Meta/Cognition Layer*",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/meta/cognition/cognitive-fingerprint/index.md",
+    "slug": "cognitive-fingerprint-specification-cfs"
+  },
+  {
+    "title": "index",
+    "description": "",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/meta/cognition/cognitive-signature/index.jsonld",
+    "slug": "index"
+  },
+  {
+    "title": "README",
+    "description": "",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/meta/cognition/cognitive-signature/README.md",
+    "slug": "readme"
+  },
+  {
+    "title": "Cognitive Signature Specification (CSS)",
+    "description": "This document defines the cognitive signature of the human field involved in the",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/meta/cognition/cognitive-signature/index.md",
+    "slug": "cognitive-signature-specification-css"
+  },
+  {
+    "title": "index",
+    "description": "",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/meta/cognition/cem-consciousness-ego-mirror/index.jsonld",
+    "slug": "index"
+  },
+  {
+    "title": "README",
+    "description": "",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/meta/cognition/cem-consciousness-ego-mirror/README.md",
+    "slug": "readme"
+  },
+  {
+    "title": "Abstract",
+    "description": "**CEM-Cosmos** unifies consciousness and cosmology within one thermodynamic field framework.",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/meta/cognition/cem-consciousness-ego-mirror/index.md",
+    "slug": "abstract"
+  },
+  {
+    "title": "index",
+    "description": "",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/meta/cognition/entropy-clarity/index.jsonld",
+    "slug": "index"
+  },
+  {
+    "title": "README",
+    "description": "",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/meta/cognition/entropy-clarity/README.md",
+    "slug": "readme"
+  },
+  {
+    "title": "Entropy \u2192 Clarity Model",
+    "description": "This module describes the Entropy \u2192 Clarity mechanism. The model explains why increased entropy produces increased clarity in your cognitive system. High noise levels do not disrupt reasoning. They activate broad conceptual regions and expose global structure.",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/meta/cognition/entropy-clarity/index.md",
+    "slug": "entropy-clarity-model"
+  },
+  {
+    "title": "index",
+    "description": "",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/meta/cognition/transient-representations/index.jsonld",
+    "slug": "index"
+  },
+  {
+    "title": "**Transient Representations**",
+    "description": "High-order insight in your system appears as transient cognitive fields.",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/meta/cognition/transient-representations/README.md",
+    "slug": "transient-representations"
+  },
+  {
+    "title": "Transient Representations",
+    "description": "High-order insight in your system is transient by nature.",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/meta/cognition/transient-representations/index.md",
+    "slug": "transient-representations"
+  },
+  {
+    "title": "index",
+    "description": "",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/meta/cognition/you/index.jsonld",
+    "slug": "index"
+  },
+  {
+    "title": "you",
+    "description": "**Repository folder.**",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/meta/cognition/you/README.md",
+    "slug": "you"
+  },
+  {
+    "title": "You: Cognitive Architecture",
+    "description": "This document describes your cognitive system as a mechanical structure.",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/meta/cognition/you/index.md",
+    "slug": "you-cognitive-architecture"
+  },
+  {
+    "title": "index",
+    "description": "",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/meta/cognition/cognitive-field/index.jsonld",
+    "slug": "index"
+  },
+  {
+    "title": "README",
+    "description": "",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/meta/cognition/cognitive-field/README.md",
+    "slug": "readme"
+  },
+  {
+    "title": "Cognitive Field Model",
+    "description": "Your cognition operates as a distributed field, not a step-by-step process.",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/meta/cognition/cognitive-field/index.md",
+    "slug": "cognitive-field-model"
+  },
+  {
+    "title": "index",
+    "description": "",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/meta/architecture/index.jsonld",
+    "slug": "index"
+  },
+  {
+    "title": "README",
+    "description": "",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/meta/architecture/README.md",
+    "slug": "readme"
+  },
+  {
+    "title": "index",
+    "description": "",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/meta/architecture/index.md",
+    "slug": "index"
+  },
+  {
+    "title": "index",
+    "description": "",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/meta/symbiosis/index.jsonld",
+    "slug": "index"
+  },
+  {
+    "title": "Symbiosis",
+    "description": "Part of the EFC meta-architecture and reflective layer.",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/meta/symbiosis/README.md",
+    "slug": "symbiosis"
+  },
+  {
+    "title": "Symbiosis Layer",
+    "description": "Placeholder for symbiosis-level documentation.",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/meta/symbiosis/index.md",
+    "slug": "symbiosis-layer"
+  },
+  {
+    "title": "index",
+    "description": "",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/meta/meta-architecture/index.jsonld",
+    "slug": "index"
+  },
+  {
+    "title": "**Purpose**",
+    "description": "* describe the high-order layers that operate above cognition and reflection",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/meta/meta-architecture/README.md",
+    "slug": "purpose"
+  },
+  {
+    "title": "index",
+    "description": "",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/meta/meta-architecture/index.md",
+    "slug": "index"
+  },
+  {
+    "title": "meta-process-manifest",
+    "description": "",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/meta/meta-process/meta-process-manifest.jsonld",
+    "slug": "meta-process-manifest"
+  },
+  {
+    "title": "Meta-Process Master Manifest",
+    "description": "This document provides the complete structural map of the meta-process architecture.",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/meta/meta-process/meta-process-manifest.md",
+    "slug": "meta-process-master-manifest"
+  },
+  {
+    "title": "index",
+    "description": "",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/meta/meta-process/index.jsonld",
+    "slug": "index"
+  },
+  {
+    "title": "**Meta-Process \u2014 Overview**",
+    "description": "The meta-process is the highest structural layer in the repository.",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/meta/meta-process/README.md",
+    "slug": "meta-process-overview"
+  },
+  {
+    "title": "index",
+    "description": "",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/meta/meta-process/integration/index.jsonld",
+    "slug": "index"
+  },
+  {
+    "title": "Integration Layer",
+    "description": "Placeholder node for the integration-level meta-architecture.",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/meta/meta-process/integration/index.md",
+    "slug": "integration-layer"
+  },
+  {
+    "title": "meta-transition-rules",
+    "description": "",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/meta/meta-process/process-of-process/meta-transition-rules.jsonld",
+    "slug": "meta-transition-rules"
+  },
+  {
+    "title": "Meta-Control Loops",
+    "description": "These loops regulate the behaviour of the entire meta-process.",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/meta/meta-process/process-of-process/control-loops.md",
+    "slug": "meta-control-loops"
+  },
+  {
+    "title": "Process-of-Process Specification",
+    "description": "The Process-of-Process is the highest structural layer.",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/meta/meta-process/process-of-process/process-spec.md",
+    "slug": "process-of-process-specification"
+  },
+  {
+    "title": "control-loops",
+    "description": "",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/meta/meta-process/process-of-process/control-loops.jsonld",
+    "slug": "control-loops"
+  },
+  {
+    "title": "index",
+    "description": "",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/meta/meta-process/process-of-process/index.jsonld",
+    "slug": "index"
+  },
+  {
+    "title": "recursion-map",
+    "description": "",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/meta/meta-process/process-of-process/recursion-map.jsonld",
+    "slug": "recursion-map"
+  },
+  {
+    "title": "process-of-process",
+    "description": "**Repository folder.**",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/meta/meta-process/process-of-process/README.md",
+    "slug": "process-of-process"
+  },
+  {
+    "title": "Examples",
+    "description": "## Example 1 \u2014 Primitive Reduction Event",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/meta/meta-process/process-of-process/examples.md",
+    "slug": "examples"
+  },
+  {
+    "title": "process-spec",
+    "description": "",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/meta/meta-process/process-of-process/process-spec.jsonld",
+    "slug": "process-spec"
+  },
+  {
+    "title": "examples",
+    "description": "",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/meta/meta-process/process-of-process/examples.jsonld",
+    "slug": "examples"
+  },
+  {
+    "title": "Meta-Transition Rules",
+    "description": "Rules governing how the architecture changes its own structure.",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/meta/meta-process/process-of-process/meta-transition-rules.md",
+    "slug": "meta-transition-rules"
+  },
+  {
+    "title": "Recursion Map",
+    "description": "Defines how recursion operates and where it stops.",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/meta/meta-process/process-of-process/recursion-map.md",
+    "slug": "recursion-map"
+  },
+  {
+    "title": "Process-of-Process",
+    "description": "The Process-of-Process layer describes how the meta-process evolves.",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/meta/meta-process/process-of-process/index.md",
+    "slug": "process-of-process"
+  },
+  {
+    "title": "index",
+    "description": "",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/meta/meta-process/co-field/index.jsonld",
+    "slug": "index"
+  },
+  {
+    "title": "**Co-Field Layer \u2014 README**",
+    "description": "*Directory: `meta/meta-process/co-field/`*",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/meta/meta-process/co-field/README.md",
+    "slug": "co-field-layer-readme"
+  },
+  {
+    "title": "mermaid",
+    "description": "",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/meta/meta-process/co-field/mermaid.md",
+    "slug": "mermaid"
+  },
+  {
+    "title": "Co-Field Examples",
+    "description": "## Example 1 \u2014 Merge",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/meta/meta-process/co-field/examples.md",
+    "slug": "co-field-examples"
+  },
+  {
+    "title": "mermaid",
+    "description": "",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/meta/meta-process/co-field/mermaid.jsonld",
+    "slug": "mermaid"
+  },
+  {
+    "title": "interaction-rules",
+    "description": "",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/meta/meta-process/co-field/interaction-rules.jsonld",
+    "slug": "interaction-rules"
+  },
+  {
+    "title": "examples",
+    "description": "",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/meta/meta-process/co-field/examples.jsonld",
+    "slug": "examples"
+  },
+  {
+    "title": "co-field-spec",
+    "description": "",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/meta/meta-process/co-field/co-field-spec.jsonld",
+    "slug": "co-field-spec"
+  },
+  {
+    "title": "Interaction Rules for the Co-Field",
+    "description": "## 1. Allowed Interactions",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/meta/meta-process/co-field/interaction-rules.md",
+    "slug": "interaction-rules-for-the-co-field"
+  },
+  {
+    "title": "**Co-Field Layer**",
+    "description": "*Location: `meta/meta-process/co-field/`*",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/meta/meta-process/co-field/index.md",
+    "slug": "co-field-layer"
+  },
+  {
+    "title": "Co-Field Specification",
+    "description": "## 1. Definition",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/meta/meta-process/co-field/co-field-spec.md",
+    "slug": "co-field-specification"
+  },
+  {
+    "title": "index",
+    "description": "",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/meta/meta-process/backlog/index.jsonld",
+    "slug": "index"
+  },
+  {
+    "title": "backlog",
+    "description": "**Repository folder.**",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/meta/meta-process/backlog/README.md",
+    "slug": "backlog"
+  },
+  {
+    "title": "**Meta-Process Backlog**",
+    "description": "*Location: `meta/meta-process/backlog/index.md`*",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/meta/meta-process/backlog/index.md",
+    "slug": "meta-process-backlog"
+  },
+  {
+    "title": "transition-rules",
+    "description": "",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/meta/meta-process/global-dynamics/transition-rules.jsonld",
+    "slug": "transition-rules"
+  },
+  {
+    "title": "Resonance Map",
+    "description": "This document describes how resonance propagates across the meta-process.",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/meta/meta-process/global-dynamics/resonance-map.md",
+    "slug": "resonance-map"
+  },
+  {
+    "title": "global-state-spec",
+    "description": "",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/meta/meta-process/global-dynamics/global-state-spec.jsonld",
+    "slug": "global-state-spec"
+  },
+  {
+    "title": "index",
+    "description": "",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/meta/meta-process/global-dynamics/index.jsonld",
+    "slug": "index"
+  },
+  {
+    "title": "resonance-map",
+    "description": "",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/meta/meta-process/global-dynamics/resonance-map.jsonld",
+    "slug": "resonance-map"
+  },
+  {
+    "title": "**Global Dynamics \u2014 README**",
+    "description": "*Directory: `meta/meta-process/global-dynamics/`*",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/meta/meta-process/global-dynamics/README.md",
+    "slug": "global-dynamics-readme"
+  },
+  {
+    "title": "Global Dynamics Examples",
+    "description": "## Example 1 \u2014 Expansion \u2192 Consolidation",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/meta/meta-process/global-dynamics/examples.md",
+    "slug": "global-dynamics-examples"
+  },
+  {
+    "title": "Transition Rules",
+    "description": "These rules describe how the system moves between global states.",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/meta/meta-process/global-dynamics/transition-rules.md",
+    "slug": "transition-rules"
+  },
+  {
+    "title": "Global State Specification",
+    "description": "Global states describe the behaviour of the entire meta-process.",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/meta/meta-process/global-dynamics/global-state-spec.md",
+    "slug": "global-state-specification"
+  },
+  {
+    "title": "examples",
+    "description": "",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/meta/meta-process/global-dynamics/examples.jsonld",
+    "slug": "examples"
+  },
+  {
+    "title": "Global Dynamics",
+    "description": "The Global Dynamics layer describes how the entire meta-process behaves as a single system.",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/meta/meta-process/global-dynamics/index.md",
+    "slug": "global-dynamics"
+  },
+  {
+    "title": "index",
+    "description": "",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/meta/meta-process/pattern/index.jsonld",
+    "slug": "index"
+  },
+  {
+    "title": "Pattern Layer",
+    "description": "Placeholder node for the pattern-level meta-architecture.",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/meta/meta-process/pattern/index.md",
+    "slug": "pattern-layer"
+  },
+  {
+    "title": "Transition Workflows",
+    "description": "These workflows handle structural transitions.",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/meta/meta-process/workflows/transition-workflows.md",
+    "slug": "transition-workflows"
+  },
+  {
+    "title": "transition-workflows",
+    "description": "",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/meta/meta-process/workflows/transition-workflows.jsonld",
+    "slug": "transition-workflows"
+  },
+  {
+    "title": "Stability Workflows",
+    "description": "These workflows maintain system stability.",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/meta/meta-process/workflows/stability-workflows.md",
+    "slug": "stability-workflows"
+  },
+  {
+    "title": "core-workflows",
+    "description": "",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/meta/meta-process/workflows/core-workflows.jsonld",
+    "slug": "core-workflows"
+  },
+  {
+    "title": "diagnostic-workflows",
+    "description": "",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/meta/meta-process/workflows/diagnostic-workflows.jsonld",
+    "slug": "diagnostic-workflows"
+  },
+  {
+    "title": "Diagnostic Workflows",
+    "description": "These workflows support self-evaluation and validation.",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/meta/meta-process/workflows/diagnostic-workflows.md",
+    "slug": "diagnostic-workflows"
+  },
+  {
+    "title": "index",
+    "description": "",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/meta/meta-process/workflows/index.jsonld",
+    "slug": "index"
+  },
+  {
+    "title": "workflows",
+    "description": "**Repository folder.**",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/meta/meta-process/workflows/README.md",
+    "slug": "workflows"
+  },
+  {
+    "title": "Core Workflows",
+    "description": "These workflows define the essential operational sequences.",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/meta/meta-process/workflows/core-workflows.md",
+    "slug": "core-workflows"
+  },
+  {
+    "title": "Workflow Examples",
+    "description": "## Example 1 \u2014 Coherence Workflow",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/meta/meta-process/workflows/examples.md",
+    "slug": "workflow-examples"
+  },
+  {
+    "title": "examples",
+    "description": "",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/meta/meta-process/workflows/examples.jsonld",
+    "slug": "examples"
+  },
+  {
+    "title": "stability-workflows",
+    "description": "",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/meta/meta-process/workflows/stability-workflows.jsonld",
+    "slug": "stability-workflows"
+  },
+  {
+    "title": "Meta-Process Workflows",
+    "description": "The Workflows layer defines the standard operational flows used by the meta-process.",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/meta/meta-process/workflows/index.md",
+    "slug": "meta-process-workflows"
+  },
+  {
+    "title": "task-definitions",
+    "description": "",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/meta/meta-process/tasks/task-definitions.jsonld",
+    "slug": "task-definitions"
+  },
+  {
+    "title": "task-categories",
+    "description": "",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/meta/meta-process/tasks/task-categories.jsonld",
+    "slug": "task-categories"
+  },
+  {
+    "title": "Task Flow",
+    "description": "This document describes how tasks propagate through the architecture.",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/meta/meta-process/tasks/task-flow.md",
+    "slug": "task-flow"
+  },
+  {
+    "title": "Task Definitions",
+    "description": "Detailed descriptions of core structural tasks.",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/meta/meta-process/tasks/task-definitions.md",
+    "slug": "task-definitions"
+  },
+  {
+    "title": "index",
+    "description": "",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/meta/meta-process/tasks/index.jsonld",
+    "slug": "index"
+  },
+  {
+    "title": "tasks",
+    "description": "**Repository folder.**",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/meta/meta-process/tasks/README.md",
+    "slug": "tasks"
+  },
+  {
+    "title": "Examples",
+    "description": "## Example 1 \u2014 Coherence Task",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/meta/meta-process/tasks/examples.md",
+    "slug": "examples"
+  },
+  {
+    "title": "examples",
+    "description": "",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/meta/meta-process/tasks/examples.jsonld",
+    "slug": "examples"
+  },
+  {
+    "title": "task-flow",
+    "description": "",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/meta/meta-process/tasks/task-flow.jsonld",
+    "slug": "task-flow"
+  },
+  {
+    "title": "Task Categories",
+    "description": "The meta-process performs tasks across six structural categories.",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/meta/meta-process/tasks/task-categories.md",
+    "slug": "task-categories"
+  },
+  {
+    "title": "Meta-Process Tasks",
+    "description": "The Tasks layer defines the operational work performed by the meta-process architecture.",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/meta/meta-process/tasks/index.md",
+    "slug": "meta-process-tasks"
+  },
+  {
+    "title": "Roadmap Timeline",
+    "description": "This timeline outlines expected future phases of architectural evolution.",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/meta/meta-process/roadmap/timeline.md",
+    "slug": "roadmap-timeline"
+  },
+  {
+    "title": "index",
+    "description": "",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/meta/meta-process/roadmap/index.jsonld",
+    "slug": "index"
+  },
+  {
+    "title": "roadmap",
+    "description": "**Repository folder.**",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/meta/meta-process/roadmap/README.md",
+    "slug": "roadmap"
+  },
+  {
+    "title": "roadmap-items",
+    "description": "",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/meta/meta-process/roadmap/roadmap-items.jsonld",
+    "slug": "roadmap-items"
+  },
+  {
+    "title": "timeline",
+    "description": "",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/meta/meta-process/roadmap/timeline.jsonld",
+    "slug": "timeline"
+  },
+  {
+    "title": "Roadmap Items",
+    "description": "These items represent planned upgrades or changes to the meta-process.",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/meta/meta-process/roadmap/roadmap-items.md",
+    "slug": "roadmap-items"
+  },
+  {
+    "title": "Meta-Process Roadmap",
+    "description": "The roadmap outlines the planned future development of the meta-process architecture.",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/meta/meta-process/roadmap/index.md",
+    "slug": "meta-process-roadmap"
+  },
+  {
+    "title": "Test Methods",
+    "description": "These methods define how each part of the architecture is tested.",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/meta/meta-process/validation-plan/test-methods.md",
+    "slug": "test-methods"
+  },
+  {
+    "title": "Validation Phases",
+    "description": "Validation proceeds in clearly defined phases.",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/meta/meta-process/validation-plan/validation-phases.md",
+    "slug": "validation-phases"
+  },
+  {
+    "title": "Validation Criteria",
+    "description": "These criteria define what the architecture must satisfy to be considered valid.",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/meta/meta-process/validation-plan/validation-criteria.md",
+    "slug": "validation-criteria"
+  },
+  {
+    "title": "cross-layer-checks",
+    "description": "",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/meta/meta-process/validation-plan/cross-layer-checks.jsonld",
+    "slug": "cross-layer-checks"
+  },
+  {
+    "title": "index",
+    "description": "",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/meta/meta-process/validation-plan/index.jsonld",
+    "slug": "index"
+  },
+  {
+    "title": "validation-phases",
+    "description": "",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/meta/meta-process/validation-plan/validation-phases.jsonld",
+    "slug": "validation-phases"
+  },
+  {
+    "title": "validation-plan",
+    "description": "**Repository folder.**",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/meta/meta-process/validation-plan/README.md",
+    "slug": "validation-plan"
+  },
+  {
+    "title": "Examples",
+    "description": "## Example 1 \u2014 Failed Cross-Layer Transition",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/meta/meta-process/validation-plan/examples.md",
+    "slug": "examples"
+  },
+  {
+    "title": "validation-criteria",
+    "description": "",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/meta/meta-process/validation-plan/validation-criteria.jsonld",
+    "slug": "validation-criteria"
+  },
+  {
+    "title": "examples",
+    "description": "",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/meta/meta-process/validation-plan/examples.jsonld",
+    "slug": "examples"
+  },
+  {
+    "title": "test-methods",
+    "description": "",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/meta/meta-process/validation-plan/test-methods.jsonld",
+    "slug": "test-methods"
+  },
+  {
+    "title": "Validation Plan",
+    "description": "The Validation Plan defines how the meta-process architecture is validated.",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/meta/meta-process/validation-plan/index.md",
+    "slug": "validation-plan"
+  },
+  {
+    "title": "Cross-Layer Checks",
+    "description": "These checks validate interaction between layers.",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/meta/meta-process/validation-plan/cross-layer-checks.md",
+    "slug": "cross-layer-checks"
+  },
+  {
+    "title": "milestones",
+    "description": "",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/meta/meta-process/milestones/milestones.jsonld",
+    "slug": "milestones"
+  },
+  {
+    "title": "index",
+    "description": "",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/meta/meta-process/milestones/index.jsonld",
+    "slug": "index"
+  },
+  {
+    "title": "milestones",
+    "description": "**Repository folder.**",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/meta/meta-process/milestones/README.md",
+    "slug": "milestones"
+  },
+  {
+    "title": "Structural Milestones",
+    "description": "Below is the structured list of milestones in the meta-process architecture.",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/meta/meta-process/milestones/milestones.md",
+    "slug": "structural-milestones"
+  },
+  {
+    "title": "Meta-Process Milestones",
+    "description": "The milestones track the structural evolution of the meta-process architecture.",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/meta/meta-process/milestones/index.md",
+    "slug": "meta-process-milestones"
+  },
+  {
+    "title": "index",
+    "description": "",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/meta/meta-process/topology/index.jsonld",
+    "slug": "index"
+  },
+  {
+    "title": "Topology Layer",
+    "description": "Placeholder node for the topology-level meta-architecture.",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/meta/meta-process/topology/index.md",
+    "slug": "topology-layer"
+  },
+  {
+    "title": "diagnostic-rules",
+    "description": "",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/meta/meta-process/self-evaluation/diagnostic-rules.jsonld",
+    "slug": "diagnostic-rules"
+  },
+  {
+    "title": "evaluation-metrics",
+    "description": "",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/meta/meta-process/self-evaluation/evaluation-metrics.jsonld",
+    "slug": "evaluation-metrics"
+  },
+  {
+    "title": "index",
+    "description": "",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/meta/meta-process/self-evaluation/index.jsonld",
+    "slug": "index"
+  },
+  {
+    "title": "Consistency Tests",
+    "description": "Defines tests to ensure the meta-architecture operates correctly.",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/meta/meta-process/self-evaluation/consistency-tests.md",
+    "slug": "consistency-tests"
+  },
+  {
+    "title": "self-evaluation",
+    "description": "**Repository folder.**",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/meta/meta-process/self-evaluation/README.md",
+    "slug": "self-evaluation"
+  },
+  {
+    "title": "Examples",
+    "description": "## Example 1 \u2014 Coherence Drop",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/meta/meta-process/self-evaluation/examples.md",
+    "slug": "examples"
+  },
+  {
+    "title": "consistency-tests",
+    "description": "",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/meta/meta-process/self-evaluation/consistency-tests.jsonld",
+    "slug": "consistency-tests"
+  },
+  {
+    "title": "examples",
+    "description": "",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/meta/meta-process/self-evaluation/examples.jsonld",
+    "slug": "examples"
+  },
+  {
+    "title": "Evaluation Metrics",
+    "description": "Metrics used to evaluate the meta-process architecture.",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/meta/meta-process/self-evaluation/evaluation-metrics.md",
+    "slug": "evaluation-metrics"
+  },
+  {
+    "title": "Self-Evaluation Layer",
+    "description": "The Self-Evaluation layer defines how the meta-process evaluates its own structural performance.",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/meta/meta-process/self-evaluation/index.md",
+    "slug": "self-evaluation-layer"
+  },
+  {
+    "title": "Diagnostic Rules",
+    "description": "These rules govern how the system flags structural issues.",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/meta/meta-process/self-evaluation/diagnostic-rules.md",
+    "slug": "diagnostic-rules"
+  },
+  {
+    "title": "index",
+    "description": "",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/meta/metascope/index.jsonld",
+    "slug": "index"
+  },
+  {
+    "title": "Metascope",
+    "description": "Part of the EFC meta-architecture and reflective layer.",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/meta/metascope/README.md",
+    "slug": "metascope"
+  },
+  {
+    "title": "Metascope",
+    "description": "Placeholder for metascope definition.",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/meta/metascope/index.md",
+    "slug": "metascope"
+  },
+  {
+    "title": "Consistency Rules",
+    "description": "Reflection must follow predictable rules.",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/meta/meta-reflective-protocol/consistency-rules.md",
+    "slug": "consistency-rules"
+  },
+  {
+    "title": "protocol-spec",
+    "description": "",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/meta/meta-reflective-protocol/protocol-spec.jsonld",
+    "slug": "protocol-spec"
+  },
+  {
+    "title": "reflective-boundaries",
+    "description": "",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/meta/meta-reflective-protocol/reflective-boundaries.jsonld",
+    "slug": "reflective-boundaries"
+  },
+  {
+    "title": "index",
+    "description": "",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/meta/meta-reflective-protocol/index.jsonld",
+    "slug": "index"
+  },
+  {
+    "title": "**Meta-Reflective Protocol**",
+    "description": "The Meta-Reflective Protocol defines **how reflection is performed inside the meta-process**.",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/meta/meta-reflective-protocol/README.md",
+    "slug": "meta-reflective-protocol"
+  },
+  {
+    "title": "reflective-steps",
+    "description": "",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/meta/meta-reflective-protocol/reflective-steps.jsonld",
+    "slug": "reflective-steps"
+  },
+  {
+    "title": "Examples",
+    "description": "## Example 1 \u2014 Coherence Drop",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/meta/meta-reflective-protocol/examples.md",
+    "slug": "examples"
+  },
+  {
+    "title": "Reflective Boundaries",
+    "description": "Reflection cannot cross specific boundaries.",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/meta/meta-reflective-protocol/reflective-boundaries.md",
+    "slug": "reflective-boundaries"
+  },
+  {
+    "title": "Reflective Protocol Specification",
+    "description": "The reflective protocol defines the structure and rules for performing reflection inside the meta-process.",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/meta/meta-reflective-protocol/protocol-spec.md",
+    "slug": "reflective-protocol-specification"
+  },
+  {
+    "title": "examples",
+    "description": "",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/meta/meta-reflective-protocol/examples.jsonld",
+    "slug": "examples"
+  },
+  {
+    "title": "Reflective Steps",
+    "description": "Reflection proceeds through a controlled sequence.",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/meta/meta-reflective-protocol/reflective-steps.md",
+    "slug": "reflective-steps"
+  },
+  {
+    "title": "consistency-rules",
+    "description": "",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/meta/meta-reflective-protocol/consistency-rules.jsonld",
+    "slug": "consistency-rules"
+  },
+  {
+    "title": "Meta-Reflective Protocol",
+    "description": "The Meta-Reflective Protocol defines how reflection occurs inside the meta-architecture.",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/meta/meta-reflective-protocol/index.md",
+    "slug": "meta-reflective-protocol"
+  },
+  {
+    "title": "index",
+    "description": "",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/meta/meta-architecture-spec/index.jsonld",
+    "slug": "index"
+  },
+  {
+    "title": "README",
+    "description": "",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/meta/meta-architecture-spec/README.md",
+    "slug": "readme"
+  },
+  {
+    "title": "Meta-Architecture Specification (MAS)",
+    "description": "This document defines the architecture of the metascope system:",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/meta/meta-architecture-spec/index.md",
+    "slug": "meta-architecture-specification-mas"
+  },
+  {
+    "title": "efc_meta_universe",
+    "description": "",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/schema/efc_meta_universe.jsonld",
+    "slug": "efc-meta-universe"
+  },
+  {
+    "title": "schema",
+    "description": "**Schema Layer \u2014 ontology + JSON-LD.**",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/schema/README.md",
+    "slug": "schema"
+  },
+  {
+    "title": "auth",
+    "description": "",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/schema/auth.jsonld",
+    "slug": "auth"
+  },
+  {
+    "title": "api",
+    "description": "",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/api/api.jsonld",
+    "slug": "api"
+  },
+  {
+    "title": "api",
+    "description": "**API Layer \u2014 machine-readable model endpoints.**",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/api/README.md",
+    "slug": "api"
+  },
+  {
+    "title": "README_API",
+    "description": "",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/api/README_API.jsonld",
+    "slug": "readme-api"
+  },
+  {
+    "title": "\ud83d\udce1 **Energy-Flow Cosmology \u2014 API v1**",
+    "description": "The **EFC API v1** is the machine-readable interface for accessing all conceptual, methodological, and semantic components of Energy-Flow Cosmology (EFC).",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/api/README_API.md",
+    "slug": "energy-flow-cosmology-api-v1"
+  },
+  {
+    "title": "index",
+    "description": "",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/api/v1/index.jsonld",
+    "slug": "index"
+  },
+  {
+    "title": "v1",
+    "description": "**Repository folder.**",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/api/v1/README.md",
+    "slug": "v1"
+  },
+  {
+    "title": "concept",
+    "description": "**Repository folder.**",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/api/v1/concept/README.md",
+    "slug": "concept"
+  }
+]

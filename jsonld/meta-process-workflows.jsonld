@@ -1,0 +1,8 @@
+{
+  "@context": "https://schema.org",
+  "@type": "CreativeWork",
+  "identifier": "meta-process-workflows",
+  "name": "Meta-Process Workflows",
+  "description": "The Workflows layer defines the standard operational flows used by the meta-process.",
+  "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/meta/meta-process/workflows/index.md"
+}

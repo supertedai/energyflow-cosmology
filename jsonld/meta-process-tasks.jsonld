@@ -1,0 +1,8 @@
+{
+  "@context": "https://schema.org",
+  "@type": "CreativeWork",
+  "identifier": "meta-process-tasks",
+  "name": "Meta-Process Tasks",
+  "description": "The Tasks layer defines the operational work performed by the meta-process architecture.",
+  "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/meta/meta-process/tasks/index.md"
+}

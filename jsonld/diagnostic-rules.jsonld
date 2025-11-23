@@ -1,0 +1,8 @@
+{
+  "@context": "https://schema.org",
+  "@type": "CreativeWork",
+  "identifier": "diagnostic-rules",
+  "name": "Diagnostic Rules",
+  "description": "These rules govern how the system flags structural issues.",
+  "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/meta/meta-process/self-evaluation/diagnostic-rules.md"
+}

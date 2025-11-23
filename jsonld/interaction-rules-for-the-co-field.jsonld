@@ -1,0 +1,8 @@
+{
+  "@context": "https://schema.org",
+  "@type": "CreativeWork",
+  "identifier": "interaction-rules-for-the-co-field",
+  "name": "Interaction Rules for the Co-Field",
+  "description": "## 1. Allowed Interactions",
+  "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/meta/meta-process/co-field/interaction-rules.md"
+}

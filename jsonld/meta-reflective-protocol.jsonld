@@ -1,0 +1,8 @@
+{
+  "@context": "https://schema.org",
+  "@type": "CreativeWork",
+  "identifier": "meta-reflective-protocol",
+  "name": "Meta-Reflective Protocol",
+  "description": "The Meta-Reflective Protocol defines how reflection occurs inside the meta-architecture.",
+  "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/meta/meta-reflective-protocol/index.md"
+}

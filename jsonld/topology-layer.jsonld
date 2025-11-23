@@ -1,0 +1,8 @@
+{
+  "@context": "https://schema.org",
+  "@type": "CreativeWork",
+  "identifier": "topology-layer",
+  "name": "Topology Layer",
+  "description": "Placeholder node for the topology-level meta-architecture.",
+  "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/meta/meta-process/topology/index.md"
+}

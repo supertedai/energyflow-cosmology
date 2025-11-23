@@ -1,0 +1,8 @@
+{
+  "@context": "https://schema.org",
+  "@type": "CreativeWork",
+  "identifier": "validation-plan",
+  "name": "Validation Plan",
+  "description": "The Validation Plan defines how the meta-process architecture is validated.",
+  "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/meta/meta-process/validation-plan/index.md"
+}

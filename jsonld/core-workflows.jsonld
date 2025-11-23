@@ -1,0 +1,8 @@
+{
+  "@context": "https://schema.org",
+  "@type": "CreativeWork",
+  "identifier": "core-workflows",
+  "name": "Core Workflows",
+  "description": "These workflows define the essential operational sequences.",
+  "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/meta/meta-process/workflows/core-workflows.md"
+}

@@ -1,0 +1,8 @@
+{
+  "@context": "https://schema.org",
+  "@type": "CreativeWork",
+  "identifier": "self-evaluation",
+  "name": "self-evaluation",
+  "description": "**Repository folder.**",
+  "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/meta/meta-process/self-evaluation/README.md"
+}

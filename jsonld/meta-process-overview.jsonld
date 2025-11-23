@@ -1,0 +1,8 @@
+{
+  "@context": "https://schema.org",
+  "@type": "CreativeWork",
+  "identifier": "meta-process-overview",
+  "name": "**Meta-Process \u2014 Overview**",
+  "description": "The meta-process is the highest structural layer in the repository.",
+  "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/meta/meta-process/README.md"
+}

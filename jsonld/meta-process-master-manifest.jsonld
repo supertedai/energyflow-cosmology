@@ -1,0 +1,8 @@
+{
+  "@context": "https://schema.org",
+  "@type": "CreativeWork",
+  "identifier": "meta-process-master-manifest",
+  "name": "Meta-Process Master Manifest",
+  "description": "This document provides the complete structural map of the meta-process architecture.",
+  "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/meta/meta-process/meta-process-manifest.md"
+}

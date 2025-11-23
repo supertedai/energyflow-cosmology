@@ -1,0 +1,8 @@
+{
+  "@context": "https://schema.org",
+  "@type": "CreativeWork",
+  "identifier": "global-dynamics-examples",
+  "name": "Global Dynamics Examples",
+  "description": "## Example 1 \u2014 Expansion \u2192 Consolidation",
+  "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/meta/meta-process/global-dynamics/examples.md"
+}

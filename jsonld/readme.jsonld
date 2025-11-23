@@ -1,0 +1,8 @@
+{
+  "@context": "https://schema.org",
+  "@type": "CreativeWork",
+  "identifier": "readme",
+  "name": "README",
+  "description": "",
+  "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/meta/meta-architecture-spec/README.md"
+}

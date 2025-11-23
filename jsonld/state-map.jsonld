@@ -1,0 +1,8 @@
+{
+  "@context": "https://schema.org",
+  "@type": "CreativeWork",
+  "identifier": "state-map",
+  "name": "state-map",
+  "description": "**Repository folder.**",
+  "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/meta/reflection/state-map/aux/state-map/README.md"
+}
