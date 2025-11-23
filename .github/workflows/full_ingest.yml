@@ -1,0 +1,118 @@
+name: Full Ingest Pipeline
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+    paths:
+      - "docs/**"
+      - "meta/**"
+      - "schema/**"
+      - "api/**"
+      - "tools/**"
+      - "semantic-search-index.json"
+
+jobs:
+  ingest:
+    runs-on: ubuntu-latest
+
+    env:
+      NEO4J_URI: ${{ secrets.NEO4J_URI }}
+      NEO4J_USER: ${{ secrets.NEO4J_USER }}
+      NEO4J_PASSWORD: ${{ secrets.NEO4J_PASSWORD }}
+      NEO4J_DATABASE: ${{ secrets.NEO4J_DATABASE }}
+      QDRANT_URL: ${{ secrets.QDRANT_URL }}
+      QDRANT_API_KEY: ${{ secrets.QDRANT_API_KEY }}
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: |
+          pip install -r tools/requirements.txt
+
+      # ---------------------------
+      # 1. SEMANTIC HARVEST
+      # ---------------------------
+      - name: Run semantic-harvest
+        run: |
+          echo ">>> Running semantic-harvest"
+          python tools/semantic_harvest.py
+
+      # ---------------------------
+      # 2. GENERATE JSON-LD
+      # ---------------------------
+      - name: Generate JSON-LD metadata
+        run: |
+          echo ">>> Rebuilding JSON-LD metadata"
+          python tools/build_jsonld.py
+
+      # ---------------------------
+      # 3. UPDATE NEO4J
+      # ---------------------------
+      - name: Push metadata to Neo4j
+        run: |
+          echo ">>> Updating Neo4j graph"
+          python tools/push_to_neo4j.py
+
+      # ---------------------------
+      # 4. UPDATE QDRANT (RAG)
+      # ---------------------------
+      - name: Push embeddings to Qdrant
+        run: |
+          echo ">>> Updating Qdrant vector store"
+          python tools/update_qdrant.py
+
+      # ---------------------------
+      # 5. BUILD SEARCH INDEX
+      # ---------------------------
+      - name: Build semantic search index
+        run: |
+          echo ">>> Rebuilding semantic-search-index.json"
+          python tools/build_search_index.py
+
+      # ---------------------------
+      # 6. REBUILD GRAPH-RAG API IMAGE
+      # ---------------------------
+      - name: Build Graph-RAG API Docker image
+        run: |
+          echo ">>> Building Graph-RAG API Docker image"
+          docker build -t efc-graph-rag-api -f tools/graph_rag_api/Dockerfile .
+
+      - name: Save Docker image artifact
+        run: |
+          docker save efc-graph-rag-api | gzip > efc-graph-rag-api.tar.gz
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: efc-graph-rag-api
+          path: efc-graph-rag-api.tar.gz
+
+      # ---------------------------
+      # 7. SYNC WITH UNIFIED API
+      # ---------------------------
+      - name: Trigger Unified API refresh
+        run: |
+          echo ">>> Triggering Unified API refresh"
+          curl -X POST \
+            "https://unified-api-958872099364.europe-west1.run.app/admin/refresh" \
+            -H "Authorization: Bearer ${{ secrets.UNIFIED_API_TOKEN }}" || true
+
+      # ---------------------------
+      # 8. COMMIT ANY CHANGES
+      # ---------------------------
+      - name: Commit changes
+        run: |
+          git config --global user.name "Symbiose Bot"
+          git config --global user.email "bot@symbiose.local"
+          git add .
+          git commit -m "Full ingest update ($(date))" || echo "No changes"
+          git push
