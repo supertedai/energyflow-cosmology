@@ -1,3 +1,6 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+
 from fastapi import FastAPI
 from pydantic import BaseModel
 import datetime
@@ -16,7 +19,7 @@ except:
     QdrantClient = None
 
 
-app = FastAPI()
+app = FastAPI(title="Symbiose Unified API", version="v4")
 
 
 # ---------------------------------------------
@@ -157,3 +160,15 @@ def unified_query(req: UnifiedQuery):
             "index_size": len(semantic)
         }
     }
+
+
+# ---------------------------------------------
+# UVICORN STARTER (Cloud Run trenger dette)
+# ---------------------------------------------
+if __name__ == "__main__":
+    import uvicorn
+    uvicorn.run(
+        "symbiose_unified_api:app",
+        host="0.0.0.0",
+        port=int(os.getenv("PORT", 8080)),
+    )
