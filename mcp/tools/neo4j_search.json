@@ -1,0 +1,24 @@
+{
+  "name": "neo4j_search",
+  "description": "Run a direct Neo4j fulltext search.",
+  "input_schema": {
+    "type": "object",
+    "required": ["query"],
+    "properties": {
+      "query": { "type": "string" }
+    }
+  },
+  "output_schema": {
+    "type": "object",
+    "properties": {
+      "enabled": { "type": "boolean" },
+      "reason": { "type": "string" },
+      "matches": { "type": "array" }
+    }
+  },
+  "api": {
+    "type": "openapi",
+    "endpoint": "https://symbiose-query-api-958872099364.europe-north1.run.app/search",
+    "method": "GET"
+  }
+}

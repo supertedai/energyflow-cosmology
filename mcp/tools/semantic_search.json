@@ -1,0 +1,23 @@
+{
+  "name": "semantic_search",
+  "description": "Search the local semantic index extracted from the repository.",
+  "input_schema": {
+    "type": "object",
+    "required": ["query"],
+    "properties": {
+      "query": { "type": "string" }
+    }
+  },
+  "output_schema": {
+    "type": "object",
+    "properties": {
+      "index_size": { "type": "number" },
+      "matches": { "type": "array" }
+    }
+  },
+  "api": {
+    "type": "openapi",
+    "endpoint": "https://symbiose-query-api-958872099364.europe-north1.run.app/semantic",
+    "method": "GET"
+  }
+}

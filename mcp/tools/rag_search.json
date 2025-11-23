@@ -1,0 +1,22 @@
+{
+  "name": "rag_search",
+  "description": "Direct semantic RAG search from the GitHub JSON-LD index.",
+  "input_schema": {
+    "type": "object",
+    "required": ["query"],
+    "properties": {
+      "query": { "type": "string" }
+    }
+  },
+  "output_schema": {
+    "type": "object",
+    "properties": {
+      "matches": { "type": "array" }
+    }
+  },
+  "api": {
+    "type": "openapi",
+    "endpoint": "https://symbiose-query-api-958872099364.europe-north1.run.app/rag",
+    "method": "GET"
+  }
+}

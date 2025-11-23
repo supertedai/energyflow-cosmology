@@ -1,0 +1,11 @@
+{
+  "name": "symbiose-mcp",
+  "version": "1.0.0",
+  "description": "MCP interface for Neo4j + Qdrant RAG + Unified EFC Query API",
+  "tools": [
+    { "name": "unified_query", "path": "./tools/unified_query.json" },
+    { "name": "neo4j_search", "path": "./tools/neo4j_search.json" },
+    { "name": "rag_search", "path": "./tools/rag_search.json" },
+    { "name": "semantic_search", "path": "./tools/semantic_search.json" }
+  ]
+}

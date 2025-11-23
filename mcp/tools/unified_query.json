@@ -1,0 +1,32 @@
+{
+  "name": "unified_query",
+  "description": "Send a unified query to the Symbiose Unified API. Handles Neo4j search, RAG search and semantic matches in one call.",
+  "input_schema": {
+    "type": "object",
+    "required": ["text"],
+    "properties": {
+      "text": {
+        "type": "string",
+        "description": "Natural language query to send into the unified symbiosis API"
+      }
+    }
+  },
+  "output_schema": {
+    "type": "object",
+    "properties": {
+      "timestamp": { "type": "string" },
+      "query": { "type": "string" },
+      "neo4j": { "type": "object" },
+      "rag": { "type": "object" },
+      "semantic": { "type": "object" }
+    }
+  },
+  "api": {
+    "type": "openapi",
+    "endpoint": "https://symbiose-query-api-958872099364.europe-north1.run.app/unified_query",
+    "method": "POST",
+    "headers": {
+      "Content-Type": "application/json"
+    }
+  }
+}
