@@ -1,7 +1,6 @@
 fastapi
 uvicorn[standard]
 neo4j-driver
+qdrant-client
 numpy
 pydantic
-qdrant-client
-networkx
