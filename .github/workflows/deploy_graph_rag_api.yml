@@ -3,22 +3,27 @@ name: Deploy Graph-RAG API
 on:
   workflow_dispatch:
   push:
-    branches: [ "main" ]
+    branches:
+      - main
     paths:
       - "tools/graph_rag_api/**"
       - "docker/Dockerfile.graph_rag_api"
-      - ".github/workflows/deploy_graph_rag_api.yml"
+
+permissions:
+  contents: read
+  id-token: write
+
+env:
+  GCP_PROJECT: ${{ secrets.GCP_PROJECT }}
+  GCP_SERVICE_ACCOUNT: ${{ secrets.GCP_SERVICE_ACCOUNT }}
+  GCP_WIF_PROVIDER: ${{ secrets.GCP_WIF_PROVIDER }}
+  REGION: europe-west1
+  REPO_NAME: symbiose-api
+  IMAGE_NAME: graph-rag-api
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
-
-    env:
-      PROJECT_ID: endless-precept-479020-n9
-      REGION: europe-west1
-      SERVICE: symbiose-graph-rag
-      GAR_REPO: symbiose-api
-      IMAGE_NAME: graph-rag
 
     steps:
       - name: Checkout
@@ -27,25 +32,32 @@ jobs:
       - name: Authenticate to Google Cloud
         uses: google-github-actions/auth@v2
         with:
-          credentials_json: ${{ secrets.GCP_SA_KEY }}
+          token_format: "access_token"
+          workload_identity_provider: ${{ env.GCP_WIF_PROVIDER }}
+          service_account: ${{ env.GCP_SERVICE_ACCOUNT }}
 
-      - name: Configure gcloud
-        run: gcloud config set project $PROJECT_ID
+      - name: Set up gcloud
+        uses: google-github-actions/setup-gcloud@v2
 
-      - name: Build & push image
+      - name: Configure Docker for Artifact Registry
+        run: gcloud auth configure-docker ${REGION}-docker.pkg.dev
+
+      - name: Build Docker image
         run: |
-          IMAGE="europe-west1-docker.pkg.dev/$PROJECT_ID/$GAR_REPO/$IMAGE_NAME:latest"
-          gcloud builds submit \
-            --tag "$IMAGE" \
-            --file docker/Dockerfile.graph_rag_api .
+          docker build \
+            -t ${REGION}-docker.pkg.dev/${GCP_PROJECT}/${REPO_NAME}/${IMAGE_NAME}:latest \
+            -f docker/Dockerfile.graph_rag_api .
+
+      - name: Push Docker image
+        run: |
+          docker push ${REGION}-docker.pkg.dev/${GCP_PROJECT}/${REPO_NAME}/${IMAGE_NAME}:latest
 
       - name: Deploy to Cloud Run
         run: |
-          IMAGE="europe-west1-docker.pkg.dev/$PROJECT_ID/$GAR_REPO/$IMAGE_NAME:latest"
-          gcloud run deploy $SERVICE \
-            --image "$IMAGE" \
-            --region $REGION \
-            --platform managed \
+          gcloud run deploy ${IMAGE_NAME} \
+            --image=${REGION}-docker.pkg.dev/${GCP_PROJECT}/${REPO_NAME}/${IMAGE_NAME}:latest \
+            --region=${REGION} \
+            --platform=managed \
             --allow-unauthenticated \
-            --port 8082 \
-            --set-env-vars=NEO4J_URI=${{ secrets.NEO4J_URI }},NEO4J_USER=${{ secrets.NEO4J_USER }},NEO4J_PASSWORD=${{ secrets.NEO4J_PASSWORD }},NEO4J_DATABASE=${{ secrets.NEO4J_DATABASE }}
+            --port=8082 \
+            --set-env-vars=NEO4J_URI="${{ secrets.NEO4J_URI }}",NEO4J_USER="${{ secrets.NEO4J_USER }}",NEO4J_PASSWORD="${{ secrets.NEO4J_PASSWORD }}",NEO4J_DATABASE="${{ secrets.NEO4J_DATABASE }}"
