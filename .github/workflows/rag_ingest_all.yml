@@ -1,6 +1,7 @@
 name: RAG Ingest – All to Qdrant
 
 on:
+  workflow_dispatch:
   push:
     branches: [ main ]
     paths:
@@ -28,20 +29,29 @@ jobs:
         with:
           python-version: "3.11"
 
-      - name: Install deps
+      - name: Install dependencies
         run: |
           pip install qdrant-client pypdf
 
-      - name: Ingest EFC papers (PDF)
+      - name: Run PDF ingest
         env:
           QDRANT_URL: ${{ secrets.QDRANT_URL }}
           QDRANT_API_KEY: ${{ secrets.QDRANT_API_KEY }}
         run: |
-          python tools/rag_ingest_efc.py  # tilpass navn til ditt eksisterende script
+          if [ -f tools/rag_ingest_efc.py ]; then
+            python tools/rag_ingest_efc.py
+          else
+            echo "🟡 Advarsel: tools/rag_ingest_efc.py finnes ikke – hopper over PDF-ingest"
+          fi
 
-      - name: Ingest repo text
+      - name: Run repo ingest
         env:
           QDRANT_URL: ${{ secrets.QDRANT_URL }}
           QDRANT_API_KEY: ${{ secrets.QDRANT_API_KEY }}
         run: |
-          python tools/rag_ingest_repo.py
+          if [ -f tools/rag_ingest_repo.py ]; then
+            python tools/rag_ingest_repo.py
+          else
+            echo "🔴 FEIL: tools/rag_ingest_repo.py mangler – workflow stopper"
+            exit 1
+          fi
