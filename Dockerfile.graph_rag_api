@@ -2,16 +2,12 @@
 FROM python:3.11-slim
 
 WORKDIR /app
-
 ENV PYTHONUNBUFFERED=1
 
-# Installer avhengigheter direkte (enkelt og robust)
 RUN pip install --no-cache-dir fastapi uvicorn[standard] neo4j
 
-# Kopier inn Graph-RAG API-koden
 COPY tools/graph_rag_api.py /app/graph_rag_api.py
 
 EXPOSE 8082
 
-# Start FastAPI via uvicorn
 CMD ["uvicorn", "graph_rag_api:app", "--host", "0.0.0.0", "--port", "8082"]
