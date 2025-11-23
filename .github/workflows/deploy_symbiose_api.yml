@@ -11,9 +11,7 @@ permissions:
   id-token: write
 
 env:
-  GCP_PROJECT: ${{ secrets.GCP_PROJECT }}
-  GCP_SERVICE_ACCOUNT: ${{ secrets.GCP_SERVICE_ACCOUNT }}
-  GCP_WIF_PROVIDER: ${{ secrets.GCP_WIF_PROVIDER }}
+  PROJECT_ID: ${{ secrets.GCP_PROJECT }}
   REGION: europe-north1
   REPO_NAME: symbiose-api
   IMAGE_NAME: symbiose-query-api
@@ -26,13 +24,17 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v4
 
+      # ---------------------------
+      # GOOGLE CLOUD AUTH (SA KEY)
+      # ---------------------------
       - name: Authenticate to Google Cloud
         uses: google-github-actions/auth@v2
         with:
-          token_format: "access_token"
-          workload_identity_provider: ${{ env.GCP_WIF_PROVIDER }}
-          service_account: ${{ env.GCP_SERVICE_ACCOUNT }}
+          credentials_json: ${{ secrets.GCP_SA_KEY }}
 
+      # ---------------------------
+      # CLOUD SDK
+      # ---------------------------
       - name: Set up gcloud
         uses: google-github-actions/setup-gcloud@v2
 
@@ -40,20 +42,29 @@ jobs:
         run: |
           gcloud auth configure-docker ${REGION}-docker.pkg.dev
 
+      # ---------------------------
+      # BUILD IMAGE
+      # ---------------------------
       - name: Build Docker image
         run: |
           docker build \
-            -t ${REGION}-docker.pkg.dev/${GCP_PROJECT}/${REPO_NAME}/${IMAGE_NAME}:latest \
+            -t ${REGION}-docker.pkg.dev/${PROJECT_ID}/${REPO_NAME}/${IMAGE_NAME}:latest \
             ./tools/symbiose-query-api
 
+      # ---------------------------
+      # PUSH IMAGE
+      # ---------------------------
       - name: Push Docker image
         run: |
-          docker push ${REGION}-docker.pkg.dev/${GCP_PROJECT}/${REPO_NAME}/${IMAGE_NAME}:latest
+          docker push ${REGION}-docker.pkg.dev/${PROJECT_ID}/${REPO_NAME}/${IMAGE_NAME}:latest
 
+      # ---------------------------
+      # DEPLOY TO CLOUD RUN
+      # ---------------------------
       - name: Deploy to Cloud Run
         run: |
           gcloud run deploy ${IMAGE_NAME} \
-            --image=${REGION}-docker.pkg.dev/${GCP_PROJECT}/${REPO_NAME}/${IMAGE_NAME}:latest \
+            --image=${REGION}-docker.pkg.dev/${PROJECT_ID}/${REPO_NAME}/${IMAGE_NAME}:latest \
             --region=${REGION} \
             --platform=managed \
             --allow-unauthenticated \
