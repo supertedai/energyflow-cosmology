@@ -1,60 +1,49 @@
-name: Deploy Unified Symbiose API
+name: Deploy Unified API to Cloud Run
 
 on:
   push:
-    branches: [ main ]
-  workflow_dispatch:
-
-permissions:
-  contents: read
-  id-token: write
-
-env:
-  GCP_PROJECT: ${{ secrets.GCP_PROJECT }}
-  GCP_SERVICE_ACCOUNT: ${{ secrets.GCP_SERVICE_ACCOUNT }}
-  GCP_WIF_PROVIDER: ${{ secrets.GCP_WIF_PROVIDER }}
-  REGION: europe-west1
-  REPO_NAME: symbiose-api
-  IMAGE_NAME: symbiose-unified-api
-  DOCKERFILE_PATH: docker/Dockerfile.unified_api
+    branches: ["main"]
+    paths:
+      - "tools/symbiose_unified_api.py"
+      - "semantic-search-index.json"
+      - "docker/Dockerfile.unified_api"
+      - ".github/workflows/deploy_unified_api.yml"
 
 jobs:
-  deploy:
+  build-and-deploy:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout repository
-      uses: actions/checkout@v4
+    - name: Checkout
+      uses: actions/checkout@v3
 
-    - name: Authenticate to Google Cloud
-      uses: google-github-actions/auth@v2
+    - name: Setup gcloud
+      uses: google-github-actions/auth@v1
       with:
-        token_format: "access_token"
-        workload_identity_provider: ${{ env.GCP_WIF_PROVIDER }}
-        service_account: ${{ env.GCP_SERVICE_ACCOUNT }}
+        credentials_json: ${{ secrets.GCP_SERVICE_KEY }}
 
-    - name: Set up gcloud
-      uses: google-github-actions/setup-gcloud@v2
+    - name: Set up Google Cloud SDK
+      uses: google-github-actions/setup-gcloud@v1
+      with:
+        project_id: endless-precept-479020-n9
 
-    - name: Configure Docker for Artifact Registry
-      run: gcloud auth configure-docker ${REGION}-docker.pkg.dev
+    - name: Configure Docker auth
+      run: gcloud auth configure-docker europe-west1-docker.pkg.dev
 
     - name: Build Docker image
       run: |
         docker build \
-          -f $DOCKERFILE_PATH \
-          -t ${REGION}-docker.pkg.dev/${GCP_PROJECT}/${REPO_NAME}/${IMAGE_NAME}:latest \
-          .
+          -t europe-west1-docker.pkg.dev/endless-precept-479020-n9/symbiose-api/symbiose-unified-api:latest \
+          -f docker/Dockerfile.unified_api .
 
     - name: Push Docker image
-      run: docker push ${REGION}-docker.pkg.dev/${GCP_PROJECT}/${REPO_NAME}/${IMAGE_NAME}:latest
+      run: |
+        docker push \
+          europe-west1-docker.pkg.dev/endless-precept-479020-n9/symbiose-api/symbiose-unified-api:latest
 
     - name: Deploy to Cloud Run
       run: |
-        gcloud run deploy ${IMAGE_NAME} \
-          --image=${REGION}-docker.pkg.dev/${GCP_PROJECT}/${REPO_NAME}/${IMAGE_NAME}:latest \
-          --project=${GCP_PROJECT} \
-          --region=${REGION} \
-          --platform=managed \
-          --allow-unauthenticated \
-          --port=8082
+        gcloud run deploy unified-api \
+          --region=europe-west1 \
+          --image=europe-west1-docker.pkg.dev/endless-precept-479020-n9/symbiose-api/symbiose-unified-api:latest \
+          --allow-unauthenticated
