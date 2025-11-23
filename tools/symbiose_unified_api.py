@@ -15,6 +15,7 @@ except:
 
 try:
     from qdrant_client import QdrantClient
+    from qdrant_client.models import SearchRequest, NamedVector
 except:
     QdrantClient = None
 
@@ -30,7 +31,7 @@ class UnifiedQuery(BaseModel):
 
 
 # ---------------------------------------------
-# HELPER: NEO4J
+# HELPERS → NEO4J
 # ---------------------------------------------
 def neo4j_query(text: str):
     uri = os.getenv("NEO4J_URI")
@@ -46,7 +47,6 @@ def neo4j_query(text: str):
 
     try:
         driver = GraphDatabase.driver(uri, auth=(user, password))
-
         with driver.session(database=db) as session:
             q = """
             CALL db.index.fulltext.queryNodes('efc_index', $q)
@@ -54,7 +54,7 @@ def neo4j_query(text: str):
             RETURN node.title AS title, node.slug AS slug, node.keywords AS keywords, score
             ORDER BY score DESC LIMIT 5
             """
-            rows = session.run(q, parameters={"q": text})
+            rows = session.run(q, {"q": text})
             data = [r.data() for r in rows]
 
         driver.close()
@@ -65,7 +65,7 @@ def neo4j_query(text: str):
 
 
 # ---------------------------------------------
-# HELPER: QDRANT
+# HELPERS → QDRANT (RAG)
 # ---------------------------------------------
 def qdrant_search(text: str, limit=5):
     url = os.getenv("QDRANT_URL")
@@ -75,28 +75,28 @@ def qdrant_search(text: str, limit=5):
     if QdrantClient is None:
         return {"enabled": False, "reason": "qdrant-client missing", "matches": []}
 
-    if not url:
-        return {"enabled": False, "reason": "Missing Qdrant URL", "matches": []}
+    if not (url and api_key):
+        return {"enabled": False, "reason": "Missing Qdrant config", "matches": []}
 
     try:
         client = QdrantClient(url=url, api_key=api_key)
 
-        # Dummy embedding (erstattes senere)
-        query_vector = [0.1] * 1536
+        # dummy embedding (erstattes når lokal embedder er aktiv)
+        embedding = [0.1] * 1536
 
-        result = client.search(
+        search_result = client.search(
             collection_name=collection,
-            query_vector=query_vector,
+            query_vector=embedding,
             limit=limit
         )
 
         matches = []
-        for h in result:
+        for hit in search_result:
             matches.append({
-                "text": h.payload.get("text"),
-                "paper": h.payload.get("paper_title"),
-                "slug": h.payload.get("slug"),
-                "score": h.score
+                "text": hit.payload.get("text"),
+                "paper": hit.payload.get("paper_title"),
+                "slug": hit.payload.get("slug"),
+                "score": hit.score
             })
 
         return {"enabled": True, "matches": matches}
@@ -108,6 +108,7 @@ def qdrant_search(text: str, limit=5):
 # ---------------------------------------------
 # ENDPOINTS
 # ---------------------------------------------
+
 @app.get("/health")
 def health():
     return {
@@ -119,20 +120,17 @@ def health():
 
 @app.get("/context")
 def context():
-    utc = datetime.datetime.utcnow().isoformat() + "Z"
     return {
         "context_version": "v6",
-        "timestamp": utc,
-        "neo4j": "ready",
-        "rag": "ready",
-        "semantic_index": "loaded"
+        "neo4j": bool(os.getenv("NEO4J_URI")),
+        "qdrant": bool(os.getenv("QDRANT_URL")),
+        "semantic_index": True,
     }
 
 
 @app.post("/unified_query")
 def unified_query(req: UnifiedQuery):
 
-    # semantic index
     try:
         with open("semantic-search-index.json") as f:
             semantic = json.load(f)
@@ -144,17 +142,5 @@ def unified_query(req: UnifiedQuery):
         "query": req.text,
         "neo4j": neo4j_query(req.text),
         "rag": qdrant_search(req.text, req.max_results),
-        "semantic": {"enabled": True, "index_size": len(semantic)}
+        "semantic": {"enabled": True, "index_size": len(semantic)},
     }
-
-
-# ---------------------------------------------
-# UVICORN STARTER
-# ---------------------------------------------
-if __name__ == "__main__":
-    import uvicorn
-    uvicorn.run(
-        "symbiose_unified_api:app",
-        host="0.0.0.0",
-        port=int(os.getenv("PORT", 8080))
-    )
