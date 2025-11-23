@@ -4,9 +4,14 @@
 Symbiose Query API – Msty-adapter
 =================================
 
-Denne tjenesten er et tynt lag rundt unified-API-et ditt.
-Nå utvidet med et matematikkfilter (LaTeX, EFC-operatører,
-validering, beautifier).
+Tynt proxy-lag mellom Msty og unified-API-et ditt.
+Nå utvidet med:
+- Matte-filter (LaTeX)
+- Unicode → LaTeX mapper
+- Løs formel-wrapping
+- Validator
+- Beautifier
+- EFC-operatorer (GridGrad, EntropyFlow, s0/s1, CMB, Halo)
 """
 
 import os
@@ -18,6 +23,7 @@ import re
 import requests
 from fastapi import FastAPI, HTTPException, Query
 from pydantic import BaseModel
+
 
 # ------------------------------------------------------------
 # Konfig
@@ -32,6 +38,7 @@ UNIFIED_API_TIMEOUT = float(os.getenv("UNIFIED_API_TIMEOUT", "30.0"))
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger("symbiose-query-api")
+
 
 app = FastAPI(
     title="Symbiose Query API (Msty adapter)",
@@ -69,9 +76,11 @@ def sanitize_unicode(text: str) -> str:
         text = text.replace(k, v)
     return text
 
+
 def wrap_loose_math(text: str) -> str:
     pattern = r"([A-Za-z0-9\^_\/\*\+\-\(\) ]+=+[A-Za-z0-9\^_\/\*\+\-\(\) ]+)"
     return re.sub(pattern, lambda m: r"\[ " + m.group(1) + r" \]", text)
+
 
 def math_validator(text: str) -> str:
     issues = []
@@ -82,6 +91,7 @@ def math_validator(text: str) -> str:
     if issues:
         text += "\n\n% VALIDATOR: " + "; ".join(issues)
     return text
+
 
 def beautify_equations(text: str) -> str:
     lines = text.split("\n")
@@ -105,6 +115,7 @@ def beautify_equations(text: str) -> str:
 
     return "\n".join(out)
 
+
 EFC_OPERATORS = r"""
 % --- EFC Math Mode operators ---
 \newcommand{\GridGrad}{\nabla_{\text{grid}}}
@@ -118,6 +129,7 @@ EFC_OPERATORS = r"""
 \newcommand{\EnergyDensity}{\rho_E}
 \newcommand{\EntropyGrad}{\nabla S}
 """
+
 
 def apply_math_filter(text: str) -> str:
     if not isinstance(text, str):
@@ -135,7 +147,7 @@ def apply_math_filter(text: str) -> str:
     # 4. Beautify / nummerering
     t4 = beautify_equations(t3)
 
-    # 5. Prepender EFC-operators hvis matte finnes
+    # 5. Prepender EFC-operators dersom matte finnes
     if "\\begin{equation}" in t4 or "\\(" in t4 or "\\[" in t4:
         return EFC_OPERATORS + "\n" + t4
 
@@ -143,14 +155,10 @@ def apply_math_filter(text: str) -> str:
 
 
 # ------------------------------------------------------------
-# Intern helper – kaller unified-API-et
+# Intern helper
 # ------------------------------------------------------------
 
 def call_unified_backend(query_text: str) -> Dict[str, Any]:
-    """
-    Forwarder til unified backend og legger mattefilter på responsen.
-    """
-
     if not UNIFIED_API_URL:
         raise HTTPException(
             status_code=500,
@@ -158,7 +166,6 @@ def call_unified_backend(query_text: str) -> Dict[str, Any]:
         )
 
     payload = {"text": query_text}
-    logger.info("Forwarder til unified backend: %s", UNIFIED_API_URL)
 
     try:
         resp = requests.post(
@@ -167,7 +174,6 @@ def call_unified_backend(query_text: str) -> Dict[str, Any]:
             timeout=UNIFIED_API_TIMEOUT,
         )
     except requests.RequestException as exc:
-        logger.exception("Feil ved kall til unified backend")
         raise HTTPException(
             status_code=502,
             detail=f"Feil ved kontakt: {exc}",
@@ -187,7 +193,7 @@ def call_unified_backend(query_text: str) -> Dict[str, Any]:
             detail="Unified API returnerte ikke gyldig JSON."
         )
 
-    # --- MATTEFILTER HER ---
+    # Mattefilter på returen:
     if isinstance(data, dict) and "response" in data:
         data["response"] = apply_math_filter(data["response"])
 
@@ -214,5 +220,5 @@ def unified_query(body: UnifiedQueryRequest) -> Dict[str, Any]:
 
 
 @app.get("/search")
-def search(q: str = Query(..., description="Fritekst-spørring (Msty-kompatibel)")) -> Dict[str, Any]:
+def search(q: str = Query(...)) -> Dict[str, Any]:
     return call_unified_backend(q)
