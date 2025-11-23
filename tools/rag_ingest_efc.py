@@ -11,13 +11,12 @@ RAG Ingest EFC (Local Embeddings, Qdrant Cloud)
 - Tester Qdrant-tilkobling eksplisitt
 - Upserter i Qdrant Cloud
 
-Dette er en helt selvstendig ingest-pipeline som fungerer direkte
-i GitHub Actions med kun:
+Bruker:
 
     QDRANT_URL
     QDRANT_API_KEY
 
-i GitHub Secrets.
+fra GitHub Secrets / miljøvariabler.
 """
 
 import os
@@ -42,7 +41,8 @@ DOCS_ROOT = ROOT / "docs" / "papers" / "efc"
 
 EMBED_DIM = 1536  # matcher OpenAI dimensjon, men lokalt generert
 
-DEFAULT_COLLECTION = "efc_rag_local"  # kan endres, men OK som er standard
+# Standardisert og riktig navn for hele symbiosen
+DEFAULT_COLLECTION = "efc"
 
 
 # ------------------------------------------------------------
@@ -115,7 +115,6 @@ def load_metadata(pdf: Path) -> Dict:
         except:
             pass
 
-    # fallback metadata
     return {
         "title": pdf.stem,
         "slug": folder.name,
