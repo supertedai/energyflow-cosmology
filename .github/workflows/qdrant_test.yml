@@ -1,0 +1,19 @@
+name: Qdrant Test
+
+on:
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v4
+
+    - name: Run Qdrant connectivity test
+      run: |
+        echo "Testing Qdrant connection..."
+        curl -v \
+          -H "api-key: ${{ secrets.QDRANT_API_KEY }}" \
+          "${{ secrets.QDRANT_URL_DEBUG }}/collections"
