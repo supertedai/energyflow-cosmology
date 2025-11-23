@@ -6,3 +6,7 @@ PyYAML
 requests
 tqdm
 numpy
+sentence-transformers
+markdown
+beautifulsoup4
+lxml
