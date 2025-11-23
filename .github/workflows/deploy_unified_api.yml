@@ -1,0 +1,62 @@
+name: Deploy Unified Symbiose API
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  id-token: write
+
+env:
+  GCP_PROJECT: ${{ secrets.GCP_PROJECT }}
+  GCP_SERVICE_ACCOUNT: ${{ secrets.GCP_SERVICE_ACCOUNT }}
+  GCP_WIF_PROVIDER: ${{ secrets.GCP_WIF_PROVIDER }}
+  REGION: europe-north1
+  REPO_NAME: symbiose-api
+  IMAGE_NAME: symbiose-unified-api
+  DOCKERFILE_PATH: docker/Dockerfile.unified_api
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Authenticate to Google Cloud
+      uses: google-github-actions/auth@v2
+      with:
+        token_format: "access_token"
+        workload_identity_provider: ${{ env.GCP_WIF_PROVIDER }}
+        service_account: ${{ env.GCP_SERVICE_ACCOUNT }}
+
+    - name: Set up gcloud SDK
+      uses: google-github-actions/setup-gcloud@v2
+
+    - name: Configure Docker for Artifact Registry
+      run: |
+        gcloud auth configure-docker ${REGION}-docker.pkg.dev
+
+    - name: Build Docker image
+      run: |
+        docker build \
+          -f $DOCKERFILE_PATH \
+          -t ${REGION}-docker.pkg.dev/${GCP_PROJECT}/${REPO_NAME}/${IMAGE_NAME}:latest \
+          .
+
+    - name: Push Docker image
+      run: |
+        docker push ${REGION}-docker.pkg.dev/${GCP_PROJECT}/${REPO_NAME}/${IMAGE_NAME}:latest
+
+    - name: Deploy to Cloud Run
+      run: |
+        gcloud run deploy ${IMAGE_NAME} \
+          --image=${REGION}-docker.pkg.dev/${GCP_PROJECT}/${REPO_NAME}/${IMAGE_NAME}:latest \
+          --project=${GCP_PROJECT} \
+          --region=${REGION} \
+          --platform=managed \
+          --allow-unauthenticated \
+          --port=8082
