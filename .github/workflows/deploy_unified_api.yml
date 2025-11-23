@@ -13,7 +13,7 @@ env:
   GCP_PROJECT: ${{ secrets.GCP_PROJECT }}
   GCP_SERVICE_ACCOUNT: ${{ secrets.GCP_SERVICE_ACCOUNT }}
   GCP_WIF_PROVIDER: ${{ secrets.GCP_WIF_PROVIDER }}
-  REGION: europe-north1
+  REGION: europe-west1
   REPO_NAME: symbiose-api
   IMAGE_NAME: symbiose-unified-api
   DOCKERFILE_PATH: docker/Dockerfile.unified_api
@@ -33,12 +33,11 @@ jobs:
         workload_identity_provider: ${{ env.GCP_WIF_PROVIDER }}
         service_account: ${{ env.GCP_SERVICE_ACCOUNT }}
 
-    - name: Set up gcloud SDK
+    - name: Set up gcloud
       uses: google-github-actions/setup-gcloud@v2
 
     - name: Configure Docker for Artifact Registry
-      run: |
-        gcloud auth configure-docker ${REGION}-docker.pkg.dev
+      run: gcloud auth configure-docker ${REGION}-docker.pkg.dev
 
     - name: Build Docker image
       run: |
@@ -48,8 +47,7 @@ jobs:
           .
 
     - name: Push Docker image
-      run: |
-        docker push ${REGION}-docker.pkg.dev/${GCP_PROJECT}/${REPO_NAME}/${IMAGE_NAME}:latest
+      run: docker push ${REGION}-docker.pkg.dev/${GCP_PROJECT}/${REPO_NAME}/${IMAGE_NAME}:latest
 
     - name: Deploy to Cloud Run
       run: |
