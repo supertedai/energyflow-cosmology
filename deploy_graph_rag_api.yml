@@ -1,0 +1,50 @@
+name: Deploy Graph-RAG API
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+    paths:
+      - "tools/graph_rag_api/**"
+      - "docker/Dockerfile.graph_rag_api"
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    env:
+      PROJECT_ID: endless-precept-479020-n9
+      REGION: europe-west1
+      SERVICE: symbiose-graph-rag
+      GAR_REPO: symbiose-api
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Authenticate to Google Cloud
+        uses: google-github-actions/auth@v2
+        with:
+          credentials_json: ${{ secrets.GCP_SA_KEY }}
+
+      - name: Configure GCloud
+        run: gcloud config set project $PROJECT_ID
+
+      - name: Build & push image
+        run: |
+          IMAGE="europe-west1-docker.pkg.dev/$PROJECT_ID/$GAR_REPO/graph-rag:latest"
+          gcloud builds submit \
+            --tag "$IMAGE" \
+            --file docker/Dockerfile.graph_rag_api .
+
+      - name: Deploy to Cloud Run
+        run: |
+          IMAGE="europe-west1-docker.pkg.dev/$PROJECT_ID/$GAR_REPO/graph-rag:latest"
+          gcloud run deploy $SERVICE \
+            --image="$IMAGE" \
+            --region=$REGION \
+            --platform=managed \
+            --allow-unauthenticated \
+            --port=8082 \
+            --set-env-vars=NEO4J_URI=${{ secrets.NEO4J_URI }},NEO4J_USER=${{ secrets.NEO4J_USER }},NEO4J_PASSWORD=${{ secrets.NEO4J_PASSWORD }},NEO4J_DATABASE=${{ secrets.NEO4J_DATABASE }}
