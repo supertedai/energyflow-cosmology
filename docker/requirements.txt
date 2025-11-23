@@ -1,0 +1,7 @@
+fastapi
+uvicorn[standard]
+neo4j-driver
+numpy
+pydantic
+qdrant-client
+networkx
