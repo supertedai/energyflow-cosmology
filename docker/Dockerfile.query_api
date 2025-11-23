@@ -6,23 +6,19 @@ ENV PYTHONUNBUFFERED=1 \
 WORKDIR /app
 
 COPY tools/symbiose_query_api.py ./symbiose_query_api.py
+
 COPY semantic-search-index.json ./semantic-search-index.json
 COPY symbiose_gnn_output/node_embeddings.json ./symbiose_gnn_output/node_embeddings.json
 COPY symbiose_gnn_output/node_mapping.json ./symbiose_gnn_output/node_mapping.json
-
-RUN apt-get update && apt-get install -y --no-install-recommends \
-      ca-certificates \
-    && rm -rf /var/lib/apt/lists/*
 
 RUN pip install --upgrade pip && \
     pip install \
       fastapi \
       "uvicorn[standard]" \
       neo4j-driver \
-      numpy \
-      pydantic \
       qdrant-client \
-      networkx
+      pydantic \
+      numpy
 
 EXPOSE 8082
 
