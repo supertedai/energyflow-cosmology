@@ -1,18 +1,14 @@
 FROM python:3.11-slim
 
-# Arbeidskatalog
 WORKDIR /app
 
-# Kopier API-kode + semantic index
 COPY tools/symbiose_unified_api.py ./symbiose_unified_api.py
 COPY semantic-search-index.json ./semantic-search-index.json
 
-# Installer avhengigheter
 RUN pip install --upgrade pip && \
     pip install fastapi "uvicorn[standard]" neo4j-driver qdrant-client pydantic numpy
 
-# Cloud Run krever at applikasjonen lytter på 0.0.0.0:$PORT
+# Cloud Run setter PORT env automatisk, men app må lytte på den
 ENV PORT=8080
 
-# Start API via Uvicorn
 CMD ["uvicorn", "symbiose_unified_api:app", "--host", "0.0.0.0", "--port", "8080"]
