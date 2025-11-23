@@ -4,10 +4,8 @@ from pathlib import Path
 from qdrant_client import QdrantClient
 from qdrant_client.models import VectorParams, PointStruct
 
-# OpenAI optional
+# Optional OpenAI import
 from openai import OpenAI
-
-# Fallback embedders
 from sentence_transformers import SentenceTransformer
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -17,12 +15,10 @@ QDRANT_URL = os.getenv("QDRANT_URL")
 QDRANT_API_KEY = os.getenv("QDRANT_API_KEY")
 OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
 
-client_q = QdrantClient(url=QDRANT_URL, api_key=QDRANT_API_KEY)
-
 COLLECTION = "efc_docs"
 
 # -----------------------------
-# 1. SELECT EMBEDDER (primary + fallback)
+# Embedder selection
 # -----------------------------
 USE_OPENAI = OPENAI_API_KEY not in (None, "", "null")
 
@@ -30,7 +26,7 @@ if USE_OPENAI:
     print("[embed] Using OpenAI embeddings (text-embedding-3-small)")
     client_oa = OpenAI(api_key=OPENAI_API_KEY)
 else:
-    print("[embed] OPENAI_API_KEY missing → Using fallback (all-MiniLM-L6-v2)")
+    print("[embed] OPENAI_API_KEY missing → Using fallback (MiniLM)")
     fallback_model = SentenceTransformer("sentence-transformers/all-MiniLM-L6-v2")
 
 def embed(text):
@@ -44,24 +40,29 @@ def embed(text):
         except Exception as e:
             print(f"[embed] OpenAI failed → fallback: {e}")
 
-    # Fallback always works
     return fallback_model.encode(text).tolist()
 
 # -----------------------------
-# 2. Ensure collection exists
+# Qdrant setup
 # -----------------------------
+client_q = QdrantClient(url=QDRANT_URL, api_key=QDRANT_API_KEY)
+
 def ensure_collection():
     try:
         client_q.get_collection(COLLECTION)
+        print(f"[qdrant] Collection exists: {COLLECTION}")
     except:
-        print("[qdrant] Creating collection:", COLLECTION)
+        print(f"[qdrant] Creating collection: {COLLECTION}")
         client_q.create_collection(
-            COLLECTION,
-            vectors=VectorParams(size=1536, distance="Cosine")
+            collection_name=COLLECTION,
+            vectors_config=VectorParams(
+                size=1536,
+                distance="Cosine"
+            )
         )
 
 # -----------------------------
-# 3. MAIN
+# MAIN
 # -----------------------------
 def main():
     ensure_collection()
@@ -73,9 +74,12 @@ def main():
         vec = embed(text)
         points.append(PointStruct(id=i, vector=vec, payload=item))
 
-    client_q.upsert(collection_name=COLLECTION, points=points)
+    client_q.upsert(
+        collection_name=COLLECTION, 
+        points=points
+    )
 
-    print(f"[qdrant] Updated {len(items)} embeddings (fallback={not USE_OPENAI})")
+    print(f"[qdrant] Updated {len(items)} embeddings.")
 
 if __name__ == "__main__":
     main()
