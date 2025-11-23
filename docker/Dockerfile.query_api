@@ -1,4 +1,3 @@
-# docker/Dockerfile.query_api
 FROM python:3.11-slim
 
 ENV PYTHONUNBUFFERED=1 \
@@ -6,7 +5,6 @@ ENV PYTHONUNBUFFERED=1 \
 
 WORKDIR /app
 
-# Kopier kun det vi trenger for API-et
 COPY tools/symbiose_query_api.py ./symbiose_query_api.py
 COPY semantic-search-index.json ./semantic-search-index.json
 COPY symbiose_gnn_output/node_embeddings.json ./symbiose_gnn_output/node_embeddings.json
@@ -28,5 +26,4 @@ RUN pip install --upgrade pip && \
 
 EXPOSE 8082
 
-# FastAPI-app er definert som `app` i symbiose_query_api.py
 CMD ["uvicorn", "symbiose_query_api:app", "--host", "0.0.0.0", "--port", "8082"]
