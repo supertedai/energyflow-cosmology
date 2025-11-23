@@ -18,7 +18,7 @@ try:
 except:
     QdrantClient = None
 
-app = FastAPI(title="Symbiose Unified API", version="v5")
+app = FastAPI(title="Symbiose Unified API", version="v6")
 
 
 # ---------------------------------------------
@@ -53,8 +53,8 @@ def neo4j_query(text: str):
             RETURN node.title AS title, node.slug AS slug, node.keywords AS keywords, score
             ORDER BY score DESC LIMIT 5
             """
-            rows = session.run(q, parameters={"q": text})
-            data = [r.data() for r in rows]
+            result = session.run(q, parameters={"q": text})
+            data = [r.data() for r in result]
 
         driver.close()
         return {"enabled": True, "matches": data}
@@ -74,14 +74,18 @@ def qdrant_search(text: str, limit=5):
     if QdrantClient is None:
         return {"enabled": False, "reason": "qdrant-client missing", "matches": []}
 
+    if not url:
+        return {"enabled": False, "reason": "Missing Qdrant URL", "matches": []}
+
     try:
         client = QdrantClient(url=url, api_key=api_key)
 
-        emb = [0.1] * 1536  # dummy embedding
+        # Dummy embedding (erstattes senere)
+        emb = [0.1] * 1536
 
         result = client.search(
             collection_name=collection,
-            vector=emb,
+            vector=emb,     # kompatibel for alle versjoner
             limit=limit
         )
 
@@ -110,7 +114,7 @@ def qdrant_search(text: str, limit=5):
 def health():
     return {
         "status": "ok",
-        "api": "unified-symbiose-v5",
+        "api": "unified-symbiose-v6",
         "timestamp": datetime.datetime.utcnow().isoformat() + "Z"
     }
 
@@ -119,11 +123,12 @@ def health():
 def context():
     utc = datetime.datetime.utcnow().isoformat() + "Z"
     return {
-        "context_version": "v5",
+        "context_version": "v6",
         "timestamp": utc,
         "neo4j": "ready",
         "rag": "ready",
-        "semantic_index": "loaded"
+        "semantic_index": "loaded",
+        "region": os.getenv("REGION", "europe-west1")
     }
 
 
@@ -146,7 +151,7 @@ def unified_query(req: UnifiedQuery):
 
 
 # ---------------------------------------------
-# UVICORN STARTER
+# UVICORN STARTER (Cloud Run)
 # ---------------------------------------------
 if __name__ == "__main__":
     import uvicorn
