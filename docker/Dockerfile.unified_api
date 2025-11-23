@@ -5,11 +5,12 @@ ENV PYTHONUNBUFFERED=1 \
 
 WORKDIR /app
 
+# kopier alt som API-et trenger
 COPY tools/symbiose_unified_api.py ./symbiose_unified_api.py
 COPY semantic-search-index.json ./semantic-search-index.json
 
 RUN pip install --upgrade pip && \
-    pip install fastapi uvicorn[standard] neo4j-driver qdrant-client pydantic numpy
+    pip install fastapi "uvicorn[standard]" neo4j-driver qdrant-client pydantic numpy
 
 EXPOSE 8082
 
