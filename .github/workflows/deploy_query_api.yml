@@ -1,9 +1,14 @@
-name: Deploy Symbiose API
+name: Deploy Query API (Symbiose)
 
 on:
   push:
     branches:
       - main
+    paths:
+      - "tools/symbiose-query-api/**"
+      - "docker/Dockerfile.query_api"
+      - ".github/workflows/deploy_query_api.yml"
+
   workflow_dispatch:
 
 permissions:
@@ -11,11 +16,11 @@ permissions:
   id-token: write
 
 env:
-  GCP_PROJECT: ${{ secrets.GCP_PROJECT }}
-  GCP_SERVICE_ACCOUNT: ${{ secrets.GCP_SERVICE_ACCOUNT }}
-  GCP_WIF_PROVIDER: ${{ secrets.GCP_WIF_PROVIDER }}
-  REGION: europe-north1
-  REPO_NAME: symbiose-api
+  PROJECT_ID: ${{ secrets.GCP_PROJECT }}
+  SERVICE_ACCOUNT: ${{ secrets.GCP_SERVICE_ACCOUNT }}
+  WIF_PROVIDER: ${{ secrets.GCP_WIF_PROVIDER }}
+  REGION: europe-west1
+  GAR_REPO: symbiose-api
   IMAGE_NAME: symbiose-query-api
 
 jobs:
@@ -23,38 +28,65 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repo
+      # ---------------------------
+      # CHECKOUT
+      # ---------------------------
+      - name: Checkout repository
         uses: actions/checkout@v4
 
+      # ---------------------------
+      # GOOGLE CLOUD AUTH (WIF)
+      # ---------------------------
       - name: Authenticate to Google Cloud
         uses: google-github-actions/auth@v2
         with:
-          token_format: "access_token"
-          workload_identity_provider: ${{ env.GCP_WIF_PROVIDER }}
-          service_account: ${{ env.GCP_SERVICE_ACCOUNT }}
+          token_format: access_token
+          workload_identity_provider: ${{ env.WIF_PROVIDER }}
+          service_account: ${{ env.SERVICE_ACCOUNT }}
 
+      # ---------------------------
+      # CLOUD SDK
+      # ---------------------------
       - name: Set up gcloud
         uses: google-github-actions/setup-gcloud@v2
+        with:
+          project_id: ${{ env.PROJECT_ID }}
 
       - name: Configure Docker for Artifact Registry
         run: |
           gcloud auth configure-docker ${REGION}-docker.pkg.dev
 
+      # ---------------------------
+      # BUILD & PUSH IMAGE
+      # ---------------------------
       - name: Build Docker image
         run: |
+          IMAGE="${REGION}-docker.pkg.dev/${PROJECT_ID}/${GAR_REPO}/${IMAGE_NAME}:latest"
+          echo ">>> Building Query API Docker image"
           docker build \
-            -t ${REGION}-docker.pkg.dev/${GCP_PROJECT}/${REPO_NAME}/${IMAGE_NAME}:latest \
-            ./tools/symbiose-query-api
+            -t "$IMAGE" \
+            -f docker/Dockerfile.query_api \
+            .
 
       - name: Push Docker image
         run: |
-          docker push ${REGION}-docker.pkg.dev/${GCP_PROJECT}/${REPO_NAME}/${IMAGE_NAME}:latest
+          IMAGE="${REGION}-docker.pkg.dev/${PROJECT_ID}/${GAR_REPO}/${IMAGE_NAME}:latest"
+          echo ">>> Pushing Query API image"
+          docker push "$IMAGE"
 
+      # ---------------------------
+      # DEPLOY TO CLOUD RUN
+      # ---------------------------
       - name: Deploy to Cloud Run
         run: |
+          IMAGE="${REGION}-docker.pkg.dev/${PROJECT_ID}/${GAR_REPO}/${IMAGE_NAME}:latest"
+          echo ">>> Deploying Query API to Cloud Run"
+
           gcloud run deploy ${IMAGE_NAME} \
-            --image=${REGION}-docker.pkg.dev/${GCP_PROJECT}/${REPO_NAME}/${IMAGE_NAME}:latest \
+            --image="$IMAGE" \
             --region=${REGION} \
             --platform=managed \
             --allow-unauthenticated \
-            --port=8082
+            --port=8081 \
+            --set-env-vars=UNIFIED_API_URL=${{ secrets.UNIFIED_API_URL }},\
+UNIFIED_API_TIMEOUT=30
