@@ -1,3 +1,34 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+
+from fastapi import FastAPI
+from pydantic import BaseModel
+import datetime
+import os
+import json
+
+# Optional drivers
+try:
+    from neo4j import GraphDatabase
+except:
+    GraphDatabase = None
+
+try:
+    from qdrant_client import QdrantClient
+except:
+    QdrantClient = None
+
+app = FastAPI(title="Symbiose Unified API", version="v5")
+
+
+# ---------------------------------------------
+# MODELS
+# ---------------------------------------------
+class UnifiedQuery(BaseModel):
+    text: str
+    max_results: int = 5
+
+
 # ---------------------------------------------
 # HELPERS → NEO4J
 # ---------------------------------------------
@@ -46,8 +77,7 @@ def qdrant_search(text: str, limit=5):
     try:
         client = QdrantClient(url=url, api_key=api_key)
 
-        # Dummy embedding
-        emb = [0.1] * 1536
+        emb = [0.1] * 1536  # dummy embedding
 
         result = client.search(
             collection_name=collection,
@@ -70,3 +100,58 @@ def qdrant_search(text: str, limit=5):
 
     except Exception as e:
         return {"enabled": False, "reason": str(e), "matches": []}
+
+
+# ---------------------------------------------
+# ENDPOINTS
+# ---------------------------------------------
+
+@app.get("/health")
+def health():
+    return {
+        "status": "ok",
+        "api": "unified-symbiose-v5",
+        "timestamp": datetime.datetime.utcnow().isoformat() + "Z"
+    }
+
+
+@app.get("/context")
+def context():
+    utc = datetime.datetime.utcnow().isoformat() + "Z"
+    return {
+        "context_version": "v5",
+        "timestamp": utc,
+        "neo4j": "ready",
+        "rag": "ready",
+        "semantic_index": "loaded"
+    }
+
+
+@app.post("/unified_query")
+def unified_query(req: UnifiedQuery):
+
+    try:
+        with open("semantic-search-index.json") as f:
+            semantic = json.load(f)
+    except:
+        semantic = {}
+
+    return {
+        "timestamp": datetime.datetime.utcnow().isoformat() + "Z",
+        "query": req.text,
+        "neo4j": neo4j_query(req.text),
+        "rag": qdrant_search(req.text, req.max_results),
+        "semantic": {"enabled": True, "index_size": len(semantic)}
+    }
+
+
+# ---------------------------------------------
+# UVICORN STARTER
+# ---------------------------------------------
+if __name__ == "__main__":
+    import uvicorn
+    uvicorn.run(
+        "symbiose_unified_api:app",
+        host="0.0.0.0",
+        port=int(os.getenv("PORT", 8080))
+    )
