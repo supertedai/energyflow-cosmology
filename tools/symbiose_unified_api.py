@@ -30,7 +30,7 @@ class UnifiedQuery(BaseModel):
 
 
 # ---------------------------------------------
-# HELPERS → NEO4J
+# HELPER: NEO4J
 # ---------------------------------------------
 def neo4j_query(text: str):
     uri = os.getenv("NEO4J_URI")
@@ -46,6 +46,7 @@ def neo4j_query(text: str):
 
     try:
         driver = GraphDatabase.driver(uri, auth=(user, password))
+
         with driver.session(database=db) as session:
             q = """
             CALL db.index.fulltext.queryNodes('efc_index', $q)
@@ -53,8 +54,8 @@ def neo4j_query(text: str):
             RETURN node.title AS title, node.slug AS slug, node.keywords AS keywords, score
             ORDER BY score DESC LIMIT 5
             """
-            result = session.run(q, parameters={"q": text})
-            data = [r.data() for r in result]
+            rows = session.run(q, parameters={"q": text})
+            data = [r.data() for r in rows]
 
         driver.close()
         return {"enabled": True, "matches": data}
@@ -64,7 +65,7 @@ def neo4j_query(text: str):
 
 
 # ---------------------------------------------
-# HELPERS → QDRANT (RAG)
+# HELPER: QDRANT
 # ---------------------------------------------
 def qdrant_search(text: str, limit=5):
     url = os.getenv("QDRANT_URL")
@@ -81,26 +82,24 @@ def qdrant_search(text: str, limit=5):
         client = QdrantClient(url=url, api_key=api_key)
 
         # Dummy embedding (erstattes senere)
-        emb = [0.1] * 1536
+        query_vector = [0.1] * 1536
 
         result = client.search(
             collection_name=collection,
-            vector=emb,     # kompatibel for alle versjoner
+            query_vector=query_vector,
             limit=limit
         )
 
-        return {
-            "enabled": True,
-            "matches": [
-                {
-                    "text": h.payload.get("text"),
-                    "paper": h.payload.get("paper_title"),
-                    "slug": h.payload.get("slug"),
-                    "score": h.score
-                }
-                for h in result
-            ]
-        }
+        matches = []
+        for h in result:
+            matches.append({
+                "text": h.payload.get("text"),
+                "paper": h.payload.get("paper_title"),
+                "slug": h.payload.get("slug"),
+                "score": h.score
+            })
+
+        return {"enabled": True, "matches": matches}
 
     except Exception as e:
         return {"enabled": False, "reason": str(e), "matches": []}
@@ -109,7 +108,6 @@ def qdrant_search(text: str, limit=5):
 # ---------------------------------------------
 # ENDPOINTS
 # ---------------------------------------------
-
 @app.get("/health")
 def health():
     return {
@@ -127,14 +125,14 @@ def context():
         "timestamp": utc,
         "neo4j": "ready",
         "rag": "ready",
-        "semantic_index": "loaded",
-        "region": os.getenv("REGION", "europe-west1")
+        "semantic_index": "loaded"
     }
 
 
 @app.post("/unified_query")
 def unified_query(req: UnifiedQuery):
 
+    # semantic index
     try:
         with open("semantic-search-index.json") as f:
             semantic = json.load(f)
@@ -151,7 +149,7 @@ def unified_query(req: UnifiedQuery):
 
 
 # ---------------------------------------------
-# UVICORN STARTER (Cloud Run)
+# UVICORN STARTER
 # ---------------------------------------------
 if __name__ == "__main__":
     import uvicorn
