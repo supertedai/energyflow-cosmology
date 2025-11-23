@@ -11,8 +11,10 @@ except ImportError:
 
 try:
     from qdrant_client import QdrantClient
+    from qdrant_client.http.models import CollectionDescription
 except ImportError:
     QdrantClient = None
+    CollectionDescription = None
 
 app = FastAPI()
 
@@ -26,14 +28,10 @@ class QueryRequest(BaseModel):
 
 
 # ------------------------
-# LAZY CLIENT HELPERS
+# NEO4J STATUS
 # ------------------------
 
 def get_neo4j_status():
-    """
-    Returnerer enkel status + metrikker for Neo4j, basert på env-vars.
-    Faller tilbake til "pending" hvis ikke satt opp eller feiler.
-    """
     uri = os.getenv("NEO4J_URI")
     user = os.getenv("NEO4J_USER")
     password = os.getenv("NEO4J_PASSWORD")
@@ -54,7 +52,7 @@ def get_neo4j_status():
         return {
             "status": "error",
             "connected": False,
-            "reason": "neo4j driver not installed in environment.",
+            "reason": "neo4j driver not installed.",
             "uri": uri,
             "database": database,
             "node_count": None,
@@ -64,8 +62,13 @@ def get_neo4j_status():
     try:
         driver = GraphDatabase.driver(uri, auth=(user, password))
         with driver.session(database=database) as session:
-            node_count = session.run("MATCH (n) RETURN count(n) AS c").single().get("c", 0)
-            rel_count = session.run("MATCH ()-[r]->() RETURN count(r) AS c").single().get("c", 0)
+            node_count = session.run(
+                "MATCH (n) RETURN count(n) AS c"
+            ).single().get("c", 0)
+
+            rel_count = session.run(
+                "MATCH ()-[r]->() RETURN count(r) AS c"
+            ).single().get("c", 0)
 
         driver.close()
         return {
@@ -77,6 +80,7 @@ def get_neo4j_status():
             "node_count": node_count,
             "relationship_count": rel_count,
         }
+
     except Exception as e:
         return {
             "status": "error",
@@ -89,11 +93,11 @@ def get_neo4j_status():
         }
 
 
+# ------------------------
+# QDRANT STATUS
+# ------------------------
+
 def get_qdrant_status():
-    """
-    Returnerer enkel status for Qdrant, basert på env-vars.
-    Faller tilbake til "pending" hvis ikke satt opp eller feiler.
-    """
     url = os.getenv("QDRANT_URL")
     api_key = os.getenv("QDRANT_API_KEY")
     collection = os.getenv("QDRANT_COLLECTION", "efc")
@@ -112,16 +116,30 @@ def get_qdrant_status():
         return {
             "status": "error",
             "connected": False,
-            "reason": "qdrant-client not installed in environment.",
+            "reason": "qdrant-client not installed.",
             "url": url,
             "collection": collection,
             "vectors_count": None,
         }
 
     try:
-        client = QdrantClient(url=url, api_key=api_key) if api_key else QdrantClient(url=url)
-        info = client.get_collection(collection)
-        vectors_count = info.vectors_count if hasattr(info, "vectors_count") else None
+        client = QdrantClient(url=url, api_key=api_key)
+
+        # Ny robust metode – fungerer både i cloud og lokal
+        info = client.get_collection(collection)  # type: CollectionDescription
+
+        vectors_count = None
+        try:
+            # Qdrant 1.8+
+            vectors_count = info.points_count
+        except:
+            pass
+
+        try:
+            # fallback – eldre API
+            vectors_count = vectors_count or info.vectors_count
+        except:
+            pass
 
         return {
             "status": "ok",
@@ -131,6 +149,7 @@ def get_qdrant_status():
             "collection": collection,
             "vectors_count": vectors_count,
         }
+
     except Exception as e:
         return {
             "status": "error",
@@ -158,16 +177,6 @@ async def health():
 
 @app.get("/context")
 async def context():
-    """
-    v3 – full symbiose-state:
-    - node/system
-    - efc
-    - neo4j-status
-    - qdrant/RAG-status
-    - axes/graph placeholders
-    - pipeline/meta-status
-    Designet for MSTY Live Context + LLM reasoning.
-    """
     utc_now = datetime.datetime.utcnow().isoformat() + "Z"
 
     neo4j_status = get_neo4j_status()
@@ -253,10 +262,7 @@ async def context():
 
 @app.post("/query")
 async def query(req: QueryRequest):
-    """
-    Nå: enkel echo med versjonsmarkør.
-    Senere: plugg inn Neo4j + Qdrant + EFC-motor her.
-    """
     return {
         "response": f"symbiose-query-api-v1: {req.text}"
     }
+
