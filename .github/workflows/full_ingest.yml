@@ -84,7 +84,7 @@ jobs:
       - name: Build Graph-RAG API Docker image
         run: |
           echo ">>> Building Graph-RAG API Docker image"
-          docker build -t efc-graph-rag-api -f tools/graph_rag_api/Dockerfile .
+          docker build -t efc-graph-rag-api -f docker/Dockerfile.unified_api .
 
       - name: Save Docker image artifact
         run: |
