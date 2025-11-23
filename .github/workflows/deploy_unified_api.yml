@@ -1,49 +1,78 @@
-name: Deploy Unified API to Cloud Run
+name: Deploy Unified API
 
 on:
+  workflow_dispatch:
   push:
-    branches: ["main"]
+    branches:
+      - main
     paths:
+      - "api/unified_api/**"
       - "tools/symbiose_unified_api.py"
       - "semantic-search-index.json"
       - "docker/Dockerfile.unified_api"
       - ".github/workflows/deploy_unified_api.yml"
 
 jobs:
-  build-and-deploy:
+  deploy:
     runs-on: ubuntu-latest
 
+    env:
+      PROJECT_ID: endless-precept-479020-n9
+      REGION: europe-west1
+      SERVICE: symbiose-unified-api
+      GAR_REPO: symbiose-api
+
     steps:
-    - name: Checkout
-      uses: actions/checkout@v3
+      # ---------------------------
+      # CHECKOUT
+      # ---------------------------
+      - name: Checkout
+        uses: actions/checkout@v4
 
-    - name: Setup gcloud
-      uses: google-github-actions/auth@v1
-      with:
-        credentials_json: ${{ secrets.GCP_SERVICE_KEY }}
+      # ---------------------------
+      # GOOGLE CLOUD AUTH
+      # ---------------------------
+      - name: Authenticate to Google Cloud
+        uses: google-github-actions/auth@v2
+        with:
+          credentials_json: ${{ secrets.GCP_SA_KEY }}
 
-    - name: Set up Google Cloud SDK
-      uses: google-github-actions/setup-gcloud@v1
-      with:
-        project_id: endless-precept-479020-n9
+      - name: Set up Cloud SDK
+        uses: google-github-actions/setup-gcloud@v2
 
-    - name: Configure Docker auth
-      run: gcloud auth configure-docker europe-west1-docker.pkg.dev
+      - name: Configure Docker Auth
+        run: |
+          gcloud config set project $PROJECT_ID
+          gcloud auth configure-docker europe-west1-docker.pkg.dev
 
-    - name: Build Docker image
-      run: |
-        docker build \
-          -t europe-west1-docker.pkg.dev/endless-precept-479020-n9/symbiose-api/symbiose-unified-api:latest \
-          -f docker/Dockerfile.unified_api .
+      # ---------------------------
+      # BUILD & PUSH IMAGE
+      # ---------------------------
+      - name: Build & push image
+        run: |
+          IMAGE="europe-west1-docker.pkg.dev/$PROJECT_ID/$GAR_REPO/unified-api:latest"
+          echo ">>> Building unified-api Docker image"
+          gcloud builds submit \
+            --tag "$IMAGE" \
+            --file docker/Dockerfile.unified_api .
 
-    - name: Push Docker image
-      run: |
-        docker push \
-          europe-west1-docker.pkg.dev/endless-precept-479020-n9/symbiose-api/symbiose-unified-api:latest
+      # ---------------------------
+      # DEPLOY TO CLOUD RUN
+      # ---------------------------
+      - name: Deploy to Cloud Run
+        run: |
+          IMAGE="europe-west1-docker.pkg.dev/$PROJECT_ID/$GAR_REPO/unified-api:latest"
+          echo ">>> Deploying Unified API to Cloud Run"
 
-    - name: Deploy to Cloud Run
-      run: |
-        gcloud run deploy unified-api \
-          --region=europe-west1 \
-          --image=europe-west1-docker.pkg.dev/endless-precept-479020-n9/symbiose-api/symbiose-unified-api:latest \
-          --allow-unauthenticated
+          gcloud run deploy $SERVICE \
+            --image="$IMAGE" \
+            --region=$REGION \
+            --platform=managed \
+            --allow-unauthenticated \
+            --port=8080 \
+            --set-env-vars=NEO4J_URI=${{ secrets.NEO4J_URI }},\
+NEO4J_USER=${{ secrets.NEO4J_USER }},\
+NEO4J_PASSWORD=${{ secrets.NEO4J_PASSWORD }},\
+NEO4J_DATABASE=${{ secrets.NEO4J_DATABASE }},\
+QDRANT_URL=${{ secrets.QDRANT_URL }},\
+QDRANT_API_KEY=${{ secrets.QDRANT_API_KEY }}
