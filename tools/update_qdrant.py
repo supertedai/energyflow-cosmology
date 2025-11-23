@@ -13,9 +13,10 @@ INDEX_FILE = ROOT / "semantic-index.json"
 
 QDRANT_URL = os.getenv("QDRANT_URL")
 QDRANT_API_KEY = os.getenv("QDRANT_API_KEY")
+OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
 
 client_qdrant = QdrantClient(url=QDRANT_URL, api_key=QDRANT_API_KEY)
-client_oa = OpenAI()
+client_oa = OpenAI(api_key=OPENAI_API_KEY)
 
 COLLECTION = "efc_docs"
 
@@ -42,9 +43,7 @@ def main():
     points = []
     for i, item in enumerate(items):
         vec = embed(item["title"] + " " + (item["description"] or ""))
-        points.append(
-            PointStruct(id=i, vector=vec, payload=item)
-        )
+        points.append(PointStruct(id=i, vector=vec, payload=item))
 
     client_qdrant.upsert(collection_name=COLLECTION, points=points)
 
