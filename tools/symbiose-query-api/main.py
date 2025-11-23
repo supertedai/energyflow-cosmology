@@ -4,9 +4,11 @@ import datetime
 
 app = FastAPI()
 
+
 # ------------------------
 # MODELS
 # ------------------------
+
 class QueryRequest(BaseModel):
     text: str
 
@@ -17,10 +19,12 @@ class QueryRequest(BaseModel):
 
 @app.get("/health")
 async def health():
+    """Health check for Cloud Run / monitoring / MSTY."""
+    utc_now = datetime.datetime.utcnow().isoformat() + "Z"
     return {
         "status": "ok",
         "api": "symbiose-query-api-v1",
-        "timestamp": datetime.datetime.utcnow().isoformat() + "Z"
+        "timestamp": utc_now,
     }
 
 
@@ -28,22 +32,37 @@ async def health():
 async def context():
     """
     Live Context endpoint for MSTY.
-    Returns clean JSON with current symbiose state.
-    Expand this later with graph, rag, axes, metadata flows.
+    v2: Stabil symbiose-state som kan utvides med Neo4j/RAG/aksene senere.
     """
+    utc_now = datetime.datetime.utcnow().isoformat() + "Z"
+
     return {
-        "context_version": "v1",
-        "status": "ok",
+        "context_version": "v2",
+        "timestamp": utc_now,
         "symbiose": {
             "node": "cloud-run",
             "region": "europe-north1",
             "mode": "live",
             "state": "running",
-            "message": "Symbiose live context feed operational."
+            "role": "global_context_provider",
+            "purpose": "Provide MSTY with live symbiose state snapshots."
+        },
+        "system": {
+            "utc": utc_now,
+            "heartbeat": True,
+            "api_version": "v1",
+            "cloud_run_revision": "dynamic"
         },
         "efc": {
             "active": True,
-            "note": "Base context only – add Neo4j/RAG integration next."
+            "mode": "base",
+            "note": "Neo4j, RAG and metadata integration will be added in the next version."
+        },
+        "placeholders": {
+            "neo4j_status": "pending",
+            "rag_status": "pending",
+            "axes_status": "pending",
+            "graph_status": "pending"
         }
     }
 
@@ -51,8 +70,9 @@ async def context():
 @app.post("/query")
 async def query(req: QueryRequest):
     """
-    Simple echo-like endpoint for now.
-    Later this becomes the unified Query Engine (EFC + Graph + RAG).
+    Enkel query-endpoint.
+    Nå: echo med versjonsmarkør.
+    Senere: kobles til Neo4j, RAG, EFC-motor osv.
     """
     return {
         "response": f"symbiose-query-api-v1: {req.text}"
