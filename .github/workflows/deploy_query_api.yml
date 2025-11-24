@@ -1,23 +1,17 @@
 name: Deploy Symbiose Query API
 
 on:
-  workflow_dispatch:
   push:
     branches:
       - main
     paths:
-      - "tools/symbiose-query-api/**"
+      - "tools/symbiose_query_api.py"
       - "docker/Dockerfile.query_api"
-
-permissions:
-  contents: read
-  id-token: write
+      - ".github/workflows/deploy_query_api.yml"
 
 env:
   GCP_PROJECT: ${{ secrets.GCP_PROJECT }}
-  GCP_SERVICE_ACCOUNT: ${{ secrets.GCP_SERVICE_ACCOUNT }}
-  GCP_WIF_PROVIDER: ${{ secrets.GCP_WIF_PROVIDER }}
-  REGION: europe-north1
+  REGION: europe-west1
   REPO_NAME: symbiose-api
   IMAGE_NAME: symbiose-query-api
 
@@ -25,38 +19,48 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
 
+    permissions:
+      contents: read
+      id-token: write
+
     steps:
-      - name: Checkout repo
+      - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Authenticate to Google Cloud
+      # Workload Identity Federation (WIF) auth
+      - name: Authenticate to Google Cloud (WIF)
         uses: google-github-actions/auth@v2
         with:
-          token_format: "access_token"
-          workload_identity_provider: ${{ env.GCP_WIF_PROVIDER }}
-          service_account: ${{ env.GCP_SERVICE_ACCOUNT }}
-
-      - name: Set up gcloud
-        uses: google-github-actions/setup-gcloud@v2
+          workload_identity_provider: ${{ secrets.GCP_WIF_PROVIDER }}
+          service_account: ${{ secrets.GCP_SERVICE_ACCOUNT }}
 
       - name: Configure Docker for Artifact Registry
-        run: gcloud auth.configure-docker ${REGION}-docker.pkg.dev
+        run: |
+          gcloud auth configure-docker "${{ env.REGION }}-docker.pkg.dev"
 
       - name: Build Docker image
         run: |
           docker build \
-            -t ${REGION}-docker.pkg.dev/${GCP_PROJECT}/${REPO_NAME}/${IMAGE_NAME}:latest \
-            ./tools/symbiose-query-api
+            -t ${{ env.REGION }}-docker.pkg.dev/${{ env.GCP_PROJECT }}/${{ env.REPO_NAME }}/${{ env.IMAGE_NAME }}:latest \
+            -f docker/Dockerfile.query_api .
 
       - name: Push Docker image
         run: |
-          docker push ${REGION}-docker.pkg.dev/${GCP_PROJECT}/${REPO_NAME}/${IMAGE_NAME}:latest
+          docker push \
+            ${{ env.REGION }}-docker.pkg.dev/${{ env.GCP_PROJECT }}/${{ env.REPO_NAME }}/${{ env.IMAGE_NAME }}:latest
 
       - name: Deploy to Cloud Run
         run: |
-          gcloud.run.deploy ${IMAGE_NAME} \
-            --image=${REGION}-docker.pkg.dev/${GCP_PROJECT}/${REPO_NAME}/${IMAGE_NAME}:latest \
-            --region=${REGION} \
-            --platform=managed \
+          gcloud run deploy ${{ env.IMAGE_NAME }} \
+            --image=${{ env.REGION }}-docker.pkg.dev/${{ env.GCP_PROJECT }}/${{ env.REPO_NAME }}/${{ env.IMAGE_NAME }}:latest \
+            --region=${{ env.REGION }} \
+            --port=8082 \
             --allow-unauthenticated \
-            --port=8082
+            --platform=managed \
+            --set-env-vars=NEO4J_URI=${{ secrets.NEO4J_URI }},\
+NEO4J_USER=${{ secrets.NEO4J_USER }},\
+NEO4J_PASSWORD=${{ secrets.NEO4J_PASSWORD }},\
+NEO4J_DATABASE=${{ secrets.NEO4J_DATABASE }},\
+QDRANT_URL=${{ secrets.QDRANT_URL }},\
+QDRANT_API_KEY=${{ secrets.QDRANT_API_KEY }},\
+QDRANT_COLLECTION=efc_docs
