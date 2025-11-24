@@ -1,60 +1,7 @@
-from fastapi import FastAPI
-from pydantic import BaseModel
-import datetime
-
-app = FastAPI()
-
-# ------------------------
-# MODELS
-# ------------------------
-
-class QueryRequest(BaseModel):
-    text: str
-
-
-# ------------------------
-# ENDPOINTS
-# ------------------------
-
-@app.get("/health")
-async def health():
-    """Simple health check used by Cloud Run and MSTY."""
-    return {
-        "status": "ok",
-        "api": "symbiose-query-api-v1",
-        "timestamp": datetime.datetime.utcnow().isoformat() + "Z"
-    }
-
-
-@app.get("/context")
-async def context():
-    """
-    Live Context endpoint for MSTY.
-    Expand later with Neo4j snapshot, RAG state, axes, metadata etc.
-    """
-    return {
-        "context_version": "v1",
-        "status": "ok",
-        "symbiose": {
-            "node": "cloud-run",
-            "region": "europe-north1",
-            "mode": "live",
-            "state": "running",
-            "message": "Symbiose live context feed operational."
-        },
-        "efc": {
-            "active": True,
-            "message": "Base context only – Neo4j/RAG integration comes next."
-        }
-    }
-
-
-@app.post("/query")
-async def query(req: QueryRequest):
-    """
-    Basic echo endpoint for now.
-    Later becomes unified Query Engine (EFC + RAG + Graph).
-    """
-    return {
-        "response": f"symbiose-query-api-v1: {req.text}"
-    }
+name: cleanup
+on: workflow_dispatch
+jobs:
+  clean:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "cleanup"
