@@ -5,7 +5,7 @@ on:
   push:
     branches: ["main"]
     paths:
-      - "tools/symbiose_unified_api.py"
+      - "unified_api/**"
       - "semantic-search-index.json"
       - "docker/Dockerfile.unified_api"
 
@@ -57,4 +57,5 @@ jobs:
           gcloud run deploy unified-api \
             --region=${REGION} \
             --image=${REGION}-docker.pkg.dev/${GCP_PROJECT}/${REPO_NAME}/${IMAGE_NAME}:latest \
-            --allow-unauthenticated
+            --allow-unauthenticated \
+            --port=8080
