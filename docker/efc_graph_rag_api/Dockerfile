@@ -2,7 +2,7 @@ FROM python:3.11-slim
 
 WORKDIR /app
 
-# kopier hele app-mappen
+# Kopier hele app-mappen (slik din API faktisk er strukturert)
 COPY ./app /app
 
 RUN pip install --no-cache-dir \
