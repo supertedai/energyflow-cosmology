@@ -26,6 +26,7 @@ jobs:
 
     - name: Activate service account
       run: |
+        gcloud auth activate-service-account ${{ secrets.GCP_SA_EMAIL }} --key-file=/github/home/.config/gcloud/application_default_credentials.json
         gcloud config set account ${{ secrets.GCP_SA_EMAIL }}
 
     - name: Docker auth (Artifact Registry)
