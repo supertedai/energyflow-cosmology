@@ -1,22 +1,16 @@
 name: Deploy Unified API
 
 on:
-  workflow_dispatch:
   push:
-    branches: ["main"]
+    branches:
+      - main
     paths:
       - "unified_api/**"
-      - "semantic-search-index.json"
       - "docker/Dockerfile.unified_api"
-
-permissions:
-  contents: read
-  id-token: write
+      - ".github/workflows/deploy_unified_api.yml"
 
 env:
   GCP_PROJECT: ${{ secrets.GCP_PROJECT }}
-  GCP_SERVICE_ACCOUNT: ${{ secrets.GCP_SERVICE_ACCOUNT }}
-  GCP_WIF_PROVIDER: ${{ secrets.GCP_WIF_PROVIDER }}
   REGION: europe-west1
   REPO_NAME: symbiose-api
   IMAGE_NAME: symbiose-unified-api
@@ -26,36 +20,41 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout
+      - name: Checkout repository
         uses: actions/checkout@v4
 
       - name: Authenticate to Google Cloud
         uses: google-github-actions/auth@v2
         with:
-          token_format: "access_token"
-          workload_identity_provider: ${{ env.GCP_WIF_PROVIDER }}
-          service_account: ${{ env.GCP_SERVICE_ACCOUNT }}
-
-      - name: Set up gcloud
-        uses: google-github-actions/setup-gcloud@v2
+          workload_identity_provider: ${{ secrets.WIF_PROVIDER }}
+          service_account: ${{ secrets.WIF_SERVICE_ACCOUNT }}
 
       - name: Configure Docker for Artifact Registry
-        run: gcloud auth configure-docker ${REGION}-docker.pkg.dev
+        run: gcloud auth configure-docker "${{ env.REGION }}-docker.pkg.dev"
 
       - name: Build Docker image
         run: |
           docker build \
-            -t ${REGION}-docker.pkg.dev/${GCP_PROJECT}/${REPO_NAME}/${IMAGE_NAME}:latest \
+            -t ${{ env.REGION }}-docker.pkg.dev/${{ env.GCP_PROJECT }}/${{ env.REPO_NAME }}/${{ env.IMAGE_NAME }}:latest \
             -f docker/Dockerfile.unified_api .
 
       - name: Push Docker image
         run: |
-          docker push ${REGION}-docker.pkg.dev/${GCP_PROJECT}/${REPO_NAME}/${IMAGE_NAME}:latest
+          docker push \
+            ${{ env.REGION }}-docker.pkg.dev/${{ env.GCP_PROJECT }}/${{ env.REPO_NAME }}/${{ env.IMAGE_NAME }}:latest
 
       - name: Deploy to Cloud Run
         run: |
-          gcloud run deploy unified-api \
-            --region=${REGION} \
-            --image=${REGION}-docker.pkg.dev/${GCP_PROJECT}/${REPO_NAME}/${IMAGE_NAME}:latest \
-            --allow-unauthenticated \
-            --port=8080
+          gcloud run deploy ${{ env.IMAGE_NAME }} \
+            --image=${{ env.REGION }}-docker.pkg.dev/${{ env.GCP_PROJECT }}/${{ env.REPO_NAME }}/${{ env.IMAGE_NAME }}:latest \
+            --region=${{ env.REGION }} \
+            --allow-unauthenticated=false \
+            --port=8080 \
+            --platform=managed \
+            --set-env-vars=NEO4J_URI=${{ secrets.NEO4J_URI }},\
+NEO4J_USER=${{ secrets.NEO4J_USER }},\
+NEO4J_PASSWORD=${{ secrets.NEO4J_PASSWORD }},\
+NEO4J_DATABASE=${{ secrets.NEO4J_DATABASE }},\
+QDRANT_URL=${{ secrets.QDRANT_URL }},\
+QDRANT_API_KEY=${{ secrets.QDRANT_API_KEY }},\
+QDRANT_COLLECTION=efc_docs
