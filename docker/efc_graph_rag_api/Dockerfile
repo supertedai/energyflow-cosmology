@@ -3,7 +3,8 @@ FROM python:3.11-slim
 WORKDIR /app
 ENV PYTHONPATH=/app
 
-COPY app/efc_graph_rag_api.py /app/app/efc_graph_rag_api.py
+# Copy the whole app folder
+COPY app/ /app/app/
 
 RUN pip install --no-cache-dir \
     fastapi \
@@ -15,4 +16,5 @@ RUN pip install --no-cache-dir \
 
 EXPOSE 8082
 
-CMD ["uvicorn", "app.efc_graph_rag_api:app", "--host", "0.0.0.0", "--port", "8082"]
+# Start FastAPI from main.py
+CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8082"]
