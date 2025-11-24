@@ -14,7 +14,7 @@ env:
   SERVICE_NAME: "symbiose-query-api"
   REGION: "europe-north1"
   PROJECT_ID: ${{ secrets.GCP_PROJECT }}
-  IMAGE: "ghcr.io/${{ github.repository }}/symbiose-query-api:latest"
+  IMAGE: "ghcr.io/supertedai/symbiose-query-api:latest"
 
 jobs:
   deploy:
