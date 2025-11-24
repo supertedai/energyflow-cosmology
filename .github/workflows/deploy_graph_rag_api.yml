@@ -3,61 +3,52 @@ name: Deploy Graph-RAG API
 on:
   workflow_dispatch:
   push:
-    branches:
-      - main
-    paths:
-      - "tools/graph_rag_api/**"
-      - "docker/Dockerfile.graph_rag_api"
-
-permissions:
-  contents: read
-  id-token: write
-
-env:
-  GCP_PROJECT: ${{ secrets.GCP_PROJECT }}
-  GCP_SERVICE_ACCOUNT: ${{ secrets.GCP_SERVICE_ACCOUNT }}
-  GCP_WIF_PROVIDER: ${{ secrets.GCP_WIF_PROVIDER }}
-  REGION: europe-west1
-  REPO_NAME: symbiose-api
-  IMAGE_NAME: graph-rag-api
+    branches: [ main ]
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write
 
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
+    - name: Checkout repo
+      uses: actions/checkout@v4
 
-      - name: Authenticate to Google Cloud
-        uses: google-github-actions/auth@v2
-        with:
-          token_format: "access_token"
-          workload_identity_provider: ${{ env.GCP_WIF_PROVIDER }}
-          service_account: ${{ env.GCP_SERVICE_ACCOUNT }}
+    - name: Show repo structure (debug)
+      run: |
+        ls -R .
+        ls -R docker/
+        ls -R docker/efc_graph_rag_api/
 
-      - name: Set up gcloud
-        uses: google-github-actions/setup-gcloud@v2
+    - name: Set up gcloud
+      uses: google-github-actions/setup-gcloud@v2
+      with:
+        project_id: ${{ secrets.GCP_PROJECT }}
+        service_account_email: ${{ secrets.GCP_SA_EMAIL }}
+        service_account_key: ${{ secrets.GCP_SA_KEY }}
+        export_default_credentials: true
 
-      - name: Configure Docker for Artifact Registry
-        run: gcloud auth configure-docker ${REGION}-docker.pkg.dev
+    - name: Authenticate Docker for GCP
+      run: gcloud auth configure-docker europe-west1-docker.pkg.dev --quiet
 
-      - name: Build Docker image
-        run: |
-          docker build \
-            -t ${REGION}-docker.pkg.dev/${GCP_PROJECT}/${REPO_NAME}/${IMAGE_NAME}:latest \
-            -f docker/Dockerfile.graph_rag_api .
+    - name: Build image
+      run: |
+        docker build \
+          -t europe-west1-docker.pkg.dev/${{ secrets.GCP_PROJECT }}/symbiose-api/graph-rag-api:latest \
+          -f docker/efc_graph_rag_api/Dockerfile .
 
-      - name: Push Docker image
-        run: |
-          docker push ${REGION}-docker.pkg.dev/${GCP_PROJECT}/${REPO_NAME}/${IMAGE_NAME}:latest
+    - name: Push container image
+      run: |
+        docker push \
+          europe-west1-docker.pkg.dev/${{ secrets.GCP_PROJECT }}/symbiose-api/graph-rag-api:latest
 
-      - name: Deploy to Cloud Run
-        run: |
-          gcloud run deploy ${IMAGE_NAME} \
-            --image=${REGION}-docker.pkg.dev/${GCP_PROJECT}/${REPO_NAME}/${IMAGE_NAME}:latest \
-            --region=${REGION} \
-            --platform=managed \
-            --allow-unauthenticated \
-            --port=8082 \
-            --set-env-vars=NEO4J_URI="${{ secrets.NEO4J_URI }}",NEO4J_USER="${{ secrets.NEO4J_USER }}",NEO4J_PASSWORD="${{ secrets.NEO4J_PASSWORD }}",NEO4J_DATABASE="${{ secrets.NEO4J_DATABASE }}"
+    - name: Deploy to Cloud Run
+      run: |
+        gcloud run deploy graph-rag-api \
+          --image=europe-west1-docker.pkg.dev/${{ secrets.GCP_PROJECT }}/symbiose-api/graph-rag-api:latest \
+          --region=europe-west1 \
+          --platform=managed \
+          --allow-unauthenticated \
+          --port=8082
