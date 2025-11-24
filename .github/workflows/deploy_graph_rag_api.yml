@@ -13,22 +13,21 @@ jobs:
       id-token: write
 
     steps:
-    - name: Checkout repo
-      uses: actions/checkout@v4
+    - uses: actions/checkout@v4
+
+    - name: Authenticate to Google Cloud (WIF)
+      uses: google-github-actions/auth@v2
+      with:
+        workload_identity_provider: ${{ secrets.GCP_WIF_PROVIDER }}
+        service_account: ${{ secrets.GCP_SERVICE_ACCOUNT }}
 
     - name: Set up gcloud
       uses: google-github-actions/setup-gcloud@v2
       with:
         project_id: ${{ secrets.GCP_PROJECT }}
-        service_account_email: ${{ secrets.GCP_SA_EMAIL }}
-        service_account_key: ${{ secrets.GCP_SA_KEY }}
-        export_default_credentials: true
 
-    - name: Docker auth (Artifact Registry)
-      run: |
-        gcloud auth print-access-token | docker login \
-          -u oauth2accesstoken \
-          --password-stdin https://europe-west1-docker.pkg.dev
+    - name: Configure Docker for Artifact Registry
+      run: gcloud auth configure-docker europe-west1-docker.pkg.dev --quiet
 
     - name: Build image
       run: |
@@ -36,10 +35,9 @@ jobs:
           -t europe-west1-docker.pkg.dev/${{ secrets.GCP_PROJECT }}/symbiose-api/graph-rag-api:latest \
           -f docker/efc_graph_rag_api/Dockerfile .
 
-    - name: Push container image
+    - name: Push image
       run: |
-        docker push \
-          europe-west1-docker.pkg.dev/${{ secrets.GCP_PROJECT }}/symbiose-api/graph-rag-api:latest
+        docker push europe-west1-docker.pkg.dev/${{ secrets.GCP_PROJECT }}/symbiose-api/graph-rag-api:latest
 
     - name: Deploy to Cloud Run
       run: |
