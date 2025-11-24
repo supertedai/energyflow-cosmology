@@ -1,4 +1,4 @@
-name: Deploy Graph-RAG API
+name: Deploy Graph-RAG API (WIF)
 
 on:
   workflow_dispatch:
@@ -10,40 +10,50 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: read
-      id-token: write
+      id-token: write    # viktig for WIF
 
     steps:
-    - uses: actions/checkout@v4
+    - name: Checkout repo
+      uses: actions/checkout@v4
 
-    - name: Authenticate to Google Cloud (WIF)
+    # 1) WIF-auth → GitHub OIDC -> GCP service account
+    - name: Authenticate to Google Cloud via WIF
       uses: google-github-actions/auth@v2
       with:
         workload_identity_provider: ${{ secrets.GCP_WIF_PROVIDER }}
         service_account: ${{ secrets.GCP_SERVICE_ACCOUNT }}
+        token_format: access_token
 
-    - name: Set up gcloud
+    # 2) gcloud med prosjekt-id (bruker creds fra auth@v2)
+    - name: Set up gcloud SDK
       uses: google-github-actions/setup-gcloud@v2
       with:
         project_id: ${{ secrets.GCP_PROJECT }}
 
+    # 3) Docker auth mot Artifact Registry (nå har vi aktiv konto)
     - name: Configure Docker for Artifact Registry
-      run: gcloud auth configure-docker europe-west1-docker.pkg.dev --quiet
+      run: |
+        gcloud auth configure-docker europe-west1-docker.pkg.dev --quiet
 
-    - name: Build image
+    # 4) Bygg image fra Dockerfile
+    - name: Build Graph-RAG API image
       run: |
         docker build \
           -t europe-west1-docker.pkg.dev/${{ secrets.GCP_PROJECT }}/symbiose-api/graph-rag-api:latest \
           -f docker/efc_graph_rag_api/Dockerfile .
 
-    - name: Push image
+    # 5) Push image til Artifact Registry
+    - name: Push image to Artifact Registry
       run: |
-        docker push europe-west1-docker.pkg.dev/${{ secrets.GCP_PROJECT }}/symbiose-api/graph-rag-api:latest
+        docker push \
+          europe-west1-docker.pkg.dev/${{ secrets.GCP_PROJECT }}/symbiose-api/graph-rag-api:latest
 
-    - name: Deploy to Cloud Run
+    # 6) Deploy til Cloud Run
+    - name: Deploy to Cloud Run (graph-rag-api)
       run: |
         gcloud run deploy graph-rag-api \
           --image=europe-west1-docker.pkg.dev/${{ secrets.GCP_PROJECT }}/symbiose-api/graph-rag-api:latest \
           --region=europe-west1 \
           --platform=managed \
-          --allow-unauthenticated \
+          --allow-unauthenticated=false \
           --port=8082
