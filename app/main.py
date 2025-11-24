@@ -1,5 +1,48 @@
-from fastapi import FastAPI
-from graph_rag.api import router as graph_rag_router
+from fastapi import FastAPI, HTTPException
+from neo4j import GraphDatabase
+import os
 
-app = FastAPI(title="Graph-RAG API", version="1.1.0")
-app.include_router(graph_rag_router, prefix="/graph")
+# Miljøvariabler (settes i Cloud Run)
+NEO4J_URI = os.getenv("NEO4J_URI")
+NEO4J_USER = os.getenv("NEO4J_USER")
+NEO4J_PASSWORD = os.getenv("NEO4J_PASSWORD")
+NEO4J_DATABASE = os.getenv("NEO4J_DATABASE", "neo4j")
+
+# Koble til Neo4j
+driver = GraphDatabase.driver(NEO4J_URI, auth=(NEO4J_USER, NEO4J_PASSWORD))
+
+app = FastAPI(
+    title="Graph-RAG API",
+    description="FastAPI-basert søke-API for Neo4j + EFC-symbiosen",
+    version="1.0.0"
+)
+
+
+@app.get("/health")
+def health():
+    return {"status": "ok", "neo4j": bool(NEO4J_URI)}
+
+
+@app.get("/search")
+def search(q: str):
+    try:
+        cypher = """
+        CALL db.index.fulltext.queryNodes('papersIndex', $q)
+        YIELD node, score
+        RETURN node.title AS title, node.slug AS slug, node.keywords AS keywords, score
+        ORDER BY score DESC LIMIT 10
+        """
+
+        with driver.session(database=NEO4J_DATABASE) as session:
+            rows = session.run(cypher, q=q)
+            results = [{
+                "title": r["title"],
+                "slug": r["slug"],
+                "keywords": r["keywords"],
+                "score": r["score"]
+            } for r in rows]
+
+        return {"query": q, "results": results}
+
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
