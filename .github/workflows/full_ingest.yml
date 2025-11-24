@@ -79,25 +79,7 @@ jobs:
           python tools/build_search_index.py
 
       # ---------------------------
-      # 6. BUILD GRAPH-RAG API IMAGE (ARTIFACT)
-      # ---------------------------
-      - name: Build Graph-RAG API Docker image
-        run: |
-          echo ">>> Building Graph-RAG API Docker image"
-          docker build -t efc-graph-rag-api -f docker/Dockerfile.graph_rag_api .
-
-      - name: Save Docker image artifact
-        run: |
-          docker save efc-graph-rag-api | gzip > efc-graph-rag-api.tar.gz
-
-      - name: Upload artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: efc-graph-rag-api
-          path: efc-graph-rag-api.tar.gz
-
-      # ---------------------------
-      # 7. REFRESH CLOUD RUN APIS
+      # 6. REFRESH CLOUD RUN APIS
       # ---------------------------
       - name: Refresh Unified API
         run: |
@@ -116,7 +98,7 @@ jobs:
             -H "Content-Type: application/json" || true
 
       # ---------------------------
-      # 8. COMMIT CHANGES (IF ANY)
+      # 7. COMMIT CHANGES (IF ANY)
       # ---------------------------
       - name: Commit changes
         run: |
