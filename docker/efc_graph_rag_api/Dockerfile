@@ -2,7 +2,8 @@ FROM python:3.11-slim
 
 WORKDIR /app
 
-COPY app/efc_graph_rag_api.py /app/efc_graph_rag_api.py
+# riktig sti – ta fra repoet til containeren
+COPY ./app/efc_graph_rag_api.py /app/efc_graph_rag_api.py
 
 RUN pip install --no-cache-dir \
     fastapi \
