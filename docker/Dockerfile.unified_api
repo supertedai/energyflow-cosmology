@@ -1,19 +1,12 @@
 FROM python:3.11-slim
 
-ENV PYTHONUNBUFFERED=1 \
-    PIP_NO_CACHE_DIR=1
-
 WORKDIR /app
 
-# Kopier API og semantisk index
-COPY tools/symbiose_unified_api.py ./symbiose_unified_api.py
-COPY semantic-search-index.json ./semantic-search-index.json
+COPY unified_api/requirements.txt ./requirements.txt
+RUN pip install --no-cache-dir -r requirements.txt
 
-# Installer riktig versjon av qdrant-client
-RUN pip install --upgrade pip && \
-    pip install fastapi "uvicorn[standard]" neo4j-driver qdrant-client==1.9.0 pydantic numpy
+COPY unified_api ./unified_api
 
 EXPOSE 8080
 
-CMD ["uvicorn", "symbiose_unified_api:app", "--host", "0.0.0.0", "--port", "8080"]
-
+CMD ["uvicorn", "unified_api.main:app", "--host", "0.0.0.0", "--port", "8080"]
