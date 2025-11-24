@@ -24,6 +24,11 @@ jobs:
         service_account_key: ${{ secrets.GCP_SA_KEY }}
         export_default_credentials: true
 
+    - name: Activate service account
+      run: |
+        gcloud auth activate-service-account ${{ secrets.GCP_SA_EMAIL }} --key-file="$GOOGLE_APPLICATION_CREDENTIALS"
+        gcloud config set account ${{ secrets.GCP_SA_EMAIL }}
+
     - name: Docker auth (Artifact Registry)
       run: |
         gcloud auth print-access-token | docker login \
