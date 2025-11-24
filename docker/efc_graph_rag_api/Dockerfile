@@ -2,14 +2,12 @@ FROM python:3.11-slim
 
 WORKDIR /app
 
-COPY efc_graph_rag_api.py /app/efc_graph_rag_api.py
+COPY app/efc_graph_rag_api.py /app/efc_graph_rag_api.py
 
 RUN pip install --no-cache-dir \
     fastapi \
     uvicorn \
-    neo4j \
-    pydantic \
-    numpy
+    neo4j
 
 EXPOSE 8082
 
