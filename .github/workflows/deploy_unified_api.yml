@@ -7,7 +7,6 @@ on:
     paths:
       - "unified_api/**"
       - "docker/Dockerfile.unified_api"
-      - ".github/workflows/deploy_unified_api.yml"
 
 env:
   GCP_PROJECT: ${{ secrets.GCP_PROJECT }}
@@ -17,6 +16,7 @@ env:
 
 jobs:
   deploy:
+    name: Build & Deploy Unified API
     runs-on: ubuntu-latest
 
     permissions:
@@ -24,53 +24,47 @@ jobs:
       id-token: write
 
     steps:
-      - name: Checkout repository
+      - name: Checkout repo
         uses: actions/checkout@v4
 
-      # Authenticate with Workload Identity Federation (no keys)
-      - name: Google Auth (WIF)
+      - name: Auth (WIF)
         uses: google-github-actions/auth@v2
         with:
           workload_identity_provider: ${{ secrets.GCP_WIF_PROVIDER }}
           service_account: ${{ secrets.GCP_SERVICE_ACCOUNT }}
 
-      # Install Google Cloud SDK (gcloud CLI)
-      - name: Install Google Cloud SDK
+      - name: Setup gcloud
         uses: google-github-actions/setup-gcloud@v2
         with:
           project_id: ${{ env.GCP_PROJECT }}
 
-      # Configure Docker for Artifact Registry
       - name: Configure Docker for Artifact Registry
         run: |
           gcloud auth configure-docker "${{ env.REGION }}-docker.pkg.dev"
 
-      # Build Docker image
       - name: Build Docker image
         run: |
           docker build \
-            -t ${{ env.REGION }}-docker.pkg.dev/${{ env.GCP_PROJECT }}/${{ env.REPO_NAME }}/${{ env.IMAGE_NAME }}:latest \
+            -t "${{ env.REGION }}-docker.pkg.dev/${{ env.GCP_PROJECT }}/${{ env.REPO_NAME }}/${{ env.IMAGE_NAME }}:latest" \
             -f docker/Dockerfile.unified_api .
 
-      # Push Docker image
-      - name: Push Docker image
+      - name: Push image
         run: |
           docker push \
-            ${{ env.REGION }}-docker.pkg.dev/${{ env.GCP_PROJECT }}/${{ env.REPO_NAME }}/${{ env.IMAGE_NAME }}:latest
+            "${{ env.REGION }}-docker.pkg.dev/${{ env.GCP_PROJECT }}/${{ env.REPO_NAME }}/${{ env.IMAGE_NAME }}:latest"
 
-      # Deploy to Cloud Run
       - name: Deploy to Cloud Run
         run: |
           gcloud run deploy ${{ env.IMAGE_NAME }} \
-            --image=${{ env.REGION }}-docker.pkg.dev/${{ env.GCP_PROJECT }}/${{ env.REPO_NAME }}/${{ env.IMAGE_NAME }}:latest \
+            --image="${{ env.REGION }}-docker.pkg.dev/${{ env.GCP_PROJECT }}/${{ env.REPO_NAME }}/${{ env.IMAGE_NAME }}:latest" \
             --region=${{ env.REGION }} \
             --platform=managed \
+            --allow-unauthenticated \
             --port=8080 \
-            --allow-unauthenticated=false \
-            --set-env-vars=NEO4J_URI=${{ secrets.NEO4J_URI }},\
-NEO4J_USER=${{ secrets.NEO4J_USER }},\
-NEO4J_PASSWORD=${{ secrets.NEO4J_PASSWORD }},\
-NEO4J_DATABASE=${{ secrets.NEO4J_DATABASE }},\
-QDRANT_URL=${{ secrets.QDRANT_URL }},\
-QDRANT_API_KEY=${{ secrets.QDRANT_API_KEY }},\
-QDRANT_COLLECTION=efc_docs
+            --set-env-vars="NEO4J_URI=${{ secrets.NEO4J_URI }}",\
+"NEO4J_USER=${{ secrets.NEO4J_USER }}",\
+"NEO4J_PASSWORD=${{ secrets.NEO4J_PASSWORD }}",\
+"NEO4J_DATABASE=${{ secrets.NEO4J_DATABASE }}",\
+"QDRANT_URL=${{ secrets.QDRANT_URL }}",\
+"QDRANT_API_KEY=${{ secrets.QDRANT_API_KEY }}",\
+"QDRANT_COLLECTION=efc_docs"
