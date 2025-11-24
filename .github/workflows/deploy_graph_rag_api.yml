@@ -16,12 +16,6 @@ jobs:
     - name: Checkout repo
       uses: actions/checkout@v4
 
-    - name: Show repo structure (debug)
-      run: |
-        ls -R .
-        ls -R docker/
-        ls -R docker/efc_graph_rag_api/
-
     - name: Set up gcloud
       uses: google-github-actions/setup-gcloud@v2
       with:
@@ -30,8 +24,9 @@ jobs:
         service_account_key: ${{ secrets.GCP_SA_KEY }}
         export_default_credentials: true
 
-    - name: Authenticate Docker for GCP
-      run: gcloud auth configure-docker europe-west1-docker.pkg.dev --quiet
+    - name: Docker auth (Artifact Registry)
+      run: |
+        gcloud auth print-access-token | docker login -u oauth2accesstoken --password-stdin https://europe-west1-docker.pkg.dev
 
     - name: Build image
       run: |
