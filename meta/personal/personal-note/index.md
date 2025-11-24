@@ -44,4 +44,4 @@ a place where patterns, structure and collaboration can breathe.
 And maybe a demonstration that it is possible to work openly, honestly
 and without hierarchy, even when the subject is something as large as a model of the universe.
 
-— Morten
+— Morten (against all odds)
