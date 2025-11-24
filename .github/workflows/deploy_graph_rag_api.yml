@@ -26,7 +26,7 @@ jobs:
 
     - name: Activate service account
       run: |
-        gcloud auth activate-service-account ${{ secrets.GCP_SA_EMAIL }} --key-file=/github/home/.config/gcloud/application_default_credentials.json
+        gcloud auth activate-service-account ${{ secrets.GCP_SA_EMAIL }} --key-file=$GOOGLE_GHA_CREDS_PATH
         gcloud config set account ${{ secrets.GCP_SA_EMAIL }}
 
     - name: Docker auth (Artifact Registry)
@@ -41,8 +41,7 @@ jobs:
 
     - name: Push container image
       run: |
-        docker push \
-          europe-west1-docker.pkg.dev/${{ secrets.GCP_PROJECT }}/symbiose-api/graph-rag-api:latest
+        docker push europe-west1-docker.pkg.dev/${{ secrets.GCP_PROJECT }}/symbiose-api/graph-rag-api:latest
 
     - name: Deploy to Cloud Run
       run: |
