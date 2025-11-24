@@ -24,14 +24,11 @@ jobs:
         service_account_key: ${{ secrets.GCP_SA_KEY }}
         export_default_credentials: true
 
-    - name: Activate service account
-      run: |
-        gcloud auth activate-service-account ${{ secrets.GCP_SA_EMAIL }} --key-file=$GOOGLE_GHA_CREDS_PATH
-        gcloud config set account ${{ secrets.GCP_SA_EMAIL }}
-
     - name: Docker auth (Artifact Registry)
       run: |
-        gcloud auth print-access-token | docker login -u oauth2accesstoken --password-stdin https://europe-west1-docker.pkg.dev
+        gcloud auth print-access-token | docker login \
+          -u oauth2accesstoken \
+          --password-stdin https://europe-west1-docker.pkg.dev
 
     - name: Build image
       run: |
@@ -41,7 +38,8 @@ jobs:
 
     - name: Push container image
       run: |
-        docker push europe-west1-docker.pkg.dev/${{ secrets.GCP_PROJECT }}/symbiose-api/graph-rag-api:latest
+        docker push \
+          europe-west1-docker.pkg.dev/${{ secrets.GCP_PROJECT }}/symbiose-api/graph-rag-api:latest
 
     - name: Deploy to Cloud Run
       run: |
