@@ -7,7 +7,7 @@ on:
     paths:
       - "tools/symbiose_query_api.py"
       - "docker/Dockerfile.query_api"
-      - ".github/workflows/deploy_query_api.yml"
+      - "unified_api/semantic-search-index.json"
 
 env:
   GCP_PROJECT: ${{ secrets.GCP_PROJECT }}
@@ -17,27 +17,24 @@ env:
 
 jobs:
   deploy:
-    name: Build & Deploy
+    name: Build & Deploy Query API
     runs-on: ubuntu-latest
-    timeout-minutes: 20
-    strategy:
-      fail-fast: false
 
     permissions:
       contents: read
       id-token: write
 
     steps:
-      - name: Checkout repository
+      - name: Checkout repo
         uses: actions/checkout@v4
 
-      - name: Google Auth (WIF)
+      - name: Auth (WIF)
         uses: google-github-actions/auth@v2
         with:
           workload_identity_provider: ${{ secrets.GCP_WIF_PROVIDER }}
           service_account: ${{ secrets.GCP_SERVICE_ACCOUNT }}
 
-      - name: Install Google Cloud SDK
+      - name: Setup gcloud
         uses: google-github-actions/setup-gcloud@v2
         with:
           project_id: ${{ env.GCP_PROJECT }}
@@ -49,21 +46,22 @@ jobs:
       - name: Build Docker image
         run: |
           docker build \
-            -t ${{ env.REGION }}-docker.pkg.dev/${{ env.GCP_PROJECT }}/${{ env.REPO_NAME }}/${{ env.IMAGE_NAME }}:latest \
+            -t "${{ env.REGION }}-docker.pkg.dev/${{ env.GCP_PROJECT }}/${{ env.REPO_NAME }}/${{ env.IMAGE_NAME }}:latest" \
             -f docker/Dockerfile.query_api .
 
-      - name: Push Docker image
+      - name: Push image
         run: |
-          docker push ${{ env.REGION }}-docker.pkg.dev/${{ env.GCP_PROJECT }}/${{ env.REPO_NAME }}/${{ env.IMAGE_NAME }}:latest
+          docker push \
+            "${{ env.REGION }}-docker.pkg.dev/${{ env.GCP_PROJECT }}/${{ env.REPO_NAME }}/${{ env.IMAGE_NAME }}:latest"
 
       - name: Deploy to Cloud Run
         run: |
           gcloud run deploy ${{ env.IMAGE_NAME }} \
-            --image=${{ env.REGION }}-docker.pkg.dev/${{ env.GCP_PROJECT }}/${{ env.REPO_NAME }}/${{ env.IMAGE_NAME }}:latest \
+            --image="${{ env.REGION }}-docker.pkg.dev/${{ env.GCP_PROJECT }}/${{ env.REPO_NAME }}/${{ env.IMAGE_NAME }}:latest" \
             --region=${{ env.REGION }} \
-            --port=8082 \
-            --allow-unauthenticated \
             --platform=managed \
+            --allow-unauthenticated \
+            --port=8082 \
             --set-env-vars="NEO4J_URI=${{ secrets.NEO4J_URI }}",\
 "NEO4J_USER=${{ secrets.NEO4J_USER }}",\
 "NEO4J_PASSWORD=${{ secrets.NEO4J_PASSWORD }}",\
