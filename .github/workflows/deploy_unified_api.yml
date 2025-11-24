@@ -1,67 +1,7 @@
-name: Deploy Unified API
-
-on:
-  push:
-    branches:
-      - main
-  workflow_dispatch:
-
-permissions:
-  contents: read
-  id-token: write
-
-env:
-  SERVICE_NAME: "symbiose-unified-api"
-  REGION: "europe-west1"
-  PROJECT_ID: ${{ secrets.GCP_PROJECT }}
-  IMAGE: "ghcr.io/${{ github.repository }}/symbiose-unified-api:latest"
-
+name: RESET
+on: workflow_dispatch
 jobs:
-  deploy:
+  reset:
     runs-on: ubuntu-latest
-
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Authenticate with GCP
-        uses: google-github-actions/auth@v2
-        with:
-          credentials_json: ${{ secrets.GCP_CREDENTIALS_JSON }}
-
-      - name: Login to GHCR
-        uses: docker/login-action@v3
-        with:
-          registry: ghcr.io
-          username: ${{ github.actor }}
-          password: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Build Docker image
-        run: |
-          docker build \
-            -f docker/Dockerfile.unified_api \
-            -t $IMAGE .
-
-      - name: Push Docker image
-        run: docker push $IMAGE
-
-      - name: Deploy to Cloud Run
-        uses: google-github-actions/deploy-cloudrun@v2
-        with:
-          service: ${{ env.SERVICE_NAME }}
-          image: $IMAGE
-          region: ${{ env.REGION }}
-          project_id: ${{ env.PROJECT_ID }}
-          flags: >
-            --allow-unauthenticated
-            --port=8081
-            --set-env-vars=NEO4J_URI=${{ secrets.NEO4J_URI }},
-            NEO4J_USER=${{ secrets.NEO4J_USER }},
-            NEO4J_PASSWORD=${{ secrets.NEO4J_PASSWORD }},
-            NEO4J_DATABASE=${{ secrets.NEO4J_DATABASE }},
-            QDRANT_URL=${{ secrets.QDRANT_URL }},
-            QDRANT_API_KEY=${{ secrets.QDRANT_API_KEY }},
-            OPENAI_API_KEY=${{ secrets.OPENAI_API_KEY }}
-
-      - name: Done
-        run: echo "Unified API deployed."
+      - run: echo ok
