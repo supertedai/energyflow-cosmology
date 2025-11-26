@@ -27,9 +27,10 @@ jobs:
       # ============================
       # Unified API
       # ============================
-      - name: Build Unified API
+      - name: Build Unified API (no-cache)
         run: |
           docker build \
+            --no-cache \
             -f docker/Dockerfile.unified_api \
             -t $IMAGE_PREFIX/unified-api:latest .
 
@@ -39,9 +40,10 @@ jobs:
       # ============================
       # Query API
       # ============================
-      - name: Build Query API
+      - name: Build Query API (no-cache)
         run: |
           docker build \
+            --no-cache \
             -f docker/Dockerfile.query_api \
             -t $IMAGE_PREFIX/query-api:latest .
 
@@ -51,9 +53,10 @@ jobs:
       # ============================
       # Graph-RAG API
       # ============================
-      - name: Build Graph-RAG API
+      - name: Build Graph-RAG API (no-cache)
         run: |
           docker build \
+            --no-cache \
             -f docker/efc_graph_rag_api/Dockerfile \
             -t $IMAGE_PREFIX/graph-rag-api:latest .
 
