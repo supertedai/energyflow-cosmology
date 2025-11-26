@@ -32,7 +32,7 @@ jobs:
       - name: Push Docker image
         run: docker push $IMAGE
 
-      - name: Deploy to Hetzner via SSH
+      - name: Deploy to Hetzner
         uses: appleboy/ssh-action@v1.0.3
         with:
           host: ${{ secrets.HETZNER_HOST }}
@@ -40,7 +40,8 @@ jobs:
           key: ${{ secrets.HETZNER_SSH_KEY }}
           script: |
             set -e
+            mkdir -p /opt/unified-api
             cd /opt/unified-api
             docker pull $IMAGE
-            docker compose up -d unified-api
+            docker compose up -d
             docker system prune -f
