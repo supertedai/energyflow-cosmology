@@ -1,4 +1,8 @@
-# Force cache-bust from workflow
+# ============================================================
+# Unified API Dockerfile (production)
+# ============================================================
+
+# Cache-bust (workflow increment)
 ARG CACHE_BUST=1
 
 FROM python:3.11-slim
@@ -8,22 +12,31 @@ ENV PYTHONUNBUFFERED=1 \
 
 WORKDIR /app
 
-# System deps (minimal)
+# ------------------------------------------------------------
+# System deps
+# ------------------------------------------------------------
 RUN apt-get update && apt-get install -y --no-install-recommends \
     build-essential \
     git \
     && rm -rf /var/lib/apt/lists/*
 
-# Install unified-api Python deps
+# ------------------------------------------------------------
+# Install Python deps
+# ------------------------------------------------------------
 COPY unified_api/requirements.txt ./requirements.txt
 
 RUN pip install --no-cache-dir --upgrade pip && \
     pip install --no-cache-dir -r requirements.txt && \
     pip install --no-cache-dir sentence-transformers
 
-# Copy unified_api code into container
+# ------------------------------------------------------------
+# Copy unified API source
+# ------------------------------------------------------------
 COPY unified_api ./unified_api
 
+# ------------------------------------------------------------
+# Expose & Run
+# ------------------------------------------------------------
 EXPOSE 8080
 
 CMD ["uvicorn", "unified_api.main:app", "--host", "0.0.0.0", "--port", "8080"]
