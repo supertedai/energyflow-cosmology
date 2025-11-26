@@ -2,8 +2,7 @@ name: Deploy Unified API to Hetzner
 
 on:
   push:
-    branches:
-      - main
+    branches: [ main ]
   workflow_dispatch:
 
 env:
@@ -39,7 +38,6 @@ jobs:
           host: ${{ secrets.HETZNER_HOST }}
           username: ${{ secrets.HETZNER_USER }}
           key: ${{ secrets.HETZNER_SSH_KEY }}
-          port: 22
           script: |
             set -e
             cd /opt/unified-api
