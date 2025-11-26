@@ -1,435 +1,132 @@
-#!/usr/bin/env python3
-# -*- coding: utf-8 -*-
-"""
-Symbiose Query API v4
-=====================
-
-Gir tre hoved-endpoints:
-
-- /health       → basis status
-- /context      → full symbiose-state for MSTY Live Context
-- /unified_query → samlet RAG + Graph + Axes + GNN-respons
-
-Dette er "one stop API" for hele symbiosen.
-"""
-
-import datetime
-import os
-import json
-from typing import Optional, List, Dict
-
-from fastapi import FastAPI
+from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
+from typing import List, Any, Dict
+from pathlib import Path
+from datetime import datetime
+import json
 
-# Optional imports
-try:
-    from neo4j import GraphDatabase
-except Exception:
-    GraphDatabase = None
+app = FastAPI(title="symbiose-query-api-v1")
 
-try:
-    from qdrant_client import QdrantClient
-    from qdrant_client import models as qm
-except Exception:
-    QdrantClient = None
+SEMANTIC_INDEX_PATH = Path("semantic-search-index.json")
+NODE_EMBEDDINGS_PATH = Path("symbiose_gnn_output/node_embeddings.json")
+NODE_MAPPING_PATH = Path("symbiose_gnn_output/node_mapping.json")
 
-import hashlib
-import random
-
-
-# =====================================================
-# FASTAPI APP
-# =====================================================
-
-app = FastAPI()
+semantic_index: List[Dict[str, Any]] = []
+node_embeddings: Dict[str, Any] | None = None
+node_mapping: Dict[str, Any] | None = None
 
 
-# =====================================================
-# MODELS
-# =====================================================
-
-class UnifiedQueryRequest(BaseModel):
+class QueryRequest(BaseModel):
     text: str
-    rag_top_k: int = 5
-    graph_limit: int = 10
-    use_rag: bool = True
-    use_graph: bool = True
-    use_axes: bool = True
+    limit: int = 5
 
 
-# =====================================================
-# INTERNAL HELPERS
-# =====================================================
-
-def deterministic_embedding(text: str, dim: int = 1536) -> List[float]:
-    """Reproduserbar hashing-embedding."""
-    seed = int(hashlib.sha256(text.encode("utf-8")).hexdigest(), 16)
-    rnd = random.Random(seed)
-    return [rnd.random() for _ in range(dim)]
+class Match(BaseModel):
+    id: Any | None = None
+    text: str
+    score: float | None = None
+    metadata: Dict[str, Any] | None = None
 
 
-# -----------------------------
-# Neo4j Helpers
-# -----------------------------
-
-def get_neo4j_config():
-    return (
-        os.getenv("NEO4J_URI"),
-        os.getenv("NEO4J_USER"),
-        os.getenv("NEO4J_PASSWORD"),
-        os.getenv("NEO4J_DATABASE", "neo4j"),
-    )
+class QueryResponse(BaseModel):
+    timestamp: str
+    query: str
+    matches: List[Match]
 
 
-def get_neo4j_driver():
-    uri, user, password, _ = get_neo4j_config()
-    if not uri or not user or not password:
-        return None
-    if GraphDatabase is None:
-        return None
-    try:
-        return GraphDatabase.driver(uri, auth=(user, password))
-    except Exception:
-        return None
+@app.on_event("startup")
+def load_data() -> None:
+    global semantic_index, node_embeddings, node_mapping
 
+    # Semantic index
+    if SEMANTIC_INDEX_PATH.exists():
+        try:
+            semantic_index = json.loads(SEMANTIC_INDEX_PATH.read_text())
+        except Exception as e:
+            print(f"[WARN] Failed to load semantic index: {e}")
+            semantic_index = []
+    else:
+        print("[WARN] semantic-search-index.json not found")
+        semantic_index = []
 
-def neo4j_status():
-    uri, user, password, database = get_neo4j_config()
+    # GNN data (valgfritt – vi bare laster, bruker ikke aktivt ennå)
+    if NODE_EMBEDDINGS_PATH.exists():
+        try:
+            node_embeddings = json.loads(NODE_EMBEDDINGS_PATH.read_text())
+        except Exception as e:
+            print(f"[WARN] Failed to load node embeddings: {e}")
 
-    if not uri:
-        return {
-            "status": "pending",
-            "connected": False,
-            "reason": "Missing NEO4J_URI / NEO4J_USER / NEO4J_PASSWORD",
-            "uri": None,
-            "database": None,
-        }
+    if NODE_MAPPING_PATH.exists():
+        try:
+            node_mapping = json.loads(NODE_MAPPING_PATH.read_text())
+        except Exception as e:
+            print(f"[WARN] Failed to load node mapping: {e}")
 
-    if GraphDatabase is None:
-        return {
-            "status": "error",
-            "connected": False,
-            "reason": "neo4j-driver not installed",
-            "uri": uri,
-            "database": database,
-        }
-
-    try:
-        driver = GraphDatabase.driver(uri, auth=(user, password))
-        with driver.session(database=database) as s:
-            node_count = s.run("MATCH (n) RETURN count(n) AS c").single().get("c")
-            rel_count = s.run("MATCH ()-[r]->() RETURN count(r) AS c").single().get("c")
-
-        driver.close()
-
-        return {
-            "status": "ok",
-            "connected": True,
-            "uri": uri,
-            "database": database,
-            "node_count": node_count,
-            "relationship_count": rel_count,
-        }
-
-    except Exception as e:
-        return {
-            "status": "error",
-            "connected": False,
-            "reason": str(e),
-            "uri": uri,
-            "database": database,
-        }
-
-
-# -----------------------------
-# Qdrant Helpers
-# -----------------------------
-
-def get_qdrant_config():
-    return (
-        os.getenv("QDRANT_URL"),
-        os.getenv("QDRANT_API_KEY"),
-        os.getenv("QDRANT_COLLECTION", "efc"),
-    )
-
-
-def get_qdrant_client():
-    url, api, _ = get_qdrant_config()
-    if not url or QdrantClient is None:
-        return None
-    try:
-        return QdrantClient(url=url, api_key=api)
-    except Exception:
-        return None
-
-
-def qdrant_status():
-    url, api_key, collection = get_qdrant_config()
-    if not url:
-        return {
-            "status": "pending",
-            "connected": False,
-            "reason": "Missing QDRANT_URL",
-            "url": None,
-            "collection": None,
-        }
-
-    if QdrantClient is None:
-        return {
-            "status": "error",
-            "connected": False,
-            "reason": "qdrant-client not installed",
-            "url": url,
-            "collection": collection,
-        }
-
-    try:
-        client = QdrantClient(url=url, api_key=api_key)
-        info = client.get_collection(collection)
-        vc = getattr(info, "vectors_count", None)
-
-        return {
-            "status": "ok",
-            "connected": True,
-            "reason": None,
-            "url": url,
-            "collection": collection,
-            "vectors_count": vc,
-        }
-
-    except Exception as e:
-        return {
-            "status": "error",
-            "connected": False,
-            "reason": str(e),
-            "url": url,
-            "collection": collection,
-        }
-
-
-# =====================================================
-# ENDPOINTS
-# =====================================================
 
 @app.get("/health")
-async def health():
+def health() -> Dict[str, Any]:
     return {
         "status": "ok",
         "api": "symbiose-query-api-v1",
-        "timestamp": datetime.datetime.utcnow().isoformat() + "Z"
+        "timestamp": datetime.utcnow().isoformat() + "Z",
+        "semantic_index_loaded": bool(semantic_index),
     }
 
 
-@app.get("/context")
-async def context():
-    """Live context for MSTY."""
-    utc_now = datetime.datetime.utcnow().isoformat() + "Z"
+@app.post("/query", response_model=QueryResponse)
+def query(req: QueryRequest) -> QueryResponse:
+    if not semantic_index:
+        raise HTTPException(status_code=500, detail="Semantic index not loaded")
 
-    return {
-        "context_version": "v3",
-        "timestamp": utc_now,
+    q = req.text.strip().lower()
+    if not q:
+        raise HTTPException(status_code=400, detail="Empty query text")
 
-        "symbiose": {
-            "node": "cloud-run",
-            "region": "europe-north1",
-            "mode": "live",
-            "state": "running",
-            "role": "global_context_provider",
-        },
+    scored: List[tuple[float, Dict[str, Any]]] = []
 
-        "system": {
-            "utc": utc_now,
-            "heartbeat": True,
-            "api_version": "v1"
-        },
+    # veldig enkel scoring: substring-count
+    for item in semantic_index:
+        text = str(
+            item.get("text")
+            or item.get("content")
+            or item.get("chunk")
+            or ""
+        )
+        if not text:
+            continue
 
-        "efc": {
-            "active": True,
-            "mode": "base",
-            "version": "draft",
-            "notes": [
-                "CMB reinterpretation through entropy flow.",
-                "s₀/s₁ gradient architecture.",
-                "Grid-Higgs / halo coupling structure."
-            ]
-        },
+        t_lower = text.lower()
+        score = t_lower.count(q)
+        if score > 0:
+            scored.append((float(score), item))
 
-        "neo4j": neo4j_status(),
-        "rag": qdrant_status(),
+    scored.sort(key=lambda x: x[0], reverse=True)
+    top = scored[: req.limit]
 
-        "axes": {
-            "status": "pending"
-        },
-
-        "graph": {
-            "status": "pending",
-            "enabled": False,
-        },
-
-        "pipeline": {
-            "repo": "github.com/supertedai/energyflow-cosmology",
-            "auto_sync": True,
-            "semantic_layer": "OK"
-        },
-
-        "extensions": {
-            "gnn_ready": False
+    matches: List[Match] = []
+    for score, item in top:
+        text = str(
+            item.get("text")
+            or item.get("content")
+            or item.get("chunk")
+            or ""
+        )
+        meta = {
+            k: v
+            for k, v in item.items()
+            if k not in {"id", "text", "content", "chunk"}
         }
-    }
-
-
-@app.post("/unified_query")
-async def unified_query(req: UnifiedQueryRequest):
-    """
-    Kombinert RAG + Graph + Axes + GNN-state.
-    Returnerer alt som trengs for AI-resonnement.
-    """
-
-    text = req.text
-    rag_part = None
-    graph_part = None
-    axes_part = None
-
-    # -----------------------------
-    # RAG
-    # -----------------------------
-    rag_hits = 0
-    if req.use_rag:
-        rag_s = qdrant_status()
-
-        client = get_qdrant_client()
-        _, _, collection = get_qdrant_config()
-
-        if client:
-            vec = deterministic_embedding(text)
-            try:
-                hits = client.search(
-                    collection_name=collection,
-                    query_vector=vec,
-                    limit=req.rag_top_k,
-                    with_payload=True,
-                )
-                results = []
-                for h in hits:
-                    results.append({
-                        "id": h.id,
-                        "score": h.score,
-                        "payload": h.payload,
-                    })
-                rag_hits = len(results)
-
-                rag_part = {
-                    "status": rag_s,
-                    "results": results
-                }
-            except Exception as e:
-                rag_part = {
-                    "status": {"status": "error", "reason": f"{e}"},
-                    "results": []
-                }
-        else:
-            rag_part = {
-                "status": rag_s,
-                "results": []
-            }
-
-    # -----------------------------
-    # GRAPH
-    # -----------------------------
-    graph_hits = 0
-    if req.use_graph:
-        driver = get_neo4j_driver()
-        uri, user, password, database = get_neo4j_config()
-
-        if driver:
-            try:
-                with driver.session(database=database) as s:
-                    res = s.run(
-                        """
-                        MATCH (n)
-                        WHERE (exists(n.title) AND toString(n.title) CONTAINS $q)
-                           OR (exists(n.name) AND toString(n.name) CONTAINS $q)
-                           OR (exists(n.slug) AND toString(n.slug) CONTAINS $q)
-                        RETURN id(n) AS id, labels(n) AS labels, properties(n) AS props
-                        LIMIT $limit
-                        """,
-                        q=text,
-                        limit=req.graph_limit
-                    )
-                    out = []
-                    for r in res:
-                        out.append({
-                            "id": r["id"],
-                            "labels": r["labels"],
-                            "properties": r["props"],
-                        })
-                    graph_hits = len(out)
-
-                    graph_part = {
-                        "status": {"status": "ok", "connected": True, "uri": uri},
-                        "results": out
-                    }
-            except Exception as e:
-                graph_part = {
-                    "status": {"status": "error", "reason": str(e), "uri": uri},
-                    "results": []
-                }
-        else:
-            graph_part = {
-                "status": {"status": "pending", "reason": "no driver"},
-                "results": []
-            }
-
-    # -----------------------------
-    # AXES
-    # -----------------------------
-    if req.use_axes:
-        clarity = max(0.0, min(1.0, 1 - len(text) / 4000))
-        resonance = min(1.0, rag_hits / 10)
-        density = min(1.0, graph_hits / 10)
-        stability = 0.5
-
-        axes_part = {
-            "status": "ok",
-            "axes": {
-                "axis_clarity": clarity,
-                "axis_resonance": resonance,
-                "axis_density": density,
-                "axis_stability": stability
-            }
-        }
-
-    # -----------------------------
-    # FINAL SUMMARY
-    # -----------------------------
-    summary = [
-        "Unified Query v4 – Sammendrag:",
-        f"- RAG: {rag_hits} treff",
-        f"- Graph: {graph_hits} treff",
-    ]
-    if axes_part:
-        ax = axes_part["axes"]
-        summary.append(
-            f"- Akseskår: klarhet={ax['axis_clarity']:.2f}, "
-            f"resonans={ax['axis_resonance']:.2f}, "
-            f"tetthet={ax['axis_density']:.2f}, "
-            f"stabilitet={ax['axis_stability']:.2f}"
+        matches.append(
+            Match(
+                id=item.get("id"),
+                text=text,
+                score=score,
+                metadata=meta or None,
+            )
         )
 
-    final_text = "\n".join(summary)
-
-    return {
-        "input": {
-            "text": text,
-            "rag_top_k": req.rag_top_k,
-            "graph_limit": req.graph_limit
-        },
-        "components": {
-            "rag": rag_part,
-            "graph": graph_part,
-            "axes": axes_part
-        },
-        "final": {
-            "answer": final_text
-        }
-    }
+    return QueryResponse(
+        timestamp=datetime.utcnow().isoformat() + "Z",
+        query=req.text,
+        matches=matches,
+    )
