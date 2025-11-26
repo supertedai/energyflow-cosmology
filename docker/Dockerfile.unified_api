@@ -2,19 +2,23 @@ FROM python:3.11-slim
 
 WORKDIR /app
 
-# System deps
+# Install system dependencies for sentence-transformers
 RUN apt-get update && apt-get install -y --no-install-recommends \
-    build-essential git && \
-    rm -rf /var/lib/apt/lists/*
+    build-essential \
+    git \
+    && rm -rf /var/lib/apt/lists/*
 
-# Install Python deps
+# Copy requirements
 COPY unified_api/requirements.txt ./requirements.txt
-RUN pip install --no-cache-dir -r requirements.txt
 
-# Copy app
+# Install Python dependencies
+RUN pip install --no-cache-dir --upgrade pip && \
+    pip install --no-cache-dir -r requirements.txt && \
+    pip install --no-cache-dir sentence-transformers
+
+# Copy API code
 COPY unified_api ./unified_api
 
 EXPOSE 8080
 
-# Run unified-api on port 8080
 CMD ["uvicorn", "unified_api.main:app", "--host", "0.0.0.0", "--port", "8080"]
