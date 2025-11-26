@@ -2,7 +2,7 @@ name: Deploy Unified API to Hetzner
 
 on:
   push:
-    branches: [ "main" ]
+    branches: [ main ]
   workflow_dispatch:
 
 env:
@@ -41,23 +41,30 @@ jobs:
           host: ${{ secrets.HETZNER_HOST }}
           username: ${{ secrets.HETZNER_USER }}
           key: ${{ secrets.HETZNER_SSH_KEY }}
+          envs: IMAGE
           script: |
             set -e
             mkdir -p /opt/unified-api
             cd /opt/unified-api
 
+            # Stop & remove old container
             docker stop unified-api || true
             docker rm unified-api || true
 
+            # Remove old images
             IMAGES=$(docker images -q ghcr.io/supertedai/unified-api)
             if [ -n "$IMAGES" ]; then
               docker rmi $IMAGES || true
             fi
 
+            # Cleanup
             docker system prune -af || true
 
+            # Pull fresh image
             docker pull $IMAGE
 
+            # Start container
             docker compose up -d
 
+            # Final cleanup
             docker system prune -f
