@@ -3,31 +3,34 @@ name: Deploy to Hetzner
 on:
   workflow_dispatch:
   push:
-    branches: [ main ]
+    branches:
+      - main
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repo
-        uses: actions/checkout@v4
-
-      - name: Connect to Hetzner and deploy
+      - name: Deploy over SSH
         uses: appleboy/ssh-action@v1.0.3
         with:
           host: ${{ secrets.HETZNER_HOST }}
           username: ${{ secrets.HETZNER_USER }}
           key: ${{ secrets.HETZNER_SSH_KEY }}
+          port: 22
           script: |
             set -e
 
-            echo "=== Pulling latest repo ==="
-            cd /opt/symbiose/repo
-            git pull
+            echo "=== Syncing repo ==="
+            cd /opt/symbiose/repo || exit 1
+
+            # HARD SYNC: always match GitHub main
+            git fetch --all
+            git reset --hard origin/main
 
             echo "=== Updating services ==="
             cd /opt/symbiose
+
             docker compose pull
             docker compose up -d
 
