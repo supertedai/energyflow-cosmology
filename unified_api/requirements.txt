@@ -3,4 +3,5 @@ uvicorn
 neo4j
 qdrant-client
 python-dotenv
+sentence-transformers
 httpx
