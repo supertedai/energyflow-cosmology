@@ -11,7 +11,10 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Deploy over SSH
+      - name: Checkout repo (for workflow context)
+        uses: actions/checkout@v4
+
+      - name: Deploy to Hetzner via SSH
         uses: appleboy/ssh-action@v1.0.3
         with:
           host: ${{ secrets.HETZNER_HOST }}
@@ -21,16 +24,13 @@ jobs:
           script: |
             set -e
 
-            echo "=== Syncing repo ==="
-            cd /opt/symbiose/repo || exit 1
-
-            # HARD SYNC: always match GitHub main
+            echo "=== Pulling latest repo (hard reset) ==="
+            cd /opt/symbiose/repo
             git fetch --all
             git reset --hard origin/main
 
             echo "=== Updating services ==="
             cd /opt/symbiose
-
             docker compose pull
             docker compose up -d
 
