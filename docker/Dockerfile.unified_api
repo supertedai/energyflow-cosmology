@@ -1,18 +1,27 @@
+# Force cache-bust from workflow
+ARG CACHE_BUST=1
+
 FROM python:3.11-slim
+
+ENV PYTHONUNBUFFERED=1 \
+    PIP_NO_CACHE_DIR=1
 
 WORKDIR /app
 
+# System deps (minimal)
 RUN apt-get update && apt-get install -y --no-install-recommends \
     build-essential \
     git \
     && rm -rf /var/lib/apt/lists/*
 
+# Install unified-api Python deps
 COPY unified_api/requirements.txt ./requirements.txt
 
 RUN pip install --no-cache-dir --upgrade pip && \
     pip install --no-cache-dir -r requirements.txt && \
     pip install --no-cache-dir sentence-transformers
 
+# Copy unified_api code into container
 COPY unified_api ./unified_api
 
 EXPOSE 8080
