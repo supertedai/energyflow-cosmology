@@ -1,9 +1,8 @@
 #!/usr/bin/env python3
 import os
 import json
-from fastapi import FastAPI, HTTPException
+from fastapi import FastAPI
 from pydantic import BaseModel
-from typing import List, Optional
 from neo4j import GraphDatabase
 from qdrant_client import QdrantClient
 from sentence_transformers import SentenceTransformer
@@ -27,16 +26,13 @@ driver = GraphDatabase.driver(NEO4J_URI, auth=(NEO4J_USER, NEO4J_PASSWORD))
 qdrant = QdrantClient(url=QDRANT_URL, api_key=QDRANT_API_KEY)
 model = SentenceTransformer("sentence-transformers/all-mpnet-base-v2")
 
-# ------------------------------------------------------------
-# FastAPI
-# ------------------------------------------------------------
 app = FastAPI()
 
 class QueryInput(BaseModel):
     text: str
 
 # ------------------------------------------------------------
-# Healthcheck
+# Health
 # ------------------------------------------------------------
 @app.get("/health")
 def health():
@@ -48,7 +44,7 @@ def health():
     }
 
 # ------------------------------------------------------------
-# Lucene escape fix
+# Lucene escape
 # ------------------------------------------------------------
 def escape_lucene(q: str) -> str:
     if not q:
@@ -60,7 +56,7 @@ def escape_lucene(q: str) -> str:
     return out
 
 # ------------------------------------------------------------
-# Neo4j search
+# Neo4j
 # ------------------------------------------------------------
 def neo4j_search(query: str):
     safe = escape_lucene(query)
@@ -81,21 +77,20 @@ def neo4j_search(query: str):
         return {"enabled": False, "reason": str(e), "matches": []}
 
 # ------------------------------------------------------------
-# RAG (Qdrant Cloud compatible)
+# RAG (Qdrant Cloud CORRECT VERSION)
 # ------------------------------------------------------------
 def rag_search(query: str):
     try:
         emb = model.encode(query).tolist()
 
-        # Qdrant Cloud uses "vector=", not "query_vector="
-        res = qdrant.search(
+        res = qdrant.query_points(
             collection_name=QDRANT_COLLECTION,
-            vector=emb,
+            query=emb,
             limit=20
         )
 
         out = []
-        for r in res:
+        for r in res.points:
             payload = r.payload or {}
             out.append({
                 "text": payload.get("text"),
@@ -103,17 +98,19 @@ def rag_search(query: str):
                 "slug": payload.get("slug"),
                 "score": r.score,
             })
+
         return {"enabled": True, "matches": out}
 
     except Exception as e:
         return {"enabled": False, "reason": str(e), "matches": []}
 
 # ------------------------------------------------------------
-# Unified endpoint
+# Unified Query
 # ------------------------------------------------------------
 @app.post("/unified_query")
 def unified_query(input: QueryInput):
     q = input.text
+
     return {
         "timestamp": __import__("datetime").datetime.utcnow().isoformat() + "Z",
         "query": q,
