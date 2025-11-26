@@ -24,10 +24,9 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Reset Docker build cache
-        run: docker builder prune -af || true
-
-      # ---------- Unified API ----------
+      # ============================
+      # Unified API
+      # ============================
       - name: Build Unified API
         run: |
           docker build \
@@ -37,7 +36,9 @@ jobs:
       - name: Push Unified API
         run: docker push $IMAGE_PREFIX/unified-api:latest
 
-      # ---------- Query API ----------
+      # ============================
+      # Query API
+      # ============================
       - name: Build Query API
         run: |
           docker build \
@@ -47,11 +48,13 @@ jobs:
       - name: Push Query API
         run: docker push $IMAGE_PREFIX/query-api:latest
 
-      # ---------- Graph-RAG API ----------
+      # ============================
+      # Graph-RAG API
+      # ============================
       - name: Build Graph-RAG API
         run: |
           docker build \
-            -f docker/Dockerfile.graph_rag_api \
+            -f docker/efc_graph_rag_api/Dockerfile \
             -t $IMAGE_PREFIX/graph-rag-api:latest .
 
       - name: Push Graph-RAG API
