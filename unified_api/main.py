@@ -1,14 +1,10 @@
 #!/usr/bin/env python3
 import os
-import json
-from datetime import datetime
 from fastapi import FastAPI
 from pydantic import BaseModel
-from typing import List, Optional
-
 from neo4j import GraphDatabase
 from qdrant_client import QdrantClient
-from openai import OpenAI
+from sentence_transformers import SentenceTransformer
 
 # ------------------------------------------------------------
 # CONFIG
@@ -22,17 +18,12 @@ QDRANT_URL = os.getenv("QDRANT_URL")
 QDRANT_API_KEY = os.getenv("QDRANT_API_KEY")
 QDRANT_COLLECTION = "efc_docs"
 
-OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
-
 # ------------------------------------------------------------
 # Init clients
 # ------------------------------------------------------------
 driver = GraphDatabase.driver(NEO4J_URI, auth=(NEO4J_USER, NEO4J_PASSWORD))
 qdrant = QdrantClient(url=QDRANT_URL, api_key=QDRANT_API_KEY)
-openai_client = OpenAI(api_key=OPENAI_API_KEY)
-
-# embedding-modell matcher Qdrant (1536-dim)
-EMBEDDING_MODEL = "text-embedding-3-large"
+model = SentenceTransformer("sentence-transformers/all-mpnet-base-v2")
 
 # ------------------------------------------------------------
 # FastAPI
@@ -52,11 +43,10 @@ def health():
         "api": "unified-api",
         "neo4j": bool(NEO4J_URI),
         "qdrant": bool(QDRANT_URL),
-        "embeddings": EMBEDDING_MODEL,
     }
 
 # ------------------------------------------------------------
-# Escape special Lucene chars
+# Lucene escape
 # ------------------------------------------------------------
 def escape_lucene(q: str) -> str:
     if not q:
@@ -89,21 +79,11 @@ def neo4j_search(query: str):
         return {"enabled": False, "reason": str(e), "matches": []}
 
 # ------------------------------------------------------------
-# OpenAI embeddings (1536-dim)
-# ------------------------------------------------------------
-def compute_embedding(text: str):
-    emb = openai_client.embeddings.create(
-        model=EMBEDDING_MODEL,
-        input=text
-    )
-    return emb.data[0].embedding
-
-# ------------------------------------------------------------
-# RAG Search (Qdrant)
+# RAG (Qdrant Cloud)
 # ------------------------------------------------------------
 def rag_search(query: str):
     try:
-        emb = compute_embedding(query)  # returns 1536-D
+        emb = model.encode(query).tolist()
 
         res = qdrant.search(
             collection_name=QDRANT_COLLECTION,
@@ -113,28 +93,29 @@ def rag_search(query: str):
 
         out = []
         for r in res:
-            payload = r.payload or {}
+            p = r.payload or {}
             out.append({
-                "text": payload.get("text"),
-                "paper": payload.get("paper"),
-                "slug": payload.get("slug"),
+                "text": p.get("text"),
+                "paper": p.get("paper"),
+                "slug": p.get("slug"),
                 "score": r.score,
             })
+
         return {"enabled": True, "matches": out}
 
     except Exception as e:
         return {"enabled": False, "reason": str(e), "matches": []}
 
 # ------------------------------------------------------------
-# Unified search
+# Unified endpoint
 # ------------------------------------------------------------
 @app.post("/unified_query")
 def unified_query(input: QueryInput):
     q = input.text
     return {
-        "timestamp": datetime.utcnow().isoformat() + "Z",
+        "timestamp": __import__("datetime").datetime.utcnow().isoformat() + "Z",
         "query": q,
         "neo4j": neo4j_search(q),
         "rag": rag_search(q),
-        "semantic": {"enabled": True, "index_size": 356}
+        "semantic": {"enabled": True, "index_size": 356},
     }
