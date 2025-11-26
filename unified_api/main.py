@@ -81,22 +81,30 @@ def neo4j_search(query: str):
         return {"enabled": False, "reason": str(e), "matches": []}
 
 # ------------------------------------------------------------
-# RAG from Qdrant
+# RAG (Qdrant Cloud compatible)
 # ------------------------------------------------------------
 def rag_search(query: str):
     try:
         emb = model.encode(query).tolist()
-        res = qdrant.search(collection_name=QDRANT_COLLECTION, query_vector=emb, limit=20)
+
+        # Qdrant Cloud uses "vector=", not "query_vector="
+        res = qdrant.search(
+            collection_name=QDRANT_COLLECTION,
+            vector=emb,
+            limit=20
+        )
+
         out = []
         for r in res:
-            p = r.payload
+            payload = r.payload or {}
             out.append({
-                "text": p.get("text"),
-                "paper": p.get("paper"),
-                "slug": p.get("slug"),
+                "text": payload.get("text"),
+                "paper": payload.get("paper"),
+                "slug": payload.get("slug"),
                 "score": r.score,
             })
         return {"enabled": True, "matches": out}
+
     except Exception as e:
         return {"enabled": False, "reason": str(e), "matches": []}
 
