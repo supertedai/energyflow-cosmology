@@ -6,7 +6,7 @@ on:
   workflow_dispatch:
 
 env:
-  IMAGE: ghcr.io/supertedai/unified-api:latest
+  IMAGE: ghcr.io/supertedai/unified-api:v2
 
 jobs:
   deploy:
@@ -22,6 +22,10 @@ jobs:
           registry: ghcr.io
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
+
+      # 🔥 Tving sletting av cache i GitHub-runners
+      - name: Reset Docker build cache
+        run: docker builder prune -af || true
 
       - name: Build Docker image
         run: |
@@ -42,6 +46,18 @@ jobs:
             set -e
             mkdir -p /opt/unified-api
             cd /opt/unified-api
+
+            # 💣 Fjern gammel container og image fullstendig
+            docker stop unified-api || true
+            docker rm unified-api || true
+            docker rmi $(docker images -q ghcr.io/supertedai/unified-api) || true || true
+            docker system prune -af || true
+
+            # Hent oppdatert image
             docker pull $IMAGE
+
+            # Start med compose
             docker compose up -d
+
+            # Rydd etterpå
             docker system prune -f
