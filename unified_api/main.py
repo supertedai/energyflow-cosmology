@@ -1,11 +1,11 @@
 #!/usr/bin/env python3
 import os
+import json
 from fastapi import FastAPI
 from pydantic import BaseModel
 from neo4j import GraphDatabase
 from qdrant_client import QdrantClient
 from sentence_transformers import SentenceTransformer
-from qdrant_client.http.models import Filter, FieldCondition, MatchValue, QueryPoints
 
 # ------------------------------------------------------------
 # CONFIG
@@ -24,9 +24,7 @@ QDRANT_COLLECTION = "efc_docs"
 # ------------------------------------------------------------
 driver = GraphDatabase.driver(NEO4J_URI, auth=(NEO4J_USER, NEO4J_PASSWORD))
 qdrant = QdrantClient(url=QDRANT_URL, api_key=QDRANT_API_KEY)
-
-# 768-dim model
-model = SentenceTransformer("sentence-transformers/all-mpnet-base-v2")
+model = SentenceTransformer("sentence-transformers/all-MiniLM-L6-v2")
 
 # ------------------------------------------------------------
 # FastAPI
@@ -36,7 +34,6 @@ app = FastAPI()
 class QueryInput(BaseModel):
     text: str
 
-
 # ------------------------------------------------------------
 # Healthcheck
 # ------------------------------------------------------------
@@ -45,13 +42,12 @@ def health():
     return {
         "status": "ok",
         "api": "unified-api",
-        "neo4j": True,
-        "qdrant": True,
+        "neo4j": bool(NEO4J_URI),
+        "qdrant": bool(QDRANT_URL)
     }
 
-
 # ------------------------------------------------------------
-# Neo4j search
+# Lucene escape fix
 # ------------------------------------------------------------
 def escape_lucene(q: str) -> str:
     if not q:
@@ -62,7 +58,9 @@ def escape_lucene(q: str) -> str:
         out = out.replace(c, f"\\{c}")
     return out
 
-
+# ------------------------------------------------------------
+# Neo4j search
+# ------------------------------------------------------------
 def neo4j_search(query: str):
     safe = escape_lucene(query)
     cypher = """
@@ -79,26 +77,24 @@ def neo4j_search(query: str):
             res = s.run(cypher, q=safe).data()
         return {"enabled": True, "matches": res}
     except Exception as e:
-        return {"enabled": False, "reason": str(e), "matches": []}
-
+        return {"enabled": False, "reason": str(e)}
 
 # ------------------------------------------------------------
-# RAG — NEW (Qdrant Cloud QueryPoints)
+# RAG search (Qdrant Cloud compatible)
 # ------------------------------------------------------------
 def rag_search(query: str):
     try:
-        emb = model.encode(query).tolist()  # 768 dims OK
+        emb = model.encode(query).tolist()
 
-        result = qdrant.query_points(
+        # Qdrant Cloud uses `vector=` (NOT query_vector)
+        results = qdrant.search(
             collection_name=QDRANT_COLLECTION,
-            query=QueryPoints(
-                vector=emb,
-                limit=20,
-            ),
+            vector=emb,
+            limit=20
         )
 
         out = []
-        for r in result.points:
+        for r in results:
             payload = r.payload or {}
             out.append({
                 "text": payload.get("text"),
@@ -106,24 +102,21 @@ def rag_search(query: str):
                 "slug": payload.get("slug"),
                 "score": r.score,
             })
-
         return {"enabled": True, "matches": out}
 
     except Exception as e:
-        return {"enabled": False, "reason": str(e), "matches": []}
-
+        return {"enabled": False, "reason": str(e)}
 
 # ------------------------------------------------------------
 # Unified endpoint
 # ------------------------------------------------------------
 @app.post("/unified_query")
 def unified_query(input: QueryInput):
-    q = input.text.strip()
-
+    q = input.text
     return {
         "timestamp": __import__("datetime").datetime.utcnow().isoformat() + "Z",
         "query": q,
         "neo4j": neo4j_search(q),
         "rag": rag_search(q),
-        "semantic": {"enabled": True, "index_size": 356},
+        "semantic": {"enabled": True, "index_size": 356}
     }
