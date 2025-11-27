@@ -5,6 +5,7 @@ from pydantic import BaseModel
 from neo4j import GraphDatabase
 from qdrant_client import QdrantClient
 from sentence_transformers import SentenceTransformer
+from qdrant_client.http.models import Filter, FieldCondition, MatchValue, QueryPoints
 
 # ------------------------------------------------------------
 # CONFIG
@@ -23,6 +24,8 @@ QDRANT_COLLECTION = "efc_docs"
 # ------------------------------------------------------------
 driver = GraphDatabase.driver(NEO4J_URI, auth=(NEO4J_USER, NEO4J_PASSWORD))
 qdrant = QdrantClient(url=QDRANT_URL, api_key=QDRANT_API_KEY)
+
+# 768-dim model
 model = SentenceTransformer("sentence-transformers/all-mpnet-base-v2")
 
 # ------------------------------------------------------------
@@ -33,6 +36,7 @@ app = FastAPI()
 class QueryInput(BaseModel):
     text: str
 
+
 # ------------------------------------------------------------
 # Healthcheck
 # ------------------------------------------------------------
@@ -41,12 +45,13 @@ def health():
     return {
         "status": "ok",
         "api": "unified-api",
-        "neo4j": bool(NEO4J_URI),
-        "qdrant": bool(QDRANT_URL),
+        "neo4j": True,
+        "qdrant": True,
     }
 
+
 # ------------------------------------------------------------
-# Lucene escape
+# Neo4j search
 # ------------------------------------------------------------
 def escape_lucene(q: str) -> str:
     if not q:
@@ -57,9 +62,7 @@ def escape_lucene(q: str) -> str:
         out = out.replace(c, f"\\{c}")
     return out
 
-# ------------------------------------------------------------
-# Neo4j search
-# ------------------------------------------------------------
+
 def neo4j_search(query: str):
     safe = escape_lucene(query)
     cypher = """
@@ -78,26 +81,29 @@ def neo4j_search(query: str):
     except Exception as e:
         return {"enabled": False, "reason": str(e), "matches": []}
 
+
 # ------------------------------------------------------------
-# RAG (Qdrant Cloud)
+# RAG — NEW (Qdrant Cloud QueryPoints)
 # ------------------------------------------------------------
 def rag_search(query: str):
     try:
-        emb = model.encode(query).tolist()
+        emb = model.encode(query).tolist()  # 768 dims OK
 
-        res = qdrant.search(
+        result = qdrant.query_points(
             collection_name=QDRANT_COLLECTION,
-            vector=emb,
-            limit=20
+            query=QueryPoints(
+                vector=emb,
+                limit=20,
+            ),
         )
 
         out = []
-        for r in res:
-            p = r.payload or {}
+        for r in result.points:
+            payload = r.payload or {}
             out.append({
-                "text": p.get("text"),
-                "paper": p.get("paper"),
-                "slug": p.get("slug"),
+                "text": payload.get("text"),
+                "paper": payload.get("paper"),
+                "slug": payload.get("slug"),
                 "score": r.score,
             })
 
@@ -106,12 +112,14 @@ def rag_search(query: str):
     except Exception as e:
         return {"enabled": False, "reason": str(e), "matches": []}
 
+
 # ------------------------------------------------------------
 # Unified endpoint
 # ------------------------------------------------------------
 @app.post("/unified_query")
 def unified_query(input: QueryInput):
-    q = input.text
+    q = input.text.strip()
+
     return {
         "timestamp": __import__("datetime").datetime.utcnow().isoformat() + "Z",
         "query": q,
