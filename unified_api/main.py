@@ -3,6 +3,7 @@ import os
 import json
 from fastapi import FastAPI
 from pydantic import BaseModel
+from typing import List, Optional
 from neo4j import GraphDatabase
 from qdrant_client import QdrantClient
 from sentence_transformers import SentenceTransformer
@@ -24,7 +25,7 @@ QDRANT_COLLECTION = "efc_docs"
 # ------------------------------------------------------------
 driver = GraphDatabase.driver(NEO4J_URI, auth=(NEO4J_USER, NEO4J_PASSWORD))
 qdrant = QdrantClient(url=QDRANT_URL, api_key=QDRANT_API_KEY)
-model = SentenceTransformer("sentence-transformers/all-MiniLM-L6-v2")
+model = SentenceTransformer("sentence-transformers/all-mpnet-base-v2")
 
 # ------------------------------------------------------------
 # FastAPI
@@ -42,8 +43,8 @@ def health():
     return {
         "status": "ok",
         "api": "unified-api",
-        "neo4j": bool(NEO4J_URI),
-        "qdrant": bool(QDRANT_URL)
+        "neo4j": True,
+        "qdrant": True,
     }
 
 # ------------------------------------------------------------
@@ -80,17 +81,15 @@ def neo4j_search(query: str):
         return {"enabled": False, "reason": str(e)}
 
 # ------------------------------------------------------------
-# RAG search (Qdrant Cloud compatible)
+# RAG — stable, Qdrant Cloud–compatible points.search()
 # ------------------------------------------------------------
 def rag_search(query: str):
     try:
         emb = model.encode(query).tolist()
-
-        # Qdrant Cloud uses `vector=` (NOT query_vector)
-        results = qdrant.search(
+        results = qdrant.points.search(
             collection_name=QDRANT_COLLECTION,
             vector=emb,
-            limit=20
+            limit=20,
         )
 
         out = []
@@ -118,5 +117,5 @@ def unified_query(input: QueryInput):
         "query": q,
         "neo4j": neo4j_search(q),
         "rag": rag_search(q),
-        "semantic": {"enabled": True, "index_size": 356}
+        "semantic": {"enabled": True, "index_size": 356},
     }
