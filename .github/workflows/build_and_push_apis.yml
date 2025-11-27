@@ -25,9 +25,8 @@ jobs:
       - name: Build Unified API
         run: |
           docker build \
-            -f apis/unified-api/Dockerfile \
-            -t $IMAGE_PREFIX/unified-api:latest \
-            .
+            apis/unified-api \
+            -t $IMAGE_PREFIX/unified-api:latest
 
       - name: Push
         run: docker push $IMAGE_PREFIX/unified-api:latest
