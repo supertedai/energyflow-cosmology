@@ -1,4 +1,4 @@
-name: Build & Push Symbiose API Images
+name: Build & Push Unified API
 
 on:
   push:
@@ -10,65 +10,24 @@ env:
   IMAGE_PREFIX: ghcr.io/supertedai
 
 jobs:
-  build-and-push:
+  build:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repo
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
-      - name: Login to GHCR
-        uses: docker/login-action@v3
+      - uses: docker/login-action@v3
         with:
-          registry: ${{ env.REGISTRY }}
+          registry: ghcr.io
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Generate build cache-bust value
-        id: cachebust
-        run: echo "CACHE_BUST=$(uuidgen)" >> $GITHUB_ENV
-
-      # ============================
-      # Unified API
-      # ============================
-      - name: Build Unified API (no-cache)
+      - name: Build Unified API
         run: |
           docker build \
-            --pull \
-            --no-cache \
-            --build-arg CACHE_BUST=${{ env.CACHE_BUST }} \
-            -f docker/Dockerfile.unified_api \
-            -t $IMAGE_PREFIX/unified-api:latest .
+            -f apis/unified-api/Dockerfile \
+            -t $IMAGE_PREFIX/unified-api:latest \
+            .
 
-      - name: Push Unified API
+      - name: Push
         run: docker push $IMAGE_PREFIX/unified-api:latest
-
-      # ============================
-      # Query API
-      # ============================
-      - name: Build Query API (no-cache)
-        run: |
-          docker build \
-            --pull \
-            --no-cache \
-            --build-arg CACHE_BUST=${{ env.CACHE_BUST }} \
-            -f docker/Dockerfile.query_api \
-            -t $IMAGE_PREFIX/query-api:latest .
-
-      - name: Push Query API
-        run: docker push $IMAGE_PREFIX/query-api:latest
-
-      # ============================
-      # Graph-RAG API
-      # ============================
-      - name: Build Graph-RAG API (no-cache)
-        run: |
-          docker build \
-            --pull \
-            --no-cache \
-            --build-arg CACHE_BUST=${{ env.CACHE_BUST }} \
-            -f docker/efc_graph_rag_api/Dockerfile \
-            -t $IMAGE_PREFIX/graph-rag-api:latest .
-
-      - name: Push Graph-RAG API
-        run: docker push $IMAGE_PREFIX/graph-rag-api:latest
