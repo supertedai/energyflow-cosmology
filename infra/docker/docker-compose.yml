@@ -1,0 +1,29 @@
+name: Deploy to Hetzner
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.HETZNER_HOST }}
+          username: ${{ secrets.HETZNER_USER }}
+          key: ${{ secrets.HETZNER_SSH_KEY }}
+          port: 22
+          script: |
+            set -e
+
+            cd /opt/symbiose
+
+            docker compose pull
+            docker compose up -d
+
+            echo "Deployment complete."
