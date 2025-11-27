@@ -1,21 +1,18 @@
 name: Deploy to Hetzner
 
 on:
-  workflow_dispatch:
   push:
-    branches:
-      - main
+    branches: [ main ]
+  workflow_dispatch:
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repo (for workflow context)
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
-      - name: Deploy to Hetzner via SSH
-        uses: appleboy/ssh-action@v1.0.3
+      - uses: appleboy/ssh-action@v1.0.3
         with:
           host: ${{ secrets.HETZNER_HOST }}
           username: ${{ secrets.HETZNER_USER }}
@@ -24,14 +21,9 @@ jobs:
           script: |
             set -e
 
-            echo "=== Pulling latest repo (hard reset) ==="
-            cd /opt/symbiose/repo
-            git fetch --all
-            git reset --hard origin/main
-
-            echo "=== Updating services ==="
             cd /opt/symbiose
+
             docker compose pull
             docker compose up -d
 
-            echo "=== Done ==="
+            echo "Deployment complete."
