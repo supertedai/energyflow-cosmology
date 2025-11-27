@@ -1,29 +1,45 @@
-name: Deploy to Hetzner
+version: "3.9"
 
-on:
-  push:
-    branches: [ main ]
-  workflow_dispatch:
+networks:
+  symbiose-net:
+    driver: bridge
 
-jobs:
-  deploy:
-    runs-on: ubuntu-latest
+services:
+  unified-api:
+    image: ghcr.io/supertedai/unified-api:latest
+    container_name: unified-api
+    env_file:
+      - /opt/symbiose/.env
+    environment:
+      PORT: "8080"
+    ports:
+      - "8080:8080"
+    restart: unless-stopped
+    networks:
+      - symbiose-net
 
-    steps:
-      - uses: actions/checkout@v4
+  query-api:
+    image: ghcr.io/supertedai/query-api:latest
+    container_name: query-api
+    env_file:
+      - /opt/symbiose/.env
+    environment:
+      PORT: "8081"
+    ports:
+      - "8081:8081"
+    restart: unless-stopped
+    networks:
+      - symbiose-net
 
-      - uses: appleboy/ssh-action@v1.0.3
-        with:
-          host: ${{ secrets.HETZNER_HOST }}
-          username: ${{ secrets.HETZNER_USER }}
-          key: ${{ secrets.HETZNER_SSH_KEY }}
-          port: 22
-          script: |
-            set -e
-
-            cd /opt/symbiose
-
-            docker compose pull
-            docker compose up -d
-
-            echo "Deployment complete."
+  graph-rag-api:
+    image: ghcr.io/supertedai/graph-rag-api:latest
+    container_name: graph-rag-api
+    env_file:
+      - /opt/symbiose/.env
+    environment:
+      PORT: "8082"
+    ports:
+      - "8082:8082"
+    restart: unless-stopped
+    networks:
+      - symbiose-net
