@@ -1,9 +1,8 @@
 #!/usr/bin/env python3
 import os
-import json
 from fastapi import FastAPI
 from pydantic import BaseModel
-from typing import List, Optional
+from typing import Optional, List
 from neo4j import GraphDatabase
 from qdrant_client import QdrantClient
 from sentence_transformers import SentenceTransformer
@@ -24,7 +23,11 @@ QDRANT_COLLECTION = "efc_docs"
 # Init clients
 # ------------------------------------------------------------
 driver = GraphDatabase.driver(NEO4J_URI, auth=(NEO4J_USER, NEO4J_PASSWORD))
-qdrant = QdrantClient(url=QDRANT_URL, api_key=QDRANT_API_KEY)
+
+qdrant = None
+if QDRANT_URL and QDRANT_API_KEY:
+    qdrant = QdrantClient(url=QDRANT_URL, api_key=QDRANT_API_KEY)
+
 model = SentenceTransformer("sentence-transformers/all-mpnet-base-v2")
 
 # ------------------------------------------------------------
@@ -32,8 +35,10 @@ model = SentenceTransformer("sentence-transformers/all-mpnet-base-v2")
 # ------------------------------------------------------------
 app = FastAPI()
 
+
 class QueryInput(BaseModel):
     text: str
+
 
 # ------------------------------------------------------------
 # Healthcheck
@@ -43,9 +48,10 @@ def health():
     return {
         "status": "ok",
         "api": "unified-api",
-        "neo4j": True,
-        "qdrant": True,
+        "neo4j": bool(NEO4J_URI),
+        "qdrant": bool(qdrant is not None),
     }
+
 
 # ------------------------------------------------------------
 # Lucene escape fix
@@ -58,6 +64,7 @@ def escape_lucene(q: str) -> str:
     for c in special.split():
         out = out.replace(c, f"\\{c}")
     return out
+
 
 # ------------------------------------------------------------
 # Neo4j search
@@ -78,33 +85,72 @@ def neo4j_search(query: str):
             res = s.run(cypher, q=safe).data()
         return {"enabled": True, "matches": res}
     except Exception as e:
-        return {"enabled": False, "reason": str(e)}
+        return {"enabled": False, "reason": str(e), "matches": []}
+
 
 # ------------------------------------------------------------
-# RAG — stable, Qdrant Cloud–compatible points.search()
+# RAG — robust mot qdrant_client-versjoner
 # ------------------------------------------------------------
 def rag_search(query: str):
+    if qdrant is None:
+        return {"enabled": False, "reason": "Qdrant not configured", "matches": []}
+
     try:
         emb = model.encode(query).tolist()
-        results = qdrant.points.search(
-            collection_name=QDRANT_COLLECTION,
-            vector=emb,
-            limit=20,
-        )
+
+        # 1) Prøv klassisk qdrant.search(...)
+        results = None
+        if hasattr(qdrant, "search"):
+            # eldre / klassisk Python-klient
+            try:
+                results = qdrant.search(
+                    collection_name=QDRANT_COLLECTION,
+                    query_vector=emb,
+                    limit=20,
+                )
+            except TypeError:
+                # noen versjoner bruker "vector" i stedet for "query_vector"
+                results = qdrant.search(
+                    collection_name=QDRANT_COLLECTION,
+                    vector=emb,
+                    limit=20,
+                )
+
+        # 2) Fallback: qdrant.points.search(...)
+        elif hasattr(qdrant, "points") and hasattr(qdrant.points, "search"):
+            results = qdrant.points.search(
+                collection_name=QDRANT_COLLECTION,
+                vector=emb,
+                limit=20,
+            )
+        else:
+            return {
+                "enabled": False,
+                "reason": "Qdrant client has no search method",
+                "matches": [],
+            }
 
         out = []
         for r in results:
-            payload = r.payload or {}
-            out.append({
-                "text": payload.get("text"),
-                "paper": payload.get("paper"),
-                "slug": payload.get("slug"),
-                "score": r.score,
-            })
+            payload = getattr(r, "payload", None) or {}
+            score = getattr(r, "score", None)
+            out.append(
+                {
+                    "text": payload.get("text"),
+                    "paper": payload.get("paper"),
+                    "slug": payload.get("slug"),
+                    "score": score,
+                }
+            )
+
         return {"enabled": True, "matches": out}
 
     except Exception as e:
-        return {"enabled": False, "reason": str(e)}
+        msg = str(e)
+        if "Vector dimension error" in msg:
+            msg += " (Qdrant-collection dim != embedding dim; dropp og re-ingest 'efc_docs')"
+        return {"enabled": False, "reason": msg, "matches": []}
+
 
 # ------------------------------------------------------------
 # Unified endpoint
