@@ -21,8 +21,13 @@ jobs:
           script: |
             set -e
 
-            cd /opt/symbiose
+            echo "=== Updating repo ==="
+            cd /opt/symbiose/repo
+            git fetch --all
+            git reset --hard origin/main
 
+            echo "=== Deploying compose ==="
+            cd /opt/symbiose/repo/infra/docker
             docker compose pull
             docker compose up -d
 
