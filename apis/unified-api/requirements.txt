@@ -1,1 +1,8 @@
-
+fastapi
+uvicorn
+qdrant-client==1.8.2
+neo4j
+pydantic
+python-dotenv
+sentence-transformers
+httpx
