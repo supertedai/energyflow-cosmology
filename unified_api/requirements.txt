@@ -1,7 +1,0 @@
-fastapi
-uvicorn
-neo4j
-qdrant-client==1.8.2
-python-dotenv
-sentence-transformers
-httpx
