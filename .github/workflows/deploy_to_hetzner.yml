@@ -21,14 +21,14 @@ jobs:
           script: |
             set -e
 
-            echo "=== Updating repo ==="
+            echo "=== Updating repo on server ==="
             cd /opt/symbiose/repo
             git fetch --all
             git reset --hard origin/main
 
-            echo "=== Deploying compose ==="
+            echo "=== Running docker compose ==="
             cd /opt/symbiose/repo/infra/docker
             docker compose pull
             docker compose up -d
 
-            echo "Deployment complete."
+            echo "=== Deployment complete ==="
