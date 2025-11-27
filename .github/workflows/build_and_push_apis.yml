@@ -2,31 +2,39 @@ name: Build & Push Unified API
 
 on:
   push:
-    branches: [ main ]
+    branches:
+      - main
   workflow_dispatch:
 
 env:
   REGISTRY: ghcr.io
-  IMAGE_PREFIX: ghcr.io/supertedai
+  IMAGE_NAME: ghcr.io/supertedai/unified-api:latest
 
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v4
+      # 1) Hent repo – full repo-root blir build-context
+      - name: Checkout repo
+        uses: actions/checkout@v4
 
-      - uses: docker/login-action@v3
+      # 2) Logg inn i GH Container Registry
+      - name: Login to GHCR
+        uses: docker/login-action@v3
         with:
           registry: ghcr.io
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Build Unified API
+      # 3) Build Unified API fra riktig path og riktig context
+      - name: Build Unified API image
         run: |
           docker build \
-            apis/unified-api \
-            -t $IMAGE_PREFIX/unified-api:latest
+            -f apis/unified-api/Dockerfile \
+            -t $IMAGE_NAME \
+            ${{ github.workspace }}
 
-      - name: Push
-        run: docker push $IMAGE_PREFIX/unified-api:latest
+      # 4) Push image til GHCR
+      - name: Push Unified API image
+        run: docker push $IMAGE_NAME
