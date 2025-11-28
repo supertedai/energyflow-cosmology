@@ -1,9 +1,12 @@
 from fastapi import APIRouter
-from clients.neo4j_client import run_query
+from apis.unified_api.clients.neo4j_client import run_query
 
-router = APIRouter(prefix="/neo4j")
+router = APIRouter()
 
 @router.get("/q")
-def q(query: str):
+def query(query: str):
+    """
+    Basic Cypher endpoint: /neo4j/q?query=...
+    """
     return run_query(query)
 

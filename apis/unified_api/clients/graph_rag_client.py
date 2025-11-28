@@ -7,6 +7,7 @@ def graph_rag_query(q: str, limit: int = 10):
     2) Returner relevante metadata
     3) Kombiner med Qdrant-søk for semantisk rangering
     """
+
     cypher = """
     MATCH (c:Concept)
     WHERE toLower(c.name) CONTAINS toLower($q)
@@ -17,7 +18,10 @@ def graph_rag_query(q: str, limit: int = 10):
     LIMIT $limit
     """
 
-    neo4j_hits = run_query(cypher, params={"q": q, "limit": limit})
+    neo4j_hits = run_query(
+        cypher,
+        parameters={"q": q, "limit": limit}
+    )
 
     # Qdrant semantisk søk
     qdrant_hits = qdrant_search(q)
@@ -27,3 +31,4 @@ def graph_rag_query(q: str, limit: int = 10):
         "neo4j": neo4j_hits,
         "qdrant": qdrant_hits,
     }
+
