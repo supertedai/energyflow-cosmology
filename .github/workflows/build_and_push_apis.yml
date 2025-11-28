@@ -13,13 +13,18 @@ env:
 jobs:
   build:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
 
     steps:
-      # 1) Hent repo – full repo-root blir build-context
+      # 1) Hent repo (hele root blir build-context)
       - name: Checkout repo
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
-      # 2) Logg inn i GH Container Registry
+      # 2) Login mot GHCR
       - name: Login to GHCR
         uses: docker/login-action@v3
         with:
@@ -27,14 +32,14 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
-      # 3) Build Unified API fra riktig path og riktig context
+      # 3) Build Docker image for unified-api
       - name: Build Unified API image
         run: |
           docker build \
-            -f apis/unified-api/Dockerfile \
+            -f apis/unified_api/Dockerfile \
             -t $IMAGE_NAME \
             ${{ github.workspace }}
 
-      # 4) Push image til GHCR
+      # 4) Push til registry
       - name: Push Unified API image
         run: docker push $IMAGE_NAME
