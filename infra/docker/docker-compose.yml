@@ -10,7 +10,7 @@ services:
     image: ghcr.io/supertedai/unified-api:latest
     container_name: unified-api
     env_file:
-      - /opt/symbiose/.env
+      - ../../.env
     environment:
       PORT: "8080"
     ports:
@@ -29,7 +29,7 @@ services:
     image: ghcr.io/supertedai/query-api:latest
     container_name: query-api
     env_file:
-      - /opt/symbiose/.env
+      - ../../.env
     environment:
       PORT: "8081"
     ports:
@@ -48,7 +48,7 @@ services:
     image: ghcr.io/supertedai/graph-rag-api:latest
     container_name: graph-rag-api
     env_file:
-      - /opt/symbiose/.env
+      - ../../.env
     environment:
       PORT: "8082"
     ports:
