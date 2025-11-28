@@ -10,12 +10,6 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # Checkout is NOT required for server-side pull
-      - name: Checkout (no repo needed)
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-
       - name: Deploy via SSH
         uses: appleboy/ssh-action@v1.0.3
         with:
@@ -26,9 +20,6 @@ jobs:
           script: |
             set -e
 
-            echo "=== Ensure docker is in PATH ==="
-            export PATH=$PATH:/usr/bin:/usr/local/bin
-
             echo "=== Updating repo on server ==="
             cd /opt/symbiose/repo
             git fetch --all
@@ -37,6 +28,9 @@ jobs:
             echo "=== Pulling updated Unified API image ==="
             cd /opt/symbiose/repo/infra/docker
             docker compose pull
+
+            echo "=== Cleaning unused images ==="
+            docker image prune -f
 
             echo "=== Restarting containers cleanly ==="
             docker compose down
