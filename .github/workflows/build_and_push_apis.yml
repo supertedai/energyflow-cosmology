@@ -1,45 +1,34 @@
-name: Build & Push Unified API
+name: Deploy to Hetzner
 
 on:
   push:
-    branches:
-      - main
+    branches: [ main ]
   workflow_dispatch:
 
-env:
-  REGISTRY: ghcr.io
-  IMAGE_NAME: ghcr.io/supertedai/unified-api:latest
-
 jobs:
-  build:
+  deploy:
     runs-on: ubuntu-latest
-    permissions:
-      contents: read
-      packages: write
 
     steps:
-      # 1) Hent repo (hele root blir build-context)
-      - name: Checkout repo
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
+
+      - uses: appleboy/ssh-action@v1.0.3
         with:
-          fetch-depth: 0
+          host: ${{ secrets.HETZNER_HOST }}
+          username: ${{ secrets.HETZNER_USER }}
+          key: ${{ secrets.HETZNER_SSH_KEY }}
+          port: 22
+          script: |
+            set -e
 
-      # 2) Login mot GHCR
-      - name: Login to GHCR
-        uses: docker/login-action@v3
-        with:
-          registry: ghcr.io
-          username: ${{ github.actor }}
-          password: ${{ secrets.GITHUB_TOKEN }}
+            echo "=== Updating repo on server ==="
+            cd /opt/symbiose/repo
+            git fetch --all
+            git reset --hard origin/main
 
-      # 3) Build Docker image for unified-api
-      - name: Build Unified API image
-        run: |
-          docker build \
-            -f apis/unified_api/Dockerfile \
-            -t $IMAGE_NAME \
-            ${{ github.workspace }}
+            echo "=== Running docker compose ==="
+            cd /opt/symbiose/repo/infra/docker
+            docker compose pull
+            docker compose up -d
 
-      # 4) Push til registry
-      - name: Push Unified API image
-        run: docker push $IMAGE_NAME
+            echo "=== Deployment complete ==="
