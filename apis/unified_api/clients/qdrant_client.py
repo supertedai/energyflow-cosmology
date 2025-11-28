@@ -1,24 +1,19 @@
-# clients/qdrant_client.py
-#
-# Midlertidig "stub" for Qdrant-kall.
-# Denne gjør INGENTING avansert – den returnerer bare tomme treff,
-# slik at API-et kan starte og Neo4j kan testes først.
+import os
+from qdrant_client import QdrantClient
 
-from typing import Any, Dict, List
+# Env
+url = os.environ.get("QDRANT_URL")
+api_key = os.environ.get("QDRANT_API_KEY")
+collection = os.environ.get("QDRANT_COLLECTION")
 
+client = QdrantClient(url=url, api_key=api_key)
 
-def qdrant_search(query: str, limit: int = 10) -> Dict[str, Any]:
-    """
-    Midlertidig Qdrant-stub.
-
-    Returnerer en tom liste med "hits" slik at resten av API-et
-    (Neo4j, routers, health) kan testes uten at vi trenger
-    HuggingFace, embeddings eller faktisk Qdrant-tilkobling ennå.
-    """
+# Midlertidig stub – ingen HF-modeller her
+def qdrant_search(text: str, limit: int = 10):
     return {
-        "query": query,
+        "query": text,
         "limit": limit,
-        "hits": [],
-        "note": "Qdrant is disabled in this stage – this is a stub response.",
+        "note": "Embedding disabled in Codespaces – Qdrant reachable, embeddings skipped.",
+        "hits": []
     }
 
