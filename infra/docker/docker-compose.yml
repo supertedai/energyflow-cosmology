@@ -5,6 +5,7 @@ networks:
     driver: bridge
 
 services:
+
   unified-api:
     image: ghcr.io/supertedai/unified-api:latest
     container_name: unified-api
@@ -17,6 +18,12 @@ services:
     restart: unless-stopped
     networks:
       - symbiose-net
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080/health"]
+      interval: 10s
+      timeout: 3s
+      retries: 5
+      start_period: 5s
 
   query-api:
     image: ghcr.io/supertedai/query-api:latest
@@ -30,6 +37,12 @@ services:
     restart: unless-stopped
     networks:
       - symbiose-net
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8081/health"]
+      interval: 10s
+      timeout: 3s
+      retries: 5
+      start_period: 5s
 
   graph-rag-api:
     image: ghcr.io/supertedai/graph-rag-api:latest
@@ -43,3 +56,9 @@ services:
     restart: unless-stopped
     networks:
       - symbiose-net
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8082/health"]
+      interval: 10s
+      timeout: 3s
+      retries: 5
+      start_period: 5s
