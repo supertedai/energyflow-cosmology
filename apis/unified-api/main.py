@@ -1,11 +1,11 @@
 from fastapi import FastAPI
 
-# Viktig: bruk absolutte imports basert på repo-strukturen
-from apis.unified-api.routers.rag import router as rag_router
-from apis.unified-api.routers.ingest import router as ingest_router
-from apis.unified-api.routers.neo4j_ops import router as neo4j_router
-from apis.unified-api.routers.graph_rag import router as graph_rag_router
-# embed-router finnes ikke — fjernet. Legg til hvis du har den.
+# Riktig modulnavn: unified_api (underscore)
+from apis.unified_api.routers.rag import router as rag_router
+from apis.unified_api.routers.ingest import router as ingest_router
+from apis.unified_api.routers.neo4j import router as neo4j_router
+from apis.unified_api.routers.graph_rag import router as graph_rag_router
+from apis.unified_api.routers.embed import router as embed_router
 
 app = FastAPI(title="Unified Symbiose API")
 
@@ -13,8 +13,9 @@ app = FastAPI(title="Unified Symbiose API")
 def health():
     return {"status": "ok"}
 
-# registrer routers
+# inkluder routers
 app.include_router(rag_router)
 app.include_router(ingest_router)
 app.include_router(neo4j_router)
 app.include_router(graph_rag_router)
+app.include_router(embed_router)
