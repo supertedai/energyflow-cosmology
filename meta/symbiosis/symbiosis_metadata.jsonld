@@ -1,0 +1,21 @@
+{
+  "@context": "https://doi.org/10.5063/schema/codemeta-2.0",
+  "@type": "SoftwareSourceCode",
+  "name": "Symbiosis Runtime",
+  "description": "Runtime subsystem of Energy-Flow Cosmology (EFC): unified APIs, graph+vector memory, agent orchestration, logging, RAG support.",
+  "version": "0.1.0-dev",
+  "codeRepository": "https://github.com/supertedai/energyflow-cosmology",
+  "license": "MIT",   /* or whichever license you choose */
+  "programmingLanguage": ["Python", "Shell"],   /* adjust as needed */
+  "author": {
+    "@type": "Person",
+    "name": "Morten / supertedai",
+    "sameAs": "https://github.com/supertedai"
+  },
+  "isPartOf": {
+    "@type": "SoftwareSourceCode",
+    "name": "Energy-Flow Cosmology (EFC)",
+    "codeRepository": "https://github.com/supertedai/energyflow-cosmology"
+  },
+  "keywords": ["EFC","Symbiosis","Graph database","Neo4j","Qdrant","RAG","API","Meta-cognition"]
+}
