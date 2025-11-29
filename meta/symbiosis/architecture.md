@@ -89,3 +89,19 @@ Symbiosis is composed of four major layers:
 
 ## Integration Diagram (text-based)
 
+Clients → unified-api → query-api → Qdrant
+→ graph-rag-api → Neo4j
+→ Logging Proxy → Neo4j (logs)
+
+
+---
+
+## Principles
+
+- **Hetzner = runtime-master**  
+- **GitHub = code-master**  
+- **Memory is shared, schema-validated, and consistent**  
+- **All services speak through the same semantic layer (JSON-LD + schema)**  
+
+---
+
