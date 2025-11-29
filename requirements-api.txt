@@ -1,9 +1,9 @@
 fastapi
 uvicorn
-qdrant-client==1.8.2
 neo4j
-pydantic
+qdrant-client==1.8.2
 python-dotenv
 sentence-transformers
 httpx
 python-multipart
+pydantic

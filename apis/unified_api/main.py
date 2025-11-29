@@ -4,6 +4,7 @@ from fastapi import FastAPI
 from apis.unified_api.routers.neo4j import router as neo4j_router
 from apis.unified_api.routers.rag import router as rag_router
 from apis.unified_api.routers.graph_rag import router as graph_rag_router
+from apis.unified_api.routers.unified_query import router as unified_query_router
 
 app = FastAPI(title="Unified Symbiose API")
 
@@ -11,8 +12,8 @@ app = FastAPI(title="Unified Symbiose API")
 def health():
     return {"status": "ok"}
 
-# Prefix bare her (ikke i router-filene)
+# Prefix her (router-filer skal ikke ha prefix)
 app.include_router(neo4j_router, prefix="/neo4j")
 app.include_router(rag_router, prefix="/rag")
 app.include_router(graph_rag_router, prefix="/graph-rag")
-
+app.include_router(unified_query_router)

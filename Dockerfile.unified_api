@@ -1,0 +1,25 @@
+FROM python:3.11-slim
+
+WORKDIR /app
+
+# System dependencies (for Neo4j + sentence-transformers)
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    build-essential \
+    git \
+    && rm -rf /var/lib/apt/lists/*
+
+# Copy API-specific requirements
+COPY requirements-api.txt .
+
+# Install API dependencies
+RUN pip install --no-cache-dir -r requirements-api.txt
+
+# Copy unified API source code
+COPY apis/unified_api ./apis/unified_api
+
+# Expose port
+ENV PORT=8080
+EXPOSE 8080
+
+# Start server
+CMD ["uvicorn", "apis.unified_api.main:app", "--host", "0.0.0.0", "--port", "8080"]
