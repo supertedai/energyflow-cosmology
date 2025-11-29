@@ -1,13 +1,17 @@
 from fastapi import APIRouter
 from apis.unified_api.clients.graph_rag_client import graph_rag_query
 
-# Router base-path styres fra main.py → prefix="/graph-rag"
 router = APIRouter()
 
-@router.get("")    # viktig: uten "/"
-def graph_rag(query: str, limit: int = 10):
+def combined_graph_rag(query: str, limit: int = 10):
     """
-    Kombinert Neo4j + Qdrant søk
+    Wrapper-funksjon brukt av unified_query.py.
     """
     return graph_rag_query(query, limit)
 
+@router.get("")
+def graph_rag_endpoint(query: str, limit: int = 10):
+    """
+    Kombinert Neo4j + Qdrant søk via API-endepunkt.
+    """
+    return combined_graph_rag(query, limit)
