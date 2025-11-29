@@ -1,235 +1,219 @@
- **Energy-Flow Cosmology — Repository Overview**
+# Energy-Flow Cosmology — Repository Overview
 
-This repository contains the full **Energy-Flow Cosmology (EFC)** framework, including theory, computational models, semantic layers, meta-architecture, and reproducible research infrastructure.
-It acts as the **single source of truth** for scientific content, metadata, workflows, and machine-readable structures.
+This repository contains the full **Energy-Flow Cosmology (EFC)** framework, including theory, computational models, semantic layers, symbiotic runtime architecture, and reproducible research infrastructure.
 
-**Keywords:** energy–entropy field, grid-level dynamics, formal specification, open-science architecture, semantic graph, meta-process, reproducibility, JSON-LD.
+It functions as the **single source of truth** for:
 
-If new - Please start here https://github.com/supertedai/energyflow-cosmology/blob/main/START-HERE.md
+- scientific content  
+- metadata and semantic structure  
+- APIs and machine interfaces  
+- knowledge-graph memory  
+- vector-memory (RAG)  
+- cognitive/meta processes  
+- open-science workflows and DOI integration
 
----
+**Keywords:** energy–entropy field, grid-level dynamics, formal specification, symbiotic runtime, knowledge graph, vector-graph retrieval, open-science architecture, JSON-LD, reproducibility.
 
-## **1. Purpose of the Repository**
-
-This repo defines:
-
-* the **formal theory** of Energy-Flow Cosmology
-* the **computational implementation** (Python modules, simulations)
-* the **semantic and structural layer** (JSON-LD, schemas, metadata)
-* the **meta-architecture** behind insight formation and reflection
-* the **scientific methodology** used for development and validation
-* the **full open-science pipeline**, including Figshare integration
-
-Everything here is versioned, traceable, and organised for both human reading and system-level processing.
+If you are new — start here:  
+https://github.com/supertedai/energyflow-cosmology/blob/main/START-HERE.md
 
 ---
 
-## **2. Repository Structure**
+## 1. Purpose of the Repository
 
-The repo is divided into clear domains. Each domain has its own README and JSON-LD metadata.
+This repository defines:
+
+- the **formal scientific theory** (EFC)
+- the **runtime system** that supports cognitive workflows (Symbiosis)
+- the **computational implementation** (Python modules)
+- the **semantic and structural layer** (JSON-LD, schemas, graph)
+- the **meta-architecture** used for reasoning and reflection
+- the **complete open-science pipeline**, including DOI and Figshare integration
+
+Everything is versioned, traceable, machine-readable, and reproducible.
+
+---
+
+## 2. Repository Structure
+
+The repository is divided into explicit domains.  
+Each domain has its own README and JSON-LD metadata.
 
 ### **theory/**
-
-Core scientific content.
-
-* EFC Master Specification (HTML/PDF)
-* mathematical foundations
-* grid, entropy and energy-flow formulations
-* supporting documents and figures
+Scientific foundations of EFC:
+- master specification
+- entropy–energy relations
+- grid, topology and flow-based formulations
+- supporting derivations and figures
 
 ### **src/**
-
-Computational implementation.
-
-* Python modules (`efc_core`, entropy, potential, validation)
-* shared utilities
-* simulation and plotting functions
+Computational implementation:
+- Python modules for EFC models
+- utilities, plotting, numerical routines
 
 ### **notebooks/**
-
-Interactive analysis.
-
-* validation notebooks
-* demonstration notebooks
-* exploratory workflows
+Interactive analysis:
+- validation notebooks
+- demonstrations
+- exploration workflows
 
 ### **data/**
-
-Input and reference data.
-
-* SPARC rotation curves
-* JWST and DESI datasets (where used)
-* structured CSV and JSON resources
+Reference datasets:
+- rotation curves
+- JWST/DESI samples
+- structured JSON/CSV resources
 
 ### **meta/**
+High-level meta-architecture:
+- reflection layer
+- cognition notes
+- meta-process
+- semantic overlays
+- Symbiosis integration points
 
-High-order structural layer.
+### **meta/symbiosis/**
+**Symbiosis Runtime System**  
+The cognitive and computational backbone of EFC:
+- unified API layer  
+- graph + vector memory  
+- RAG retrieval engine  
+- logging and reflection  
+- metadata and JSON-LD  
+- runtime architecture  
+- roadmap and components  
+- (DOI pending)
 
-* meta-architecture
-* cognition and reflection
-* meta-process and metascope
-* personal-note documentation
-* semantic overlays
+This subsystem defines how EFC interacts with agents, memory, APIs and search.
 
 ### **meta-graph/**
-
-Full semantic graph and graph-schema.
-
-* machine-readable structure for all concepts
-* graph-schema definitions
-* extraction and merging logic
+EFC semantic graph:
+- machine-readable concept graph
+- graph schema
+- extraction, merging and indexing logic
 
 ### **methodology/**
-
-Research method and workflow.
-
-* open-method
-* open-process
-* EFC epistemology
-* reproducibility guide
-* symbiosis interface
-* AI-augmented workflow
+Open scientific method:
+- open-method
+- open-process
+- reproducibility guide
+- symbiosis-method integration
+- AI-augmented scientific workflow
 
 ### **api/**
-
-Machine interfaces.
-
-* `/api/v1/*` JSON endpoints
-* semantic concept registry
-* meta-index and node-index
-* schema mapping and repository API list
+Machine interfaces:
+- `/api/v1/*`
+- unified query endpoints
+- semantic registry
+- schema mapping
+- graph-RAG API
 
 ### **schema/**
-
-Semantic definitions.
-
-* schema definitions for concepts and processes
-* repository-level manifest
-* JSON-LD vocabulary
+Semantic definitions:
+- vocabularies
+- schema maps
+- manifest files
+- JSON-LD vocabulary for EFC + Symbiosis
 
 ### **docs/**
-
-Static documents.
-
-* published PDFs
-* supplementary files
-* README-linked support content
+Static published content:
+- papers
+- PDFs
+- supplementary files
 
 ### **figshare/**
-
-Metadata and integration.
-
-* DOI mapping
-* sync metadata
-* harvested semantic fields
+DOI + metadata integration:
+- figshare datasets
+- JSON-LD harvested fields
+- sync metadata
 
 ### **scripts/**
-
-Automation and utilities.
-
-* semantic extractors
-* maintenance scripts
-* PDF restoration and placement
+Automation:
+- semantic extractors
+- maintenance scripts
+- PDF build utilities
 
 ### **app/**
-
-Interfaces and tools.
-
-* visual dashboards
-* meta-dashboard scripts
-
----
-
-## **3. Entry Points**
-
-Start here when exploring the project:
-
-* **START-HERE.md** — orientation for new readers
-* **OVERVIEW.md** — structural map of all domains
-* **META-MAP.md** — map of meta-architecture and semantic fields
-* **research-entry.md** — direct entry to the scientific content
+Tools and dashboards:
+- visual interfaces
+- meta-dashboards
+- analysis utilities
 
 ---
 
-## **4. Semantic and Machine-Readable Layer**
+## 3. Entry Points
 
-The repository maintains an integrated semantic graph through:
+Recommended starting points:
 
-* `manifest.jsonld`
-* `schema-map.json`
-* `semantic-graph.json`
-* `meta-index.json`
-* `node-index.json`
-
-These files describe how concepts, documents, code, and processes link together.
-They enable automated analysis, indexing, API generation, and external integration.
+- **START-HERE.md** — orientation  
+- **OVERVIEW.md** — map of all domains  
+- **META-MAP.md** — meta-architecture overview  
+- **research-entry.md** — scientific entry point  
+- **meta/symbiosis/README.md** — Symbiosis runtime entry
 
 ---
 
-## **5. Reproducibility and Open Science**
+## 4. Semantic and Machine-Readable Layer
 
-The full research workflow is documented in:
+The entire repository is indexed through:
 
-* `methodology/open-method`
-* `methodology/open-process`
-* `methodology/reproducibility-guide`
-* `AI-Augmented-Scientific-Workflow-Framework`
+- `manifest.jsonld`
+- `schema-map.json`
+- `semantic-graph.json`
+- `meta-index.json`
+- `node-index.json`
 
-Every step of the scientific chain—from theory to validation and publication—is described and versioned.
-
----
-
-## **6. Status of the Repository**
-
-The repo is actively maintained.
-Automated workflows update:
-
-* READMEs
-* semantic indexes
-* schema exports
-* Figshare metadata
-
-Manual content (theory, meta-architecture, notebooks) is never modified by automation.
+These files describe how concepts, documents, metadata, code and processes connect.  
+They support automated indexing, graph reasoning, API validation and external integration.
 
 ---
 
-## **7. How to Contribute**
+## 5. Reproducibility and Open Science
 
-Use standard Git workflows.
-When adding new content:
+The complete research workflow is documented under:
 
-1. Add Markdown + JSON-LD.
-2. Follow existing directory structure.
-3. Link new concepts in `semantic-graph.json` or `schema-map.json`.
-4. Update relevant READMEs manually.
+- `methodology/open-method`
+- `methodology/open-process`
+- `methodology/reproducibility-guide`
+- `AI-Augmented-Scientific-Workflow-Framework`
+- Symbiosis runtime integration
 
----
-
-## **8. AUTH — Origin & Authorship Layer**
-
-The `auth/` directory defines the provenance and origin node of the EFC 
-framework. It links the human cognitive process, the meta architecture, 
-and the formal theory into a single identifiable origin.
-
-AUTH is used by:
-
-- researchers (provenance reference)
-- LLMs (origin anchor for semantic alignment)
-- RAG systems (root-level indexing)
-- search engines (structured semantic context)
-
-AUTH ensures that Energy-Flow Cosmology has a clear, unambiguous, 
-machine-readable and human-readable origin.
+Every stage—from theory → computation → insight → publication—is versioned and reproducible.
 
 ---
 
-## **9. License**
+## 6. Status
 
-# License
+The repository is actively maintained.
 
-All content in this repository is released under the
-Creative Commons Attribution 4.0 International (CC BY 4.0) License.
+Automated workflows handle:
+- semantic indexes
+- schema exports
+- metadata updates
+- Figshare synchronisation
+
+Manual scientific content is curated with care and is never overwritten by automation.
+
+---
+
+## 7. Authorship & Provenance
+
+The `auth/` directory defines the origin, provenance and cognitive root of the EFC and Symbiosis framework.
+
+Used by:
+- researchers  
+- search engines  
+- citation frameworks  
+- LLMs  
+- RAG systems  
+
+This ensures unambiguous authorship and origin.
+
+---
+
+## 8. License
+
+All content is released under:  
+**Creative Commons Attribution 4.0 International (CC BY 4.0)**
 
 © Morten Magnusson.
-
 
