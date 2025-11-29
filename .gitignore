@@ -106,3 +106,4 @@ downloads/
 **/index/index/*
 **/index/index*/**
 .venv/
+.env
