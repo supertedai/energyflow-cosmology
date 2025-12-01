@@ -1,33 +1,23 @@
-networks:
-  symbiose-net:
-    driver: bridge
-
 services:
   unified-api:
     container_name: unified-api
-    
     build:
-      context: /Users/morpheus/energyflow-cosmology
-      dockerfile: infra/docker/Dockerfile.unified_api
-
+      context: ../../
+      dockerfile: Dockerfile.unified_api
     env_file:
-      - /Users/morpheus/energyflow-cosmology/.env
-
+      - ../../.env
     environment:
       PORT: "8080"
-
+      ENABLE_QDRANT: "0"
+      ENABLE_NEO4J: "0"
+      ENABLE_EMBED: "1"
     ports:
       - "8080:8080"
-
     restart: unless-stopped
-
     networks:
       - symbiose-net
 
-    healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:8080/health"]
-      interval: 10s
-      timeout: 3s
-      retries: 5
-      start_period: 5s
+networks:
+  symbiose-net:
+    driver: bridge
 
