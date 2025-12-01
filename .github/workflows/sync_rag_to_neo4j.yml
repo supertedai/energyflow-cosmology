@@ -1,10 +1,3 @@
-name: Debug secrets
-  run: |
-    echo "URL: $QDRANT_URL"
-    echo "API KEY LENGTH: ${#QDRANT_API_KEY}"
-    printf 'KEY HEX: '
-    printf '%s' "$QDRANT_API_KEY" | hexdump -C
-
 name: Sync RAG to Neo4j
 
 on:
