@@ -1,4 +1,4 @@
-- name: Debug secrets
+name: Debug secrets
   run: |
     echo "URL: $QDRANT_URL"
     echo "API KEY LENGTH: ${#QDRANT_API_KEY}"
