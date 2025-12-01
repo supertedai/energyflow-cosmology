@@ -1,7 +1,6 @@
 #!/usr/bin/env python
 import os
 from qdrant_client import QdrantClient
-from qdrant_client.models import ScrollRequest
 from neo4j import GraphDatabase
 
 
@@ -17,7 +16,13 @@ NEO4J_PASSWORD = os.getenv("NEO4J_PASSWORD")
 def connect_qdrant():
     if not QDRANT_URL or not QDRANT_API_KEY:
         raise RuntimeError("QDRANT_URL/QDRANT_API_KEY is not set")
-    client = QdrantClient(url=QDRANT_URL, api_key=QDRANT_API_KEY)
+
+    client = QdrantClient(
+        url=QDRANT_URL,
+        api_key=QDRANT_API_KEY,
+        timeout=30,
+        prefer_grpc=False,  # tving HTTP, matcher curl-testene dine
+    )
     return client
 
 
@@ -50,15 +55,20 @@ def main():
     total_points = 0
     docs_seen = set()
 
+    from qdrant_client.http import models as rest
+
     with driver.session() as session:
         while True:
-            points, offset = qdrant.scroll(
+            scroll_result = qdrant.scroll(
                 collection_name=QDRANT_COLLECTION,
                 scroll_filter=None,
                 limit=256,
                 offset=offset,
                 with_payload=True,
+                with_vectors=False,
             )
+            points, offset = scroll_result
+
             if not points:
                 break
 
