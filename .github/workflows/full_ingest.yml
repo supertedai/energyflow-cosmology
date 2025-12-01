@@ -1,32 +1,24 @@
-name: Full Ingest Pipeline
+name: Full RAG Ingest
 
 on:
-  workflow_dispatch:
+  workflow_dispatch: {}
   push:
-    branches:
-      - main
     paths:
       - "docs/**"
       - "meta/**"
-      - "schema/**"
-      - "api/**"
-      - "tools/**"
-      - "semantic-search-index.json"
+      - "symbiosis/**"
+      - "theory/**"
 
 jobs:
-  ingest:
+  full-rag-ingest:
     runs-on: ubuntu-latest
 
     env:
-      NEO4J_URI: ${{ secrets.NEO4J_URI }}
-      NEO4J_USER: ${{ secrets.NEO4J_USER }}
-      NEO4J_PASSWORD: ${{ secrets.NEO4J_PASSWORD }}
-      NEO4J_DATABASE: ${{ secrets.NEO4J_DATABASE }}
-      QDRANT_URL: ${{ secrets.QDRANT_URL }}
-      QDRANT_API_KEY: ${{ secrets.QDRANT_API_KEY }}
+      API_URL: "http://46.62.239.139:8080"
+      QDRANT_COLLECTION: "efc_docs"
 
     steps:
-      - name: Checkout repository
+      - name: Checkout repo
         uses: actions/checkout@v4
 
       - name: Set up Python
@@ -34,76 +26,11 @@ jobs:
         with:
           python-version: "3.11"
 
-      - name: Install dependencies
+      - name: Install Python dependencies
         run: |
-          pip install -r tools/requirements.txt
+          python -m pip install --upgrade pip
+          pip install requests
 
-      # ---------------------------
-      # 1. SEMANTIC HARVEST
-      # ---------------------------
-      - name: Run semantic-harvest
+      - name: Run RAG ingest pipeline
         run: |
-          echo ">>> Running semantic-harvest"
-          python tools/semantic_harvest.py
-
-      # ---------------------------
-      # 2. GENERATE JSON-LD
-      # ---------------------------
-      - name: Generate JSON-LD metadata
-        run: |
-          echo ">>> Rebuilding JSON-LD metadata"
-          python tools/build_jsonld.py
-
-      # ---------------------------
-      # 3. UPDATE NEO4J GRAPH
-      # ---------------------------
-      - name: Push metadata to Neo4j
-        run: |
-          echo ">>> Updating Neo4j graph"
-          python tools/push_to_neo4j.py
-
-      # ---------------------------
-      # 4. UPDATE QDRANT VECTOR STORE
-      # ---------------------------
-      - name: Push embeddings to Qdrant
-        run: |
-          echo ">>> Updating Qdrant vector store"
-          python tools/update_qdrant.py
-
-      # ---------------------------
-      # 5. REBUILD SEARCH INDEX
-      # ---------------------------
-      - name: Build semantic search index
-        run: |
-          echo ">>> Rebuilding semantic-search-index.json"
-          python tools/build_search_index.py
-
-      # ---------------------------
-      # 6. REFRESH CLOUD RUN APIS
-      # ---------------------------
-      - name: Refresh Unified API
-        run: |
-          echo ">>> Refreshing Unified API"
-          curl -X POST \
-            "https://unified-api-958872099364.europe-west1.run.app/admin/refresh" \
-            -H "Authorization: Bearer ${{ secrets.UNIFIED_API_TOKEN }}" \
-            -H "Content-Type: application/json" || true
-
-      - name: Refresh Query API
-        run: |
-          echo ">>> Refreshing Query API"
-          curl -X POST \
-            "https://symbiose-query-api-958872099364.europe-north1.run.app/admin/refresh" \
-            -H "Authorization: Bearer ${{ secrets.QUERY_API_TOKEN }}" \
-            -H "Content-Type: application/json" || true
-
-      # ---------------------------
-      # 7. COMMIT CHANGES (IF ANY)
-      # ---------------------------
-      - name: Commit changes
-        run: |
-          git config --global user.name "Symbiose Bot"
-          git config --global user.email "bot@symbiose.local"
-          git add .
-          git commit -m "Full ingest update ($(date))" || echo "No changes"
-          git push || echo "Nothing to push"
+          python tools/rag_ingest.py
