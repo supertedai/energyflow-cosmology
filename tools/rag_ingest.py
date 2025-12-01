@@ -4,7 +4,7 @@ from pathlib import Path
 import textwrap
 import requests
 
-API_URL = os.getenv("API_URL", "http://localhost:8080")
+API_URL = os.getenv("API_URL", "http://46.62.239.139:8080")
 COLLECTION = os.getenv("QDRANT_COLLECTION", "efc_docs")
 
 # Mapper vi faktisk vil ingest'e fra
@@ -21,8 +21,8 @@ OVERLAP = 200
 
 def iter_source_files():
     """
-    Gir liste over filer som skal ingestes.
-    Filtrerer bort draft, old, tmp, etc.
+    Returnerer filer som skal ingestes.
+    Filtrerer bort draft/old/tmp.
     """
     for base in BASE_DIRS:
         if not base.exists():
@@ -37,10 +37,10 @@ def iter_source_files():
 
 def chunk_text(text: str, max_chars: int = MAX_CHARS, overlap: int = OVERLAP):
     """
-    Chunker tekst:
-    - splitter på avsnitt
-    - bygger chunks innenfor grensen
-    - legger inn overlapp for kontekst
+    Chunking:
+    - splitter på avsnitt (tom linje)
+    - bygger opp til max_chars
+    - legger inn enkel overlapp
     """
     paragraphs = [p.strip() for p in text.split("\n\n") if p.strip()]
     chunks = []
@@ -63,7 +63,7 @@ def chunk_text(text: str, max_chars: int = MAX_CHARS, overlap: int = OVERLAP):
     if current:
         chunks.append(current.strip())
 
-    # overlapp mellom chunks
+    # overlapp
     if overlap > 0 and len(chunks) > 1:
         overlapped = []
         for i, ch in enumerate(chunks):
@@ -83,13 +83,12 @@ def ingest_chunk(text: str, source: str):
     """
     Sender chunk til unified-api /ingest som multipart/form-data.
 
-    Antatt serversignatur (typisk FastAPI):
+    Antatt serversignatur (FastAPI):
         file: UploadFile = File(...)
         source: str = Form(...)
         collection: str = Form(...)
     """
 
-    # Fil-innholdet er bare selve teksten
     files = {
         "file": ("chunk.txt", text.encode("utf-8"), "text/plain")
     }
