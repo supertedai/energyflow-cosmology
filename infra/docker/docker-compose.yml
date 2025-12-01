@@ -1,23 +1,29 @@
-version: "3.9"
-
 networks:
   symbiose-net:
     driver: bridge
 
 services:
-
   unified-api:
-    image: ghcr.io/supertedai/unified-api:latest
     container_name: unified-api
+    
+    build:
+      context: /Users/morpheus/energyflow-cosmology
+      dockerfile: infra/docker/Dockerfile.unified_api
+
     env_file:
-      - ../../.env
+      - /Users/morpheus/energyflow-cosmology/.env
+
     environment:
       PORT: "8080"
+
     ports:
       - "8080:8080"
+
     restart: unless-stopped
+
     networks:
       - symbiose-net
+
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:8080/health"]
       interval: 10s
@@ -25,46 +31,3 @@ services:
       retries: 5
       start_period: 5s
 
-  # ----------------------------------------------------------
-  #  query-api (deaktivert for nå – mangler kode og image)
-  # ----------------------------------------------------------
-  # query-api:
-  #   image: ghcr.io/supertedai/query-api:latest
-  #   container_name: query-api
-  #   env_file:
-  #     - ../../.env
-  #   environment:
-  #     PORT: "8081"
-  #   ports:
-  #     - "8081:8081"
-  #   restart: unless-stopped
-  #   networks:
-  #     - symbiose-net
-  #   healthcheck:
-  #     test: ["CMD", "curl", "-f", "http://localhost:8081/health"]
-  #     interval: 10s
-  #     timeout: 3s
-  #     retries: 5
-  #     start_period: 5s
-
-  # ----------------------------------------------------------
-  #  graph-rag-api (deaktivert for nå – mangler kode og image)
-  # ----------------------------------------------------------
-  # graph-rag-api:
-  #   image: ghcr.io/supertedai/graph-rag-api:latest
-  #   container_name: graph-rag-api
-  #   env_file:
-  #     - ../../.env
-  #   environment:
-  #     PORT: "8082"
-  #   ports:
-  #     - "8082:8082"
-  #   restart: unless-stopped
-  #   networks:
-  #     - symbiose-net
-  #   healthcheck:
-  #     test: ["CMD", "curl", "-f", "http://localhost:8082/health"]
-  #     interval: 10s
-  #     timeout: 3s
-  #     retries: 5
-  #     start_period: 5s
