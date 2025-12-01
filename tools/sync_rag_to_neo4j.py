@@ -1,212 +1,84 @@
-#!/usr/bin/env python3
-# -*- coding: utf-8 -*-
-"""
-SYNC RAG → NEO4J
-================
-
-Leser ALLE Qdrant RAG-chunks og speiler dem inn i Neo4j som:
-
-  (:RAGChunk {id, text, chunk_index, slug, doi, path})
-    -[:FROM_PAPER]-> (:EFCPaper {slug})
-    -[:HAS_KEYWORD]-> (:Keyword {name})
-
-Bruker bare disse secrets i GitHub:
-
-QDRANT_URL
-QDRANT_API_KEY
-NEO4J_URI
-NEO4J_USER
-NEO4J_PASSWORD
-NEO4J_DATABASE
-"""
-
+#!/usr/bin/env python
 import os
-from typing import List, Dict, Any, Tuple
 from qdrant_client import QdrantClient
+from qdrant_client.models import ScrollRequest
 from neo4j import GraphDatabase
 
 
-# ------------------------------------------------------------
-# Logging
-# ------------------------------------------------------------
+QDRANT_URL = os.getenv("QDRANT_URL")
+QDRANT_API_KEY = os.getenv("QDRANT_API_KEY")
+QDRANT_COLLECTION = os.getenv("QDRANT_COLLECTION", "efc_docs")
 
-def log(msg: str):
-    print(f"[sync-rag-neo4j] {msg}", flush=True)
+NEO4J_URI = os.getenv("NEO4J_URI")
+NEO4J_USER = os.getenv("NEO4J_USER")
+NEO4J_PASSWORD = os.getenv("NEO4J_PASSWORD")
 
 
-# ------------------------------------------------------------
-# Qdrant helpers
-# ------------------------------------------------------------
-
-def get_qdrant_client() -> QdrantClient:
-    url = os.environ.get("QDRANT_URL")
-    api = os.environ.get("QDRANT_API_KEY")
-
-    if not url:
-        raise RuntimeError("QDRANT_URL mangler i miljøvariabler.")
-    if not api:
-        raise RuntimeError("QDRANT_API_KEY mangler i miljøvariabler.")
-
-    log(f"Kobler til Qdrant @ {url}")
-    client = QdrantClient(url=url, api_key=api)
-
-    # test
-    _ = client.get_collections()
-    log("Qdrant-tilkobling OK.")
-
+def connect_qdrant():
+    if not QDRANT_URL or not QDRANT_API_KEY:
+        raise RuntimeError("QDRANT_URL/QDRANT_API_KEY is not set")
+    client = QdrantClient(url=QDRANT_URL, api_key=QDRANT_API_KEY)
     return client
 
 
-def scroll_all_points(client: QdrantClient, collection: str) -> List[Tuple[str, Dict[str, Any]]]:
-    """Scroller ALLE Qdrant-punkter i batches."""
-    points = []
-    offset = None
-
-    while True:
-        batch, offset = client.scroll(
-            collection_name=collection,
-            offset=offset,
-            limit=256,
-            with_payload=True,
-            with_vectors=False
-        )
-        if not batch:
-            break
-
-        for pt in batch:
-            points.append((str(pt.id), pt.payload or {}))
-
-        if offset is None:
-            break
-
-    log(f"Fant totalt {len(points)} points i Qdrant-collection '{collection}'.")
-    return points
+def connect_neo4j():
+    if not NEO4J_URI or not NEO4J_USER or not NEO4J_PASSWORD:
+        raise RuntimeError("NEO4J_URI/USER/PASSWORD is not set")
+    driver = GraphDatabase.driver(NEO4J_URI, auth=(NEO4J_USER, NEO4J_PASSWORD))
+    return driver
 
 
-# ------------------------------------------------------------
-# Neo4j helpers
-# ------------------------------------------------------------
+def upsert_document(tx, doc_id: str):
+    tx.run(
+        """
+        MERGE (d:Document {id: $doc_id})
+        ON CREATE SET d.first_seen = datetime()
+        SET d.last_ingested = datetime()
+        """,
+        doc_id=doc_id,
+    )
 
-def get_neo4j_driver():
-    uri = os.environ.get("NEO4J_URI")
-    user = os.environ.get("NEO4J_USER")            # ← RIKTIG SECRET NAVN
-    pwd = os.environ.get("NEO4J_PASSWORD")
-    db = os.environ.get("NEO4J_DATABASE", "neo4j")
-
-    if not uri:
-        raise RuntimeError("NEO4J_URI mangler i miljøvariabler.")
-    if not user:
-        raise RuntimeError("NEO4J_USER mangler i miljøvariabler.")
-    if not pwd:
-        raise RuntimeError("NEO4J_PASSWORD mangler i miljøvariabler.")
-
-    log(f"Kobler til Neo4j @ {uri} (database={db})")
-    driver = GraphDatabase.driver(uri, auth=(user, pwd))
-
-    # test
-    with driver.session(database=db) as session:
-        ok = session.run("RETURN 1 AS ok").single()["ok"]
-        if ok != 1:
-            raise RuntimeError("Neo4j test-tilkobling feilet.")
-
-    log("Neo4j-tilkobling OK.")
-    return driver, db
-
-
-def upsert_chunks(driver, database: str, points):
-    """Lagrer chunks i Neo4j i batches."""
-    BATCH_SIZE = 100
-    total = len(points)
-
-    log(f"Starter Neo4j-sync av {total} chunks...")
-
-    def write_tx(tx, rows):
-        tx.run(
-            """
-            UNWIND $rows AS row
-            WITH row WHERE row.slug IS NOT NULL
-
-            MERGE (p:EFCPaper {slug: row.slug})
-              ON CREATE SET
-                p.title = coalesce(row.paper_title, p.title),
-                p.doi   = coalesce(row.doi, p.doi)
-
-            MERGE (c:RAGChunk {id: row.id})
-              ON CREATE SET
-                c.text        = row.text,
-                c.chunk_index = row.chunk_index,
-                c.path        = row.path,
-                c.slug        = row.slug,
-                c.doi         = row.doi,
-                c.source      = row.source
-              ON MATCH SET
-                c.text        = row.text,
-                c.chunk_index = row.chunk_index,
-                c.path        = row.path,
-                c.slug        = row.slug,
-                c.doi         = row.doi,
-                c.source      = row.source
-
-            MERGE (c)-[:FROM_PAPER]->(p)
-
-            WITH c, row
-            WHERE row.keywords IS NOT NULL AND size(row.keywords) > 0
-            UNWIND row.keywords AS kw
-            WITH c, trim(kw) AS kw_name WHERE kw_name <> ""
-
-            MERGE (k:Keyword {name: kw_name})
-            MERGE (c)-[:HAS_KEYWORD]->(k)
-            """,
-            rows=rows
-        )
-
-    with driver.session(database=database) as session:
-        for i in range(0, total, BATCH_SIZE):
-            batch = []
-
-            for pid, payload in points[i:i+BATCH_SIZE]:
-                keywords = payload.get("keywords", [])
-                if isinstance(keywords, str):
-                    keywords = [k.strip() for k in keywords.split(",") if k.strip()]
-
-                batch.append({
-                    "id": pid,
-                    "text": payload.get("text", ""),
-                    "chunk_index": payload.get("chunk_index"),
-                    "path": payload.get("path"),
-                    "slug": payload.get("slug"),
-                    "doi": payload.get("doi"),
-                    "paper_title": payload.get("paper_title"),
-                    "source": payload.get("source", "efc_paper"),
-                    "keywords": keywords,
-                })
-
-            session.execute_write(write_tx, batch)
-            log(f"  Synced {min(i+BATCH_SIZE, total)} / {total} chunks...")
-
-    log("Neo4j-sync ferdig.")
-
-
-# ------------------------------------------------------------
-# MAIN
-# ------------------------------------------------------------
 
 def main():
-    log("Starter SYNC RAG → Neo4j...")
+    print(f"[SYNC] Qdrant={QDRANT_URL}, collection={QDRANT_COLLECTION}")
+    print(f"[SYNC] Neo4j={NEO4J_URI}")
 
-    collection = os.environ.get("QDRANT_COLLECTION", "efc_rag_local")
+    qdrant = connect_qdrant()
+    driver = connect_neo4j()
 
-    qdrant = get_qdrant_client()
-    points = scroll_all_points(qdrant, collection)
+    offset = None
+    total_points = 0
+    docs_seen = set()
 
-    if not points:
-        log("Ingen points funnet i Qdrant.")
-        return
+    with driver.session() as session:
+        while True:
+            points, offset = qdrant.scroll(
+                collection_name=QDRANT_COLLECTION,
+                scroll_filter=None,
+                limit=256,
+                offset=offset,
+                with_payload=True,
+            )
+            if not points:
+                break
 
-    driver, db = get_neo4j_driver()
-    upsert_chunks(driver, db, points)
+            for p in points:
+                total_points += 1
+                payload = p.payload or {}
+                source = payload.get("source")
+                if not source:
+                    continue
 
-    log("SYNC RAG → Neo4j FULLFØRT.")
+                # "docs/efc/efc_core.md#chunk=0001" → "docs/efc/efc_core.md"
+                doc_id = source.split("#", 1)[0]
+                if doc_id in docs_seen:
+                    continue
+                docs_seen.add(doc_id)
+
+                session.write_transaction(upsert_document, doc_id)
+                print(f"[SYNC] Document node: {doc_id}")
+
+    print(f"[SYNC] Done. Points scanned: {total_points}, documents: {len(docs_seen)}")
 
 
 if __name__ == "__main__":
