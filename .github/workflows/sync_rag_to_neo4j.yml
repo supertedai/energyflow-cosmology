@@ -32,6 +32,13 @@ jobs:
           python -m pip install --upgrade pip
           pip install qdrant-client neo4j
 
+      - name: Debug secrets
+        run: |
+          echo "URL: $QDRANT_URL"
+          echo "API KEY LENGTH: ${#QDRANT_API_KEY}"
+          printf 'KEY HEX: '
+          printf '%s' "$QDRANT_API_KEY" | hexdump -C
+
       - name: Run sync from RAG to Neo4j
         run: |
           python tools/sync_rag_to_neo4j.py
