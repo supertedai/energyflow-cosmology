@@ -1,19 +1,38 @@
-import os
-from qdrant_client import QdrantClient
+# qdrant_client.py
+#
+# Komplett stub for lokal utvikling (lag-1a).
+# Ingen kontakt med Qdrant – alt returnerer dummy-data.
 
-# Env
-url = os.environ.get("QDRANT_URL")
-api_key = os.environ.get("QDRANT_API_KEY")
-collection = os.environ.get("QDRANT_COLLECTION")
-
-client = QdrantClient(url=url, api_key=api_key)
-
-# Midlertidig stub – ingen HF-modeller her
-def qdrant_search(text: str, limit: int = 10):
+def qdrant_ingest(text: str) -> dict:
+    """Stub for ingest."""
     return {
-        "query": text,
+        "status": "qdrant_disabled_stub",
+        "operation": "ingest",
+        "received_text_length": len(text),
+        "message": "Qdrant ingest er deaktivert lokalt."
+    }
+
+
+def qdrant_search(query: str, limit: int = 5) -> dict:
+    """Stub for RAG-søk."""
+    return {
+        "status": "qdrant_disabled_stub",
+        "operation": "search",
+        "query": query,
         "limit": limit,
-        "note": "Embedding disabled in Codespaces – Qdrant reachable, embeddings skipped.",
-        "hits": []
+        "results": [],
+        "message": "Qdrant search er deaktivert lokalt."
+    }
+
+
+def qdrant_graph_search(query: str, limit: int = 5) -> dict:
+    """Stub for graph-RAG-søk."""
+    return {
+        "status": "qdrant_disabled_stub",
+        "operation": "graph_search",
+        "query": query,
+        "limit": limit,
+        "results": [],
+        "message": "Graph-RAG er deaktivert lokalt."
     }
 
