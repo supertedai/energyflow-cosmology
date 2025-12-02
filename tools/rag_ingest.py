@@ -7,6 +7,7 @@ chunker tekst, lager embeddings og skriver til Qdrant.
 """
 
 import os
+import uuid
 from pathlib import Path
 from typing import List
 
@@ -17,7 +18,9 @@ from openai import OpenAI
 # === ENV ===
 QDRANT_URL = os.getenv("QDRANT_URL")
 QDRANT_API_KEY = os.getenv("QDRANT_API_KEY")
-QDRANT_COLLECTION = os.getenv("QDRANT_COLLECTION", "efc_docs")
+
+# --- Viktig: EFC er eneste gyldige collection ---
+QDRANT_COLLECTION = "efc"
 
 OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
 EMBEDDING_MODEL = os.getenv("EMBEDDING_MODEL", "text-embedding-3-large")
@@ -126,18 +129,22 @@ def main() -> None:
         vectors = embed_texts(openai_client, chunks)
 
         for idx, (chunk, vec) in enumerate(zip(chunks, vectors)):
-            chunk_id = f"{rel}#chunk={idx:04d}"
+            # --- FIX: UUID (Qdrant krever int eller UUID) ---
+            chunk_id = str(uuid.uuid4())
+
             payload = {
                 "text": chunk,
                 "source": str(rel),
                 "chunk_id": chunk_id,
                 "file_path": str(rel),
             }
+
             pt = models.PointStruct(
                 id=chunk_id,
                 vector=vec,
                 payload=payload,
             )
+
             points_batch.append(pt)
             total_chunks += 1
 
