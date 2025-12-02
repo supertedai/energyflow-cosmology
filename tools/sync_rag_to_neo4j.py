@@ -1,9 +1,17 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
+"""
+Sync RAG embeddings from Qdrant → Neo4j
+Compatible with Qdrant Cloud (no scroll, uses search batching)
+"""
+
 import os
 from qdrant_client import QdrantClient
 from neo4j import GraphDatabase
 
 
+# ======================
+#  ENVIRONMENT
+# ======================
 QDRANT_URL = os.getenv("QDRANT_URL")
 QDRANT_API_KEY = os.getenv("QDRANT_API_KEY")
 QDRANT_COLLECTION = os.getenv("QDRANT_COLLECTION", "efc_docs")
@@ -13,83 +21,119 @@ NEO4J_USER = os.getenv("NEO4J_USER")
 NEO4J_PASSWORD = os.getenv("NEO4J_PASSWORD")
 
 
-def connect_qdrant():
-    if not QDRANT_URL or not QDRANT_API_KEY:
-        raise RuntimeError("QDRANT_URL/QDRANT_API_KEY is not set")
+# ======================
+#  HELPERS
+# ======================
+def log(msg):
+    print(f"[SYNC] {msg}", flush=True)
 
+
+# ======================
+#  QDRANT CLIENT
+# ======================
+def connect_qdrant():
+    log(f"Connecting to Qdrant: {QDRANT_URL}")
     client = QdrantClient(
         url=QDRANT_URL,
         api_key=QDRANT_API_KEY,
         timeout=30,
-        prefer_grpc=False,  # tving HTTP, matcher curl-testene dine
+        prefix=None,
     )
     return client
 
 
+# ======================
+#  NEO4J CLIENT
+# ======================
 def connect_neo4j():
-    if not NEO4J_URI or not NEO4J_USER or not NEO4J_PASSWORD:
-        raise RuntimeError("NEO4J_URI/USER/PASSWORD is not set")
-    driver = GraphDatabase.driver(NEO4J_URI, auth=(NEO4J_USER, NEO4J_PASSWORD))
+    log(f"Connecting to Neo4j: {NEO4J_URI}")
+    driver = GraphDatabase.driver(
+        NEO4J_URI,
+        auth=(NEO4J_USER, NEO4J_PASSWORD),
+        max_connection_lifetime=200,
+    )
     return driver
 
 
-def upsert_document(tx, doc_id: str):
+# Create node
+def create_node(tx, point_id, text, source, chunk, url):
     tx.run(
         """
-        MERGE (d:Document {id: $doc_id})
-        ON CREATE SET d.first_seen = datetime()
-        SET d.last_ingested = datetime()
+        MERGE (d:Document {id: $point_id})
+        SET d.text = $text,
+            d.source = $source,
+            d.chunk = $chunk,
+            d.url = $url
         """,
-        doc_id=doc_id,
+        point_id=point_id,
+        text=text,
+        source=source,
+        chunk=chunk,
+        url=url,
     )
 
 
-def main():
-    print(f"[SYNC] Qdrant={QDRANT_URL}, collection={QDRANT_COLLECTION}")
-    print(f"[SYNC] Neo4j={NEO4J_URI}")
-
+# ======================
+#  SYNC FUNCTION
+# ======================
+def sync():
     qdrant = connect_qdrant()
-    driver = connect_neo4j()
+    neo4j = connect_neo4j()
 
+    batch_size = 100
     offset = None
-    total_points = 0
-    docs_seen = set()
+    total_synced = 0
 
-    from qdrant_client.http import models as rest
+    with neo4j.session() as session:
 
-    with driver.session() as session:
+        log(f"Start sync from Qdrant collection: {QDRANT_COLLECTION}")
+
         while True:
-            scroll_result = qdrant.scroll(
+            # ================================
+            #  CLOUD-SAFE SEARCH BATCHING
+            # ================================
+            search_result = qdrant.search(
                 collection_name=QDRANT_COLLECTION,
-                scroll_filter=None,
-                limit=256,
-                offset=offset,
+                query_vector=[0.0] * 1536,  # dummy vector required for Cloud
+                limit=batch_size,
                 with_payload=True,
-                with_vectors=False,
+                offset=offset,
             )
-            points, offset = scroll_result
 
-            if not points:
+            if not search_result:
                 break
 
-            for p in points:
-                total_points += 1
-                payload = p.payload or {}
-                source = payload.get("source")
-                if not source:
-                    continue
+            for point in search_result:
+                pid = str(point.id)
+                payload = point.payload or {}
 
-                # "docs/efc/efc_core.md#chunk=0001" → "docs/efc/efc_core.md"
-                doc_id = source.split("#", 1)[0]
-                if doc_id in docs_seen:
-                    continue
-                docs_seen.add(doc_id)
+                text = payload.get("text", "")
+                source = payload.get("source", "")
+                chunk = payload.get("chunk", 0)
+                url = payload.get("url", "")
 
-                session.write_transaction(upsert_document, doc_id)
-                print(f"[SYNC] Document node: {doc_id}")
+                session.write_transaction(
+                    create_node,
+                    pid,
+                    text,
+                    source,
+                    chunk,
+                    url,
+                )
 
-    print(f"[SYNC] Done. Points scanned: {total_points}, documents: {len(docs_seen)}")
+                total_synced += 1
+
+            offset = (offset or 0) + batch_size
+            log(f"Synced {total_synced} points so far...")
+
+        log(f"DONE. Total synced: {total_synced}")
 
 
+# ======================
+#  MAIN
+# ======================
 if __name__ == "__main__":
-    main()
+    log(f"QDRANT={QDRANT_URL}, collection={QDRANT_COLLECTION}")
+    log(f"NEO4J={NEO4J_URI}")
+
+    sync()
