@@ -1,57 +1,67 @@
 import os
 import uuid
-import json
 from pathlib import Path
 from typing import List
 
 from qdrant_client import QdrantClient
-from qdrant_client.models import (
-    VectorParams,
-    Distance,
-    PointStruct,
-    CreateCollection,
-)
-
+from qdrant_client.models import VectorParams, Distance, PointStruct
 from openai import OpenAI
+import pypdf
 
 
-# -------------------------------------------------------------
-#  CONFIG
-# -------------------------------------------------------------
+# -----------------------------------------
+# CONFIG – CLOUD ONLY
+# -----------------------------------------
 ROOT = Path(__file__).resolve().parents[1]
-DOCS_DIR = ROOT
 
 QDRANT_URL = os.getenv("QDRANT_URL")
-QDRANT_COLLECTION = os.getenv("QDRANT_COLLECTION", "efc")
 QDRANT_API_KEY = os.getenv("QDRANT_API_KEY")
+QDRANT_COLLECTION = os.getenv("QDRANT_COLLECTION", "efc")   # <– riktig
 
 OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
-EMBED_MODEL = "text-embedding-3-large"
-EMBED_DIM = 1536
+EMBED_MODEL = os.getenv("EMBEDDING_MODEL", "text-embedding-3-large")
+EMBED_DIM = int(os.getenv("EMBEDDING_DIM", "1536"))
 
-IGNORE_DIRS = {
-    ".git", ".github", "__pycache__", "infra", "docker", "symbiose_gnn_output"
-}
-
-IGNORE_EXT = {".png", ".jpg", ".jpeg", ".gif", ".pdf"}
+# Kun PDF + Markdown
+ALLOWED_EXT = {".pdf", ".md"}
 
 
-# -------------------------------------------------------------
-#  SCANNING
-# -------------------------------------------------------------
-def list_files(base: Path) -> List[Path]:
+# -----------------------------------------
+# FILE SCANNING (kun docs/papers/efc og docs/)
+# -----------------------------------------
+def list_ingest_files() -> List[Path]:
+    folders = [
+        ROOT / "docs" / "papers" / "efc",
+        ROOT / "docs"
+    ]
+
     files = []
-    for p in base.rglob("*"):
-        if p.is_file() and p.suffix.lower() not in IGNORE_EXT:
-            if not any(seg in IGNORE_DIRS for seg in p.parts):
+    for folder in folders:
+        if not folder.exists():
+            continue
+        for p in folder.rglob("*"):
+            if p.is_file() and p.suffix.lower() in ALLOWED_EXT:
                 files.append(p)
+
     return files
 
 
-# -------------------------------------------------------------
-#  EMBEDDINGS
-# -------------------------------------------------------------
-def chunk_text(text: str, max_chars=1200) -> List[str]:
+# -----------------------------------------
+# PDF TEXT EXTRACTOR
+# -----------------------------------------
+def read_pdf(path: Path) -> str:
+    text = ""
+    with open(path, "rb") as f:
+        reader = pypdf.PdfReader(f)
+        for page in reader.pages:
+            text += page.extract_text() + "\n"
+    return text
+
+
+# -----------------------------------------
+# CHUNKING
+# -----------------------------------------
+def chunk_text(text: str, max_chars=1300) -> List[str]:
     chunks = []
     while len(text) > max_chars:
         split = text.rfind("\n", 0, max_chars)
@@ -64,93 +74,88 @@ def chunk_text(text: str, max_chars=1200) -> List[str]:
     return chunks
 
 
+# -----------------------------------------
+# EMBEDDINGS
+# -----------------------------------------
 def embed_texts(client, texts: List[str]):
     resp = client.embeddings.create(
         model=EMBED_MODEL,
-        input=texts
+        input=texts,
     )
     return [x.embedding for x in resp.data]
 
 
-# -------------------------------------------------------------
-#  MAIN INGEST
-# -------------------------------------------------------------
+# -----------------------------------------
+# MAIN
+# -----------------------------------------
 def main():
-    print(f"[INGEST] ROOT={ROOT}")
-    print(f"[INGEST] QDRANT_URL={QDRANT_URL}")
-    print(f"[INGEST] COLLECTION={QDRANT_COLLECTION}")
-    print(f"[INGEST] EMBEDDING_MODEL={EMBED_MODEL} dim={EMBED_DIM}")
+    print("")
+    print("=============================================")
+    print(" 🔥 LOCAL CLOUD INGEST (SAFE MODE) START")
+    print("=============================================")
+    print(f"Using Qdrant collection: {QDRANT_COLLECTION}")
+    print("")
 
-    # ---------------------------------------
-    # Connect to Qdrant
-    # ---------------------------------------
     qdrant = QdrantClient(
         url=QDRANT_URL,
-        api_key=QDRANT_API_KEY,
-        timeout=60
+        api_key=QDRANT_API_KEY
     )
 
-    # ---------------------------------------
-    # Recreate collection IF exists
-    # ---------------------------------------
-    if qdrant.collection_exists(QDRANT_COLLECTION):
-        print(f"[INGEST] Sletter eksisterende: {QDRANT_COLLECTION}")
-        qdrant.delete_collection(QDRANT_COLLECTION)
-
-    print(f"[INGEST] Lager ny collection: {QDRANT_COLLECTION}")
-    qdrant.create_collection(
-        collection_name=QDRANT_COLLECTION,
-        vectors_config=VectorParams(
-            size=EMBED_DIM,
-            distance=Distance.COSINE
+    # ---------------------------------------------------
+    # Do NOT delete Cloud data. We only upsert.
+    # ---------------------------------------------------
+    if not qdrant.collection_exists(QDRANT_COLLECTION):
+        print(f"[INIT] Creating collection {QDRANT_COLLECTION}")
+        qdrant.create_collection(
+            collection_name=QDRANT_COLLECTION,
+            vectors_config=VectorParams(
+                size=EMBED_DIM,
+                distance=Distance.COSINE
+            )
         )
-    )
+    else:
+        print(f"[INIT] Using existing collection: {QDRANT_COLLECTION}")
 
     openai_client = OpenAI(api_key=OPENAI_API_KEY)
 
-    # ---------------------------------------
-    # List up files
-    # ---------------------------------------
-    files = list_files(DOCS_DIR)
-    print(f"[INGEST] Filer funnet: {len(files)}")
+    files = list_ingest_files()
+    print(f"[FILES] {len(files)} ingestable files")
 
     total_chunks = 0
 
-    # ---------------------------------------
-    # Process each file
-    # ---------------------------------------
     for f in files:
         relative = f.relative_to(ROOT)
+        print(f"[PROCESS] {relative}")
 
-        try:
+        # Read file content
+        if f.suffix.lower() == ".pdf":
+            text = read_pdf(f)
+        else:
             text = f.read_text(encoding="utf-8", errors="ignore")
-        except Exception:
+
+        if not text.strip():
+            print(f"  -> skipped (empty)")
             continue
 
         chunks = chunk_text(text)
-        if not chunks:
-            continue
-
-        print(f"[INGEST] {relative} → {len(chunks)} chunks")
+        print(f"  -> {len(chunks)} chunks")
 
         vectors = embed_texts(openai_client, chunks)
 
-        # Build points with UUID ID
         points = []
-        for i in range(len(chunks)):
+        for i, chunk in enumerate(chunks):
             points.append(
                 PointStruct(
-                    id=str(uuid.uuid4()),     # UUID fix
+                    id=str(uuid.uuid4()),
                     vector=vectors[i],
                     payload={
                         "source": str(relative),
-                        "text": chunks[i],
-                        "chunk_index": i,
+                        "text": chunk,
+                        "chunk_index": i
                     }
                 )
             )
 
-        # Upsert to Qdrant
         qdrant.upsert(
             collection_name=QDRANT_COLLECTION,
             points=points
@@ -158,11 +163,10 @@ def main():
 
         total_chunks += len(chunks)
 
-    print(f"[INGEST] Ferdig. Total chunks: {total_chunks}")
+    print("")
+    print(f"✨ DONE – uploaded {total_chunks} chunks to {QDRANT_COLLECTION}")
+    print("")
 
 
-# -------------------------------------------------------------
-#  RUN
-# -------------------------------------------------------------
 if __name__ == "__main__":
     main()
