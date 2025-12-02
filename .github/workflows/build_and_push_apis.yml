@@ -36,6 +36,8 @@ jobs:
           context: .
           file: ./Dockerfile.unified_api
           push: true
+          provenance: false
+          sbom: false
           tags: |
             ghcr.io/supertedai/unified-api:latest
 
@@ -46,6 +48,8 @@ jobs:
           context: .
           file: ./Dockerfile.query_api
           push: true
+          provenance: false
+          sbom: false
           tags: |
             ghcr.io/supertedai/query-api:latest
 
@@ -56,5 +60,7 @@ jobs:
           context: .
           file: ./Dockerfile.graph_rag_api
           push: true
+          provenance: false
+          sbom: false
           tags: |
             ghcr.io/supertedai/graph-rag-api:latest
