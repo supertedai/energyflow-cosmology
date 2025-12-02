@@ -1,0 +1,47 @@
+name: Full RAG Ingest
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - "*/*.md"
+      - "*/*.txt"
+      - "meta/**"
+      - "theory/**"
+      - "docs/**"
+      - "tools/rag_ingest.py"
+
+jobs:
+  rag-ingest:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.11"
+
+      - name: Install requirements
+        run: |
+          python -m pip install --upgrade pip
+          pip install qdrant-client==1.8.2
+          pip install openai
+          pip install python-dotenv
+
+      - name: Run RAG ingest
+        env:
+          QDRANT_URL: ${{ secrets.QDRANT_URL }}
+          QDRANT_API_KEY: ${{ secrets.QDRANT_API_KEY }}
+          QDRANT_COLLECTION: efc
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+        run: |
+          echo "Starting ingest..."
+          python tools/rag_ingest.py
+
+      - name: Cleanup
+        if: always()
+        run: |
+          echo "Workflow complete."
