@@ -1,15 +1,13 @@
 services:
   unified-api:
+    image: ghcr.io/supertedai/unified-api:latest
     container_name: unified-api
-    build:
-      context: ../../
-      dockerfile: Dockerfile.unified_api
     env_file:
-      - ../../.env
+      - /opt/symbiose/.env
     environment:
       PORT: "8080"
-      ENABLE_QDRANT: "0"
-      ENABLE_NEO4J: "0"
+      ENABLE_QDRANT: "1"
+      ENABLE_NEO4J: "1"
       ENABLE_EMBED: "1"
     ports:
       - "8080:8080"
@@ -17,7 +15,28 @@ services:
     networks:
       - symbiose-net
 
+  query-api:
+    image: ghcr.io/supertedai/query-api:latest
+    container_name: query-api
+    env_file:
+      - /opt/symbiose/.env
+    ports:
+      - "8081:8081"
+    restart: unless-stopped
+    networks:
+      - symbiose-net
+
+  graph-rag-api:
+    image: ghcr.io/supertedai/graph-rag-api:latest
+    container_name: graph-rag-api
+    env_file:
+      - /opt/symbiose/.env
+    ports:
+      - "8082:8082"
+    restart: unless-stopped
+    networks:
+      - symbiose-net
+
 networks:
   symbiose-net:
     driver: bridge
-

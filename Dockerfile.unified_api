@@ -1,23 +1,25 @@
 FROM python:3.11-slim
 
+# Set working directory
 WORKDIR /app
 
-# Fix SSL certificate issues on macOS Docker (ARM)
-RUN apt-get update && \
-    apt-get install -y --no-install-recommends \
-        ca-certificates \
-        curl \
-        build-essential && \
-    update-ca-certificates && \
-    rm -rf /var/lib/apt/lists/*
+# System dependencies
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    ca-certificates \
+    curl \
+    build-essential \
+    && update-ca-certificates \
+    && rm -rf /var/lib/apt/lists/*
 
-# Install API dependencies
-COPY requirements-api.txt .
-RUN pip install --upgrade pip
-RUN pip install --no-cache-dir -r requirements-api.txt
+# Copy requirements
+COPY requirements-api.txt /app/requirements-api.txt
 
-# Copy unified API source code
+# Install Python dependencies
+RUN pip install --upgrade pip && \
+    pip install --no-cache-dir -r /app/requirements-api.txt
+
+# Copy application code
 COPY apis/unified_api /app/apis/unified_api
 
+# Explicit main entrypoint
 CMD ["uvicorn", "apis.unified_api.main:app", "--host", "0.0.0.0", "--port", "8080"]
-
