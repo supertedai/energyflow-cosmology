@@ -1,39 +1,168 @@
-name: Full RAG Ingest
+import os
+import uuid
+import json
+from pathlib import Path
+from typing import List
 
-on:
-  workflow_dispatch: {}
-  push:
-    paths:
-      - "meta/**"
-      - "theory/**"
-      - "tools/rag_ingest.py"
+from qdrant_client import QdrantClient
+from qdrant_client.models import (
+    VectorParams,
+    Distance,
+    PointStruct,
+    CreateCollection,
+)
 
-jobs:
-  full-rag-ingest:
-    runs-on: ubuntu-latest
+from openai import OpenAI
 
-    env:
-      QDRANT_URL: ${{ secrets.QDRANT_URL }}
-      QDRANT_API_KEY: ${{ secrets.QDRANT_API_KEY }}
-      QDRANT_COLLECTION: "efc_docs"
-      OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
-      EMBEDDING_MODEL: "text-embedding-3-large"
-      EMBEDDING_DIM: "1536"
 
-    steps:
-      - name: Checkout repo
-        uses: actions/checkout@v4
+# -------------------------------------------------------------
+#  CONFIG
+# -------------------------------------------------------------
+ROOT = Path(__file__).resolve().parents[1]
+DOCS_DIR = ROOT
 
-      - name: Set up Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: "3.11"
+QDRANT_URL = os.getenv("QDRANT_URL")
+QDRANT_COLLECTION = os.getenv("QDRANT_COLLECTION", "efc_docs")
+QDRANT_API_KEY = os.getenv("QDRANT_API_KEY")
 
-      - name: Install dependencies
-        run: |
-          python -m pip install --upgrade pip
-          pip install qdrant-client openai
+OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
+EMBED_MODEL = "text-embedding-3-large"
+EMBED_DIM = 1536
 
-      - name: Run RAG ingest
-        run: |
-          python tools/rag_ingest.py
+IGNORE_DIRS = {
+    ".git", ".github", "__pycache__", "infra", "docker", "symbiose_gnn_output"
+}
+
+IGNORE_EXT = {".png", ".jpg", ".jpeg", ".gif", ".pdf"}
+
+
+# -------------------------------------------------------------
+#  SCANNING
+# -------------------------------------------------------------
+def list_files(base: Path) -> List[Path]:
+    files = []
+    for p in base.rglob("*"):
+        if p.is_file() and p.suffix.lower() not in IGNORE_EXT:
+            if not any(seg in IGNORE_DIRS for seg in p.parts):
+                files.append(p)
+    return files
+
+
+# -------------------------------------------------------------
+#  EMBEDDINGS
+# -------------------------------------------------------------
+def chunk_text(text: str, max_chars=1200) -> List[str]:
+    chunks = []
+    while len(text) > max_chars:
+        split = text.rfind("\n", 0, max_chars)
+        if split == -1:
+            split = max_chars
+        chunks.append(text[:split].strip())
+        text = text[split:].strip()
+    if text:
+        chunks.append(text)
+    return chunks
+
+
+def embed_texts(client, texts: List[str]):
+    resp = client.embeddings.create(
+        model=EMBED_MODEL,
+        input=texts
+    )
+    return [x.embedding for x in resp.data]
+
+
+# -------------------------------------------------------------
+#  MAIN INGEST
+# -------------------------------------------------------------
+def main():
+    print(f"[INGEST] ROOT={ROOT}")
+    print(f"[INGEST] QDRANT_URL={QDRANT_URL}")
+    print(f"[INGEST] COLLECTION={QDRANT_COLLECTION}")
+    print(f"[INGEST] EMBEDDING_MODEL={EMBED_MODEL} dim={EMBED_DIM}")
+
+    # ---------------------------------------
+    # Connect to Qdrant
+    # ---------------------------------------
+    qdrant = QdrantClient(
+        url=QDRANT_URL,
+        api_key=QDRANT_API_KEY,
+        timeout=60
+    )
+
+    # ---------------------------------------
+    # Recreate collection IF exists
+    # ---------------------------------------
+    if qdrant.collection_exists(QDRANT_COLLECTION):
+        print(f"[INGEST] Sletter eksisterende: {QDRANT_COLLECTION}")
+        qdrant.delete_collection(QDRANT_COLLECTION)
+
+    print(f"[INGEST] Lager ny collection: {QDRANT_COLLECTION}")
+    qdrant.create_collection(
+        collection_name=QDRANT_COLLECTION,
+        vectors_config=VectorParams(
+            size=EMBED_DIM,
+            distance=Distance.COSINE
+        )
+    )
+
+    openai_client = OpenAI(api_key=OPENAI_API_KEY)
+
+    # ---------------------------------------
+    # List up files
+    # ---------------------------------------
+    files = list_files(DOCS_DIR)
+    print(f"[INGEST] Filer funnet: {len(files)}")
+
+    total_chunks = 0
+
+    # ---------------------------------------
+    # Process each file
+    # ---------------------------------------
+    for f in files:
+        relative = f.relative_to(ROOT)
+
+        try:
+            text = f.read_text(encoding="utf-8", errors="ignore")
+        except Exception:
+            continue
+
+        chunks = chunk_text(text)
+        if not chunks:
+            continue
+
+        print(f"[INGEST] {relative} → {len(chunks)} chunks")
+
+        vectors = embed_texts(openai_client, chunks)
+
+        # Build points with UUID ID
+        points = []
+        for i in range(len(chunks)):
+            points.append(
+                PointStruct(
+                    id=str(uuid.uuid4()),     # UUID fix
+                    vector=vectors[i],
+                    payload={
+                        "source": str(relative),
+                        "text": chunks[i],
+                        "chunk_index": i,
+                    }
+                )
+            )
+
+        # Upsert to Qdrant
+        qdrant.upsert(
+            collection_name=QDRANT_COLLECTION,
+            points=points
+        )
+
+        total_chunks += len(chunks)
+
+    print(f"[INGEST] Ferdig. Total chunks: {total_chunks}")
+
+
+# -------------------------------------------------------------
+#  RUN
+# -------------------------------------------------------------
+if __name__ == "__main__":
+    main()
