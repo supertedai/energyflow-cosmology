@@ -1,136 +1,162 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
+"""
+RAG ingest direkte til Qdrant Cloud.
+
+Leser relevante .md-filer fra repoet,
+chunker tekst, lager embeddings og skriver til Qdrant.
+"""
+
 import os
 from pathlib import Path
-import textwrap
-import requests
+from typing import List
 
-API_URL = os.getenv("API_URL", "http://46.62.239.139:8080")
-COLLECTION = os.getenv("QDRANT_COLLECTION", "efc_docs")
+from qdrant_client import QdrantClient, models
+from openai import OpenAI
 
-# Mapper vi faktisk vil ingest'e fra
-BASE_DIRS = [
-    Path("docs"),
-    Path("meta"),
-    Path("symbiosis"),
-    Path("theory"),
+
+# === ENV ===
+QDRANT_URL = os.getenv("QDRANT_URL")
+QDRANT_API_KEY = os.getenv("QDRANT_API_KEY")
+QDRANT_COLLECTION = os.getenv("QDRANT_COLLECTION", "efc_docs")
+
+OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
+EMBEDDING_MODEL = os.getenv("EMBEDDING_MODEL", "text-embedding-3-large")
+EMBEDDING_DIM = int(os.getenv("EMBEDDING_DIM", "1536"))
+
+ROOT = Path(__file__).resolve().parent.parent
+
+INCLUDE_DIRS = [
+    "theory",
+    "meta",
 ]
 
-MAX_CHARS = 1200
-OVERLAP = 200
+MAX_CHARS = 1500  # enkel chunksize per tekstbit
 
 
-def iter_source_files():
-    """
-    Returnerer filer som skal ingestes.
-    Filtrerer bort draft/old/tmp.
-    """
-    for base in BASE_DIRS:
+def log(msg: str) -> None:
+    print(f"[INGEST] {msg}", flush=True)
+
+
+def iter_files() -> List[Path]:
+    for rel_dir in INCLUDE_DIRS:
+        base = ROOT / rel_dir
         if not base.exists():
             continue
-        for ext in ("*.md", "*.txt"):
-            for path in base.rglob(ext):
-                name = path.name.lower()
-                if any(tag in name for tag in ("draft", "old", "tmp")):
-                    continue
-                yield path
+        for path in base.rglob("*.md"):
+            yield path
 
 
-def chunk_text(text: str, max_chars: int = MAX_CHARS, overlap: int = OVERLAP):
-    """
-    Chunking:
-    - splitter på avsnitt (tom linje)
-    - bygger opp til max_chars
-    - legger inn enkel overlapp
-    """
-    paragraphs = [p.strip() for p in text.split("\n\n") if p.strip()]
+def chunk_text(text: str, max_chars: int = MAX_CHARS) -> List[str]:
+    text = text.replace("\r\n", "\n")
+    paragraphs = text.split("\n\n")
     chunks = []
-    current = ""
+    buf = ""
 
     for para in paragraphs:
-        candidate = (current + "\n\n" + para).strip() if current else para
-        if len(candidate) <= max_chars:
-            current = candidate
+        para = para.strip()
+        if not para:
+            continue
+        if len(buf) + len(para) + 2 <= max_chars:
+            buf = (buf + "\n\n" + para) if buf else para
         else:
-            if current:
-                chunks.append(current.strip())
-            if len(para) > max_chars:
-                for wrapped in textwrap.wrap(para, max_chars):
-                    chunks.append(wrapped.strip())
-                current = ""
-            else:
-                current = para
-
-    if current:
-        chunks.append(current.strip())
-
-    # overlapp
-    if overlap > 0 and len(chunks) > 1:
-        overlapped = []
-        for i, ch in enumerate(chunks):
-            if i == 0:
-                overlapped.append(ch)
-            else:
-                prev = overlapped[-1]
-                tail = prev[-overlap:]
-                merged = (tail + "\n\n" + ch).strip()
-                overlapped.append(merged)
-        chunks = overlapped
-
+            if buf:
+                chunks.append(buf.strip())
+            buf = para
+    if buf:
+        chunks.append(buf.strip())
     return chunks
 
 
-def ingest_chunk(text: str, source: str):
-    """
-    Sender chunk til unified-api /ingest som multipart/form-data.
-
-    Antatt serversignatur (FastAPI):
-        file: UploadFile = File(...)
-        source: str = Form(...)
-        collection: str = Form(...)
-    """
-
-    files = {
-        "file": ("chunk.txt", text.encode("utf-8"), "text/plain")
-    }
-
-    data = {
-        "source": source,
-        "collection": COLLECTION,
-    }
-
-    resp = requests.post(f"{API_URL}/ingest", data=data, files=files, timeout=60)
-
-    if not resp.ok:
-        raise RuntimeError(
-            f"Ingest failed for {source}: {resp.status_code} {resp.text}"
-        )
+def ensure_collection(client: QdrantClient) -> None:
+    log(f"Recreate collection {QDRANT_COLLECTION} @ {QDRANT_URL}")
+    client.recreate_collection(
+        collection_name=QDRANT_COLLECTION,
+        vectors_config=models.VectorParams(
+            size=EMBEDDING_DIM,
+            distance=models.Distance.COSINE,
+        ),
+    )
 
 
-def main():
-    print(f"[INGEST] API_URL={API_URL} COLLECTION={COLLECTION}")
-    total_files = 0
+def embed_texts(client: OpenAI, texts: List[str]) -> List[List[float]]:
+    if not texts:
+        return []
+    resp = client.embeddings.create(
+        model=EMBEDDING_MODEL,
+        input=texts,
+    )
+    return [d.embedding for d in resp.data]
+
+
+def main() -> None:
+    if not QDRANT_URL or not QDRANT_API_KEY:
+        raise RuntimeError("QDRANT_URL og QDRANT_API_KEY må være satt i miljøvariabler.")
+    if not OPENAI_API_KEY:
+        raise RuntimeError("OPENAI_API_KEY må være satt i miljøvariabler.")
+
+    log(f"ROOT={ROOT}")
+    log(f"QDRANT_URL={QDRANT_URL}")
+    log(f"COLLECTION={QDRANT_COLLECTION}")
+    log(f"EMBEDDING_MODEL={EMBEDDING_MODEL} dim={EMBEDDING_DIM}")
+
+    qdrant = QdrantClient(
+        url=QDRANT_URL,
+        api_key=QDRANT_API_KEY,
+        prefer_grpc=False,
+    )
+    openai_client = OpenAI(api_key=OPENAI_API_KEY)
+
+    ensure_collection(qdrant)
+
+    files = list(iter_files())
+    log(f"Filer funnet: {len(files)}")
+
     total_chunks = 0
+    points_batch: List[models.PointStruct] = []
+    BATCH_SIZE = 64
 
-    for path in iter_source_files():
-        rel = path.relative_to(Path("."))
-        text = path.read_text(encoding="utf-8", errors="ignore")
-        if not text.strip():
-            continue
-
+    for path in files:
+        rel = path.relative_to(ROOT)
+        text = path.read_text(encoding="utf-8")
         chunks = chunk_text(text)
         if not chunks:
             continue
 
-        total_files += 1
+        log(f"{rel} → {len(chunks)} chunks")
+        vectors = embed_texts(openai_client, chunks)
 
-        for i, ch in enumerate(chunks):
-            source = f"{rel}#chunk={i:04d}"
-            ingest_chunk(ch, source)
+        for idx, (chunk, vec) in enumerate(zip(chunks, vectors)):
+            chunk_id = f"{rel}#chunk={idx:04d}"
+            payload = {
+                "text": chunk,
+                "source": str(rel),
+                "chunk_id": chunk_id,
+                "file_path": str(rel),
+            }
+            pt = models.PointStruct(
+                id=chunk_id,
+                vector=vec,
+                payload=payload,
+            )
+            points_batch.append(pt)
             total_chunks += 1
 
-        print(f"[INGEST] {rel} → {len(chunks)} chunks")
+            if len(points_batch) >= BATCH_SIZE:
+                qdrant.upsert(
+                    collection_name=QDRANT_COLLECTION,
+                    points=points_batch,
+                )
+                log(f"Upsert batch, total so far: {total_chunks}")
+                points_batch = []
 
-    print(f"[INGEST] Done. Files: {total_files}, chunks: {total_chunks}")
+    if points_batch:
+        qdrant.upsert(
+            collection_name=QDRANT_COLLECTION,
+            points=points_batch,
+        )
+        log(f"Upsert siste batch. Total chunks: {total_chunks}")
+
+    log(f"Done. Files: {len(files)}, chunks: {total_chunks}")
 
 
 if __name__ == "__main__":
