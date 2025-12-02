@@ -1,34 +1,60 @@
-name: Deploy to Hetzner
+name: Build & Push APIs to Hetzner
 
 on:
+  workflow_dispatch:
   push:
     branches: [ main ]
-  workflow_dispatch:
+    paths:
+      - "apis/**"
+      - "Dockerfile.unified_api"
+      - "Dockerfile.query_api"
+      - "Dockerfile.graph_rag_api"
 
 jobs:
-  deploy:
+  build-and-push:
     runs-on: ubuntu-latest
 
+    permissions:
+      packages: write
+      contents: read
+
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout repo
+        uses: actions/checkout@v4
 
-      - uses: appleboy/ssh-action@v1.0.3
+      - name: Log in to GHCR
+        uses: docker/login-action@v3
         with:
-          host: ${{ secrets.HETZNER_HOST }}
-          username: ${{ secrets.HETZNER_USER }}
-          key: ${{ secrets.HETZNER_SSH_KEY }}
-          port: 22
-          script: |
-            set -e
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
 
-            echo "=== Updating repo on server ==="
-            cd /opt/symbiose/repo
-            git fetch --all
-            git reset --hard origin/main
+      # --- UNIFIED API ---
+      - name: Build unified-api
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          file: ./Dockerfile.unified_api
+          push: true
+          tags: |
+            ghcr.io/supertedai/unified-api:latest
 
-            echo "=== Running docker compose ==="
-            cd /opt/symbiose/repo/infra/docker
-            docker compose pull
-            docker compose up -d
+      # --- QUERY API ---
+      - name: Build query-api
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          file: ./Dockerfile.query_api
+          push: true
+          tags: |
+            ghcr.io/supertedai/query-api:latest
 
-            echo "=== Deployment complete ==="
+      # --- GRAPH-RAG API ---
+      - name: Build graph-rag-api
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          file: ./Dockerfile.graph_rag_api
+          push: true
+          tags: |
+            ghcr.io/supertedai/graph-rag-api:latest
