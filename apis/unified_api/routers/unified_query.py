@@ -10,7 +10,7 @@ router = APIRouter()
 async def unified_query(payload: dict):
     """
     Kombinerer alle søk:
-    - Neo4j direkte-søk
+    - Neo4j direkte Chunk-søk
     - RAG/Qdrant
     - Graph-RAG
     """
@@ -27,14 +27,26 @@ async def unified_query(payload: dict):
         "semantic": {}
     }
 
-    # --- Neo4j ---
+    # -------------------
+    # NEO4J: Søk i Chunk
+    # -------------------
     try:
-        neo4j_res = run_cypher(f"MATCH (n) WHERE n.name CONTAINS '{query}' RETURN n LIMIT 10")
+        neo4j_cypher = f"""
+            MATCH (c:Chunk)
+            WHERE toLower(c.text) CONTAINS toLower('{query}')
+            RETURN c.id AS id,
+                   c.text AS text,
+                   c.source AS source
+            LIMIT 10
+        """
+        neo4j_res = run_cypher(neo4j_cypher)
         result["neo4j"] = {"enabled": True, "matches": neo4j_res}
     except Exception as e:
         result["neo4j"] = {"enabled": False, "error": str(e)}
 
-    # --- RAG/Qdrant ---
+    # -------------------
+    # RAG / Qdrant
+    # -------------------
     try:
         rag_res = do_rag_search(query)
         result["rag"] = {
@@ -45,7 +57,9 @@ async def unified_query(payload: dict):
     except Exception as e:
         result["rag"] = {"enabled": False, "error": str(e)}
 
-    # --- Graph-RAG ---
+    # -------------------
+    # Graph-RAG
+    # -------------------
     try:
         graph_rag_res = combined_graph_rag(query)
         result["semantic"] = {
