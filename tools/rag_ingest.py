@@ -88,14 +88,27 @@ def embed_texts(client: OpenAI, texts: List[str]) -> List[List[float]]:
         model=EMBEDDING_MODEL,
         input=texts,
     )
-    return [d.embedding for d in resp.data]
+
+    fixed_vectors = []
+    for d in resp.data:
+        vec = d.embedding
+
+        # --- SAFEGUARD: Tving embedding til korrekt dimensjon ---
+        if len(vec) > EMBEDDING_DIM:
+            vec = vec[:EMBEDDING_DIM]
+        elif len(vec) < EMBEDDING_DIM:
+            vec = vec + [0.0] * (EMBEDDING_DIM - len(vec))
+
+        fixed_vectors.append(vec)
+
+    return fixed_vectors
 
 
 def main() -> None:
     if not QDRANT_URL or not QDRANT_API_KEY:
-        raise RuntimeError("QDRANT_URL og QDRANT_API_KEY må være satt i miljøvariabler.")
+        raise RuntimeError("QDRANT_URL og QDRANT_API_KEY må være satt.")
     if not OPENAI_API_KEY:
-        raise RuntimeError("OPENAI_API_KEY må være satt i miljøvariabler.")
+        raise RuntimeError("OPENAI_API_KEY må være satt.")
 
     log(f"ROOT={ROOT}")
     log(f"QDRANT_URL={QDRANT_URL}")
@@ -129,8 +142,7 @@ def main() -> None:
         vectors = embed_texts(openai_client, chunks)
 
         for idx, (chunk, vec) in enumerate(zip(chunks, vectors)):
-            # --- FIX: UUID (Qdrant krever int eller UUID) ---
-            chunk_id = str(uuid.uuid4())
+            chunk_id = str(uuid.uuid4())  # <-- UUID fix
 
             payload = {
                 "text": chunk,
