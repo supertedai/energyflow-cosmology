@@ -22,7 +22,7 @@ ROOT = Path(__file__).resolve().parents[1]
 DOCS_DIR = ROOT
 
 QDRANT_URL = os.getenv("QDRANT_URL")
-QDRANT_COLLECTION = os.getenv("QDRANT_COLLECTION", "efc_docs")
+QDRANT_COLLECTION = os.getenv("QDRANT_COLLECTION", "efc")
 QDRANT_API_KEY = os.getenv("QDRANT_API_KEY")
 
 OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
