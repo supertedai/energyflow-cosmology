@@ -4,18 +4,21 @@ on:
   workflow_dispatch: {}
   push:
     paths:
-      - "docs/**"
       - "meta/**"
-      - "symbiosis/**"
       - "theory/**"
+      - "tools/rag_ingest.py"
 
 jobs:
   full-rag-ingest:
     runs-on: ubuntu-latest
 
     env:
-      API_URL: "http://46.62.239.139:8080"
+      QDRANT_URL: ${{ secrets.QDRANT_URL }}
+      QDRANT_API_KEY: ${{ secrets.QDRANT_API_KEY }}
       QDRANT_COLLECTION: "efc_docs"
+      OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+      EMBEDDING_MODEL: "text-embedding-3-large"
+      EMBEDDING_DIM: "1536"
 
     steps:
       - name: Checkout repo
@@ -26,11 +29,11 @@ jobs:
         with:
           python-version: "3.11"
 
-      - name: Install Python dependencies
+      - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install requests
+          pip install qdrant-client openai
 
-      - name: Run RAG ingest pipeline
+      - name: Run RAG ingest
         run: |
           python tools/rag_ingest.py
