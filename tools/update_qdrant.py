@@ -108,7 +108,7 @@ print(f"[data] Loaded {len(docs)} normalized documents")
 # ----------------------------------------
 # Prepare Qdrant collection
 # ----------------------------------------
-COLLECTION = "efc_docs"
+COLLECTION = "efc"
 VECTOR_SIZE = 1536
 
 if client_q.collection_exists(COLLECTION):
