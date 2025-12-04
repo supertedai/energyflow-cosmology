@@ -7,12 +7,6 @@ jobs:
   rag-ingest:
     runs-on: ubuntu-latest
 
-    env:
-      QDRANT_URL: ${{ secrets.QDRANT_URL }}
-      QDRANT_API_KEY: ${{ secrets.QDRANT_API_KEY }}
-      QDRANT_COLLECTION: efc
-      OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
-
     steps:
       # ---------------------------
       # 1. CHECKOUT
@@ -21,7 +15,7 @@ jobs:
         uses: actions/checkout@v4
 
       # ---------------------------
-      # 2. PYTHON SETUP
+      # 2. SETUP PYTHON
       # ---------------------------
       - name: Set up Python
         uses: actions/setup-python@v5
@@ -35,19 +29,25 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           pip install -r tools/requirements.txt
+          pip install pypdf
 
       # ---------------------------
-      # 4. CONTROLLED EFC INGEST
+      # 4. RUN CONTROLLED RAG INGEST
       # ---------------------------
-      - name: Run controlled EFC RAG ingest (3072 → efc)
+      - name: Run controlled RAG ingest (EFC / 3072)
+        env:
+          QDRANT_URL: ${{ secrets.QDRANT_URL }}
+          QDRANT_API_KEY: ${{ secrets.QDRANT_API_KEY }}
+          QDRANT_COLLECTION: efc
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
         run: |
           echo ">>> Starting controlled RAG ingest to Qdrant (collection: efc)"
           python tools/rag_ingest_efc.py
 
       # ---------------------------
-      # 5. DONE
+      # 5. CLEANUP
       # ---------------------------
       - name: Cleanup
         if: always()
         run: |
-          echo ">>> Controlled EFC ingest completed."
+          echo ">>> Controlled RAG ingest завершен."
