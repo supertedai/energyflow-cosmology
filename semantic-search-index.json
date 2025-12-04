@@ -1069,6 +1069,61 @@
     "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/docs/papers/efc/EFC-CMB-Thermodynamic-Gradient/EFC-CMB-Thermodynamic-Gradient.jsonld"
   },
   {
+    "slug": "symbiosis-method",
+    "title": "symbiosis_method",
+    "keywords": [
+      "symbiosis_method"
+    ],
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/docs/papers/efc/Symbiosis-A-Human\u2013AI-Co-Reflection-Architecture-Using-Graph\u2013Vector-Memory-for-Long-Horizon-Thinking/symbiosis_method.pdf"
+  },
+  {
+    "slug": "symbiosis-method",
+    "title": "symbiosis_method",
+    "keywords": [
+      "symbiosis_method"
+    ],
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/docs/papers/efc/Symbiosis-A-Human\u2013AI-Co-Reflection-Architecture-Using-Graph\u2013Vector-Memory-for-Long-Horizon-Thinking/symbiosis_method.jsonld"
+  },
+  {
+    "slug": "symbiosis-a-human-ai-co-reflection-architecture-using-graph-vector-memory-for-long-horizon-thinking",
+    "title": "Symbiosis: A Human--AI Co-Reflection Architecture Using Graph--Vector Memory for Long-Horizon Thinking",
+    "keywords": [
+      "symbiosis:",
+      "a",
+      "human--ai",
+      "co-reflection",
+      "architecture",
+      "using",
+      "graph--vector",
+      "memory",
+      "for",
+      "long-horizon",
+      "thinking",
+      "this",
+      "directory",
+      "contains",
+      "the",
+      "paper",
+      "**\u201csymbiosis:",
+      "a",
+      "human--ai",
+      "co-reflection",
+      "architecture",
+      "using",
+      "graph--vector",
+      "memory",
+      "for",
+      "long-horizon",
+      "thinking\u201d**,",
+      "part",
+      "of",
+      "the",
+      "efc",
+      "series."
+    ],
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/docs/papers/efc/Symbiosis-A-Human\u2013AI-Co-Reflection-Architecture-Using-Graph\u2013Vector-Memory-for-Long-Horizon-Thinking/README.md"
+  },
+  {
     "slug": "efc-field-equations-for-entropy-driven-spacetime",
     "title": "EFC \u2014 Field Equations for Entropy-Driven Spacetime",
     "keywords": [
@@ -2877,6 +2932,28 @@
     "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/meta/architecture/index.md"
   },
   {
+    "slug": "symbiosis-runtime-architecture",
+    "title": "Symbiosis Runtime Architecture",
+    "keywords": [
+      "symbiosis",
+      "runtime",
+      "architecture",
+      "the",
+      "symbiosis",
+      "subsystem",
+      "forms",
+      "the",
+      "core",
+      "runtime",
+      "environment",
+      "of",
+      "the",
+      "efc",
+      "ecosystem."
+    ],
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/meta/symbiosis/architecture.md"
+  },
+  {
     "slug": "index",
     "title": "index",
     "keywords": [
@@ -2885,31 +2962,79 @@
     "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/meta/symbiosis/index.jsonld"
   },
   {
-    "slug": "symbiosis",
-    "title": "Symbiosis",
+    "slug": "symbiosis-runtime-layer",
+    "title": "Symbiosis Runtime Layer",
     "keywords": [
       "symbiosis",
-      "part",
-      "of",
+      "runtime",
+      "layer",
       "the",
-      "efc",
-      "meta-architecture",
+      "*symbiosis*",
+      "subsystem",
+      "is",
+      "the",
+      "cognitive",
       "and",
-      "reflective",
-      "layer."
+      "computational",
+      "backbone",
+      "that",
+      "integrates"
     ],
     "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/meta/symbiosis/README.md"
   },
   {
-    "slug": "symbiosis-layer",
-    "title": "Symbiosis Layer",
+    "slug": "symbiosis-metadata",
+    "title": "symbiosis_metadata",
+    "keywords": [
+      "symbiosis_metadata"
+    ],
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/meta/symbiosis/symbiosis_metadata.jsonld"
+  },
+  {
+    "slug": "symbiosis-runtime-roadmap",
+    "title": "Symbiosis Runtime \u2014 Roadmap",
     "keywords": [
       "symbiosis",
-      "layer",
-      "placeholder",
-      "for",
-      "symbiosis-level",
-      "documentation."
+      "runtime",
+      "\u2014",
+      "roadmap",
+      "this",
+      "roadmap",
+      "outlines",
+      "the",
+      "development",
+      "trajectory",
+      "of",
+      "the",
+      "symbiosis",
+      "subsystem",
+      "within",
+      "the"
+    ],
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/meta/symbiosis/ROADMAP.md"
+  },
+  {
+    "slug": "symbiosis-metadata-index",
+    "title": "Symbiosis Metadata Index",
+    "keywords": [
+      "symbiosis",
+      "metadata",
+      "index",
+      "this",
+      "index",
+      "file",
+      "provides",
+      "a",
+      "human-readable",
+      "overview",
+      "of",
+      "the",
+      "symbiosis",
+      "subsystem",
+      "within",
+      "the",
+      "efc",
+      "ecosystem."
     ],
     "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/meta/symbiosis/index.md"
   },

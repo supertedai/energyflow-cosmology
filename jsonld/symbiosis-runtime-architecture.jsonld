@@ -1,0 +1,8 @@
+{
+  "@context": "https://schema.org",
+  "@type": "CreativeWork",
+  "identifier": "symbiosis-runtime-architecture",
+  "name": "Symbiosis Runtime Architecture",
+  "description": "The Symbiosis subsystem forms the core runtime environment of the EFC ecosystem.",
+  "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/meta/symbiosis/architecture.md"
+}

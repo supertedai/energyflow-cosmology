@@ -1,0 +1,8 @@
+{
+  "@context": "https://schema.org",
+  "@type": "CreativeWork",
+  "identifier": "symbiosis-runtime-layer",
+  "name": "Symbiosis Runtime Layer",
+  "description": "The *Symbiosis* subsystem is the cognitive and computational backbone that integrates",
+  "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/meta/symbiosis/README.md"
+}

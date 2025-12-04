@@ -1,0 +1,8 @@
+{
+  "@context": "https://schema.org",
+  "@type": "CreativeWork",
+  "identifier": "symbiosis-metadata-index",
+  "name": "Symbiosis Metadata Index",
+  "description": "This index file provides a human-readable overview of the Symbiosis subsystem within the EFC ecosystem.",
+  "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/meta/symbiosis/index.md"
+}

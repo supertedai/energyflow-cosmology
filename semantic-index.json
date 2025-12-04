@@ -468,6 +468,24 @@
     "slug": "efc-cmb-thermodynamic-gradient"
   },
   {
+    "title": "symbiosis_method",
+    "description": "",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/docs/papers/efc/Symbiosis-A-Human\u2013AI-Co-Reflection-Architecture-Using-Graph\u2013Vector-Memory-for-Long-Horizon-Thinking/symbiosis_method.pdf",
+    "slug": "symbiosis-method"
+  },
+  {
+    "title": "symbiosis_method",
+    "description": "",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/docs/papers/efc/Symbiosis-A-Human\u2013AI-Co-Reflection-Architecture-Using-Graph\u2013Vector-Memory-for-Long-Horizon-Thinking/symbiosis_method.jsonld",
+    "slug": "symbiosis-method"
+  },
+  {
+    "title": "Symbiosis: A Human--AI Co-Reflection Architecture Using Graph--Vector Memory for Long-Horizon Thinking",
+    "description": "This directory contains the paper **\u201cSymbiosis: A Human--AI Co-Reflection Architecture Using Graph--Vector Memory for Long-Horizon Thinking\u201d**, part of the EFC series.",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/docs/papers/efc/Symbiosis-A-Human\u2013AI-Co-Reflection-Architecture-Using-Graph\u2013Vector-Memory-for-Long-Horizon-Thinking/README.md",
+    "slug": "symbiosis-a-human-ai-co-reflection-architecture-using-graph-vector-memory-for-long-horizon-thinking"
+  },
+  {
     "title": "EFC \u2014 Field Equations for Entropy-Driven Spacetime",
     "description": "This directory contains the paper presenting the proposed field equations",
     "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/docs/papers/efc/EFC-Field-Equations-for-Entropy-Driven-Spacetime/README.md",
@@ -1278,22 +1296,40 @@
     "slug": "index"
   },
   {
+    "title": "Symbiosis Runtime Architecture",
+    "description": "The Symbiosis subsystem forms the core runtime environment of the EFC ecosystem.",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/meta/symbiosis/architecture.md",
+    "slug": "symbiosis-runtime-architecture"
+  },
+  {
     "title": "index",
     "description": "",
     "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/meta/symbiosis/index.jsonld",
     "slug": "index"
   },
   {
-    "title": "Symbiosis",
-    "description": "Part of the EFC meta-architecture and reflective layer.",
+    "title": "Symbiosis Runtime Layer",
+    "description": "The *Symbiosis* subsystem is the cognitive and computational backbone that integrates",
     "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/meta/symbiosis/README.md",
-    "slug": "symbiosis"
+    "slug": "symbiosis-runtime-layer"
   },
   {
-    "title": "Symbiosis Layer",
-    "description": "Placeholder for symbiosis-level documentation.",
+    "title": "symbiosis_metadata",
+    "description": "",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/meta/symbiosis/symbiosis_metadata.jsonld",
+    "slug": "symbiosis-metadata"
+  },
+  {
+    "title": "Symbiosis Runtime \u2014 Roadmap",
+    "description": "This roadmap outlines the development trajectory of the Symbiosis subsystem within the",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/meta/symbiosis/ROADMAP.md",
+    "slug": "symbiosis-runtime-roadmap"
+  },
+  {
+    "title": "Symbiosis Metadata Index",
+    "description": "This index file provides a human-readable overview of the Symbiosis subsystem within the EFC ecosystem.",
     "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/meta/symbiosis/index.md",
-    "slug": "symbiosis-layer"
+    "slug": "symbiosis-metadata-index"
   },
   {
     "title": "index",

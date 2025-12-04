@@ -1,0 +1,8 @@
+{
+  "@context": "https://schema.org",
+  "@type": "CreativeWork",
+  "identifier": "symbiosis-runtime-roadmap",
+  "name": "Symbiosis Runtime \u2014 Roadmap",
+  "description": "This roadmap outlines the development trajectory of the Symbiosis subsystem within the",
+  "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/meta/symbiosis/ROADMAP.md"
+}
