@@ -19,8 +19,37 @@
     "foaf:page": "https://orcid.org/0009-0002-4860-5095"
   },
 
-  "dct:license": "https://creativecommons.org/licenses/by/4.0/",
   "dct:publisher": "Energy-Flow Cosmology Project",
+  "dct:license": "https://creativecommons.org/licenses/by/4.0/",
+
+  "dct:subject": [
+    "Thermodynamics",
+    "Cosmology",
+    "Information Theory",
+    "Complex Systems",
+    "Human–AI Symbiosis"
+  ],
+
+  "schema:keywords": [
+    "Energy-Flow Cosmology",
+    "EFC",
+    "Graph-RAG",
+    "Vector-RAG",
+    "Semantic Memory",
+    "Symbiosis",
+    "Metacognition",
+    "Knowledge Graph",
+    "Entropy"
+  ],
+
+  "schema:version": "0.3.0",
+
+  "dct:created": "2025-11-21",
+  "dct:modified": "2025-12-04",
+
+  "dct:relation": [
+    "https://figshare.com/projects/Energy-Flow-Cosmology"
+  ],
 
   "dcat:distribution": [
     {
