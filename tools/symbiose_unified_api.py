@@ -82,7 +82,7 @@ def qdrant_search(text: str, limit=5):
         client = QdrantClient(url=url, api_key=api_key)
 
         # dummy embedding (erstattes når lokal embedder er aktiv)
-        embedding = [0.1] * 1536
+        embedding = [0.1] * 3072
 
         search_result = client.search(
             collection_name=collection,
