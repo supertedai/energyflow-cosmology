@@ -9,15 +9,6 @@ jobs:
   ingest:
     runs-on: ubuntu-latest
 
-    env:
-      NEO4J_URI: ${{ secrets.NEO4J_URI }}
-      NEO4J_USER: ${{ secrets.NEO4J_USER }}
-      NEO4J_PASSWORD: ${{ secrets.NEO4J_PASSWORD }}
-      NEO4J_DATABASE: ${{ secrets.NEO4J_DATABASE }}
-      QDRANT_URL: ${{ secrets.QDRANT_URL }}
-      QDRANT_API_KEY: ${{ secrets.QDRANT_API_KEY }}
-      UNIFIED_API_TOKEN: ${{ secrets.UNIFIED_API_TOKEN }}
-
     steps:
       # ---------------------------
       # 0. CHECKOUT
@@ -54,23 +45,7 @@ jobs:
           python tools/build_jsonld.py
 
       # ---------------------------
-      # 3. UPDATE NEO4J
-      # ---------------------------
-      - name: Push metadata to Neo4j
-        run: |
-          echo ">>> Nightly Neo4j update"
-          python tools/push_to_neo4j.py
-
-      # ---------------------------
-      # 4. UPDATE QDRANT
-      # ---------------------------
-      - name: Push embeddings to Qdrant
-        run: |
-          echo ">>> Nightly Qdrant update"
-          python tools/update_qdrant.py
-
-      # ---------------------------
-      # 5. BUILD SEARCH INDEX
+      # 3. BUILD SEARCH INDEX
       # ---------------------------
       - name: Rebuild semantic-search-index
         run: |
@@ -78,35 +53,7 @@ jobs:
           python tools/build_search_index.py
 
       # ---------------------------
-      # 6. REBUILD GRAPH-RAG API DOCKER IMAGE
-      # ---------------------------
-      - name: Build Graph-RAG API Docker image
-        run: |
-          echo ">>> Building nightly Graph-RAG Docker image"
-          docker build -t efc-graph-rag-api -f docker/Dockerfile.unified_api .
-
-      - name: Save Docker image artifact
-        run: |
-          docker save efc-graph-rag-api | gzip > efc-graph-rag-api.tar.gz
-
-      - name: Upload Docker image artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: efc-graph-rag-api-nightly
-          path: efc-graph-rag-api.tar.gz
-
-      # ---------------------------
-      # 7. TRIGGER API REFRESH
-      # ---------------------------
-      - name: Trigger Unified API refresh
-        run: |
-          echo ">>> Nightly Unified API refresh"
-          curl -X POST \
-            "https://unified-api-958872099364.europe-west1.run.app/admin/refresh" \
-            -H "Authorization: Bearer ${{ secrets.UNIFIED_API_TOKEN }}" || true
-
-      # ---------------------------
-      # 8. SAFE COMMIT + PUSH
+      # 4. SAFE COMMIT + PUSH
       # ---------------------------
       - name: Commit changes safely
         run: |
@@ -114,9 +61,8 @@ jobs:
           git config --global user.email "bot@symbiose.local"
 
           git add .
-          git commit -m "Nightly ingest ($(date))" || echo "No changes"
+          git commit -m "Nightly semantic rebuild ($(date))" || echo "No changes"
 
-          # sync with remote
           git fetch origin main
           git rebase origin/main || git rebase --skip
 
