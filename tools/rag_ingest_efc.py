@@ -39,7 +39,7 @@ from pypdf import PdfReader
 ROOT = Path(__file__).resolve().parents[1]
 DOCS_ROOT = ROOT / "docs" / "papers" / "efc"
 
-EMBED_DIM = 1536  # matcher OpenAI dimensjon, men lokalt generert
+EMBED_DIM = 3072  # matcher OpenAI dimensjon, men lokalt generert
 
 # Standardisert og riktig navn for hele symbiosen
 DEFAULT_COLLECTION = "efc"
