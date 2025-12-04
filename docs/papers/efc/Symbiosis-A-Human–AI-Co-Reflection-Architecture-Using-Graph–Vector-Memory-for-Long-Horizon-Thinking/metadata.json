@@ -1,17 +1,24 @@
 {
-  "title": "Symbiosis: A Human–AI Co-Reflection Architecture Using Graph–Vector Memory for Long-Horizon Thinking",
-  "slug": "symbiosis-a-human-ai-co-reflection-architecture-using-graph-vector-memory-for-long-horizon-thinking",
-  "doi": "10.6084/m9.figshare.30773684",
-  "keywords": [
-    "Human–AI symbiosis",
-    "cognitive infrastructure",
-    "long-term memory",
-    "knowledge graphs",
-    "Vector databases",
-    "hybrid RAG",
-    "reflective AI",
-    "metacognition",
-    "reasoning traces",
-    "Energy-Flow Cosmology (EFC)"
-  ]
+  "id": "symbiosis_method",
+  "slug": "symbiosis_method",
+  "title": "Symbiosis: A Human--AI Co-Reflection Architecture Using Graph--Vector Memory for Long-Horizon Thinking",
+  "description": "This paper presents Symbiosis, a human--AI co-reflection architecture designed to support long-horizon thinking, traceable theory development, and structured cognitive work across extended timescales. The system integrates large language models (LLMs) with a hybrid memory substrate consisting of a knowledge graph (Neo4j), a vector database (Qdrant), and a unified API layer that binds reflection, retrieval, and logging into one operational loop. Unlike conventional retrieval-augmented generation ",
+  "domain": "META-systems",
+  "keywords": [],
+  "version": "1.0.0",
+  "authors": [
+    {
+      "name": "Morten Magnusson",
+      "orcid": "https://orcid.org/0009-0002-4860-5095"
+    }
+  ],
+  "files": {
+    "pdf": "symbiosis_method.pdf",
+    "tex": "symbiosis_method.tex",
+    "readme": "README.md",
+    "jsonld": "symbiosis_method.jsonld"
+  },
+  "created": "2025-12-04",
+  "updated": "2025-12-04",
+  "doi": "10.6084/m9.figshare.30773684"
 }

@@ -10,7 +10,7 @@ This paper presents Symbiosis, a human--AI co-reflection architecture designed t
 - Framework: Energy-Flow Cosmology (EFC)
 - Domain: META-systems
 - Role: Links entropic structure, information flow and observable cosmological behaviour.
-- DOI: pending
+- DOI: 10.6084/m9.figshare.30773684
 
 ---
 
@@ -36,5 +36,5 @@ This paper presents Symbiosis, a human--AI co-reflection architecture designed t
 
 ## Citation
 Magnusson, M. (2025). *Symbiosis: A Human--AI Co-Reflection Architecture Using Graph--Vector Memory for Long-Horizon Thinking*.  
-DOI: pending  
+DOI: 10.6084/m9.figshare.30773684  
 GitHub: docs/papers/efc/symbiosis_method/symbiosis_method.pdf
