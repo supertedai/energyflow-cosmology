@@ -80,7 +80,7 @@ TEXT_SUFFIXES = {
     ".tex",
 }
 
-EMBED_DIM = 1536  # matcher EFC-ingest
+EMBED_DIM = 3072  # matcher EFC-ingest
 DEFAULT_COLLECTION = "efc"
 
 
