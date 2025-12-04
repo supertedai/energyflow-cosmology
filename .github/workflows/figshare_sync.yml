@@ -1,4 +1,4 @@
-name: Figshare Sync (EFC v3 + metadata.json)
+name: Figshare Sync (EFC v3 + robust metadata)
 
 on:
   workflow_dispatch:
@@ -26,14 +26,14 @@ jobs:
         run: |
           pip install requests python-slugify
 
-      # === ORIGINAL FIGSHARE SYNC (UENDRET) ===
+      # === ORIGINAL FIGSHARE SYNC ===
       - name: Run Figshare Sync
         env:
           FIGSHARE_TOKEN: ${{ secrets.FIGSHARE_TOKEN }}
         run: python integrations/figshare/efc_figshare_sync_v3.py
 
-      # === NYTT: GENERER metadata.json PER PDF ===
-      - name: Generate metadata.json for PDF folders
+      # === ROBUST METADATA.JSON SYNC (DOI → SLUG FALLBACK) ===
+      - name: Generate metadata.json for PDF folders (robust)
         env:
           FIGSHARE_TOKEN: ${{ secrets.FIGSHARE_TOKEN }}
         run: |
@@ -46,19 +46,25 @@ jobs:
 
           ROOT = Path(".").resolve()
           PAPERS = ROOT / "docs" / "papers" / "efc"
+          FIGSHARE_DIR = ROOT / "figshare"
+          DOI_MAP_FILE = FIGSHARE_DIR / "doi-map.json"
 
           TOKEN = os.getenv("FIGSHARE_TOKEN")
           if not TOKEN:
               raise SystemExit("FIGSHARE_TOKEN missing")
 
+          if not DOI_MAP_FILE.exists():
+              raise SystemExit("figshare/doi-map.json mangler")
+
+          doi_map = json.loads(DOI_MAP_FILE.read_text(encoding="utf-8"))
           HEADERS = {"Authorization": f"token {TOKEN}"}
 
-          print("[figshare] Fetching articles...")
           r = requests.get("https://api.figshare.com/v2/account/articles", headers=HEADERS)
           r.raise_for_status()
           articles = r.json()
 
-          figshare_map = {}
+          figshare_by_doi = {}
+          figshare_by_slug = {}
 
           for a in articles:
               title = a.get("title", "")
@@ -73,16 +79,20 @@ jobs:
               keywords = d.get("keywords", [])
               slug = slugify(title)
 
-              figshare_map[slug] = {
+              entry = {
                   "title": title,
                   "slug": slug,
                   "doi": doi,
                   "keywords": keywords
               }
 
-          print("[sync] Writing metadata.json to PDF folders...")
+              if doi:
+                  figshare_by_doi[doi] = entry
+
+              figshare_by_slug[slug] = entry
 
           updated = 0
+          skipped = 0
 
           for folder in PAPERS.iterdir():
               if not folder.is_dir():
@@ -92,14 +102,31 @@ jobs:
               if not pdfs:
                   continue
 
-              local_slug = slugify(folder.name)
               meta_file = folder / "metadata.json"
 
-              if local_slug not in figshare_map:
-                  print(f"[skip] No Figshare match for {folder.name}")
-                  continue
+              existing = {}
+              if meta_file.exists():
+                  try:
+                      existing = json.loads(meta_file.read_text(encoding="utf-8"))
+                  except:
+                      pass
 
-              data = figshare_map[local_slug]
+              existing_doi = existing.get("doi")
+              local_slug = slugify(folder.name)
+
+              data = None
+
+              if existing_doi and existing_doi in figshare_by_doi:
+                  data = figshare_by_doi[existing_doi]
+              elif folder.name in doi_map and doi_map[folder.name] in figshare_by_doi:
+                  data = figshare_by_doi[doi_map[folder.name]]
+              elif local_slug in figshare_by_slug:
+                  data = figshare_by_slug[local_slug]
+
+              if not data:
+                  print(f"[skip] No Figshare match for {folder.name}")
+                  skipped += 1
+                  continue
 
               meta = {
                   "title": data["title"],
@@ -116,24 +143,24 @@ jobs:
               print(f"[ok] Updated {meta_file}")
               updated += 1
 
-          print(f"[done] {updated} metadata files updated.")
+          print(f"[done] Updated: {updated} | Skipped: {skipped}")
           EOF
 
-      # === NYTT: COMMIT metadata.json TILBAKE TIL REPO ===
-      - name: Commit metadata.json changes
+      # === RIKTIG COMMIT (INGEN EXIT 1 LENGER) ===
+      - name: Commit Figshare + metadata changes
         run: |
           git config user.name "figshare-bot"
           git config user.email "figshare-bot@users.noreply.github.com"
 
           if [[ -n "$(git status --porcelain)" ]]; then
-            git add docs/papers/efc/**/metadata.json
-            git commit -m "Auto-sync metadata.json from Figshare"
+            git add docs/papers/efc/**/metadata.json figshare/ figshare_sync_report.txt
+            git commit -m "Auto-sync Figshare metadata + metadata.json"
             git push
           else
             echo "No metadata changes."
           fi
 
-      # === ORIGINAL RAPPORT (UENDRET) ===
+      # === RAPPORT (UENDRET) ===
       - name: Upload Sync Report
         uses: actions/upload-artifact@v4
         with:
