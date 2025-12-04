@@ -24,7 +24,7 @@ QDRANT_COLLECTION = "efc"
 
 OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
 EMBEDDING_MODEL = os.getenv("EMBEDDING_MODEL", "text-embedding-3-large")
-EMBEDDING_DIM = int(os.getenv("EMBEDDING_DIM", "1536"))
+EMBEDDING_DIM = int(os.getenv("EMBEDDING_DIM", "3072"))
 
 ROOT = Path(__file__).resolve().parent.parent
 
