@@ -1,9 +1,12 @@
 #!/usr/bin/env python3
 """
-RAG ingest direkte til Qdrant Cloud.
+RAG ingest direkte til Qdrant Cloud – 3072 LÅST.
 
 Leser relevante .md-filer fra repoet,
-chunker tekst, lager embeddings og skriver til Qdrant.
+chunker tekst, lager ekte OpenAI-embeddings (3072)
+og skriver til Qdrant collection 'efc'.
+
+NEKTER Å KJØRE hvis noe ikke er 3072.
 """
 
 import os
@@ -19,12 +22,13 @@ from openai import OpenAI
 QDRANT_URL = os.getenv("QDRANT_URL")
 QDRANT_API_KEY = os.getenv("QDRANT_API_KEY")
 
-# --- Viktig: EFC er eneste gyldige collection ---
 QDRANT_COLLECTION = "efc"
 
 OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
-EMBEDDING_MODEL = os.getenv("EMBEDDING_MODEL", "text-embedding-3-large")
-EMBEDDING_DIM = int(os.getenv("EMBEDDING_DIM", "3072"))
+
+# LÅST
+EMBEDDING_MODEL = "text-embedding-3-large"
+EMBEDDING_DIM = 3072
 
 ROOT = Path(__file__).resolve().parent.parent
 
@@ -33,7 +37,7 @@ INCLUDE_DIRS = [
     "meta",
 ]
 
-MAX_CHARS = 1500  # enkel chunksize per tekstbit
+MAX_CHARS = 1500
 
 
 def log(msg: str) -> None:
@@ -70,9 +74,27 @@ def chunk_text(text: str, max_chars: int = MAX_CHARS) -> List[str]:
     return chunks
 
 
+# ------------------------------------------------------------
+# QDRANT – HARD DIM LOCK
+# ------------------------------------------------------------
+
 def ensure_collection(client: QdrantClient) -> None:
-    log(f"Recreate collection {QDRANT_COLLECTION} @ {QDRANT_URL}")
-    client.recreate_collection(
+    collections = {c.name for c in client.get_collections().collections}
+
+    if QDRANT_COLLECTION in collections:
+        info = client.get_collection(QDRANT_COLLECTION)
+        size = info.config.params.vectors.size
+
+        if size != EMBEDDING_DIM:
+            raise RuntimeError(
+                f"KRITISK: Collection '{QDRANT_COLLECTION}' har dim={size}, forventet {EMBEDDING_DIM}"
+            )
+
+        log(f"Collection '{QDRANT_COLLECTION}' OK (dim={size}).")
+        return
+
+    log(f"Lager collection '{QDRANT_COLLECTION}' (dim={EMBEDDING_DIM})")
+    client.create_collection(
         collection_name=QDRANT_COLLECTION,
         vectors_config=models.VectorParams(
             size=EMBEDDING_DIM,
@@ -81,28 +103,36 @@ def ensure_collection(client: QdrantClient) -> None:
     )
 
 
+# ------------------------------------------------------------
+# EMBEDDING – KUN 3072
+# ------------------------------------------------------------
+
 def embed_texts(client: OpenAI, texts: List[str]) -> List[List[float]]:
     if not texts:
         return []
+
     resp = client.embeddings.create(
         model=EMBEDDING_MODEL,
         input=texts,
     )
 
-    fixed_vectors = []
+    vectors = []
     for d in resp.data:
         vec = d.embedding
 
-        # --- SAFEGUARD: Tving embedding til korrekt dimensjon ---
-        if len(vec) > EMBEDDING_DIM:
-            vec = vec[:EMBEDDING_DIM]
-        elif len(vec) < EMBEDDING_DIM:
-            vec = vec + [0.0] * (EMBEDDING_DIM - len(vec))
+        if len(vec) != EMBEDDING_DIM:
+            raise RuntimeError(
+                f"Embedding-dimensjon feil: {len(vec)} ≠ {EMBEDDING_DIM}"
+            )
 
-        fixed_vectors.append(vec)
+        vectors.append(vec)
 
-    return fixed_vectors
+    return vectors
 
+
+# ------------------------------------------------------------
+# MAIN
+# ------------------------------------------------------------
 
 def main() -> None:
     if not QDRANT_URL or not QDRANT_API_KEY:
@@ -113,7 +143,7 @@ def main() -> None:
     log(f"ROOT={ROOT}")
     log(f"QDRANT_URL={QDRANT_URL}")
     log(f"COLLECTION={QDRANT_COLLECTION}")
-    log(f"EMBEDDING_MODEL={EMBEDDING_MODEL} dim={EMBEDDING_DIM}")
+    log(f"MODEL={EMBEDDING_MODEL} dim={EMBEDDING_DIM}")
 
     qdrant = QdrantClient(
         url=QDRANT_URL,
@@ -141,8 +171,8 @@ def main() -> None:
         log(f"{rel} → {len(chunks)} chunks")
         vectors = embed_texts(openai_client, chunks)
 
-        for idx, (chunk, vec) in enumerate(zip(chunks, vectors)):
-            chunk_id = str(uuid.uuid4())  # <-- UUID fix
+        for chunk, vec in zip(chunks, vectors):
+            chunk_id = str(uuid.uuid4())
 
             payload = {
                 "text": chunk,
