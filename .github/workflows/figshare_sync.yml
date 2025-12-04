@@ -1,4 +1,4 @@
-name: Figshare Sync (EFC v3)
+name: Figshare Sync (EFC v3 + metadata.json)
 
 on:
   workflow_dispatch:
@@ -15,6 +15,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
+          persist-credentials: true
 
       - name: Setup Python
         uses: actions/setup-python@v4
@@ -25,11 +26,114 @@ jobs:
         run: |
           pip install requests python-slugify
 
+      # === ORIGINAL FIGSHARE SYNC (UENDRET) ===
       - name: Run Figshare Sync
         env:
           FIGSHARE_TOKEN: ${{ secrets.FIGSHARE_TOKEN }}
         run: python integrations/figshare/efc_figshare_sync_v3.py
 
+      # === NYTT: GENERER metadata.json PER PDF ===
+      - name: Generate metadata.json for PDF folders
+        env:
+          FIGSHARE_TOKEN: ${{ secrets.FIGSHARE_TOKEN }}
+        run: |
+          python << 'EOF'
+          import os
+          import json
+          import requests
+          from pathlib import Path
+          from slugify import slugify
+
+          ROOT = Path(".").resolve()
+          PAPERS = ROOT / "docs" / "papers" / "efc"
+
+          TOKEN = os.getenv("FIGSHARE_TOKEN")
+          if not TOKEN:
+              raise SystemExit("FIGSHARE_TOKEN missing")
+
+          HEADERS = {"Authorization": f"token {TOKEN}"}
+
+          print("[figshare] Fetching articles...")
+          r = requests.get("https://api.figshare.com/v2/account/articles", headers=HEADERS)
+          r.raise_for_status()
+          articles = r.json()
+
+          figshare_map = {}
+
+          for a in articles:
+              title = a.get("title", "")
+              doi = a.get("doi")
+              article_id = a.get("id")
+
+              d = requests.get(
+                  f"https://api.figshare.com/v2/articles/{article_id}",
+                  headers=HEADERS
+              ).json()
+
+              keywords = d.get("keywords", [])
+              slug = slugify(title)
+
+              figshare_map[slug] = {
+                  "title": title,
+                  "slug": slug,
+                  "doi": doi,
+                  "keywords": keywords
+              }
+
+          print("[sync] Writing metadata.json to PDF folders...")
+
+          updated = 0
+
+          for folder in PAPERS.iterdir():
+              if not folder.is_dir():
+                  continue
+
+              pdfs = list(folder.glob("*.pdf"))
+              if not pdfs:
+                  continue
+
+              local_slug = slugify(folder.name)
+              meta_file = folder / "metadata.json"
+
+              if local_slug not in figshare_map:
+                  print(f"[skip] No Figshare match for {folder.name}")
+                  continue
+
+              data = figshare_map[local_slug]
+
+              meta = {
+                  "title": data["title"],
+                  "slug": data["slug"],
+                  "doi": data["doi"],
+                  "keywords": data["keywords"]
+              }
+
+              meta_file.write_text(
+                  json.dumps(meta, indent=2, ensure_ascii=False),
+                  encoding="utf-8"
+              )
+
+              print(f"[ok] Updated {meta_file}")
+              updated += 1
+
+          print(f"[done] {updated} metadata files updated.")
+          EOF
+
+      # === NYTT: COMMIT metadata.json TILBAKE TIL REPO ===
+      - name: Commit metadata.json changes
+        run: |
+          git config user.name "figshare-bot"
+          git config user.email "figshare-bot@users.noreply.github.com"
+
+          if [[ -n "$(git status --porcelain)" ]]; then
+            git add docs/papers/efc/**/metadata.json
+            git commit -m "Auto-sync metadata.json from Figshare"
+            git push
+          else
+            echo "No metadata changes."
+          fi
+
+      # === ORIGINAL RAPPORT (UENDRET) ===
       - name: Upload Sync Report
         uses: actions/upload-artifact@v4
         with:
