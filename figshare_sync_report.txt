@@ -1,0 +1,14 @@
+=== FIGSHARE SYNC START ===
+[OK] Figshare articles retrieved
+[OK] Metadata updated for: symbiosis-a-human-ai-co-reflection-architecture-using-graph-vector-memory-for-long-horizon-thinking
+[OK] Metadata updated for: auth-layer-origin-provenance-and-structural-signature-of-energy-flow-cosmology
+[OK] Metadata updated for: symbiotic-insight-framework-sif-a-human-system-methodology-for-high-scale-scientific-reasoning
+[OK] Metadata updated for: variable-effective-light-speed-in-entropic-transition-states
+[OK] Metadata updated for: ai-augmented-scientific-workflow-framework
+[OK] Metadata updated for: energy-flow-cosmology-formal-master-specification-v1-0
+[OK] Metadata updated for: energyflow-cosmology-github-dataset
+[OK] Metadata updated for: energyflow-cosmology
+[OK] Metadata updated for: energy-flow-cosmology-v1-2-foundational-framework-and-cross-field-continuity
+[OK] Metadata updated for: applied-energy-flow-cosmology-v2-2-cross-field-integration-summary-2025
+[OK] DOI map updated
+=== FIGSHARE SYNC COMPLETE ===
