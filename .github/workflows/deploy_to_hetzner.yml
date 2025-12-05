@@ -20,12 +20,24 @@ jobs:
           script: |
             set -e
 
+            echo "=== PRE-DEPLOY STATUS ==="
+            docker ps || true
+            docker images | head -n 20 || true
+
             echo "=== Updating repo on server ==="
             cd /opt/symbiose/repo
             git fetch --all
             git reset --hard origin/main
 
-            echo "=== Pulling updated Unified API image ==="
+            echo "=== Forcibly stopping legacy containers (safety) ==="
+            docker stop unified-api || true
+            docker rm unified-api || true
+            docker stop query-api || true
+            docker rm query-api || true
+            docker stop graph-rag-api || true
+            docker rm graph-rag-api || true
+
+            echo "=== Pulling updated images ==="
             cd /opt/symbiose/repo/infra/docker
             docker compose pull
 
@@ -33,7 +45,10 @@ jobs:
             docker image prune -f
 
             echo "=== Restarting containers cleanly ==="
-            docker compose down
+            docker compose down --remove-orphans
             docker compose up -d
+
+            echo "=== POST-DEPLOY STATUS ==="
+            docker ps || true
 
             echo "=== Deployment complete ==="
