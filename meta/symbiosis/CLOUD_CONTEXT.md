@@ -56,11 +56,13 @@ This note captures the end-state intent for the Symbiosis runtime across cloud s
 
 ### ✅ FUNGERENDE
 - **Qdrant Cloud**: Tilkoblet og operativ via HTTPS API (bf12db8d...us-east4-0.gcp.cloud.qdrant.io)
-- **Neo4j Aura**: Tilkoblet (119e751c.databases.neo4j.io), 5 noder lastet
+- **Neo4j Aura**: Tilkoblet (119e751c.databases.neo4j.io), **10,183 noder** aktive
 - **Unified API**: Kjører på port 8080 med `.env` loaded
 - **Semantic Vector Search**: Implementert med OpenAI text-embedding-3-large (3072-dim)
 - **RAG Endpoint**: `/rag/search` returnerer ekte similarity scores (cosine distance)
-- **GNN**: Artefakter i `symbiose_gnn_output/` lastes OK (16,576 parametere, 5 noder × 64-dim)
+- **Graph-RAG Endpoint**: `/graph-rag/search` kombinerer Neo4j struktur + Qdrant semantikk
+- **Unified Query**: `/unified_query` POST endpoint for kombinert søk
+- **GNN**: Artefakter i `symbiose_gnn_output/` lastes OK (16,576 parametere, 64-dim embeddings)
 
 ### 🔄 I ARBEID
 - **RAG Kvalitet**: Ny `tools/rag_ingest_clean.py` opprettet for clean text extraction
