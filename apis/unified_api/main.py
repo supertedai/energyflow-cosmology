@@ -1,5 +1,8 @@
 # FILE: /Users/morpheus/energyflow-cosmology/apis/unified_api/main.py
 
+from dotenv import load_dotenv
+load_dotenv()  # Load .env BEFORE any other imports
+
 from fastapi import FastAPI
 
 from apis.unified_api.routers.neo4j import router as neo4j_router

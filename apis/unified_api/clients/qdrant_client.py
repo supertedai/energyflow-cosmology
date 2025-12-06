@@ -64,9 +64,10 @@ def qdrant_ingest(text: str, source: str, metadata: dict = None):
         points = []
         
         for i, chunk in enumerate(chunks):
-            # Deduplication: hash-based ID
-            content_hash = hashlib.sha256(chunk.encode()).hexdigest()[:16]
-            point_id = str(uuid.UUID(content_hash + "0" * 16))
+            # Deduplication: hash source + text to create deterministic ID
+            content_for_hash = f"{source}||{chunk}"
+            content_hash = hashlib.sha256(content_for_hash.encode()).hexdigest()[:32]
+            point_id = str(uuid.UUID(content_hash))
             
             # Generate embedding
             vector = embed_text(chunk)
@@ -89,6 +90,7 @@ def qdrant_ingest(text: str, source: str, metadata: dict = None):
                     "summary": metadata.get("summary"),
                     "source_type": metadata.get("source_type"),
                     "section": metadata.get("section"),
+                    "node_id": metadata.get("node_id"),  # 🔗 BRIDGE to Neo4j/GNN
                 })
             
             points.append(PointStruct(

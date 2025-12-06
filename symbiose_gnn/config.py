@@ -1,6 +1,10 @@
 # symbiose_gnn/config.py
 
 import os
+from dotenv import load_dotenv
+
+# Load environment variables
+load_dotenv()
 
 config = {
     "neo4j_uri": os.getenv("NEO4J_URI", "neo4j+s://119e751c.databases.neo4j.io"),

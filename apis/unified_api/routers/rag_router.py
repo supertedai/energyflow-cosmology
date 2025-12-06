@@ -15,12 +15,14 @@ QDRANT_URL = os.getenv("QDRANT_URL")
 QDRANT_API_KEY = os.getenv("QDRANT_API_KEY")
 QDRANT_COLLECTION = os.getenv("QDRANT_COLLECTION", "efc")
 
-client = None
-if ENABLE_QDRANT:
-    client = QdrantClient(
-        url=QDRANT_URL,
-        api_key=QDRANT_API_KEY
-    )
+_client = None
+
+def get_qdrant_client():
+    """Lazy initialize Qdrant client after env vars are loaded."""
+    global _client
+    if _client is None and ENABLE_QDRANT and QDRANT_URL and QDRANT_API_KEY:
+        _client = QdrantClient(url=QDRANT_URL, api_key=QDRANT_API_KEY)
+    return _client
 
 
 def rag_search(query: str, limit: int = 5, use_vector: bool = True):
@@ -32,6 +34,7 @@ def rag_search(query: str, limit: int = 5, use_vector: bool = True):
         limit: Max results
         use_vector: Use vector search (True) or text filter (False)
     """
+    client = get_qdrant_client()
     if not ENABLE_QDRANT or not client:
         return {
             "status": "disabled",
@@ -70,6 +73,8 @@ def rag_search(query: str, limit: int = 5, use_vector: bool = True):
                     "layer": payload.get("layer"),
                     "doi": payload.get("doi"),
                     "title": payload.get("name") or payload.get("title"),
+                    "node_id": payload.get("node_id"),  # 🔗 GNN bridge
+                    "payload": payload,  # Full payload for graph-rag
                 })
         else:
             # Fallback: text matching (old behavior)

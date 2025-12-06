@@ -21,9 +21,10 @@ def fetch_graph():
 
     with driver.session(database=config["neo4j_database"]) as session:
 
+        # Fetch ALL nodes from the graph (10,183 nodes)
+        print("[GNN] Fetching all nodes from Neo4j...")
         res_nodes = session.run("""
             MATCH (n)
-            WHERE n:EFCPaper OR n:MetaNode
             RETURN elementId(n) AS eid, labels(n) AS labels, n AS props
         """)
 
@@ -31,10 +32,10 @@ def fetch_graph():
             idx2neo[idx] = rec["eid"]
             nodes.append(idx)
 
+        # Fetch ALL edges in the graph
+        print(f"[GNN] Found {len(nodes)} nodes. Fetching edges...")
         res_edges = session.run("""
             MATCH (a)-[r]->(b)
-            WHERE (a:EFCPaper OR a:MetaNode)
-              AND (b:EFCPaper OR b:MetaNode)
             RETURN elementId(a) AS src, elementId(b) AS dst
         """)
 
@@ -47,5 +48,8 @@ def fetch_graph():
 
     x = torch.randn(len(nodes), config["embedding_dim"])
     edge_index = torch.tensor([edges_src, edges_dst], dtype=torch.long)
+
+    print(f"[GNN] Graph loaded: {len(nodes)} nodes, {len(edges_src)} edges")
+    print(f"[GNN] Feature dimension: {config['embedding_dim']}")
 
     return idx2neo, Data(x=x, edge_index=edge_index)

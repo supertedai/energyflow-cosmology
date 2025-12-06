@@ -1,0 +1,19 @@
+{
+  "name": "symbiosis-mcp-server",
+  "version": "1.0.0",
+  "description": "Symbiosis MCP Server for LM Studio - Graph-RAG and Vector Search",
+  "main": "symbiosis_mcp_server.py",
+  "scripts": {
+    "start": "python symbiosis_mcp_server.py"
+  },
+  "dependencies": {},
+  "mcpServers": {
+    "symbiosis": {
+      "command": "python",
+      "args": ["symbiosis_mcp_server.py"],
+      "env": {
+        "SYMBIOSIS_API_URL": "http://localhost:8000"
+      }
+    }
+  }
+}

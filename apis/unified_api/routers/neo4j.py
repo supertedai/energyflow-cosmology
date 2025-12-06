@@ -25,7 +25,17 @@ def neo_status():
 
 
 @router.get("/q")
-def query_endpoint(query: str):
+def query_endpoint_get(query: str):
     """Manual test endpoint: /neo4j/q?query=RETURN 1"""
     return run_cypher(query)
+
+
+@router.post("/q")
+def query_endpoint_post(payload: dict):
+    """POST endpoint for Neo4j queries with optional params."""
+    query = payload.get("query")
+    params = payload.get("params", {})
+    if not query:
+        return {"error": "Missing 'query' field in request body"}
+    return run_cypher(query, params)
 
