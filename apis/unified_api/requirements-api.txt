@@ -1,8 +1,7 @@
 fastapi
 uvicorn
-python-dotenv
-requests
-qdrant-client
 openai
-sentence-transformers
+qdrant-client
+neo4j
+python-multipart
 

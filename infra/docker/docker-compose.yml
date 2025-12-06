@@ -1,42 +1,63 @@
 services:
-  unified-api:
-    image: ghcr.io/supertedai/unified-api:latest
-    container_name: unified-api
-    env_file:
-      - /opt/symbiose/.env
+  neo4j:
+    image: neo4j:5.22
+    container_name: neo4j
+    ports:
+      - "7687:7687"
+      - "7474:7474"
     environment:
-      PORT: "8080"
-      ENABLE_QDRANT: "1"
-      ENABLE_NEO4J: "1"
-      ENABLE_EMBED: "1"
+      NEO4J_AUTH: "${NEO4J_USER}/${NEO4J_PASSWORD}"
+      NEO4J_ACCEPT_LICENSE_AGREEMENT: "yes"
+    volumes:
+      - neo4j_data:/data
+      - neo4j_logs:/logs
+    restart: always
+
+  unified-api:
+    build:
+      context: ../../
+      dockerfile: apis/unified_api/Dockerfile
+    container_name: unified-api
     ports:
       - "8080:8080"
-    restart: unless-stopped
-    networks:
-      - symbiose-net
+    environment:
+      OPENAI_API_KEY: ${OPENAI_API_KEY}
+
+      # ---- Cloud Qdrant ONLY ----
+      QDRANT_URL: ${QDRANT_URL}
+      QDRANT_API_KEY: ${QDRANT_API_KEY}
+      QDRANT_COLLECTION: ${QDRANT_COLLECTION}
+
+      # ---- Neo4j Cloud ----
+      NEO4J_URI: ${NEO4J_URI}
+      NEO4J_USER: ${NEO4J_USER}
+      NEO4J_PASSWORD: ${NEO4J_PASSWORD}
+
+      # ---- Feature toggles ----
+      ENABLE_QDRANT: ${ENABLE_QDRANT}
+      ENABLE_NEO4J: ${ENABLE_NEO4J}
+      ENABLE_EMBED: ${ENABLE_EMBED}
+
+    depends_on:
+      - neo4j
+    restart: always
 
   query-api:
-    image: ghcr.io/supertedai/query-api:latest
+    build:
+      context: ../../
+      dockerfile: tools/Dockerfile.query_api
     container_name: query-api
-    env_file:
-      - /opt/symbiose/.env
     ports:
-      - "8081:8081"
-    restart: unless-stopped
-    networks:
-      - symbiose-net
+      - "8090:8082"
+    environment:
+      NEO4J_URI: ${NEO4J_URI}
+      NEO4J_USER: ${NEO4J_USER}
+      NEO4J_PASSWORD: ${NEO4J_PASSWORD}
+    depends_on:
+      - neo4j
+    restart: always
 
-  graph-rag-api:
-    image: ghcr.io/supertedai/graph-rag-api:latest
-    container_name: graph-rag-api
-    env_file:
-      - /opt/symbiose/.env
-    ports:
-      - "8082:8082"
-    restart: unless-stopped
-    networks:
-      - symbiose-net
+volumes:
+  neo4j_data:
+  neo4j_logs:
 
-networks:
-  symbiose-net:
-    driver: bridge

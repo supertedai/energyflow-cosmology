@@ -1,73 +1,27 @@
-from fastapi import APIRouter
-from datetime import datetime
-from apis.unified_api.routers.neo4j import run_cypher
-from apis.unified_api.routers.rag import do_rag_search
-from apis.unified_api.routers.graph_rag import combined_graph_rag
+# FILE: apis/unified_api/routers/unified_query.py
 
-router = APIRouter()
+from fastapi import APIRouter, HTTPException
+from typing import Dict, Any
+
+# Korrekt import – rag_search finnes, do_rag_search finnes ikke
+from apis.unified_api.routers.rag_router import rag_search
+
+router = APIRouter(tags=["Unified Query"])
 
 @router.post("/unified_query")
-async def unified_query(payload: dict):
-    """
-    Kombinerer alle søk:
-    - Neo4j direkte Chunk-søk
-    - RAG/Qdrant
-    - Graph-RAG
-    """
-    query = payload.get("text") or payload.get("query")
-
+def unified_query(payload: Dict[str, Any]):
+    query = payload.get("query")
     if not query:
-        return {"error": "Missing field 'text' or 'query'"}
+        raise HTTPException(status_code=400, detail="Missing 'query' field")
 
-    result = {
-        "timestamp": datetime.utcnow().isoformat() + "Z",
+    # Call RAG search directly
+    rag_result = rag_search(query=query)
+
+    return {
+        "timestamp": "N/A",
         "query": query,
-        "neo4j": {},
-        "rag": {},
-        "semantic": {}
+        "neo4j": {"enabled": False},
+        "rag": rag_result,
+        "semantic": {"enabled": False},
     }
 
-    # -------------------
-    # NEO4J: Søk i Chunk
-    # -------------------
-    try:
-        neo4j_cypher = f"""
-            MATCH (c:Chunk)
-            WHERE toLower(c.text) CONTAINS toLower('{query}')
-            RETURN c.id AS id,
-                   c.text AS text,
-                   c.source AS source
-            LIMIT 10
-        """
-        neo4j_res = run_cypher(neo4j_cypher)
-        result["neo4j"] = {"enabled": True, "matches": neo4j_res}
-    except Exception as e:
-        result["neo4j"] = {"enabled": False, "error": str(e)}
-
-    # -------------------
-    # RAG / Qdrant
-    # -------------------
-    try:
-        rag_res = do_rag_search(query)
-        result["rag"] = {
-            "enabled": True,
-            "matches": rag_res.get("hits", []),
-            "note": rag_res.get("note", None)
-        }
-    except Exception as e:
-        result["rag"] = {"enabled": False, "error": str(e)}
-
-    # -------------------
-    # Graph-RAG
-    # -------------------
-    try:
-        graph_rag_res = combined_graph_rag(query)
-        result["semantic"] = {
-            "enabled": True,
-            "index_size": graph_rag_res.get("index_size", 0),
-            "matches": graph_rag_res.get("matches", [])
-        }
-    except Exception as e:
-        result["semantic"] = {"enabled": False, "error": str(e)}
-
-    return result

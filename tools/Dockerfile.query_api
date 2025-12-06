@@ -2,21 +2,20 @@ FROM python:3.11-slim
 
 WORKDIR /app
 
-# Install basic system deps
+# Install system dependencies
 RUN apt-get update && apt-get install -y --no-install-recommends \
     build-essential && \
     rm -rf /var/lib/apt/lists/*
 
-# Kopier requirements for query-API
+# Install Python deps
 COPY tools/query_api_requirements.txt /app/requirements.txt
-
 RUN pip install --no-cache-dir --upgrade pip && \
     pip install --no-cache-dir -r /app/requirements.txt
 
-# Kopier API-koden
+# Copy API code
 COPY tools/symbiose_query_api.py /app/symbiose_query_api.py
 
-# Kopier GNN-output inn i imaget (enten fra repo eller fra artifact-download i workflow)
+# Copy GNN output directory
 COPY symbiose_gnn_output /app/symbiose_gnn_output
 
 ENV PORT=8082
@@ -25,3 +24,4 @@ ENV GNN_OUTPUT_DIR=/app/symbiose_gnn_output
 EXPOSE 8082
 
 CMD ["uvicorn", "symbiose_query_api:app", "--host", "0.0.0.0", "--port", "8082"]
+
