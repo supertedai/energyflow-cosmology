@@ -25,20 +25,12 @@ def qdrant_ingest(text: str, source: str):
 
 
 def qdrant_search(query: str, limit: int = 5):
-    if not ENABLE_QDRANT:
-        return {
-            "status": "qdrant_disabled_stub",
-            "operation": "search",
-            "query": query,
-            "limit": limit,
-            "results": [],
-            "message": "Qdrant search er deaktivert lokalt."
-        }
-
-    return {
-        "status": "qdrant_enabled_but_not_implemented",
-        "operation": "search"
-    }
+    """
+    Use the rag_router's rag_search function for actual search.
+    This is a compatibility wrapper.
+    """
+    from apis.unified_api.routers.rag_router import rag_search
+    return rag_search(query, limit)
 
 
 def qdrant_graph_search(query: str, limit: int = 5):

@@ -1,10 +1,12 @@
 # symbiose_gnn/config.py
 
+import os
+
 config = {
-    "neo4j_uri": "neo4j+s://119e751c.databases.neo4j.io",
-    "neo4j_user": "neo4j",
-    "neo4j_password": "N-HPl8pKFVwsMgCzydGI26dsgJAMOP1ss6r1NhiHNjs",
-    "neo4j_database": "neo4j",
+    "neo4j_uri": os.getenv("NEO4J_URI", "neo4j+s://119e751c.databases.neo4j.io"),
+    "neo4j_user": os.getenv("NEO4J_USER", "neo4j"),
+    "neo4j_password": os.getenv("NEO4J_PASSWORD"),
+    "neo4j_database": os.getenv("NEO4J_DATABASE", "neo4j"),
     "output_dir": "symbiose_gnn_output",
     "embedding_dim": 64
 }

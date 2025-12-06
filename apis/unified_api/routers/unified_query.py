@@ -1,30 +1,52 @@
-# FILE: /Users/morpheus/energyflow-cosmology/apis/unified_api/routers/unified_query.py
+# apis/unified_api/routers/unified_query.py
 
 from fastapi import APIRouter, HTTPException
-from typing import Dict, Any
+from apis.unified_api.routers.rag_router import rag_search
+from apis.unified_api.clients.neo4j_client import run_query, driver
+from datetime import datetime
 
-from apis.unified_api.routers.rag_router import rag_search_internal
-from apis.unified_api.routers.neo4j import run_cypher
+router = APIRouter()
 
-router = APIRouter(tags=["Unified Query"])
 
 @router.post("/unified_query")
-def unified_query(payload: Dict[str, Any]):
-    query = payload.get("query")
+def unified_query(payload: dict):
+
+    query = payload.get("query", "").strip()
+    
     if not query:
-        raise HTTPException(status_code=400, detail="Missing 'query'")
+        raise HTTPException(status_code=400, detail="Missing 'query' field")
 
-    rag = rag_search_internal(query=query)
+    # -------------------------------------------------------
+    # 1. Neo4j
+    # -------------------------------------------------------
+    neo4j_enabled = driver is not None
+    neo4j_result = None
+    
+    if neo4j_enabled:
+        try:
+            neo4j_result = run_query(query)
+        except Exception as e:
+            neo4j_enabled = False
+            neo4j_result = {"error": str(e)}
 
-    try:
-        neo = run_cypher("RETURN 1 AS ok")
-    except Exception:
-        neo = {"neo4j": "error"}
+    # -------------------------------------------------------
+    # 2. RAG (Qdrant)
+    # -------------------------------------------------------
+    rag_result = rag_search(query)
 
+    # -------------------------------------------------------
+    # 3. Combined response
+    # -------------------------------------------------------
     return {
+        "timestamp": datetime.utcnow().isoformat() + "Z",
         "query": query,
-        "rag": rag,
-        "neo4j": neo,
-        "semantic": {"enabled": False},
+        "neo4j": {
+            "enabled": neo4j_enabled,
+            "result": neo4j_result,
+        },
+        "rag": rag_result,
+        "semantic": {
+            "enabled": False
+        }
     }
 
