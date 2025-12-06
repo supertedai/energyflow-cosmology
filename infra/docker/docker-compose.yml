@@ -21,26 +21,37 @@ services:
     ports:
       - "8080:8080"
     environment:
+      # OpenAI
       OPENAI_API_KEY: ${OPENAI_API_KEY}
+      EMBEDDING_MODEL: ${EMBEDDING_MODEL:-text-embedding-3-large}
+      EMBEDDING_DIM: ${EMBEDDING_DIM:-3072}
 
-      # ---- Cloud Qdrant ONLY ----
+      # Qdrant Cloud
       QDRANT_URL: ${QDRANT_URL}
       QDRANT_API_KEY: ${QDRANT_API_KEY}
-      QDRANT_COLLECTION: ${QDRANT_COLLECTION}
+      QDRANT_COLLECTION: ${QDRANT_COLLECTION:-efc}
 
-      # ---- Neo4j Cloud ----
+      # Neo4j Cloud (Aura)
       NEO4J_URI: ${NEO4J_URI}
       NEO4J_USER: ${NEO4J_USER}
       NEO4J_PASSWORD: ${NEO4J_PASSWORD}
+      NEO4J_DATABASE: ${NEO4J_DATABASE:-neo4j}
 
-      # ---- Feature toggles ----
-      ENABLE_QDRANT: ${ENABLE_QDRANT}
-      ENABLE_NEO4J: ${ENABLE_NEO4J}
-      ENABLE_EMBED: ${ENABLE_EMBED}
+      # Feature toggles
+      ENABLE_QDRANT: ${ENABLE_QDRANT:-1}
+      ENABLE_NEO4J: ${ENABLE_NEO4J:-1}
+      ENABLE_EMBED: ${ENABLE_EMBED:-1}
 
+    volumes:
+      - ../../symbiose_gnn_output:/app/symbiose_gnn_output:ro
     depends_on:
       - neo4j
     restart: always
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
 
   query-api:
     build:

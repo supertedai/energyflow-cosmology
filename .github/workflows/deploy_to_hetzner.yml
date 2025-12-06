@@ -29,6 +29,23 @@ jobs:
             git fetch --all
             git reset --hard origin/main
 
+            echo "=== Creating .env file from secrets ==="
+            cat > /opt/symbiose/repo/.env << 'EOF'
+            NEO4J_URI=${{ secrets.NEO4J_URI }}
+            NEO4J_USER=${{ secrets.NEO4J_USER }}
+            NEO4J_PASSWORD=${{ secrets.NEO4J_PASSWORD }}
+            NEO4J_DATABASE=neo4j
+            QDRANT_URL=${{ secrets.QDRANT_URL }}
+            QDRANT_API_KEY=${{ secrets.QDRANT_API_KEY }}
+            QDRANT_COLLECTION=efc
+            OPENAI_API_KEY=${{ secrets.OPENAI_API_KEY }}
+            EMBEDDING_MODEL=text-embedding-3-large
+            EMBEDDING_DIM=3072
+            ENABLE_QDRANT=1
+            ENABLE_NEO4J=1
+            ENABLE_EMBED=1
+            EOF
+
             echo "=== Forcibly stopping legacy containers (safety) ==="
             docker stop unified-api || true
             docker rm unified-api || true

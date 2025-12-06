@@ -52,35 +52,9 @@ This note captures the end-state intent for the Symbiosis runtime across cloud s
 - [ ] Train and export GNN embeddings once the graph is live.
 - [ ] Expose services via Hetzner reverse proxy with TLS; restrict inbound/egress as needed.
 
-## Current Status (6. desember 2025)
+## Current Status (local snapshot)
 
-### ✅ FUNGERENDE
-- **Qdrant Cloud**: Tilkoblet og operativ via HTTPS API (bf12db8d...us-east4-0.gcp.cloud.qdrant.io)
-- **Neo4j Aura**: Tilkoblet (119e751c.databases.neo4j.io), **10,183 noder** aktive
-- **Unified API**: Kjører på port 8080 med `.env` loaded
-- **Semantic Vector Search**: Implementert med OpenAI text-embedding-3-large (3072-dim)
-- **RAG Endpoint**: `/rag/search` returnerer ekte similarity scores (cosine distance)
-- **Graph-RAG Endpoint**: `/graph-rag/search` kombinerer Neo4j struktur + Qdrant semantikk
-- **Unified Query**: `/unified_query` POST endpoint for kombinert søk
-- **GNN**: Artefakter i `symbiose_gnn_output/` lastes OK (16,576 parametere, 64-dim embeddings)
-
-### 🔄 I ARBEID
-- **RAG Kvalitet**: Ny `tools/rag_ingest_clean.py` opprettet for clean text extraction
-  - Problem: Eksisterende Qdrant data har full JSON-LD som `text` (ikke description)
-  - Løsning: Extraherer `description`/`summary` felt, chunker 300-800 chars, dedup via hash
-  - Status: Script ferdig, venter på re-ingest (tar tid pga OpenAI API-kall per chunk)
-  
-- **Ingest Pipeline**: `apis/unified_api/clients/qdrant_client.py` oppdatert med:
-  - Smart chunking (600 chars, 100 overlap, sentence boundary detection)
-  - Hash-basert deduplication
-  - Rik metadata (layer, doi, title, description, source_type, section)
-
-### 🚧 BLOKKERE
-- **Re-ingest tid**: OpenAI embeddings tar ~1-2 sek per chunk (100+ filer = lang kjøretid)
-- **Neo4j edges**: Grafen har 5 noder men 0 kanter (trenger data seeding)
-
-### 📋 NESTE STEG
-1. Kjør `tools/rag_ingest_clean.py` i bakgrunnen (tar 10-30 min)
-2. Seed Neo4j med `neo4j/*.cypher` filer
-3. Test Graph-RAG hybrid search med begge tjenester aktive
-4. Tren GNN på full Neo4j graf
+- **Qdrant / Neo4j**: Ikke konfigurert lokalt (ingen `QDRANT_*` eller `NEO4J_*` env vars satt). RAG/Graph-RAG kjører derfor i stub/degradert modus.
+- **Unified API**: Kan startes, men graf- og RAG-endepunkter krever at env-sett og tjenester er live.
+- **GNN**: Artefakter i `symbiose_gnn_output/` lastes OK (16 576 parametere, 64-dim embeddings fra 5 noder). Ny trening krever Neo4j-tilkobling fra `symbiose_gnn/data_loader.py`.
+- **Ingest**: Repo-ingest til Qdrant ikke kjørt her; krever aktive nøkler og modellvalg (stub eller ekte embeddings).
