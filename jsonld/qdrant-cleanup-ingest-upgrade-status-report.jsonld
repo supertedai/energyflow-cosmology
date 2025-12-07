@@ -1,0 +1,8 @@
+{
+  "@context": "https://schema.org",
+  "@type": "CreativeWork",
+  "identifier": "qdrant-cleanup-ingest-upgrade-status-report",
+  "name": "Qdrant Cleanup & Ingest Upgrade - Status Report",
+  "description": "## \u2705 Completed Tasks",
+  "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/meta/symbiosis/QDRANT_CLEANUP_REPORT.md"
+}

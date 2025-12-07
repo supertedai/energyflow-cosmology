@@ -1,0 +1,8 @@
+{
+  "@context": "https://schema.org",
+  "@type": "CreativeWork",
+  "identifier": "production-readiness-checklist",
+  "name": "\ud83c\udfaf Production Readiness Checklist",
+  "description": "**Status:** 6. desember 2025",
+  "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/docs/PRODUCTION_READINESS.md"
+}

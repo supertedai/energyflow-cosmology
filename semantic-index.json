@@ -1,5 +1,11 @@
 [
   {
+    "title": "\ud83c\udfaf Production Readiness Checklist",
+    "description": "**Status:** 6. desember 2025",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/docs/PRODUCTION_READINESS.md",
+    "slug": "production-readiness-checklist"
+  },
+  {
     "title": "index",
     "description": "",
     "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/docs/index.jsonld",
@@ -16,6 +22,18 @@
     "description": "This directory contains all human-readable documentation for the Energy-Flow Cosmology (EFC) project. It provides a clear overview of theory, methods, meta-architecture, and supporting materials. The structure is designed to align with the semantic layers of the repository and the public metadata endpoints.",
     "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/docs/README.md",
     "slug": "documentation"
+  },
+  {
+    "title": "\ud83e\udde0 GNN-Hybrid Graph-RAG \u2013 Komplett Implementering",
+    "description": "**Status:** \u2705 **Produksjonsklar**",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/docs/GNN_HYBRID_IMPLEMENTATION.md",
+    "slug": "gnn-hybrid-graph-rag-komplett-implementering"
+  },
+  {
+    "title": "\ud83d\udd17 GNN Bridge Implementation \u2013 Den Siste Broen",
+    "description": "**Dato:** 6. desember 2025",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/docs/GNN_BRIDGE.md",
+    "slug": "gnn-bridge-implementation-den-siste-broen"
   },
   {
     "title": "Docs",
@@ -1296,6 +1314,18 @@
     "slug": "index"
   },
   {
+    "title": "Symbiosis Cloud Context (Qdrant, Neo4j, Graph-RAG, GNN, Hetzner)",
+    "description": "This note captures the end-state intent for the Symbiosis runtime across cloud services and the Hetzner runtime-master. It aligns vector memory (Qdrant Cloud), graph memory (Neo4j Aura or self-hosted), Graph-RAG APIs, GNN embeddings, and the Hetzner control plane.",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/meta/symbiosis/CLOUD_CONTEXT.md",
+    "slug": "symbiosis-cloud-context-qdrant-neo4j-graph-rag-gnn-hetzner"
+  },
+  {
+    "title": "Qdrant Cleanup & Ingest Upgrade - Status Report",
+    "description": "## \u2705 Completed Tasks",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/meta/symbiosis/QDRANT_CLEANUP_REPORT.md",
+    "slug": "qdrant-cleanup-ingest-upgrade-status-report"
+  },
+  {
     "title": "Symbiosis Runtime Architecture",
     "description": "The Symbiosis subsystem forms the core runtime environment of the EFC ecosystem.",
     "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/meta/symbiosis/architecture.md",
@@ -1312,6 +1342,12 @@
     "description": "The *Symbiosis* subsystem is the cognitive and computational backbone that integrates",
     "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/meta/symbiosis/README.md",
     "slug": "symbiosis-runtime-layer"
+  },
+  {
+    "title": "GNN Training Report - Symbiose",
+    "description": "**Date:** 2025-12-06",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/meta/symbiosis/GNN_TRAINING_REPORT.md",
+    "slug": "gnn-training-report-symbiose"
   },
   {
     "title": "symbiosis_metadata",

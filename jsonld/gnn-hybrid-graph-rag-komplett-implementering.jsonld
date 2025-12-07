@@ -1,0 +1,8 @@
+{
+  "@context": "https://schema.org",
+  "@type": "CreativeWork",
+  "identifier": "gnn-hybrid-graph-rag-komplett-implementering",
+  "name": "\ud83e\udde0 GNN-Hybrid Graph-RAG \u2013 Komplett Implementering",
+  "description": "**Status:** \u2705 **Produksjonsklar**",
+  "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/docs/GNN_HYBRID_IMPLEMENTATION.md"
+}

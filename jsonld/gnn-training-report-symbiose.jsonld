@@ -1,0 +1,8 @@
+{
+  "@context": "https://schema.org",
+  "@type": "CreativeWork",
+  "identifier": "gnn-training-report-symbiose",
+  "name": "GNN Training Report - Symbiose",
+  "description": "**Date:** 2025-12-06",
+  "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/meta/symbiosis/GNN_TRAINING_REPORT.md"
+}

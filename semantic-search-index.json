@@ -1,5 +1,20 @@
 [
   {
+    "slug": "production-readiness-checklist",
+    "title": "\ud83c\udfaf Production Readiness Checklist",
+    "keywords": [
+      "\ud83c\udfaf",
+      "production",
+      "readiness",
+      "checklist",
+      "**status:**",
+      "6.",
+      "desember",
+      "2025"
+    ],
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/docs/PRODUCTION_READINESS.md"
+  },
+  {
     "slug": "index",
     "title": "index",
     "keywords": [
@@ -72,6 +87,41 @@
       "endpoints."
     ],
     "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/docs/README.md"
+  },
+  {
+    "slug": "gnn-hybrid-graph-rag-komplett-implementering",
+    "title": "\ud83e\udde0 GNN-Hybrid Graph-RAG \u2013 Komplett Implementering",
+    "keywords": [
+      "\ud83e\udde0",
+      "gnn-hybrid",
+      "graph-rag",
+      "\u2013",
+      "komplett",
+      "implementering",
+      "**status:**",
+      "\u2705",
+      "**produksjonsklar**"
+    ],
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/docs/GNN_HYBRID_IMPLEMENTATION.md"
+  },
+  {
+    "slug": "gnn-bridge-implementation-den-siste-broen",
+    "title": "\ud83d\udd17 GNN Bridge Implementation \u2013 Den Siste Broen",
+    "keywords": [
+      "\ud83d\udd17",
+      "gnn",
+      "bridge",
+      "implementation",
+      "\u2013",
+      "den",
+      "siste",
+      "broen",
+      "**dato:**",
+      "6.",
+      "desember",
+      "2025"
+    ],
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/docs/GNN_BRIDGE.md"
   },
   {
     "slug": "docs",
@@ -2932,6 +2982,78 @@
     "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/meta/architecture/index.md"
   },
   {
+    "slug": "symbiosis-cloud-context-qdrant-neo4j-graph-rag-gnn-hetzner",
+    "title": "Symbiosis Cloud Context (Qdrant, Neo4j, Graph-RAG, GNN, Hetzner)",
+    "keywords": [
+      "symbiosis",
+      "cloud",
+      "context",
+      "(qdrant,",
+      "neo4j,",
+      "graph-rag,",
+      "gnn,",
+      "hetzner)",
+      "this",
+      "note",
+      "captures",
+      "the",
+      "end-state",
+      "intent",
+      "for",
+      "the",
+      "symbiosis",
+      "runtime",
+      "across",
+      "cloud",
+      "services",
+      "and",
+      "the",
+      "hetzner",
+      "runtime-master.",
+      "it",
+      "aligns",
+      "vector",
+      "memory",
+      "(qdrant",
+      "cloud),",
+      "graph",
+      "memory",
+      "(neo4j",
+      "aura",
+      "or",
+      "self-hosted),",
+      "graph-rag",
+      "apis,",
+      "gnn",
+      "embeddings,",
+      "and",
+      "the",
+      "hetzner",
+      "control",
+      "plane."
+    ],
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/meta/symbiosis/CLOUD_CONTEXT.md"
+  },
+  {
+    "slug": "qdrant-cleanup-ingest-upgrade-status-report",
+    "title": "Qdrant Cleanup & Ingest Upgrade - Status Report",
+    "keywords": [
+      "qdrant",
+      "cleanup",
+      "&",
+      "ingest",
+      "upgrade",
+      "-",
+      "status",
+      "report",
+      "##",
+      "\u2705",
+      "completed",
+      "tasks"
+    ],
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/meta/symbiosis/QDRANT_CLEANUP_REPORT.md"
+  },
+  {
     "slug": "symbiosis-runtime-architecture",
     "title": "Symbiosis Runtime Architecture",
     "keywords": [
@@ -2981,6 +3103,20 @@
       "integrates"
     ],
     "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/meta/symbiosis/README.md"
+  },
+  {
+    "slug": "gnn-training-report-symbiose",
+    "title": "GNN Training Report - Symbiose",
+    "keywords": [
+      "gnn",
+      "training",
+      "report",
+      "-",
+      "symbiose",
+      "**date:**",
+      "2025-12-06"
+    ],
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/meta/symbiosis/GNN_TRAINING_REPORT.md"
   },
   {
     "slug": "symbiosis-metadata",

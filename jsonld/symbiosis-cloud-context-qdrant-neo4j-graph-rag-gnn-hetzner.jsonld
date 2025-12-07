@@ -1,0 +1,8 @@
+{
+  "@context": "https://schema.org",
+  "@type": "CreativeWork",
+  "identifier": "symbiosis-cloud-context-qdrant-neo4j-graph-rag-gnn-hetzner",
+  "name": "Symbiosis Cloud Context (Qdrant, Neo4j, Graph-RAG, GNN, Hetzner)",
+  "description": "This note captures the end-state intent for the Symbiosis runtime across cloud services and the Hetzner runtime-master. It aligns vector memory (Qdrant Cloud), graph memory (Neo4j Aura or self-hosted), Graph-RAG APIs, GNN embeddings, and the Hetzner control plane.",
+  "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/meta/symbiosis/CLOUD_CONTEXT.md"
+}
