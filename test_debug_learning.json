@@ -1,0 +1,50 @@
+{
+  "patterns": {
+    "Language cues: 2 hits": {
+      "pattern": "Language cues: 2 hits",
+      "pattern_type": "language_cue",
+      "domains": [
+        "economics"
+      ],
+      "success_count": 1,
+      "total_count": 1,
+      "average_score": 4.0,
+      "confidence": 0.0,
+      "learned_at": "2025-12-11T19:49:08.855927",
+      "last_seen": "2025-12-11T19:49:08.855931"
+    },
+    "Logical: matches 'hvorfor.*stabiliserer'": {
+      "pattern": "Logical: matches 'hvorfor.*stabiliserer'",
+      "pattern_type": "logical_pattern",
+      "domains": [
+        "economics"
+      ],
+      "success_count": 1,
+      "total_count": 1,
+      "average_score": 4.0,
+      "confidence": 0.0,
+      "learned_at": "2025-12-11T19:49:08.855937",
+      "last_seen": "2025-12-11T19:49:08.855939"
+    }
+  },
+  "domains": {
+    "economics": {
+      "domain": "economics",
+      "observations": 1,
+      "successful_efc_uses": 1,
+      "average_efc_score": 4.0,
+      "learned_patterns": [
+        "hvorfor stabiliserer",
+        "stabiliserer markedet",
+        "markedet seg",
+        "seg ved",
+        "ved likevekt?",
+        "hvorfor",
+        "stabiliserer",
+        "markedet",
+        "likevekt?"
+      ],
+      "threshold_adjustment": 0.0
+    }
+  }
+}

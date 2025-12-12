@@ -1,0 +1,15 @@
+{
+  "timestamp": "2025-12-10T11:58:26.481042",
+  "root_dir": "theory",
+  "total_files": 33,
+  "processed": 33,
+  "successful": 33,
+  "errors": 0,
+  "skipped": 0,
+  "statistics": {
+    "chunks": 84,
+    "concepts": 191,
+    "tokens": 5151
+  },
+  "recent_errors": []
+}

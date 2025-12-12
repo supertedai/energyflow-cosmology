@@ -73,13 +73,24 @@ def deduplicate_collection():
     
     for content_hash, point_list in hash_to_points.items():
         if len(point_list) > 1:
-            # Keep first, delete rest
-            keep_id = point_list[0].id
-            delete_ids = [p.id for p in point_list[1:]]
+            # Keep the one WITH node_id (newest), delete rest
+            # Find point with node_id
+            keep_point = None
+            for p in point_list:
+                if p.payload and p.payload.get("node_id"):
+                    keep_point = p
+                    break
+            
+            # If no node_id found, keep first as fallback
+            if keep_point is None:
+                keep_point = point_list[0]
+            
+            keep_id = keep_point.id
+            delete_ids = [p.id for p in point_list if p.id != keep_id]
             duplicates_to_delete.extend(delete_ids)
             
             print(f"🔍 Hash {content_hash[:8]}... has {len(point_list)} duplicates")
-            print(f"   Keeping: {keep_id}")
+            print(f"   Keeping: {keep_id} (has node_id: {bool(keep_point.payload.get('node_id'))})")
             print(f"   Deleting: {delete_ids}")
         else:
             unique_count += 1

@@ -14,6 +14,34 @@ It functions as the **single source of truth** for:
 
 **Keywords:** energy–entropy field, grid-level dynamics, formal specification, symbiotic runtime, knowledge graph, vector-graph retrieval, open-science architecture, JSON-LD, reproducibility.
 
+---
+
+## 🔒 **NEW: Unified Ingestion Pipeline (Orchestrator v2)**
+
+**ALL new data MUST go through the deterministic ingestion pipeline.**
+
+This ensures:
+- ✅ Perfect Qdrant ↔ Neo4j sync
+- ✅ Token-based chunking (512 tokens, 50 overlap)
+- ✅ LLM concept extraction (GPT-4o-mini)
+- ✅ Rollback safety on failures
+
+**Quick Start:**
+```bash
+# Ingest single file
+python tools/orchestrator_v2.py --input README.md --type document
+
+# Start ingestion API
+uvicorn tools.ingestion_api:app --port 8001
+
+# Batch ingest directory
+python tools/batch_ingest.py --dir theory/
+```
+
+**Full Documentation:** [tools/INGESTION_PIPELINE.md](tools/INGESTION_PIPELINE.md)
+
+---
+
 If you are new — start here:  
 https://github.com/supertedai/energyflow-cosmology/blob/main/START-HERE.md
 

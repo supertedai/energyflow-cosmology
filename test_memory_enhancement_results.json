@@ -1,0 +1,62 @@
+{
+  "test_type": "memory_enhancement",
+  "session_id": "test_memory_enhancement",
+  "results": [
+    {
+      "query": "Who am I?",
+      "was_enhanced": true,
+      "final_answer": "Du heter Morpheus, og du er arkitekten bak Energy-Flow Cosmology-rammeverket. Du er ogs\u00e5 ekspert p\u00e5 EFC-arkitektur ved bruk av Neo4j og Qdrant, og du forsker p\u00e5 kosmologi.",
+      "memory_stats": {
+        "canonical_facts": 5,
+        "context_chunks": 2,
+        "override_decision": "MEMORY_ENHANCED"
+      }
+    },
+    {
+      "query": "What is my role in this project?",
+      "was_enhanced": true,
+      "final_answer": "Som arkitekt av Energy-Flow Cosmology-rammeverket har du en sentral rolle i dette prosjektet. Din ekspertise innen EFC-arkitektur, spesielt med bruk av Neo4j og Qdrant, gir deg en unik posisjon til \u00e5 forme og implementere de tekniske aspektene av prosjektet. I tillegg til din forskning innen kosmologi, bidrar din dybdekunnskap til \u00e5 utvikle og forbedre prosjektets fundamentale teorier og modeller.",
+      "memory_stats": {
+        "canonical_facts": 5,
+        "context_chunks": 0,
+        "override_decision": "MEMORY_ENHANCED"
+      }
+    },
+    {
+      "query": "What databases does EFC use?",
+      "was_enhanced": true,
+      "final_answer": "EFC (Enhanced Framework for Connectivity) utilizes Neo4j and Qdrant as its primary databases. Neo4j is a graph database that excels in managing and querying complex relationships, making it ideal for EFC's architecture. Qdrant, on the other hand, is designed for vector similarity search, which complements the capabilities of Neo4j in handling large-scale data efficiently. Together, these databases form a robust foundation for the EFC system, enabling it to leverage both graph-based and vector-based data processing.",
+      "memory_stats": {
+        "canonical_facts": 5,
+        "context_chunks": 0,
+        "override_decision": "MEMORY_ENHANCED"
+      }
+    },
+    {
+      "query": "How should I ingest new data into the system?",
+      "was_enhanced": true,
+      "final_answer": "For \u00e5 innta nye data i systemet, m\u00e5 du bruke `orchestrator_v2.py` pipeline, som er den foreskrevne metoden for all datainntak. S\u00f8rg for at du f\u00f8lger de spesifikke retningslinjene for denne pipelinen for \u00e5 sikre at dataene blir behandlet korrekt. \n\nSom arkitekt av Energy-Flow Cosmology (EFC) rammeverket, er det ogs\u00e5 viktig \u00e5 vurdere hvordan de nye dataene vil integreres med de eksisterende komponentene i EFC-systemet, spesielt komponent 2 og komponent 3. Hvis du har spesifikke sp\u00f8rsm\u00e5l om hvordan dataene skal struktureres eller lagres i Neo4j og Qdrant, kan jeg hjelpe deg med det ogs\u00e5.",
+      "memory_stats": {
+        "canonical_facts": 5,
+        "context_chunks": 0,
+        "override_decision": "MEMORY_ENHANCED"
+      }
+    },
+    {
+      "query": "Tell me about the Energy-Flow Cosmology framework",
+      "was_enhanced": true,
+      "final_answer": "Energy-Flow Cosmology (EFC) is a framework that you have architected, which focuses on understanding the universe through the lens of energy flow and its interactions. This innovative approach integrates various components to model cosmic phenomena effectively.\n\nIn your EFC framework, you utilize Neo4j and Qdrant, showcasing your expertise in architecture and data management. These tools allow for sophisticated data representation and retrieval, which are essential for analyzing complex cosmological systems.\n\nThe framework consists of several key components, including at least three distinct elements that contribute to its overall functionality. Each component plays a vital role in modeling and simulating the energy dynamics that govern cosmic structures and behaviors.\n\nYour research in cosmology further enriches the EFC framework, as it combines theoretical insights with practical applications, making it a significant contribution to the field. If you have specific aspects of EFC that you would like to delve into further, feel free to ask!",
+      "memory_stats": {
+        "canonical_facts": 5,
+        "context_chunks": 0,
+        "override_decision": "MEMORY_ENHANCED"
+      }
+    }
+  ],
+  "summary": {
+    "total": 5,
+    "enhanced": 5,
+    "raw": 0,
+    "errors": 0
+  }
+}

@@ -1,0 +1,15 @@
+{"timestamp": "2025-12-10T14:02:35.220014", "user_message": "Hei! Jeg heter Morten og er gift med Elisabet", "assistant_message": "Tusen takk for at du delte det \u2013 jeg har n\u00e5 registrert at du heter Morten og er gift med Elisabet.", "importance": "high", "session_id": null}
+{"timestamp": "2025-12-10T14:03:34.197206", "user_message": "Hei! Jeg heter Morten og er gift med Elisabet", "assistant_message": "Tusen takk for at du delte det \u2013 jeg har n\u00e5 registrert at du heter Morten og er gift med Elisabet.", "importance": "high", "session_id": null}
+{"timestamp": "2025-12-10T14:11:13.869320", "user_message": "Jeg liker \u00e5 drikke kaffe om morgenen", "assistant_message": "Notert! Jeg husker at du liker kaffe om morgenen.", "importance": "medium", "session_id": null}
+{"timestamp": "2025-12-10T14:11:40.093507", "user_message": "Jeg jobber som forsker ved Universitetet i Oslo og spesialiserer meg i kosmologi", "assistant_message": "Interessant! Jeg noterer at du er kosmologiforsker ved UiO.", "importance": "high", "session_id": null}
+{"timestamp": "2025-12-10T15:27:16.577010", "user_message": "Test MCP fix", "assistant_message": "Testing...", "importance": "medium", "session_id": null}
+{"timestamp": "2025-12-10T15:30:42.285124", "user_message": "Test MCP manual", "assistant_message": "Testing...", "importance": "medium", "session_id": null}
+{"timestamp": "2025-12-10T20:00:51.819991", "user_message": "What is the entropy gradient in EFC?", "assistant_message": "The entropy gradient is the fundamental driver of cosmic evolution in Energy-Flow Cosmology", "importance": "medium", "session_id": null}
+{"timestamp": "2025-12-10T20:01:24.192184", "user_message": "What is entropy?", "assistant_message": "Entropy measures disorder in thermodynamics", "importance": "medium", "session_id": null}
+{"timestamp": "2025-12-10T20:04:04.360010", "user_message": "What is entropy?", "assistant_message": "Entropy measures disorder...", "importance": "medium", "session_id": null}
+{"timestamp": "2025-12-10T20:04:48.019177", "user_message": "Hva er entropi?", "assistant_message": "Entropi m\u00e5ler uorden i systemet...", "importance": "medium", "session_id": null}
+{"timestamp": "2025-12-10T20:06:57.465855", "user_message": "Tell me about EFC", "assistant_message": "EFC (Energy Flow Cosmology) is a theoretical framework...", "importance": "medium", "session_id": null}
+{"timestamp": "2025-12-10T20:13:07.901291", "user_message": "Hva heter jeg?", "assistant_message": "Du heter Morten Gr\u00f8dem.", "importance": "high", "session_id": null}
+{"timestamp": "2025-12-10T20:15:43.766658", "user_message": "What is entropy in EFC?", "assistant_message": "Entropy is a fundamental concept in EFC theory.", "importance": "medium", "session_id": null}
+{"timestamp": "2025-12-10T20:31:30.475306", "user_message": "Jeg vil kalle deg Opus", "assistant_message": "Tusen takk! Jeg vil gjerne bli kalt Opus.", "importance": "high", "session_id": null}
+{"timestamp": "2025-12-10T20:48:31.369624", "user_message": "Jeg er gift med Elisabet", "assistant_message": "Takk for at du deler det!", "importance": "high", "session_id": null}

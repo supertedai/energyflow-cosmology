@@ -1,0 +1,261 @@
+{
+  "export_timestamp": "2025-12-10T18:31:36.904950",
+  "node_count": 1959,
+  "edge_count": 2434,
+  "include_chunks": false,
+  "relationship_types": [
+    {
+      "rel_type": "MENTIONS",
+      "count": 3209
+    },
+    {
+      "rel_type": "PART_OF",
+      "count": 633
+    },
+    {
+      "rel_type": "SUPPORTS",
+      "count": 327
+    },
+    {
+      "rel_type": "RELATES_TO",
+      "count": 312
+    },
+    {
+      "rel_type": "ENABLES",
+      "count": 304
+    },
+    {
+      "rel_type": "EXPLAINS",
+      "count": 226
+    },
+    {
+      "rel_type": "DEPENDS_ON",
+      "count": 159
+    },
+    {
+      "rel_type": "CONSTRAINS",
+      "count": 82
+    },
+    {
+      "rel_type": "IMPLIES",
+      "count": 79
+    },
+    {
+      "rel_type": "DERIVES_FROM",
+      "count": 53
+    },
+    {
+      "rel_type": "INCLUDES",
+      "count": 51
+    },
+    {
+      "rel_type": "CONTAINS",
+      "count": 48
+    },
+    {
+      "rel_type": "AUTHORED_BY",
+      "count": 25
+    },
+    {
+      "rel_type": "CAUSES",
+      "count": 24
+    },
+    {
+      "rel_type": "CREATED_BY",
+      "count": 12
+    },
+    {
+      "rel_type": "CONTRADICTS",
+      "count": 12
+    },
+    {
+      "rel_type": "ENABLED",
+      "count": 9
+    },
+    {
+      "rel_type": "HAS_VERSION",
+      "count": 6
+    },
+    {
+      "rel_type": "ENABLED_BY",
+      "count": 4
+    },
+    {
+      "rel_type": "PREDICTS",
+      "count": 4
+    },
+    {
+      "rel_type": "AUTHORED",
+      "count": 4
+    },
+    {
+      "rel_type": "CALLS",
+      "count": 4
+    },
+    {
+      "rel_type": "PRODUCES",
+      "count": 3
+    },
+    {
+      "rel_type": "EXTENDS",
+      "count": 3
+    },
+    {
+      "rel_type": "DEFINES",
+      "count": 3
+    },
+    {
+      "rel_type": "AUTHOR_OF",
+      "count": 3
+    },
+    {
+      "rel_type": "USES",
+      "count": 3
+    },
+    {
+      "rel_type": "HAS_PART",
+      "count": 3
+    },
+    {
+      "rel_type": "CONTRIBUTES_TO",
+      "count": 2
+    },
+    {
+      "rel_type": "INTERACTS_WITH",
+      "count": 2
+    },
+    {
+      "rel_type": "USES_FORMAT",
+      "count": 2
+    },
+    {
+      "rel_type": "IS_A",
+      "count": 2
+    },
+    {
+      "rel_type": "SPECIFIES",
+      "count": 2
+    },
+    {
+      "rel_type": "IMPLEMENTS",
+      "count": 2
+    },
+    {
+      "rel_type": "DOCUMENTED_IN",
+      "count": 2
+    },
+    {
+      "rel_type": "CREATES",
+      "count": 2
+    },
+    {
+      "rel_type": "TRIGGERS",
+      "count": 1
+    },
+    {
+      "rel_type": "REFINES",
+      "count": 1
+    },
+    {
+      "rel_type": "SUSTAINS",
+      "count": 1
+    },
+    {
+      "rel_type": "DRIVES",
+      "count": 1
+    },
+    {
+      "rel_type": "BALANCES",
+      "count": 1
+    },
+    {
+      "rel_type": "CONNECTS_TO",
+      "count": 1
+    },
+    {
+      "rel_type": "MEDIATES",
+      "count": 1
+    },
+    {
+      "rel_type": "REQUIRES",
+      "count": 1
+    },
+    {
+      "rel_type": "CREATED",
+      "count": 1
+    },
+    {
+      "rel_type": "STABILIZES",
+      "count": 1
+    },
+    {
+      "rel_type": "REGULATES",
+      "count": 1
+    },
+    {
+      "rel_type": "COVERS",
+      "count": 1
+    },
+    {
+      "rel_type": "LINKS",
+      "count": 1
+    },
+    {
+      "rel_type": "CONFIRMED_BY",
+      "count": 1
+    },
+    {
+      "rel_type": "BRIDGES",
+      "count": 1
+    },
+    {
+      "rel_type": "CHALLENGES",
+      "count": 1
+    },
+    {
+      "rel_type": "TRACKS",
+      "count": 1
+    },
+    {
+      "rel_type": "GENERATES",
+      "count": 1
+    },
+    {
+      "rel_type": "WRITTEN_TO",
+      "count": 1
+    },
+    {
+      "rel_type": "POPULATES",
+      "count": 1
+    },
+    {
+      "rel_type": "OUTPUTS_TO",
+      "count": 1
+    },
+    {
+      "rel_type": "BOOSTS",
+      "count": 1
+    }
+  ],
+  "degree_statistics": {
+    "min": 0,
+    "max": 458,
+    "avg": 2.0851026952075618,
+    "median": 1.0
+  },
+  "label_distribution": [
+    {
+      "label": "Chunk",
+      "count": 9580
+    },
+    {
+      "label": "Concept",
+      "count": 1959
+    }
+  ],
+  "graph_properties": {
+    "directed": true,
+    "weighted": false,
+    "multigraph": false
+  }
+}

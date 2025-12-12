@@ -1,0 +1,532 @@
+{"source_id": 0, "target_id": 3694, "rel_type": "PART_OF", "source_name": "Cosmic Dynamics", "target_name": "Energy-Flow Cosmology"}
+{"source_id": 0, "target_id": 3694, "rel_type": "SUPPORTS", "source_name": "Cosmic Dynamics", "target_name": "Energy-Flow Cosmology"}
+{"source_id": 66, "target_id": 69, "rel_type": "PART_OF", "source_name": "Entropy-Driven Spacetime", "target_name": "Thermodynamic Physics"}
+{"source_id": 69, "target_id": 6264, "rel_type": "SUPPORTS", "source_name": "Thermodynamic Physics", "target_name": "Entropy"}
+{"source_id": 132, "target_id": 1426, "rel_type": "PART_OF", "source_name": "Properties Definition", "target_name": "Keywords"}
+{"source_id": 132, "target_id": 7281, "rel_type": "PART_OF", "source_name": "Properties Definition", "target_name": "Encoding Format"}
+{"source_id": 132, "target_id": 8484, "rel_type": "PART_OF", "source_name": "Properties Definition", "target_name": "Author Information"}
+{"source_id": 132, "target_id": 538, "rel_type": "ENABLES", "source_name": "Properties Definition", "target_name": "Array Type"}
+{"source_id": 133, "target_id": 132, "rel_type": "PART_OF", "source_name": "About Array", "target_name": "Properties Definition"}
+{"source_id": 136, "target_id": 2713, "rel_type": "PART_OF", "source_name": "Energy Flow Cosmology", "target_name": "Creative Work"}
+{"source_id": 136, "target_id": 2868, "rel_type": "EXPLAINS", "source_name": "Energy Flow Cosmology", "target_name": "Universal Structures"}
+{"source_id": 136, "target_id": 2113, "rel_type": "SUPPORTS", "source_name": "Energy Flow Cosmology", "target_name": "Thermodynamic Cosmology"}
+{"source_id": 136, "target_id": 2818, "rel_type": "ENABLES", "source_name": "Energy Flow Cosmology", "target_name": "EFC Applications"}
+{"source_id": 136, "target_id": 2819, "rel_type": "ENABLES", "source_name": "Energy Flow Cosmology", "target_name": "EFC Implications"}
+{"source_id": 136, "target_id": 6264, "rel_type": "ENABLES", "source_name": "Energy Flow Cosmology", "target_name": "Entropy"}
+{"source_id": 137, "target_id": 138, "rel_type": "PART_OF", "source_name": "Spacetime Distortion", "target_name": "Cosmological Clusters"}
+{"source_id": 137, "target_id": 8749, "rel_type": "ENABLES", "source_name": "Spacetime Distortion", "target_name": "Energy Flow"}
+{"source_id": 138, "target_id": 2843, "rel_type": "DEPENDS_ON", "source_name": "Cosmological Clusters", "target_name": "EFC Flow Entropy"}
+{"source_id": 138, "target_id": 137, "rel_type": "CAUSES", "source_name": "Cosmological Clusters", "target_name": "Spacetime Distortion"}
+{"source_id": 197, "target_id": 6264, "rel_type": "SUPPORTS", "source_name": "Halo Structures", "target_name": "Entropy"}
+{"source_id": 197, "target_id": 8749, "rel_type": "ENABLES", "source_name": "Halo Structures", "target_name": "Energy Flow"}
+{"source_id": 201, "target_id": 202, "rel_type": "SUPPORTS", "source_name": "schema identifier", "target_name": "schema name"}
+{"source_id": 203, "target_id": 8064, "rel_type": "CONSTRAINS", "source_name": "schema version", "target_name": "schema type"}
+{"source_id": 207, "target_id": 8749, "rel_type": "CONSTRAINS", "source_name": "Spacetime Resistance", "target_name": "Energy Flow"}
+{"source_id": 207, "target_id": 3694, "rel_type": "IMPLIES", "source_name": "Spacetime Resistance", "target_name": "Energy-Flow Cosmology"}
+{"source_id": 342, "target_id": 8751, "rel_type": "SUPPORTS", "source_name": "Dynamic Structure", "target_name": "Entropy Gradient"}
+{"source_id": 344, "target_id": 8749, "rel_type": "PART_OF", "source_name": "Grid Field", "target_name": "Energy Flow"}
+{"source_id": 410, "target_id": 136, "rel_type": "SUPPORTS", "source_name": "Balance", "target_name": "Energy Flow Cosmology"}
+{"source_id": 410, "target_id": 2868, "rel_type": "IMPLIES", "source_name": "Balance", "target_name": "Universal Structures"}
+{"source_id": 475, "target_id": 8749, "rel_type": "IMPLIES", "source_name": "Thermodynamic Spacetime", "target_name": "Energy Flow"}
+{"source_id": 475, "target_id": 8751, "rel_type": "IMPLIES", "source_name": "Thermodynamic Spacetime", "target_name": "Entropy Gradient"}
+{"source_id": 476, "target_id": 474, "rel_type": "CONSTRAINS", "source_name": "Energy Propagation", "target_name": "Spacetime Stability"}
+{"source_id": 533, "target_id": 530, "rel_type": "CAUSES", "source_name": "Energy Density Variations", "target_name": "Fabric of Space-Time"}
+{"source_id": 737, "target_id": 738, "rel_type": "SUPPORTS", "source_name": "Energy-Driven Dynamics", "target_name": "Non-Equilibrium Spacetime"}
+{"source_id": 745, "target_id": 8063, "rel_type": "PART_OF", "source_name": "schema properties", "target_name": "schema context"}
+{"source_id": 748, "target_id": 8749, "rel_type": "EXPLAINS", "source_name": "Entropy in Cosmic Evolution", "target_name": "Energy Flow"}
+{"source_id": 748, "target_id": 136, "rel_type": "SUPPORTS", "source_name": "Entropy in Cosmic Evolution", "target_name": "Energy Flow Cosmology"}
+{"source_id": 748, "target_id": 3694, "rel_type": "SUPPORTS", "source_name": "Entropy in Cosmic Evolution", "target_name": "Energy-Flow Cosmology"}
+{"source_id": 748, "target_id": 136, "rel_type": "IMPLIES", "source_name": "Entropy in Cosmic Evolution", "target_name": "Energy Flow Cosmology"}
+{"source_id": 809, "target_id": 8749, "rel_type": "DEPENDS_ON", "source_name": "Information Flow", "target_name": "Energy Flow"}
+{"source_id": 865, "target_id": 866, "rel_type": "ENABLES", "source_name": "Entropy as a Measure of Disorder", "target_name": "Energy Flow and Complexity"}
+{"source_id": 869, "target_id": 870, "rel_type": "PART_OF", "source_name": "Levels of Consciousness", "target_name": "Separation of Self and I"}
+{"source_id": 935, "target_id": 936, "rel_type": "PART_OF", "source_name": "Main Clusters", "target_name": "Small Clusters"}
+{"source_id": 936, "target_id": 937, "rel_type": "ENABLES", "source_name": "Small Clusters", "target_name": "The Halo"}
+{"source_id": 1007, "target_id": 1008, "rel_type": "SUPPORTS", "source_name": "JSON-LD Context", "target_name": "JSON-LD Type"}
+{"source_id": 1008, "target_id": 7281, "rel_type": "DEPENDS_ON", "source_name": "JSON-LD Type", "target_name": "Encoding Format"}
+{"source_id": 1079, "target_id": 8749, "rel_type": "IMPLIES", "source_name": "Thermodynamic Signals", "target_name": "Energy Flow"}
+{"source_id": 1201, "target_id": 1202, "rel_type": "SUPPORTS", "source_name": "speed of light", "target_name": "Einstein\u2019s theory of special relativity"}
+{"source_id": 1201, "target_id": 1616, "rel_type": "SUPPORTS", "source_name": "speed of light", "target_name": "relativity"}
+{"source_id": 1201, "target_id": 1618, "rel_type": "CONSTRAINS", "source_name": "speed of light", "target_name": "universal expansion"}
+{"source_id": 1201, "target_id": 1203, "rel_type": "ENABLES", "source_name": "speed of light", "target_name": "causality"}
+{"source_id": 1210, "target_id": 344, "rel_type": "DEPENDS_ON", "source_name": "Computational Models", "target_name": "Grid Field"}
+{"source_id": 1211, "target_id": 3769, "rel_type": "SUPPORTS", "source_name": "Thermodynamic Field Definitions", "target_name": "Entropy Field"}
+{"source_id": 1217, "target_id": 8749, "rel_type": "IMPLIES", "source_name": "Cosmic Expansion", "target_name": "Energy Flow"}
+{"source_id": 1220, "target_id": 8065, "rel_type": "PART_OF", "source_name": "data properties", "target_name": "author information"}
+{"source_id": 1223, "target_id": 1224, "rel_type": "EXPLAINS", "source_name": "Energy-Flow Interface", "target_name": "Field Interaction"}
+{"source_id": 1223, "target_id": 1227, "rel_type": "IMPLIES", "source_name": "Energy-Flow Interface", "target_name": "Information Transfer"}
+{"source_id": 1224, "target_id": 1226, "rel_type": "ENABLES", "source_name": "Field Interaction", "target_name": "Cosmic Structure"}
+{"source_id": 1422, "target_id": 6264, "rel_type": "MEASURES", "source_name": "Gravitational Wave Analysis", "target_name": "Entropy"}
+{"source_id": 1423, "target_id": 6264, "rel_type": "PROVIDES_INSIGHT", "source_name": "Cosmic Microwave Background (CMB)", "target_name": "Entropy"}
+{"source_id": 1486, "target_id": 1487, "rel_type": "CONTRADICTS", "source_name": "Singularities", "target_name": "Ultimate Dispersion"}
+{"source_id": 1489, "target_id": 1486, "rel_type": "EXPLAINS", "source_name": "Role of Time", "target_name": "Singularities"}
+{"source_id": 1489, "target_id": 1487, "rel_type": "EXPLAINS", "source_name": "Role of Time", "target_name": "Ultimate Dispersion"}
+{"source_id": 1550, "target_id": 1552, "rel_type": "ENABLES", "source_name": "Energy Flow as a Temporal Anchor", "target_name": "NOW as a Balance Point"}
+{"source_id": 1551, "target_id": 1550, "rel_type": "DEPENDS_ON", "source_name": "Temporal Perception", "target_name": "Energy Flow as a Temporal Anchor"}
+{"source_id": 1555, "target_id": 1551, "rel_type": "IMPLIES", "source_name": "Relativity and Simultaneity", "target_name": "Temporal Perception"}
+{"source_id": 1556, "target_id": 1551, "rel_type": "SUPPORTS", "source_name": "Neural Energy Dynamics", "target_name": "Temporal Perception"}
+{"source_id": 1698, "target_id": 1699, "rel_type": "PART_OF", "source_name": "EFC v2.1 \u2013 Complete Edition", "target_name": "EFC Papers"}
+{"source_id": 1698, "target_id": 5128, "rel_type": "AUTHORED_BY", "source_name": "EFC v2.1 \u2013 Complete Edition", "target_name": "Morten Magnusson"}
+{"source_id": 1698, "target_id": 1700, "rel_type": "ENCODED_IN", "source_name": "EFC v2.1 \u2013 Complete Edition", "target_name": "application/pdf"}
+{"source_id": 1699, "target_id": 2940, "rel_type": "PART_OF", "source_name": "EFC Papers", "target_name": "Formal Specifications"}
+{"source_id": 1699, "target_id": 3694, "rel_type": "SUPPORTS", "source_name": "EFC Papers", "target_name": "Energy-Flow Cosmology"}
+{"source_id": 1831, "target_id": 7285, "rel_type": "SUPPORTS", "source_name": "EFC-S (Structural Domain)", "target_name": "Halo Model of Entropy"}
+{"source_id": 1842, "target_id": 136, "rel_type": "SUPPORTS", "source_name": "Cross-Field Integration", "target_name": "Energy Flow Cosmology"}
+{"source_id": 1842, "target_id": 8846, "rel_type": "SUPPORTS", "source_name": "Cross-Field Integration", "target_name": "Thermodynamic Structure"}
+{"source_id": 1909, "target_id": 3694, "rel_type": "ENABLES", "source_name": "Energy Rate Density", "target_name": "Energy-Flow Cosmology"}
+{"source_id": 2108, "target_id": 2245, "rel_type": "PART_OF", "source_name": "required properties", "target_name": "author object"}
+{"source_id": 2108, "target_id": 2246, "rel_type": "PART_OF", "source_name": "required properties", "target_name": "keywords array"}
+{"source_id": 2108, "target_id": 2247, "rel_type": "PART_OF", "source_name": "required properties", "target_name": "about array"}
+{"source_id": 2108, "target_id": 8067, "rel_type": "PART_OF", "source_name": "required properties", "target_name": "encoding format"}
+{"source_id": 2108, "target_id": 2109, "rel_type": "SUPPORTS", "source_name": "required properties", "target_name": "properties"}
+{"source_id": 2109, "target_id": 874, "rel_type": "PART_OF", "source_name": "properties", "target_name": "url"}
+{"source_id": 2109, "target_id": 3779, "rel_type": "PART_OF", "source_name": "properties", "target_name": "version"}
+{"source_id": 2109, "target_id": 8067, "rel_type": "PART_OF", "source_name": "properties", "target_name": "encoding format"}
+{"source_id": 2109, "target_id": 8068, "rel_type": "PART_OF", "source_name": "properties", "target_name": "keywords"}
+{"source_id": 2112, "target_id": 2713, "rel_type": "IS_A", "source_name": "Formal Specification", "target_name": "Creative Work"}
+{"source_id": 2114, "target_id": 3694, "rel_type": "CONSTRAINS", "source_name": "Spacetime Structure", "target_name": "Energy-Flow Cosmology"}
+{"source_id": 2177, "target_id": 2779, "rel_type": "PART_OF", "source_name": "Master Specification", "target_name": "Directory"}
+{"source_id": 2179, "target_id": 136, "rel_type": "PART_OF", "source_name": "Core Architecture", "target_name": "Energy Flow Cosmology"}
+{"source_id": 2241, "target_id": 3694, "rel_type": "IMPLIES", "source_name": "Entropy-Driven Stability Band", "target_name": "Energy-Flow Cosmology"}
+{"source_id": 2313, "target_id": 2314, "rel_type": "PART_OF", "source_name": "EFC-S Layer", "target_name": "EFC-D Layer"}
+{"source_id": 2315, "target_id": 2313, "rel_type": "DEPENDS_ON", "source_name": "EFC-C Layer", "target_name": "EFC-S Layer"}
+{"source_id": 2379, "target_id": 2381, "rel_type": "PART_OF", "source_name": "Human Contribution", "target_name": "Symbiotic Field"}
+{"source_id": 2380, "target_id": 2381, "rel_type": "PART_OF", "source_name": "System Contribution", "target_name": "Symbiotic Field"}
+{"source_id": 2441, "target_id": 2442, "rel_type": "ENABLES", "source_name": "parallel conceptual fields", "target_name": "cross-domain integration"}
+{"source_id": 2447, "target_id": 2448, "rel_type": "DERIVES_FROM", "source_name": "Variable Effective Light Speed", "target_name": "Entropic Transition States"}
+{"source_id": 2447, "target_id": 2448, "rel_type": "EXPLAINS", "source_name": "Variable Effective Light Speed", "target_name": "Entropic Transition States"}
+{"source_id": 2448, "target_id": 3694, "rel_type": "SUPPORTS", "source_name": "Entropic Transition States", "target_name": "Energy-Flow Cosmology"}
+{"source_id": 2449, "target_id": 2447, "rel_type": "CONSTRAINS", "source_name": "Low-Entropy State (s0)", "target_name": "Variable Effective Light Speed"}
+{"source_id": 2449, "target_id": 2508, "rel_type": "CONSTRAINS", "source_name": "Low-Entropy State (s0)", "target_name": "Effective Speed of Light"}
+{"source_id": 2450, "target_id": 2447, "rel_type": "ENABLES", "source_name": "High-Entropy State (s1)", "target_name": "Variable Effective Light Speed"}
+{"source_id": 2450, "target_id": 2508, "rel_type": "ENABLES", "source_name": "High-Entropy State (s1)", "target_name": "Effective Speed of Light"}
+{"source_id": 2452, "target_id": 2508, "rel_type": "DERIVES_FROM", "source_name": "Entropic Gradient", "target_name": "Effective Speed of Light"}
+{"source_id": 2452, "target_id": 2447, "rel_type": "IMPLIES", "source_name": "Entropic Gradient", "target_name": "Variable Effective Light Speed"}
+{"source_id": 2567, "target_id": 2566, "rel_type": "CONSTRAINS", "source_name": "$s_0$ state", "target_name": "effective speed of light"}
+{"source_id": 2568, "target_id": 2566, "rel_type": "ENABLES", "source_name": "$s_1$ state", "target_name": "effective speed of light"}
+{"source_id": 2573, "target_id": 2574, "rel_type": "PART_OF", "source_name": "Files", "target_name": "CreativeWork"}
+{"source_id": 2573, "target_id": 5270, "rel_type": "IMPLIES", "source_name": "Files", "target_name": "Version 1.0"}
+{"source_id": 2631, "target_id": 2634, "rel_type": "PART_OF", "source_name": "Disaster Recovery Guide", "target_name": "GitHub Repository"}
+{"source_id": 2631, "target_id": 2632, "rel_type": "EXPLAINS", "source_name": "Disaster Recovery Guide", "target_name": "Symbiosis Runtime"}
+{"source_id": 2632, "target_id": 3255, "rel_type": "PART_OF", "source_name": "Symbiosis Runtime", "target_name": "Symbiosis Subsystem"}
+{"source_id": 2632, "target_id": 3254, "rel_type": "EXPLAINS", "source_name": "Symbiosis Runtime", "target_name": "Development Trajectory"}
+{"source_id": 2632, "target_id": 2633, "rel_type": "DEPENDS_ON", "source_name": "Symbiosis Runtime", "target_name": "Hetzner"}
+{"source_id": 2635, "target_id": 2632, "rel_type": "ENABLES", "source_name": "docker-compose.yml", "target_name": "Symbiosis Runtime"}
+{"source_id": 2636, "target_id": 2632, "rel_type": "SUPPORTS", "source_name": "API Verification", "target_name": "Symbiosis Runtime"}
+{"source_id": 2691, "target_id": 2692, "rel_type": "PART_OF", "source_name": "Figshare Articles", "target_name": "DOI Map"}
+{"source_id": 2706, "target_id": 2707, "rel_type": "EXPLAINS", "source_name": "API Layer", "target_name": "machine-readable model endpoints"}
+{"source_id": 2713, "target_id": 748, "rel_type": "PART_OF", "source_name": "Creative Work", "target_name": "Entropy in Cosmic Evolution"}
+{"source_id": 2713, "target_id": 2735, "rel_type": "PART_OF", "source_name": "Creative Work", "target_name": "README"}
+{"source_id": 2713, "target_id": 3704, "rel_type": "PART_OF", "source_name": "Creative Work", "target_name": "Identifier"}
+{"source_id": 2713, "target_id": 8749, "rel_type": "PART_OF", "source_name": "Creative Work", "target_name": "Energy Flow"}
+{"source_id": 2713, "target_id": 2715, "rel_type": "DERIVES_FROM", "source_name": "Creative Work", "target_name": "JSON-LD"}
+{"source_id": 2713, "target_id": 2770, "rel_type": "SUPPORTS", "source_name": "Creative Work", "target_name": "energy flow cosmology"}
+{"source_id": 2713, "target_id": 2714, "rel_type": "ENABLES", "source_name": "Creative Work", "target_name": "File Path"}
+{"source_id": 2713, "target_id": 3704, "rel_type": "ENABLES", "source_name": "Creative Work", "target_name": "Identifier"}
+{"source_id": 2713, "target_id": 7284, "rel_type": "ENABLES", "source_name": "Creative Work", "target_name": "Halo Concept"}
+{"source_id": 2713, "target_id": 2920, "rel_type": "DEPENDS_ON", "source_name": "Creative Work", "target_name": "JSON-LD Format"}
+{"source_id": 2713, "target_id": 2715, "rel_type": "CONTAINS", "source_name": "Creative Work", "target_name": "JSON-LD"}
+{"source_id": 2718, "target_id": 136, "rel_type": "PART_OF", "source_name": "Repository folder", "target_name": "Energy Flow Cosmology"}
+{"source_id": 2718, "target_id": 2719, "rel_type": "PART_OF", "source_name": "Repository folder", "target_name": "README.md"}
+{"source_id": 2718, "target_id": 3275, "rel_type": "PART_OF", "source_name": "Repository folder", "target_name": "Energyflow Cosmology"}
+{"source_id": 2718, "target_id": 2719, "rel_type": "CONTAINS", "source_name": "Repository folder", "target_name": "README.md"}
+{"source_id": 2719, "target_id": 2720, "rel_type": "PART_OF", "source_name": "README.md", "target_name": "energyflow-cosmology"}
+{"source_id": 2723, "target_id": 2724, "rel_type": "PART_OF", "source_name": "backlog", "target_name": "repository folder"}
+{"source_id": 2724, "target_id": 2719, "rel_type": "CONTAINS", "source_name": "repository folder", "target_name": "README.md"}
+{"source_id": 2734, "target_id": 2736, "rel_type": "PART_OF", "source_name": "Co-Field Layer", "target_name": "Directory Structure"}
+{"source_id": 2734, "target_id": 2739, "rel_type": "PART_OF", "source_name": "Co-Field Layer", "target_name": "meta-process"}
+{"source_id": 2734, "target_id": 2735, "rel_type": "EXPLAINS", "source_name": "Co-Field Layer", "target_name": "README"}
+{"source_id": 2734, "target_id": 2740, "rel_type": "DEPENDS_ON", "source_name": "Co-Field Layer", "target_name": "location"}
+{"source_id": 2735, "target_id": 2714, "rel_type": "DEPENDS_ON", "source_name": "README", "target_name": "File Path"}
+{"source_id": 2739, "target_id": 3122, "rel_type": "ENABLES", "source_name": "meta-process", "target_name": "process-spec"}
+{"source_id": 2747, "target_id": 2748, "rel_type": "PART_OF", "source_name": "Co-Field Specification", "target_name": "Definition"}
+{"source_id": 2759, "target_id": 2760, "rel_type": "PART_OF", "source_name": "Cognitive Fingerprint Specification", "target_name": "Meta/Cognition Layer"}
+{"source_id": 2763, "target_id": 6461, "rel_type": "EXPLAINS", "source_name": "Cognitive Signature Specification", "target_name": "Cognitive Signature"}
+{"source_id": 2769, "target_id": 2771, "rel_type": "PART_OF", "source_name": "consistency rules", "target_name": "meta-reflective protocol"}
+{"source_id": 2770, "target_id": 3279, "rel_type": "PART_OF", "source_name": "energy flow cosmology", "target_name": "validation plan"}
+{"source_id": 2770, "target_id": 2769, "rel_type": "ENABLES", "source_name": "energy flow cosmology", "target_name": "consistency rules"}
+{"source_id": 2770, "target_id": 2985, "rel_type": "DEPENDS_ON", "source_name": "energy flow cosmology", "target_name": "light speed"}
+{"source_id": 2770, "target_id": 3039, "rel_type": "DEPENDS_ON", "source_name": "energy flow cosmology", "target_name": "co-field"}
+{"source_id": 2778, "target_id": 2574, "rel_type": "PART_OF", "source_name": "Contents", "target_name": "CreativeWork"}
+{"source_id": 2778, "target_id": 2779, "rel_type": "ENABLES", "source_name": "Contents", "target_name": "Directory"}
+{"source_id": 2779, "target_id": 2714, "rel_type": "CONTAINS", "source_name": "Directory", "target_name": "File Path"}
+{"source_id": 2785, "target_id": 2786, "rel_type": "EXPLAINS", "source_name": "Core Workflows", "target_name": "Operational Sequences"}
+{"source_id": 2794, "target_id": 2795, "rel_type": "EXPLAINS", "source_name": "Diagnostic Rules", "target_name": "Structural Issues"}
+{"source_id": 2807, "target_id": 3694, "rel_type": "SUPPORTS", "source_name": "Documentation", "target_name": "Energy-Flow Cosmology"}
+{"source_id": 2808, "target_id": 3694, "rel_type": "PART_OF", "source_name": "Theory and Methods", "target_name": "Energy-Flow Cosmology"}
+{"source_id": 2809, "target_id": 2807, "rel_type": "ENABLES", "source_name": "Meta-architecture", "target_name": "Documentation"}
+{"source_id": 2810, "target_id": 2807, "rel_type": "CONSTRAINS", "source_name": "Semantic Layers", "target_name": "Documentation"}
+{"source_id": 2843, "target_id": 137, "rel_type": "EXPLAINS", "source_name": "EFC Flow Entropy", "target_name": "Spacetime Distortion"}
+{"source_id": 2849, "target_id": 2112, "rel_type": "PART_OF", "source_name": "Energy-Flow", "target_name": "Formal Specification"}
+{"source_id": 2849, "target_id": 2177, "rel_type": "PART_OF", "source_name": "Energy-Flow", "target_name": "Master Specification"}
+{"source_id": 2857, "target_id": 2946, "rel_type": "SUPPORTS", "source_name": "EFC", "target_name": "Energy Flow in Space-Time"}
+{"source_id": 2879, "target_id": 6264, "rel_type": "CONSTRAINS", "source_name": "Energy", "target_name": "Entropy"}
+{"source_id": 2892, "target_id": 2574, "rel_type": "PART_OF", "source_name": "efc_index", "target_name": "CreativeWork"}
+{"source_id": 2892, "target_id": 2894, "rel_type": "ENABLES", "source_name": "efc_index", "target_name": "file path"}
+{"source_id": 2892, "target_id": 3777, "rel_type": "DEPENDS_ON", "source_name": "efc_index", "target_name": "identifier"}
+{"source_id": 2898, "target_id": 6264, "rel_type": "CONSTRAINS", "source_name": "Time", "target_name": "Entropy"}
+{"source_id": 2946, "target_id": 2947, "rel_type": "EXPLAINS", "source_name": "Energy Flow in Space-Time", "target_name": "Technical Documentation"}
+{"source_id": 2947, "target_id": 2857, "rel_type": "PART_OF", "source_name": "Technical Documentation", "target_name": "EFC"}
+{"source_id": 2951, "target_id": 2713, "rel_type": "PART_OF", "source_name": "Energy Flow Interface", "target_name": "Creative Work"}
+{"source_id": 2961, "target_id": 2962, "rel_type": "SUPPORTS", "source_name": "EFC-Unresolved Questions", "target_name": "Challenges in Entropy"}
+{"source_id": 2962, "target_id": 136, "rel_type": "DEPENDS_ON", "source_name": "Challenges in Entropy", "target_name": "Energy Flow Cosmology"}
+{"source_id": 2972, "target_id": 136, "rel_type": "EXPLAINS", "source_name": "Modular Synthesis paper", "target_name": "Energy Flow Cosmology"}
+{"source_id": 2985, "target_id": 2986, "rel_type": "IMPLIES", "source_name": "light speed", "target_name": "cosmic limit"}
+{"source_id": 2996, "target_id": 2998, "rel_type": "DEPENDS_ON", "source_name": "Cognitive System", "target_name": "Broad Conceptual Regions"}
+{"source_id": 2998, "target_id": 2999, "rel_type": "SUPPORTS", "source_name": "Broad Conceptual Regions", "target_name": "Global Structure"}
+{"source_id": 3002, "target_id": 3003, "rel_type": "DEPENDS_ON", "source_name": "Evaluation Metrics", "target_name": "Meta-Process Architecture"}
+{"source_id": 3003, "target_id": 3069, "rel_type": "ENABLES", "source_name": "Meta-Process Architecture", "target_name": "Meta-Process Milestones"}
+{"source_id": 3023, "target_id": 3024, "rel_type": "EXPLAINS", "source_name": "Global State Specification", "target_name": "Global States"}
+{"source_id": 3024, "target_id": 3025, "rel_type": "PART_OF", "source_name": "Global States", "target_name": "Meta-Process"}
+{"source_id": 3025, "target_id": 3073, "rel_type": "PART_OF", "source_name": "Meta-Process", "target_name": "Repository"}
+{"source_id": 3025, "target_id": 3026, "rel_type": "ENABLES", "source_name": "Meta-Process", "target_name": "Behaviour Description"}
+{"source_id": 3025, "target_id": 3205, "rel_type": "ENABLES", "source_name": "Meta-Process", "target_name": "Self-Evaluation Layer"}
+{"source_id": 3025, "target_id": 3264, "rel_type": "ENABLED", "source_name": "Meta-Process", "target_name": "Task Categories"}
+{"source_id": 3034, "target_id": 3035, "rel_type": "PART_OF", "source_name": "Interaction Rules", "target_name": "Co-Field"}
+{"source_id": 3038, "target_id": 2770, "rel_type": "ENABLES", "source_name": "interaction rules", "target_name": "energy flow cosmology"}
+{"source_id": 3039, "target_id": 3038, "rel_type": "PART_OF", "source_name": "co-field", "target_name": "interaction rules"}
+{"source_id": 3045, "target_id": 2724, "rel_type": "PART_OF", "source_name": "media", "target_name": "repository folder"}
+{"source_id": 3048, "target_id": 2574, "rel_type": "PART_OF", "source_name": "mermaid", "target_name": "CreativeWork"}
+{"source_id": 3048, "target_id": 2894, "rel_type": "ENABLES", "source_name": "mermaid", "target_name": "file path"}
+{"source_id": 3048, "target_id": 3777, "rel_type": "DEPENDS_ON", "source_name": "mermaid", "target_name": "identifier"}
+{"source_id": 3051, "target_id": 3052, "rel_type": "EXPLAINS", "source_name": "Meta-Architecture Specification", "target_name": "Metascope System"}
+{"source_id": 3055, "target_id": 3025, "rel_type": "PART_OF", "source_name": "Meta-Control Loops", "target_name": "Meta-Process"}
+{"source_id": 3056, "target_id": 3055, "rel_type": "SUPPORTS", "source_name": "Control Loops", "target_name": "Meta-Control Loops"}
+{"source_id": 3059, "target_id": 3060, "rel_type": "PART_OF", "source_name": "Meta-Process Backlog", "target_name": "Location"}
+{"source_id": 3059, "target_id": 2714, "rel_type": "DEPENDS_ON", "source_name": "Meta-Process Backlog", "target_name": "File Path"}
+{"source_id": 3063, "target_id": 2574, "rel_type": "PART_OF", "source_name": "meta-process-manifest", "target_name": "CreativeWork"}
+{"source_id": 3063, "target_id": 2894, "rel_type": "ENABLES", "source_name": "meta-process-manifest", "target_name": "file path"}
+{"source_id": 3063, "target_id": 3777, "rel_type": "DEPENDS_ON", "source_name": "meta-process-manifest", "target_name": "identifier"}
+{"source_id": 3066, "target_id": 3003, "rel_type": "EXPLAINS", "source_name": "Meta-Process Master Manifest", "target_name": "Meta-Process Architecture"}
+{"source_id": 3079, "target_id": 3003, "rel_type": "PART_OF", "source_name": "Meta-Process Tasks", "target_name": "Meta-Process Architecture"}
+{"source_id": 3082, "target_id": 3083, "rel_type": "PART_OF", "source_name": "Meta-Process Workflows", "target_name": "Workflows Layer"}
+{"source_id": 3101, "target_id": 2724, "rel_type": "PART_OF", "source_name": "milestones", "target_name": "repository folder"}
+{"source_id": 3107, "target_id": 3073, "rel_type": "PART_OF", "source_name": "Meta-structure", "target_name": "Repository"}
+{"source_id": 3110, "target_id": 3112, "rel_type": "PART_OF", "source_name": "Personal", "target_name": "Reflective layer"}
+{"source_id": 3115, "target_id": 3116, "rel_type": "PART_OF", "source_name": "Process-of-Process Specification", "target_name": "Structural Layer"}
+{"source_id": 3119, "target_id": 2739, "rel_type": "PART_OF", "source_name": "Process-of-Process", "target_name": "meta-process"}
+{"source_id": 3122, "target_id": 2770, "rel_type": "PART_OF", "source_name": "process-spec", "target_name": "energy flow cosmology"}
+{"source_id": 3125, "target_id": 2713, "rel_type": "PART_OF", "source_name": "protocol specification", "target_name": "Creative Work"}
+{"source_id": 3125, "target_id": 3126, "rel_type": "DEPENDS_ON", "source_name": "protocol specification", "target_name": "JSON-LD file"}
+{"source_id": 3132, "target_id": 2574, "rel_type": "PART_OF", "source_name": "README_API", "target_name": "CreativeWork"}
+{"source_id": 3132, "target_id": 2894, "rel_type": "ENABLES", "source_name": "README_API", "target_name": "file path"}
+{"source_id": 3132, "target_id": 3777, "rel_type": "DEPENDS_ON", "source_name": "README_API", "target_name": "identifier"}
+{"source_id": 3142, "target_id": 3143, "rel_type": "EXPLAINS", "source_name": "Reflection Index", "target_name": "Reflection Domains"}
+{"source_id": 3142, "target_id": 3088, "rel_type": "SUPPORTS", "source_name": "Reflection Index", "target_name": "Meta-Architecture"}
+{"source_id": 3143, "target_id": 3088, "rel_type": "PART_OF", "source_name": "Reflection Domains", "target_name": "Meta-Architecture"}
+{"source_id": 3146, "target_id": 2574, "rel_type": "PART_OF", "source_name": "reflection-levels", "target_name": "CreativeWork"}
+{"source_id": 3146, "target_id": 3147, "rel_type": "ENABLES", "source_name": "reflection-levels", "target_name": "file"}
+{"source_id": 3146, "target_id": 3777, "rel_type": "DEPENDS_ON", "source_name": "reflection-levels", "target_name": "identifier"}
+{"source_id": 3150, "target_id": 3694, "rel_type": "EXPLAINS", "source_name": "Reflection Log", "target_name": "Energy-Flow Cosmology"}
+{"source_id": 3154, "target_id": 2724, "rel_type": "PART_OF", "source_name": "reflection-log", "target_name": "repository folder"}
+{"source_id": 3157, "target_id": 3158, "rel_type": "EXPLAINS", "source_name": "Reflection Map", "target_name": "Structural Domains"}
+{"source_id": 3165, "target_id": 3702, "rel_type": "PART_OF", "source_name": "Reflection Surfaces", "target_name": "Architecture"}
+{"source_id": 3168, "target_id": 2713, "rel_type": "PART_OF", "source_name": "reflection types", "target_name": "Creative Work"}
+{"source_id": 3168, "target_id": 3777, "rel_type": "ENABLES", "source_name": "reflection types", "target_name": "identifier"}
+{"source_id": 3168, "target_id": 2894, "rel_type": "DEPENDS_ON", "source_name": "reflection types", "target_name": "file path"}
+{"source_id": 3171, "target_id": 8749, "rel_type": "PART_OF", "source_name": "Reflection", "target_name": "Energy Flow"}
+{"source_id": 3171, "target_id": 3016, "rel_type": "ENABLES", "source_name": "Reflection", "target_name": "Meta-process"}
+{"source_id": 3171, "target_id": 3172, "rel_type": "ENABLES", "source_name": "Reflection", "target_name": "DOI"}
+{"source_id": 3171, "target_id": 3182, "rel_type": "ENABLES", "source_name": "Reflection", "target_name": "Controlled Sequence"}
+{"source_id": 3175, "target_id": 3171, "rel_type": "CONSTRAINS", "source_name": "Reflective Boundaries", "target_name": "Reflection"}
+{"source_id": 3178, "target_id": 3016, "rel_type": "PART_OF", "source_name": "Reflective Protocol Specification", "target_name": "Meta-process"}
+{"source_id": 3178, "target_id": 3171, "rel_type": "EXPLAINS", "source_name": "Reflective Protocol Specification", "target_name": "Reflection"}
+{"source_id": 3181, "target_id": 3182, "rel_type": "PART_OF", "source_name": "Reflective Steps", "target_name": "Controlled Sequence"}
+{"source_id": 3181, "target_id": 3171, "rel_type": "EXPLAINS", "source_name": "Reflective Steps", "target_name": "Reflection"}
+{"source_id": 3185, "target_id": 2724, "rel_type": "PART_OF", "source_name": "resonance-links", "target_name": "repository folder"}
+{"source_id": 3189, "target_id": 3814, "rel_type": "IMPLIES", "source_name": "global dynamics", "target_name": "energy flow"}
+{"source_id": 3192, "target_id": 3025, "rel_type": "PART_OF", "source_name": "Roadmap Items", "target_name": "Meta-Process"}
+{"source_id": 3195, "target_id": 4938, "rel_type": "EXPLAINS", "source_name": "Roadmap Timeline", "target_name": "Architectural Evolution"}
+{"source_id": 3198, "target_id": 2724, "rel_type": "PART_OF", "source_name": "roadmap", "target_name": "repository folder"}
+{"source_id": 3201, "target_id": 2715, "rel_type": "PART_OF", "source_name": "Schema Layer", "target_name": "JSON-LD"}
+{"source_id": 3201, "target_id": 3202, "rel_type": "PART_OF", "source_name": "Schema Layer", "target_name": "Ontology"}
+{"source_id": 3205, "target_id": 3025, "rel_type": "PART_OF", "source_name": "Self-Evaluation Layer", "target_name": "Meta-Process"}
+{"source_id": 3208, "target_id": 2724, "rel_type": "PART_OF", "source_name": "self-evaluation", "target_name": "repository folder"}
+{"source_id": 3211, "target_id": 2713, "rel_type": "PART_OF", "source_name": "stability workflows", "target_name": "Creative Work"}
+{"source_id": 3211, "target_id": 2894, "rel_type": "ENABLES", "source_name": "stability workflows", "target_name": "file path"}
+{"source_id": 3211, "target_id": 3777, "rel_type": "DEPENDS_ON", "source_name": "stability workflows", "target_name": "identifier"}
+{"source_id": 3215, "target_id": 2724, "rel_type": "PART_OF", "source_name": "state-map", "target_name": "repository folder"}
+{"source_id": 3215, "target_id": 3814, "rel_type": "ENABLES", "source_name": "state-map", "target_name": "energy flow"}
+{"source_id": 3218, "target_id": 3219, "rel_type": "PART_OF", "source_name": "Structural Milestones", "target_name": "Meta-process Architecture"}
+{"source_id": 3227, "target_id": 8749, "rel_type": "DEPENDS_ON", "source_name": "EFC Hybrid Stack", "target_name": "Energy Flow"}
+{"source_id": 3233, "target_id": 3234, "rel_type": "EXPLAINS", "source_name": "Symbiosis Metadata Index", "target_name": "Symbiosis subsystem"}
+{"source_id": 3234, "target_id": 3235, "rel_type": "PART_OF", "source_name": "Symbiosis subsystem", "target_name": "EFC ecosystem"}
+{"source_id": 3238, "target_id": 2574, "rel_type": "PART_OF", "source_name": "symbiosis_metadata", "target_name": "CreativeWork"}
+{"source_id": 3238, "target_id": 2894, "rel_type": "ENABLES", "source_name": "symbiosis_metadata", "target_name": "file path"}
+{"source_id": 3238, "target_id": 3777, "rel_type": "DEPENDS_ON", "source_name": "symbiosis_metadata", "target_name": "identifier"}
+{"source_id": 3254, "target_id": 3255, "rel_type": "DEPENDS_ON", "source_name": "Development Trajectory", "target_name": "Symbiosis Subsystem"}
+{"source_id": 3258, "target_id": 3112, "rel_type": "PART_OF", "source_name": "Symbiosis", "target_name": "Reflective layer"}
+{"source_id": 3264, "target_id": 3265, "rel_type": "PART_OF", "source_name": "Task Categories", "target_name": "Structural Categories"}
+{"source_id": 3268, "target_id": 3269, "rel_type": "EXPLAINS", "source_name": "Task Definitions", "target_name": "Core Structural Tasks"}
+{"source_id": 3272, "target_id": 2574, "rel_type": "PART_OF", "source_name": "task-flow", "target_name": "CreativeWork"}
+{"source_id": 3272, "target_id": 3777, "rel_type": "ENABLES", "source_name": "task-flow", "target_name": "identifier"}
+{"source_id": 3272, "target_id": 2894, "rel_type": "DEPENDS_ON", "source_name": "task-flow", "target_name": "file path"}
+{"source_id": 3279, "target_id": 2770, "rel_type": "ENABLES", "source_name": "validation plan", "target_name": "energy flow cosmology"}
+{"source_id": 3279, "target_id": 3278, "rel_type": "ENABLES", "source_name": "validation plan", "target_name": "test methods"}
+{"source_id": 3289, "target_id": 2574, "rel_type": "PART_OF", "source_name": "timeline", "target_name": "CreativeWork"}
+{"source_id": 3289, "target_id": 3777, "rel_type": "ENABLES", "source_name": "timeline", "target_name": "identifier"}
+{"source_id": 3289, "target_id": 3147, "rel_type": "DEPENDS_ON", "source_name": "timeline", "target_name": "file"}
+{"source_id": 3295, "target_id": 3296, "rel_type": "EXPLAINS", "source_name": "Transient Representations", "target_name": "High-order Insight"}
+{"source_id": 3295, "target_id": 3297, "rel_type": "DEPENDS_ON", "source_name": "Transient Representations", "target_name": "System"}
+{"source_id": 3296, "target_id": 3297, "rel_type": "PART_OF", "source_name": "High-order Insight", "target_name": "System"}
+{"source_id": 3300, "target_id": 3024, "rel_type": "EXPLAINS", "source_name": "Transition Rules", "target_name": "Global States"}
+{"source_id": 3303, "target_id": 2713, "rel_type": "PART_OF", "source_name": "transition workflows", "target_name": "Creative Work"}
+{"source_id": 3303, "target_id": 2715, "rel_type": "ENABLES", "source_name": "transition workflows", "target_name": "JSON-LD"}
+{"source_id": 3303, "target_id": 3777, "rel_type": "DEPENDS_ON", "source_name": "transition workflows", "target_name": "identifier"}
+{"source_id": 3308, "target_id": 3279, "rel_type": "PART_OF", "source_name": "validation criteria", "target_name": "validation plan"}
+{"source_id": 3309, "target_id": 3308, "rel_type": "SUPPORTS", "source_name": "creative work", "target_name": "validation criteria"}
+{"source_id": 3312, "target_id": 3279, "rel_type": "PART_OF", "source_name": "validation phases", "target_name": "validation plan"}
+{"source_id": 3315, "target_id": 3316, "rel_type": "EXPLAINS", "source_name": "Validation Plan", "target_name": "meta-process architecture"}
+{"source_id": 3319, "target_id": 3814, "rel_type": "ENABLES", "source_name": "variable light", "target_name": "energy flow"}
+{"source_id": 3694, "target_id": 2170, "rel_type": "DERIVES_FROM", "source_name": "Energy-Flow Cosmology", "target_name": "Energy-Flow Field"}
+{"source_id": 3694, "target_id": 3768, "rel_type": "DERIVES_FROM", "source_name": "Energy-Flow Cosmology", "target_name": "Core Elements"}
+{"source_id": 3694, "target_id": 3769, "rel_type": "DERIVES_FROM", "source_name": "Energy-Flow Cosmology", "target_name": "Entropy Field"}
+{"source_id": 3694, "target_id": 5121, "rel_type": "DERIVES_FROM", "source_name": "Energy-Flow Cosmology", "target_name": "EFC Master Specification"}
+{"source_id": 3694, "target_id": 6391, "rel_type": "DERIVES_FROM", "source_name": "Energy-Flow Cosmology", "target_name": "AUTH Principle"}
+{"source_id": 3694, "target_id": 8749, "rel_type": "DERIVES_FROM", "source_name": "Energy-Flow Cosmology", "target_name": "Energy Flow"}
+{"source_id": 3694, "target_id": 6264, "rel_type": "CONSTRAINS", "source_name": "Energy-Flow Cosmology", "target_name": "Entropy"}
+{"source_id": 3694, "target_id": 125, "rel_type": "ENABLES", "source_name": "Energy-Flow Cosmology", "target_name": "Energy-Flow Four-Vector"}
+{"source_id": 3694, "target_id": 1692, "rel_type": "ENABLES", "source_name": "Energy-Flow Cosmology", "target_name": "Cross-dataset Bayesian testing"}
+{"source_id": 3694, "target_id": 1842, "rel_type": "ENABLES", "source_name": "Energy-Flow Cosmology", "target_name": "Cross-Field Integration"}
+{"source_id": 3694, "target_id": 3699, "rel_type": "ENABLES", "source_name": "Energy-Flow Cosmology", "target_name": "Grid\u2013Higgs Framework"}
+{"source_id": 3694, "target_id": 3769, "rel_type": "ENABLES", "source_name": "Energy-Flow Cosmology", "target_name": "Entropy Field"}
+{"source_id": 3694, "target_id": 7284, "rel_type": "ENABLES", "source_name": "Energy-Flow Cosmology", "target_name": "Halo Concept"}
+{"source_id": 3694, "target_id": 8507, "rel_type": "ENABLES", "source_name": "Energy-Flow Cosmology", "target_name": "Flow Fields"}
+{"source_id": 3694, "target_id": 1012, "rel_type": "IMPLIES", "source_name": "Energy-Flow Cosmology", "target_name": "Thermodynamic Signatures"}
+{"source_id": 3694, "target_id": 2312, "rel_type": "IMPLIES", "source_name": "Energy-Flow Cosmology", "target_name": "Information Capacity"}
+{"source_id": 3694, "target_id": 1831, "rel_type": "PART_OF", "source_name": "Energy-Flow Cosmology", "target_name": "EFC-S (Structural Domain)"}
+{"source_id": 3694, "target_id": 1833, "rel_type": "PART_OF", "source_name": "Energy-Flow Cosmology", "target_name": "EFC-D (Dynamical Domain)"}
+{"source_id": 3694, "target_id": 1834, "rel_type": "PART_OF", "source_name": "Energy-Flow Cosmology", "target_name": "EFC-C (Cognitive Domain)"}
+{"source_id": 3694, "target_id": 1908, "rel_type": "PART_OF", "source_name": "Energy-Flow Cosmology", "target_name": "Synergetics"}
+{"source_id": 3694, "target_id": 2989, "rel_type": "PART_OF", "source_name": "Energy-Flow Cosmology", "target_name": "conceptual components"}
+{"source_id": 3694, "target_id": 2990, "rel_type": "PART_OF", "source_name": "Energy-Flow Cosmology", "target_name": "methodological components"}
+{"source_id": 3694, "target_id": 2991, "rel_type": "PART_OF", "source_name": "Energy-Flow Cosmology", "target_name": "semantic components"}
+{"source_id": 3694, "target_id": 3286, "rel_type": "PART_OF", "source_name": "Energy-Flow Cosmology", "target_name": "$s_0 / s_1$ Structure"}
+{"source_id": 3694, "target_id": 3695, "rel_type": "PART_OF", "source_name": "Energy-Flow Cosmology", "target_name": "Entropy field"}
+{"source_id": 3694, "target_id": 3696, "rel_type": "PART_OF", "source_name": "Energy-Flow Cosmology", "target_name": "Energy-flow field"}
+{"source_id": 3694, "target_id": 3783, "rel_type": "PART_OF", "source_name": "Energy-Flow Cosmology", "target_name": "theoretical components"}
+{"source_id": 3694, "target_id": 8079, "rel_type": "PART_OF", "source_name": "Energy-Flow Cosmology", "target_name": "Scientific Infrastructure"}
+{"source_id": 3694, "target_id": 1561, "rel_type": "EXPLAINS", "source_name": "Energy-Flow Cosmology", "target_name": "Light Speed Limit"}
+{"source_id": 3694, "target_id": 2508, "rel_type": "EXPLAINS", "source_name": "Energy-Flow Cosmology", "target_name": "Effective Speed of Light"}
+{"source_id": 3694, "target_id": 2566, "rel_type": "EXPLAINS", "source_name": "Energy-Flow Cosmology", "target_name": "effective speed of light"}
+{"source_id": 3694, "target_id": 6264, "rel_type": "EXPLAINS", "source_name": "Energy-Flow Cosmology", "target_name": "Entropy"}
+{"source_id": 3694, "target_id": 8845, "rel_type": "EXPLAINS", "source_name": "Energy-Flow Cosmology", "target_name": "Cosmic Evolution"}
+{"source_id": 3694, "target_id": 8852, "rel_type": "EXPLAINS", "source_name": "Energy-Flow Cosmology", "target_name": "Entropy Gradients"}
+{"source_id": 3694, "target_id": 1356, "rel_type": "SUPPORTS", "source_name": "Energy-Flow Cosmology", "target_name": "General Relativity (GR)"}
+{"source_id": 3694, "target_id": 1357, "rel_type": "SUPPORTS", "source_name": "Energy-Flow Cosmology", "target_name": "Quantum Field Theory (QFT)"}
+{"source_id": 3694, "target_id": 1691, "rel_type": "SUPPORTS", "source_name": "Energy-Flow Cosmology", "target_name": "Lyapunov functional"}
+{"source_id": 3694, "target_id": 2112, "rel_type": "SUPPORTS", "source_name": "Energy-Flow Cosmology", "target_name": "Formal Specification"}
+{"source_id": 3694, "target_id": 11294, "rel_type": "SUPPORTS", "source_name": "Energy-Flow Cosmology", "target_name": "Dynamic Balance"}
+{"source_id": 3702, "target_id": 3703, "rel_type": "PART_OF", "source_name": "Architecture", "target_name": "Scholarly Article"}
+{"source_id": 3703, "target_id": 3704, "rel_type": "ENABLES", "source_name": "Scholarly Article", "target_name": "Identifier"}
+{"source_id": 3703, "target_id": 3705, "rel_type": "DEPENDS_ON", "source_name": "Scholarly Article", "target_name": "Version"}
+{"source_id": 3768, "target_id": 3769, "rel_type": "PART_OF", "source_name": "Core Elements", "target_name": "Entropy Field"}
+{"source_id": 3768, "target_id": 3770, "rel_type": "PART_OF", "source_name": "Core Elements", "target_name": "Energy-flow Field"}
+{"source_id": 3769, "target_id": 475, "rel_type": "PART_OF", "source_name": "Entropy Field", "target_name": "Thermodynamic Spacetime"}
+{"source_id": 3769, "target_id": 2113, "rel_type": "PART_OF", "source_name": "Entropy Field", "target_name": "Thermodynamic Cosmology"}
+{"source_id": 3769, "target_id": 1225, "rel_type": "SUPPORTS", "source_name": "Entropy Field", "target_name": "Boundary Dynamics"}
+{"source_id": 3769, "target_id": 8749, "rel_type": "CONSTRAINS", "source_name": "Entropy Field", "target_name": "Energy Flow"}
+{"source_id": 3769, "target_id": 8749, "rel_type": "ENABLES", "source_name": "Entropy Field", "target_name": "Energy Flow"}
+{"source_id": 3772, "target_id": 3694, "rel_type": "ENABLES", "source_name": "Informational Metastructure", "target_name": "Energy-Flow Cosmology"}
+{"source_id": 3775, "target_id": 3776, "rel_type": "SUPPORTS", "source_name": "context", "target_name": "type"}
+{"source_id": 3775, "target_id": 3776, "rel_type": "ENABLES", "source_name": "context", "target_name": "type"}
+{"source_id": 3775, "target_id": 8068, "rel_type": "ENABLES", "source_name": "context", "target_name": "keywords"}
+{"source_id": 3777, "target_id": 202, "rel_type": "SUPPORTS", "source_name": "identifier", "target_name": "schema name"}
+{"source_id": 3777, "target_id": 3778, "rel_type": "SUPPORTS", "source_name": "identifier", "target_name": "name"}
+{"source_id": 3777, "target_id": 3778, "rel_type": "DEPENDS_ON", "source_name": "identifier", "target_name": "name"}
+{"source_id": 3777, "target_id": 8066, "rel_type": "DEPENDS_ON", "source_name": "identifier", "target_name": "versioning"}
+{"source_id": 3778, "target_id": 3779, "rel_type": "PART_OF", "source_name": "name", "target_name": "version"}
+{"source_id": 3779, "target_id": 3778, "rel_type": "CONSTRAINS", "source_name": "version", "target_name": "name"}
+{"source_id": 3779, "target_id": 3776, "rel_type": "DEPENDS_ON", "source_name": "version", "target_name": "type"}
+{"source_id": 3779, "target_id": 3777, "rel_type": "DEPENDS_ON", "source_name": "version", "target_name": "identifier"}
+{"source_id": 3779, "target_id": 8067, "rel_type": "DEPENDS_ON", "source_name": "version", "target_name": "encoding format"}
+{"source_id": 3806, "target_id": 7280, "rel_type": "PART_OF", "source_name": "Properties Object", "target_name": "Author Object"}
+{"source_id": 3806, "target_id": 8485, "rel_type": "PART_OF", "source_name": "Properties Object", "target_name": "Keywords Array"}
+{"source_id": 3806, "target_id": 7281, "rel_type": "INCLUDES", "source_name": "Properties Object", "target_name": "Encoding Format"}
+{"source_id": 3806, "target_id": 8484, "rel_type": "INCLUDES", "source_name": "Properties Object", "target_name": "Author Information"}
+{"source_id": 3806, "target_id": 8485, "rel_type": "INCLUDES", "source_name": "Properties Object", "target_name": "Keywords Array"}
+{"source_id": 3806, "target_id": 3807, "rel_type": "DEPENDS_ON", "source_name": "Properties Object", "target_name": "Context"}
+{"source_id": 3806, "target_id": 8484, "rel_type": "CONTAINS", "source_name": "Properties Object", "target_name": "Author Information"}
+{"source_id": 3808, "target_id": 1008, "rel_type": "ENABLES", "source_name": "Versioning", "target_name": "JSON-LD Type"}
+{"source_id": 3814, "target_id": 3320, "rel_type": "SUPPORTS", "source_name": "energy flow", "target_name": "cosmology"}
+{"source_id": 3814, "target_id": 1205, "rel_type": "ENABLES", "source_name": "energy flow", "target_name": "cosmic dynamics"}
+{"source_id": 3814, "target_id": 1201, "rel_type": "CONTRAINTS", "source_name": "energy flow", "target_name": "speed of light"}
+{"source_id": 4840, "target_id": 4841, "rel_type": "ENABLES", "source_name": "Human Insight Stream", "target_name": "Pattern Layer"}
+{"source_id": 4841, "target_id": 4842, "rel_type": "CONTRIBUTES_TO", "source_name": "Pattern Layer", "target_name": "Global Dynamics"}
+{"source_id": 4842, "target_id": 2736, "rel_type": "PART_OF", "source_name": "Global Dynamics", "target_name": "Directory Structure"}
+{"source_id": 4842, "target_id": 2735, "rel_type": "EXPLAINS", "source_name": "Global Dynamics", "target_name": "README"}
+{"source_id": 4842, "target_id": 3016, "rel_type": "EXPLAINS", "source_name": "Global Dynamics", "target_name": "Meta-process"}
+{"source_id": 4842, "target_id": 4843, "rel_type": "SUPPORTS", "source_name": "Global Dynamics", "target_name": "Meta-Reflective Protocol"}
+{"source_id": 4843, "target_id": 3088, "rel_type": "PART_OF", "source_name": "Meta-Reflective Protocol", "target_name": "Meta-Architecture"}
+{"source_id": 4843, "target_id": 4845, "rel_type": "PRODUCES", "source_name": "Meta-Reflective Protocol", "target_name": "Reflection Output"}
+{"source_id": 4844, "target_id": 4842, "rel_type": "EXPLAINS", "source_name": "EFC Theory", "target_name": "Global Dynamics"}
+{"source_id": 4844, "target_id": 3694, "rel_type": "SUPPORTS", "source_name": "EFC Theory", "target_name": "Energy-Flow Cosmology"}
+{"source_id": 5034, "target_id": 5036, "rel_type": "EXPLAINS", "source_name": "Meta / Cognition / Symbiosis", "target_name": "Cognitive-Field Structure"}
+{"source_id": 5121, "target_id": 2915, "rel_type": "PART_OF", "source_name": "EFC Master Specification", "target_name": "v1 Archive"}
+{"source_id": 5121, "target_id": 136, "rel_type": "EXPLAINS", "source_name": "EFC Master Specification", "target_name": "Energy Flow Cosmology"}
+{"source_id": 5122, "target_id": 3694, "rel_type": "SUPPORTS", "source_name": "EFC Formal Specification", "target_name": "Energy-Flow Cosmology"}
+{"source_id": 5127, "target_id": 3694, "rel_type": "PART_OF", "source_name": "EFC API v1", "target_name": "Energy-Flow Cosmology"}
+{"source_id": 5127, "target_id": 5129, "rel_type": "PART_OF", "source_name": "EFC API v1", "target_name": "CreativeWorkSeries"}
+{"source_id": 5127, "target_id": 3694, "rel_type": "ENABLES", "source_name": "EFC API v1", "target_name": "Energy-Flow Cosmology"}
+{"source_id": 5128, "target_id": 5127, "rel_type": "CREATED", "source_name": "Morten Magnusson", "target_name": "EFC API v1"}
+{"source_id": 5218, "target_id": 3704, "rel_type": "PART_OF", "source_name": "Tech Article", "target_name": "Identifier"}
+{"source_id": 5218, "target_id": 3705, "rel_type": "PART_OF", "source_name": "Tech Article", "target_name": "Version"}
+{"source_id": 5221, "target_id": 3777, "rel_type": "PART_OF", "source_name": "required fields", "target_name": "identifier"}
+{"source_id": 5221, "target_id": 3778, "rel_type": "PART_OF", "source_name": "required fields", "target_name": "name"}
+{"source_id": 5221, "target_id": 3779, "rel_type": "PART_OF", "source_name": "required fields", "target_name": "version"}
+{"source_id": 5221, "target_id": 5222, "rel_type": "PART_OF", "source_name": "required fields", "target_name": "@context"}
+{"source_id": 5221, "target_id": 5223, "rel_type": "PART_OF", "source_name": "required fields", "target_name": "@type"}
+{"source_id": 5222, "target_id": 5223, "rel_type": "ENABLES", "source_name": "@context", "target_name": "@type"}
+{"source_id": 5268, "target_id": 5269, "rel_type": "PART_OF", "source_name": "Dashboard", "target_name": "SoftwareApplication"}
+{"source_id": 5268, "target_id": 5270, "rel_type": "HAS_VERSION", "source_name": "Dashboard", "target_name": "Version 1.0"}
+{"source_id": 5275, "target_id": 5276, "rel_type": "PART_OF", "source_name": "papers efc", "target_name": "theory"}
+{"source_id": 5276, "target_id": 5277, "rel_type": "ENABLES", "source_name": "theory", "target_name": "meta"}
+{"source_id": 5277, "target_id": 5278, "rel_type": "SUPPORTS", "source_name": "meta", "target_name": "auth"}
+{"source_id": 5281, "target_id": 5282, "rel_type": "PART_OF", "source_name": "Archive", "target_name": "Dataset"}
+{"source_id": 5281, "target_id": 5270, "rel_type": "HAS_VERSION", "source_name": "Archive", "target_name": "Version 1.0"}
+{"source_id": 5287, "target_id": 5288, "rel_type": "PART_OF", "source_name": "Processed Dataset", "target_name": "Dataset Identifier"}
+{"source_id": 5287, "target_id": 5289, "rel_type": "PART_OF", "source_name": "Processed Dataset", "target_name": "Dataset Version"}
+{"source_id": 5294, "target_id": 5282, "rel_type": "PART_OF", "source_name": "Raw Dataset", "target_name": "Dataset"}
+{"source_id": 5294, "target_id": 5270, "rel_type": "DEPENDS_ON", "source_name": "Raw Dataset", "target_name": "Version 1.0"}
+{"source_id": 5299, "target_id": 3808, "rel_type": "PART_OF", "source_name": "Sparc Dataset", "target_name": "Versioning"}
+{"source_id": 5299, "target_id": 5288, "rel_type": "PART_OF", "source_name": "Sparc Dataset", "target_name": "Dataset Identifier"}
+{"source_id": 5872, "target_id": 3694, "rel_type": "SUPPORTS", "source_name": "Concept Extraction", "target_name": "Energy-Flow Cosmology"}
+{"source_id": 6153, "target_id": 2574, "rel_type": "PART_OF", "source_name": "Docs", "target_name": "CreativeWork"}
+{"source_id": 6153, "target_id": 5129, "rel_type": "PART_OF", "source_name": "Docs", "target_name": "CreativeWorkSeries"}
+{"source_id": 6153, "target_id": 2804, "rel_type": "ENABLES", "source_name": "Docs", "target_name": "Markdown"}
+{"source_id": 6153, "target_id": 5128, "rel_type": "CREATED_BY", "source_name": "Docs", "target_name": "Morten Magnusson"}
+{"source_id": 6157, "target_id": 5128, "rel_type": "PART_OF", "source_name": "Mathjax Header", "target_name": "Morten Magnusson"}
+{"source_id": 6157, "target_id": 5129, "rel_type": "PART_OF", "source_name": "Mathjax Header", "target_name": "CreativeWorkSeries"}
+{"source_id": 6160, "target_id": 6162, "rel_type": "SUPPORTS", "source_name": "Canonical specification", "target_name": "Mathematical and structural specification"}
+{"source_id": 6161, "target_id": 6163, "rel_type": "EXTENDS", "source_name": "Historic version", "target_name": "Versioned complete representations"}
+{"source_id": 6164, "target_id": 6165, "rel_type": "SUPPORTS", "source_name": "Core theoretical developments", "target_name": "Empirical or evidence-based papers"}
+{"source_id": 6264, "target_id": 475, "rel_type": "EXPLAINS", "source_name": "Entropy", "target_name": "Thermodynamic Spacetime"}
+{"source_id": 6264, "target_id": 8845, "rel_type": "EXPLAINS", "source_name": "Entropy", "target_name": "Cosmic Evolution"}
+{"source_id": 6264, "target_id": 8923, "rel_type": "SUPPORTS", "source_name": "Entropy", "target_name": "Second Law of Thermodynamics"}
+{"source_id": 6264, "target_id": 8749, "rel_type": "CONSTRAINS", "source_name": "Entropy", "target_name": "Energy Flow"}
+{"source_id": 6264, "target_id": 137, "rel_type": "IMPLIES", "source_name": "Entropy", "target_name": "Spacetime Distortion"}
+{"source_id": 6264, "target_id": 8845, "rel_type": "IMPLIES", "source_name": "Entropy", "target_name": "Cosmic Evolution"}
+{"source_id": 6264, "target_id": 198, "rel_type": "DEPENDS_ON", "source_name": "Entropy", "target_name": "Redshift"}
+{"source_id": 6264, "target_id": 8749, "rel_type": "INTERACTS_WITH", "source_name": "Entropy", "target_name": "Energy Flow"}
+{"source_id": 6264, "target_id": 8749, "rel_type": "ENABLES", "source_name": "Entropy", "target_name": "Energy Flow"}
+{"source_id": 6264, "target_id": 8845, "rel_type": "ENABLES", "source_name": "Entropy", "target_name": "Cosmic Evolution"}
+{"source_id": 6265, "target_id": 6460, "rel_type": "SUPPORTS", "source_name": "Provenance", "target_name": "AUTH Layer"}
+{"source_id": 6265, "target_id": 6266, "rel_type": "ENABLES", "source_name": "Provenance", "target_name": "Insight Structures"}
+{"source_id": 6266, "target_id": 6267, "rel_type": "CONTAINS", "source_name": "Insight Structures", "target_name": "Meta-Layer"}
+{"source_id": 6395, "target_id": 3694, "rel_type": "DERIVES_FROM", "source_name": "Structural Signature", "target_name": "Energy-Flow Cosmology"}
+{"source_id": 6395, "target_id": 3694, "rel_type": "EXPLAINS", "source_name": "Structural Signature", "target_name": "Energy-Flow Cosmology"}
+{"source_id": 6460, "target_id": 3694, "rel_type": "PART_OF", "source_name": "AUTH Layer", "target_name": "Energy-Flow Cosmology"}
+{"source_id": 6460, "target_id": 3694, "rel_type": "EXPLAINS", "source_name": "AUTH Layer", "target_name": "Energy-Flow Cosmology"}
+{"source_id": 6461, "target_id": 2764, "rel_type": "PART_OF", "source_name": "Cognitive Signature", "target_name": "Human Field"}
+{"source_id": 6461, "target_id": 3694, "rel_type": "SUPPORTS", "source_name": "Cognitive Signature", "target_name": "Energy-Flow Cosmology"}
+{"source_id": 6471, "target_id": 2751, "rel_type": "PART_OF", "source_name": "Cognition", "target_name": "Meta-Cognitive Layer"}
+{"source_id": 6471, "target_id": 6473, "rel_type": "SUPPORTS", "source_name": "Cognition", "target_name": "Ego"}
+{"source_id": 6471, "target_id": 6474, "rel_type": "IMPLIES", "source_name": "Cognition", "target_name": "Mirror"}
+{"source_id": 6472, "target_id": 3694, "rel_type": "DEPENDS_ON", "source_name": "Entropy Fields", "target_name": "Energy-Flow Cosmology"}
+{"source_id": 6708, "target_id": 6473, "rel_type": "PART_OF", "source_name": "Consciousness", "target_name": "Ego"}
+{"source_id": 6708, "target_id": 6264, "rel_type": "IMPLIES", "source_name": "Consciousness", "target_name": "Entropy"}
+{"source_id": 7252, "target_id": 7280, "rel_type": "PART_OF", "source_name": "Properties", "target_name": "Author Object"}
+{"source_id": 7252, "target_id": 8485, "rel_type": "PART_OF", "source_name": "Properties", "target_name": "Keywords Array"}
+{"source_id": 7252, "target_id": 7253, "rel_type": "INCLUDES", "source_name": "Properties", "target_name": "Required Fields"}
+{"source_id": 7252, "target_id": 7280, "rel_type": "INCLUDES", "source_name": "Properties", "target_name": "Author Object"}
+{"source_id": 7252, "target_id": 7281, "rel_type": "INCLUDES", "source_name": "Properties", "target_name": "Encoding Format"}
+{"source_id": 7252, "target_id": 8485, "rel_type": "INCLUDES", "source_name": "Properties", "target_name": "Keywords Array"}
+{"source_id": 7252, "target_id": 7253, "rel_type": "ENABLES", "source_name": "Properties", "target_name": "Required Fields"}
+{"source_id": 7252, "target_id": 7281, "rel_type": "DEPENDS_ON", "source_name": "Properties", "target_name": "Encoding Format"}
+{"source_id": 7252, "target_id": 7253, "rel_type": "CONTAINS", "source_name": "Properties", "target_name": "Required Fields"}
+{"source_id": 7280, "target_id": 3704, "rel_type": "PART_OF", "source_name": "Author Object", "target_name": "Identifier"}
+{"source_id": 7280, "target_id": 3803, "rel_type": "PART_OF", "source_name": "Author Object", "target_name": "Required Properties"}
+{"source_id": 7280, "target_id": 3704, "rel_type": "DEPENDS_ON", "source_name": "Author Object", "target_name": "Identifier"}
+{"source_id": 7284, "target_id": 136, "rel_type": "PART_OF", "source_name": "Halo Concept", "target_name": "Energy Flow Cosmology"}
+{"source_id": 7284, "target_id": 8000, "rel_type": "PART_OF", "source_name": "Halo Concept", "target_name": "Dark Matter"}
+{"source_id": 7284, "target_id": 7285, "rel_type": "DERIVES_FROM", "source_name": "Halo Concept", "target_name": "Halo Model of Entropy"}
+{"source_id": 7285, "target_id": 1835, "rel_type": "EXPLAINS", "source_name": "Halo Model of Entropy", "target_name": "Grid\u2013Higgs Field"}
+{"source_id": 7285, "target_id": 7286, "rel_type": "EXPLAINS", "source_name": "Halo Model of Entropy", "target_name": "Entropy Shells"}
+{"source_id": 7288, "target_id": 3694, "rel_type": "PART_OF", "source_name": "Grid-Higgs Framework", "target_name": "Energy-Flow Cosmology"}
+{"source_id": 7288, "target_id": 265, "rel_type": "EXPLAINS", "source_name": "Grid-Higgs Framework", "target_name": "Black Holes"}
+{"source_id": 7288, "target_id": 8000, "rel_type": "EXPLAINS", "source_name": "Grid-Higgs Framework", "target_name": "Dark Matter"}
+{"source_id": 7288, "target_id": 3694, "rel_type": "SUPPORTS", "source_name": "Grid-Higgs Framework", "target_name": "Energy-Flow Cosmology"}
+{"source_id": 7288, "target_id": 8653, "rel_type": "CONSTRAINS", "source_name": "Grid-Higgs Framework", "target_name": "CMB Thermodynamic Gradient"}
+{"source_id": 7288, "target_id": 264, "rel_type": "DEPENDS_ON", "source_name": "Grid-Higgs Framework", "target_name": "Higgs bosons"}
+{"source_id": 8063, "target_id": 8064, "rel_type": "PART_OF", "source_name": "schema context", "target_name": "schema type"}
+{"source_id": 8063, "target_id": 269, "rel_type": "SUPPORTS", "source_name": "schema context", "target_name": "data type"}
+{"source_id": 8063, "target_id": 1220, "rel_type": "SUPPORTS", "source_name": "schema context", "target_name": "data properties"}
+{"source_id": 8063, "target_id": 269, "rel_type": "ENABLES", "source_name": "schema context", "target_name": "data type"}
+{"source_id": 8063, "target_id": 8064, "rel_type": "ENABLES", "source_name": "schema context", "target_name": "schema type"}
+{"source_id": 8065, "target_id": 3777, "rel_type": "PART_OF", "source_name": "author information", "target_name": "identifier"}
+{"source_id": 8065, "target_id": 202, "rel_type": "EXPLAINS", "source_name": "author information", "target_name": "schema name"}
+{"source_id": 8065, "target_id": 202, "rel_type": "SUPPORTS", "source_name": "author information", "target_name": "schema name"}
+{"source_id": 8065, "target_id": 3777, "rel_type": "SUPPORTS", "source_name": "author information", "target_name": "identifier"}
+{"source_id": 8065, "target_id": 3777, "rel_type": "DEPENDS_ON", "source_name": "author information", "target_name": "identifier"}
+{"source_id": 8065, "target_id": 3777, "rel_type": "REQUIRES", "source_name": "author information", "target_name": "identifier"}
+{"source_id": 8066, "target_id": 3777, "rel_type": "CONSTRAINS", "source_name": "versioning", "target_name": "identifier"}
+{"source_id": 8066, "target_id": 8064, "rel_type": "CONSTRAINS", "source_name": "versioning", "target_name": "schema type"}
+{"source_id": 8066, "target_id": 202, "rel_type": "DEPENDS_ON", "source_name": "versioning", "target_name": "schema name"}
+{"source_id": 8066, "target_id": 3777, "rel_type": "DEPENDS_ON", "source_name": "versioning", "target_name": "identifier"}
+{"source_id": 8066, "target_id": 8067, "rel_type": "DEPENDS_ON", "source_name": "versioning", "target_name": "encoding format"}
+{"source_id": 8067, "target_id": 1220, "rel_type": "ENABLES", "source_name": "encoding format", "target_name": "data properties"}
+{"source_id": 8067, "target_id": 8064, "rel_type": "ENABLES", "source_name": "encoding format", "target_name": "schema type"}
+{"source_id": 8068, "target_id": 745, "rel_type": "SUPPORTS", "source_name": "keywords", "target_name": "schema properties"}
+{"source_id": 8068, "target_id": 8063, "rel_type": "SUPPORTS", "source_name": "keywords", "target_name": "schema context"}
+{"source_id": 8068, "target_id": 8650, "rel_type": "SUPPORTS", "source_name": "keywords", "target_name": "about"}
+{"source_id": 8068, "target_id": 8069, "rel_type": "CONSTRAINS", "source_name": "keywords", "target_name": "about information"}
+{"source_id": 8068, "target_id": 3777, "rel_type": "ENABLES", "source_name": "keywords", "target_name": "identifier"}
+{"source_id": 8068, "target_id": 8069, "rel_type": "ENABLES", "source_name": "keywords", "target_name": "about information"}
+{"source_id": 8072, "target_id": 8073, "rel_type": "ENABLES", "source_name": "AI-Augmented Science", "target_name": "Scientific Workflow"}
+{"source_id": 8074, "target_id": 8076, "rel_type": "SUPPORTS", "source_name": "Open Science", "target_name": "Reproducibility"}
+{"source_id": 8075, "target_id": 8072, "rel_type": "ENABLES", "source_name": "LLM Integration", "target_name": "AI-Augmented Science"}
+{"source_id": 8077, "target_id": 8073, "rel_type": "ENABLES", "source_name": "AI-Assisted Research", "target_name": "Scientific Workflow"}
+{"source_id": 8078, "target_id": 8079, "rel_type": "PART_OF", "source_name": "Metadata Architecture", "target_name": "Scientific Infrastructure"}
+{"source_id": 8484, "target_id": 132, "rel_type": "PART_OF", "source_name": "Author Information", "target_name": "Properties Definition"}
+{"source_id": 8485, "target_id": 132, "rel_type": "PART_OF", "source_name": "Keywords Array", "target_name": "Properties Definition"}
+{"source_id": 8649, "target_id": 3777, "rel_type": "PART_OF", "source_name": "author", "target_name": "identifier"}
+{"source_id": 8649, "target_id": 3778, "rel_type": "PART_OF", "source_name": "author", "target_name": "name"}
+{"source_id": 8649, "target_id": 3777, "rel_type": "SUPPORTS", "source_name": "author", "target_name": "identifier"}
+{"source_id": 8649, "target_id": 3777, "rel_type": "DEPENDS_ON", "source_name": "author", "target_name": "identifier"}
+{"source_id": 8650, "target_id": 8068, "rel_type": "IMPLIES", "source_name": "about", "target_name": "keywords"}
+{"source_id": 8653, "target_id": 3694, "rel_type": "SUPPORTS", "source_name": "CMB Thermodynamic Gradient", "target_name": "Energy-Flow Cosmology"}
+{"source_id": 8749, "target_id": 2697, "rel_type": "PART_OF", "source_name": "Energy Flow", "target_name": "Cosmology"}
+{"source_id": 8749, "target_id": 2912, "rel_type": "PART_OF", "source_name": "Energy Flow", "target_name": "Universe"}
+{"source_id": 8749, "target_id": 0, "rel_type": "EXPLAINS", "source_name": "Energy Flow", "target_name": "Cosmic Dynamics"}
+{"source_id": 8749, "target_id": 530, "rel_type": "EXPLAINS", "source_name": "Energy Flow", "target_name": "Fabric of Space-Time"}
+{"source_id": 8749, "target_id": 736, "rel_type": "EXPLAINS", "source_name": "Energy Flow", "target_name": "Spacetime"}
+{"source_id": 8749, "target_id": 1214, "rel_type": "EXPLAINS", "source_name": "Energy Flow", "target_name": "Space-Time Fabric"}
+{"source_id": 8749, "target_id": 2981, "rel_type": "IMPLIES", "source_name": "Energy Flow", "target_name": "The Now"}
+{"source_id": 8749, "target_id": 198, "rel_type": "DEPENDS_ON", "source_name": "Energy Flow", "target_name": "Redshift"}
+{"source_id": 8749, "target_id": 741, "rel_type": "DEPENDS_ON", "source_name": "Energy Flow", "target_name": "Space-Time"}
+{"source_id": 8749, "target_id": 6264, "rel_type": "DEPENDS_ON", "source_name": "Energy Flow", "target_name": "Entropy"}
+{"source_id": 8749, "target_id": 207, "rel_type": "CAUSES", "source_name": "Energy Flow", "target_name": "Spacetime Resistance"}
+{"source_id": 8749, "target_id": 741, "rel_type": "SUSTAINS", "source_name": "Energy Flow", "target_name": "Space-Time"}
+{"source_id": 8749, "target_id": 8845, "rel_type": "DRIVES", "source_name": "Energy Flow", "target_name": "Cosmic Evolution"}
+{"source_id": 8749, "target_id": 6264, "rel_type": "INTERACTS_WITH", "source_name": "Energy Flow", "target_name": "Entropy"}
+{"source_id": 8749, "target_id": 742, "rel_type": "CONNECTS_TO", "source_name": "Energy Flow", "target_name": "Forces of the Universe"}
+{"source_id": 8749, "target_id": 1420, "rel_type": "INFLUENCES", "source_name": "Energy Flow", "target_name": "Space-Time Dynamics"}
+{"source_id": 8749, "target_id": 474, "rel_type": "ENABLES", "source_name": "Energy Flow", "target_name": "Spacetime Stability"}
+{"source_id": 8749, "target_id": 736, "rel_type": "ENABLES", "source_name": "Energy Flow", "target_name": "Spacetime"}
+{"source_id": 8749, "target_id": 1496, "rel_type": "ENABLES", "source_name": "Energy Flow", "target_name": "Temporal Dynamics"}
+{"source_id": 8749, "target_id": 2871, "rel_type": "ENABLES", "source_name": "Energy Flow", "target_name": "Spacetime Sustainability"}
+{"source_id": 8749, "target_id": 6264, "rel_type": "ENABLES", "source_name": "Energy Flow", "target_name": "Entropy"}
+{"source_id": 8749, "target_id": 8750, "rel_type": "ENABLES", "source_name": "Energy Flow", "target_name": "Galactic Clusters"}
+{"source_id": 8749, "target_id": 8751, "rel_type": "ENABLES", "source_name": "Energy Flow", "target_name": "Entropy Gradient"}
+{"source_id": 8749, "target_id": 15264, "rel_type": "ENABLES", "source_name": "Energy Flow", "target_name": "Fundamental Dynamics"}
+{"source_id": 8749, "target_id": 8750, "rel_type": "SUPPORTS", "source_name": "Energy Flow", "target_name": "Galactic Clusters"}
+{"source_id": 8751, "target_id": 607, "rel_type": "PART_OF", "source_name": "Entropy Gradient", "target_name": "Dynamical Systems"}
+{"source_id": 8751, "target_id": 673, "rel_type": "EXPLAINS", "source_name": "Entropy Gradient", "target_name": "Causality"}
+{"source_id": 8751, "target_id": 8749, "rel_type": "EXPLAINS", "source_name": "Entropy Gradient", "target_name": "Energy Flow"}
+{"source_id": 8751, "target_id": 1562, "rel_type": "CONSTRAINS", "source_name": "Entropy Gradient", "target_name": "Cosmic Boundaries"}
+{"source_id": 8751, "target_id": 8749, "rel_type": "CONSTRAINS", "source_name": "Entropy Gradient", "target_name": "Energy Flow"}
+{"source_id": 8751, "target_id": 749, "rel_type": "ENABLES", "source_name": "Entropy Gradient", "target_name": "Structure Formation"}
+{"source_id": 8751, "target_id": 8749, "rel_type": "CAUSES", "source_name": "Entropy Gradient", "target_name": "Energy Flow"}
+{"source_id": 8752, "target_id": 8753, "rel_type": "SUPPORTS", "source_name": "Cluster Dynamics", "target_name": "Observational Signatures"}
+{"source_id": 8846, "target_id": 8852, "rel_type": "PART_OF", "source_name": "Thermodynamic Structure", "target_name": "Entropy Gradients"}
+{"source_id": 8846, "target_id": 6264, "rel_type": "CONSTRAINS", "source_name": "Thermodynamic Structure", "target_name": "Entropy"}
+{"source_id": 8949, "target_id": 6264, "rel_type": "CONTRAINS", "source_name": "Biological Evolution", "target_name": "Entropy"}
+{"source_id": 11294, "target_id": 2832, "rel_type": "EXPLAINS", "source_name": "Dynamic Balance", "target_name": "Entropy Flow"}
+{"source_id": 11294, "target_id": 6264, "rel_type": "EXPLAINS", "source_name": "Dynamic Balance", "target_name": "Entropy"}
+{"source_id": 11294, "target_id": 8749, "rel_type": "SUPPORTS", "source_name": "Dynamic Balance", "target_name": "Energy Flow"}
+{"source_id": 11294, "target_id": 11295, "rel_type": "SUPPORTS", "source_name": "Dynamic Balance", "target_name": "Order"}
+{"source_id": 11294, "target_id": 11296, "rel_type": "CONSTRAINS", "source_name": "Dynamic Balance", "target_name": "Chaos"}
+{"source_id": 11294, "target_id": 6264, "rel_type": "ENABLES", "source_name": "Dynamic Balance", "target_name": "Entropy"}
+{"source_id": 11294, "target_id": 11295, "rel_type": "ENABLES", "source_name": "Dynamic Balance", "target_name": "Order"}
+{"source_id": 11295, "target_id": 11296, "rel_type": "IMPLIES", "source_name": "Order", "target_name": "Chaos"}
+{"source_id": 15258, "target_id": 8852, "rel_type": "CONSTRAINS", "source_name": "Thermodynamic Equilibrium", "target_name": "Entropy Gradients"}

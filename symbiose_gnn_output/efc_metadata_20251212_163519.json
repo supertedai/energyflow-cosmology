@@ -1,0 +1,237 @@
+{
+  "export_timestamp": "2025-12-12T16:35:21.044150",
+  "node_count": 837,
+  "edge_count": 1203,
+  "include_chunks": false,
+  "relationship_types": [
+    {
+      "rel_type": "MENTIONS",
+      "count": 2743
+    },
+    {
+      "rel_type": "PART_OF",
+      "count": 337
+    },
+    {
+      "rel_type": "ENABLES",
+      "count": 183
+    },
+    {
+      "rel_type": "SUPPORTS",
+      "count": 139
+    },
+    {
+      "rel_type": "EXPLAINS",
+      "count": 113
+    },
+    {
+      "rel_type": "DEPENDS_ON",
+      "count": 103
+    },
+    {
+      "rel_type": "IMPLIES",
+      "count": 61
+    },
+    {
+      "rel_type": "CONSTRAINS",
+      "count": 54
+    },
+    {
+      "rel_type": "INCLUDES",
+      "count": 36
+    },
+    {
+      "rel_type": "DERIVES_FROM",
+      "count": 31
+    },
+    {
+      "rel_type": "AUTHORED_BY",
+      "count": 26
+    },
+    {
+      "rel_type": "CONTAINS",
+      "count": 25
+    },
+    {
+      "rel_type": "CAUSES",
+      "count": 17
+    },
+    {
+      "rel_type": "ENABLED",
+      "count": 7
+    },
+    {
+      "rel_type": "CREATED_BY",
+      "count": 6
+    },
+    {
+      "rel_type": "AUTHORED",
+      "count": 6
+    },
+    {
+      "rel_type": "CONTRADICTS",
+      "count": 5
+    },
+    {
+      "rel_type": "INFLUENCES",
+      "count": 4
+    },
+    {
+      "rel_type": "CONTRIBUTES_TO",
+      "count": 3
+    },
+    {
+      "rel_type": "HAS_VERSION",
+      "count": 3
+    },
+    {
+      "rel_type": "CONTRAINTS",
+      "count": 3
+    },
+    {
+      "rel_type": "REGULATES",
+      "count": 2
+    },
+    {
+      "rel_type": "IS_A",
+      "count": 2
+    },
+    {
+      "rel_type": "PRODUCES",
+      "count": 2
+    },
+    {
+      "rel_type": "INTEGRATES",
+      "count": 2
+    },
+    {
+      "rel_type": "DEFINES",
+      "count": 2
+    },
+    {
+      "rel_type": "EXTENDS",
+      "count": 2
+    },
+    {
+      "rel_type": "INTERACTS_WITH",
+      "count": 2
+    },
+    {
+      "rel_type": "TRIGGERS",
+      "count": 2
+    },
+    {
+      "rel_type": "CONNECTS_TO",
+      "count": 2
+    },
+    {
+      "rel_type": "HAS_PART",
+      "count": 2
+    },
+    {
+      "rel_type": "MEASURES",
+      "count": 1
+    },
+    {
+      "rel_type": "PROVIDES_INSIGHT",
+      "count": 1
+    },
+    {
+      "rel_type": "ENCODED_IN",
+      "count": 1
+    },
+    {
+      "rel_type": "DESCRIBES",
+      "count": 1
+    },
+    {
+      "rel_type": "COORDINATES",
+      "count": 1
+    },
+    {
+      "rel_type": "EMERGES_FROM",
+      "count": 1
+    },
+    {
+      "rel_type": "IS_PART_OF",
+      "count": 1
+    },
+    {
+      "rel_type": "CREATED",
+      "count": 1
+    },
+    {
+      "rel_type": "CREATES",
+      "count": 1
+    },
+    {
+      "rel_type": "SPECIFIES",
+      "count": 1
+    },
+    {
+      "rel_type": "USES",
+      "count": 1
+    },
+    {
+      "rel_type": "REFINES",
+      "count": 1
+    },
+    {
+      "rel_type": "MEDIATES",
+      "count": 1
+    },
+    {
+      "rel_type": "STABILIZES",
+      "count": 1
+    },
+    {
+      "rel_type": "TRANSFORMS",
+      "count": 1
+    },
+    {
+      "rel_type": "REQUIRES",
+      "count": 1
+    },
+    {
+      "rel_type": "IDENTIFIES",
+      "count": 1
+    },
+    {
+      "rel_type": "SUSTAINS",
+      "count": 1
+    },
+    {
+      "rel_type": "DRIVES",
+      "count": 1
+    },
+    {
+      "rel_type": "BALANCES",
+      "count": 1
+    },
+    {
+      "rel_type": "CONTRAINS",
+      "count": 1
+    }
+  ],
+  "degree_statistics": {
+    "min": 0,
+    "max": 602,
+    "avg": 2.138940878564353,
+    "median": 1.0
+  },
+  "label_distribution": [
+    {
+      "label": "Concept",
+      "count": 837
+    },
+    {
+      "label": "Chunk",
+      "count": 8246
+    }
+  ],
+  "graph_properties": {
+    "directed": true,
+    "weighted": false,
+    "multigraph": false
+  }
+}

@@ -16,18 +16,20 @@ except ImportError:
 # Load GNN artifacts
 GNN_OUTPUT_DIR = Path(__file__).resolve().parents[3] / "symbiose_gnn_output"
 NODE_EMBEDDINGS_PATH = GNN_OUTPUT_DIR / "node_embeddings.json"
-NODE_MAPPING_PATH = GNN_OUTPUT_DIR / "node_mapping.json"
-MODEL_PATH = GNN_OUTPUT_DIR / "gnn_model.pt"
+EFC_NODES_PATH = GNN_OUTPUT_DIR / "efc_nodes_latest.jsonl"
+EFC_METADATA_PATH = GNN_OUTPUT_DIR / "efc_metadata_latest.json"
+MODEL_PATH = GNN_OUTPUT_DIR / "efc_gnn_best.pt"
 
 # Cache loaded artifacts
 _node_embeddings = None
-_node_mapping = None
+_efc_nodes = None
+_efc_metadata = None
 _model = None
 
 
 def load_artifacts():
     """Load GNN artifacts on first request."""
-    global _node_embeddings, _node_mapping, _model
+    global _node_embeddings, _efc_nodes, _efc_metadata, _model
     
     if _node_embeddings is not None:
         return
@@ -37,47 +39,55 @@ def load_artifacts():
         with open(NODE_EMBEDDINGS_PATH) as f:
             _node_embeddings = json.load(f)
     
-    # Load node mapping
-    if NODE_MAPPING_PATH.exists():
-        with open(NODE_MAPPING_PATH) as f:
-            _node_mapping = json.load(f)
+    # Load EFC nodes metadata
+    if EFC_NODES_PATH.exists():
+        import jsonlines
+        _efc_nodes = []
+        with jsonlines.open(EFC_NODES_PATH) as reader:
+            for obj in reader:
+                _efc_nodes.append(obj)
     
-    # Load model (optional, for inference)
-    if MODEL_PATH.exists():
+    # Load EFC metadata
+    if EFC_METADATA_PATH.exists():
+        with open(EFC_METADATA_PATH) as f:
+            _efc_metadata = json.load(f)
+    
+    # Load trained GNN model
+    if MODEL_PATH.exists() and TORCH_AVAILABLE:
         try:
-            from symbiose_gnn.model import SymbioseGNN
-            _model = SymbioseGNN(input_dim=64, hidden_dim=128, out_dim=64)
-            _model.load_state_dict(torch.load(MODEL_PATH, map_location="cpu"))
-            _model.eval()
-        except Exception:
+            _model = torch.load(MODEL_PATH, map_location="cpu")
+        except Exception as e:
+            print(f"⚠️  Failed to load GNN model: {e}")
             _model = None
 
 
 @router.get("/status")
 def gnn_status():
     """
-    Get GNN system status.
+    Get GNN system status and statistics.
     """
     load_artifacts()
     
-    # embeddings is a list of vectors, mapping is dict
-    total_nodes = len(_node_embeddings) if _node_embeddings else 0
-    emb_dim = len(_node_embeddings[0]) if _node_embeddings and len(_node_embeddings) > 0 else 0
+    # Check if GNN embeddings dict exists
+    total_concepts = len(_node_embeddings) if _node_embeddings else 0
     
     return {
-        "status": "ok",
+        "status": "ok" if _model is not None else "trained_but_not_loaded",
         "artifacts": {
-            "node_embeddings": _node_embeddings is not None,
-            "node_mapping": _node_mapping is not None,
-            "model": _model is not None,
+            "node_embeddings": NODE_EMBEDDINGS_PATH.exists(),
+            "efc_nodes": EFC_NODES_PATH.exists(),
+            "efc_metadata": EFC_METADATA_PATH.exists(),
+            "model": MODEL_PATH.exists(),
         },
         "stats": {
-            "total_nodes": total_nodes,
-            "embedding_dim": emb_dim,
+            "total_nodes": len(_efc_nodes) if _efc_nodes else 0,
+            "total_concepts": total_concepts,
+            "metadata": _efc_metadata if _efc_metadata else {}
         },
         "paths": {
             "embeddings": str(NODE_EMBEDDINGS_PATH),
-            "mapping": str(NODE_MAPPING_PATH),
+            "nodes": str(EFC_NODES_PATH),
+            "metadata": str(EFC_METADATA_PATH),
             "model": str(MODEL_PATH),
         }
     }
@@ -192,3 +202,59 @@ def find_similar_nodes(node_idx: int, top_k: int = 5):
         "top_k": top_k,
         "results": similarities[:top_k]
     }
+
+
+@router.post("/query")
+def query_concepts(request: dict):
+    """
+    Query GNN for concept similarity by text.
+    
+    Request body:
+    {
+        "query": "energy flow",
+        "top_k": 5
+    }
+    """
+    query_text = request.get("query", "")
+    top_k = request.get("top_k", 5)
+    
+    if not query_text:
+        raise HTTPException(status_code=400, detail="query is required")
+    
+    # Use gnn_scoring module for text-to-concept matching
+    import sys
+    from pathlib import Path
+    sys.path.insert(0, str(Path(__file__).resolve().parents[3] / "tools"))
+    
+    try:
+        from gnn_scoring import get_gnn_similarity_score
+        
+        result = get_gnn_similarity_score(
+            private_chunk_text=query_text,
+            top_k=top_k,
+            chunk_domain="theory"  # Force theory domain for GNN usage
+        )
+        
+        if not result.get("available"):
+            raise HTTPException(
+                status_code=503,
+                detail=result.get("reason", "GNN not available")
+            )
+        
+        return {
+            "query": query_text,
+            "gnn_similarity": result.get("gnn_similarity", 0.0),
+            "confidence": result.get("confidence", 0.0),
+            "matches": result.get("top_matches", [])
+        }
+        
+    except ImportError:
+        raise HTTPException(
+            status_code=503,
+            detail="GNN scoring module not available"
+        )
+    except Exception as e:
+        raise HTTPException(
+            status_code=500,
+            detail=f"GNN query error: {str(e)}"
+        )

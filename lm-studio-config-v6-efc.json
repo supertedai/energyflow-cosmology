@@ -1,0 +1,13 @@
+{
+  "mcpServers": {
+    "symbiosis-efc": {
+      "command": "/Users/morpheus/energyflow-cosmology/.venv/bin/python",
+      "args": [
+        "/Users/morpheus/energyflow-cosmology/mcp/symbiosis_mcp_server_v6_efc.py"
+      ],
+      "env": {
+        "SYMBIOSIS_API_URL": "http://localhost:8000"
+      }
+    }
+  }
+}

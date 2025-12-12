@@ -1,0 +1,15 @@
+{
+  "mcpServers": {
+    "symbiosis": {
+      "command": "/Users/morpheus/energyflow-cosmology/.venv/bin/python",
+      "args": [
+        "/Users/morpheus/energyflow-cosmology/mcp/symbiosis_mcp_server_v6_autobridge.py"
+      ],
+      "cwd": "/Users/morpheus/energyflow-cosmology",
+      "env": {
+        "SYMBIOSIS_API_URL": "http://localhost:8000",
+        "PYTHONPATH": "/Users/morpheus/energyflow-cosmology"
+      }
+    }
+  }
+}

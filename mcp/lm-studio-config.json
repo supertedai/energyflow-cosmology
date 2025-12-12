@@ -3,7 +3,7 @@
     "symbiosis": {
       "command": "/Users/morpheus/energyflow-cosmology/.venv/bin/python",
       "args": [
-        "/Users/morpheus/energyflow-cosmology/mcp/symbiosis_mcp_server.py"
+        "/Users/morpheus/energyflow-cosmology/mcp/symbiosis_mcp_server_v7_complete.py"
       ],
       "env": {
         "SYMBIOSIS_API_URL": "http://localhost:8000"

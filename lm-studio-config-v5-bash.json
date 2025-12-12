@@ -1,0 +1,10 @@
+{
+  "mcpServers": {
+    "symbiosis": {
+      "command": "/bin/bash",
+      "args": [
+        "/Users/morpheus/energyflow-cosmology/mcp/run_mcp.sh"
+      ]
+    }
+  }
+}

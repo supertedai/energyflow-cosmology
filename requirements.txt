@@ -21,3 +21,4 @@ markdown
 pydantic
 python-dotenv
 PyYAML
+python-dateutil

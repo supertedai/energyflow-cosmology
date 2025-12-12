@@ -1,0 +1,237 @@
+{
+  "schema_version": "2.0",
+  "description": "Intelligent Adaptive Canonical Memory Schema - Auto-expanding with learned patterns",
+  "adaptive_mode": true,
+  "auto_expand_domains": true,
+  "auto_expand_keys": true,
+  "learning_enabled": true,
+  "allowed_domains": {
+    "identity": {
+      "description": "Core user identity facts",
+      "max_facts": 10,
+      "allowed_keys": [
+        "name",
+        "birthday",
+        "age",
+        "location",
+        "occupation",
+        "nationality",
+        "email",
+        "phone"
+      ],
+      "examples": {
+        "name": "Brukeren heter Morten",
+        "location": "Bor i Oslo, Norge",
+        "occupation": "Forsker innen Energy-Flow Cosmology"
+      },
+      "strictness": 1.0
+    },
+    "family": {
+      "description": "Family members and relationships",
+      "max_facts": 20,
+      "allowed_keys": [
+        "child_1",
+        "child_2",
+        "child_3",
+        "child_4",
+        "child_5",
+        "partner",
+        "spouse",
+        "parents",
+        "siblings",
+        "pets"
+      ],
+      "examples": {
+        "child_1": "Joakim",
+        "child_2": "Isak Andreas",
+        "child_3": "Susanna",
+        "partner": "Gift med [navn]"
+      },
+      "strictness": 1.0,
+      "synthesis_enabled": true
+    },
+    "preferences": {
+      "description": "User preferences and settings",
+      "max_facts": 20,
+      "allowed_keys": [
+        "language",
+        "interface_style",
+        "communication_style",
+        "notification_prefs",
+        "timezone",
+        "work_hours",
+        "availability",
+        "diet",
+        "allergies"
+      ],
+      "examples": {
+        "language": "Foretrekker norsk språk",
+        "communication_style": "Direkte og konsist",
+        "work_hours": "09:00-17:00 CET"
+      },
+      "strictness": 0.8
+    },
+    "professional": {
+      "description": "Professional skills and expertise",
+      "max_facts": 25,
+      "allowed_keys": [
+        "skill_1",
+        "skill_2",
+        "skill_3",
+        "skill_4",
+        "skill_5",
+        "expertise_1",
+        "expertise_2",
+        "expertise_3",
+        "project_1",
+        "project_2",
+        "project_3",
+        "tool_1",
+        "tool_2",
+        "tool_3",
+        "certification",
+        "education"
+      ],
+      "examples": {
+        "expertise_1": "Energy-Flow Cosmology (EFC)",
+        "skill_1": "Python programming",
+        "project_1": "energyflow-cosmology repository"
+      },
+      "strictness": 0.7,
+      "synthesis_enabled": true
+    },
+    "assistant": {
+      "description": "Assistant identity and capabilities",
+      "max_facts": 15,
+      "allowed_keys": [
+        "assistant_name",
+        "assistant_role",
+        "assistant_capabilities",
+        "assistant_version",
+        "assistant_model",
+        "assistant_created",
+        "assistant_purpose"
+      ],
+      "examples": {
+        "assistant_name": "AI-assistenten heter Claude",
+        "assistant_role": "Research assistant for EFC theory",
+        "assistant_capabilities": "Kan hjelpe med EFC-teori, koding og forskning"
+      },
+      "strictness": 0.9
+    }
+  },
+  "dynamic_domains": {
+    "description": "Auto-created domains based on usage patterns",
+    "enabled": true,
+    "max_dynamic_domains": 50,
+    "creation_threshold": 3,
+    "examples": {}
+  },
+  "learned_keys": {
+    "description": "Auto-learned keys from usage patterns",
+    "enabled": true,
+    "learning_rate": 0.1,
+    "patterns": {}
+  },
+  "global_limits": {
+    "max_total_facts": 1000,
+    "max_facts_per_domain": 100,
+    "max_fact_length": 500,
+    "min_confidence": 0.6,
+    "min_authority_level": "SHORT_TERM",
+    "max_age_days": 365,
+    "soft_limit_enabled": true
+  },
+  "validation_rules": {
+    "require_domain": true,
+    "require_key": true,
+    "require_confidence": false,
+    "require_authority": false,
+    "allow_duplicates": false,
+    "enforce_key_pattern": false,
+    "sanitize_input": true,
+    "adaptive_validation": true,
+    "learn_from_rejections": true,
+    "suggest_alternatives": true
+  },
+  "key_patterns": {
+    "child_\\d+": {
+      "domain": "family",
+      "max_count": 10,
+      "value_type": "string"
+    },
+    "skill_\\d+": {
+      "domain": "professional",
+      "max_count": 20,
+      "value_type": "string"
+    },
+    "expertise_\\d+": {
+      "domain": "professional",
+      "max_count": 10,
+      "value_type": "string"
+    },
+    "project_\\d+": {
+      "domain": "professional",
+      "max_count": 10,
+      "value_type": "string"
+    },
+    "tool_\\d+": {
+      "domain": "professional",
+      "max_count": 10,
+      "value_type": "string"
+    }
+  },
+  "forbidden_patterns": {
+    "sensitive_data": [
+      "password",
+      "ssn",
+      "credit_card",
+      "secret",
+      "api_key",
+      "token",
+      "private_key"
+    ],
+    "pii_high_risk": [
+      "full_address",
+      "passport_number",
+      "driver_license",
+      "bank_account"
+    ]
+  },
+  "auto_cleanup": {
+    "enabled": true,
+    "remove_expired_facts": true,
+    "remove_low_confidence": true,
+    "confidence_threshold": 0.5,
+    "age_threshold_days": 180
+  },
+  "conflict_resolution": {
+    "strategy": "highest_confidence",
+    "allow_manual_override": true,
+    "flag_for_review": true
+  },
+  "intelligence_layer": {
+    "enabled": true,
+    "domain_inference": {
+      "enabled": true,
+      "model": "semantic",
+      "confidence_threshold": 0.7
+    },
+    "key_normalization": {
+      "enabled": true,
+      "fuzzy_matching": true,
+      "similarity_threshold": 0.85
+    },
+    "pattern_recognition": {
+      "enabled": true,
+      "min_occurrences": 3,
+      "confidence_boost": 0.1
+    },
+    "schema_evolution": {
+      "enabled": true,
+      "review_interval_days": 7,
+      "auto_promote_threshold": 10,
+      "auto_create_keys": true
+    }
+  }
+}

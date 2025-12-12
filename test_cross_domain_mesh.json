@@ -1,0 +1,207 @@
+{
+  "patterns": {
+    "Language cues: 2 hits": {
+      "pattern": "Language cues: 2 hits",
+      "pattern_type": "language_cue",
+      "domains": [
+        "biology",
+        "economics",
+        "cosmology",
+        "physics"
+      ],
+      "success_count": 8,
+      "total_count": 8,
+      "average_score": 3.75,
+      "confidence": 1.0,
+      "learned_at": "2025-12-11T19:57:19.095671",
+      "last_seen": "2025-12-11T19:57:19.096754"
+    },
+    "Logical: matches 'hva driver'": {
+      "pattern": "Logical: matches 'hva driver'",
+      "pattern_type": "logical_pattern",
+      "domains": [
+        "biology",
+        "economics",
+        "cosmology",
+        "physics"
+      ],
+      "success_count": 4,
+      "total_count": 4,
+      "average_score": 4.0,
+      "confidence": 0.0,
+      "learned_at": "2025-12-11T19:57:19.095720",
+      "last_seen": "2025-12-11T19:57:19.096756"
+    },
+    "Language cues: 1 hits": {
+      "pattern": "Language cues: 1 hits",
+      "pattern_type": "language_cue",
+      "domains": [
+        "biology",
+        "economics",
+        "cosmology"
+      ],
+      "success_count": 3,
+      "total_count": 3,
+      "average_score": 2.3333333333333335,
+      "confidence": 0.0,
+      "learned_at": "2025-12-11T19:57:19.095758",
+      "last_seen": "2025-12-11T19:57:19.096696"
+    },
+    "Logical: matches 'hvorfor.*stabiliserer'": {
+      "pattern": "Logical: matches 'hvorfor.*stabiliserer'",
+      "pattern_type": "logical_pattern",
+      "domains": [
+        "economics",
+        "cosmology",
+        "physics"
+      ],
+      "success_count": 3,
+      "total_count": 3,
+      "average_score": 4.0,
+      "confidence": 0.0,
+      "learned_at": "2025-12-11T19:57:19.095800",
+      "last_seen": "2025-12-11T19:57:19.096731"
+    },
+    "Logical: matches 'hvordan oppst\u00e5r'": {
+      "pattern": "Logical: matches 'hvordan oppst\u00e5r'",
+      "pattern_type": "logical_pattern",
+      "domains": [
+        "economics",
+        "cosmology"
+      ],
+      "success_count": 2,
+      "total_count": 2,
+      "average_score": 3.0,
+      "confidence": 0.0,
+      "learned_at": "2025-12-11T19:57:19.095862",
+      "last_seen": "2025-12-11T19:57:19.096698"
+    }
+  },
+  "domains": {
+    "biology": {
+      "domain": "biology",
+      "observations": 3,
+      "successful_efc_uses": 3,
+      "average_efc_score": 2.3333333333333335,
+      "learned_patterns": [
+        "hvordan stabiliserer",
+        "stabiliserer celler",
+        "celler homeostase?",
+        "hvordan",
+        "stabiliserer",
+        "celler",
+        "homeostase?",
+        "hva driver",
+        "driver metabolsk",
+        "metabolsk stabilitet?",
+        "driver",
+        "metabolsk",
+        "stabilitet?",
+        "hvorfor opprettholder",
+        "opprettholder organismer",
+        "organismer stabile",
+        "stabile tilstander?",
+        "hvorfor",
+        "opprettholder",
+        "organismer",
+        "stabile",
+        "tilstander?"
+      ],
+      "threshold_adjustment": 0.0
+    },
+    "economics": {
+      "domain": "economics",
+      "observations": 3,
+      "successful_efc_uses": 3,
+      "average_efc_score": 3.6666666666666665,
+      "learned_patterns": [
+        "hvorfor stabiliserer",
+        "stabiliserer markeder",
+        "markeder seg",
+        "seg ved",
+        "ved likevekt?",
+        "hvorfor",
+        "stabiliserer",
+        "markeder",
+        "likevekt?",
+        "hva driver",
+        "driver prisstabilisering?",
+        "driver",
+        "prisstabilisering?",
+        "hvordan oppst\u00e5r",
+        "oppst\u00e5r markedsstabilitet?",
+        "hvordan",
+        "oppst\u00e5r",
+        "markedsstabilitet?"
+      ],
+      "threshold_adjustment": 0.0
+    },
+    "cosmology": {
+      "domain": "cosmology",
+      "observations": 3,
+      "successful_efc_uses": 3,
+      "average_efc_score": 3.6666666666666665,
+      "learned_patterns": [
+        "hvorfor stabiliserer",
+        "stabiliserer galakser",
+        "galakser seg?",
+        "hvorfor",
+        "stabiliserer",
+        "galakser",
+        "hva driver",
+        "driver stellare",
+        "stellare stabile",
+        "stabile baner?",
+        "driver",
+        "stellare",
+        "stabile",
+        "baner?",
+        "hvordan oppst\u00e5r",
+        "oppst\u00e5r gravitasjonell",
+        "gravitasjonell stabilitet?",
+        "hvordan",
+        "oppst\u00e5r",
+        "gravitasjonell",
+        "stabilitet?"
+      ],
+      "threshold_adjustment": 0.0
+    },
+    "physics": {
+      "domain": "physics",
+      "observations": 2,
+      "successful_efc_uses": 2,
+      "average_efc_score": 4.0,
+      "learned_patterns": [
+        "hvorfor stabiliserer",
+        "stabiliserer atomer",
+        "atomer seg?",
+        "hvorfor",
+        "stabiliserer",
+        "atomer",
+        "hva driver",
+        "driver termodynamisk",
+        "termodynamisk stabilitet?",
+        "driver",
+        "termodynamisk",
+        "stabilitet?"
+      ],
+      "threshold_adjustment": 0.0
+    }
+  },
+  "cross_domain_patterns": {
+    "2": {
+      "pattern": "2",
+      "domains": [
+        "biology",
+        "economics",
+        "cosmology",
+        "physics"
+      ],
+      "total_occurrences": 8,
+      "success_rate": 1.0,
+      "is_universal": true,
+      "confidence": 1.0,
+      "discovered_at": "2025-12-11T19:57:19.096622"
+    }
+  }
+}

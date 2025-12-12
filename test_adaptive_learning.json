@@ -1,0 +1,112 @@
+{
+  "patterns": {
+    "Language cues: 2 hits": {
+      "pattern": "Language cues: 2 hits",
+      "pattern_type": "language_cue",
+      "domains": [
+        "economics"
+      ],
+      "success_count": 1,
+      "total_count": 1,
+      "average_score": 4.0,
+      "confidence": 0.0,
+      "learned_at": "2025-12-11T19:52:02.973741",
+      "last_seen": "2025-12-11T19:52:02.973744"
+    },
+    "Logical: matches 'hvorfor.*stabiliserer'": {
+      "pattern": "Logical: matches 'hvorfor.*stabiliserer'",
+      "pattern_type": "logical_pattern",
+      "domains": [
+        "economics"
+      ],
+      "success_count": 1,
+      "total_count": 1,
+      "average_score": 4.0,
+      "confidence": 0.0,
+      "learned_at": "2025-12-11T19:52:02.973748",
+      "last_seen": "2025-12-11T19:52:02.973750"
+    },
+    "Language cues: 1 hits": {
+      "pattern": "Language cues: 1 hits",
+      "pattern_type": "language_cue",
+      "domains": [
+        "economics"
+      ],
+      "success_count": 1,
+      "total_count": 1,
+      "average_score": 3.0,
+      "confidence": 0.0,
+      "learned_at": "2025-12-11T19:52:02.973774",
+      "last_seen": "2025-12-11T19:52:02.973775"
+    },
+    "Logical: matches 'hva driver'": {
+      "pattern": "Logical: matches 'hva driver'",
+      "pattern_type": "logical_pattern",
+      "domains": [
+        "economics"
+      ],
+      "success_count": 1,
+      "total_count": 1,
+      "average_score": 3.0,
+      "confidence": 0.0,
+      "learned_at": "2025-12-11T19:52:02.973778",
+      "last_seen": "2025-12-11T19:52:02.973780"
+    },
+    "Logical: matches 'hvordan oppst\u00e5r'": {
+      "pattern": "Logical: matches 'hvordan oppst\u00e5r'",
+      "pattern_type": "logical_pattern",
+      "domains": [
+        "economics"
+      ],
+      "success_count": 1,
+      "total_count": 1,
+      "average_score": 2.0,
+      "confidence": 0.0,
+      "learned_at": "2025-12-11T19:52:02.973800",
+      "last_seen": "2025-12-11T19:52:02.973801"
+    }
+  },
+  "domains": {
+    "economics": {
+      "domain": "economics",
+      "observations": 4,
+      "successful_efc_uses": 4,
+      "average_efc_score": 2.25,
+      "learned_patterns": [
+        "hvorfor stabiliserer",
+        "stabiliserer markedet",
+        "markedet seg",
+        "seg ved",
+        "ved likevekt?",
+        "hvorfor",
+        "stabiliserer",
+        "markedet",
+        "likevekt?",
+        "hva driver",
+        "driver prisendringer",
+        "prisendringer i",
+        "i et",
+        "et marked?",
+        "driver",
+        "prisendringer",
+        "marked?",
+        "hvordan oppst\u00e5r",
+        "oppst\u00e5r finansielle",
+        "finansielle kriser?",
+        "hvordan",
+        "oppst\u00e5r",
+        "finansielle",
+        "kriser?",
+        "hvorfor vokser",
+        "vokser \u00f8konomien",
+        "\u00f8konomien i",
+        "i sykler?",
+        "hvorfor",
+        "vokser",
+        "\u00f8konomien",
+        "sykler?"
+      ],
+      "threshold_adjustment": 0.0
+    }
+  }
+}
