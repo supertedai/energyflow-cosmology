@@ -1,0 +1,8 @@
+{
+  "@context": "https://schema.org",
+  "@type": "CreativeWork",
+  "identifier": "self-optimizing-symbiosis-quick-reference",
+  "name": "Self-Optimizing Symbiosis - Quick Reference",
+  "description": "**One-liner**: System observes performance \u2192 adjusts parameters \u2192 anchors improvements or reverts failures.",
+  "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/docs/SELF_OPTIMIZING_QUICK_REF.md"
+}

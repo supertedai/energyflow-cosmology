@@ -1,5 +1,47 @@
 [
   {
+    "title": "\ud83d\ude80 Layer 9 Integration - Live Status",
+    "description": "## \u2705 Status: OPERATIONAL",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/docs/LIVE_STATUS.md",
+    "slug": "layer-9-integration-live-status"
+  },
+  {
+    "title": "Intelligent Adaptive Canonical Memory System",
+    "description": "**Version:** 2.0",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/docs/INTELLIGENT_ADAPTIVE_MEMORY.md",
+    "slug": "intelligent-adaptive-canonical-memory-system"
+  },
+  {
+    "title": "MCP Quick Reference Card",
+    "description": "## One-Line Summary",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/docs/MCP_QUICK_REFERENCE.md",
+    "slug": "mcp-quick-reference-card"
+  },
+  {
+    "title": "Msty AI Integration Guide",
+    "description": "## Overview",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/docs/MSTY_AI_INTEGRATION.md",
+    "slug": "msty-ai-integration-guide"
+  },
+  {
+    "title": "Self-Optimizing Symbiosis Layer - Complete Documentation",
+    "description": "**Status**: \u2705 Production-Ready (Phase 3 Complete)",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/docs/SELF_OPTIMIZING_SYMBIOSIS.md",
+    "slug": "self-optimizing-symbiosis-layer-complete-documentation"
+  },
+  {
+    "title": "Self-Healing Memory - Quick Reference",
+    "description": "## One-Liner",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/docs/SELF_HEALING_QUICK_REF.md",
+    "slug": "self-healing-memory-quick-reference"
+  },
+  {
+    "title": "MCP Testing Guide - LM Studio Integration",
+    "description": "## Quick Start: Testing Router in LM Studio",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/docs/MCP_TESTING_GUIDE.md",
+    "slug": "mcp-testing-guide-lm-studio-integration"
+  },
+  {
     "title": "\ud83c\udfaf Production Readiness Checklist",
     "description": "**Status:** 6. desember 2025",
     "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/docs/PRODUCTION_READINESS.md",
@@ -24,6 +66,24 @@
     "slug": "documentation"
   },
   {
+    "title": "GNN-Augmented EFC Theory Development",
+    "description": "**Graph Neural Network system for Energy-Flow Cosmology theory expansion**",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/docs/GNN_THEORY_WORKFLOW.md",
+    "slug": "gnn-augmented-efc-theory-development"
+  },
+  {
+    "title": "EFC Adaptive Learning System - Complete Integration",
+    "description": "## System Overview",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/docs/ADAPTIVE_LEARNING_COMPLETE.md",
+    "slug": "efc-adaptive-learning-system-complete-integration"
+  },
+  {
+    "title": "MCP Protocol Compliance - Change Summary",
+    "description": "**Date**: 2025-01-XX",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/docs/MCP_COMPLIANCE_SUMMARY.md",
+    "slug": "mcp-protocol-compliance-change-summary"
+  },
+  {
     "title": "\ud83e\udde0 GNN-Hybrid Graph-RAG \u2013 Komplett Implementering",
     "description": "**Status:** \u2705 **Produksjonsklar**",
     "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/docs/GNN_HYBRID_IMPLEMENTATION.md",
@@ -34,6 +94,60 @@
     "description": "**Dato:** 6. desember 2025",
     "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/docs/GNN_BRIDGE.md",
     "slug": "gnn-bridge-implementation-den-siste-broen"
+  },
+  {
+    "title": "Phase 3 Complete: Self-Optimizing Symbiosis",
+    "description": "**Status**: \u2705 COMPLETE",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/docs/PHASE3_COMPLETE.md",
+    "slug": "phase-3-complete-self-optimizing-symbiosis"
+  },
+  {
+    "title": "MCP Protocol Compliance - Router Cleanup",
+    "description": "## Problem Identification",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/docs/MCP_PROTOCOL_COMPLIANCE.md",
+    "slug": "mcp-protocol-compliance-router-cleanup"
+  },
+  {
+    "title": "Layer 9 Integration - Deployment Checklist",
+    "description": "## \u2705 Completed Components",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/docs/LAYER_9_DEPLOYMENT_CHECKLIST.md",
+    "slug": "layer-9-integration-deployment-checklist"
+  },
+  {
+    "title": "Self-Optimizing Symbiosis - Quick Reference",
+    "description": "**One-liner**: System observes performance \u2192 adjusts parameters \u2192 anchors improvements or reverts failures.",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/docs/SELF_OPTIMIZING_QUICK_REF.md",
+    "slug": "self-optimizing-symbiosis-quick-reference"
+  },
+  {
+    "title": "EFC Meta-Learning Layer 9 - Kryssvaliderings-Mesh Dokumentasjon",
+    "description": "## Hva Vi Har Bygget",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/docs/LAYER_9_CROSS_VALIDATION_MESH.md",
+    "slug": "efc-meta-learning-layer-9-kryssvaliderings-mesh-dokumentasjon"
+  },
+  {
+    "title": "Self-Healing Canonical Memory - Architecture & Implementation",
+    "description": "**Date**: 2025-12-12",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/docs/SELF_HEALING_MEMORY.md",
+    "slug": "self-healing-canonical-memory-architecture-implementation"
+  },
+  {
+    "title": "\u2705 MCP Protocol Compliance - COMPLETE",
+    "description": "**Date**: 2025-01-XX",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/docs/MCP_COMPLIANCE_COMPLETE.md",
+    "slug": "mcp-protocol-compliance-complete"
+  },
+  {
+    "title": "GNN Validator Bugfixes - December 2025",
+    "description": "## \ud83d\udc1b **Bugs Fixed**",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/docs/GNN_VALIDATOR_BUGFIXES.md",
+    "slug": "gnn-validator-bugfixes-december-2025"
+  },
+  {
+    "title": "\ud83c\udfaf Msty AI Live Context - Quick Setup Guide",
+    "description": "## \u2705 Working Endpoint",
+    "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/docs/MSTY_LIVE_CONTEXT_SETUP.md",
+    "slug": "msty-ai-live-context-quick-setup-guide"
   },
   {
     "title": "Docs",

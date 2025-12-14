@@ -1,0 +1,8 @@
+{
+  "@context": "https://schema.org",
+  "@type": "CreativeWork",
+  "identifier": "mcp-testing-guide-lm-studio-integration",
+  "name": "MCP Testing Guide - LM Studio Integration",
+  "description": "## Quick Start: Testing Router in LM Studio",
+  "file": "/home/runner/work/energyflow-cosmology/energyflow-cosmology/docs/MCP_TESTING_GUIDE.md"
+}
